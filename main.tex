@@ -554,7 +554,7 @@ GET /v2.0/networks/network_id
       \item Outils : Launchpad (blueprints, bugs) + Git + GitHub (code)\pause
       \item Sur chaque commit : peer review (Gerrit) + intégration continue (exécution de différents tests par Jenkins)\pause
       \item Plateforme de référence et modèle de développement : Ubuntu\pause
-      \item Développement hyper actif\pause
+      \item Développement hyper actif : 17000 commits dans Icehouse (+25\%)\pause
       \item Fin 2012, création d'une entité indépendante de gouvernance : la fondation OpenStack
     \end{itemize}
   \end{frame}
@@ -619,7 +619,7 @@ GET /v2.0/networks/network_id
     \begin{itemize}
       \item Aux USA jusqu'en 2013
       \item Aujourd'hui : alternance USA et Asie/Europe
-      \item Quelques centaines au début à plusieurs milliers de participants aujourd'hui
+      \item Quelques centaines au début à 4500 de participants aujourd'hui
       \item En parallèle : conférence (utilisateurs, décideurs) et Design Summit (développeurs)
       \item Détermine le nom de la release : lieu/ville à proximité du Summit
     \end{itemize}
@@ -630,7 +630,15 @@ GET /v2.0/networks/network_id
     \includegraphics[width=\textwidth]{photo-summit.jpg}
   \end{frame}
 
+  \begin{frame}
+    \frametitle{Exemple du Summit de mai 2014 à Atlanta}
+    \includegraphics[width=\textwidth]{photo-summit1.jpg}
+  \end{frame}
 
+  \begin{frame}
+    \frametitle{Exemple du Summit de mai 2014 à Atlanta}
+    \includegraphics[width=\textwidth]{photo-summit2.jpg}
+  \end{frame}
   \begin{frame}
     \frametitle{Design Tenets}
     \begin{enumerate}
@@ -1128,6 +1136,7 @@ $ glance image-create
   \begin{frame}
     \frametitle{Principes}
     \begin{itemize}
+      \item SDN
       \item Auparavant Quantum et nova-network
       \item neutron-server : fournit l'API
       \item Agent DHCP : fournit le service de DHCP pour les instances
@@ -1140,9 +1149,9 @@ $ glance image-create
     \frametitle{Fonctionnalités supplémentaires}
     Outre les fonctions réseau de base niveaux 2 et 3, Neutron peut fournir d'autres services :
     \begin{itemize}
-      \item Load Balancing
-      \item Firewall
-      \item VPN
+      \item Load Balancing (HAProxy, ...)
+      \item Firewall (vArmour, ...)
+      \item VPN (Openswan, ...)
     \end{itemize}
     Ces fonctionnalités se basent également sur des plugins
   \end{frame}
@@ -1164,7 +1173,8 @@ $ glance image-create
       \item Modular Layer 2
       \item OpenVSwitch
       \item OpenDaylight
-      \item Contrails
+      \item Contrail, OpenContrail
+      \item Nuage Networks
       \item cf. OpenFlow
     \end{itemize}
   \end{frame}
