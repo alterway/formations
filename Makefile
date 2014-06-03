@@ -1,8 +1,9 @@
-TEXFILES = main.tex
+#TEXFILES = latex/main.tex
 
 all: screen.pdf handout.pdf print.pdf
 
-%.pdf: %.tex $(TEXFILES)
+#%.pdf: latex/%.tex $(TEXFILES)
+%.pdf: latex/%.tex
 	pdflatex $<
 	pdflatex $<
 
