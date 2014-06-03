@@ -2,8 +2,6 @@
 
 ### Pré-requis de la formation
 
-Compétences d’administration système Linux tel qu’Ubuntu
-
 * Formation initiale
 
 ### Objectifs
