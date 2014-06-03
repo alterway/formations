@@ -1,5 +1,20 @@
 ## OpenStack administrateur – formation avancée (3 jours)
 
+### Pré-requis de la formation
+
+Compétences d’administration système Linux tel qu’Ubuntu
+
+* Formation initiale
+
+### Objectifs
+
+* Comprendre le fonctionnement de chacun des composants d’OpenStack,
+* Pouvoir faire les bons choix de configuration,
+* Savoir déployer manuellement un cloud OpenStack pour fournir de l’IaaS,
+* Connaitre les bonnes pratiques de déploiement d’OpenStack,
+* Etre capable de déeterminer l’origine d’une erreur dans OpenStack,
+* Savoir réagir face à un bug et connaître le processus de correction.
+
 ### Déployer OpenStack de A à Z
 
 1. Les briques nécessaires
