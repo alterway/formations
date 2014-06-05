@@ -1,17 +1,20 @@
 ## OpenStack administrateur – formation initiale
 Durée : 2 jours
 
+### Description
+
+Cette formation vous permettra d'installer et de piloter un Iaas sous OpenStack. OpenStack, solution leader du marche du cloud, est un framework IaaS qui permet de déployer des clouds privés ou publics. 
+
+### A qui s'adresse la formation
+
+La formation s'adresse aux administrateurs système, stockage et virtualisation souhaitant utiliser la technologie OpenStack.
+
 ### Pré-requis de la formation
 
-Compétences d’administration système Linux tel qu’Ubuntu
-
+Compétences d’administration système Linux tel qu’Ubuntu, Redhat ou Debian.
 * Gestion des paquets
 * LVM et systèmes de fichiers,
 * Notions de virtualisation, KVM et libvirt
-
-Peut servir :
-
-* A l’aise dans un environnement Python
 
 ### Objectifs
 
@@ -19,23 +22,23 @@ Peut servir :
 * Connaitre le vocabulaire inhérent au cloud
 * Avoir une vue d’ensemble sur les solutions existantes en cloud public et privé
 * Posséder les clés pour tirer partie au mieux de l’IaaS
-* Pouvoir déterminer ce qui est compatible avec la philosophie cloud ou pas
-* Adapter ses méthodes d’administration système à un environnement cloud,
+* Pouvoir déterminer ce qui est compatible avec la philosophie cloud
+* Adapter ses méthodes d’administration système à un environnement cloud
 * Connaitre le fonctionnement du projet OpenStack et ses possibilités
-* Savoir déployer rapidement un OpenStack de test,
+* Savoir déployer rapidement un OpenStack de test
 * Utiliser OpenStack (API, CLI, Dashboard).
 
 ### Programme
 
 #### Le Cloud : vue d’ensemble 
 
-1. Le Cloud : les concepts
-2. PaaS : Platform as a Service
-3. IaaS : Infrastructure as a Service
-4. Stockage : block, objet, SDS
-5. Réseau : SFN et NFV
-6. Orchestrer les ressources de son IaaS
-7. APIs : quel rôle ?
+1. Les concepts du Cloud
+2. Comprendre le PaaS (Platform as a Service)
+3. Comprendre l'IaaS (Infrastructure as a Service)
+4. Le stockage dans le cloud, block, objet et SDS
+5. La gestion du Réseau SFN et NFV
+6. Comment orchestrer les ressources de son IaaS
+7. Les APIs, la clé du cloud OpneStack
 
 #### OpenStack : projet et logiciel
 

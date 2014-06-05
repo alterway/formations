@@ -1,8 +1,17 @@
 ## OpenStack administrateur – formation avancée (3 jours)
+Durée : 3 jours
+
+## Déscription
+
+TODO (Cette formation vous permettra d'installer et de piloter un Iaas sous OpenStack. OpenStack, solution leader du marche du cloud, est un framework IaaS qui permet de déployer des clouds privés ou publics.)
+
+### A qui s'adresse la formation
+
+TODO (La formation s'adresse aux administrateurs système, stockage et virtualisation souhaitant utiliser la technologie OpenStack.)
 
 ### Pré-requis de la formation
 
-* Formation initiale
+* La formation initiale est un pré-requis à la formation avancée
 
 ### Objectifs
 
