@@ -3,11 +3,11 @@ Durée : 3 jours
 
 ## Déscription
 
-TODO (Cette formation vous permettra d'installer et de piloter un Iaas sous OpenStack. OpenStack, solution leader du marche du cloud, est un framework IaaS qui permet de déployer des clouds privés ou publics.)
+Cette formation avancée vous permettra de maîtriser tous les composants et mécanismes de la solution OpenStack. 
 
 ### A qui s'adresse la formation
 
-TODO (La formation s'adresse aux administrateurs système, stockage et virtualisation souhaitant utiliser la technologie OpenStack.)
+La formation s'adresse aux administrateurs et architectes souhaitant mettre en place un cloud OpenStack.
 
 ### Pré-requis de la formation
 

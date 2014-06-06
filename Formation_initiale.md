@@ -3,11 +3,11 @@ Durée : 2 jours
 
 ### Description
 
-Cette formation vous permettra d'installer et de piloter un Iaas sous OpenStack. OpenStack, solution leader du marche du cloud, est un framework IaaS qui permet de déployer des clouds privés ou publics. 
+Cette formation vous permettra d'installer et de piloter un Iaas OpenStack, solution leader du marche du cloud.
 
 ### A qui s'adresse la formation
 
-La formation s'adresse aux administrateurs système, stockage et virtualisation souhaitant utiliser la technologie OpenStack.
+La formation s'adresse aux administrateurs système, stockage, virtualisation et architectes souhaitant utiliser la technologie OpenStack.
 
 ### Pré-requis de la formation
 
@@ -26,7 +26,7 @@ Compétences d’administration système Linux tel qu’Ubuntu, Redhat ou Debian
 * Adapter ses méthodes d’administration système à un environnement cloud
 * Connaitre le fonctionnement du projet OpenStack et ses possibilités
 * Savoir déployer rapidement un OpenStack de test
-* Utiliser OpenStack (API, CLI, Dashboard).
+* Utilisation de l'API, de la CLI (Command Line Interface) et du Dashboard.
 
 ### Programme
 
