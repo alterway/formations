@@ -768,6 +768,7 @@ SERVICE_TOKEN=a682f596-76f3-11e3-b3b2-e716f9080d50
       \item Des crédentials sont nécessaires
       \begin{itemize}
         \item API OpenStack : utilisateur + mot de passe + tenant
+        \item API AWS : access key ID + secret access key
       \end{itemize}
     \end{itemize}
   \end{frame}
@@ -995,11 +996,21 @@ $ keystone token-get
     Gère :
     \begin{itemize}
       \item Instances
-      \item Flavors
-      \item Security Groups
-      \item Floating IPs
+      \item Flavors (types d'instance)
+      \item Security Groups (groupes de sécurité)
+      \item Floating IPs (IPs flottantes)
     \end{itemize}
-    Les instances sont redimensionnables et migrables.
+    Les instances sont redimensionnables et migrables d'un hôte physique à un autre.
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Les groupes de sécurité}
+    \begin{itemize}
+      \item Équivalent à un firewall devant chaque instance
+      \item Une instance peut être associée à un ou plusieurs groupes de sécurité
+      \item Gestion des accès en entrée et sortie
+      \item Règles par protocole (TCP/UDP/ICMP) et par port
+    \end{itemize}
   \end{frame}
 
   \begin{frame}
@@ -1150,8 +1161,8 @@ $ glance image-create
     Outre les fonctions réseau de base niveaux 2 et 3, Neutron peut fournir d'autres services :
     \begin{itemize}
       \item Load Balancing (HAProxy, ...)
-      \item Firewall (vArmour, ...)
-      \item VPN (Openswan, ...)
+      \item Firewall (vArmour, ...) : différe des groupes de sécurité
+      \item VPN (Openswan, ...) : permet d'accéder à un réseau privé sans IP flottantes
     \end{itemize}
     Ces fonctionnalités se basent également sur des plugins
   \end{frame}
@@ -1362,6 +1373,15 @@ resources:
       image: F18-x86_64-cfntools
       flavor: m1.small
 \end{verbatim}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Fonctionnalités avancées de Heat}
+    \begin{itemize}
+      \item Nested stacks
+      \item Environments
+      \item Providers
+    \end{itemize}
   \end{frame}
 
   \subsection[Trove]{Trove : Database as a Service}
@@ -1736,6 +1756,14 @@ packages:
  - apache2
  - htop
 \end{verbatim}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Configurer et orchestrer ses instances}
+    \begin{itemize}
+      \item Outils de gestion de configuration (les mêmes qui permettent de déployer OpenStack)
+      \item Juju
+    \end{itemize}
   \end{frame}
 
   \section*{Conclusion}
