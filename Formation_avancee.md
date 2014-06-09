@@ -56,3 +56,9 @@ La formation s'adresse aux administrateurs et architectes souhaitant mettre en p
 2. Infrastructure as Code
 3. Gérer et manipuler ses images cloud
 4. Vers le PaaS
+
+## Exemples de travaux pratiques réalisés
+* Installation d'OpenStack avec les paquets de la distribution
+* Déploiement d'OpenStack avec Puppet
+* Déployer une stack avec Heat
+* Générer sa propre image cloud

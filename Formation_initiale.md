@@ -3,7 +3,7 @@ Durée : 2 jours
 
 ## Description
 
-Cette formation vous permettra de comprendre les enjeux liés au cloud IaaS, puis d'installer et de piloter une infrastructure OpenStack, solution leader du marché.
+Cette formation vous permettra de comprendre les enjeux liés au cloud IaaS (Infrastructure as a Service), puis d'installer et de piloter une infrastructure OpenStack, solution leader du marché.
 
 ### À qui s'adresse la formation
 
@@ -13,8 +13,8 @@ La formation s'adresse aux administrateurs système, stockage, virtualisation et
 
 Compétences d’administration système Linux tel qu’Ubuntu, Red Hat ou Debian.
 * Gestion des paquets
-* LVM et systèmes de fichiers
-* Notions de virtualisation, KVM et libvirt
+* LVM (Logical Volume Management) et systèmes de fichiers
+* Notions de virtualisation, KVM (Kernel-based Virtual Machine) et libvirt
 
 ### Objectifs
 
@@ -26,7 +26,7 @@ Compétences d’administration système Linux tel qu’Ubuntu, Red Hat ou Debia
 * Adapter ses méthodes d’administration système à un environnement cloud
 * Connaitre le fonctionnement du projet OpenStack et ses possibilités
 * Savoir déployer rapidement un OpenStack de test
-* Utilisation de l'API, de la CLI (Command Line Interface) et du Dashboard.
+* Utilisation de l'API (Application Programming Interface), de la CLI (Command Line Interface) et du Dashboard.
 
 ## Programme
 
@@ -36,7 +36,7 @@ Compétences d’administration système Linux tel qu’Ubuntu, Red Hat ou Debia
 2. Comprendre le PaaS (Platform as a Service)
 3. Comprendre l'IaaS (Infrastructure as a Service)
 4. Le stockage dans le cloud, block, objet et SDS
-5. La gestion du Réseau SFN et NFV
+5. La gestion du réseau SDN (Software Defined Network) et NFV (Network Functions Virtualization)
 6. Comment orchestrer les ressources de son IaaS
 7. Les APIs, la clé du cloud OpneStack
 
@@ -53,3 +53,11 @@ Compétences d’administration système Linux tel qu’Ubuntu, Red Hat ou Debia
 3. Utilisation des outils CLI
 4. Utilisation du Dashboard
 5. Fonctionnalités avancées
+
+## Exemples de travaux pratiques réalisés
+* Découverte de la palette de services proposée par AWS (Amazon Web Services)
+* Lancer et configurer des ressources de base sur AWS
+* Installer OpenStack à l'aide de DevStack
+* Découvrir le fonctionnement des APIs en effectuant des requêtes HTTP avec curl
+* Manipuler les ressources de son cloud à l'aide des outils CLI
+* Utiliser le dashboard OpenStack
