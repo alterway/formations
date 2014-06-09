@@ -1,11 +1,11 @@
-## OpenStack administrateur – formation avancée (3 jours)
+# OpenStack administrateur – formation avancée (3 jours)
 Durée : 3 jours
 
-## Déscription
+## Description
 
-Cette formation avancée vous permettra de maîtriser tous les composants et mécanismes de la solution OpenStack. 
+Cette formation avancée vous permettra de maîtriser tous les composants et mécanismes de la solution OpenStack.
 
-### A qui s'adresse la formation
+### À qui s'adresse la formation
 
 La formation s'adresse aux administrateurs et architectes souhaitant mettre en place un cloud OpenStack.
 
@@ -19,8 +19,10 @@ La formation s'adresse aux administrateurs et architectes souhaitant mettre en p
 * Pouvoir faire les bons choix de configuration,
 * Savoir déployer manuellement un cloud OpenStack pour fournir de l’IaaS,
 * Connaitre les bonnes pratiques de déploiement d’OpenStack,
-* Etre capable de déeterminer l’origine d’une erreur dans OpenStack,
+* Être capable de déterminer l’origine d’une erreur dans OpenStack,
 * Savoir réagir face à un bug et connaître le processus de correction.
+
+## Programme
 
 ### Déployer OpenStack de A à Z
 
