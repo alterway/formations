@@ -1519,6 +1519,13 @@ resources:
     Guide HA : \url{http://docs.openstack.org/high-availability-guide/content/}
   \end{frame}
 
+  \begin{itemize}
+    \frametitle{Haut disponibilité de l'agent L3 de Neutron}
+    \begin{itemize}
+      \item Plusieurs solutions possibles
+    \end{itemize}
+  \end{itemize}
+
   \begin{frame}
     \frametitle{Considérations pour une environnement de production}
     \begin{itemize}
@@ -1734,6 +1741,23 @@ resources:
       \item Un OS sachant parler à l'API de metadata du cloud (cloud-init)
     \end{itemize}
     La plupart des distributions fournissent aujourd'hui des images cloud.
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Cirros}
+    \begin{itemize}
+      \item Cirros est l'image cloud par excellence
+      \item OS minimaliste
+      \item Contient cloud-init
+      \item \url{https://launchpad.net/cirros}
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Faire ou modifier une image cloud}
+    \begin{itemize}
+      \item Utilisation de libguestfs
+    \end{itemize}
   \end{frame}
 
   \begin{frame}
