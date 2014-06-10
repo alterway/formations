@@ -1,14 +1,14 @@
-#TEXFILES = latex/main.tex
+SHELL=/bin/bash
 
 all: screen.pdf handout.pdf print.pdf
 
-#%.pdf: latex/%.tex $(TEXFILES)
 %.pdf: latex/%.tex
-	pdflatex $<
-	pdflatex $<
+	mkdir -p result
+	pdflatex -output-directory result $<
+	pdflatex -output-directory result $<
 
 clean:
-	rm -f {screen,handout,print}.{aux,log,nav,out,snm,toc}
+	rm -f result/{screen,handout,print}.{aux,log,nav,out,snm,toc}
 
 mrproper: clean
-	rm -f {screen,handout,print}.pdf
+	rm -f result/{screen,handout,print}.pdf
