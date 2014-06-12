@@ -41,7 +41,7 @@ Compétences d’administration système Linux tel qu’Ubuntu, Red Hat ou Debia
 4. Le stockage dans le cloud, block, objet et SDS
 5. La gestion du réseau SDN (Software Defined Network) et NFV (Network Functions Virtualization)
 6. Comment orchestrer les ressources de son IaaS
-7. Les APIs, la clé du cloud OpneStack
+7. Les APIs, la clé du cloud
 
 ### OpenStack : projet et logiciel
 
