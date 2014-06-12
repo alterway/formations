@@ -12,6 +12,10 @@ La formation s'adresse aux administrateurs et architectes souhaitant mettre en p
 ### Pré-requis de la formation
 
 * La formation initiale est un pré-requis à la formation avancée
+* Compétences avancées d’administration système Linux tel qu’Ubuntu, Red Hat ou Debian, notamment :
+    * Gestion des paquets
+    * LVM (Logical Volume Management) et systèmes de fichiers
+    * Notions de virtualisation, KVM (Kernel-based Virtual Machine) et libvirt
 
 ### Objectifs
 

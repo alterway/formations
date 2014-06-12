@@ -15,9 +15,6 @@ La formation s'adresse aux administrateurs système, stockage, virtualisation et
 ### Pré-requis de la formation
 
 Compétences d’administration système Linux tel qu’Ubuntu, Red Hat ou Debian.
-* Gestion des paquets
-* LVM (Logical Volume Management) et systèmes de fichiers
-* Notions de virtualisation, KVM (Kernel-based Virtual Machine) et libvirt
 
 ### Objectifs
 
