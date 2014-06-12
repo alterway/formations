@@ -5,6 +5,9 @@ Durée : 2 jours
 
 Cette formation vous permettra de comprendre les enjeux liés au cloud IaaS (Infrastructure as a Service), puis d'installer et de piloter une infrastructure OpenStack, solution leader du marché.
 
+IaaS est un modèle où les ressources d'infrastructure (telles que calcul, stockage et réseau) sont mises à dispostion des utilisateurs par le biais d'APIs. Les APIs permettent l'accès à ces ressources par de multiples moyens : interface graphique/web, ligne de commande, script, programme, etc. Cette possibilité de programmer l'allocation, l'utilisation et la restitution des ressources fait la force du système cloud : mise à l'échelle automatique en fonction de la demande, facturation à l'usage, etc. Les processus deviennent plus agiles.
+Des clouds publics tels qu'Amazon Web Services (AWS) proposent de l'IaaS. Dans le domaine du cloud privé, c'est le logiciel libre OpenStack qui fait référence.
+
 ### À qui s'adresse la formation
 
 La formation s'adresse aux administrateurs système, stockage, virtualisation et architectes souhaitant utiliser la technologie OpenStack.
