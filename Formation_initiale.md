@@ -18,15 +18,13 @@ Compétences d’administration système Linux tel qu’Ubuntu, Red Hat ou Debia
 
 ### Objectifs
 
-* Comprendre les principes du cloud et son intérêt
-* Connaitre le vocabulaire inhérent au cloud
-* Avoir une vue d’ensemble sur les solutions existantes en cloud public et privé
-* Posséder les clés pour tirer partie au mieux de l’IaaS
-* Pouvoir déterminer ce qui est compatible avec la philosophie cloud
-* Adapter ses méthodes d’administration système à un environnement cloud
-* Connaitre le fonctionnement du projet OpenStack et ses possibilités
-* Savoir déployer rapidement un OpenStack de test
-* Utilisation de l'API (Application Programming Interface), de la CLI (Command Line Interface) et du Dashboard.
+* Découvrir OpenStack et manipuler les différents services,
+* Savoir déployer rapidement un OpenStack de test,
+* Comprendre les principes du cloud et son intérêt, ainsi que le vocabulaire associé,
+* Avoir une vue d’ensemble sur les solutions existantes en cloud public et privé,
+* Pouvoir déterminer ce qui est compatible avec la philosophie cloud,
+* Connaitre le fonctionnement du projet OpenStack et ses possibilités,
+* Manipuler l'API (Application Programming Interface), la CLI (Command Line Interface) et le Dashboard.
 
 ## Programme
 

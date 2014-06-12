@@ -24,7 +24,8 @@ La formation s'adresse aux administrateurs et architectes souhaitant mettre en p
 * Savoir déployer manuellement un cloud OpenStack pour fournir de l’IaaS,
 * Connaitre les bonnes pratiques de déploiement d’OpenStack,
 * Être capable de déterminer l’origine d’une erreur dans OpenStack,
-* Savoir réagir face à un bug et connaître le processus de correction.
+* Savoir réagir face à un bug et connaître le processus de correction,
+* Posséder les clés pour tirer partie au mieux de l’IaaS.
 
 ## Programme
 
