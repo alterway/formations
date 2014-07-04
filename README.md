@@ -13,13 +13,15 @@ Installation de LaTeX (Ubuntu)
 
        sudo apt-get install texlive-lang-french texlive
 
-
 Générations des PDFs
 --------------------
 
 Tous :
+
        make
+
 Un style (screen, handout ou print) :
+
        make style.pdf
 
 Copyright et licence
