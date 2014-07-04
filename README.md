@@ -1,8 +1,12 @@
-License
--------
-Le contenu de la formation est sous licence CC BY-SA.
+Supports de formation OpenStack
+===============================
 
-![Creative Common BY-SA](http://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-sa.png)
+Supports de formation (sous forme de slides) sur OpenStack écrits en Français.
+Sont notamment abordés les sujets suivants : le cloud, le projet OpenStack, l'utilisation d'OpenStack, le déploiement d'OpenStack, et les manières de tirer partie d'une infrastructure IaaS.
+
+Auteurs :
+* Adrien Cunin <adrien.cunin@osones.com>
+* Pierre Freund <pierre.freund@osones.com>
 
 Installation de LaTeX (Ubuntu)
 ------------------------------
@@ -10,10 +14,21 @@ Installation de LaTeX (Ubuntu)
        sudo apt-get install texlive-lang-french texlive
 
 
-Récupération des fichiers et compilation
-----------------------------------------
+Générations des PDFs
+--------------------
 
-       git clone git@github.com:Osones/formation-openstack.git
-       cd formation-openstack/
+Tous :
        make
+Un style (screen, handout ou print) :
+       make style.pdf
 
+Copyright et licence
+--------------------
+Tous les contenus originaux (Makefile, les fichiers dans latex/) sont :
+* Copyright © 2014 Osones
+* Distribués sous licence Creative Commons BY-SA 4.0.
+
+![Creative Commons BY-SA](http://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-sa.png)
+https://creativecommons.org/licenses/by-sa/4.0/
+
+Les autres fichiers du répertoire images/ sont soumis à leur copyright et licence respectifs.
