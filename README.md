@@ -29,6 +29,7 @@ Tous les contenus originaux (Makefile, les fichiers dans latex/) sont :
 * Distribués sous licence Creative Commons BY-SA 4.0.
 
 ![Creative Commons BY-SA](http://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-sa.png)
+
 https://creativecommons.org/licenses/by-sa/4.0/
 
 Les autres fichiers du répertoire images/ sont soumis à leur copyright et licence respectifs.
