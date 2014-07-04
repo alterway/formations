@@ -1,0 +1,53 @@
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{xparse}
+\usepackage{microtype}
+\usepackage{verbatim}
+
+\usetheme{Boadilla}
+
+\title{Formation OpenStack}
+\author{Adrien Cunin}
+\institute{Osones}
+\date{Juin 2014}
+
+\logo{\includegraphics[height=0.5cm]{images/logo-osones.png}}
+
+\begin{document}
+  \begin{frame}
+    \titlepage
+    \begin{center}
+      \includegraphics[width=4cm]{images/openstack.png}
+    \end{center}
+  \end{frame}
+
+  \begin{frame}
+    \title{Mentions légales}
+    \begin{itemize}
+      \item Copyright \copyright{2014 Osones}
+      \item Licence : Creative Commons BY-SA 4.0 \\
+        \includegraphics{images/licence.png} \\
+        \url{https://creativecommons.org/licenses/by-sa/4.0/deed.fr}
+      \item Sources : \url{https://github.com/Osones/formation-openstack/}
+    \end{itemize}
+  \end{frame}
+
+  \AtBeginSection[]
+  {
+    \begin{frame}[shrink]
+      \frametitle{Plan}
+      \tableofcontents[currentsection,hideothersubsections]
+    \end{frame}
+  }
+  \AtBeginSubsection[]
+  {
+    \begin{frame}[shrink]
+      \frametitle{Plan}
+      \tableofcontents[
+        currentsection,
+        sectionstyle=show/show,
+        subsectionstyle=show/shaded/hide
+      ]
+    \end{frame}
+  }
+
