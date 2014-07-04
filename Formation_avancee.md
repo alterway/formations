@@ -1,4 +1,4 @@
-# OpenStack administrateur – formation avancée (3 jours)
+# OpenStack administrateur – formation avancée
 Durée : 3 jours
 
 ## Description
@@ -46,6 +46,7 @@ La formation s'adresse aux administrateurs et architectes souhaitant mettre en p
 13. Quelques autres composants intéressants
 
 ### OpenStack en production
+
 1. Bonnes pratiques générales
 2. Choix structurants
 3. Penser le réseau
@@ -62,7 +63,7 @@ La formation s'adresse aux administrateurs et architectes souhaitant mettre en p
 3. Gérer et manipuler ses images cloud
 4. Vers le PaaS
 
-## Exemples de travaux pratiques réalisés
+### Travaux pratiques
 * Installation d'OpenStack avec les paquets de la distribution
 * Déploiement d'OpenStack avec Puppet
 * Déployer une stack avec Heat
