@@ -1,7 +1,7 @@
 Supports de formation OpenStack
 ===============================
 
-Supports de formation (sous forme de slides) sur OpenStack écrits en Français.
+Supports de formation (sous forme de slides) sur OpenStack écrits en Français et réalisés par Osones (https://osones.com/).
 Sont notamment abordés les sujets suivants : le cloud, le projet OpenStack, l'utilisation d'OpenStack, le déploiement d'OpenStack, et les manières de tirer partie d'une infrastructure IaaS.
 
 Auteurs :
