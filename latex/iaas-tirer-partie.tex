@@ -1,0 +1,95 @@
+  \section{Tirer partie de l'IaaS}
+
+  \begin{frame}
+    \frametitle{Deux visions}
+    Une fois un cloud IaaS en place, deux optiques possibles :
+    \begin{itemize}
+      \item Garder les mêmes pratiques tout en profitant du self service et de l'agilité de la solution
+      \item Faire évoluer ses pratiquer, tant côté applicatif que système
+    \end{itemize}
+    "Pets vs Cattle"
+  \end{frame}
+
+  \subsection{Côté applications}
+
+  \begin{frame}
+    \frametitle{Adapter ou faire ses applications "cloud ready"}
+    \begin{itemize}
+      \item Stateless : permet de multiplier les routes d'accès à l'application
+      \item Ne pas stocker les données en local, mais plutôt :
+      \begin{itemize}
+        \item Base de données
+        \item Stockage objet
+      \end{itemize}
+    \item Utiliser des outils standards de journalisation
+    \end{itemize}
+  \end{frame}
+
+  \subsection{Côté système}
+
+  \begin{frame}
+    \frametitle{Adopter une philosophie DevOps}
+    \begin{itemize}
+      \item Infrastructure as Code
+      \item Scale out au lieu de scale up
+      \item HA niveau application plutôt qu'infrastructure
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Utiliser des images cloud}
+    Une image cloud c'est :
+    \begin{itemize}
+      \item Une image disque contenant un OS déjà installé
+      \item Une image qui peut être instanciée en n machines sans erreur
+      \item Un OS sachant parler à l'API de metadata du cloud (cloud-init)
+    \end{itemize}
+    La plupart des distributions fournissent aujourd'hui des images cloud.
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Cirros}
+    \begin{itemize}
+      \item Cirros est l'image cloud par excellence
+      \item OS minimaliste
+      \item Contient cloud-init
+      \item \url{https://launchpad.net/cirros}
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Faire ou modifier une image cloud}
+    \begin{itemize}
+      \item Utilisation de libguestfs
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Cloud-init}
+    \begin{itemize}
+      \item Cloud-init est un moyen de tirer partie de l'API de metadata, et notamment des user data
+      \item L'outil est intégré par défaut dans la plupart des images cloud
+      \item À partir des user data, cloud-init effectue les opérations de personnalisation de l'instance
+      \item cloud-config est un format possible de user data
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}[containsverbatim]
+    \frametitle{Exemple cloud-config}
+\begin{verbatim}
+#cloud-config
+mounts:
+ - [ xvdc, /var/www ]
+packages:
+ - apache2
+ - htop
+\end{verbatim}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Configurer et orchestrer ses instances}
+    \begin{itemize}
+      \item Outils de gestion de configuration (les mêmes qui permettent de déployer OpenStack)
+      \item Juju
+    \end{itemize}
+  \end{frame}
