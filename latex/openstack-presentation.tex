@@ -72,7 +72,7 @@
         \item OpenStack Image Service - Glance\pause
         \item OpenStack Identity Service - Keystone\pause
         \item OpenStack Dashboard - Horizon\pause
-        \item OpenStack Metering - Ceilometer\pause
+        \item OpenStack Telemetry - Ceilometer\pause
         \item OpenStack Orchestration - Heat\pause
         \item OpenStack Database Service - Trove
     \end{itemize}
@@ -84,12 +84,14 @@
       \item Incubating (à jour Icehouse)
       \begin{itemize}
         \item Bare metal (Ironic)
-        \item Queue service (Marconi)
+        \item Queue service (Zaqar)
         \item Data processing (Sahara)
       \end{itemize}\pause
       \item Intéressants
       \begin{itemize}
         \item DNS service (Designate)
+        \item Shared File Systems (Manila)
+        \item Key management (Barbican)
       \end{itemize}
       \item Autres\pause
       \begin{itemize}
@@ -305,12 +307,12 @@
         \item \url{http//openstack.fr/}
         \item openstack-fr@lists.openstack.org
         \item \#openstack-fr@Freenode
-		\item Association
+        \item Association
       \end{itemize}
     \end{itemize}
   \end{frame}
-  
-    \subsection[DevStack]{DevStack : faire tourner rapidement un OpenStack}
+
+  \subsection[DevStack]{DevStack : faire tourner rapidement un OpenStack}
 
   \begin{frame}
     \frametitle{Utilité de DevStack}
@@ -359,8 +361,8 @@ SERVICE_TOKEN=a682f596-76f3-11e3-b3b2-e716f9080d50
       \item L'utilisation de Vagrant est conseillée
     \end{itemize}
   \end{frame}
-  
-    \subsection[Utilisation]{Utiliser OpenStack}
+
+  \subsection[Utilisation]{Utiliser OpenStack}
 
   \begin{frame}
     \frametitle{Le principe}
