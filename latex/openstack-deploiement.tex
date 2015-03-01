@@ -178,15 +178,27 @@ $ keystone token-get
     \frametitle{Principes}
     \begin{itemize}
       \item Gère les instances
-      \item IP flottantes, groupes de sécurité
       \item Les instances sont créées à partir des images fournies par Glance
       \item Les interfaces réseaux des instances sont associées à des ports Neutron
+      \item Du stockage block peut être fourni aux instances par Cinder
     \end{itemize}
   \end{frame}
 
   \begin{frame}
     \frametitle{Interactions avec les autres composants}
     \includegraphics[width=\textwidth]{images/compute-node.png}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Propriétés d'une instance}
+    \begin{itemize}
+      \item Éphémère
+      \item Une flavor
+      \item Consruite à partir d'une image
+      \item Attachement possible de volumes
+      \item Boot depuis un volume possible
+      \item Une clé SSH publique
+    \end{itemize}
   \end{frame}
 
   \begin{frame}
