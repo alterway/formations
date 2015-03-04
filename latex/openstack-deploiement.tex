@@ -21,7 +21,7 @@
     \frametitle{Quelques éléments de configuration généraux}
     \begin{itemize}
       \item Tous les composants doivent être configurés pour communiquer avec Keystone
-      \item La plupart doivent être configurés pour communiquer avec MySQL et RabbitMQ
+      \item La plupart doivent être configurés pour communiquer avec MySQL/MariaDB et RabbitMQ
       \item Les composants découpés en plusieurs services ont souvent un fichier de configuration par service
       \item api-paste.ini contient des paramètres concernant le service API
     \end{itemize}
@@ -57,7 +57,7 @@
       \item Chaque composant a sa propre base
       \item OpenStack utilise l'ORM Python SQLAlchemy
       \item Support théorique équivalent à celui de SQLAlchemy
-      \item MySQL est l'implémentation la plus largement testée et utilisée
+      \item MySQL/MariaDB est l'implémentation la plus largement testée et utilisée
       \item SQLite est principalement utilisé dans le cadre de tests et démo
       \item Certains déploiements fonctionnent avec PostgreSQL
     \end{itemize}
@@ -617,7 +617,7 @@ resources:
     \begin{itemize}
       \item Fournit des bases de données relationnelles, à la AWS RDS
       \item A vocation à supporter des bases NoSQL aussi
-      \item Gère notamment MySQL comme back-end
+      \item Gère notamment MySQL/MariaDB comme back-end
       \item Se repose sur Nova pour les instances dans lesquelles se fait l'installation d'une BDD
     \end{itemize}
   \end{frame}
@@ -749,7 +749,7 @@ resources:
     \frametitle{Haute disponbilité}
     Haut disponibilité de l'IaaS
     \begin{itemize}
-      \item MySQL, RabbitMQ : HA classique (Galera, Clustering)
+      \item MySQL/MariaDB, RabbitMQ : HA classique (Galera, Clustering)
       \item Les services APIs sont stateless et HTTP : scale out et load balancers
       \item La plupart des autres services OpenStack sont capables de scale out également
     \end{itemize}
@@ -803,8 +803,8 @@ resources:
     \frametitle{Considérations liées à la sécurité}
     \begin{itemize}
       \item Indispensable : HTTPS sur l'accès des APIs à l'extérieur
-      \item Sécurisation des communications MySQL et RabbitMQ
-      \item Un accès MySQL par base et par service
+      \item Sécurisation des communications MySQL/MariaDB et RabbitMQ
+      \item Un accès MySQL/MariaDB par base et par service
       \item Un utilisateur Keystone par service
       \item Limiter l'accès en lecture des fichiers de configuration (mots de passe, token)
       \item Veille sur les failles de sécurité : OSSA (\textit{OpenStack Security Advisory})
