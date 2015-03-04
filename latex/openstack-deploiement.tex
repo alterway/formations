@@ -225,10 +225,13 @@ $ keystone token-get
   \end{frame}
 
   \begin{frame}
-    \frametitle{Rôle des flavors}
+    \frametitle{Flavors}
     \begin{itemize}
+      \item \textit{Gabarit}
       \item Équivalent des "instance types" d'AWS
-      \item Définit un modèle d'instance en termes de CPU, RAM, disque, disque éphémère
+      \item Définit un modèle d'instance en termes de CPU, RAM, disque (racine), disque éphémère
+      \item Un disque de taille nul équivaut à prendre la taille de l'image de base
+      \item Le disque éphémère a, comme le disque racine, l'avantage d'être souvent local donc rapide
     \end{itemize}
   \end{frame}
 
