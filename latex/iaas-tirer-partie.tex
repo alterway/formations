@@ -4,24 +4,46 @@
     \frametitle{Deux visions}
     Une fois un cloud IaaS en place, deux optiques possibles :
     \begin{itemize}
-      \item Garder les mêmes pratiques tout en profitant du self service et de l'agilité de la solution
-      \item Faire évoluer ses pratiques, tant côté applicatif que système
-    \end{itemize}
+      \item Garder les mêmes pratiques tout en profitant du self service et de l'agilité de la solution pour des besoins test/dev
+      \item \textbf<2->{Faire évoluer ses pratiques}, tant côté applicatif que système
+    \end{itemize}\pause
     "Pets vs Cattle"
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Sinon ?}
+    Faire tourner des applications \textit{legacy} dans le cloud est une mauvaise idée :
+    \begin{itemize}
+      \item Interruptions de service
+      \item Pertes de données
+      \item Incompréhensions "le cloud ça marche pas"
+    \end{itemize}
   \end{frame}
 
   \subsection{Côté applications}
 
-  \begin{frame}
-    \frametitle{Adapter ou faire ses applications "cloud ready"}
+  \begin{frame}[allowframebreaks]
+    \frametitle{Adapter ou penser ses applications "cloud ready"}
+    Cf. les design tenets du projet OpenStack
     \begin{itemize}
-      \item Stateless : permet de multiplier les routes d'accès à l'application
+      \item Architecture distribuée plutôt que monolithique
+      \begin{itemize}
+        \item Facilite le passage à l'échelle
+        \item Limite les domaines de \textit{failure}
+      \end{itemize}\pause
+      \item Couplage faible entre les composants
+      \item Bus de messages pour les communications inter-composants\pause
+      \item Stateless : permet de multiplier les routes d'accès à l'application\pause
+      \item Dynamicité : l'application doit s'adapter à son environnement et se reconfigurer lorsque nécessaire\pause
+      \item Permettre le déploiement et l'exploitation par des outils d'automatisation\pause
+      \item Limiter autant que possible les dépendances à du matériel ou du logiciel spécifique qui pourrait ne pas fonctionner dans un cloud\pause
+      \item Tolérance aux pannes (\textit{fault tolerance}) intégrée\pause
       \item Ne pas stocker les données en local, mais plutôt :
       \begin{itemize}
         \item Base de données
         \item Stockage objet
-      \end{itemize}
-    \item Utiliser des outils standards de journalisation
+      \end{itemize}\pause
+      \item Utiliser des outils standards de journalisation
     \end{itemize}
   \end{frame}
 
@@ -33,6 +55,8 @@
       \item Infrastructure as Code
       \item Scale out plutôt que scale up (horizontalement plutôt que verticalement)
       \item HA niveau application plutôt qu'infrastructure
+      \item Automatisation, automatisation, automatisation
+      \item Tests
     \end{itemize}
   \end{frame}
 
