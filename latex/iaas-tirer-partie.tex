@@ -92,15 +92,8 @@
       \item Cirros est l'image cloud par excellence
       \item OS minimaliste
       \item Contient cloud-init
-      \item \url{https://launchpad.net/cirros}
     \end{itemize}
-  \end{frame}
-
-  \begin{frame}
-    \frametitle{Faire ou modifier une image cloud}
-    \begin{itemize}
-      \item Utilisation de libguestfs
-    \end{itemize}
+    \url{https://launchpad.net/cirros}
   \end{frame}
 
   \begin{frame}
@@ -123,6 +116,19 @@ packages:
  - apache2
  - htop
 \end{verbatim}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Comment gérer ses images ?}
+    \begin{itemize}
+      \item Utilisation d'images génériques et personnalisation à l'instanciation
+      \item Création d'images intermédiaires et/ou totalement personnalisées : \textit{Golden images}
+      \begin{itemize}
+        \item libguestfs, virt-builder
+        \item diskimage-builder
+        \item solution "maison"
+      \end{itemize}
+    \end{itemize}
   \end{frame}
 
   \begin{frame}
