@@ -193,12 +193,13 @@ $ keystone token-get
   \begin{frame}
     \frametitle{Propriétés d'une instance}
     \begin{itemize}
-      \item Éphémère
-      \item Une flavor
+      \item Éphémère, a priori non hautement disponible
+      \item Définie par une flavor
       \item Construite à partir d'une image
-      \item Attachement possible de volumes
-      \item Boot depuis un volume possible
-      \item Une clé SSH publique
+      \item Optionnel : attachement de volumes
+      \item Optionnel : boot depuis un volume
+      \item Optionnel : une clé SSH publique
+      \item Optionnel : des ports réseaux
     \end{itemize}
   \end{frame}
 
@@ -208,8 +209,7 @@ $ keystone token-get
     \begin{itemize}
       \item Instances
       \item Flavors (types d'instance)
-      \item Security Groups (groupes de sécurité)
-      \item Floating IPs (IPs flottantes)
+      \item Indirectement : images, security groups (groupes de sécurité), floating IPs (IPs flottantes)
     \end{itemize}
     Les instances sont redimensionnables et migrables d'un hôte physique à un autre.
   \end{frame}
@@ -221,6 +221,7 @@ $ keystone token-get
       \item Une instance peut être associée à un ou plusieurs groupes de sécurité
       \item Gestion des accès en entrée et sortie
       \item Règles par protocole (TCP/UDP/ICMP) et par port
+      \item Cible une adresse IP, un réseau ou un autre groupe de sécurité
     \end{itemize}
   \end{frame}
 
