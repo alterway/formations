@@ -250,9 +250,9 @@ $ keystone token-get
   \begin{frame}
     \frametitle{Nova compute}
     \begin{itemize}
-      \item Exécute les machines virtuelles
+      \item Pilote les instances (machines virtuelles ou physiques)
       \item Tire partie de libvirt ou d'autres APIs comme XenAPI
-      \item Drivers : libvirt, XenAPI, VMWare ESX, Docker
+      \item Drivers : libvirt (KVM, LXC, etc.), XenAPI, VMWare vSphere, Docker; Ironic
       \item Permet de récupérer les logs de la console et une console VNC
     \end{itemize}
   \end{frame}
