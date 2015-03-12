@@ -908,9 +908,10 @@ resources:
     \frametitle{Déploiement bare metal}
     \begin{itemize}
       \item Le déploiement des hôtes physiques OpenStack peut se faire à l'aide d'outils dédiés\pause
-      \item Canonical/Ubuntu propose MaaS : Metal as a Service
-      \item Dell propose Crowbar
-      \item eDeploy (eNovance)
+      \item MaaS (Metal as a Service), par Ubuntu/Canonical : se couple avec Juju
+      \item Crowbar / OpenCrowbar (initialement Dell) : utilise Chef
+      \item eDeploy (eNovance) : déploiement par des images\pause
+      \item Ironic via TripleO
     \end{itemize}
   \end{frame}
 
