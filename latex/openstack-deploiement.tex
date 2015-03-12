@@ -770,6 +770,7 @@ resources:
     \frametitle{Considérations pour une environnement de production}
     \begin{itemize}
       \item Des URLs uniformes pour toutes les APIs : utiliser un reverse proxy
+      \item Apache/mod\_wsgi pour servir les APIs lorsque cela est possible (Keystone)
       \item Utilisation des quotas
       \item Prévoir les bonnes volumétries, notamment pour les données Ceilometer
       \item Monitoring
