@@ -824,24 +824,27 @@ resources:
       \item Regions : chaque région a son API
       \item Cells : permet de regrouper plusieurs cloud différents sous une même API
     \end{itemize}
-    \url{http://docs.openstack.org/openstack-ops/content/scaling.html}
+    \url{http://docs.openstack.org/openstack-ops/content/scaling.html#segregate_cloud}
   \end{frame}
 
   \begin{frame}
     \frametitle{Host aggregates / agrégats d'hôtes}
     \begin{itemize}
-      \item L'administrateur définit des agrégats via l'API
+      \item Spécifique Nova
+      \item L'administrateur définit des agrégats d'hôtes via l'API
+      \item L'administrateur associe flavors et agrégats via des couples clé/valeur communs
       \item 1 agrégat $\equiv$ 1 point commun, ex : GPU
-      \item L'utilisateur peut choisir un agrégat à la création d'instance
+      \item L'utilisateur choisit un agrégat à travers son choix de flavor à la création d'instance
     \end{itemize}
   \end{frame}
 
   \begin{frame}
     \frametitle{Availability zones / zones de disponibilité}
     \begin{itemize}
-      \item Groupe d'hôtes
+      \item Spécifique Nova et Cinder
+      \item Groupes d'hôtes
       \item Découpage en termes de disponibilité : Rack, Datacenter, etc.
-      \item L'utiliser peut choisir une zone de disponibilité
+      \item L'utilisateur choisit une zone de disponibilité à la création d'instance
       \item L'utilisateur peut demander à ce que des instances soient démarrées dans une même zone, ou au contraire dans des zones différentes
     \end{itemize}
   \end{frame}
@@ -849,6 +852,7 @@ resources:
   \begin{frame}
     \frametitle{Régions}
     \begin{itemize}
+      \item Générique OpenStack
       \item Équivalent des régions d'AWS
       \item Un service peut avoir différents endpoints dans différentes régions
       \item Chaque région est autonome
@@ -857,9 +861,9 @@ resources:
   \end{frame}
 
   \begin{frame}
-    \frametitle{Cellules / Cells}
+    \frametitle{Cells / Cellules}
     \begin{itemize}
-      \item Fonctionnalité de Nova uniquement
+      \item Spécifique Nova
       \item Un seul nova-api devant plusieurs cellules
       \item Chaque cellule a sa propre BDD et file de messages
       \item Ajoute un niveau de scheduling (choix de la cellule)
