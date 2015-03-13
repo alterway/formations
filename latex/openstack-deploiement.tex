@@ -275,7 +275,7 @@ $ keystone token-get
   \begin{frame}
     \frametitle{Nova scheduler}
     \begin{itemize}
-      \item Service qui distribue les demandes d'instances sur les noeuds compute
+      \item Service qui distribue les demandes d'instances sur les nœuds compute
       \item Filter, Chance, Multi Scheduler
       \item Filtres, par défaut : AvailabilityZoneFilter,RamFilter,ComputeFilter
       \item Tri par poids, par défaut : RamWeigher
@@ -291,8 +291,8 @@ $ keystone token-get
     \frametitle{Nova conductor}
     \begin{itemize}
       \item Service facultatif qui améliore la sécurité
-      \item Fait office de proxy entre les noeuds compute et la BDD
-      \item Les noeuds compute, vulnérables, n'ont donc plus d'accès à la BDD
+      \item Fait office de proxy entre les nœuds compute et la BDD
+      \item Les nœuds compute, vulnérables, n'ont donc plus d'accès à la BDD
     \end{itemize}
   \end{frame}
 
@@ -690,8 +690,8 @@ resources:
     \frametitle{TripleO}
     \begin{itemize}
       \item OpenStack On OpenStack
-      \item Objectif : pouvoir déployer un cloud OpenStack (overcloud) à partir d'un cloud OpenStack (undercloud)
-      \item Autoscaling du cloud lui-même : déploiement de nouveaux noeuds compute lorsque cela est nécessaire
+      \item Objectif : pouvoir déployer un cloud OpenStack (\textit{overcloud}) à partir d'un cloud OpenStack (\textit{undercloud})
+      \item Autoscaling du cloud lui-même : déploiement de nouveaux nœuds compute lorsque cela est nécessaire
       \item Fonctionne conjointement avec Ironic pour le déploiement bare-metal
     \end{itemize}
   \end{frame}
