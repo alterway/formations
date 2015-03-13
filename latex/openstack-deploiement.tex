@@ -728,12 +728,23 @@ resources:
   \end{frame}
 
   \begin{frame}
-    \frametitle{Mise à jour versions majeures}
+    \frametitle{Mises à jour entre versions majeures}
     \begin{itemize}
+      \item OpenStack supporte les mises à jour N $\rightarrow$ N+1
       \item Swift : très bonne gestion en mode \textit{rolling upgrade}
       \item Autres composants : tester préalablement avec vos données
       \item Lire les release notes
       \item Cf. articles de blog du CERN
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Mises à jour dans une version stable}
+    \begin{itemize}
+      \item Fourniture de correctifs de bugs majeurs et de sécurité
+      \item OpenStack intègre ces correctifs sous forme de patchs dans la branche stable
+      \item Publication de \textit{point releases} intégrant ces correctifs issus de la branche stable
+      \item Durée variable du support des versions stables, dépendant de l'intérêt des intégrateurs
     \end{itemize}
   \end{frame}
 
