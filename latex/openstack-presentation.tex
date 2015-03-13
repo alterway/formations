@@ -137,7 +137,7 @@
   \end{frame}
 
   \begin{frame}
-    \frametitle{Développement du projet}
+    \frametitle{Développement du projet : les principes}
     \begin{itemize}
       \item Open Source
       \item Open Design
@@ -152,8 +152,11 @@
       \item Ouvert à tous (individuels et entreprises)\pause
       \item Cycle de développement de 6 mois débuté par un (design) summit\pause
       \item Outils : Launchpad $\rightarrow$ Storyboard (blueprints, bugs) + Git + GitHub (code)\pause
-      \item Sur chaque patch proposé : peer review (Gerrit) + intégration continue (exécution de différents tests par Jenkins)\pause
-      \item Plateforme de référence et modèle de développement : Ubuntu\pause
+      \item Sur chaque patch proposé :
+      \begin{itemize}
+        \item Revue de code (peer review) : Gerrit, \url{https://review.openstack.org}
+        \item Intégration continue (continous integration) : Jenkins, Zuul, etc., \url{http://zuul.openstack.org/}
+      \end{itemize}\pause
       \item Développement hyper actif : 17000 commits dans Icehouse (+25\%)\pause
       \item Fin 2012, création d'une entité indépendante de gouvernance : la fondation OpenStack
     \end{itemize}
