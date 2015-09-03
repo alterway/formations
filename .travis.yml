@@ -1,0 +1,5 @@
+install:
+    - sudo apt-get install texlive-lang-french texlive texlive-latex-recommended
+ 
+script:
+    - make
