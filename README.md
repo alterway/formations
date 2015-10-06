@@ -8,7 +8,7 @@ Auteurs :
 * Adrien Cunin <adrien.cunin@osones.com>
 * Pierre Freund <pierre.freund@osones.com>
 
-![Travis](https://travis-ci.org/Osones/OpenStack-Formations.svg?branch=integration)
+[![Build Status](https://travis-ci.org/Osones/OpenStack-Formations.svg?branch=master)](https://travis-ci.org/Osones/OpenStack-Formations)
 
 Installation de LaTeX (Ubuntu)
 ------------------------------
