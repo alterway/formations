@@ -8,10 +8,12 @@ Auteurs :
 * Adrien Cunin <adrien.cunin@osones.com>
 * Pierre Freund <pierre.freund@osones.com>
 
+![Travis](https://travis-ci.org/Osones/OpenStack-Formations.svg?branch=integration)
+
 Installation de LaTeX (Ubuntu)
 ------------------------------
 
-       sudo apt-get install texlive-lang-french texlive
+       sudo apt-get install texlive-lang-french texlive texlive-latex3
 
 Générations des PDFs
 --------------------
@@ -27,7 +29,7 @@ Un style (screen, handout ou print) :
 Copyright et licence
 --------------------
 Tous les contenus originaux (Makefile, les fichiers dans latex/) sont :
-* Copyright © 2014 Osones
+* Copyright © 2015 Osones
 * Distribués sous licence Creative Commons BY-SA 4.0.
 
 ![Creative Commons BY-SA](http://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-sa.png)

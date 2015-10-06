@@ -1,0 +1,12 @@
+language: python
+install:
+  - sudo apt-get install texlive-lang-french texlive texlive-latex3
+script:
+  - make
+  - test -s screen.pdf
+  - test -s handout.pdf
+  - test -s print.pdf
+branches:
+  only:
+    - master
+    - integration
