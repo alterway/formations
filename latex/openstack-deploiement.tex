@@ -392,7 +392,7 @@ $ glance image-create
     Outre les fonctions réseau de base niveaux 2 et 3, Neutron peut fournir d'autres services :
     \begin{itemize}
       \item Load Balancing (HAProxy, ...)
-      \item Firewall (vArmour, ...) : différe des groupes de sécurité
+      \item Firewall (vArmour, ...) : diffère des groupes de sécurité
       \item VPN (Openswan, ...) : permet d'accéder à un réseau privé sans IP flottantes
     \end{itemize}
     Ces fonctionnalités se basent également sur des plugins
@@ -417,6 +417,7 @@ $ glance image-create
       \item OpenDaylight
       \item Contrail, OpenContrail
       \item Nuage Networks
+      \item VMWare NSX
       \item cf. OpenFlow
     \end{itemize}
   \end{frame}
@@ -456,8 +457,8 @@ $ glance image-create
     \frametitle{Du stockage partagé ?}
     \begin{itemize}
       \item Cinder n'est \textbf{pas} une solution de stockage partagé comme NFS
-      \item OpenStack (tout comme AWS) ne fournit pas de solution \textit{NFS as a Service}
-      \item Cf. le projet Manila
+      \item Le projet OpenStack Manila a pour objectif d'être un \textit{NFS as a Service}
+      \item AWS n'a introduit une telle fonctionnalité que récemment
     \end{itemize}
   \end{frame}
 
@@ -497,7 +498,7 @@ $ glance image-create
   \begin{frame}
     \frametitle{Principes}
     \begin{itemize}
-      \item Utilise les APIs existantes pour fournir une interface
+      \item Utilise les APIs existantes pour fournir une interface utilisateur
       \item Horizon est un module Django
       \item OpenStack Dashboard est l'implémentation officielle de ce module
     \end{itemize}
@@ -569,8 +570,17 @@ $ glance image-create
     \begin{itemize}
       \item Indexe différentes métriques concernant l'utilisation des différents services du cloud
       \item Fournit des APIs permettant de récupérer ces données
-      \item Base pour construire des outils de facturation
+      \item Base pour construire des outils de facturation (exemple : CloudKitty)
       \item Utilise MongoDB (par défaut) pour le stockage
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Gnocchi : time-series database}
+    \begin{itemize}
+      \item Pourquoi Gnocchi ? Palier aux problème de scalabilité de Ceilometer
+      \item Initié par des développeurs de Ceilometer et intégré à l'équipe projet Ceilometer
+      \item Back-end remplaçant MongoDB pour Ceilometer
     \end{itemize}
   \end{frame}
 
@@ -781,7 +791,7 @@ resources:
   \end{frame}
 
   \begin{frame}
-    \frametitle{Haute disponbilité}
+    \frametitle{Haute disponibilité}
     Haut disponibilité de l'IaaS
     \begin{itemize}
       \item MySQL/MariaDB, RabbitMQ : HA classique (Galera, Clustering)
@@ -843,7 +853,7 @@ resources:
       \item Un accès MySQL/MariaDB par base et par service
       \item Un utilisateur Keystone par service
       \item Limiter l'accès en lecture des fichiers de configuration (mots de passe, token)
-      \item Veille sur les failles de sécurité : OSSA (\textit{OpenStack Security Advisory})
+      \item Veille sur les failles de sécurité : OSSA (\textit{OpenStack Security Advisory}), OSSN (\textit{... Notes})
     \end{itemize}
     Guide sécurité : \url{http://docs.openstack.org/security-guide/content/}
   \end{frame}
