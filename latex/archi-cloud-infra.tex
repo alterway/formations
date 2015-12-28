@@ -1,0 +1,83 @@
+  \section{Architecture cloud}
+
+  \subsection{Concevoir une infrastructure pour le cloud}
+
+  \begin{frame}
+    \frametitle{Adopter une philosophie DevOps}
+    \begin{itemize}
+      \item Infrastructure as Code
+      \item Scale out plutôt que scale up (horizontalement plutôt que verticalement)
+      \item HA niveau application plutôt qu'infrastructure
+      \item Automatisation, automatisation, automatisation
+      \item Tests
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Automatisation}
+      \item Automatiser la gestion de l'infrastructure : indispensable
+      \item Création des ressources
+      \item Configuration des ressources
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Infrastructure as Code}
+    \begin{itemize}
+      \item Travailler comme un développeur
+      \item Décrire son infrastructure sous forme de code (Heat, Ansible)
+      \item Suivre les changements dans un VCS (git)
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Besoin d'orchestration}
+    \begin{itemize}
+      \item Manager tous les types de ressources par un point d'entrée
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{L'isolation}
+    \begin{itemize}
+      \item Niveau control plane : Tenant (projet)
+      \item Niveau réseau : L2, L3, security groups
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Réseau}
+    \begin{itemize}
+      \item Fixed IP
+      \item Multiples interfaces réseaux
+      \item Floating IPs : pool, allocate, associate
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Les instances}
+    \begin{itemize}
+      \item Éphémère
+      \item Pets vs Cattle
+      \item Basé sur une \textit{image}
+      \item API de metadata
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Monitoring}
+    Monitoring
+    \begin{itemize}
+      \item Prendre en compte le cycle de vie des instances : DOWN != ALERT
+      \item Monitorer le service plus que le serveur
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Backup}
+    Backuper, quoi ?
+    \begin{itemize}
+      \item Être capable de recréer ses instances (et le reste de son infrastructure)
+      \item Données (applicatives, logs) : block, objet
+    \end{itemize}
+  \end{frame}
