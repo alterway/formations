@@ -11,7 +11,16 @@
     \frametitle{12-factor}
     "The Twelve-Factor App" \url{http://12factor.net/}
     \begin{itemize}
-      \item 
+      \item Écrit par Heroku
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Modulaire}
+    \begin{itemize}
+      \item Multiples composants de taille raisonnable
+      \item Philosophie Unix
+      \item Couplage faible et interface documentée
     \end{itemize}
   \end{frame}
 
@@ -19,6 +28,7 @@
     \frametitle{Passage à l'échelle}
     \begin{itemize}
       \item Vertical vs Horizontal
+      \item Plusieurs petites instances plutôt qu'une grosse instance
     \end{itemize}
   \end{frame}
 
@@ -29,6 +39,27 @@
       \item Nécessite de partager l'information d'état lorsque plusieurs workers
       \item Le stateless élimine cette contrainte
     \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Tolérance aux pannes}
+    \begin{frame}
+      \item L'infrastructure n'est pas hautement disponible
+      \item L'API d'infrastructure est hautement disponible
+      \item L'application doit anticiper et réagir aux pannes
+    \end{frame}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Stockage des données}
+    \begin{frame}
+      \item Base de données relationnelles
+      \item Base de données NoSQL
+      \item Stockage bloc
+      \item Stockage objet
+      \item Stockage éphémère
+      \item Cache, temporaire
+    \end{frame}
   \end{frame}
 
   \begin{frame}[allowframebreaks]

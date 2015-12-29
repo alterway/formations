@@ -27,6 +27,7 @@
       \item Travailler comme un développeur
       \item Décrire son infrastructure sous forme de code (Heat, Ansible)
       \item Suivre les changements dans un VCS (git)
+      \item Utiliser des outils de tests
     \end{itemize}
   \end{frame}
 
@@ -34,6 +35,16 @@
     \frametitle{Besoin d'orchestration}
     \begin{itemize}
       \item Manager tous les types de ressources par un point d'entrée
+      \item Description de l'infrastructure dans un fichier (\textit{template})
+      \item Heat (intégré à OpenStack), Terraform
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Tests et intégration continue}
+    \begin{itemize}
+      \item Style de code
+      \item Validation de la syntaxe
     \end{itemize}
   \end{frame}
 
@@ -79,5 +90,14 @@
     \begin{itemize}
       \item Être capable de recréer ses instances (et le reste de son infrastructure)
       \item Données (applicatives, logs) : block, objet
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Un exemple : l'équipe openstack-infra}
+    \begin{itemize}
+      \item Infrastructure as code
+      \item Infrastructure ouverte : code "open source"
+      \item Utilise du cloud (hybride)
     \end{itemize}
   \end{frame}
