@@ -121,16 +121,6 @@
   \end{frame}
 
   \begin{frame}
-    \frametitle{Cycle de vie des projets au sein d'OpenStack}
-    \includegraphics[width=\textwidth]{images/innovation1.pdf}
-  \end{frame}
-
-  \begin{frame}
-    \frametitle{Les projets dans Icehouse}
-    \includegraphics[width=\textwidth]{images/innovation2.pdf}
-  \end{frame}
-
-  \begin{frame}
     \frametitle{Le nouveau modèle "big tent"}
     \begin{itemize}
       \item Évolutions presque totalement implémentées
@@ -452,54 +442,3 @@ SERVICE_TOKEN=a682f596-76f3-11e3-b3b2-e716f9080d50
     \end{itemize}
   \end{frame}
 
-  \subsection[Utilisation]{Utiliser OpenStack}
-
-  \begin{frame}
-    \frametitle{Le principe}
-    \begin{itemize}
-      \item Toutes les fonctionnalités sont accessibles par l'API
-      \item Les clients (y compris Horizon) utilisent l'API
-      \item Des crédentials sont nécessaires
-      \begin{itemize}
-        \item API OpenStack : utilisateur + mot de passe + tenant
-        \item API AWS : access key ID + secret access key
-      \end{itemize}
-    \end{itemize}
-  \end{frame}
-
-  \begin{frame}
-    \frametitle{Accès aux APIs}
-    \begin{itemize}
-      \item Direct, en HTTP, via des outils comme curl
-      \item Avec une bibliothèque
-      \begin{itemize}
-        \item Les implémentations officielles en Python
-        \item D'autres implémentations pour d'autres langages (exemple : jclouds)
-      \end{itemize}
-      \item Avec les outils officiels en ligne de commande
-      \item Avec Horizon
-    \end{itemize}
-  \end{frame}
-
-  \begin{frame}
-    \frametitle{Clients officiels}
-    \begin{itemize}
-      \item Le projet fournit des clients officiels : python-PROJETclient
-      \item Bibliothèques Python
-      \item Outils CLI
-      \begin{itemize}
-        \item L'authentification se fait en passant les credentials par paramètres ou variables d'environnement
-        \item L'option --debug affiche la communication HTTP
-      \end{itemize}
-    \end{itemize}
-  \end{frame}
-
-  \begin{frame}
-    \frametitle{OpenStack Client}
-    \begin{itemize}
-      \item Client CLI unifié
-      \item Commandes du type \textit{openstack <service> <action>}
-      \item Vise à remplacer à terme les clients spécifiques
-      \item Permet une expérience utilisateur plus homogène
-    \end{itemize}
-  \end{frame}
