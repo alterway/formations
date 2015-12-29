@@ -3,44 +3,45 @@
   \subsection[Cloud]{Le Cloud : les concepts}
 
   \begin{frame}
-    \frametitle{Le cloud, c'est large !}
+    \frametitle{Le cloud ? Vaste sujet !}
     \begin{itemize}
-      \item Stockage/calcul distant \pause (on oublie, cf. externalisation)\pause
-      \item Virtualisation++\pause
-      \item Abstraction du matériel (voire plus)\pause
-      \item Accès normalisé par des APIs\pause
-      \item Service et facturation à la demande\pause
-      \item Flexibilité, élasticité
+      \item Puissance de calcul, capacité de stockage et fonctionnalités réseau sous forme de services en-ligne\pause
+      \item Flexibilité et élasticité des infrastructures\pause
+      \item Libre-service, notion de catalogue\pause
+      \item Accès en mode programmatique par des APIs, automatisation\pause
+      \item Facturation à l'usage
     \end{itemize}
   \end{frame}
 
   \begin{frame}
     \frametitle{WaaS : Whatever as a Service}
     \begin{itemize}
-      \item Principalement\pause
+      \item Principalement :
+      \pause
       \begin{description}
-        \item[IaaS] \alert<5->{Infrastructure as a Service}\pause
-        \item[PaaS] Platform as a Service\pause
-        \item[SaaS] Software as a Service\pause
+        \item[IaaS] $\rightarrow$ \alert<5->{Infrastructure as a Service}\pause
+        \item[PaaS] $\rightarrow$ Platform as a Service\pause
+        \item[SaaS] $\rightarrow$ Software as a Service\pause
       \end{description}
       \pause
       \item Mais aussi :
       \pause
       \begin{itemize}
-        \item Database as a Service
-        \item Network as a Service
-        \item Load balancing as a Service\pause
-        \item \$APPLICATION as a Service
+        \item Object Storage as a Service\pause
+        \item Database as a Service\pause
+        \item Load Balancing as a Service\pause
+        \item DNS as a Service\pause
+        \item \$Application as a Service
       \end{itemize}
     \end{itemize}
   \end{frame}
 
   \begin{frame}
-    \frametitle{Cloud public ou cloud privé ?}
+    \frametitle{Cloud public, cloud privé, cloud hybride ?}
     \begin{description}
-      \item[Public] fourni par un hébergeur à des clients (AWS, Rackspace Cloud, etc.)
-      \item[Privé] plateforme et ressources internes
-      \item[Hybride] utilisation de ressources publiques au sein d'un cloud privé
+      \item[Public] $\rightarrow$ services cloud proposés par un fournisseur externe (AWS, Rackspace, OVS,...)\pause
+      \item[Privé] $\rightarrow$ services cloud proposés par une entreprise/organisation à ses propres départements\pause 
+      \item[Hybride] $\rightarrow$ utilisation des services d'un ou plusieurs clouds publics au sein d'un cloud privé
     \end{description}
   \end{frame}
 
@@ -50,88 +51,93 @@
   \end{frame}
 
   \begin{frame}
-    \frametitle{Pourquoi du cloud ? Côté business}
+    \frametitle{Pourquoi migrer vers le cloud ? Motivations d'ordre économique}
     \begin{itemize}
-      \item Baisse des coûts par la mutualisation des ressources
-      \item Utilisation uniquement des ressources qui sont nécessaires
-      \item Va de pair avec l'automatisation du SI, l'agilité
-      \item Donc réduction des délais et reproductibilité
-      \item À grande échelle et/ou en cloud hybride, garantie de service
+      \item appréhender les ressources IT comme des services "fournisseur"\pause
+      \item réduire les coûts en mutualisant les ressources\pause
+      \item réduire les délais d'approvisionnement de ressources\pause
+      \item faire glisser le budget "investissement" (Capex) vers le budget "fonctionnement"a(Opex)\pause
+      \item aligner les coûts sur la consommation réelle des ressources\pause
+      \item automatiser les opérations sur le SI et le rendre ainsi plus flexible
     \end{itemize}
   \end{frame}
 
   \begin{frame}
-    \frametitle{Pourquoi du cloud ? Côté technique}
+    \frametitle{Pourquoi migrer vers le cloud ? Motivations d'ordre technique}
     \begin{itemize}
-      \item Abstraction des couches plus basses
-      \item On peut tout programmer à son gré
-      \item Permet la mise en place d'architectures scalables
+      \item abstraire les couches basses (serveur, réseau, os, stockage)
+      \pause
+      \item s'affranchir de l'administration technique des ressources et services (BdD, pare-feux, load balancing,...)
+      \pause
+      \item concevoir des infrastructures scalables à la volée
+      \pause
+      \item agir sur les ressources via des lignes de code et gérer les infrastructures "comme du code".
     \end{itemize}
   \end{frame}
 
   \subsection[PaaS]{PaaS : Platform as a Service}
 
   \begin{frame}
-    \frametitle{PaaS : les principes}
+    \frametitle{PaaS : concept d'application managée}
     \begin{itemize}
-      \item Fourniture d'une plateforme de développement
-      \item Fourniture d'une plateforme de déploiement
-      \item Pour un langage / un framework
-      \item Principalement utilisé par des développeurs
+      \item Fourniture d'une plate-forme de "build, deploy and scale"
+      \pause
+      \item Pour un langage / un framework (python, java, php,...)
+      \pause
+      \item Principalement utilisé par des développeurs d'applications
     \end{itemize}
   \end{frame}
 
   \begin{frame}
-    \frametitle{Exemples de PaaS publics}
+    \frametitle{Exemples de PaaS public}
     \begin{itemize}
-      \item Amazon OpsWork / Elastic Beanstalk
-      \item Google App Engine
-      \item Heroku
+      \item Amazon Elastic Beanstalk (https://aws.amazon.com/fr/elasticbeanstalk)
+      \pause
+      \item Google App Engine (https://cloud.google.com/appengine)
+      \pause
+      \item Heroku (https://www.heroku.com)
     \end{itemize}
   \end{frame}
 
   \begin{frame}
     \frametitle{Solutions de PaaS privé}
     \begin{itemize}
-      \item Cloud Foundry
-      \item OpenShift (Red Hat)\pause
-      \item Solum
+      \item Cloud Foundry (https://www.cloudfoundry.org)
+      \pause
+      \item OpenShift (http://www.openshift.org)
+      \pause
+      \item \alert<5->{Solum} (https://wiki.openstack.org/wiki/Solum)
     \end{itemize}
   \end{frame}
 
   \subsection[IaaS]{IaaS : Infrastructure as a Service}
 
   \begin{frame}
-    \frametitle{Amazon Web Services (AWS) et les autres}
+    \frametitle{Le leader du IaaS public : Amazon Web Services (AWS)}
     \begin{itemize}
-      \item Service (cloud public) : \textcolor{blue}{AWS}
-      \begin{itemize}
-        \item Pionnier du genre (dès 2006)\pause
-        \item Elastic Compute Cloud (\textcolor{blue}{EC2})
-        \item Elastic Block Storage (\textcolor{blue}{EBS})\pause
-        \item Simple Storage Service (\textcolor{blue}{S3})\pause
-      \end{itemize}
-        \item Logiciels libres permettant le déploiement d'un cloud privé :
-      \begin{itemize}
-        \item Eucalyptus
-        \item CloudStack
-        \item OpenNebula\pause
-        \item \textbf{OpenStack}
-      \end{itemize}
+      \item Pionnier du marché (dès 2006)
+      \pause
+      \item Elastic Compute Cloud (\textcolor{blue}{EC2})\pause $\rightarrow$ puissance de calcul
+      \pause
+      \item Elastic Block Storage (\textcolor{blue}{EBS})\pause $\rightarrow$ stockage bloc
+      \pause
+      \item Simple Storage Service (\textcolor{blue}{S3})\pause $\rightarrow$ stockage objet
     \end{itemize}
   \end{frame}
 
   \begin{frame}
     \frametitle{Les clouds publics concurrents d'AWS}
     \begin{itemize}
-      \item Google Compute Platform
-      \item Microsoft Azure
-      \item \textbf<3->{Rackspace}
-      \item \textbf<3->{HP Cloud}\pause
-      \item En France
+      \item dans le monde :
       \begin{itemize}
-        \item \textbf<3->{Cloudwatt}
-        \item \textbf<3->{Numergy}
+        \item Google Compute Platform
+        \item Microsoft Azure
+        \item \textbf<3->{Rackspace}
+      \end{itemize}
+      \item en France :
+      \begin{itemize}
+        \item \textbf<3->{Cloudwatt} (Orange Business Services)
+        \item \textbf<3->{Numergy} (SFR)
         \item Outscale
         \item \textbf<3->{OVH}
         \item Ikoula
@@ -141,132 +147,100 @@
   \end{frame}
 
   \begin{frame}
+    \frametitle{Logiciels libres permettant le déploiement d'un cloud privé}
+    \begin{itemize}
+        \item Eucalyptus\pause
+        \item CloudStack\pause
+        \item OpenNebula\pause
+        \item \textbf{OpenStack} (https://www.openstack.org)
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Correspondance OpenStack - AWS}
+    \begin{table}[bt]
+      \begin{tabular}{|l|c|c|} \hline
+        \textbf{Service}      & \textbf{OpenStack}
+                              & \textbf{AWS} \\ \hline
+        \uncover<2->{compute} & \uncover<2->{Nova}
+                              & \uncover<2->{EC2} \\
+        \uncover<2->{block storage} & \uncover<2->{Cinder}
+                              & \uncover<2->{EBS} \\
+        \uncover<2->{object storage} & \uncover<2->{Swift}
+                              & \uncover<2->{S3} \\ \hline
+      \end{tabular}
+    \end{table}
+  \end{frame}
+
+  \begin{frame}
     \frametitle{Virtualisation dans le cloud}
     \begin{itemize}
-      \item Le cloud IaaS repose souvent sur la virtualisation
-      \item Ressources compute $\leftarrow$ virtualisation
-      \item Virtualisation complète : KVM, Xen
-      \item Virtualisation containers : OpenVZ, LXC, Docker
+      \item Un cloud IaaS repose souvent sur la virtualisation
+      \item Ressources "compute" $\leftarrow$ virtualisation
+      \item Hyperviseurs : KVM, Xen (libvirt), ESX
+      \item Conteneurs : OpenVZ, LXC, Docker, Kubernetes
     \end{itemize}
   \end{frame}
 
   \begin{frame}
-    \frametitle{Notions et vocabulaire IaaS}
+    \frametitle{Notions et vocabulaire IaaS 1/4}
     \begin{itemize}
-      \item Images
-      \item Instances
-      \item Types d'instance / gabarits (flavors)
-      \item Volumes\pause
-      \item Stockage block
-      \item Stockage objet\pause
-      \item IP flottantes/élastiques\pause
-      \item Groupes de sécurité\pause
-      \item Paires de clés\pause
-      \item Templates, stacks\pause
-      \item API REST\pause
-      \item API de metadata et user data
-      \item cloud-init, cloud-config
-    \end{itemize}
-  \end{frame}
-
-  \begin{frame}
-    \frametitle{Notions et vocabulaire IaaS}
-    \begin{itemize}
-      \item L'instance est par définition éphémère
-      \item Elle doit être utilisée comme ressource de calcul
-      \item Une image se personnalise lors de son instanciation grâce à l'API de metadata
-      \item Séparer les données des instances
-      \item Choix du type de stockage : éphémère, volume, objet
-    \end{itemize}
-  \end{frame}
-
-  \begin{frame}
-    \frametitle{À retenir}
-    \Huge{Virtualisation $\ne$ IaaS}
-  \end{frame}
-
-  \begin{frame}
-    \frametitle{AWS}
-    \huge{Regardons l'interface web d'Amazon}
-  \end{frame}
-
-  \subsection[Stockage]{Stockage : block, objet, SDS}
-
-  \begin{frame}
-    \frametitle{Stockage block}
-    \begin{itemize}
-      \item Accès à des raw devices type \textit{/dev/vdb}
-      \item Possibilité d'utiliser n'importe quel système de fichiers
-      \item Compatible avec toutes les applications legacy
-    \end{itemize}
-  \end{frame}
-
-  \begin{frame}
-    \frametitle{Stockage objet}
-    \begin{itemize}
-      \item Pousser et retirer des objets dans un container/bucket
-      \item Pas de hiérarchie des données, pas de système de fichiers
-      \item Accès par les APIs
-      \item L'application doit être conçue pour tirer partie du stockage objet
-    \end{itemize}
-  \end{frame}
-
-  \begin{frame}
-    \frametitle{Stockage objet : schéma}
-    \begin{center}
-      \includegraphics{images/stockage-objet.png}
-    \end{center}
-  \end{frame}
-
-  \begin{frame}
-    \frametitle{SDS : Software Defined Storage}
-    \begin{itemize}
-      \item Utilisation de commodity hardware
-      \item Pas de RAID matériel
-      \item Le logiciel est responsable de garantir les données
-      \item Les pannes matérielles sont prises en compte et gérées
-    \end{itemize}
-  \end{frame}
-
-  \begin{frame}
-    \frametitle{Deux solutions : OpenStack Swift et Ceph}
-    \begin{itemize}
-      \item Swift fait partie du projet OpenStack et fournit du stockage objet
-      \item Ceph fournit du stockage objet, block et FS
-      \item Les deux sont implémentés en SDS\pause
-      \item Théorème CAP : on en choisit deux
-    \end{itemize}
-  \end{frame}
-
-  \begin{frame}
-  \frametitle{Théorème CAP}
-  \includegraphics[width=\textwidth,height=\textheight]{images/cap.jpg}
-  \end{frame}
-
-  \begin{frame}
-  \frametitle{Swift}
-    \begin{itemize}
-      \item Swift est un projet OpenStack
-      \item Le projet est né chez Rackspace avant la création d'OpenStack
-      \item Swift est en production chez Rackspace depuis lors
-      \item C'est le composant le plus mature d'OpenStack
-    \end{itemize}
-  \end{frame}
-
-  \begin{frame}
-  \frametitle{Ceph}
-    \begin{itemize}
-      \item Projet totalement parallèle à OpenStack
-      \item Supporté par une entreprise (Inktank) récemment rachetée par Red Hat
-      \item Fournit d'abord du stockage objet
-      \item L'accès aux données se fait via RADOS :
+      \item Identité et accès
       \begin{itemize}
-        \item Accès direct depuis une application avec librados
-        \item Accès via une API REST grâce à radosgw
+        \item Tenant/Projet (Project) : \pause locataire du cloud, propriétaire de ressources.
+        \item Utilisateur (User) : \pause compte autorisé à utiliser les API OpenStack.
+        \item Quota : \pause contrôle l'utilisation des ressources (vcpu, ram, fip, security groups,...) dans un tenant.
+        \item Catalogue (de services) : \pause services disponibles et accessibles via les API.
+        \item Endpoint : \pause URL permettant l'accès à une API. Un endpoint par service.
       \end{itemize}
-      \item La couche RBD permet d'accéder aux données en mode block (volumes)
-      \item CephFS permet un accès par un système de fichiers POSIX
     \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Notions et vocabulaire IaaS 2/4}
+    \begin{itemize}
+      \item Puissance de calcul, serveurs (Compute)
+      \begin{itemize}
+        \item Image : \pause
+        \item Instance : \pause forme dynamique d'une image
+        \item Type d'instance (flavor) : \pause définit les mensurations d'une instance (cpu, ram, capacité disque,...)
+        \item Metadata et user data : \pause
+        \item Cloud-init, cloud-config : \pause
+      \end{itemize}
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Notions et vocabulaire IaaS 3/4}
+    \begin{itemize}
+      \item Stockage (Storage)
+      \begin{itemize}
+        \item Disque éphémère (Ephemeral disk) : \pause
+        \item Volume : \pause disque virtuel en-ligne accessible par les instances
+        \item Conteneur (Container) : \pause entités logiques pour le stockage de fichiers et accessibles via une URL
+      \end{itemize}
+      \item Réseau et sécurité (Network, Security)
+      \begin{itemize}
+        \item Groupe de sécurité (Security groups) : \pause ensemble de règles de filtrage de flux appliqué à l'entrée des instances.
+        \item Paire de clés (Keypairs) : \pause
+        \item IP flottantes (Floating IP) : \pause
+      \end{itemize}
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Notions et vocabulaire IaaS 4/4}
+    \begin{itemize}
+      \item Orchestration
+      \begin{itemize}
+        \item Stack, template : \pause
+      \end{itemize}
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{OpenStack}
+    \huge{Horizon, la console web d'OpenStack}
   \end{frame}
 
   \subsection[Orchestration]{Orchestrer les ressources de son IaaS}
