@@ -5,6 +5,8 @@ SHELL=/bin/bash
 #  make (screen.pdf handout.pdf print.pdf) course=[openstack|docker]
 #
 #######################
+# Les morceaux que l'on veut inclure
+#PARTS = introduction-user cloud archi-cloud-dev archi-cloud-infra openstack-presentation openstack-utilisation conclusion
 
 # Par défaut on génère tous les styles : screen, handout et print
 all: screen.pdf handout.pdf print.pdf
