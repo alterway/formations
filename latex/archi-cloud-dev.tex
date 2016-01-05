@@ -12,6 +12,8 @@
     "The Twelve-Factor App" \url{http://12factor.net/}
     \begin{itemize}
       \item Écrit par Heroku
+      \item Suivre (tout) le code dans un VCS
+      \item Configuration
     \end{itemize}
   \end{frame}
 
@@ -61,6 +63,22 @@
       \item Cache, temporaire
     \end{itemize}
   \end{frame}
+
+  \begin{frame}
+    \frametitle{Design Tenets d'OpenStack (exemple)}
+    \begin{enumerate}
+      \item Scalability and elasticity are our main goals
+      \item Any feature that limits our main goals must be optional
+      \item Everything should be asynchronous. If you can't do something asynchronously, see \#2
+      \item All required components must be horizontally scalable
+      \item Always use shared nothing architecture (SN) or sharding. If you can't Share nothing/shard, see \#2
+      \item Distribute everything. Especially logic. Move logic to where state naturally exists.
+      \item Accept eventual consistency and use it where it is appropriate.
+      \item Test everything. We require tests with submitted code. (We will help you if you need it)
+    \end{enumerate}
+    \url{https://wiki.openstack.org/wiki/BasicDesignTenets}
+  \end{frame}
+
 
   \begin{frame}[allowframebreaks]
     \frametitle{Adapter ou penser ses applications "cloud ready"}
