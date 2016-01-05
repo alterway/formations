@@ -13,7 +13,7 @@
       \item Démarrage en 2010
       \item Objectif : le Cloud Operating System libre
       \item Fusion de deux projets de Rackspace (Storage) et de la NASA (Compute)
-      \item Développé en Python et distribué sous licence Apache 2.0\pause
+      \item Logiciel libre distribué sous licence Apache 2.0\pause
       \item Les releases jusqu'à aujourd'hui :
       \begin{itemize}
         \item Austin (2010.1)
@@ -111,34 +111,8 @@
       \end{itemize}\pause
       \item Autres
       \begin{itemize}
-        \item Oslo
-        \item rootwrap : wrapper pour les commandes root utilisé par les projets
-        \item TripleO
-        \item Tempest, Grenade
         \item Les clients (python-*client)
       \end{itemize}
-    \end{itemize}
-  \end{frame}
-
-  \begin{frame}
-    \frametitle{Le nouveau modèle "big tent"}
-    \begin{itemize}
-      \item Évolutions presque totalement implémentées
-      \item Objectif : résoudre les limitations du modèle incubation/intégré
-      \item Inclusion {a priori} de l'ensemble de l'écosystème OpenStack
-      \item \textit{Programs} $\rightarrow$ \textit{Project Teams}
-      \item Disparation des statuts en incubation et intégré
-      \item Utilisation de tags factuels et objectifs
-    \end{itemize}
-  \end{frame}
-
-  \begin{frame}
-    \frametitle{Traduction}
-    \begin{itemize}
-      \item La question de la traduction est dorénavant prise en compte (officialisation de l'équipe \textit{i18n})
-      \item Seules certaines parties sont traduites, comme Horizon
-      \item La traduction française est aujourd'hui une des plus avancées
-      \item Utilisation de la plateforme Transifex (en cours de migration vers l'outil libre Zanata)
     \end{itemize}
   \end{frame}
 
@@ -250,16 +224,6 @@
   \end{frame}
 
   \begin{frame}
-    \frametitle{Stackforge}
-    \begin{itemize}
-      \item Forge pour les nouveaux projets en lien avec OpenStack
-      \item Ils bénéficient de l'infrastructure du projet OpenStack, mais la séparation reste claire
-      \item Les projets démarrent dans Stackforge et peuvent ensuite rejoindre le projet OpenStack
-      \item En train de disparaitre au profit du modèle "big tent"
-    \end{itemize}
-  \end{frame}
-
-  \begin{frame}
     \frametitle{OpenStack Summit}
     \begin{itemize}
       \item Aux USA jusqu'en 2013
@@ -315,20 +279,6 @@
   \end{frame}
 
   \begin{frame}
-    \frametitle{Implémentation}
-    \begin{itemize}
-      \item Chaque sous-projet est découpé en plusieurs services\pause
-      \item Communication entre les services : AMQP (RabbitMQ)\pause
-      \item Base de données : relationnelle SQL (MySQL/MariaDB)\pause
-      \item Réseau : OpenVSwitch\pause
-      \item En général : réutilisation de composants existants\pause
-      \item Tout est développé en Python (Django pour la partie web)\pause
-      \item APIs supportées : OpenStack et équivalent Amazon\pause
-      \item Multi tenancy
-    \end{itemize}
-  \end{frame}
-
-  \begin{frame}
     \frametitle{Multi-tenant}
     \begin{itemize}
       \item Notion générale : un déploiement du logiciel permet de multiples utilisations
@@ -337,13 +287,6 @@
       \item Certaines ressources peuvent être partagées entre tenants (exemple : image publique)
       \item On peut aussi parler de "projet"
     \end{itemize}
-  \end{frame}
-
-  \begin{frame}
-    \frametitle{Architecture}
-    \begin{center}
-      \includegraphics[width=\textwidth]{images/architecture-simple.jpg}
-    \end{center}
   \end{frame}
 
   \begin{frame}
