@@ -56,6 +56,28 @@
   \end{frame}
 
   \begin{frame}
+    \frametitle{Security groups}
+    \begin{itemize}
+      \item Équivalent à un firewall devant chaque instance
+      \item Une instance peut être associée à un ou plusieurs groupes de sécurité
+      \item Gestion des accès en entrée et sortie
+      \item Règles par protocole (TCP/UDP/ICMP) et par port
+      \item Cible une adresse IP, un réseau ou un autre groupe de sécurité
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Flavors}
+    \begin{itemize}
+      \item \textit{Gabarit}
+      \item Équivalent des "instance types" d'AWS
+      \item Définit un modèle d'instance en termes de CPU, RAM, disque (racine), disque éphémère
+      \item Un disque de taille nul équivaut à prendre la taille de l'image de base
+      \item Le disque éphémère a, comme le disque racine, l'avantage d'être souvent local donc rapide
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
     \frametitle{Multi-tenant}
     \begin{itemize}
       \item Notion générale : un déploiement du logiciel permet de multiples utilisations
@@ -82,6 +104,17 @@
       \item Pets vs Cattle
       \item Basé sur une \textit{image}
       \item API de metadata
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{L'API de metadata}
+    \begin{itemize}
+      \item API à destination des instances
+      \item Standard de fait initié par AWS
+      \item Accessible depuis l'instance sur http://169.254.169.254/
+      \item Expose des informations relatives à l'instance
+      \item Expose un champ libre dit "userdata"
     \end{itemize}
   \end{frame}
 

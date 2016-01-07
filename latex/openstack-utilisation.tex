@@ -20,6 +20,7 @@
       \item \url{http://developer.openstack.org/\#api}
       \item Chaque API est versionnée, la rétro-compatibilité est assurée
       \item REST
+      \item Shade
       \item Certains services sont aussi accessibles via une API différente compatible AWS
     \end{itemize}
   \end{frame}
@@ -31,7 +32,7 @@
       \item Avec une bibliothèque
       \begin{itemize}
         \item Les implémentations officielles en Python
-        \item D'autres implémentations pour d'autres langages (exemple : jclouds)
+        \item D'autres implémentations, y compris pour d'autres langages (exemple : jclouds)
       \end{itemize}
       \item Avec les outils officiels en ligne de commande
       \item Avec Horizon
@@ -58,6 +59,13 @@
       \item Commandes du type \textit{openstack <service> <action>}
       \item Vise à remplacer à terme les clients spécifiques
       \item Permet une expérience utilisateur plus homogène
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Shade}
+    \begin{itemize}
+      \item Bibliothèque Python incluant la business logic
     \end{itemize}
   \end{frame}
 
