@@ -78,6 +78,16 @@
   \end{frame}
 
   \begin{frame}
+    \frametitle{Keypairs}
+    \begin{itemize}
+      \item \textit{Paires dé clé}
+      \item Clés SSH publiques/privés
+      \item Le cloud a connaissance de la clé publique
+      \item La clé publique est injectée dans les instances
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
     \frametitle{Multi-tenant}
     \begin{itemize}
       \item Notion générale : un déploiement du logiciel permet de multiples utilisations
@@ -94,6 +104,18 @@
       \item Fixed IP
       \item Multiples interfaces réseaux
       \item Floating IPs : pool, allocate, associate
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Floating IPs}
+    \begin{itemize}
+      \item \textit{IP flottantes}
+      \item Surcharge des "Fixed IPs"
+      \item Non portée par l'instance
+      \item Souvent une IP "publique"
+      \item Une fois allouée à un tenant, l'IP est réservée
+      \item Elle est ensuite associable et désassociable à loisir
     \end{itemize}
   \end{frame}
 
