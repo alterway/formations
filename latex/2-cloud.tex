@@ -185,13 +185,13 @@
   \begin{frame}
     \frametitle{Notions et vocabulaire IaaS 1/4}
     \begin{itemize}
-      \item Identité et accès
+      \item Identité et accès \pause
       \begin{itemize}
-        \item Tenant/Projet (Project) : \pause locataire du cloud, propriétaire de ressources.
-        \item Utilisateur (User) : \pause compte autorisé à utiliser les API OpenStack.
-        \item Quota : \pause contrôle l'utilisation des ressources (vcpu, ram, fip, security groups,...) dans un tenant.
-        \item Catalogue (de services) : \pause services disponibles et accessibles via les API.
-        \item Endpoint : \pause URL permettant l'accès à une API. Un endpoint par service.
+        \item Tenant/Projet (Project) : locataire du cloud, propriétaire de ressources. \pause
+        \item Utilisateur (User) : compte autorisé à utiliser les API OpenStack. \pause
+        \item Quota : contrôle l'utilisation des ressources (vcpu, ram, fip, security groups,...) dans un tenant. \pause
+        \item Catalogue (de services) : services disponibles et accessibles via les API. \pause
+        \item Endpoint : URL permettant l'accès à une API. Un endpoint par service. \pause
       \end{itemize}
     \end{itemize}
   \end{frame}
@@ -199,13 +199,13 @@
   \begin{frame}
     \frametitle{Notions et vocabulaire IaaS 2/4}
     \begin{itemize}
-      \item Puissance de calcul, serveurs (Compute)
+      \item Calcul/Serveurs (Compute) \pause
       \begin{itemize}
-        \item Image : \pause
-        \item Instance : \pause forme dynamique d'une image
-        \item Type d'instance (flavor) : \pause définit les mensurations d'une instance (cpu, ram, capacité disque,...)
-        \item Metadata et user data : \pause
-        \item Cloud-init, cloud-config : \pause
+        \item Image : généralement, un OS bootable et "cloud ready". \pause
+        \item Instance : forme dynamique d'une image. \pause
+        \item Type d'instance (flavor) : mensurations d'une instance (cpu, ram, capacité disque,...). \pause
+        \item Metadata et user data : informations gérées par le IaaS et mises à disposition de l'instance. \pause
+        \item Cloud-init, cloud-config : mécanismes permettant la configuration finale automatique d'une instance. \pause
       \end{itemize}
     \end{itemize}
   \end{frame}
@@ -213,17 +213,16 @@
   \begin{frame}
     \frametitle{Notions et vocabulaire IaaS 3/4}
     \begin{itemize}
-      \item Stockage (Storage)
+      \item Stockage (Storage) \pause
       \begin{itemize}
-        \item Disque éphémère (Ephemeral disk) : \pause
-        \item Volume : \pause disque virtuel en-ligne accessible par les instances
-        \item Conteneur (Container) : \pause entités logiques pour le stockage de fichiers et accessibles via une URL
+        \item Volume : disque virtuel accessible par les instances (stockage "block"). \pause
+        \item Conteneur (Container) : entités logiques pour le stockage de fichiers et accessibles via une URL (stockage "objet"). \pause
       \end{itemize}
-      \item Réseau et sécurité (Network, Security)
+      \item Réseau et sécurité (Network, Security) \pause
       \begin{itemize}
-        \item Groupe de sécurité (Security groups) : \pause ensemble de règles de filtrage de flux appliqué à l'entrée des instances.
-        \item Paire de clés (Keypairs) : \pause
-        \item IP flottantes (Floating IP) : \pause
+        \item Groupe de sécurité (Security groups) : ensemble de règles de filtrage de flux appliqué à l'entrée des instances. \pause
+        \item Paire de clés (Keypairs) : clé privée + clé publique permettant les connexions aux instances via ssh. \pause
+        \item IP flottantes (Floating IP) : adresse IP allouée à la demande et utilisée par les instances pour communiquer avec le réseau "externe". \pause
       \end{itemize}
     \end{itemize}
   \end{frame}
@@ -231,9 +230,10 @@
   \begin{frame}
     \frametitle{Notions et vocabulaire IaaS 4/4}
     \begin{itemize}
-      \item Orchestration
+      \item Orchestration \pause
       \begin{itemize}
-        \item Stack, template : \pause
+        \item Stack : Ensemble des ressources IaaS utilisées par une application. \pause
+        \item Template : Fichier texte contenant la description d'une stack. \pause
       \end{itemize}
     \end{itemize}
   \end{frame}
