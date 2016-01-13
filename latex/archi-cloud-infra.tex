@@ -1,17 +1,6 @@
   \subsection[Architecture infra]{Concevoir une infrastructure pour le cloud}
 
   \begin{frame}
-    \frametitle{Adopter une philosophie DevOps}
-    \begin{itemize}
-      \item Infrastructure as Code
-      \item Scale out plutôt que scale up (horizontalement plutôt que verticalement)
-      \item HA niveau application plutôt qu'infrastructure
-      \item Automatisation, automatisation, automatisation
-      \item Tests
-    \end{itemize}
-  \end{frame}
-
-  \begin{frame}
     \frametitle{Automatisation}
     \begin{itemize}
       \item Automatiser la gestion de l'infrastructure : indispensable
@@ -44,6 +33,16 @@
     \begin{itemize}
       \item Style de code
       \item Validation de la syntaxe
+      \item Voire plus si possible
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Autoscaling group}
+    \begin{itemize}
+      \item Groupe d'instances similaires
+      \item Nombre variable d'instances
+      \item Scaling automatique en fonction de métriques
     \end{itemize}
   \end{frame}
 
@@ -52,6 +51,59 @@
     \begin{itemize}
       \item Niveau control plane : Tenant (projet)
       \item Niveau réseau : L2, L3, security groups
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Multi-tenant}
+    \begin{itemize}
+      \item Notion générale : un déploiement du logiciel permet de multiples utilisations
+      \item Un cloud OpenStack permet aux utilisateurs de travailler dans des environnements isolés
+      \item Les instances, réseaux, images, etc. sont associés à un tenant
+      \item Certaines ressources peuvent être partagées entre tenants (exemple : image publique)
+      \item On peut aussi parler de "projet"
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Les instances}
+    \begin{itemize}
+      \item Éphémère
+      \item Pets vs Cattle
+      \item Basé sur une \textit{image}
+      \item API de metadata
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{L'API de metadata}
+    \begin{itemize}
+      \item API à destination des instances
+      \item Standard de fait initié par AWS
+      \item Accessible depuis l'instance sur http://169.254.169.254/
+      \item Expose des informations relatives à l'instance
+      \item Expose un champ libre dit "userdata"
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Réseau}
+    \begin{itemize}
+      \item Fixed IP
+      \item Multiples interfaces réseaux
+      \item Floating IPs : pool, allocate, associate
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Floating IPs}
+    \begin{itemize}
+      \item \textit{IP flottantes}
+      \item Surcharge des "Fixed IPs"
+      \item Non portée par l'instance
+      \item Souvent une IP "publique"
+      \item Une fois allouée à un tenant, l'IP est réservée
+      \item Elle est ensuite associable et désassociable à loisir
     \end{itemize}
   \end{frame}
 
@@ -84,59 +136,6 @@
       \item Clés SSH publiques/privés
       \item Le cloud a connaissance de la clé publique
       \item La clé publique est injectée dans les instances
-    \end{itemize}
-  \end{frame}
-
-  \begin{frame}
-    \frametitle{Multi-tenant}
-    \begin{itemize}
-      \item Notion générale : un déploiement du logiciel permet de multiples utilisations
-      \item Un cloud OpenStack permet aux utilisateurs de travailler dans des environnements isolés
-      \item Les instances, réseaux, images, etc. sont associés à un tenant
-      \item Certaines ressources peuvent être partagées entre tenants (exemple : image publique)
-      \item On peut aussi parler de "projet"
-    \end{itemize}
-  \end{frame}
-
-  \begin{frame}
-    \frametitle{Réseau}
-    \begin{itemize}
-      \item Fixed IP
-      \item Multiples interfaces réseaux
-      \item Floating IPs : pool, allocate, associate
-    \end{itemize}
-  \end{frame}
-
-  \begin{frame}
-    \frametitle{Floating IPs}
-    \begin{itemize}
-      \item \textit{IP flottantes}
-      \item Surcharge des "Fixed IPs"
-      \item Non portée par l'instance
-      \item Souvent une IP "publique"
-      \item Une fois allouée à un tenant, l'IP est réservée
-      \item Elle est ensuite associable et désassociable à loisir
-    \end{itemize}
-  \end{frame}
-
-  \begin{frame}
-    \frametitle{Les instances}
-    \begin{itemize}
-      \item Éphémère
-      \item Pets vs Cattle
-      \item Basé sur une \textit{image}
-      \item API de metadata
-    \end{itemize}
-  \end{frame}
-
-  \begin{frame}
-    \frametitle{L'API de metadata}
-    \begin{itemize}
-      \item API à destination des instances
-      \item Standard de fait initié par AWS
-      \item Accessible depuis l'instance sur http://169.254.169.254/
-      \item Expose des informations relatives à l'instance
-      \item Expose un champ libre dit "userdata"
     \end{itemize}
   \end{frame}
 
