@@ -74,29 +74,3 @@
     \end{enumerate}
     \url{https://wiki.openstack.org/wiki/BasicDesignTenets}
   \end{frame}
-
-
-  \begin{frame}[allowframebreaks]
-    \frametitle{Adapter ou penser ses applications "cloud ready"}
-    Cf. les design tenets du projet OpenStack et Twelve-Factor \url{http://12factor.net/}
-    \begin{itemize}
-      \item Architecture distribuée plutôt que monolithique
-      \begin{itemize}
-        \item Facilite le passage à l'échelle
-        \item Limite les domaines de \textit{failure}
-      \end{itemize}\pause
-      \item Couplage faible entre les composants
-      \item Bus de messages pour les communications inter-composants\framebreak
-      \item Stateless : permet de multiplier les routes d'accès à l'application\pause
-      \item Dynamicité : l'application doit s'adapter à son environnement et se reconfigurer lorsque nécessaire\pause
-      \item Permettre le déploiement et l'exploitation par des outils d'automatisation\pause
-      \item Limiter autant que possible les dépendances à du matériel ou du logiciel spécifique qui pourrait ne pas fonctionner dans un cloud\pause
-      \item Tolérance aux pannes (\textit{fault tolerance}) intégrée\pause
-      \item Ne pas stocker les données en local, mais plutôt :
-      \begin{itemize}
-        \item Base de données
-        \item Stockage objet
-      \end{itemize}\pause
-      \item Utiliser des outils standards de journalisation
-    \end{itemize}
-  \end{frame}
