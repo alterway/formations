@@ -3,7 +3,7 @@
 * Définition
 instance vs container
 LXC vs docker
-notion de namespace
+Nnamespace
 rappel sur le kernel
 
 * Docker
@@ -11,7 +11,6 @@ concepts autour de Docker, storage, réseau, layers
 link
 ports exposés
 volumes
-option : runc, OCI
 
 * Build
 Dockerfile
@@ -40,3 +39,7 @@ gérer son unit systemd docker
 * Clustering avec RancherOS
 * ECS
 * Magnum
+
+Containeriser une application
+Discovery service
+LB des containers
