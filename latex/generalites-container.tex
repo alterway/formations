@@ -55,7 +55,7 @@
       \item Le cloud IaaS repose souvent sur la virtualisation
       \item Ressources compute $\leftarrow$ virtualisation
       \item Virtualisation complète : KVM, Xen
-      \item Virtualisation containers : OpenVZ, LXC, Docker
+      \item Virtualisation conteneurs : OpenVZ, LXC, Docker
     \end{itemize}
   \end{frame}
 
@@ -71,25 +71,48 @@
   \subsection[Orchestration]{Orchestrer ses ressources}
 
   \begin{frame}
-    \frametitle{Pourquoi orchestrer}
+    \frametitle{Pourquoi orchestrer ?}
     \begin{itemize}
       \item Définir tout une infrastructure dans un seul fichier texte
       \item Autoscaling
-      \begin{itemize}
         \item Adapter ses ressources en fonction de ses besoins en temps réel
-      \end{itemize}
     \end{itemize}
   \end{frame}
 
-  \subsection[Containers]Aller encore plus loin}
+  \subsection[Conteneurs]Aller encore plus loin}
 
   \begin{frame}
     \frametitle{Encore plus "cloud" qu'une instance}
     \begin{itemize}
-      \item  
-      \item 
-      \begin{itemize}
-        \item 
-      \end{itemize}
+      \item Partage du kernel
+      \item Un seul process par conteneur
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Le kernel Linux}
+    \begin{itemize}
+      \item Namespaces
+      \item cgroups
+    \end{itemize}
+  \end{frame}
+
+ \begin{frame}
+     \frametitle{Les namespaces}
+    \begin{itemize}
+      \item Mount
+      \item Network
+      \item PID
+      \item ??
+      \item User
+    \end{itemize}
+  \end{frame}
+
+\begin{frame}
+     \frametitle{Systèmes de conteneurs}
+    \begin{itemize}
+      \item Docker
+      \item LXC
+      \item Rocket
     \end{itemize}
   \end{frame}
