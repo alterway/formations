@@ -3,54 +3,32 @@
   \subsection[Docker]{Docker : les concepts}
 
   \begin{frame}
-    \frametitle{Le cloud, c'est large !}
+    \frametitle{Un ensemble de composants}
     \begin{itemize}
-      \item Stockage/calcul distant \pause (on oublie, cf. externalisation)\pause
-    \end{itemize}
-  \end{frame}
-
-  \begin{frame}
-    \frametitle{WaaS : Whatever as a Service}
-    \begin{itemize}
-      \item Principalement\pause
-      \begin{description}
-        \item[IaaS] \alert<5->{Infrastructure as a Service}\pause
-        \item[PaaS] Platform as a Service\pause
-        \item[SaaS] Software as a Service\pause
-      \end{description}
-      \pause
-      \item Mais aussi :
-      \pause
+      \item Stockage\pause
       \begin{itemize}
-        \item Database as a Service
-        \item Network as a Service
-        \item Load balancing as a Service\pause
-        \item \$APPLICATION as a Service
+        \item Volumes \pause
+      \end{itemize}
+      \item Réseau \pause
+      \begin{itemize}
+          \item Ports \pause
+          \item Links \pause
       \end{itemize}
     \end{itemize}
   \end{frame}
 
-  \begin{frame}[containsverbatim]
-    \frametitle{Exemple concret}
-\begin{verbatim}
-GET /v2.0/networks/<network_id>
-{
-   "network":{
-      "status":"ACTIVE",
-      "subnets":[
-         "54d6f61d-db07-451c-9ab3-b9609b6b6f0b"
-      ],
-      "name":"private-network",
-      "provider:physical_network":null,
-      "admin_state_up":true,
-      "tenant_id":"4fd44f30292945e481c7b8a0c8908869",
-      "provider:network_type":"local",
-      "router:external":true,
-      "shared":true,
-      "id":"d32019d3-bc6e-4319-9c1d-6722fc136a22",
-      "provider:segmentation_id":null
-   }
-}
-\end{verbatim}
+  \begin{frame}
+    \frametitle{Stockage : volumes}
+    \begin{itemize}
+      \item Schéma
+      \end{description}
+    \end{itemize}
   \end{frame}
 
+  \begin{frame}
+    \frametitle{Réseau, link et ports}
+    \begin{itemize}
+      \item Schéma
+      \end{description}
+    \end{itemize}
+  \end{frame}
