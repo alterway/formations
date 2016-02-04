@@ -1,6 +1,6 @@
-  \section[Cloud]{Le Cloud : vue d'ensemble}
+\section[Cloud]{Le Cloud : vue d'ensemble}
 
-  \subsection[Cloud]{Le Cloud : les concepts}
+\subsection[Cloud]{Le Cloud : les concepts}
 
   \begin{frame}
     \frametitle{Le cloud, c'est large !}
@@ -68,7 +68,7 @@
     \end{itemize}
   \end{frame}
 
-  \subsection[Orchestration]{Orchestrer ses ressources}
+\subsection[Orchestration]{Orchestrer ses ressources}
 
   \begin{frame}
     \frametitle{Pourquoi orchestrer ?}
@@ -79,7 +79,7 @@
     \end{itemize}
   \end{frame}
 
-  \subsection[Conteneurs]Aller encore plus loin}
+  \subsection[Conteneurs]{Aller encore plus loin}
 
   \begin{frame}
     \frametitle{Encore plus "cloud" qu'une instance}
@@ -89,11 +89,16 @@
     \end{itemize}
   \end{frame}
 
+\subsection[Conteneurs]{Le kernel Linux}
+
   \begin{frame}
     \frametitle{Le kernel Linux}
     \begin{itemize}
-      \item Namespaces
-      \item cgroups
+        Kernel 2.6.24, janvier 2008
+      \begin{itemize}
+        \item Namespaces
+        \item cgroups
+      \end{itemize}
     \end{itemize}
   \end{frame}
 
@@ -108,11 +113,32 @@
     \end{itemize}
   \end{frame}
 
-\begin{frame}
-     \frametitle{Systèmes de conteneurs}
+\subsection[Conteneurs]{Différents types de conteneurs}
+
+  \begin{frame}
+     \frametitle{LXC}
     \begin{itemize}
-      \item Docker
-      \item LXC
-      \item Rocket
+      \item Développeurs indépendants
+      \item Depuis l'ajout des namespaces et cgroups dans le kernel Linux 2.6.24
+    \end{itemize}
+  \end{frame}
+
+ \begin{frame}
+     \frametitle{Docker}
+    \begin{itemize}
+      \item Développé par Docker Inc.
+      \item Daemon
+      \item Utilisait la liblxc
+      \item Utilise désormais la libcontainer
+    \end{itemize}
+  \end{frame}
+
+   \begin{frame}
+     \frametitle{Rocker (rkt)}
+    \begin{itemize}
+      \item Développé par CoreOS
+      \item Daemon
+      \item Utilise systemd-nspawn
+      \item Boucher les trous de sécurité de Docker
     \end{itemize}
   \end{frame}
