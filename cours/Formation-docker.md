@@ -52,11 +52,10 @@ Compétences d’administration système Linux tel qu’Ubuntu, Red Hat ou Debia
 
 #### Les concepts de Docker
 - Stockage
+- Volumes
 - Réseau
-- Layers
 - Links
 - Ports
-- Volumes
 
 #### Build : Créer et maintenir une application dockerisée
 - Différence entre une image et un conteneur
