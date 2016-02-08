@@ -1,6 +1,4 @@
-[![Build Status](https://travis-ci.com/Osones/formation-openstack.svg?token=7ppXKZyxcmMnfH2RMRnd&branch=master)
-
-Supports de formation OpenStack
+Supports de formation OpenStack  ![Build Status](https://travis-ci.com/Osones/formation-openstack.svg?token=7ppXKZyxcmMnfH2RMRnd&branch=master)
 ===============================
 
 Supports de formation (sous forme de slides) sur OpenStack écrits en Français et réalisés par Osones (https://osones.com/).
