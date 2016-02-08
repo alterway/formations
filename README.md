@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/Osones/formation-openstack.svg?token=7ppXKZyxcmMnfH2RMRnd&branch=master)
+
 Supports de formation OpenStack
 ===============================
 
