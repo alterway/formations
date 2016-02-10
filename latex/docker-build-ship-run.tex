@@ -1,0 +1,106 @@
+\section[Docker]{Build, Ship and Run !}
+
+\subsection[Docker]{Build}
+
+  \begin{frame}
+    \frametitle{Le conteneur et son image}
+    \begin{itemize}
+      \item Flexibilité, élasticité
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Dockerfile}
+    \begin{itemize}
+      \item
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Best Practices des Dockerfile}
+      \item Comptez vos layers !
+      \item Bien choisir sa baseimage
+      \item schéma montrant les pb de tailles dues à une baseimage de merde
+  \end{frame}
+
+  \begin{frame}
+    \frametitl{Présentation de DockerHub}
+    \begin{itemize}
+      \item Intégration GitHub / DockerHub
+      \item screenshot
+    \end{itemize}
+  \end{frame}
+
+\subsection[Docker]{Ship}
+
+  \begin{frame}
+    \frametitle{Les conteneurs sont indépendants !}
+    \begin{itemize}
+      \item Sauvegarder un conteneur :
+      \item docker commit mon_conteneur backup/mon_conteneur
+      \item docker run -it backup/mon_conteneur
+      \item Exporter un conteneur :
+      \item docker save -o mon_image.tar backup/mon_conteneur
+      \item Importe un conteneur :
+      \item docker import mon_image.tar backup/mon_conteneur
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Docker Registry}
+    \begin{itemize}
+      \item DockerHub n'est qu'au Docker registry ce que GitHub est à git
+      \item Pull & Push
+    \end{itemize}
+  \end{frame}
+
+  \subsection[Docker]{Run}
+
+  \begin{frame}
+    \frametitle{Lancer un conteneur}
+    \begin{itemize}
+      \item docker run
+        \begin{itemize}
+          \item -d (detach)
+          \item -i (interactive)
+          \item -t (pseudo tty)
+        \end{itemize}
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{avec beaucoup d'options...}
+    \begin{itemize}
+      \item -v /directory/host:/directory/container
+      \item -p portHost:portContainer
+      \item -e "VARIABLE=valeur"
+      \item --restart=always
+      \item --name=mon_conteneur
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{...dont certaines un peu dangereuses}
+    \begin{itemize}
+      \item --privileged (Accès à tous les devices)
+      \item --pid=host (Accès aux PID de l'host)
+      \item --net=host (Accès à la stack IP de l'host)
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Se "connecter" à un conteneur}
+    \begin{itemize}
+      \item docker exec
+      \item docker attach
+    \end{itemize}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Détruire un conteneur}
+    \begin{itemize}
+      \item docker kill (SIGKILL)
+      \item docker stop (SIGTERM puis SIGKILL)
+      \item docker rm (détruit complètement)
+    \end{itemize}
+  \end{frame}
