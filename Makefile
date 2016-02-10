@@ -1,8 +1,8 @@
 SHELL=/bin/bash
 
 # Les morceaux que l'on veut inclure
-PARTS = introduction cloud openstack-presentation openstack-deploiement iaas-tirer-partie conclusion
-
+#PARTS = common introduction cloud openstack-presentation openstack-deploiement iaas-tirer-partie conclusion
+PARTS = docker-common docker-container docker-base docker-build-ship-run docker-ecosystem docker-hosts
 # Par défaut on génère tous les styles : screen, handout et print
 all: screen.pdf handout.pdf print.pdf
 
@@ -14,7 +14,6 @@ result:=$(pwd)/result
 %.pdf: latex/styles/%.tex latex/*.tex
 	$(eval tmp:=$(shell mktemp -d $(pwd)/tmp.XXX))
 	cp $< $(tmp)/$*.tex
-	cat latex/common.tex >> $(tmp)/$*.tex
 	$(foreach part,$(PARTS),cat latex/$(part).tex >> $(tmp)/$*.tex;)
 	echo '\end{document}' >> $(tmp)/$*.tex
 	mkdir -p ${result}
