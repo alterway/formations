@@ -1,8 +1,8 @@
 SHELL=/bin/bash
 
 # Les morceaux que l'on veut inclure
-#PARTS = common introduction cloud openstack-presentation openstack-deploiement iaas-tirer-partie conclusion
-PARTS = docker-common docker-container docker-base docker-build-ship-run docker-ecosystem docker-hosts
+PARTS = common introduction cloud openstack-presentation openstack-deploiement iaas-tirer-partie conclusion
+#PARTS = docker-common docker-container docker-base docker-build-ship-run docker-ecosystem docker-hosts
 # Par défaut on génère tous les styles : screen, handout et print
 all: screen.pdf handout.pdf print.pdf
 
