@@ -1,5 +1,5 @@
 # Docker
-Durée : 2 jours
+Durée : 2 jours  
 Intervenant : 1
 
 ## Description
