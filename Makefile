@@ -21,8 +21,8 @@ result:=$(pwd)/result
 	cat latex/${course}/*.tex >> $(tmp)/$*.tex
 	echo '\end{document}' >> $(tmp)/$*.tex
 	mkdir -p ${result}
-	pdflatex -output-directory $(result) $(tmp)/$*.tex
-	pdflatex -output-directory $(result) $(tmp)/$*.tex
+	lualatex -output-directory $(result) $(tmp)/$*.tex
+	lualatex -output-directory $(result) $(tmp)/$*.tex
 	rm -rf $(tmp)
 	ln -sf result/$*.pdf $*.pdf
 
