@@ -1,20 +1,24 @@
 SHELL=/bin/bash
 
-# Les morceaux que l'on veut inclure
-PARTS = common introduction cloud openstack-presentation openstack-deploiement iaas-tirer-partie conclusion
-#PARTS = docker-common docker-container docker-base docker-build-ship-run docker-ecosystem docker-hosts
+#### USAGE ####
+#
+#  make (screen.pdf handout.pdf print.pdf) course=[openstack|docker]
+#
+#######################
+
 # Par défaut on génère tous les styles : screen, handout et print
 all: screen.pdf handout.pdf print.pdf
 
+course=openstack
 # Nécessaire pour la suite
 pwd:=$(shell pwd)
 result:=$(pwd)/result
 
 # Construction du style demandé, avec les morceaux choisis
-%.pdf: latex/styles/%.tex latex/*.tex
+%.pdf: latex/styles/%.tex latex/${course}/*.tex
 	$(eval tmp:=$(shell mktemp -d $(pwd)/tmp.XXX))
 	cp $< $(tmp)/$*.tex
-	$(foreach part,$(PARTS),cat latex/$(part).tex >> $(tmp)/$*.tex;)
+	cat latex/${course}/*.tex >> $(tmp)/$*.tex
 	echo '\end{document}' >> $(tmp)/$*.tex
 	mkdir -p ${result}
 	pdflatex -output-directory $(result) $(tmp)/$*.tex
@@ -25,6 +29,7 @@ result:=$(pwd)/result
 # On ne garde que les PDFs résultants
 clean:
 	rm -f $(result)/*.{aux,log,nav,out,snm,toc}
+	rm -rf $(pwd)/tmp.*
 
 # On nettoie tout
 mrproper: clean
