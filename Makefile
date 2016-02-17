@@ -20,6 +20,7 @@ result:=$(pwd)/result
 	cp $< $(tmp)/$*.tex
 	cat latex/${course}/*.tex >> $(tmp)/$*.tex
 	echo '\end{document}' >> $(tmp)/$*.tex
+	cp latex/*.sty $(tmp)/
 	mkdir -p ${result}
 	lualatex -output-directory $(result) $(tmp)/$*.tex
 	lualatex -output-directory $(result) $(tmp)/$*.tex
