@@ -77,6 +77,8 @@
     \begin{itemize}
       \item Partage du kernel
       \item Un seul process par conteneur
+      \item Le conteneur est encore plus éphèmère que l'instance
+      \item Le turnover des conteneurs est élevé $\leftarrow$ orchestration !!
     \end{itemize}
   \end{frame}
 
@@ -125,11 +127,12 @@
   \end{frame}
 
    \begin{frame}
-     \frametitle{Rocker (rkt)}
+     \frametitle{Rocket (rkt)}
     \begin{itemize}
+      \item Se prononce "rock-it"
       \item Développé par CoreOS
       \item Daemon
       \item Utilise systemd-nspawn
-      \item Adresser les problèmes de sécurité de Docker
+      \item Adresse certains problèmes de sécurité de Docker
     \end{itemize}
   \end{frame}
