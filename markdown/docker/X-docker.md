@@ -1,10 +1,8 @@
----
-title: Formation Docker
-...
+# Formation Docker
 
 ![image](images/docker.png){width="4cm"}
 
-### Concernant ces supports de cours
+## Concernant ces supports de cours
 
 Supports de cours Docker réalisés par Osones (<https://osones.com/>)\
 Auteurs :
@@ -23,11 +21,9 @@ Auteurs :
 
 -   Sources : <https://github.com/Osones/OpenStack-Formations/>
 
-Le Cloud : vue d’ensemble
-=========================
+# Le Cloud : vue d’ensemble
 
-Le Cloud : les concepts
------------------------
+## Le Cloud : les concepts
 
 ### Le cloud, c’est large !
 
@@ -89,8 +85,7 @@ Le Cloud : les concepts
 
 -   Séparer les données des instances
 
-Orchestrer ses ressources
--------------------------
+## Orchestrer ses ressources
 
 ### Pourquoi orchestrer ?
 
@@ -100,8 +95,7 @@ Orchestrer ses ressources
 
 -   Adapter ses ressources en fonction de ses besoins en temps réel
 
-Aller encore plus loin
-----------------------
+## Aller encore plus loin
 
 ### Encore plus “cloud” qu’une instance
 
@@ -113,8 +107,7 @@ Aller encore plus loin
 
 -   Le turnover des conteneurs est élevé $\leftarrow$ orchestration !!
 
-Le kernel Linux
----------------
+## Le kernel Linux
 
 ### Le kernel Linux
 
@@ -136,8 +129,7 @@ Le kernel Linux
 
 -   User
 
-Différents types de conteneurs
-------------------------------
+## Différents types de conteneurs
 
 ### LXC
 
@@ -167,11 +159,9 @@ Différents types de conteneurs
 
 -   Adresse certains problèmes de sécurité de Docker
 
-Vue d’ensemble
-==============
+# Vue d’ensemble
 
-Docker : les concepts
----------------------
+## Docker : les concepts
 
 ### Un ensemble de composants
 
@@ -216,11 +206,9 @@ A la base, pas grand chose...
     6ebf7b150515        none                null
     0509391a1fbd        host                host
 
-Build, Ship and Run !
-=====================
+# Build, Ship and Run !
 
-Build
------
+## Build
 
 ### Le conteneur et son image
 
@@ -244,8 +232,7 @@ Build
 
 -   screenshot
 
-Ship
-----
+## Ship
 
 ### Les conteneurs sont indépendants !
 
@@ -269,8 +256,7 @@ Ship
 
 -   Pull and Push
 
-Run
----
+## Run
 
 ### Lancer un conteneur
 
@@ -316,15 +302,13 @@ Run
 
 -   docker rm (détruit complètement)
 
-Ecosystème
-==========
+## Ecosystème
 
 ### Docker Inc. et OCI
 
 -   TBC
 
-Les autres produits Docker
---------------------------
+## Les autres produits Docker
 
 ### Compose
 
@@ -341,151 +325,3 @@ Les autres produits Docker
 ### Plugins réseau et stockage
 
 -   Schéma
-
-Le Cloud : vue d’ensemble
-=========================
-
-Le Cloud : les concepts
------------------------
-
-### Le cloud, c’est large !
-
--   Stockage/calcul distant (on oublie, cf. externalisation)
-
--   Virtualisation++
-
--   Abstraction du matériel (voire plus)
-
--   Accès normalisé par des APIs
-
--   Service et facturation à la demande
-
--   Flexibilité, élasticité
-
-### WaaS : Whatever as a Service
-
--   Principalement
-
-    IaaS
-
-    :   Infrastructure as a Service
-
-    PaaS
-
-    :   Platform as a Service
-
-    SaaS
-
-    :   Software as a Service
-
--   Mais aussi :
-
-    -   Database as a Service
-
-    -   Network as a Service
-
-    -   Load balancing as a Service
-
-    -   \$APPLICATION as a Service
-
-### Le cloud en un schéma
-
-![image](images/cloud.png){width="\linewidth" height="\textheight"}
-
-### Pourquoi du cloud ? Côté technique
-
--   Abstraction des couches plus basses
-
--   On peut tout programmer à son gré
-
--   Permet la mise en place d’architectures scalables
-
-### Virtualisation dans le cloud
-
--   Le cloud IaaS repose souvent sur la virtualisation
-
--   Ressources compute $\leftarrow$ virtualisation
-
--   Virtualisation complète : KVM, Xen
-
--   Virtualisation conteneurs : OpenVZ, LXC, Docker
-
-### Notions et vocabulaire IaaS
-
--   L’instance est par définition éphémère
-
--   Elle doit être utilisée comme ressource de calcul
-
--   Séparer les données des instances
-
-Orchestrer ses ressources
--------------------------
-
-### Pourquoi orchestrer ?
-
--   Définir tout une infrastructure dans un seul fichier texte
-
--   Autoscaling
-
--   Adapter ses ressources en fonction de ses besoins en temps réel
-
-Aller encore plus loin
-----------------------
-
-### Encore plus “cloud” qu’une instance
-
--   Partage du kernel
-
--   Un seul process par conteneur
-
-Le kernel Linux
----------------
-
-### Le kernel Linux
-
--   Kernel 2.6.24, janvier 2008
-
-    -   Namespaces
-
-    -   cgroups
-
-### Les namespaces
-
--   Mount
-
--   Network
-
--   PID
-
--   Hostname
-
--   User
-
-Différents types de conteneurs
-------------------------------
-
-### LXC
-
--   Développeurs indépendants
-
--   Depuis l’ajout des namespaces et cgroups dans le kernel Linux 2.6.24
-
-### Docker
-
--   Développé par Docker Inc.
-
--   Daemon
-
--   Utilisait la liblxc
-
--   Utilise désormais la libcontainer
-
-### Rocker (rkt)
-
--   Développé par CoreOS
-
--   Daemon
-
--   Utilise systemd-nspawn
-
--   Boucher les trous de sécurité de Docker
