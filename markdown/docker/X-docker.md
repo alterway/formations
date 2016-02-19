@@ -1,25 +1,25 @@
 # Formation Docker
 
-![image](images/docker.png){width="4cm"}
+![image](images/docker.png){width="100px"}
 
 ## Concernant ces supports de cours
 
 Supports de cours Docker réalisés par Osones (<https://osones.com/>)\
 Auteurs :
 
--   Romain Guichard &lt;romain.guichard@osones.com&gt;
+- Romain Guichard <romain.guichard@osones.com>
 
--   Kevin Lefevre &lt;kevin.lefevre@osones.com&gt;
+- Kevin Lefevre <kevin.lefevre@osones.com>
 
-![image](images/logo-osones-new.png){height="1cm"}
+![image](images/logo-osones-new.png){height="30px"}
 
--   Copyright ©<span>2016 Osones</span>
+- Copyright © 2016 Osones
 
--   Licence : Creative Commons BY-SA 4.0\
-    ![image](images/licence.png){width="2.5cm"}\
-    <https://creativecommons.org/licenses/by-sa/4.0/deed.fr>
+- Licence : Creative Commons BY-SA 4.0\
+  ![image](images/licence.png){width="2.5cm"}\
+  <https://creativecommons.org/licenses/by-sa/4.0/deed.fr>
 
--   Sources : <https://github.com/Osones/OpenStack-Formations/>
+- Sources : <https://github.com/Osones/Formations/>
 
 # Le Cloud : vue d’ensemble
 
@@ -27,137 +27,128 @@ Auteurs :
 
 ### Le cloud, c’est large !
 
--   Stockage/calcul distant (on oublie, cf. externalisation)
+- Stockage/calcul distant (on oublie, cf. externalisation)
 
--   Virtualisation++
+- Virtualisation++
 
--   Abstraction du matériel (voire plus)
+- Abstraction du matériel (voire plus)
 
--   Accès normalisé par des APIs
+- Accès normalisé par des APIs
 
--   Service et facturation à la demande
+- Service et facturation à la demande
 
--   Flexibilité, élasticité
+- Flexibilité, élasticité
 
 ### WaaS : Whatever as a Service
 
--   Principalement
-
-    IaaS
-
-    :   Infrastructure as a Service
-
-    PaaS
-
-    :   Platform as a Service
-
-    SaaS
-
-    :   Software as a Service
+Principalement
+- IaaS : Infrastructure as a Service
+- PaaS : Platform as a Service
+- SaaS : Software as a Service
 
 ### Le cloud en un schéma
 
-![image](images/cloud.png){width="\linewidth" height="\textheight"}
+![image](images/cloud.png){height="200px"}
 
 ### Pourquoi du cloud ? Côté technique
 
--   Abstraction des couches plus basses
+- Abstraction des couches basses
 
--   On peut tout programmer à son gré
+- On peut tout programmer à son gré
 
--   Permet la mise en place d’architectures scalables
+- Permet la mise en place d’architectures scalables
 
 ### Virtualisation dans le cloud
 
--   Le cloud IaaS repose souvent sur la virtualisation
+- Le cloud IaaS repose souvent sur la virtualisation
 
--   Ressources compute $\leftarrow$ virtualisation
+- Ressources compute -> virtualisation
 
--   Virtualisation complète : KVM, Xen
+- Virtualisation complète : KVM, Xen
 
--   Virtualisation conteneurs : OpenVZ, LXC, Docker
+- Virtualisation conteneurs : OpenVZ, LXC, Docker
 
 ### Notions et vocabulaire IaaS
 
--   L’instance est par définition éphémère
+- L’instance est par définition éphémère
 
--   Elle doit être utilisée comme ressource de calcul
+- Elle doit être utilisée comme ressource de calcul
 
--   Séparer les données des instances
+- Séparer les données des instances
 
 ## Orchestrer ses ressources
 
 ### Pourquoi orchestrer ?
 
--   Définir tout une infrastructure dans un seul fichier texte
+- Définir tout une infrastructure dans un seul fichier texte
 
--   Autoscaling
+- Autoscaling
 
--   Adapter ses ressources en fonction de ses besoins en temps réel
+- Adapter ses ressources en fonction de ses besoins en temps réel
 
 ## Aller encore plus loin
 
 ### Encore plus “cloud” qu’une instance
 
--   Partage du kernel
+- Partage du kernel
 
--   Un seul process par conteneur
+- Un seul process par conteneur
 
--   Le conteneur est encore plus éphèmère que l’instance
+- Le conteneur est encore plus éphèmère que l’instance
 
--   Le turnover des conteneurs est élevé $\leftarrow$ orchestration !!
+- Le turnover des conteneurs est élevé -> orchestration !!
 
 ## Le kernel Linux
 
 ### Le kernel Linux
 
--   Kernel 2.6.24, janvier 2008
+- Kernel 2.6.24, janvier 2008
 
-    -   Namespaces
+- Namespaces
 
-    -   cgroups
+- cgroups
 
 ### Les namespaces
 
--   Mount
+- Mount
 
--   Network
+- Network
 
--   PID
+- PID
 
--   Hostname
+- Hostname
 
--   User
+- User
 
 ## Différents types de conteneurs
 
 ### LXC
 
--   Développeurs indépendants
+- Développeurs indépendants
 
--   Depuis l’ajout des namespaces et cgroups dans le kernel Linux 2.6.24
+- Depuis l’ajout des namespaces et cgroups dans le kernel Linux 2.6.24
 
 ### Docker
 
--   Développé par Docker Inc.
+- Développé par Docker Inc.
 
--   Daemon
+- Daemon
 
--   Utilisait la liblxc
+- Utilisait la liblxc
 
--   Utilise désormais la libcontainer
+- Utilise désormais la libcontainer
 
 ### Rocket (rkt)
 
--   Se prononce “rock-it”
+- Se prononce “rock-it”
 
--   Développé par CoreOS
+- Développé par CoreOS
 
--   Daemon
+- Daemon
 
--   Utilise systemd-nspawn
+- Utilise systemd-nspawn
 
--   Adresse certains problèmes de sécurité de Docker
+- Adresse certains problèmes de sécurité de Docker
 
 # Vue d’ensemble
 
@@ -165,17 +156,17 @@ Auteurs :
 
 ### Un ensemble de composants
 
--   Layers
+- Layers
 
--   Stockage
+- Stockage
 
-    -   Volumes
+- Volumes
 
--   Réseau
+- Réseau
 
-    -   Ports
+- Ports
 
-    -   Links
+- Links
 
 ### Layers : une image
 
@@ -201,10 +192,12 @@ Auteurs :
 
 A la base, pas grand chose...
 
-    NETWORK ID          NAME                DRIVER
-    42f7f9558b7a        bridge              bridge
-    6ebf7b150515        none                null
-    0509391a1fbd        host                host
+```
+NETWORK ID      NAME      DRIVER
+42f7f9558b7a    bridge    bridge
+6ebf7b150515    none      null
+0509391a1fbd    host      host
+```
 
 # Build, Ship and Run !
 
@@ -212,116 +205,118 @@ A la base, pas grand chose...
 
 ### Le conteneur et son image
 
--   Flexibilité, élasticité
+- Flexibilité et élasticité
 
 ### Dockerfile
 
--
+- lorem ipsum
 
 ### Best Practices des Dockerfile
 
--   Comptez vos layers !
+- Comptez vos layers !
 
--   Bien choisir sa baseimage
+- Bien choisir sa baseimage
 
--   schéma montrant les pb de tailles dues à une baseimage de merde
+- schéma montrant les pb de tailles dues à une baseimage de merde
 
 ### Présentation de DockerHub
 
--   Intégration GitHub / DockerHub
+- Intégration GitHub / DockerHub
 
--   screenshot
+- screenshot
 
 ## Ship
 
 ### Les conteneurs sont indépendants !
 
--   Sauvegarder un conteneur :
+- Sauvegarder un conteneur :
 
--   docker commit mon-conteneur backup/mon-conteneur
+- docker commit mon-conteneur backup/mon-conteneur
 
--   docker run -it backup/mon-conteneur
+- docker run -it backup/mon-conteneur
 
--   Exporter un conteneur :
+- Exporter un conteneur :
 
--   docker save -o mon-image.tar backup/mon-conteneur
+- docker save -o mon-image.tar backup/mon-conteneur
 
--   Importe un conteneur :
+- Importe un conteneur :
 
--   docker import mon-image.tar backup/mon-conteneur
+- docker import mon-image.tar backup/mon-conteneur
 
 ### Docker Registry
 
--   DockerHub n’est qu’au Docker registry ce que GitHub est à git
+- DockerHub n’est qu’au Docker registry ce que GitHub est à git
 
--   Pull and Push
+- Pull and Push
 
 ## Run
 
 ### Lancer un conteneur
 
--   docker run
+- docker run
 
-    -   -d (detach)
+  - -d (detach)
 
-    -   -i (interactive)
+  - -i (interactive)
 
-    -   -t (pseudo tty)
+  - -t (pseudo tty)
 
 ### avec beaucoup d’options...
 
--   -v /directory/host:/directory/container
+- -v /directory/host:/directory/container
 
--   -p portHost:portContainer
+- -p portHost:portContainer
 
--   -e “VARIABLE=valeur”
+- -e “VARIABLE=valeur”
 
--   –restart=always
+- –restart=always
 
--   –name=mon-conteneur
+- –name=mon-conteneur
 
 ### ...dont certaines un peu dangereuses
 
--   –privileged (Accès à tous les devices)
+- –privileged (Accès à tous les devices)
 
--   –pid=host (Accès aux PID de l’host)
+- –pid=host (Accès aux PID de l’host)
 
--   –net=host (Accès à la stack IP de l’host)
+- –net=host (Accès à la stack IP de l’host)
 
 ### Se “connecter” à un conteneur
 
--   docker exec
+- docker exec
 
--   docker attach
+- docker attach
 
 ### Détruire un conteneur
 
--   docker kill (SIGKILL)
+- docker kill (SIGKILL)
 
--   docker stop (SIGTERM puis SIGKILL)
+- docker stop (SIGTERM puis SIGKILL)
 
--   docker rm (détruit complètement)
+- docker rm (détruit complètement)
 
 ## Ecosystème
 
 ### Docker Inc. et OCI
 
--   TBC
+- TBC
 
 ## Les autres produits Docker
 
 ### Compose
 
--   schema
+- schema
 
 ### Machine
 
--   Schéma
+- Schéma
 
 ### Swarm
 
--   Schéma
+- Schéma
 
 ### Plugins réseau et stockage
 
--   Schéma
+- Schéma
+
+## Docker Hosts
