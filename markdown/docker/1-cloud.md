@@ -97,15 +97,13 @@ Principalement
 
 - Le turnover des conteneurs est élevé -> orchestration !!
 
-### Différents types de conteneurs
-
-#### LXC
+### LXC
 
 - Développeurs indépendants
 
 - Depuis l’ajout des namespaces et cgroups dans le kernel Linux 2.6.24
 
-#### Docker
+### Docker
 
 - Développé par Docker Inc.
 
@@ -115,7 +113,7 @@ Principalement
 
 - Utilise désormais la libcontainer
 
-#### Rocket (rkt)
+### Rocket (rkt)
 
 - Se prononce “rock-it”
 

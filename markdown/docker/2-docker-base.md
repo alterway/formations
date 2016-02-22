@@ -3,36 +3,31 @@
 ### Un ensemble de composants
 
 - Layers
-
 - Stockage
-
 - Volumes
-
 - Réseau
-
 - Ports
-
 - Links
 
 ### Layers : une image
 
-![image](images/docker/image-layers.jpg){height="200px"}
+![image](images/docker/image-layers.jpg)
 
 ### Layers : un conteneur
 
-![image](images/docker/container-layers.jpg){height="200px"}
+![image](images/docker/container-layers.jpg)
 
 ### Layers : plusieurs conteneurs
 
-![image](images/docker/sharing-layers.jpg){height="200px"}
+![image](images/docker/sharing-layers.jpg)
 
 ### Layers : Répétition des layers
 
-![image](images/docker/saving-space.jpg){height="200px"}
+![image](images/docker/saving-space.jpg)
 
 ### Stockage : volumes
 
-![image](images/docker/shared-volume.jpg){height="200px"}
+![image](images/docker/shared-volume.jpg)
 
 ### Réseau, link et ports
 
