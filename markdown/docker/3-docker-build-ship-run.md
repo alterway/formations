@@ -6,15 +6,30 @@
 
 - Flexibilité et élasticité
 
+- Format standard
+
+- Instanciation illimitée
+
 ### Dockerfile
 
-- lorem ipsum
+- Définition d'une image
+
+- Permet de vérifier le contenu d'une image
+
+```
+FROM alpine:3.2
+MAINTAINER Romain Guichard <rgu@osones.io>
+RUN apk -U add nginx
+EXPOSE 80 443
+CMD ["nginx"]
+```
+
 
 ### Best Practices des Dockerfile
 
-- Comptez vos layers !
-
 - Bien choisir sa baseimage
+
+- Comptez vos layers !
 
 - schéma montrant les pb de tailles dues à une baseimage de merde
 
@@ -93,5 +108,3 @@
 - docker stop (SIGTERM puis SIGKILL)
 
 - docker rm (détruit complètement)
-
-

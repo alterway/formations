@@ -8,15 +8,23 @@
 
 ### Compose
 
-- schema
+- Concept de stack
+
+- Infrastructure as a code
+
+- Scalabilité
 
 ### Machine
 
-- Schéma
+- "Metal" as a Service
+
+- Abstraction du cloud provider
 
 ### Swarm
 
-- Schéma
+- Clustering
+
+- Orchestration
 
 ### Plugins réseau et stockage
 
