@@ -11,27 +11,25 @@
 
 ### Layers : une image
 
-![image](images/docker/image-layers.jpg)
+![image-layers](images/docker/image-layers.jpg)
 
 ### Layers : un conteneur
 
-![image](images/docker/container-layers.jpg)
+![container-layers](images/docker/container-layers.jpg)
 
 ### Layers : plusieurs conteneurs
 
-![image](images/docker/sharing-layers.jpg)
+![sharing-layers](images/docker/sharing-layers.jpg)
 
 ### Layers : Répétition des layers
 
-![image](images/docker/saving-space.jpg)
+![saving-space](images/docker/saving-space.jpg)
 
 ### Stockage : volumes
 
-![image](images/docker/shared-volume.jpg)
+![shared-volume](images/docker/shared-volume.jpg)
 
-### Réseau, link et ports
-
-A la base, pas grand chose...
+### Réseau : A la base, pas grand chose...
 
 ```
 NETWORK ID      NAME      DRIVER
@@ -40,4 +38,17 @@ NETWORK ID      NAME      DRIVER
 0509391a1fbd    host      host
 ```
 
+### Réseau : Et puis des trucs sympas !
+
+- Driver réseau
+
+- libnetwork
+
+### Réseau : multihost overlay
+
+![overlay](images/docker/overlay_network.png)
+
+### Réseau : ports
+
+![ports](images/docker/network_access.png)
 
