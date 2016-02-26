@@ -22,8 +22,8 @@ result:=$(pwd)/result
 	echo '\end{document}' >> $(tmp)/$*.tex
 	cp latex/*.sty $(tmp)/
 	mkdir -p ${result}
-	lualatex -output-directory $(result) $(tmp)/$*.tex
-	lualatex -output-directory $(result) $(tmp)/$*.tex
+	pdflatex -output-directory $(result) $(tmp)/$*.tex
+	pdflatex -output-directory $(result) $(tmp)/$*.tex
 	rm -rf $(tmp)
 	ln -sf result/$*.pdf $*.pdf
 
