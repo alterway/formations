@@ -1,7 +1,5 @@
 # Le Cloud : vue d’ensemble
 
-## Le Cloud : les concepts
-
 ### Le cloud, c’est large !
 
 - Stockage/calcul distant (on oublie, cf. externalisation)
@@ -25,7 +23,7 @@ Principalement
 
 ### Le cloud en un schéma
 
-![image](images/cloud.png){height="200px"}
+![cloud](images/cloud.png){height="400px"}
 
 ### Pourquoi du cloud ? Côté technique
 
@@ -53,7 +51,7 @@ Principalement
 
 - Séparer les données des instances
 
-## Orchestrer ses ressources
+### Orchestrer ses ressources
 
 ### Pourquoi orchestrer ?
 
@@ -63,7 +61,7 @@ Principalement
 
 - Adapter ses ressources en fonction de ses besoins en temps réel
 
-## Le kernel Linux
+### Le kernel Linux
 
 ### Le kernel Linux
 
@@ -85,7 +83,7 @@ Principalement
 
 - User
 
-## Les conteneurs
+### Les conteneurs
 
 ### Encore plus “cloud” qu’une instance
 
@@ -124,3 +122,4 @@ Principalement
 - Utilise systemd-nspawn
 
 - Adresse certains problèmes de sécurité de Docker
+

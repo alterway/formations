@@ -1,6 +1,6 @@
 # Build, Ship and Run !
 
-## Build
+### Build
 
 ### Le conteneur et son image
 
@@ -39,7 +39,7 @@ CMD ["nginx"]
 
 - screenshot
 
-## Ship
+### Ship
 
 ### Les conteneurs sont indépendants !
 
@@ -63,7 +63,7 @@ CMD ["nginx"]
 
 - Pull and Push
 
-## Run
+### Run
 
 ### Lancer un conteneur
 
