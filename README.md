@@ -23,13 +23,9 @@ Cours OpenStack :
 
         make course=openstack
 
-Cours Docker :
-
-        make course=docker
-
 Un style (screen, handout ou print) pour les cours Docker :
 
-        make style.pdf course=docker
+        make style.pdf course=openstack
 
 
 Copyright et licence
