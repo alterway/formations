@@ -20,7 +20,6 @@ result:=$(pwd)/result
 	cp $< $(tmp)/$*.tex
 	cat latex/${course}/*.tex >> $(tmp)/$*.tex
 	echo '\end{document}' >> $(tmp)/$*.tex
-	cp latex/*.sty $(tmp)/
 	mkdir -p ${result}
 	pdflatex -output-directory $(result) $(tmp)/$*.tex
 	pdflatex -output-directory $(result) $(tmp)/$*.tex
