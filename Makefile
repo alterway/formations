@@ -15,14 +15,14 @@ pwd:=$(shell pwd)
 result:=$(pwd)/result
 
 # Construction du style demandé, avec les morceaux choisis
-%.pdf: latex/styles/%.tex latex/${course}/*.tex
+%.pdf: cours/styles/%.tex cours/${course}/*.tex
 	$(eval tmp:=$(shell mktemp -d $(pwd)/tmp.XXX))
 	cp $< $(tmp)/$*.tex
-	cat latex/${course}/*.tex >> $(tmp)/$*.tex
+	cat cours/${course}/*.tex >> $(tmp)/$*.tex
 	echo '\end{document}' >> $(tmp)/$*.tex
 	mkdir -p ${result}
-	pdflatex -output-directory $(result) $(tmp)/$*.tex
-	pdflatex -output-directory $(result) $(tmp)/$*.tex
+	pdfcours -output-directory $(result) $(tmp)/$*.tex
+	pdfcours -output-directory $(result) $(tmp)/$*.tex
 	rm -rf $(tmp)
 	ln -sf result/$*.pdf $*.pdf
 
