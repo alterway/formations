@@ -21,8 +21,8 @@ result:=$(pwd)/result
 	cat cours/${course}/*.tex >> $(tmp)/$*.tex
 	echo '\end{document}' >> $(tmp)/$*.tex
 	mkdir -p ${result}
-	pdfcours -output-directory $(result) $(tmp)/$*.tex
-	pdfcours -output-directory $(result) $(tmp)/$*.tex
+	pdflatex -output-directory $(result) $(tmp)/$*.tex
+	pdflatex -output-directory $(result) $(tmp)/$*.tex
 	rm -rf $(tmp)
 	ln -sf result/$*.pdf $*.pdf
 
