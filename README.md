@@ -1,4 +1,4 @@
-Supports de formation Osones  ![Build Status](https://travis-ci.com/Osones/formation-openstack.svg?token=7ppXKZyxcmMnfH2RMRnd&branch=master)
+Supports de formation Osones  ![Build Status](https://travis-ci.com/Osones/formations.svg?token=sy6nX4pitZ2Pksd9gZmW&branch=master)
 ===============================
 
 Supports de formation (sous forme de slides) écrits en Français et réalisés par Osones (https://osones.com/) pour ses offres de formation OpenStack et Docker.
@@ -11,6 +11,16 @@ Auteurs :
 * Romain Guichard <romain.guichard@osones.com>
 * Kevin Lefevre <kevin.lefevre@osones.com>
 
+
+Intégration Continue
+--------------------
+
+Travis est en charge de builder régulièrement les supports de formation. Ceux ci sont écrits en markdown et sont buildés pour obtenir un support HTML et un support PDF
+
+[Support PDF](http://formation.osones.com)
+[Support HTML Docker](http://docker.formation.osones.com)
+[Support HTML OpenStack](http://openstack.formation.osones.com)
+
 Installation de LaTeX (Ubuntu)
 ------------------------------
 
@@ -19,19 +29,18 @@ sudo apt-get install texlive-lang-french texlive
 Générations des PDFs
 --------------------
 
-Cours OpenStack :
+Cours :
 
-        make course=openstack
+        make
 
 Un style (screen, handout ou print) pour les cours Docker :
 
-        make style.pdf course=openstack
+        make course=openstack
 
 
 Copyright et licence
 --------------------
-Tous les contenus originaux (Makefile, les fichiers dans latex/, les fichiers
-dans markdown/) sont :
+Tous les contenus originaux (Makefile, les fichiers dans cours/) sont :
 * Copyright © 2014-2016 Osones
 * Distribués sous licence Creative Commons BY-SA 4.0.
 
