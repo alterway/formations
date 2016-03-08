@@ -17,9 +17,9 @@ Intégration Continue
 
 Travis est en charge de builder régulièrement les supports de formation. Ceux ci sont écrits en markdown et sont buildés pour obtenir un support HTML et un support PDF
 
-[Support PDF](http://formation.osones.com)
-[Support HTML Docker](http://docker.formation.osones.com)
-[Support HTML OpenStack](http://openstack.formation.osones.com)
+[Support PDF](http://formation.osones.com)  
+[Support HTML Docker](http://docker.formation.osones.com)  
+[Support HTML OpenStack](http://openstack.formation.osones.com)  
 
 Installation de LaTeX (Ubuntu)
 ------------------------------
