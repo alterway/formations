@@ -1,0 +1,62 @@
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{xparse}
+\usepackage{microtype}
+\usepackage{verbatim}
+
+\usetheme{Boadilla}
+
+\title{Formation Docker}
+%\author{Romain Guichard}
+%\institute{Osones}
+%\date{}
+
+%\logo{\includegraphics[height=0.5cm]{images/logo-osones.png}}
+
+\begin{document}
+  \begin{frame}
+    \titlepage
+    \begin{center}
+      \includegraphics[width=4cm]{images/docker.png}
+    \end{center}
+  \end{frame}
+
+  \begin{frame}
+    \frametitle{Concernant ces supports de cours}
+    Supports de cours Docker réalisés par Osones (\url{https://osones.com/})\\
+    Auteurs :
+    \begin{itemize}
+      \item Romain Guichard \textless romain.guichard@osones.com\textgreater
+      \item Kevin Lefevre \textless kevin.lefevre@osones.com\textgreater
+    \end{itemize}
+    \begin{center}
+      \includegraphics[height=1cm]{images/logo-osones-new.png}
+    \end{center}
+    \begin{itemize}
+      \item Copyright \copyright{2016 Osones}
+      \item Licence : Creative Commons BY-SA 4.0 \\
+        \includegraphics[width=2.5cm]{images/licence.png} \\
+        \url{https://creativecommons.org/licenses/by-sa/4.0/deed.fr}
+      \item Sources : \url{https://github.com/Osones/OpenStack-Formations/}
+    \end{itemize}
+  \end{frame}
+
+  \AtBeginSection[]
+  {
+    \begin{frame}[shrink]
+      \frametitle{Plan}
+      \tableofcontents[currentsection,hideothersubsections]
+    \end{frame}
+  }
+  \AtBeginSubsection[]
+  {
+    \begin{frame}[shrink]
+      \frametitle{Plan}
+      \tableofcontents[
+        currentsection,
+        sectionstyle=show/show,
+        subsectionstyle=show/shaded/hide
+      ]
+    \end{frame}
+  }
+
