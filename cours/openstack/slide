@@ -1,24 +1,25 @@
 #Formation OpenStack
 
-![image](images/openstack.png)
+![](images/openstack.png)
 
 ### Concernant ces supports de cours
 
 Supports de cours OpenStack réalisés par Osones (<https://osones.com/>)\
-Auteurs :
+
+![](images/logo-osones-new.png)
+
+-   Copyright ©<span>2014-2015 Osones</span>
+-   Licence : Creative Commons BY-SA 4.0\
+-   Sources : <https://github.com/Osones/OpenStack-Formations/>
+![<https://creativecommons.org/licenses/by-sa/4.0/deed.fr>](images/licence.png)
+
+### Auteurs
 
 -   Adrien Cunin \<adrien.cunin@osones.com\>
 -   Pierre Freund \<pierre.freund@osones.com\>
 -   Romain Guichard \<romain.guichard@osones.com\>
 -   Kevin Lefevre \<kevin.lefevre@osones.com\>
 
-![image](images/logo-osones.png)
-
--   Copyright ©<span>2014-2015 Osones</span>
--   Licence : Creative Commons BY-SA 4.0\
-    ![image](images/licence.png)\
-    <https://creativecommons.org/licenses/by-sa/4.0/deed.fr>
--   Sources : <https://github.com/Osones/OpenStack-Formations/>
 
 # Introduction
 
@@ -96,7 +97,7 @@ Hybride
 
 ### Le cloud en un schéma
 
-![image](images/cloud.png)
+![](images/cloud.png)
 
 ### Pourquoi du cloud ? Côté business
 
@@ -214,7 +215,7 @@ Hybride
 
 ### Stockage objet : schéma
 
-![image](images/stockage-objet.png)
+![](images/stockage-objet.png)
 
 ### SDS : Software Defined Storage
 
@@ -232,7 +233,7 @@ Hybride
 
 ### Théorème CAP
 
-![image](images/cap.jpg)
+![](images/cap.jpg)
 
 ### Swift
 
@@ -301,7 +302,7 @@ Hybride
 
 ### Vue haut niveau
 
-![image](images/openstack-software-diagram.pdf)
+![](images/openstack-software-diagram.pdf)
 
 ### Historique
 
@@ -395,11 +396,11 @@ Source :
 
 ### Cycle de vie des projets au sein d’OpenStack
 
-![image](images/innovation1.pdf)
+![](images/innovation1.pdf)
 
 ### Les projets dans Icehouse
 
-![image](images/innovation2.pdf)
+![](images/innovation2.pdf)
 
 ### Le nouveau modèle “big tent”
 
@@ -459,7 +460,7 @@ Source :
 
 ### La fondation OpenStack
 
-![image](images/foundation.png)
+![](images/foundation.png)
 
 ### OpenStack Infra
 
@@ -530,26 +531,26 @@ Source :
 
 ### Exemple du Summit d’avril 2013 à Portland
 
-![image](images/photo-summit.jpg)
+![](images/photo-summit.jpg)
 
 ### Exemple du Summit d’octobre 2015 à Tokyo
 
-![image](images/photo-summit1.jpg) Photo : Elizabeth K. Joseph, CC BY
+![](images/photo-summit1.jpg) Photo : Elizabeth K. Joseph, CC BY
 2.0, Flickr/pleia2
 
 ### Exemple du Summit d’octobre 2015 à Tokyo
 
-![image](images/photo-summit2.jpg) Photo : Elizabeth K. Joseph, CC BY
+![](images/photo-summit2.jpg) Photo : Elizabeth K. Joseph, CC BY
 2.0, Flickr/pleia2
 
 ### Exemple du Summit d’octobre 2015 à Tokyo
 
-![image](images/photo-summit3.jpg) Photo : Elizabeth K. Joseph, CC BY
+![](images/photo-summit3.jpg) Photo : Elizabeth K. Joseph, CC BY
 2.0, Flickr/pleia2
 
 ### Exemple du Summit d’octobre 2015 à Tokyo
 
-![image](images/photo-summit4.jpg) Photo : Elizabeth K. Joseph, CC BY
+![](images/photo-summit4.jpg) Photo : Elizabeth K. Joseph, CC BY
 2.0, Flickr/pleia2
 
 ### Design Tenets
@@ -584,11 +585,11 @@ Source :
 
 ### Architecture
 
-![image](images/architecture-simple.jpg)
+![](images/architecture-simple.jpg)
 
 ### Interface web / Dashboard : Horizon
 
-![image](images/horizon.png)
+![](images/horizon.png)
 
 ### Ressources
 
@@ -611,7 +612,7 @@ Source :
 
 ### Ressources - Communauté francophone
 
-![image](images/openstackfr.png)
+![](images/openstackfr.png)
 
 -   Site web : <http://openstack.fr/>
 -   Association des utilisateurs francophones d’OpenStack :
@@ -707,15 +708,15 @@ Exemple
 
 ### Architecture détaillée
 
-![image](images/architecture.jpg)
+![](images/architecture.jpg)
 
 ### Architecture réseau
 
-![image](images/archi-network.png)
+![](images/archi-network.png)
 
 ### Architecture services
 
-![image](images/archi-service.png)
+![](images/archi-service.png)
 
 ### Quelques éléments de configuration généraux
 
@@ -735,7 +736,7 @@ Exemple
 
 ### Python
 
-![image](images/python-powered.png)
+![](images/python-powered.png)
 
 -   OpenStack est aujourd’hui compatible Python 2.7
 -   Afin de ne pas réinventer la roue, beaucoup de dépendances sont nécessaires
@@ -753,12 +754,12 @@ Exemple
 
 ### Pourquoi l’utilisation de SQLAlchemy
 
-![image](images/sqlalchemy-logo.png)
+![](images/sqlalchemy-logo.png)
 
 -   Support de multiples BDD
 -   Gestion des migrations
 
-![image](images/mysql-logo.png)
+![](images/mysql-logo.png)
 
 ### Passage de messages
 
@@ -770,14 +771,14 @@ Exemple
 
 ### RabbitMQ
 
-![image](images/rabbitmq-logo.png)
+![](images/rabbitmq-logo.png)
 
 -   RabbitMQ est implémenté en Erlang
 -   Une machine virtuelle Erlang est donc nécessaire
 
 ### “Hello world” RabbitMQ
 
-![image](images/rabbitmq-schema.png)
+![](images/rabbitmq-schema.png)
 
 ### Keystone : Authentification, autorisation et catalogue de services
 
@@ -799,7 +800,7 @@ Exemple
 
 ### Scénario d’utilisation typique
 
-![image](images/keystone-scenario.png)
+![](images/keystone-scenario.png)
 
 ### Installation et configuration
 
@@ -846,7 +847,7 @@ Keystone :
 
 ### Interactions avec les autres composants
 
-![image](images/compute-node.png)
+![](images/compute-node.png)
 
 ### Propriétés d’une instance
 
@@ -908,7 +909,7 @@ Les instances sont redimensionnables et migrables d’un hôte physique à un au
 
 ### Le scheduler Nova en action
 
-![image](images/scheduling-schema.png)
+![](images/scheduling-schema.png)
 
 ### Nova conductor
 
@@ -1028,11 +1029,11 @@ L’API permet notamment de manipuler ces ressources
 
 ### Schéma
 
-![image](images/neutron-schema.png)
+![](images/neutron-schema.png)
 
 ### Schéma
 
-![image](images/neutron-schema2.png)
+![](images/neutron-schema2.png)
 
 ###Cinder : Stockage block
 
@@ -1080,7 +1081,7 @@ L’API permet notamment de manipuler ces ressources
 -   Horizon est un module Django
 -   OpenStack Dashboard est l’implémentation officielle de ce module
 
-![image](images/django-logo.png)
+![](images/django-logo.png)
 
 ### Configuration
 
@@ -1121,7 +1122,7 @@ Swift : Stockage objet
 
 ### Schéma
 
-![image](images/swift-schema.png)
+![](images/swift-schema.png)
 
 ###Ceilometer : Collecte de métriques
 
@@ -1402,7 +1403,7 @@ Guide sécurité : <http://docs.openstack.org/security-guide/content/>
 
 ### Ubuntu Cloud Archive
 
-![image](images/ubuntu-cloud-archive.png)
+![](images/ubuntu-cloud-archive.png)
 
 ### Packaging d’OpenStack dans les autres distributions
 
