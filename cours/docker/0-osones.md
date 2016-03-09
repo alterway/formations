@@ -16,7 +16,7 @@ Supports de cours Docker réalisés par Osones
 
 - Sources : <https://github.com/Osones/Formations/>
 
-![https://creativecommons.org/licenses/by-sa/4.0/deed.fr](images/licence.png){width="2.5cm"}
+![<https://creativecommons.org/licenses/by-sa/4.0/deed.fr>](images/licence.png){width="2.5cm"}
 
 ### Auteurs
 
