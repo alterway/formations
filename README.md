@@ -33,7 +33,7 @@ Cours :
 
         make
 
-Un style (screen, handout ou print) pour les cours Docker :
+Un style (screen, handout ou print) pour les cours OpenStack :
 
         make course=openstack
 
