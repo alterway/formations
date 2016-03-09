@@ -1,6 +1,4 @@
----
-title: Formation OpenStack
-...
+#Formation OpenStack
 
 ![image](images/openstack.png)
 
@@ -24,7 +22,7 @@ Auteurs :
 
 # Introduction
 
-## Objectifs de la formation : Cloud
+### Objectifs de la formation : Cloud
 
 -   Comprendre les principes du cloud et son intérêt
 -   Connaitre le vocabulaire inhérent au cloud
@@ -36,7 +34,7 @@ Auteurs :
 -   Adapter ses méthodes d’administration système à un environnement
     cloud
 
-## Objectifs de la formation : OpenStack
+### Objectifs de la formation : OpenStack
 
 -   Connaitre le fonctionnement du projet OpenStack et ses possibilités
 -   Comprendre le fonctionnement de chacun des composants d’OpenStack
@@ -47,7 +45,7 @@ Auteurs :
 -   Être capable de déterminer l’origine d’une erreur dans OpenStack
 -   Savoir réagir face à un bug
 
-## Pré-requis de la formation
+### Pré-requis de la formation
 
 -   Compétences d’administration système Linux tel qu’Ubuntu
     -   Gestion des paquets
@@ -59,7 +57,7 @@ Auteurs :
 
 # Le Cloud : vue d’ensemble
 
-## Le Cloud : les concepts
+### Le Cloud : les concepts
 
 ### Le cloud, c’est large !
 
@@ -114,7 +112,7 @@ Hybride
 -   On peut tout programmer à son gré
 -   Permet la mise en place d’architectures scalables
 
-## PaaS : Platform as a Service
+### PaaS : Platform as a Service
 
 ### PaaS : les principes
 
@@ -135,7 +133,7 @@ Hybride
 -   OpenShift (Red Hat)
 -   Solum
 
-## IaaS : Infrastructure as a Service
+### IaaS : Infrastructure as a Service
 
 ### Amazon Web Services (AWS) et les autres
 
@@ -199,7 +197,7 @@ Hybride
 -   Séparer les données des instances
 -   Choix du type de stockage : éphémère, volume, objet
 
-## Stockage : block, objet, SDS
+### Stockage : block, objet, SDS
 
 ### Stockage block
 
@@ -254,7 +252,7 @@ Hybride
 -   La couche RBD permet d’accéder aux données en mode block (volumes)
 -   CephFS permet un accès par un système de fichiers POSIX
 
-## Orchestrer les ressources de son IaaS
+### Orchestrer les ressources de son IaaS
 
 ### Pourquoi orchestrer
 
@@ -265,7 +263,7 @@ Hybride
     -   Fonctionnalité incluse dans le composant d’orchestration
         d’OpenStack
 
-## APIs : quel rôle ?
+### APIs : quel rôle ?
 
 ### API ?
 
@@ -276,7 +274,7 @@ Hybride
     service (XaaS)
 -   Il s’agit le plus souvent d’API HTTP REST
 
-## Exemple concret
+### Exemple concret
 
     GET /v2.0/networks/<network_id>
     {
@@ -299,7 +297,7 @@ Hybride
 
 # OpenStack : projet, logiciel et utilisation
 
-## Présentation du projet et du logiciel
+### Présentation du projet et du logiciel
 
 ### Vue haut niveau
 
@@ -624,7 +622,7 @@ Source :
     -   openstack-fr@lists.openstack.org
     -   \#openstack-fr@Freenode
 
-## DevStack : faire tourner rapidement un OpenStack
+### DevStack : faire tourner rapidement un OpenStack
 
 ### Utilité de DevStack
 
@@ -663,7 +661,7 @@ Exemple
 -   Pour tester tous les composants OpenStack dans de bonnes conditions, plusieurs Go de RAM sont nécessaires
 -   L’utilisation de Vagrant est conseillée
 
-## Utiliser OpenStack
+### Utiliser OpenStack
 
 ### Le principe
 
@@ -726,7 +724,7 @@ Exemple
 -   Les composants découpés en plusieurs services ont souvent un fichier de configuration par service
 -   api-paste.ini contient des paramètres concernant le service API
 
-## Les briques nécessaires
+### Les briques nécessaires
 
 ### Système d’exploitation
 
@@ -781,7 +779,7 @@ Exemple
 
 ![image](images/rabbitmq-schema.png)
 
-## Keystone : Authentification, autorisation et catalogue de services
+### Keystone : Authentification, autorisation et catalogue de services
 
 ### Principes
 
@@ -841,7 +839,6 @@ Keystone :
       --publicurl=http://controller:8776/v2/%\(tenant_id\)s \
       --internalurl=http://controller:8776/v2/%\(tenant_id\)s \
       --adminurl=http://controller:8776/v2/%\(tenant_id\)s
-        
 
 [containsverbatim]
 
@@ -854,8 +851,7 @@ Keystone :
     $ keystone token-get
     ...
 
-Nova : Compute
---------------
+###Nova : Compute
 
 ### Principes
 
@@ -986,8 +982,7 @@ un autre.
     $ nova create
     ...
 
-Glance : Registre d’images
---------------------------
+###Glance : Registre d’images
 
 ### Principes
 
@@ -1058,8 +1053,7 @@ support de l’hyperviseur sous-jacent à Nova
     $ glance image-create
     ...
 
-Neutron : Réseau en tant que service
-------------------------------------
+###Neutron : Réseau en tant que service
 
 ### Principes
 
@@ -1138,8 +1132,7 @@ L’API permet notamment de manipuler ces ressources
 
 ![image](images/neutron-schema2.png)
 
-Cinder : Stockage block
------------------------
+###Cinder : Stockage block
 
 ### Principes
 
@@ -1195,8 +1188,7 @@ Cinder : Stockage block
 
 -   DRBD
 
-Horizon : Dashboard web
------------------------
+###Horizon : Dashboard web
 
 ### Principes
 
@@ -1222,7 +1214,6 @@ Horizon : Dashboard web
 -   Une interface par tenant
 
 Swift : Stockage objet
-----------------------
 
 ### Principes
 
@@ -1266,8 +1257,7 @@ Swift : Stockage objet
 
 ![image](images/swift-schema.png)
 
-Ceilometer : Collecte de métriques
-----------------------------------
+###Ceilometer : Collecte de métriques
 
 ### Surveiller l’utilisation de son infrastructure avec Ceilometer
 
@@ -1290,8 +1280,7 @@ Ceilometer : Collecte de métriques
 
 -   Back-end remplaçant MongoDB pour Ceilometer
 
-Heat : Orchestration des ressources
------------------------------------
+###Heat : Orchestration des ressources
 
 ### Orchestrer son infrastructure avec Heat
 
@@ -1348,8 +1337,7 @@ Multiples projets en cours de développement
 
 -   Merlin
 
-Trove : Database as a Service
------------------------------
+###Trove : Database as a Service
 
 ### Principe
 
@@ -1370,8 +1358,7 @@ Trove : Database as a Service
 
 -   trove-guestagent : agent interne à l’instance
 
-Designate : DNS as a Service
-----------------------------
+###Designate : DNS as a Service
 
 ### Principe
 
@@ -1379,8 +1366,7 @@ Designate : DNS as a Service
 
 -   Gère différents backends : BIND, etc.
 
-Quelques autres composants intéressants
----------------------------------------
+###Quelques autres composants intéressants
 
 ### Ironic
 
@@ -1428,8 +1414,7 @@ Quelques autres composants intéressants
 -   Le déployeur peut utiliser Tempest pour vérifier la bonne conformité
     de son cloud
 
-Bonnes pratiques pour un déploiement en production
---------------------------------------------------
+###Bonnes pratiques pour un déploiement en production
 
 ### Quels composants dois-je installer ?
 
@@ -1736,8 +1721,7 @@ Guide sécurité : <http://docs.openstack.org/security-guide/content/>
 
 -   Facilite les mises à jour entre versions majeures
 
-Faire face aux problèmes
-------------------------
+###Faire face aux problèmes
 
 ### Ressources FAILED/ERROR
 
@@ -1775,8 +1759,7 @@ Faire face aux problèmes
 
 -   Sinon, à vous d’en juger
 
-Tirer partie de l’IaaS
-======================
+#Tirer partie de l’IaaS
 
 ### Deux visions
 
@@ -1801,8 +1784,7 @@ idée :
 
 -   Incompréhensions “le cloud ça marche pas”
 
-Côté applications
------------------
+###Côté applications
 
 [allowframebreaks]
 
@@ -1842,8 +1824,7 @@ Cf. les design tenets du projet OpenStack et Twelve-Factor
 
 -   Utiliser des outils standards de journalisation
 
-Côté système
-------------
+###Côté système
 
 ### Adopter une philosophie DevOps
 
@@ -1943,8 +1924,7 @@ La plupart des distributions fournissent aujourd’hui des images cloud.
 
 -   Juju
 
-Conclusion {#conclusion .unnumbered}
-==========
+#Conclusion
 
 ### Conclusion
 
