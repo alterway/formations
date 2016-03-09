@@ -36,6 +36,18 @@ body {
   line-height: 1.3;
   font-weight: inherit; }
 
+
+  /***************************************
+   * BACKGROUND
+   * *************************************/
+
+.slide-background.titleslide {
+    background-color: #b50000;
+}
+
+section.titleslide h1 {
+    color: white;
+}
 /*********************************************
  * HEADERS
  *********************************************/
@@ -231,7 +243,6 @@ body {
 .reveal section img {
   margin: 15px 0px;
   background: rgba(255, 255, 255, 0.12);
-  border: 4px solid #657b83;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); }
 
 .reveal section img.plain {
@@ -253,19 +264,19 @@ body {
  *********************************************/
 .reveal .controls .navigate-left,
 .reveal .controls .navigate-left.enabled {
-  border-right-color: #b50000; }
+  border-right-color: black; }
 
 .reveal .controls .navigate-right,
 .reveal .controls .navigate-right.enabled {
-  border-left-color: #b50000; }
+  border-left-color: black; }
 
 .reveal .controls .navigate-up,
 .reveal .controls .navigate-up.enabled {
-  border-bottom-color: #b50000; }
+  border-bottom-color: black; }
 
 .reveal .controls .navigate-down,
 .reveal .controls .navigate-down.enabled {
-  border-top-color: #b50000; }
+  border-top-color: black; }
 
 .reveal .controls .navigate-left.enabled:hover {
   border-right-color: #78b9e6; }
