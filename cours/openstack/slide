@@ -1,24 +1,25 @@
-#Formation OpenStack
+# Formation OpenStack
 
 ![](images/openstack.png)
 
 ### Concernant ces supports de cours
 
-Supports de cours OpenStack réalisés par Osones (<https://osones.com/>)\
+Supports de cours OpenStack réalisés par Osones (<https://osones.com/>)
 
 ![](images/logo-osones-new.png)
 
--   Copyright ©<span>2014-2015 Osones</span>
--   Licence : Creative Commons BY-SA 4.0\
--   Sources : <https://github.com/Osones/OpenStack-Formations/>
+-   Copyright © 2014-2016 Osones
+-   Licence : Creative Commons BY-SA 4.0
+-   Sources : <https://github.com/Osones/OpenStack-Formations>
+
 ![<https://creativecommons.org/licenses/by-sa/4.0/deed.fr>](images/licence.png)
 
 ### Auteurs
 
--   Adrien Cunin \<adrien.cunin@osones.com\>
--   Pierre Freund \<pierre.freund@osones.com\>
--   Romain Guichard \<romain.guichard@osones.com\>
--   Kevin Lefevre \<kevin.lefevre@osones.com\>
+-   Adrien Cunin <adrien.cunin@osones.com>
+-   Pierre Freund <pierre.freund@osones.com>
+-   Romain Guichard <romain.guichard@osones.com>
+-   Kevin Lefevre <kevin.lefevre@osones.com>
 
 
 # Introduction
@@ -27,21 +28,17 @@ Supports de cours OpenStack réalisés par Osones (<https://osones.com/>)\
 
 -   Comprendre les principes du cloud et son intérêt
 -   Connaitre le vocabulaire inhérent au cloud
--   Avoir une vue d’ensemble sur les solutions existantes en cloud
-    public et privé
+-   Avoir une vue d’ensemble sur les solutions existantes en cloud public et privé
 -   Posséder les clés pour tirer partie au mieux de l’IaaS
--   Pouvoir déterminer ce qui est compatible avec la philosophie cloud
-    ou pas
--   Adapter ses méthodes d’administration système à un environnement
-    cloud
+-   Pouvoir déterminer ce qui est compatible avec la philosophie cloud ou pas
+-   Adapter ses méthodes d’administration système à un environnement cloud
 
 ### Objectifs de la formation : OpenStack
 
 -   Connaitre le fonctionnement du projet OpenStack et ses possibilités
 -   Comprendre le fonctionnement de chacun des composants d’OpenStack
 -   Pouvoir faire les bons choix de configuration
--   Savoir déployer manuellement un cloud OpenStack pour fournir de
-    l’IaaS
+-   Savoir déployer manuellement un cloud OpenStack pour fournir de l’IaaS
 -   Connaitre les bonnes pratiques de déploiement d’OpenStack
 -   Être capable de déterminer l’origine d’une erreur dans OpenStack
 -   Savoir réagir face à un bug
@@ -261,18 +258,15 @@ Hybride
 -   Être en capacité d’instancier une infrastructure entière en un appel API
 -   Autoscaling
     -   Adapter ses ressources en fonction de ses besoins en temps réel
-    -   Fonctionnalité incluse dans le composant d’orchestration
-        d’OpenStack
+    -   Fonctionnalité incluse dans le composant d’orchestration d’OpenStack
 
 ### APIs : quel rôle ?
 
 ### API ?
 
 -   *Application Programming Interface*
--   Au sens logiciel : Interface permettant à un logiciel d’utiliser une
-    bibliothèque
--   Au sens cloud : Interface permettant à un logiciel d’utiliser un
-    service (XaaS)
+-   Au sens logiciel : Interface permettant à un logiciel d’utiliser une bibliothèque
+-   Au sens cloud : Interface permettant à un logiciel d’utiliser un service (XaaS)
 -   Il s’agit le plus souvent d’API HTTP REST
 
 ### Exemple concret
@@ -308,8 +302,7 @@ Hybride
 
 -   Démarrage en 2010
 -   Objectif : le Cloud Operating System libre
--   Fusion de deux projets de Rackspace (Storage) et de la NASA
-    (Compute)
+-   Fusion de deux projets de Rackspace (Storage) et de la NASA (Compute)
 -   Développé en Python et distribué sous licence Apache 2.0
 -   Les releases jusqu’à aujourd’hui :
 
@@ -413,12 +406,10 @@ Source :
 
 ### Traduction
 
--   La question de la traduction est dorénavant prise en compte
-    (officialisation de l’équipe *i18n*)
+-   La question de la traduction est dorénavant prise en compte (officialisation de l’équipe *i18n*)
 -   Seules certaines parties sont traduites, comme Horizon
 -   La traduction française est aujourd’hui une des plus avancées
--   Utilisation de la plateforme Transifex (en cours de migration vers
-    l’outil libre Zanata)
+-   Utilisation de la plateforme Transifex (en cours de migration vers l’outil libre Zanata)
 
 ### Développement du projet : les principes
 
@@ -431,30 +422,23 @@ Source :
 
 -   Ouvert à tous (individuels et entreprises)
 -   Cycle de développement de 6 mois débuté par un (design) summit
--   Outils : Launchpad $\rightarrow$ Storyboard (blueprints, bugs) +
-    Git + GitHub (code)
+-   Outils : Launchpad $\rightarrow$ Storyboard (blueprints, bugs) + Git + GitHub (code)
 -   Sur chaque patch proposé :
-    -   Revue de code (peer review) : Gerrit,
-        <https://review.openstack.org>
-    -   Intégration continue (continous integration) : Jenkins, Zuul,
-        etc., <http://zuul.openstack.org/>
+    -   Revue de code (peer review) : Gerrit, <https://review.openstack.org>
+    -   Intégration continue (continous integration) : Jenkins, Zuul, etc., <http://zuul.openstack.org/>
 -   Développement hyper actif : 17000 commits dans Icehouse (+25%)
--   Fin 2012, création d’une entité indépendante de gouvernance : la
-    fondation OpenStack
+-   Fin 2012, création d’une entité indépendante de gouvernance : la fondation OpenStack
 
 ### La fondation OpenStack
 
 -   Entité de gouvernance principale du projet
 -   Représentation juridique du projet
--   Les membres du board sont issus des entreprises sponsors et élus par
-    les membres individuels
+-   Les membres du board sont issus des entreprises sponsors et élus par     les membres individuels
 -   Tout le monde peut devenir membre individuel (gratuitement)
 -   La fondation supporte le projet par différents moyens :
-    -   Événements : organisation (Summits) ou participation (OSCON,
-        etc.)
+    -   Événements : organisation (Summits) ou participation (OSCON,         etc.)
     -   Infrastructure de développement (serveurs)
-    -   Ressources humaines : marketing, release manager, quelques
-        développeurs (principalement sur l’infrastructure)
+    -   Ressources humaines : marketing, release manager, quelques         développeurs (principalement sur l’infrastructure)
 -   500 organisations à travers le monde
 -   23000 membres individuels dans 160 pays
 
@@ -489,15 +473,12 @@ Source :
 ### Où trouver des informations sur le développement d’OpenStack
 
 -   Principalement sur le wiki : <https://wiki.openstack.org>
--   Les blueprints et bugs sur Launchpad/StoryBoard :
-    <https://launchpad.net/openstack>,
-    <https://storyboard.openstack.org>, <http://specs.openstack.org/>
--   Les patchs proposés et leurs reviews sont sur Gerrit :
-    <https://review.openstack.org>
+-   Les blueprints et bugs sur Launchpad/StoryBoard : <https://launchpad.net/openstack>, 
+<https://storyboard.openstack.org>, <http://specs.openstack.org/>
+-   Les patchs proposés et leurs reviews sont sur Gerrit <https://review.openstack.org>
 -   L’état de la CI (entre autres) : <http://status.openstack.org>
 -   Le code est disponible dans Git : <https://git.openstack.org>
--   Les sources (tarballs) sont disponibles :
-    <http://tarballs.openstack.org/>
+-   Les sources (tarballs) sont disponibles : <http://tarballs.openstack.org/>
 
 ### Qui contribue ?
 
@@ -513,10 +494,8 @@ Source :
 ### Stackforge
 
 -   Forge pour les nouveaux projets en lien avec OpenStack
--   Ils bénéficient de l’infrastructure du projet OpenStack, mais la
-    séparation reste claire
--   Les projets démarrent dans Stackforge et peuvent ensuite rejoindre
-    le projet OpenStack
+-   Ils bénéficient de l’infrastructure du projet OpenStack, mais la séparation reste claire
+-   Les projets démarrent dans Stackforge et peuvent ensuite rejoindre le projet OpenStack
 -   En train de disparaitre au profit du modèle “big tent”
 
 ### OpenStack Summit
@@ -524,8 +503,7 @@ Source :
 -   Aux USA jusqu’en 2013
 -   Aujourd’hui : alternance Amérique de Nord et Asie/Europe
 -   Quelques centaines au début à 4500 participants aujourd’hui
--   En parallèle : conférence (utilisateurs, décideurs) et Design Summit
-    (développeurs)
+-   En parallèle : conférence (utilisateurs, décideurs) et Design Summit (développeurs)
 -   Détermine le nom de la release : lieu/ville à proximité du Summit
 -   *Upstream Training*
 
@@ -607,16 +585,14 @@ Source :
     -   Planet : <http://planet.openstack.org>
     -   Superuser : <http://superuser.openstack.org/>
     -   OpenStack Community Weekly Newsletter
--   Ressources commerciales : <http://www.openstack.org/marketplace/>
-    entre autres
+-   Ressources commerciales : <http://www.openstack.org/marketplace/> entre autres
 
 ### Ressources - Communauté francophone
 
 ![](images/openstackfr.png)
 
 -   Site web : <http://openstack.fr/>
--   Association des utilisateurs francophones d’OpenStack :
-    <https://asso.openstack.fr/>
+-   Association des utilisateurs francophones d’OpenStack :     <https://asso.openstack.fr/>
 -   Meetups : Paris, Rhônes-Alpes, Toulouse, Montréal, ...
 -   Présence à des événements tels que Solutions Linux
 -   Canaux de communication :
@@ -1021,11 +997,8 @@ L’API permet notamment de manipuler ces ressources
 
 ### Implémentation
 
--   Neutron tire partie des namespaces réseaux du noyau Linux pour
-    permettre l’IP overlapping
--   Le proxy de metadata est un composant qui permet aux instances
-    isolées dans leur réseau de joindre l’API de metadata fournie par
-    Nova
+-   Neutron tire partie des namespaces réseaux du noyau Linux pour    permettre l’IP overlapping
+-   Le proxy de metadata est un composant qui permet aux instances isolées dans leur réseau de joindre l’API de metadata fournie par Nova
 
 ### Schéma
 
@@ -1151,6 +1124,7 @@ Swift : Stockage objet
 ### Autoscaling avec Heat
 
 Heat implémente la fonctionnalité d’autoscaling
+
 -   Se déclenche en fonction des alarmes produites par Ceilometer
 -   Entraine la création de nouvelles instances
 
@@ -1264,8 +1238,7 @@ Multiples projets en cours de développement :
 
 -   DevStack est à oublier pour la production
 -   TripleO est encore jeune
--   Le déploiement à la main comme vu précédemment n’est pas recommandé
-    car peu maintenable
+-   Le déploiement à la main comme vu précédemment n’est pas recommandé     car peu maintenable
 -   Distributions OpenStack packagées et prêtes à l’emploi
 -   Distributions classiques et gestion de configuration
 -   Déploiement continu
@@ -1298,6 +1271,7 @@ Ce modèle simplifié n’est pas HA.
 ### Haute disponibilité
 
 Haut disponibilité de l’IaaS
+
 -   MySQL/MariaDB, RabbitMQ : HA classique (Galera, Clustering)
 -   Les services APIs sont stateless et HTTP : scale out et load balancers
 -   La plupart des autres services OpenStack sont capables de scale out également
@@ -1435,8 +1409,7 @@ Guide sécurité : <http://docs.openstack.org/security-guide/content/>
 
 ### Modules Puppet
 
--   Puppet Labs maintient (avec d’autres) des modules pour déployer
-    OpenStack
+-   Puppet Labs maintient (avec d’autres) des modules pour déployer    OpenStack
 -   <https://forge.puppetlabs.com/puppetlabs/openstack>
 
 ### Déploiement continu
@@ -1457,8 +1430,7 @@ Guide sécurité : <http://docs.openstack.org/security-guide/content/>
 ### Les réflexes en cas d’erreur ou de comportement erroné
 
 -   Travaille-t-on sur le bon tenant ?
--   Est-ce que l’API renvoie une erreur ? (le dashboard peut cacher
-    certaines informations)
+-   Est-ce que l’API renvoie une erreur ? (le dashboard peut cacher    certaines informations)
 -   Si nécessaire d’aller plus loin :
     -   Regarder les logs sur le cloud controller (/var/log/\<composant\>/\*.log)
     -   Regarder les logs sur le compute node et le network node si le problème est spécifique réseau/instance
@@ -1477,8 +1449,7 @@ Guide sécurité : <http://docs.openstack.org/security-guide/content/>
 
 Une fois un cloud IaaS en place, deux optiques possibles :
 
--   Garder les mêmes pratiques tout en profitant du self service et de
-    l’agilité de la solution pour des besoins test/dev
+-   Garder les mêmes pratiques tout en profitant du self service et de l’agilité de la solution pour des besoins test/dev
 -   Faire évoluer ses pratiques, tant côté applicatif que système
 
 “Pets vs Cattle”
@@ -1574,8 +1545,7 @@ La plupart des distributions fournissent aujourd’hui des images cloud.
 
 ### Comment gérer ses images ?
 
--   Utilisation d’images génériques et personnalisation à
-    l’instanciation
+-   Utilisation d’images génériques et personnalisation à l’instanciation
 -   Création d’images intermédiaires et/ou totalement personnalisées :
     *Golden images*
     -   libguestfs, virt-builder, virt-sysprep
@@ -1585,8 +1555,7 @@ La plupart des distributions fournissent aujourd’hui des images cloud.
 
 ### Configurer et orchestrer ses instances
 
--   Outils de gestion de configuration (les mêmes qui permettent de
-    déployer OpenStack)
+-   Outils de gestion de configuration (les mêmes qui permettent de déployer OpenStack)
 -   Juju
 
 # Conclusion
