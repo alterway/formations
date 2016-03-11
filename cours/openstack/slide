@@ -3,6 +3,7 @@
 ![image](images/openstack.png)
 
 ### Concernant ces supports de cours
+
 Supports de cours OpenStack réalisés par Osones (<https://osones.com>)
 
 ![image](images/logo-osones.png)
@@ -117,6 +118,7 @@ Hybride:   $\rightarrow$ utilisation des services d’un ou plusieurs clouds pub
 -   Heroku (<https://www.heroku.com>)
 
 ### Solutions de PaaS privé
+
 -   Cloud Foundry (<https://www.cloudfoundry.org>)
 -   OpenShift (<http://www.openshift.org>)
 -   Solum (<https://wiki.openstack.org/wiki/Solum>)
