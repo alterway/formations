@@ -1,26 +1,25 @@
-# Formation OpenStack
+# Formations
 
-![](images/openstack.png)
+![image](images/openstack.png)
 
 ### Concernant ces supports de cours
+Supports de cours OpenStack réalisés par Osones (<https://osones.com>)
 
-Supports de cours OpenStack réalisés par Osones (<https://osones.com/>)
-
-![](images/logo-osones-new.png)
+![image](images/logo-osones.png)
 
 -   Copyright © 2014-2016 Osones
 -   Licence : Creative Commons BY-SA 4.0
--   Sources : <https://github.com/Osones/OpenStack-Formations>
-
-![<https://creativecommons.org/licenses/by-sa/4.0/deed.fr>](images/licence.png)
+    ![image](images/licence.png)
+    <https://creativecommons.org/licenses/by-sa/4.0/deed.fr>
+-   Sources : <https://github.com/Osones/OpenStack-Formations/>
 
 ### Auteurs
 
 -   Adrien Cunin <adrien.cunin@osones.com>
 -   Pierre Freund <pierre.freund@osones.com>
+-   Jean-François Taltavull <jft@osones.com>
 -   Romain Guichard <romain.guichard@osones.com>
 -   Kevin Lefevre <kevin.lefevre@osones.com>
-
 
 # Introduction
 
@@ -44,7 +43,6 @@ Supports de cours OpenStack réalisés par Osones (<https://osones.com/>)
 -   Savoir réagir face à un bug
 
 ### Pré-requis de la formation
-
 -   Compétences d’administration système Linux tel qu’Ubuntu
     -   Gestion des paquets
     -   LVM et systèmes de fichiers
@@ -57,210 +55,152 @@ Supports de cours OpenStack réalisés par Osones (<https://osones.com/>)
 
 ### Le Cloud : les concepts
 
-### Le cloud, c’est large !
+### Le cloud ? Vaste sujet !
 
--   Stockage/calcul distant (on oublie, cf. externalisation)
--   Virtualisation++
--   Abstraction du matériel (voire plus)
--   Accès normalisé par des APIs
--   Service et facturation à la demande
--   Flexibilité, élasticité
+-   Puissance de calcul, capacité de stockage et fonctionnalités réseau sous forme de services en-ligne
+-   Flexibilité et élasticité des infrastructures
+-   Libre-service, notion de catalogue
+-   Accès en mode programmatique par des APIs, automatisation
+-   Facturation à l’usage
 
 ### WaaS : Whatever as a Service
 
--   Principalement
-    -   IaaS : Infrastructure as a Service
-    -   PaaS : Platform as a Service
-    -   SaaS : Software as a Service
+-   Principalement :
+    IaaS: $\rightarrow$ Infrastructure as a Service
+    PaaS: $\rightarrow$ Platform as a Service
+    SaaS: $\rightarrow$ Software as a Service
 -   Mais aussi :
+    -   Object Storage as a Service
     -   Database as a Service
-    -   Network as a Service
-    -   Load balancing as a Service
-    -   \$APPLICATION as a Service
+    -   Load Balancing as a Service
+    -   DNS as a Service
+    -   \$Application as a Service
 
-### Cloud public ou cloud privé ?
+### Cloud public, cloud privé, cloud hybride ?
 
-Public
-
-:   fourni par un hébergeur à des clients (AWS, Rackspace Cloud, etc.)
-
-Privé
-
-:   plateforme et ressources internes
-
-Hybride
-
-:   utilisation de ressources publiques au sein d’un cloud privé
+Public: $\rightarrow$ services cloud proposés par un fournisseur externe (AWS, Rackspace, OVH, etc.)
+Privé: $\rightarrow$ services cloud proposés par une entreprise/organisation à ses propres départements
+Hybride:   $\rightarrow$ utilisation des services d’un ou plusieurs clouds publics au sein d’un cloud privé
 
 ### Le cloud en un schéma
 
-![](images/cloud.png)
+![image](images/cloud.png)
 
-### Pourquoi du cloud ? Côté business
+### Pourquoi migrer vers le cloud ? Motivations d’ordre économique
 
--   Baisse des coûts par la mutualisation des ressources
--   Utilisation uniquement des ressources qui sont nécessaires
--   Va de pair avec l’automatisation du SI, l’agilité
--   Donc réduction des délais et reproductibilité
--   À grande échelle et/ou en cloud hybride, garantie de service
+-   appréhender les ressources IT comme des services “fournisseur”
+-   réduire les coûts en mutualisant les ressources
+-   réduire les délais d’approvisionnement de ressources
+-   faire glisser le budget “investissement” (Capex) vers le budget “fonctionnement” (Opex)
+-   aligner les coûts sur la consommation réelle des ressources
+-   automatiser les opérations sur le SI et le rendre ainsi plus flexible
 
-### Pourquoi du cloud ? Côté technique
+### Pourquoi migrer vers le cloud ? Motivations d’ordre technique
 
--   Abstraction des couches plus basses
--   On peut tout programmer à son gré
--   Permet la mise en place d’architectures scalables
+-   abstraire les couches basses (serveur, réseau, OS, stockage)
+-   s’affranchir de l’administration technique des ressources et services (BdD, pare-feux, load balancing,...)
+-   concevoir des infrastructures scalables à la volée
+-   agir sur les ressources via des lignes de code et gérer les infrastructures “comme du code”
 
-### PaaS : Platform as a Service
+# PaaS : Platform as a Service
 
-### PaaS : les principes
+### PaaS : concept d’application managée
 
--   Fourniture d’une plateforme de développement
--   Fourniture d’une plateforme de déploiement
--   Pour un langage / un framework
--   Principalement utilisé par des développeurs
+-   Fourniture d’une plate-forme de “build, deploy and scale”
+-   Pour un langage / un framework (Python, Java, PHP, etc.)
+-   Principalement utilisé par des développeurs d’applications
 
-### Exemples de PaaS publics
+### Exemples de PaaS public
 
--   Amazon OpsWork / Elastic Beanstalk
--   Google App Engine
--   Heroku
+-   Amazon Elastic Beanstalk (<https://aws.amazon.com/fr/elasticbeanstalk>)
+-   Google App Engine (<https://cloud.google.com/appengine>)
+-   Heroku (<https://www.heroku.com>)
 
 ### Solutions de PaaS privé
+-   Cloud Foundry (<https://www.cloudfoundry.org>)
+-   OpenShift (<http://www.openshift.org>)
+-   Solum (<https://wiki.openstack.org/wiki/Solum>)
 
--   Cloud Foundry
--   OpenShift (Red Hat)
--   Solum
+# IaaS : Infrastructure as a Service
 
-### IaaS : Infrastructure as a Service
+### Le leader du IaaS public : Amazon Web Services (AWS)
 
-### Amazon Web Services (AWS) et les autres
-
--   Service (cloud public) :
-    -   Pionnier du genre (dès 2006)
-    -   Elastic Compute Cloud ()
-    -   Elastic Block Storage ()
-    -   Simple Storage Service ()
-
--   Logiciels libres permettant le déploiement d’un cloud privé :
-
-    -   Eucalyptus
-    -   CloudStack
-    -   OpenNebula
-    -   **OpenStack**
+-   Pionnier du marché (dès 2006)
+-   Elastic Compute Cloud ()$\rightarrow$ puissance de calcul
+-   Elastic Block Storage ()$\rightarrow$ stockage bloc
+-   Simple Storage Service ()$\rightarrow$ stockage objet
 
 ### Les clouds publics concurrents d’AWS
 
--   Google Compute Platform
--   Microsoft Azure
--   Rackspace
--   HP Cloud
-
--   En France
-
-    -   Cloudwatt
-    -   Numergy
+-   dans le monde :
+    -   Google Compute Platform
+    -   Microsoft Azure
+    -   Rackspace
+-   en France :
+    -   Cloudwatt (Orange Business Services)
+    -   Numergy (SFR)
     -   Outscale
     -   OVH
     -   Ikoula
     -   Scaleway (Iliad)
 
+### Logiciels libres permettant le déploiement d’un cloud privé
+
+-   Eucalyptus
+-   CloudStack
+-   OpenNebula
+-   **OpenStack** (https://www.openstack.org)
+
+### Correspondance OpenStack - AWS
+
+| Service       |     OpenStack     |      AWS     |
+| ------------- |: ---------------: | -----------: |
+| compute       |       Nova        |      EC2     |
+| block storage |       Cinder      |      EBS     |
+| object storage|       Swift       |      S3      |
+
 ### Virtualisation dans le cloud
 
--   Le cloud IaaS repose souvent sur la virtualisation
--   Ressources compute $\leftarrow$ virtualisation
--   Virtualisation complète : KVM, Xen
--   Virtualisation containers : OpenVZ, LXC, Docker
+-   Un cloud IaaS repose souvent sur la virtualisation
+-   Ressources “compute” $\leftarrow$ virtualisation
+-   Hyperviseurs : KVM, Xen (libvirt), ESX
+-   Conteneurs : OpenVZ, LXC, Docker, Kubernetes
 
-### Notions et vocabulaire IaaS
+### Notions et vocabulaire IaaS 1/4
 
--   Images
--   Instances
--   Types d’instance / gabarits (flavors)
--   Volumes
--   Stockage block
--   Stockage objet
--   IP flottantes/élastiques
--   Groupes de sécurité
--   Paires de clés
--   Templates, stacks
--   API REST
--   API de metadata et user data
--   cloud-init, cloud-config
+-   Identité et accès
+    -   Tenant/Projet (Project) : locataire du cloud, propriétaire de ressources.
+    -   Utilisateur (User) : compte autorisé à utiliser les API OpenStack.
+    -   Quota : contrôle l’utilisation des ressources (vcpu, ram, fip, security groups,...) dans un tenant.
+    -   Catalogue (de services) : services disponibles et accessibles via les API.
+    -   Endpoint : URL permettant l’accès à une API. Un endpoint par service.
 
-### Notions et vocabulaire IaaS
+### Notions et vocabulaire IaaS 2/4
 
--   L’instance est par définition éphémère
--   Elle doit être utilisée comme ressource de calcul
--   Une image se personnalise lors de son instanciation grâce à l’API de metadata
--   Séparer les données des instances
--   Choix du type de stockage : éphémère, volume, objet
+-   Calcul/Serveurs (Compute)
+    -   Image : généralement, un OS bootable et “cloud ready”.
+    -   Instance : forme dynamique d’une image.
+    -   Type d’instance (flavor) : mensurations d’une instance (cpu, ram, capacité disque,...).
+    -   Metadata et user data : informations gérées par le IaaS et mises à disposition de l’instance.
+    -   Cloud-init, cloud-config : mécanismes permettant la configuration finale automatique d’une instance.
 
-### Stockage : block, objet, SDS
+### Notions et vocabulaire IaaS 3/4
 
-### Stockage block
+-   Stockage (Storage)
+    -   Volume : disque virtuel accessible par les instances (stockage “block”).
+    -   Conteneur (Container) : entités logiques pour le stockage de fichiers et accessibles via une URL (stockage “objet”).
+-   Réseau et sécurité (Network, Security)
+    -   Groupe de sécurité (Security groups) : ensemble de règles de filtrage de flux appliqué à l’entrée des instances.
+    -   Paire de clés (Keypairs) : clé privée + clé publique permettant les connexions aux instances via SSH.
+    -   IP flottantes (Floating IP) : adresse IP allouée à la demande et utilisée par les instances pour communiquer avec le réseau “externe”.
 
--   Accès à des raw devices type */dev/vdb*
--   Possibilité d’utiliser n’importe quel système de fichiers
--   Compatible avec toutes les applications legacy
+### Notions et vocabulaire IaaS 4/4
 
-### Stockage objet
+-   Orchestration
+    -   Stack : ensemble des ressources IaaS utilisées par une application.
+    -   Template : fichier texte contenant la description d’une stack.
 
--   Pousser et retirer des objets dans un container/bucket
--   Pas de hiérarchie des données, pas de système de fichiers
--   Accès par les APIs
--   L’application doit être conçue pour tirer partie du stockage objet
-
-### Stockage objet : schéma
-
-![](images/stockage-objet.png)
-
-### SDS : Software Defined Storage
-
--   Utilisation de commodity hardware
--   Pas de RAID matériel
--   Le logiciel est responsable de garantir les données
--   Les pannes matérielles sont prises en compte et gérées
-
-### Deux solutions : OpenStack Swift et Ceph
-
--   Swift fait partie du projet OpenStack et fournit du stockage objet
--   Ceph fournit du stockage objet, block et FS
--   Les deux sont implémentés en SDS
--   Théorème CAP : on en choisit deux
-
-### Théorème CAP
-
-![](images/cap.jpg)
-
-### Swift
-
--   Swift est un projet OpenStack
--   Le projet est né chez Rackspace avant la création d’OpenStack
--   Swift est en production chez Rackspace depuis lors
--   C’est le composant le plus mature d’OpenStack
-
-### Ceph
-
--   Projet totalement parallèle à OpenStack
--   Supporté par une entreprise (Inktank) récemment rachetée par Red Hat
--   Fournit d’abord du stockage objet
--   L’accès aux données se fait via RADOS :
-    -   Accès direct depuis une application avec librados
-    -   Accès via une API REST grâce à radosgw
--   La couche RBD permet d’accéder aux données en mode block (volumes)
--   CephFS permet un accès par un système de fichiers POSIX
-
-### Orchestrer les ressources de son IaaS
-
-### Pourquoi orchestrer
-
--   Définir tout une infrastructure dans un seul fichier texte
--   Être en capacité d’instancier une infrastructure entière en un appel API
--   Autoscaling
-    -   Adapter ses ressources en fonction de ses besoins en temps réel
-    -   Fonctionnalité incluse dans le composant d’orchestration d’OpenStack
-
-### APIs : quel rôle ?
+# APIs : quel rôle ?
 
 ### API ?
 
@@ -290,22 +230,21 @@ Hybride
        }
     }
 
-# OpenStack : projet, logiciel et utilisation
+# OpenStack : le projet, utilisation du IaaS
 
-### Présentation du projet et du logiciel
+### Présentation du projet
 
 ### Vue haut niveau
 
-![](images/openstack-software-diagram.pdf)
+![image](images/openstack-software-diagram.pdf)
 
 ### Historique
 
 -   Démarrage en 2010
 -   Objectif : le Cloud Operating System libre
 -   Fusion de deux projets de Rackspace (Storage) et de la NASA (Compute)
--   Développé en Python et distribué sous licence Apache 2.0
+-   Logiciel libre distribué sous licence Apache 2.0
 -   Les releases jusqu’à aujourd’hui :
-
     -   Austin (2010.1)
     -   Bexar (2011.1)
     -   Cactus (2011.2)
@@ -328,15 +267,14 @@ Hybride
 -   113 drivers/plugins
 -   792200 chaines traduites
 
-Source :
-<http://lists.openstack.org/pipermail/foundation-board/2015-April/000050.html>
+Source : <http://lists.openstack.org/pipermail/foundation-board/2015-April/000050.html>
 
 ### Quelques soutiens/contributeurs ...
 
--  NASA
--  VMWare
--  Bull
--  Mais aussi : eNovance (racheté par Red Hat), Hastexo, StackOps
+-   NASA
+-   VMWare
+-   Bull
+-   Mais aussi : , eNovance (racheté par Red Hat), , Hastexo, StackOps
 -   et **Google** ! (depuis juillet 2015)
 
 <http://www.openstack.org/foundation/companies/>
@@ -378,38 +316,8 @@ Source :
     -   Key management (Barbican)
     -   PaaS (Solum)
     -   Container (Magnum)
-
 -   Autres
-
-    -   Oslo
-    -   rootwrap : wrapper pour les commandes root utilisé par les projets
-    -   TripleO
-    -   Tempest, Grenade
     -   Les clients (python-\*client)
-
-### Cycle de vie des projets au sein d’OpenStack
-
-![](images/innovation1.pdf)
-
-### Les projets dans Icehouse
-
-![](images/innovation2.pdf)
-
-### Le nouveau modèle “big tent”
-
--   Évolutions presque totalement implémentées
--   Objectif : résoudre les limitations du modèle incubation/intégré
--   Inclusion a priori de l’ensemble de l’écosystème OpenStack
--   *Programs* $\rightarrow$ *Project Teams*
--   Disparation des statuts en incubation et intégré
--   Utilisation de tags factuels et objectifs
-
-### Traduction
-
--   La question de la traduction est dorénavant prise en compte (officialisation de l’équipe *i18n*)
--   Seules certaines parties sont traduites, comme Horizon
--   La traduction française est aujourd’hui une des plus avancées
--   Utilisation de la plateforme Transifex (en cours de migration vers l’outil libre Zanata)
 
 ### Développement du projet : les principes
 
@@ -418,156 +326,26 @@ Source :
 -   Open Development
 -   Open Community
 
-### Développement du projet : en détails
-
--   Ouvert à tous (individuels et entreprises)
--   Cycle de développement de 6 mois débuté par un (design) summit
--   Outils : Launchpad $\rightarrow$ Storyboard (blueprints, bugs) + Git + GitHub (code)
--   Sur chaque patch proposé :
-    -   Revue de code (peer review) : Gerrit, <https://review.openstack.org>
-    -   Intégration continue (continous integration) : Jenkins, Zuul, etc., <http://zuul.openstack.org/>
--   Développement hyper actif : 17000 commits dans Icehouse (+25%)
--   Fin 2012, création d’une entité indépendante de gouvernance : la fondation OpenStack
-
 ### La fondation OpenStack
 
 -   Entité de gouvernance principale du projet
 -   Représentation juridique du projet
--   Les membres du board sont issus des entreprises sponsors et élus par     les membres individuels
+-   Les membres du board sont issus des entreprises sponsors et élus par les membres individuels
 -   Tout le monde peut devenir membre individuel (gratuitement)
 -   La fondation supporte le projet par différents moyens :
-    -   Événements : organisation (Summits) ou participation (OSCON,         etc.)
+    -   Événements : organisation (Summits) ou participation (OSCON, etc.)
     -   Infrastructure de développement (serveurs)
-    -   Ressources humaines : marketing, release manager, quelques         développeurs (principalement sur l’infrastructure)
+    -   Ressources humaines : marketing, release manager, quelques développeurs (principalement sur l’infrastructure)
 -   500 organisations à travers le monde
 -   23000 membres individuels dans 160 pays
 
 ### La fondation OpenStack
 
-![](images/foundation.png)
-
-### OpenStack Infra
-
--   Équipe projet en charge de l’infrastructure de développement d’OpenStack
--   Travaille comme les équipes de dev d’OpenStack et utilise les mêmes outils
--   Résultat : une infrastructure entièrement open source et développée comme tel
-
-### Cycle de développement : 6 mois
-
--   Le planning est publié, exemple : <https://wiki.openstack.org/wiki/Mitaka_Release_Schedule>
--   Milestone releases
--   Freezes : FeatureProposal, Feature, String
--   RC releases
--   Stable releases
--   Ce modèle de cycle de développement a évolué depuis le début du projet
--   Cas particulier de Swift et de plus en plus de composants
--   Depuis Liberty, chaque composant gère son propre versionnement
-
-### Versionnement depuis Liberty
-
--   *Semantic versioning*
--   Chaque projet est indépendant
--   Dans le cadre du cycle de release néanmoins
--   <http://docs.openstack.org/releases/>
-
-### Où trouver des informations sur le développement d’OpenStack
-
--   Principalement sur le wiki : <https://wiki.openstack.org>
--   Les blueprints et bugs sur Launchpad/StoryBoard : <https://launchpad.net/openstack>, 
-<https://storyboard.openstack.org>, <http://specs.openstack.org/>
--   Les patchs proposés et leurs reviews sont sur Gerrit <https://review.openstack.org>
--   L’état de la CI (entre autres) : <http://status.openstack.org>
--   Le code est disponible dans Git : <https://git.openstack.org>
--   Les sources (tarballs) sont disponibles : <http://tarballs.openstack.org/>
-
-### Qui contribue ?
-
--   *Active Technical Contributor*
--   ATC : personne ayant au moins une contribution récente dans un projet OpenStack reconnu
--   Les ATC sont invités aux summits et ont le droit de vote
--   *Core reviewer* : ATC ayant les droits pour valider les patchs dans un projet
--   *Project Team Lead* (PTL) : élu par les ATCs de chaque projet
--   Stackalytics fournit des statistiques sur les contributions
-
-<http://stackalytics.com/>
-
-### Stackforge
-
--   Forge pour les nouveaux projets en lien avec OpenStack
--   Ils bénéficient de l’infrastructure du projet OpenStack, mais la séparation reste claire
--   Les projets démarrent dans Stackforge et peuvent ensuite rejoindre le projet OpenStack
--   En train de disparaitre au profit du modèle “big tent”
-
-### OpenStack Summit
-
--   Aux USA jusqu’en 2013
--   Aujourd’hui : alternance Amérique de Nord et Asie/Europe
--   Quelques centaines au début à 4500 participants aujourd’hui
--   En parallèle : conférence (utilisateurs, décideurs) et Design Summit (développeurs)
--   Détermine le nom de la release : lieu/ville à proximité du Summit
--   *Upstream Training*
-
-### Exemple du Summit d’avril 2013 à Portland
-
-![](images/photo-summit.jpg)
-
-### Exemple du Summit d’octobre 2015 à Tokyo
-
-![](images/photo-summit1.jpg) Photo : Elizabeth K. Joseph, CC BY
-2.0, Flickr/pleia2
-
-### Exemple du Summit d’octobre 2015 à Tokyo
-
-![](images/photo-summit2.jpg) Photo : Elizabeth K. Joseph, CC BY
-2.0, Flickr/pleia2
-
-### Exemple du Summit d’octobre 2015 à Tokyo
-
-![](images/photo-summit3.jpg) Photo : Elizabeth K. Joseph, CC BY
-2.0, Flickr/pleia2
-
-### Exemple du Summit d’octobre 2015 à Tokyo
-
-![](images/photo-summit4.jpg) Photo : Elizabeth K. Joseph, CC BY
-2.0, Flickr/pleia2
-
-### Design Tenets
-
-1.  Scalability and elasticity are our main goals
-2.  Any feature that limits our main goals must be optional
-3.  Everything should be asynchronous. If you can’t do something asynchronously, see \#2
-4.  All required components must be horizontally scalable
-5.  Always use shared nothing architecture (SN) or sharding. If you can’t Share nothing/shard, see \#2
-6.  Distribute everything. Especially logic. Move logic to where state naturally exists.
-7.  Accept eventual consistency and use it where it is appropriate.
-8.  Test everything. We require tests with submitted code. (We will help you if you need it)
-
-### Implémentation
-
--   Chaque sous-projet est découpé en plusieurs services
--   Communication entre les services : AMQP (RabbitMQ)
--   Base de données : relationnelle SQL (MySQL/MariaDB)
--   Réseau : OpenVSwitch
--   En général : réutilisation de composants existants
--   Tout est développé en Python (Django pour la partie web)
--   APIs supportées : OpenStack et équivalent Amazon
--   Multi tenancy
-
-### Multi-tenant
-
--   Notion générale : un déploiement du logiciel permet de multiples utilisations
--   Un cloud OpenStack permet aux utilisateurs de travailler dans des environnements isolés
--   Les instances, réseaux, images, etc. sont associés à un tenant
--   Certaines ressources peuvent être partagées entre tenants (exemple : image publique)
--   On peut aussi parler de “projet”
-
-### Architecture
-
-![](images/architecture-simple.jpg)
+![image](images/foundation.png)
 
 ### Interface web / Dashboard : Horizon
 
-![](images/horizon.png)
+![image](images/horizon.png)
 
 ### Ressources
 
@@ -589,110 +367,37 @@ Source :
 
 ### Ressources - Communauté francophone
 
-![](images/openstackfr.png)
+![image](images/openstackfr.png)
 
 -   Site web : <http://openstack.fr/>
--   Association des utilisateurs francophones d’OpenStack :     <https://asso.openstack.fr/>
+-   Association des utilisateurs francophones d’OpenStack : <https://asso.openstack.fr/>
 -   Meetups : Paris, Rhônes-Alpes, Toulouse, Montréal, ...
 -   Présence à des événements tels que Solutions Linux
 -   Canaux de communication :
     -   openstack-fr@lists.openstack.org
     -   \#openstack-fr@Freenode
 
-### DevStack : faire tourner rapidement un OpenStack
-
-### Utilité de DevStack
-
--   Déployer rapidement un OpenStack
--   Utilisé par les développeurs pour tester leurs changements
--   Utilisé pour faire des démonstrations
--   Utilisé pour tester les APIs sans se préoccuper du déploiement
--   Ne doit PAS être utilisé pour de la production
-
-### Fonctionnement de DevStack
-
--   Un script shell qui fait tout le travail : stack.sh
--   Un fichier de configuration : local.conf
--   Installe toutes les dépendances nécessaires (paquets)
--   Clone les dépôts git (branche master par défaut)
--   Lance tous les composants dans un screen
-
-### Configuration : local.conf
-
-Exemple
-
-    [[local|localrc]]
-    ADMIN_PASSWORD=secrete
-    DATABASE_PASSWORD=$ADMIN_PASSWORD
-    RABBIT_PASSWORD=$ADMIN_PASSWORD
-    SERVICE_PASSWORD=$ADMIN_PASSWORD
-    SERVICE_TOKEN=a682f596-76f3-11e3-b3b2-e716f9080d50
-    #FIXED_RANGE=172.31.1.0/24
-    #FLOATING_RANGE=192.168.20.0/25
-    #HOST_IP=10.3.4.5
-
-### Conseils d’utilisation
-
--   DevStack installe beaucoup de choses sur la machine
--   Il est recommandé de travailler dans une VM
--   Pour tester tous les composants OpenStack dans de bonnes conditions, plusieurs Go de RAM sont nécessaires
--   L’utilisation de Vagrant est conseillée
-
-### Utiliser OpenStack
-
-### Le principe
-
--   Toutes les fonctionnalités sont accessibles par l’API
--   Les clients (y compris Horizon) utilisent l’API
--   Des crédentials sont nécessaires
-    -   API OpenStack : utilisateur + mot de passe + tenant
-    -   API AWS : access key ID + secret access key
-
-### Accès aux APIs
-
--   Direct, en HTTP, via des outils comme curl
--   Avec une bibliothèque
-    -   Les implémentations officielles en Python
-    -   D’autres implémentations pour d’autres langages (exemple : jclouds)
--   Avec les outils officiels en ligne de commande
--   Avec Horizon
-
-### Clients officiels
-
--   Le projet fournit des clients officiels : python-PROJETclient
--   Bibliothèques Python
--   Outils CLI
-    -   L’authentification se fait en passant les credentials par
-        paramètres ou variables d’environnement
-    -   L’option –debug affiche la communication HTTP
-
-### OpenStack Client
-
--   Client CLI unifié
--   Commandes du type *openstack \<service\> \<action\>*
--   Vise à remplacer à terme les clients spécifiques
--   Permet une expérience utilisateur plus homogène
-
 # Déployer OpenStack
 
 ### Ce qu’on va voir
 
--   Installer OpenStack à la main <http://docs.openstack.org/juno/install-guide/install/apt/content/>
+-   Installer OpenStack à la main
+    <http://docs.openstack.org/juno/install-guide/install/apt/content/>
 -   Donc comprendre son fonctionnement
 -   Passer en revue chaque composant plus en détails
 -   Tour d’horizon des solutions de déploiement
 
 ### Architecture détaillée
 
-![](images/architecture.jpg)
+![image](images/architecture.jpg)
 
 ### Architecture réseau
 
-![](images/archi-network.png)
+![image](images/archi-network.png)
 
 ### Architecture services
 
-![](images/archi-service.png)
+![image](images/archi-service.png)
 
 ### Quelques éléments de configuration généraux
 
@@ -701,7 +406,7 @@ Exemple
 -   Les composants découpés en plusieurs services ont souvent un fichier de configuration par service
 -   api-paste.ini contient des paramètres concernant le service API
 
-### Les briques nécessaires
+# Les briques nécessaires
 
 ### Système d’exploitation
 
@@ -712,7 +417,7 @@ Exemple
 
 ### Python
 
-![](images/python-powered.png)
+![image](images/python-powered.png)
 
 -   OpenStack est aujourd’hui compatible Python 2.7
 -   Afin de ne pas réinventer la roue, beaucoup de dépendances sont nécessaires
@@ -730,12 +435,12 @@ Exemple
 
 ### Pourquoi l’utilisation de SQLAlchemy
 
-![](images/sqlalchemy-logo.png)
+![image](images/sqlalchemy-logo.png)
 
 -   Support de multiples BDD
 -   Gestion des migrations
 
-![](images/mysql-logo.png)
+![image](images/mysql-logo.png)
 
 ### Passage de messages
 
@@ -747,16 +452,16 @@ Exemple
 
 ### RabbitMQ
 
-![](images/rabbitmq-logo.png)
+![image](images/rabbitmq-logo.png)
 
 -   RabbitMQ est implémenté en Erlang
 -   Une machine virtuelle Erlang est donc nécessaire
 
 ### “Hello world” RabbitMQ
 
-![](images/rabbitmq-schema.png)
+![image](images/rabbitmq-schema.png)
 
-### Keystone : Authentification, autorisation et catalogue de services
+# Keystone : Authentification, autorisation et catalogue de services
 
 ### Principes
 
@@ -776,10 +481,9 @@ Exemple
 
 ### Scénario d’utilisation typique
 
-![](images/keystone-scenario.png)
+![image](images/keystone-scenario.png)
 
 ### Installation et configuration
-
 -   Paquet : keystone
 -   Configuration d’un token ADMIN pour la configuration initiale
 -   Backends : choix de SQL ou LDAP (ou AD)
@@ -793,7 +497,6 @@ Exemple
 
 Il faut renseigner l’existence des différents services (catalogue) dans
 Keystone :
-
     $ keystone service-create --name=cinderv2 --type=volumev2 \
       --description="Cinder Volume Service V2"
     $ keystone endpoint-create \
@@ -803,8 +506,8 @@ Keystone :
       --internalurl=http://controller:8776/v2/%\(tenant_id\)s \
       --adminurl=http://controller:8776/v2/%\(tenant_id\)s
 
-### Tester
 
+### Tester
     $ keystone service-list
     ...
     $ keystone user-list
@@ -812,7 +515,7 @@ Keystone :
     $ keystone token-get
     ...
 
-###Nova : Compute
+# Nova : Compute
 
 ### Principes
 
@@ -823,7 +526,7 @@ Keystone :
 
 ### Interactions avec les autres composants
 
-![](images/compute-node.png)
+![image](images/compute-node.png)
 
 ### Propriétés d’une instance
 
@@ -885,7 +588,7 @@ Les instances sont redimensionnables et migrables d’un hôte physique à un au
 
 ### Le scheduler Nova en action
 
-![](images/scheduling-schema.png)
+![image](images/scheduling-schema.png)
 
 ### Nova conductor
 
@@ -900,7 +603,7 @@ Les instances sont redimensionnables et migrables d’un hôte physique à un au
     $ nova create
     ...
 
-###Glance : Registre d’images
+# Glance : Registre d’images
 
 ### Principes
 
@@ -911,8 +614,7 @@ Les instances sont redimensionnables et migrables d’un hôte physique à un au
 
 ### Propriétés des images dans Glance
 
-L’utilisateur peut définir un certain nombre de propriétés dont
-certaines seront utilisées lors de l’instanciation
+L’utilisateur peut définir un certain nombre de propriétés dont certaines seront utilisées lors de  l’instanciation
 
 -   Type d’image
 -   Architecture
@@ -924,8 +626,7 @@ certaines seront utilisées lors de l’instanciation
 
 ### Types d’images
 
-Glance supporte un large éventail de types d’images, limité par le
-support de l’hyperviseur sous-jacent à Nova
+Glance supporte un large éventail de types d’images, limité par le support de l’hyperviseur sous-jacent à Nova
 
 -   raw
 -   qcow2
@@ -944,15 +645,13 @@ support de l’hyperviseur sous-jacent à Nova
 
 -   Paquet glance-api : fournit l’API
 -   Paquet glance-registry : démon du registre d’images en tant que tel
-
 ### Tester
-
     $ glance image-list
     ...
     $ glance image-create
     ...
 
-###Neutron : Réseau en tant que service
+# Neutron : Réseau en tant que service
 
 ### Principes
 
@@ -962,13 +661,11 @@ support de l’hyperviseur sous-jacent à Nova
 -   neutron-server : fournit l’API
 -   Agent DHCP : fournit le service de DHCP pour les instances
 -   Agent L3 : gère la couche 3 du réseau, le routage
--   Plugin : OpenVSwitch par défaut, d’autres implémentations
-    libres/propriétaires, logicielles/matérielles existent
+-   Plugin : OpenVSwitch par défaut, d’autres implémentations libres/propriétaires, logicielles/matérielles existent
 
 ### Fonctionnalités supplémentaires
 
-Outre les fonctions réseau de base niveaux 2 et 3, Neutron peut fournir
-d’autres services :
+Outre les fonctions réseau de base niveaux 2 et 3, Neutron peut fournir d’autres services :
 
 -   Load Balancing (HAProxy, ...)
 -   Firewall (vArmour, ...) : diffère des groupes de sécurité
@@ -997,18 +694,18 @@ L’API permet notamment de manipuler ces ressources
 
 ### Implémentation
 
--   Neutron tire partie des namespaces réseaux du noyau Linux pour    permettre l’IP overlapping
+-   Neutron tire partie des namespaces réseaux du noyau Linux pour permettre l’IP overlapping
 -   Le proxy de metadata est un composant qui permet aux instances isolées dans leur réseau de joindre l’API de metadata fournie par Nova
 
 ### Schéma
 
-![](images/neutron-schema.png)
+![image](images/neutron-schema.png)
 
 ### Schéma
 
-![](images/neutron-schema2.png)
+![image](images/neutron-schema2.png)
 
-###Cinder : Stockage block
+# Cinder : Stockage block
 
 ### Principes
 
@@ -1046,7 +743,7 @@ L’API permet notamment de manipuler ces ressources
 -   Systèmes de stockage propriétaires type NetApp
 -   DRBD
 
-###Horizon : Dashboard web
+# Horizon : Dashboard web
 
 ### Principes
 
@@ -1054,20 +751,19 @@ L’API permet notamment de manipuler ces ressources
 -   Horizon est un module Django
 -   OpenStack Dashboard est l’implémentation officielle de ce module
 
-![](images/django-logo.png)
+![image](images/django-logo.png)
 
 ### Configuration
 
 -   local\_settings.py
--   Les services apparaissent dans Horizon s’ils sont répertoriés dans
-    le catalogue de services de Keystone
+-   Les services apparaissent dans Horizon s’ils sont répertoriés dans le catalogue de services de Keystone
 
 ### Utilisation
 
 -   Une zone “admin” restreinte
 -   Une interface par tenant
 
-Swift : Stockage objet
+# Swift : Stockage objet
 
 ### Principes
 
@@ -1095,9 +791,9 @@ Swift : Stockage objet
 
 ### Schéma
 
-![](images/swift-schema.png)
+![image](images/swift-schema.png)
 
-###Ceilometer : Collecte de métriques
+# Ceilometer : Collecte de métriques
 
 ### Surveiller l’utilisation de son infrastructure avec Ceilometer
 
@@ -1112,11 +808,11 @@ Swift : Stockage objet
 -   Initié par des développeurs de Ceilometer et intégré à l’équipe projet Ceilometer
 -   Back-end remplaçant MongoDB pour Ceilometer
 
-###Heat : Orchestration des ressources
+# Heat : Orchestration des ressources
 
 ### Orchestrer son infrastructure avec Heat
 
--   Équivalent d’Amazon CloudFormation
+-   Équivalent d’Amazon Cloud Formation
 -   Orchestrer les ressources compute, storage, network, etc.
 -   Doit se coupler avec cloud-init
 -   Description de son infrastructure dans un fichier template, format JSON (CFN) ou YAML (HOT)
@@ -1133,9 +829,7 @@ Heat implémente la fonctionnalité d’autoscaling
 *parameters* - *resources* - *outputs*
 
     heat_template_version: 2013-05-23
-
     description: Simple template to deploy a single compute instance
-
     resources:
       my_instance:
         type: OS::Nova::Server
@@ -1152,13 +846,13 @@ Heat implémente la fonctionnalité d’autoscaling
 
 ### Construire un template à partir d’existant
 
-Multiples projets en cours de développement :
+Multiples projets en cours de développement
 
 -   Flame (Cloudwatt)
 -   HOT builder
 -   Merlin
 
-###Trove : Database as a Service
+# Trove : Database as a Service
 
 ### Principe
 
@@ -1173,14 +867,14 @@ Multiples projets en cours de développement :
 -   trove-taskmanager : gère les instances BDD
 -   trove-guestagent : agent interne à l’instance
 
-###Designate : DNS as a Service
+# Designate : DNS as a Service
 
 ### Principe
 
 -   Équivalent d’AWS Route 53
 -   Gère différents backends : BIND, etc.
 
-###Quelques autres composants intéressants
+# Quelques autres composants intéressants
 
 ### Ironic
 
@@ -1211,21 +905,17 @@ Multiples projets en cours de développement :
 -   Suite de tests d’un cloud OpenStack
 -   Effectue des appels à l’API et vérifie le résultat
 -   Est très utilisé par les développeurs via l’intégration continue
--   Le déployeur peut utiliser Tempest pour vérifier la bonne conformité
-    de son cloud
+-   Le déployeur peut utiliser Tempest pour vérifier la bonne conformité de son cloud
 
-###Bonnes pratiques pour un déploiement en production
+# Bonnes pratiques pour un déploiement en production
 
 ### Quels composants dois-je installer ?
-
 -   Keystone est indispensable
 -   L’utilisation de Nova va de paire avec Glance et Neutron
 -   Cinder s’avérera souvent utile
 -   Ceilometer et Heat vont souvent ensemble
 -   Swift est indépendant des autres composants
--   Neutron peut parfois être utilisé indépendamment (ex : avec oVirt)
-
-<http://docs.openstack.org/arch-design/content/>
+-   Neutron peut parfois être utilisé indépendamment (ex : avec oVirt) <http://docs.openstack.org/arch-design/content/>
 
 ### Penser dès le début aux choix structurants
 
@@ -1238,7 +928,7 @@ Multiples projets en cours de développement :
 
 -   DevStack est à oublier pour la production
 -   TripleO est encore jeune
--   Le déploiement à la main comme vu précédemment n’est pas recommandé     car peu maintenable
+-   Le déploiement à la main comme vu précédemment n’est pas recommandé car peu maintenable
 -   Distributions OpenStack packagées et prêtes à l’emploi
 -   Distributions classiques et gestion de configuration
 -   Déploiement continu
@@ -1354,8 +1044,7 @@ Guide sécurité : <http://docs.openstack.org/security-guide/content/>
 -   Équivalent des régions d’AWS
 -   Un service peut avoir différents endpoints dans différentes régions
 -   Chaque région est autonome
--   Cas d’usage : cloud de grande ampleur (comme certains clouds
-    publics)
+-   Cas d’usage : cloud de grande ampleur (comme certains clouds publics)
 
 ### Cells / Cellules
 
@@ -1366,29 +1055,24 @@ Guide sécurité : <http://docs.openstack.org/security-guide/content/>
 
 ### Packaging d’OpenStack - Ubuntu
 
--   Le packaging est fait dans de multiples distributions, RPM, DEB et
-    autres
--   Ubuntu est historiquement la plateforme de référence pour le
-    développement d’OpenStack
--   Le packaging dans Ubuntu suit de près le développement d’OpenStack,
-    et des tests automatisés sont réalisés
--   Canonical fournit la Ubuntu Cloud Archive, qui met à disposition la
-    dernière version d’OpenStack pour la dernière Ubuntu LTS
+-   Le packaging est fait dans de multiples distributions, RPM, DEB et autres
+-   Ubuntu est historiquement la plateforme de référence pour le développement d’OpenStack
+-   Le packaging dans Ubuntu suit de près le développement d’OpenStack, et des tests automatisés sont réalisés
+-   Canonical fournit la Ubuntu Cloud Archive, qui met à disposition la dernière version d’OpenStack pour la dernière Ubuntu LTS
 
 ### Ubuntu Cloud Archive
 
-![](images/ubuntu-cloud-archive.png)
+![image](images/ubuntu-cloud-archive.png)
 
 ### Packaging d’OpenStack dans les autres distributions
 
 -   OpenStack est intégré dans les dépôts officiels de Debian
 -   Red Hat propose RHOS/RDO
--   Comme Ubuntu, le cycle de release de Fedora est synchronisé avec
-    celui d’OpenStack
+-   Comme Ubuntu, le cycle de release de Fedora est synchronisé avec celui d’OpenStack
 
 ### Les distributions OpenStack
 
--   RedHat OpenStack Plateform
+-   StackOps
 -   Mirantis
 -   HP Helion
 -   etc.
@@ -1409,7 +1093,7 @@ Guide sécurité : <http://docs.openstack.org/security-guide/content/>
 
 ### Modules Puppet
 
--   Puppet Labs maintient (avec d’autres) des modules pour déployer    OpenStack
+-   Puppet Labs maintient (avec d’autres) des modules pour déployer OpenStack
 -   <https://forge.puppetlabs.com/puppetlabs/openstack>
 
 ### Déploiement continu
@@ -1419,7 +1103,7 @@ Guide sécurité : <http://docs.openstack.org/security-guide/content/>
 -   Nécessite la mise en place d’une infrastructure importante
 -   Facilite les mises à jour entre versions majeures
 
-###Faire face aux problèmes
+# Faire face aux problèmes
 
 ### Ressources FAILED/ERROR
 
@@ -1430,7 +1114,7 @@ Guide sécurité : <http://docs.openstack.org/security-guide/content/>
 ### Les réflexes en cas d’erreur ou de comportement erroné
 
 -   Travaille-t-on sur le bon tenant ?
--   Est-ce que l’API renvoie une erreur ? (le dashboard peut cacher    certaines informations)
+-   Est-ce que l’API renvoie une erreur ? (le dashboard peut cacher certaines informations)
 -   Si nécessaire d’aller plus loin :
     -   Regarder les logs sur le cloud controller (/var/log/\<composant\>/\*.log)
     -   Regarder les logs sur le compute node et le network node si le problème est spécifique réseau/instance
@@ -1443,16 +1127,14 @@ Guide sécurité : <http://docs.openstack.org/security-guide/content/>
 -   Si les logs montrent une stacktrace Python, c’est un bug
 -   Sinon, à vous d’en juger
 
-#Tirer partie de l’IaaS
+# Tirer partie de l’IaaS
 
 ### Deux visions
 
 Une fois un cloud IaaS en place, deux optiques possibles :
 
 -   Garder les mêmes pratiques tout en profitant du self service et de l’agilité de la solution pour des besoins test/dev
--   Faire évoluer ses pratiques, tant côté applicatif que système
-
-“Pets vs Cattle”
+-   Faire évoluer ses pratiques, tant côté applicatif que système “Pets vs Cattle”
 
 ### Sinon ?
 
@@ -1463,12 +1145,10 @@ idée :
 -   Pertes de données
 -   Incompréhensions “le cloud ça marche pas”
 
-###Côté applications
+# Côté applications
 
 ### Adapter ou penser ses applications “cloud ready”
-
-Cf. les design tenets du projet OpenStack et Twelve-Factor
-<http://12factor.net/>
+Cf. les design tenets du projet OpenStack et Twelve-Factor <http://12factor.net/>
 
 -   Architecture distribuée plutôt que monolithique
     -   Facilite le passage à l’échelle
@@ -1485,10 +1165,9 @@ Cf. les design tenets du projet OpenStack et Twelve-Factor
     -   Stockage objet
 -   Utiliser des outils standards de journalisation
 
-###Côté système
+# Côté système
 
 ### Adopter une philosophie DevOps
-
 -   Infrastructure as Code
 -   Scale out plutôt que scale up (horizontalement plutôt que verticalement)
 -   HA niveau application plutôt qu’infrastructure
@@ -1515,8 +1194,7 @@ Une image cloud c’est :
 -   Une image qui peut être instanciée en n machines sans erreur
 -   Un OS sachant parler à l’API de metadata du cloud (cloud-init)
 
-Détails :
-<http://docs.openstack.org/image-guide/content/ch_openstack_images.html>\
+Détails : <http://docs.openstack.org/image-guide/content/ch_openstack_images.html>\
 La plupart des distributions fournissent aujourd’hui des images cloud.
 
 ### Cirros
@@ -1558,10 +1236,629 @@ La plupart des distributions fournissent aujourd’hui des images cloud.
 -   Outils de gestion de configuration (les mêmes qui permettent de déployer OpenStack)
 -   Juju
 
-# Conclusion
+# Conclusion 
 
 -   Le cloud révolutionne l’IT
 -   OpenStack est le projet libre phare sur la partie IaaS
 -   Déployer OpenStack n’est pas une mince affaire
 -   L’utilisation d’un cloud IaaS implique des changements de pratique
+-   Les métiers d’architecture logicielle et infra évoluent
+
+# Architectures cloud-ready
+
+### Concevoir une application pour le cloud
+
+### 12-factor
+
+“The Twelve-Factor App” <http://12factor.net/>
+
+-   Écrit par Heroku
+-   Suivre (tout) le code dans un VCS
+-   Configuration
+
+### Modulaire
+
+-   Multiples composants de taille raisonnable
+-   Philosophie Unix
+-   Couplage faible et interface documentée
+
+### Passage à l’échelle
+
+-   Vertical vs Horizontal
+-   Scale up vs Scale out
+-   Plusieurs petites instances plutôt qu’une grosse instance
+
+### Stateful vs stateless
+
+-   Beaucoup de stateful dans les applications legacy
+-   Nécessite de partager l’information d’état lorsque plusieurs workers
+-   Le stateless élimine cette contrainte
+
+### Tolérance aux pannes
+
+-   L’infrastructure n’est pas hautement disponible
+-   L’API d’infrastructure est hautement disponible
+-   L’application doit anticiper et réagir aux pannes
+
+### Stockage des données
+
+-   Base de données relationnelles
+-   Base de données NoSQL
+-   Stockage bloc
+-   Stockage objet
+-   Stockage éphémère
+-   Cache, temporaire
+
+### Design Tenets d’OpenStack (exemple)
+
+1.  Scalability and elasticity are our main goals
+2.  Any feature that limits our main goals must be optional
+3.  Everything should be asynchronous. If you can’t do something asynchronously, see \#2
+4.  All required components must be horizontally scalable
+5.  Always use shared nothing architecture (SN) or sharding. If you can’t Share nothing/shard, see \#2
+6.  Distribute everything. Especially logic. Move logic to where state naturally exists.
+7.  Accept eventual consistency and use it where it is appropriate.
+8.  Test everything. We require tests with submitted code. (We will help you if you need it)
+
+<https://wiki.openstack.org/wiki/BasicDesignTenets>
+
+# Concevoir une infrastructure pour le cloud
+
+### Automatisation
+
+-   Automatiser la gestion de l’infrastructure : indispensable
+-   Création des ressources
+-   Configuration des ressources
+
+### Infrastructure as Code
+
+-   Travailler comme un développeur
+-   Décrire son infrastructure sous forme de code (Heat, Ansible)
+-   Suivre les changements dans un VCS (git)
+-   Utiliser des outils de tests
+
+### Besoin d’orchestration
+
+-   Manager tous les types de ressources par un point d’entrée
+-   Description de l’infrastructure dans un fichier (*template*)
+-   Heat (intégré à OpenStack), Terraform
+
+### Tests et intégration continue
+
+-   Style de code
+-   Validation de la syntaxe
+-   Voire plus si possible
+
+### Autoscaling group
+
+-   Groupe d’instances similaires
+-   Nombre variable d’instances
+-   Scaling automatique en fonction de métriques
+
+### L’isolation
+
+-   Niveau control plane : Tenant (projet)
+-   Niveau réseau : L2, L3, security groups
+
+### Multi-tenant
+
+-   Notion générale : un déploiement du logiciel permet de multiples utilisations
+-   Un cloud OpenStack permet aux utilisateurs de travailler dans des environnements isolés
+-   Les instances, réseaux, images, etc. sont associés à un tenant
+-   Certaines ressources peuvent être partagées entre tenants (exemple :image publique)
+-   On peut aussi parler de “projet”
+
+### Les instances
+
+-   Éphémère
+-   Pets vs Cattle
+-   Basé sur une *image*
+-   API de metadata
+
+### L’API de metadata
+
+-   API à destination des instances
+-   Standard de fait initié par AWS
+-   Accessible depuis l’instance sur http://169.254.169.254/
+-   Expose des informations relatives à l’instance
+-   Expose un champ libre dit “userdata”
+
+### Réseau
+
+-   Fixed IP
+-   Multiples interfaces réseaux
+-   Floating IPs : pool, allocate, associate
+
+### Floating IPs
+
+-   *IP flottantes*
+-   Surcharge des “Fixed IPs”
+-   Non portée par l’instance
+-   Souvent une IP “publique”
+-   Une fois allouée à un tenant, l’IP est réservée
+-   Elle est ensuite associable et désassociable à loisir
+
+### Security groups
+
+-   Équivalent à un firewall devant chaque instance
+-   Une instance peut être associée à un ou plusieurs groupes de sécurité
+-   Gestion des accès en entrée et sortie
+-   Règles par protocole (TCP/UDP/ICMP) et par port
+-   Cible une adresse IP, un réseau ou un autre groupe de sécurité
+
+### Flavors
+
+-   *Gabarit*
+-   Équivalent des “instance types” d’AWS
+-   Définit un modèle d’instance en termes de CPU, RAM, disque (racine), disque éphémère
+-   Un disque de taille nul équivaut à prendre la taille de l’image de base
+-   Le disque éphémère a, comme le disque racine, l’avantage d’être souvent local donc rapide
+
+### Keypairs
+
+-   *Paires de clé*
+-   Clés SSH publiques/privés
+-   Le cloud a connaissance de la clé publique
+-   La clé publique est injectée dans les instances
+
+### Monitoring
+
+Monitoring
+
+-   Prendre en compte le cycle de vie des instances : DOWN != ALERT
+-   Monitorer le service plus que le serveur
+
+### Backup
+
+Backuper, quoi ?
+
+-   Être capable de recréer ses instances (et le reste de son infrastructure)
+-   Données (applicatives, logs) : block, objet
+
+### Un exemple : l’équipe openstack-infra
+
+-   Équipe projet en charge de l’infrastructure de développement d’OpenStack
+-   Travaille comme les équipes de dev d’OpenStack et utilise les mêmes outils
+-   Infrastructure as code
+-   Infrastructure ouverte : code “open source”
+-   Utilise du cloud (hybride)
+
+# Introduction
+
+### Objectifs de la formation
+
+-   Assimiler les concepts et le vocabulaire liés au cloud
+-   Définir, déployer et maintenir une infrastructure dans le cloud
+-   Concevoir une application cloud-ready
+-   Manipuler et orchestrer des ressources dans un cloud OpenStack
+
+Public visé : intégrateurs et développeurs d’application
+
+### Pré-requis de la formation
+
+-   Pratique du langage de commande Linux (Shell)
+-   Notions de virtualisation
+-   Optionnel :
+    -   Notions de Python (langage et environnement)
+
+# Stockage : block, objet, SDS
+
+### Stockage block
+
+-   Accès à des raw devices type */dev/vdb*
+-   Possibilité d’utiliser n’importe quel système de fichiers
+-   Compatible avec toutes les applications legacy
+
+### Stockage objet
+
+-   Pousser et retirer des objets dans un container/bucket
+-   Pas de hiérarchie des données, pas de système de fichiers
+-   Accès par les APIs
+-   L’application doit être conçue pour tirer partie du stockage objet
+
+### Stockage objet : schéma
+
+![image](images/stockage-objet.png)
+
+### SDS : Software Defined Storage
+
+-   Utilisation de commodity hardware
+-   Pas de RAID matériel
+-   Le logiciel est responsable de garantir les données
+-   Les pannes matérielles sont prises en compte et gérées
+
+### Deux solutions : OpenStack Swift et Ceph
+
+-   Swift fait partie du projet OpenStack et fournit du stockage objet
+-   Ceph fournit du stockage objet, block et FS
+-   Les deux sont implémentés en SDS
+-   Théorème CAP : on en choisit deux
+
+### Théorème CAP
+
+![image](images/cap.jpg)
+
+### Swift
+
+-   Swift est un projet OpenStack
+-   Le projet est né chez Rackspace avant la création d’OpenStack
+-   Swift est en production chez Rackspace depuis lors
+-   C’est le composant le plus mature d’OpenStack
+
+### Ceph
+
+-   Projet totalement parallèle à OpenStack
+-   Supporté par une entreprise (Inktank) récemment rachetée par Red Hat
+-   Fournit d’abord du stockage objet
+-   L’accès aux données se fait via RADOS :
+    -   Accès direct depuis une application avec librados
+    -   Accès via une API REST grâce à radosgw
+-   La couche RBD permet d’accéder aux données en mode block (volumes)
+-   CephFS permet un accès par un système de fichiers POSIX
+
+### Le nouveau modèle “big tent”
+
+-   Évolutions presque totalement implémentées
+-   Objectif : résoudre les limitations du modèle incubation/intégré
+-   Inclusion a priori de l’ensemble de l’écosystème OpenStack
+-   *Programs* $\rightarrow$ *Project Teams*
+-   Disparation des statuts en incubation et intégré
+-   Utilisation de tags factuels et objectifs
+
+### Traduction
+
+-   La question de la traduction est dorénavant prise en compte (officialisation de l’équipe *i18n*)
+-   Seules certaines parties sont traduites, comme Horizon
+-   La traduction française est aujourd’hui une des plus avancées
+-   Utilisation de la plateforme Transifex (en cours de migration vers l’outil libre Zanata)
+
+### Stackforge
+
+-   Forge pour les nouveaux projets en lien avec OpenStack
+-   Ils bénéficient de l’infrastructure du projet OpenStack, mais la séparation reste claire
+-   Les projets démarrent dans Stackforge et peuvent ensuite rejoindre le projet OpenStack
+-   En train de disparaitre au profit du modèle “big tent”
+
+### Implémentation
+
+-   Chaque sous-projet est découpé en plusieurs services
+-   Communication entre les services : AMQP (RabbitMQ)
+-   Base de données : relationnelle SQL (MySQL/MariaDB)
+-   Réseau : OpenVSwitch
+-   En général : réutilisation de composants existants
+-   Tout est développé en Python (Django pour la partie web)
+-   APIs supportées : OpenStack et équivalent Amazon
+-   Multi tenancy
+
+### Architecture
+
+![image](images/architecture-simple.jpg)
+
+### Cycle de développement : 6 mois
+
+-   Le planning est publié, exemple : <https://wiki.openstack.org/wiki/Mitaka_Release_Schedule>
+-   Milestone releases
+-   Freezes : FeatureProposal, Feature, String
+-   RC releases
+-   Stable releases
+-   Ce modèle de cycle de développement a évolué depuis le début du projet
+-   Cas particulier de Swift et de plus en plus de composants
+-   Depuis Liberty, chaque composant gère son propre versionnement
+
+### Versionnement depuis Liberty
+
+-   *Semantic versioning*
+-   Chaque projet est indépendant
+-   Dans le cadre du cycle de release néanmoins
+-   <http://docs.openstack.org/releases/>
+
+### Où trouver des informations sur le développement d’OpenStack
+
+-   Principalement sur le wiki : <https://wiki.openstack.org>
+-   Les blueprints et bugs sur Launchpad/StoryBoard : <https://launchpad.net/openstack>, <https://storyboard.openstack.org>, <http://specs.openstack.org/>
+-   Les patchs proposés et leurs reviews sont sur Gerrit : <https://review.openstack.org>
+-   L’état de la CI (entre autres) : <http://status.openstack.org>
+-   Le code est disponible dans Git : <https://git.openstack.org>
+-   Les sources (tarballs) sont disponibles : <http://tarballs.openstack.org/>
+
+### Qui contribue ?
+
+-   *Active Technical Contributor*
+-   ATC : personne ayant au moins une contribution récente dans un projet OpenStack reconnu
+-   Les ATC sont invités aux summits et ont le droit de vote
+-   *Core reviewer* : ATC ayant les droits pour valider les patchs dans un projet
+-   *Project Team Lead* (PTL) : élu par les ATCs de chaque projet
+-   Stackalytics fournit des statistiques sur les contributions
+<http://stackalytics.com/>
+
+### OpenStack Summit
+
+-   Aux USA jusqu’en 2013
+-   Aujourd’hui : alternance Amérique de Nord et Asie/Europe
+-   Quelques centaines au début à 4500 participants aujourd’hui
+-   En parallèle : conférence (utilisateurs, décideurs) et Design Summit (développeurs)
+-   Détermine le nom de la release : lieu/ville à proximité du Summit
+-   *Upstream Training*
+
+### Exemple du Summit d’avril 2013 à Portland
+
+![image](images/photo-summit.jpg)
+
+### Exemple du Summit d’octobre 2015 à Tokyo
+
+![image](images/photo-summit1.jpg) Photo : Elizabeth K. Joseph, CC BY
+
+2.0, Flickr/pleia2
+
+### Exemple du Summit d’octobre 2015 à Tokyo
+
+![image](images/photo-summit2.jpg) Photo : Elizabeth K. Joseph, CC BY
+2.0, Flickr/pleia2
+
+### Exemple du Summit d’octobre 2015 à Tokyo
+
+![image](images/photo-summit3.jpg) Photo : Elizabeth K. Joseph, CC BY
+2.0, Flickr/pleia2
+
+### Exemple du Summit d’octobre 2015 à Tokyo
+
+![image](images/photo-summit4.jpg) Photo : Elizabeth K. Joseph, CC BY
+2.0, Flickr/pleia2
+
+### Développement du projet : en détails
+
+-   Ouvert à tous (individuels et entreprises)
+-   Cycle de développement de 6 mois débuté par un (design) summit
+-   Outils : Launchpad $\rightarrow$ Storyboard (blueprints, bugs) + Git + GitHub (code)
+-   Sur chaque patch proposé :
+    -   Revue de code (peer review) : Gerrit, <https://review.openstack.org>
+    -   Intégration continue (continous integration) : Jenkins, Zuul, etc., <http://zuul.openstack.org/>
+-   Développement hyper actif : 17000 commits dans Icehouse (+25%)
+-   Fin 2012, création d’une entité indépendante de gouvernance : la fondation OpenStack
+### OpenStack Infra
+-   Équipe projet en charge de l’infrastructure de développement d’OpenStack
+-   Travaille comme les équipes de dev d’OpenStack et utilise les mêmes outils
+-   Résultat : une infrastructure entièrement open source et développée comme tel
+
+# Orchestrer les ressources de son IaaS
+
+### Pourquoi orchestrer
+
+-   Définir tout une infrastructure dans un seul fichier texte
+-   Être en capacité d’instancier une infrastructure entière en un appel API
+-   Autoscaling
+    -   Adapter ses ressources en fonction de ses besoins en temps réel
+    -   Fonctionnalité incluse dans le composant d’orchestration d’OpenStack
+
+# DevStack : faire tourner rapidement un OpenStack
+
+### Utilité de DevStack
+
+-   Déployer rapidement un OpenStack
+-   Utilisé par les développeurs pour tester leurs changements
+-   Utilisé pour faire des démonstrations
+-   Utilisé pour tester les APIs sans se préoccuper du déploiement
+-   Ne doit PAS être utilisé pour de la production
+
+### Fonctionnement de DevStack
+
+-   Un script shell qui fait tout le travail : stack.sh
+-   Un fichier de configuration : local.conf
+-   Installe toutes les dépendances nécessaires (paquets)
+-   Clone les dépôts git (branche master par défaut)
+-   Lance tous les composants dans un screen
+
+### Configuration : local.conf
+
+Exemple
+
+    [[local|localrc]]
+    ADMIN_PASSWORD=secrete
+    DATABASE_PASSWORD=$ADMIN_PASSWORD
+    RABBIT_PASSWORD=$ADMIN_PASSWORD
+    SERVICE_PASSWORD=$ADMIN_PASSWORD
+    SERVICE_TOKEN=a682f596-76f3-11e3-b3b2-e716f9080d50
+    #FIXED_RANGE=172.31.1.0/24
+    #FLOATING_RANGE=192.168.20.0/25
+    #HOST_IP=10.3.4.5
+
+### Conseils d’utilisation
+
+-   DevStack installe beaucoup de choses sur la machine
+-   Il est recommandé de travailler dans une VM
+-   Pour tester tous les composants OpenStack dans de bonnes conditions, plusieurs Go de RAM sont nécessaires
+-   L’utilisation de Vagrant est conseillée
+
+# Utiliser OpenStack
+
+### Le principe
+
+-   Toutes les fonctionnalités sont accessibles par l’API
+-   Les clients (y compris Horizon) utilisent l’API
+-   Des crédentials sont nécessaires
+    -   API OpenStack : utilisateur + mot de passe + tenant
+    -   API AWS : access key ID + secret access key
+
+### Les APIs OpenStack
+
+-   Une API par service OpenStack
+-   <http://developer.openstack.org/#api>
+-   Chaque API est versionnée, la rétro-compatibilité est assurée
+-   REST
+-   Certains services sont aussi accessibles via une API différente compatible AWS
+
+### Accès aux APIs
+
+-   Direct, en HTTP, via des outils comme curl
+-   Avec une bibliothèque
+    -   Les implémentations officielles en Python
+    -   OpenStackSDK
+    -   D’autres implémentations, y compris pour d’autres langages (exemple : jclouds)
+    -   Shade
+-   Avec les outils officiels en ligne de commande
+-   Avec Horizon
+
+### Clients officiels
+
+-   Le projet fournit des clients officiels : python-PROJETclient
+-   Bibliothèques Python
+-   Outils CLI
+    -   L’authentification se fait en passant les credentials par paramètres ou variables d’environnement
+    -   L’option –debug affiche la communication HTTP
+
+### OpenStack Client
+
+-   Client CLI unifié
+-   Commandes du type *openstack \<service \>\<action \>*
+-   Vise à remplacer à terme les clients spécifiques
+-   Permet une expérience utilisateur plus homogène
+
+### Shade
+
+-   Bibliothèque Python incluant la business logic
+
+### Authentification et catalogue de service
+
+-   Une fois authentifié, récupération d’un jeton (*token*)
+-   Récupération du catalogue de services
+-   Pour chaque service, un endpoint HTTP (API)
+
+### Utiliser des images cloud
+
+Une image cloud c’est :
+
+-   Une image disque contenant un OS déjà installé
+-   Une image qui peut être instanciée en n machines sans erreur
+-   Un OS sachant parler à l’API de metadata du cloud (cloud-init)
+
+Détails : <http://docs.openstack.org/image-guide/content/ch_openstack_images.html>\
+La plupart des distributions fournissent aujourd’hui des images cloud.
+
+### Cirros
+
+-   Cirros est l’image cloud par excellence
+-   OS minimaliste
+-   Contient cloud-init 
+
+<https://launchpad.net/cirros>
+
+### Cloud-init
+
+-   Cloud-init est un moyen de tirer partie de l’API de metadata, et notamment des user data
+-   L’outil est intégré par défaut dans la plupart des images cloud
+-   À partir des user data, cloud-init effectue les opérations de personnalisation de l’instance
+-   cloud-config est un format possible de user data
+
+### Exemple cloud-config
+
+    #cloud-config
+    mounts:
+     - [ xvdc, /var/www ]
+    packages:
+     - apache2
+     - htop
+
+### Comment gérer ses images ?
+
+-   Utilisation d’images génériques et personnalisation à l’instanciation
+-   Création d’images intermédiaires et/ou totalement personnalisées :
+    *Golden images*
+    -   libguestfs, virt-builder, virt-sysprep
+    -   diskimage-builder (TripleO)
+    -   Packer
+    -   solution “maison”
+
+### Propriétés d’une instance
+
+-   Éphémère, a priori non hautement disponible
+-   Définie par une flavor
+-   Construite à partir d’une image
+-   Optionnel : attachement de volumes
+-   Optionnel : boot depuis un volume
+-   Optionnel : une clé SSH publique
+-   Optionnel : des ports réseaux
+
+### Les groupes de sécurité
+
+-   Équivalent à un firewall devant chaque instance
+-   Une instance peut être associée à un ou plusieurs groupes de sécurité
+-   Gestion des accès en entrée et sortie
+-   Règles par protocole (TCP/UDP/ICMP) et par port
+-   Cible une adresse IP, un réseau ou un autre groupe de sécurité
+
+### Flavors
+
+-   *Gabarit*
+-   Équivalent des “instance types” d’AWS
+-   Définit un modèle d’instance en termes de CPU, RAM, disque (racine), disque éphémère
+-   Un disque de taille nul équivaut à prendre la taille de l’image de base
+-   Le disque éphémère a, comme le disque racine, l’avantage d’être souvent local donc rapide
+
+### Propriétés des images dans Glance
+
+L’utilisateur peut définir un certain nombre de propriétés dont certaines seront utilisées lors de l’instanciation
+
+-   Type d’image
+-   Architecture
+-   Distribution
+-   Version de la distribution
+-   Espace disque minimum
+-   RAM minimum
+-   Publique ou non
+
+### Types d’images
+
+Glance supporte un large éventail de types d’images, limité par le support de l’hyperviseur sous-jacent à Nova
+
+-   raw
+-   qcow2
+-   ami
+-   vmdk
+-   iso
+
+### Fonctionnalités supplémentaires
+
+Outre les fonctions réseau de base niveaux 2 et 3, Neutron peut fournir d’autres services :
+
+-   Load Balancing (HAProxy, ...)
+-   Firewall (vArmour, ...) : diffère des groupes de sécurité
+-   VPN (Openswan, ...) : permet d’accéder à un réseau privé sans IP flottantes
+
+Ces fonctionnalités se basent également sur des plugins
+
+### API
+
+L’API permet notamment de manipuler ces ressources
+
+-   Réseau (*network*) : niveau 2
+-   Sous-réseau (*subnet*) : niveau 3
+-   Port : attachable à une interface sur une instance, un load-balancer, etc.
+-   Routeur
+
+### Un template HOT
+
+*parameters* - *resources* - *outputs*
+
+    heat_template_version: 2013-05-23
+    description: Simple template to deploy a single compute instance
+    resources:
+      my_instance:
+        type: OS::Nova::Server
+        properties:
+          key_name: my_key
+          image: F18-x86_64-cfntools
+          flavor: m1.small
+
+### Construire un template à partir d’existant
+
+Multiples projets en cours de développement
+
+-   Flame (Cloudwatt)
+-   HOT builder
+-   Merlin
+
+### Un grand cloud
+
+-   Régions
+-   Zones de disponibilité (AZ)
 
