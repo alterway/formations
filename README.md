@@ -12,7 +12,6 @@ Auteurs :
 * Kevin Lefevre <kevin.lefevre@osones.com>
 * Jean-François Taltavull <jft@osones.com>
 
-
 Intégration Continue
 --------------------
 
@@ -40,9 +39,8 @@ Pour visualiser :
 
 OU
 
-- ```docker run -d -p 80:8001 -v images:/revealjs/images -v cours/output-html/$(cours).html:/revealjs/index.html -v cours/styles/osones.css:/revealjs/css/theme/osones.css vsense/revealjs```
-- (http://localhost)
-
+- `docker run -d -p 80:8001 -v images:/revealjs/images -v cours/output-html/$(cours).html:/revealjs/index.html -v cours/styles/osones.css:/revealjs/css/theme/osones.css vsense/revealjs`
+- http://localhost
 
 Générations des PDFs
 --------------------
@@ -58,10 +56,8 @@ Copyright et licence
 --------------------
 Tous les contenus originaux (Makefile, les fichiers dans cours/, scripts) sont :
 * Copyright © 2014-2016 Osones
-* Distribués sous licence Creative Commons BY-SA 4.0.
+* Distribués sous licence Creative Commons BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)
 
-![Creative Commons BY-SA](http://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-sa.png)
-
-https://creativecommons.org/licenses/by-sa/4.0/
+![Creative Commons BY-SA](http://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-sa.png){width="100px"}
 
 Les autres fichiers du répertoire images/ sont soumis à leur copyright et licence respectifs.
