@@ -1,21 +1,26 @@
 # Formation Docker
 
-![](images/docker.png){width="100px"}
+![docker](images/docker-media-kit/small_h-trans.png){width="100px"}
+![osones](images/logo-osones-new.png){height="70px"}
 
 ### Concernant ces supports de cours
 
-Supports de cours Docker réalisés par Osones
+Supports de cours réalisés par Osones
 
-<https://osones.com/>
+<https://osones.io/>
 
 ![](images/logo-osones-new.png){height="70px"}
+
+
 - Copyright © 2016 Osones
 - Licence : Creative Commons BY-SA 4.0\
 - Sources : <https://github.com/Osones/Formations/>
 
-![<https://creativecommons.org/licenses/by-sa/4.0/deed.fr>](images/licence.png){width="2.5cm"}
+![](images/licence.png){width="70px"}
 
 ### Auteurs
 
-- Romain Guichard <romain.guichard@osones.com>
-- Kevin Lefevre <kevin.lefevre@osones.com>
+Romain Guichard `<romain.guichard@osones.io>`
+
+Kevin Lefevre `<kevin.lefevre@osones.io>`
+

@@ -11,7 +11,6 @@
 
 ### WaaS : Whatever as a Service
 
-Principalement :
 - IaaS : Infrastructure as a Service
 - PaaS : Platform as a Service
 - SaaS : Software as a Service
@@ -50,3 +49,4 @@ Principalement :
 - Facilitent la mise en place de PaaS
 - Fonctionnent sur du IaaS ou sur du bare-metal
 - Simplifient la décomposition d'application en micro services
+

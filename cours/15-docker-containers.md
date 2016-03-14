@@ -35,15 +35,7 @@ Permet l’isolation des ID des utilisateurs et des groupe au sein d’un conten
 
 Permet l’isolation des ressources associées au réseau, chaque namespace dispose de ses propres cartes reseaux, plan IP, table de routage, numéro de port etc. Les namespace réseaux sont utilisés par Neutron et rendent l’utilisation de conteneur est intéressante, d’un point de vu réseau, puisque chaque conteneur peut avoir tout un stack réseau TCP/IP dédié.
 
-### Cgroups : control groups
-
-Les groupes de contrôles permettent
-
-- Limitation des ressources : des groupes peuvent être mis en place afin de ne pas dépasser une limite de mémoire.
-- Priorisation : certains groupes peuvent obtenir une plus grande part de ressources processeur ou de bande passante d'entrée-sortie.
-- Comptabilité : permet de mesurer la quantité de ressources consommées par certains systèmes en vue de leur facturation par exemple.
-- Isolation : séparation par espace de nommage pour les groupes, afin qu'ils ne puissent pas voir les processus des autres, leurs connexions réseaux ou leurs fichiers.
-- Contrôle : figer les groupes ou créer un point de sauvegarde et redémarrer.
+### Cgroups : Control Croups
 
 ```
 CGroup: /
@@ -52,6 +44,26 @@ CGroup: /
            │ │ ├─6807 nginx: master process ngin
            │ │ ├─6847 nginx: worker proces
 ```
+
+### Cgroups : Limitation de ressources
+
+- Limitation des ressources : des groupes peuvent être mis en place afin de ne pas dépasser une limite de mémoire.
+
+### Cgroups : Priorisation
+
+- Priorisation : certains groupes peuvent obtenir une plus grande part de ressources processeur ou de bande passante d'entrée-sortie.
+
+### Cgroups : Comptabilité
+
+- Comptabilité : permet de mesurer la quantité de ressources consommées par certains systèmes en vue de leur facturation par exemple.
+
+### Cgroups : Isolation
+
+- Isolation : séparation par espace de nommage pour les groupes, afin qu'ils ne puissent pas voir les processus des autres, leurs connexions réseaux ou leurs fichiers.
+
+### Cgroups : Contrôle
+
+- Contrôle : figer les groupes ou créer un point de sauvegarde et redémarrer.
 
 ### Deux philosophies de conteneurs
 
@@ -73,12 +85,6 @@ On va surtout s'intéresser aux conteneurs applicatifs.
 - Rkt
 - LXC
 
-Ces solutions s'appuient sur des fonctions qui font interface avec le Kernel afin de creer les namespaces.
-
-- libcontainer
-- liblxc
-- systemd-nspawn
-
 ### LXC
 
 - Conteneur système
@@ -99,3 +105,4 @@ Ces solutions s'appuient sur des fonctions qui font interface avec le Kernel afi
 - Pas de deamon -> intégration avec systemd.
 - Utilise systemd-nspawn
 - Adresse certains problèmes de sécurité de Docker
+
