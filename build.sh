@@ -1,8 +1,8 @@
 #!/bin/bash -xe
 
-COURS_DIR=/formations/cours
-IMG_DIR=/formations/images
-LIST=/formations/cours/list.md
+COURS_DIR=cours
+IMG_DIR=images
+LIST=cours/list.md
 
 git clone https://github.com/hakimel/reveal.js.git $COURS_DIR/revealjs
 mkdir $COURS_DIR/output-html
