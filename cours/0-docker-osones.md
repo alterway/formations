@@ -16,7 +16,7 @@ Supports de cours réalisés par Osones
 - Licence : Creative Commons BY-SA 4.0\
 - Sources : <https://github.com/Osones/Formations/>
 
-![](images/licence.png){width="70px"}
+![](images/licence.png){width="100px"}
 
 ### Auteurs
 

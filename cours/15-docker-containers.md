@@ -2,7 +2,7 @@
 
 ### Définition
 
-Les conteneurs fournissent un environnement isolé sur un système hôte, semblable a un Chroot sous Linux ou une Jail sous BSD, mais en proposant plus de fonctionnalités en matière d'isolation et de configuration. Ces fonctionnalités sont dépendantes du système hôte sous-jacent et notamment du Kernel.
+- Les conteneurs fournissent un environnement isolé sur un système hôte, semblable a un Chroot sous Linux ou une Jail sous BSD, mais en proposant plus de fonctionnalités en matière d'isolation et de configuration. Ces fonctionnalités sont dépendantes du système hôte sous-jacent et notamment du Kernel.
 
 ### Le Kernel Linux
 
@@ -13,19 +13,19 @@ Les conteneurs fournissent un environnement isolé sur un système hôte, sembla
 
 ### Mount namespaces ( Linux 2.4.19)
 
-Permet de créer un arbre des points de montage indépendant de celui du système global.
+- Permet de créer un arbre des points de montage indépendant de celui du système global.
 
 ### UTS namespaces (Linux 2.6.19)
 
-Unix Time Sharing : Permet à un conteneur de disposer de son propre nom de domaine et d’identité NIS sur laquelle certains protocoles tel que LDAP peuvent se baser.
+- Unix Time Sharing : Permet à un conteneur de disposer de son propre nom de domaine et d’identité NIS sur laquelle certains protocoles tel que LDAP peuvent se baser.
 
 ### IPC namespaces (Linux 2.6.19)
 
-Inter Process Communication : Permet d’isoler les bus de communication entre les processus d’un conteneur.
+- Inter Process Communication : Permet d’isoler les bus de communication entre les processus d’un conteneur.
 
 ### PID namespaces (Linux 2.6.24)
 
-Isole l’arbre d’execution des processus et permet donc à chaque conteneur de disposer de son propre processus maître (PID 0) qui pourra ensuite exécuter et manager  d'autres processus avec des droits illimités tout en étant un processus restreint au sein du système hôte.
+- Isole l’arbre d’execution des processus et permet donc à chaque conteneur de disposer de son propre processus maître (PID 0) qui pourra ensuite exécuter et manager  d'autres processus avec des droits illimités tout en étant un processus restreint au sein du système hôte.
 
 ### User namespaces (Linux 2.6.23-3.8)
 
