@@ -1,2 +1,2 @@
-docker:0-osones.md 1-cloud.md 2-docker-base.md 3-docker-build-ship-run.md 4-docker-ecosystem.md 5-docker-hosts.md
-openstack:0-common.md 1-introduction.md 2-cloud.md 3-openstack-presentation.md 4-openstack-deploiement.md 5-iaas-tirer-partie.md 6-conclusion.md
+docker:0-docker-osones.md 10-docker-introduction.md 20-docker-concepts.md 30-docker-build-ship-run.md 40-docker-ecosystem.md 50-docker-hosts.md
+openstack:0-openstack-osones.md 10-openstack-introduction.md 20-openstack-cloud.md 30-openstack-presentation.md 40-openstack-deploiement.md 50-openstack-iaas-tirer-partie.md 60-openstack-conclusion.md
