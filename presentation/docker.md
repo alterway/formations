@@ -56,4 +56,3 @@ Résilience des applications en 2016
 - CoreOS
 - RancherOS
 - Kubernetes
-

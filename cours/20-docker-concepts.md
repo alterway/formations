@@ -2,8 +2,8 @@
 
 ### Un ensemble de composants
 
-- Layers
 - Stockage
+- Layers
 - Volumes
 - Réseau
 - Ports

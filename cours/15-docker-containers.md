@@ -23,17 +23,17 @@ Unix Time Sharing : Permet à un conteneur de disposer de son propre nom de doma
 
 Inter Process Communication : Permet d’isoler les bus de communication entre les processus d’un conteneur.
 
-### PID namespaces (CLONE_NEWPID, Linux 2.6.24)
+### PID namespaces (Linux 2.6.24)
 
 Isole l’arbre d’execution des processus et permet donc à chaque conteneur de disposer de son propre processus maître (PID 0) qui pourra ensuite exécuter et manager  d'autres processus avec des droits illimités tout en étant un processus restreint au sein du système hôte.
 
-### User namespaces (Linux 2.6.23 et complétés dans Linux 3.8)
+### User namespaces (Linux 2.6.23-3.8)
 
-Permet l’isolation des ID des utilisateurs et des groupe au sein d’un conteneur. Cela permet notamment de gérer des utilsateurs tel que l’ID 0 et GID 0, le root qui aurait des permissions absolues au sein d’un namespace mais pas au sein du système hôte.
+- Permet l’isolation des ID des utilisateurs et des groupe au sein d’un conteneur. Cela permet notamment de gérer des utilsateurs tel que l’ID 0 et GID 0, le root qui aurait des permissions absolues au sein d’un namespace mais pas au sein du système hôte.
 
 ### Network namespaces (Linux 2.6.29)
 
-Permet l’isolation des ressources associées au réseau, chaque namespace dispose de ses propres cartes reseaux, plan IP, table de routage, numéro de port etc. Les namespace réseaux sont utilisés par Neutron et rendent l’utilisation de conteneur est intéressante, d’un point de vu réseau, puisque chaque conteneur peut avoir tout un stack réseau TCP/IP dédié.
+- Permet l’isolation des ressources associées au réseau, chaque namespace dispose de ses propres cartes reseaux, plan IP, table de routage, numéro de port etc. Les namespace réseaux sont utilisés par Neutron et rendent l’utilisation de conteneur est intéressante, d’un point de vu réseau, puisque chaque conteneur peut avoir tout un stack réseau TCP/IP dédié.
 
 ### Cgroups : Control Croups
 
@@ -69,8 +69,6 @@ CGroup: /
 
 - Systeme : simule une séquence de boot complète avec un init process ainsi que plusieurs processus (eg: LXC, OpenVZ).
 - Process : un conteneur exécute un ou plusieurs processus directement, en fonction de l'application contenerisée (eg: Docker, Rkt).
-
-On va surtout s'intéresser aux conteneurs applicatifs.
 
 ### Encore plus “cloud” qu’une instance
 
