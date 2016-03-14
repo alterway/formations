@@ -1,7 +1,7 @@
 Supports de formation Osones  ![Build Status](https://travis-ci.com/Osones/formations.svg?token=sy6nX4pitZ2Pksd9gZmW&branch=master)
 ===============================
 
-Supports de formation (sous forme de slides) écrits en Français et réalisés par Osones (https://osones.com/) pour ses offres de formation OpenStack et Docker.
+Supports de formation (sous forme de slides) écrits en Français et réalisés par Osones (https://osones.com/) pour ses offres de formation.
 
 Sont notamment abordés les sujets suivants : le cloud, sa philosophie, le projet OpenStack, l'utilisation d'OpenStack, le déploiement d'OpenStack, le principe des conteneurs, le projet Docker, l'utilisation de Docker, l'orchestration de conteneurs Docker.
 
@@ -10,6 +10,7 @@ Auteurs :
 * Pierre Freund <pierre.freund@osones.com>
 * Romain Guichard <romain.guichard@osones.com>
 * Kevin Lefevre <kevin.lefevre@osones.com>
+* Jean-François Taltavull <jft@osones.com>
 
 
 Intégration Continue
@@ -17,30 +18,45 @@ Intégration Continue
 
 Travis est en charge de builder régulièrement les supports de formation. Ceux ci sont écrits en markdown et sont buildés pour obtenir un support HTML et un support PDF
 
-[Support PDF](http://formation.osones.com)  
-[Support HTML Docker](http://docker.formation.osones.com)  
-[Support HTML OpenStack](http://openstack.formation.osones.com)  
+[Support PDF](http://formation.osones.com/pdf)
 
-Installation de LaTeX (Ubuntu)
-------------------------------
+[Support HTML Docker](http://formation.osones.com/docker.html)
 
-sudo apt-get install texlive-lang-french texlive
+[Support HTML OpenStack](http://formation.osones.com/openstack.html)
+
+
+Builder en local
+----------------
+
+Build du HTML :
+
+```
+bash build.sh
+```
+
+Pour visualiser :
+
+- Lire le(s) fichier(s) cours/revealjs/$(cours).html avec votre navigateur
+
+OU
+
+- ```docker run -d -p 80:8001 -v images:/revealjs/images -v cours/output-html/$(cours).html:/revealjs/index.html -v cours/styles/osones.css:/revealjs/css/theme/osones.css vsense/revealjs```
+- (http://localhost)
+
 
 Générations des PDFs
 --------------------
 
-Cours :
+```
+bash build.sh
+docker run --rm -v cours/output-pdf:/output -v cours/revealjs:/input -v images:/input/images/ astefanutti/decktape /input/$(cours).html /output/$(cours).pdf
+```
 
-        make
-
-Un style (screen, handout ou print) pour les cours OpenStack :
-
-        make course=openstack
-
+Les PDF se trouvent dans output-pdf/$(cours).pdf
 
 Copyright et licence
 --------------------
-Tous les contenus originaux (Makefile, les fichiers dans cours/) sont :
+Tous les contenus originaux (Makefile, les fichiers dans cours/, scripts) sont :
 * Copyright © 2014-2016 Osones
 * Distribués sous licence Creative Commons BY-SA 4.0.
 
