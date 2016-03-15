@@ -2,7 +2,7 @@
 
 ### Définition
 
-- Les conteneurs fournissent un environnement isolé sur un système hôte, semblable a un Chroot sous Linux ou une Jail sous BSD, mais en proposant plus de fonctionnalités en matière d'isolation et de configuration. Ces fonctionnalités sont dépendantes du système hôte sous-jacent et notamment du Kernel.
+- Les conteneurs fournissent un environnement isolé sur un système hôte, semblable à un chroot sous Linux ou une jail sous BSD, mais en proposant plus de fonctionnalités en matière d'isolation et de configuration. Ces fonctionnalités sont dépendantes du système hôte  et notamment du kernel.
 
 ### Le Kernel Linux
 
@@ -13,7 +13,7 @@
 
 ### Mount namespaces ( Linux 2.4.19)
 
-- Permet de créer un arbre des points de montage indépendant de celui du système global.
+- Permet de créer un arbre des points de montage indépendants de celui du système hôte.
 
 ### UTS namespaces (Linux 2.6.19)
 
@@ -25,15 +25,15 @@
 
 ### PID namespaces (Linux 2.6.24)
 
-- Isole l’arbre d’execution des processus et permet donc à chaque conteneur de disposer de son propre processus maître (PID 0) qui pourra ensuite exécuter et manager  d'autres processus avec des droits illimités tout en étant un processus restreint au sein du système hôte.
+- Isole l’arbre d’execution des processus et permet donc à chaque conteneur de disposer de son propre processus maître (PID 0) qui pourra ensuite exécuter et manager d'autres processus avec des droits illimités tout en étant un processus restreint au sein du système hôte.
 
 ### User namespaces (Linux 2.6.23-3.8)
 
-- Permet l’isolation des ID des utilisateurs et des groupe au sein d’un conteneur. Cela permet notamment de gérer des utilsateurs tel que l’ID 0 et GID 0, le root qui aurait des permissions absolues au sein d’un namespace mais pas au sein du système hôte.
+- Permet l’isolation des ID des utilisateurs et des groupes au sein d’un conteneur. Cela permet notamment de gérer des utilsateurs tels que l’UID 0 et GID 0, le root qui aurait des permissions absolues au sein d’un namespace mais pas au sein du système hôte.
 
 ### Network namespaces (Linux 2.6.29)
 
-- Permet l’isolation des ressources associées au réseau, chaque namespace dispose de ses propres cartes reseaux, plan IP, table de routage, numéro de port etc. Les namespace réseaux sont utilisés par Neutron et rendent l’utilisation de conteneur est intéressante, d’un point de vu réseau, puisque chaque conteneur peut avoir tout un stack réseau TCP/IP dédié.
+- Permet l’isolation des ressources associées au réseau, chaque namespace dispose de ses propres cartes reseaux, plan IP, table de routage, numéro de port etc.
 
 ### Cgroups : Control Croups
 
@@ -55,7 +55,7 @@ CGroup: /
 
 ### Cgroups : Comptabilité
 
-- Comptabilité : permet de mesurer la quantité de ressources consommées par certains systèmes en vue de leur facturation par exemple.
+- Comptabilité : permet de mesurer la quantité de ressources consommées par certains systèmes, en vue de leur facturation par exemple.
 
 ### Cgroups : Isolation
 
@@ -67,13 +67,13 @@ CGroup: /
 
 ### Deux philosophies de conteneurs
 
-- Systeme : simule une séquence de boot complète avec un init process ainsi que plusieurs processus (eg: LXC, OpenVZ).
-- Process : un conteneur exécute un ou plusieurs processus directement, en fonction de l'application contenerisée (eg: Docker, Rkt).
+- *Systeme* : simule une séquence de boot complète avec un init process ainsi que plusieurs processus (LXC, OpenVZ).
+- *Process* : un conteneur exécute un ou plusieurs processus directement, en fonction de l'application conteneurisée (Docker, Rkt).
 
 ### Encore plus “cloud” qu’une instance
 
 - Partage du kernel
-- Un seul process par conteneur
+- Un seul processus par conteneur
 - Le conteneur est encore plus éphèmère que l’instance
 - Le turnover des conteneurs est élevé -> orchestration !!!
 
