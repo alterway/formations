@@ -80,22 +80,23 @@ Compétences d’administration système Linux tel qu’Ubuntu, Red Hat ou Debia
 - Reprendre la main sur un conteneur
 - Débuguer les erreurs
 
-#### Hosts Docker
-- Les OS Linux traditionnels : Debian, Ubuntu, CentOS
-- Les OS Linux orientés conteneurs : CoreOS, RancherOS
-- Lequel choisir ?
-
 #### Ecosystème Docker
 - Compose
 - Machine
 - Swarm
 - Plugins (réseau et stockage)
 
+#### Hosts Docker
+- Les OS Linux traditionnels : Debian, Ubuntu, CentOS
+- Les OS Linux orientés conteneurs : CoreOS, RancherOS
+- Lequel choisir ?
+- Gérer ses conteneurs avec Systemd
+
 #### Clustering
 - Swarm
 - CoreOS
 - Rancher
-- Kubernetes
+- Kubernetes/Mesos
 
 #### Construire, déployer et maintenir une infrastructure Docker
 - Les outils de déploiement : Terraform et Heat
