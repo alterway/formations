@@ -2,11 +2,12 @@
 
 ### Définition
 
-- Les conteneurs fournissent un environnement isolé sur un système hôte, semblable à un chroot sous Linux ou une jail sous BSD, mais en proposant plus de fonctionnalités en matière d'isolation et de configuration. Ces fonctionnalités sont dépendantes du système hôte  et notamment du kernel.
+- Les conteneurs fournissent un environnement isolé sur un système hôte, semblable à un chroot sous Linux ou une jail sous BSD, mais en proposant plus de fonctionnalités en matière d'isolation et de configuration. Ces fonctionnalités sont dépendantes du système hôte et notamment du kernel.
 
 ### Le Kernel Linux
 
 - Namespaces
+
 - Cgroups (control groups)
 
 ### Les namespaces
@@ -29,11 +30,11 @@
 
 ### User namespaces (Linux 2.6.23-3.8)
 
-- Permet l’isolation des ID des utilisateurs et des groupes au sein d’un conteneur. Cela permet notamment de gérer des utilsateurs tels que l’UID 0 et GID 0, le root qui aurait des permissions absolues au sein d’un namespace mais pas au sein du système hôte.
+- Permet l’isolation  des utilisateurs et des groupes au sein d’un conteneur. Cela permet notamment de gérer des utilisateurs tels que l’UID 0 et GID 0, le root qui aurait des permissions absolues au sein d’un namespace mais pas au sein du système hôte.
 
 ### Network namespaces (Linux 2.6.29)
 
-- Permet l’isolation des ressources associées au réseau, chaque namespace dispose de ses propres cartes reseaux, plan IP, table de routage, numéro de port etc.
+- Permet l’isolation des ressources associées au réseau, chaque namespace dispose de ses propres cartes réseaux, plan IP, table de routage, etc.
 
 ### Cgroups : Control Croups
 
@@ -73,34 +74,48 @@ CGroup: /
 ### Encore plus “cloud” qu’une instance
 
 - Partage du kernel
+
 - Un seul processus par conteneur
-- Le conteneur est encore plus éphèmère que l’instance
+
+- Le conteneur est encore plus éphémère que l’instance
+
 - Le turnover des conteneurs est élevé : orchestration
 
 ### Container runtime
 
 - Docker
+
 - Rkt
+
 - LXC
 
 ### LXC
 
 - Conteneur système
+
 - Utilise la *liblxc*
+
 - Virtualisation d'un système complet (boot)
 
 ### Docker
 
 - Développé par Docker Inc.
-- Fonctionne en mode daemon : difficulté d'integration avec les init-process
+
+- Fonctionne en mode daemon : difficulté d'intégration avec les init-process
+
 - Utilisait la *liblxc*
+
 - Utilise désormais la *libcontainer*
 
 ### Rocket (rkt)
 
 - Se prononce “rock-it”
+
 - Développé par CoreOS
-- Pas de deamon : intégration avec systemd.
+
+- Pas de daemon : intégration avec systemd.
+
 - Utilise systemd-nspawn
-- Adresse certains problèmes de sécurité de Docker
+
+- Adresse certains problèmes de sécurité inhérent à Docker
 

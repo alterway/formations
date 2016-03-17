@@ -1,8 +1,5 @@
 # Formation Docker
 
-![docker](images/docker-media-kit/small_h-trans.png){width="100px"}
-![osones](images/logo-osones-new.png){height="70px"}
-
 ### Concernant ces supports de cours
 
 Supports de cours réalisés par Osones

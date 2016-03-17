@@ -1,13 +1,34 @@
 # Docker : les concepts
 
-### Un ensemble de composants
+### Un ensemble de concepts et de composants
 
-- Stockage
-- Layers
-- Volumes
-- Réseau
-- Ports
+- Layers : un image contient une ou plusieurs couches, ces couches peuvent être partagées et réutilisées entre les différentes images afin de réduire l'espace de stockage
+
+- Stockage : Docker permet l'utilisation de plusieurs backend de stockage contenant les layers ainsi que potentiellement les données des conteneurs.
+
+- Volumes : Un conteneur est éphémère, il est cependant possible de disposer de données persistantes grâce au volumes.
+
+- Réseau : Docker permet l'utilisation de plusieurs backend réseau afin de fournir la connectivité aux conteneurs.
+
+- Ports :
+
 - Links
+
+### Stockage
+
+- Images Docker
+
+- Les données des conteneurs
+
+- Multiples backends (extensibles via plugins):
+    - AUFS
+    - DeviceMapper
+    - OverlayFS
+    - BTRFS
+    - ZFS
+    - XFS
+    - NFS (via plugin Convoy)
+    - GlusterFS (via plugin Convoy)
 
 ### Layers : une image
 
