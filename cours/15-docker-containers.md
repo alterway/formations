@@ -75,7 +75,7 @@ CGroup: /
 - Partage du kernel
 - Un seul processus par conteneur
 - Le conteneur est encore plus éphèmère que l’instance
-- Le turnover des conteneurs est élevé -> orchestration !!!
+- Le turnover des conteneurs est élevé : orchestration
 
 ### Container runtime
 
@@ -92,7 +92,7 @@ CGroup: /
 ### Docker
 
 - Développé par Docker Inc.
-- Fonctionne en mode daemon -> difficulté d'integration avec les init-process
+- Fonctionne en mode daemon : difficulté d'integration avec les init-process
 - Utilisait la *liblxc*
 - Utilise désormais la *libcontainer*
 
@@ -100,7 +100,7 @@ CGroup: /
 
 - Se prononce “rock-it”
 - Développé par CoreOS
-- Pas de deamon -> intégration avec systemd.
+- Pas de deamon : intégration avec systemd.
 - Utilise systemd-nspawn
 - Adresse certains problèmes de sécurité de Docker
 

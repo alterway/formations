@@ -11,7 +11,6 @@ Supports de cours réalisés par Osones
 
 ![](/images/logo-osones-new.png){height="70px"}
 
-
 - Copyright © 2016 Osones
 - Licence : Creative Commons BY-SA 4.0\
 - Sources : <https://github.com/Osones/Formations/>
@@ -20,7 +19,7 @@ Supports de cours réalisés par Osones
 
 ### Auteurs
 
-Romain Guichard `<romain.guichard@osones.io>`
+Romain Guichard <romain.guichard@osones.io>
 
-Kevin Lefevre `<kevin.lefevre@osones.io>`
+Kevin Lefevre <kevin.lefevre@osones.io>
 
