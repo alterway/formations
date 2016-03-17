@@ -2,37 +2,29 @@
 
 ### Un ensemble de concepts et de composants
 
-- Layers : un image contient une ou plusieurs couches, ces couches peuvent être partagées et réutilisées entre les différentes images afin de réduire l'espace de stockage
+- Layers
 
-- Stockage : Docker permet l'utilisation de plusieurs backend de stockage contenant les layers ainsi que potentiellement les données des conteneurs.
+- Stockage
+-
+- Volumes
 
-- Volumes : Un conteneur est éphémère, il est cependant possible de disposer de données persistantes grâce au volumes.
+- Réseau
 
-- Réseau : Docker permet l'utilisation de plusieurs backend réseau afin de fournir la connectivité aux conteneurs.
-
-- Ports :
+- Ports
 
 - Links
 
-### Stockage
+### Layers
 
-- Images Docker
+- Les conteneurs et leurs images sont decomposées en couches (layers)
 
-- Les données des conteneurs
+- Les layers peuvent etre reutiliser entre differents conteneurs
 
-- Multiples backends (extensibles via plugins):
-    - AUFS
-    - DeviceMapper
-    - OverlayFS
-    - BTRFS
-    - ZFS
-    - XFS
-    - NFS (via plugin Convoy)
-    - GlusterFS (via plugin Convoy)
+- Gestion optimisée de l'espace disque.
 
 ### Layers : une image
 
-![](images/docker/image-layers.jpg)
+![Une image se decompose en layers](images/docker/image-layers.jpg)
 
 ### Layers : un conteneur
 
@@ -45,6 +37,43 @@
 ### Layers : Répétition des layers
 
 ![Les layers sont indépendants de l'image](images/docker/saving-space.jpg)
+
+### Stockage
+
+- Images Docker, données des conteneurs, volumes
+
+- Multiples backends (extensibles via plugins):
+    - AUFS
+    - DeviceMapper
+    - OverlayFS
+    - NFS (via plugin Convoy)
+    - GlusterFS (via plugin Convoy)
+
+### Stockage : AUFS
+
+- A unification filesystem
+
+- Stable : performances écriture moyennes
+
+- Non intégré dans le Kernel Linux (mainline)
+
+### Stockage : Device Mapper
+
+- Basé sur LVM
+
+- Thin Provisionning et snapshot
+
+- Intégré dans le Kernel Linux (mainline)
+
+- Stable : performances écriture moyennes
+
+### Stockage : OverlayFS
+
+- Successeur de AUFS
+
+- Performances accrues
+
+- Relativement stable mais moins éprouvé que AUFS ou Device Mapper
 
 ### Stockage : volumes
 

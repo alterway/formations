@@ -26,7 +26,7 @@
 
 ### PID namespaces (Linux 2.6.24)
 
-- Isole l’arbre d’execution des processus et permet donc à chaque conteneur de disposer de son propre processus maître (PID 0) qui pourra ensuite exécuter et manager d'autres processus avec des droits illimités tout en étant un processus restreint au sein du système hôte.
+- Isole l’arbre d’exécution des processus et permet donc à chaque conteneur de disposer de son propre processus maître (PID 0) qui pourra ensuite exécuter et manager d'autres processus avec des droits illimités tout en étant un processus restreint au sein du système hôte.
 
 ### User namespaces (Linux 2.6.23-3.8)
 
@@ -113,7 +113,7 @@ CGroup: /
 
 - Développé par CoreOS
 
-- Pas de daemon : intégration avec systemd.
+- Pas de daemon : intégration avec systemd
 
 - Utilise systemd-nspawn
 

@@ -66,5 +66,5 @@
 
 - Fonctionnent sur du IaaS ou sur du bare-metal
 
-- Simplifient la décomposition d'application en micro services
+- Simplifient la décomposition d'applications en micro services
 
