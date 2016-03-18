@@ -77,7 +77,25 @@ section.titleslide h1 {
   font-size: 1.55em; }
 
 .reveal h4 {
-  font-size: 1em; }
+  font-size: 1em;
+  color: #383838;
+  position: relative;
+  top: 50px;
+  margin-left: 40%;
+  margin-right: 40%;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 36px;
+  font-weight: normal;
+}
+.reveal h4:before {
+  content: '\2022';
+  position: relative;
+  bottom: .1em;
+  right: 5px;
+  color: #383838;
+  font-size: 36px;
+  font-weight: bold;
+}
 
 .reveal h1 {
   text-shadow: none; }

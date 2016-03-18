@@ -2,17 +2,18 @@
 
 ### Un ensemble de concepts et de composants
 
-- Layers
+#### Layers {.fragment .fade-in}
 
-- Stockage
--
-- Volumes
+#### Stockage{.fragment .fade-in}
 
-- Réseau
+#### Volumes{.fragment .fade-in}
 
-- Ports
+#### Réseau{.fragment .fade-in}
 
-- Links
+#### Ports{.fragment .fade-in}
+
+#### Links{.fragment .fade-in}
+
 
 ### Layers
 
