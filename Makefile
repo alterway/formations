@@ -1,39 +1,43 @@
-SHELL=/bin/bash
-
-#### USAGE ####
 #
-#  make (screen.pdf handout.pdf print.pdf) course=[openstack|docker]
+#  make $cours.pdf
+#  make $cours-handout.pdf
+#  make $cours-print.pdf
 #
-#######################
-# Les morceaux que l'on veut inclure
-#PARTS = introduction-user cloud archi-cloud-dev archi-cloud-infra openstack-presentation openstack-utilisation conclusion
+#  Optional:
+#  make build/$cours.md
+#  make build/$cours.tex
+#
 
-# Par défaut on génère tous les styles : screen, handout et print
-all: screen.pdf handout.pdf print.pdf
+cours=cours/list.md
 
-course=openstack
-# Nécessaire pour la suite
-pwd:=$(shell pwd)
-result:=$(pwd)/result
+all: openstack.pdf docker.pdf
 
-# Construction du style demandé, avec les morceaux choisis
-%.pdf: cours/styles/%.tex cours/${course}/*.tex
-	$(eval tmp:=$(shell mktemp -d $(pwd)/tmp.XXX))
-	cp $< $(tmp)/$*.tex
-	cat cours/${course}/*.tex >> $(tmp)/$*.tex
-	echo '\end{document}' >> $(tmp)/$*.tex
-	mkdir -p ${result}
-	pdflatex -output-directory $(result) $(tmp)/$*.tex
-	pdflatex -output-directory $(result) $(tmp)/$*.tex
-	rm -rf $(tmp)
-	ln -sf result/$*.pdf $*.pdf
+build/Makefile:
+	mkdir -p build
+	sed -E 's#^(.*):(.*)#build/\1.md: $$(addprefix cours/, \2)\n\t$$(foreach module,$$^,cat $$(module) >> $$@;)#' $(cours) > build/Makefile
 
-# On ne garde que les PDFs résultants
+-include build/Makefile
+
+build/%.tex: build/%.md
+	pandoc $< -t beamer -f markdown -s -o $@ --slide-level 3 -V navigation=frame
+	sed -i 's,\\{width=``.*},,' $@ # workaround
+	sed -i 's,\\{height=``.*},,' $@
+
+build/%-handout.tex: build/%.md
+	pandoc $< -t beamer -f markdown -s -o $@ --slide-level 3 -V navigation=frame -V handout
+	sed -i 's,\\{width=``.*},,' $@
+	sed -i 's,\\{height=``.*},,' $@
+
+%.pdf: build/%.tex
+	pdflatex -output-directory build/ $<
+	pdflatex -output-directory build/ $<
+	cp build/$@ $@
+
+%-print.pdf: %.pdf
+	touch $@ #TODO
+
 clean:
-	rm -f $(result)/*.{aux,log,nav,out,snm,toc}
-	rm -rf $(pwd)/tmp.*
+	rm -rf build/
 
-# On nettoie tout
 mrproper: clean
-	rm -rf $(result)/
 	rm *.pdf
