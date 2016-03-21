@@ -1,12 +1,10 @@
 # Formations
 
-![image](images/openstack.png)
-
 ### Concernant ces supports de cours
 
 Supports de cours OpenStack réalisés par Osones (<https://osones.com>)
 
-![image](images/logo-osones.png)
+![](images/logo-osones.png)
 
 -   Copyright © 2014-2016 Osones
 -   Licence : Creative Commons BY-SA 4.0
