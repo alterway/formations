@@ -2,8 +2,6 @@
 
 ### Le Cloud : les concepts
 
-### Le cloud ? Vaste sujet !
-
 -   Puissance de calcul, capacité de stockage et fonctionnalités réseau sous forme de services en-ligne
 -   Flexibilité et élasticité des infrastructures
 -   Libre-service, notion de catalogue
@@ -13,9 +11,9 @@
 ### WaaS : Whatever as a Service
 
 -   Principalement :
-    IaaS: $\rightarrow$ Infrastructure as a Service
-    PaaS: $\rightarrow$ Platform as a Service
-    SaaS: $\rightarrow$ Software as a Service
+    -   IaaS $\rightarrow$ Infrastructure as a Service
+    -   PaaS $\rightarrow$ Platform as a Service
+    -   SaaS $\rightarrow$ Software as a Service
 -   Mais aussi :
     -   Object Storage as a Service
     -   Database as a Service
@@ -25,16 +23,17 @@
 
 ### Cloud public, cloud privé, cloud hybride ?
 
-Public: $\rightarrow$ services cloud proposés par un fournisseur externe (AWS, Rackspace, OVH, etc.)
-Privé: $\rightarrow$ services cloud proposés par une entreprise/organisation à ses propres départements
-Hybride:   $\rightarrow$ utilisation des services d’un ou plusieurs clouds publics au sein d’un cloud privé
+-   Public $\rightarrow$ services cloud proposés par un fournisseur externe (AWS, Rackspace, OVH, etc.)
+-   Privé $\rightarrow$ services cloud proposés par une entreprise/organisation à ses propres départements
+-   Hybride $\rightarrow$ utilisation des services d’un ou plusieurs clouds publics au sein d’un cloud privé
 
 ### Le cloud en un schéma
 
 ![image](images/cloud.png)
 
-### Pourquoi migrer vers le cloud ? Motivations d’ordre économique
+### Pourquoi migrer vers le cloud ? 
 
+Motivations d’ordre économique :
 -   appréhender les ressources IT comme des services “fournisseur”
 -   réduire les coûts en mutualisant les ressources
 -   réduire les délais d’approvisionnement de ressources
@@ -42,32 +41,13 @@ Hybride:   $\rightarrow$ utilisation des services d’un ou plusieurs clouds pub
 -   aligner les coûts sur la consommation réelle des ressources
 -   automatiser les opérations sur le SI et le rendre ainsi plus flexible
 
-### Pourquoi migrer vers le cloud ? Motivations d’ordre technique
+### Pourquoi migrer vers le cloud ?
 
+Motivations d’ordre technique : 
 -   abstraire les couches basses (serveur, réseau, OS, stockage)
 -   s’affranchir de l’administration technique des ressources et services (BdD, pare-feux, load balancing,...)
 -   concevoir des infrastructures scalables à la volée
 -   agir sur les ressources via des lignes de code et gérer les infrastructures “comme du code”
-
-# PaaS : Platform as a Service
-
-### PaaS : concept d’application managée
-
--   Fourniture d’une plate-forme de “build, deploy and scale”
--   Pour un langage / un framework (Python, Java, PHP, etc.)
--   Principalement utilisé par des développeurs d’applications
-
-### Exemples de PaaS public
-
--   Amazon Elastic Beanstalk (<https://aws.amazon.com/fr/elasticbeanstalk>)
--   Google App Engine (<https://cloud.google.com/appengine>)
--   Heroku (<https://www.heroku.com>)
-
-### Solutions de PaaS privé
-
--   Cloud Foundry (<https://www.cloudfoundry.org>)
--   OpenShift (<http://www.openshift.org>)
--   Solum (<https://wiki.openstack.org/wiki/Solum>)
 
 # IaaS : Infrastructure as a Service
 
@@ -81,7 +61,7 @@ Hybride:   $\rightarrow$ utilisation des services d’un ou plusieurs clouds pub
 ### Les clouds publics concurrents d’AWS
 
 -   dans le monde :
-    -   Google Compute Platform
+    -   Google Cloud Platform
     -   Microsoft Azure
     -   Rackspace
 -   en France :
@@ -94,18 +74,19 @@ Hybride:   $\rightarrow$ utilisation des services d’un ou plusieurs clouds pub
 
 ### Logiciels libres permettant le déploiement d’un cloud privé
 
--   Eucalyptus
--   CloudStack
--   OpenNebula
 -   **OpenStack** (https://www.openstack.org)
+-   CloudStack (https://cloudstack.apache.org/)
+-   Eucalyptus (Acheté par HP en septembre 2014)
+-   OpenNebula (http://opennebula.org/)
+
 
 ### Correspondance OpenStack - AWS
 
-| Service       |     OpenStack     |      AWS     |
-| ------------- |: ---------------: | -----------: |
-| compute       |       Nova        |      EC2     |
-| block storage |       Cinder      |      EBS     |
-| object storage|       Swift       |      S3      |
+| Service        |     OpenStack     |      AWS     |
+| -------------- |: ---------------: | -----------: |
+| compute        |       Nova        |      EC2     |
+| block storage  |       Cinder      |      EBS     |
+| object storage |       Swift       |      S3      |
 
 ### Virtualisation dans le cloud
 
@@ -148,9 +129,7 @@ Hybride:   $\rightarrow$ utilisation des services d’un ou plusieurs clouds pub
     -   Stack : ensemble des ressources IaaS utilisées par une application.
     -   Template : fichier texte contenant la description d’une stack.
 
-# APIs : quel rôle ?
-
-### API ?
+### OpenStack est une API
 
 -   *Application Programming Interface*
 -   Au sens logiciel : Interface permettant à un logiciel d’utiliser une bibliothèque
@@ -177,4 +156,25 @@ Hybride:   $\rightarrow$ utilisation des services d’un ou plusieurs clouds pub
           "provider:segmentation_id":null
        }
     }
+
+
+# PaaS : Platform as a Service
+
+### PaaS : concept d’application managée
+
+-   Fourniture d’une plate-forme de “build, deploy and scale”
+-   Pour un langage / un framework (Python, Java, PHP, etc.)
+-   Principalement utilisé par des développeurs d’applications
+
+### Exemples de PaaS public
+
+-   Amazon Elastic Beanstalk (<https://aws.amazon.com/fr/elasticbeanstalk>)
+-   Google App Engine (<https://cloud.google.com/appengine>)
+-   Heroku (<https://www.heroku.com>)
+
+### Solutions de PaaS privé
+
+-   Cloud Foundry (<https://www.cloudfoundry.org>)
+-   OpenShift (<http://www.openshift.org>)
+-   Solum (<https://wiki.openstack.org/wiki/Solum>)
 

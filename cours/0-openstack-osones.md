@@ -16,9 +16,9 @@ Supports de cours réalisés par Osones
 
 ### Auteurs
 
--   Adrien Cunin <adrien.cunin@osones.com>
--   Pierre Freund <pierre.freund@osones.com>
--   Jean-François Taltavull <jft@osones.com>
--   Romain Guichard <romain.guichard@osones.com>
--   Kevin Lefevre <kevin.lefevre@osones.com>
+- Adrien Cunin <adrien.cunin@osones.com>
+- Pierre Freund <pierre.freund@osones.com>
+- Jean-François Taltavull <jft@osones.com>
+- Romain Guichard <romain.guichard@osones.com>
+- Kevin Lefevre <kevin.lefevre@osones.com>
 

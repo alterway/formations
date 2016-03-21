@@ -20,6 +20,7 @@
 -   Savoir réagir face à un bug
 
 ### Pré-requis de la formation
+
 -   Compétences d’administration système Linux tel qu’Ubuntu
     -   Gestion des paquets
     -   LVM et systèmes de fichiers

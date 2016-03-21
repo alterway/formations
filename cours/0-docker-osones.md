@@ -16,6 +16,6 @@ Supports de cours réalisés par Osones
 
 ### Auteurs
 
-Romain Guichard <romain.guichard@osones.io>
-Kevin Lefevre <kevin.lefevre@osones.io>
+- Romain Guichard <romain.guichard@osones.io>
+- Kevin Lefevre <kevin.lefevre@osones.io>
 
