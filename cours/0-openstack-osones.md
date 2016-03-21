@@ -2,15 +2,17 @@
 
 ### Concernant ces supports de cours
 
-Supports de cours OpenStack réalisés par Osones (<https://osones.com>)
+Supports de cours réalisés par Osones
 
-![](images/logo-osones.png)
+<https://osones.com>
 
--   Copyright © 2014-2016 Osones
--   Licence :
-[Creative Commons BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.fr)
-![](images/licence.png)
--   Sources : <https://github.com/Osones/OpenStack-Formations/>
+![](images/logo-osones.png){height="70px"}
+
+- Copyright © 2014-2016 Osones
+- Licence : [Creative Commons BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.fr)
+- Sources : <https://github.com/Osones/Formations/>
+
+![](images/licence.png){width="100px"}
 
 ### Auteurs
 
