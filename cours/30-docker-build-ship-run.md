@@ -24,6 +24,19 @@ EXPOSE 80 443
 CMD ["nginx"]
 ```
 
+### Dockerfile : principales instructions
+
+- `FROM` : baseimage utilisée
+
+- `RUN` : Commandes effectuées lors du build de l'image
+
+- `EXPOSE` : Ports exposées lors du run (si `-P` est précisé)
+
+- `ENV` : Variables d'environnement du conteneur à l'instanciation
+
+- `CMD` : Commande unique lancée par le conteneur
+
+- `ENTRYPOINT` : "Préfixe" de la commande unique lancée par le conteneur
 
 ### Best Practices des Dockerfile
 
@@ -81,6 +94,8 @@ CMD ["nginx"]
 
 - `-p` portHost:portContainer
 
+- `-P`
+
 - `-e` “VARIABLE=valeur”
 
 - `–restart=always`
@@ -108,3 +123,4 @@ CMD ["nginx"]
 - docker stop (SIGTERM puis SIGKILL)
 
 - docker rm (détruit complètement)
+

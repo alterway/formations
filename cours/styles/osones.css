@@ -86,6 +86,7 @@ section.titleslide h1 {
   font-family: "Source Sans Pro", sans-serif;
   font-size: 36px;
   font-weight: normal;
+  text-transform: lowercase;
 }
 .reveal h4:before {
   content: '\2022';

@@ -12,7 +12,7 @@
 
 ### Rancher
 
-### Disovery Service
+### Discovery Service
 
 - La nature ephémère des conteneurs empêche toute configuration manuelle
 
