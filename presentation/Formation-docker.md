@@ -1,5 +1,5 @@
 # Docker
-Durée : 2 jours  
+Durée : 2 jours
 Intervenant : 1
 
 ## Description
@@ -88,7 +88,7 @@ Compétences d’administration système Linux tel qu’Ubuntu, Red Hat ou Debia
 
 #### Hosts Docker
 - Les OS Linux traditionnels : Debian, Ubuntu, CentOS
-- Les OS Linux orientés conteneurs : CoreOS, RancherOS
+- Les OS Linux orientés conteneurs : CoreOS, RancherOS, Atomic
 - Lequel choisir ?
 - Gérer ses conteneurs avec Systemd
 
