@@ -51,7 +51,7 @@ Motivations d’ordre technique :
 -   concevoir des infrastructures scalables à la volée
 -   agir sur les ressources via des lignes de code et gérer les infrastructures “comme du code”
 
-# IaaS : Infrastructure as a Service
+### IaaS : Infrastructure as a Service
 
 ### Le leader du IaaS public : Amazon Web Services (AWS)
 
@@ -159,7 +159,7 @@ Motivations d’ordre technique :
     }
 
 
-# PaaS : Platform as a Service
+### PaaS : Platform as a Service
 
 ### PaaS : concept d’application managée
 

@@ -80,7 +80,7 @@
 
 ![](images/rabbitmq-schema.png)
 
-# Keystone : Authentification, autorisation et catalogue de services
+### Keystone : Authentification, autorisation et catalogue de services
 
 ### Principes
 
@@ -134,7 +134,7 @@ Keystone :
     $ keystone token-get
     ...
 
-# Nova : Compute
+### Nova : Compute
 
 ### Principes
 
@@ -222,7 +222,7 @@ Les instances sont redimensionnables et migrables d’un hôte physique à un au
     $ nova create
     ...
 
-# Glance : Registre d’images
+### Glance : Registre d’images
 
 ### Principes
 
@@ -270,7 +270,7 @@ Glance supporte un large éventail de types d’images, limité par le support d
     $ glance image-create
     ...
 
-# Neutron : Réseau en tant que service
+### Neutron : Réseau en tant que service
 
 ### Principes
 
@@ -324,7 +324,7 @@ L’API permet notamment de manipuler ces ressources
 
 ![](images/neutron-schema2.png)
 
-# Cinder : Stockage block
+### Cinder : Stockage block
 
 ### Principes
 
@@ -362,7 +362,7 @@ L’API permet notamment de manipuler ces ressources
 -   Systèmes de stockage propriétaires type NetApp
 -   DRBD
 
-# Horizon : Dashboard web
+### Horizon : Dashboard web
 
 ### Principes
 
@@ -382,7 +382,7 @@ L’API permet notamment de manipuler ces ressources
 -   Une zone “admin” restreinte
 -   Une interface par tenant
 
-# Swift : Stockage objet
+### Swift : Stockage objet
 
 ### Principes
 
@@ -412,7 +412,7 @@ L’API permet notamment de manipuler ces ressources
 
 ![](images/swift-schema.png)
 
-# Ceilometer : Collecte de métriques
+### Ceilometer : Collecte de métriques
 
 ### Surveiller l’utilisation de son infrastructure avec Ceilometer
 
@@ -427,7 +427,7 @@ L’API permet notamment de manipuler ces ressources
 -   Initié par des développeurs de Ceilometer et intégré à l’équipe projet Ceilometer
 -   Back-end remplaçant MongoDB pour Ceilometer
 
-# Heat : Orchestration des ressources
+### Heat : Orchestration des ressources
 
 ### Orchestrer son infrastructure avec Heat
 
@@ -471,7 +471,7 @@ Multiples projets en cours de développement
 -   HOT builder
 -   Merlin
 
-# Trove : Database as a Service
+### Trove : Database as a Service
 
 ### Principe
 
@@ -486,14 +486,14 @@ Multiples projets en cours de développement
 -   trove-taskmanager : gère les instances BDD
 -   trove-guestagent : agent interne à l’instance
 
-# Designate : DNS as a Service
+### Designate : DNS as a Service
 
 ### Principe
 
 -   Équivalent d’AWS Route 53
 -   Gère différents backends : BIND, etc.
 
-# Quelques autres composants intéressants
+### Quelques autres composants intéressants
 
 ### Ironic
 
@@ -526,7 +526,7 @@ Multiples projets en cours de développement
 -   Est très utilisé par les développeurs via l’intégration continue
 -   Le déployeur peut utiliser Tempest pour vérifier la bonne conformité de son cloud
 
-# Bonnes pratiques pour un déploiement en production
+### Bonnes pratiques pour un déploiement en production
 
 ### Quels composants dois-je installer ?
 -   Keystone est indispensable
