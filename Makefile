@@ -1,15 +1,25 @@
 #
+#  Usage:
 #  make $cours.pdf
 #  make $cours-handout.pdf
 #  make $cours-print.pdf
+#  make $cours.html
 #
 #  Optional:
 #  make build/$cours.md
 #  make build/$cours.tex
 #
 
-cours=cours/list.md
+# Dependencies: pandoc
+#               pdflatex
+#               texlive-extra-utils (pdfnup)
 
+# Definition of cours based on modules
+cours=cours/list.md
+# Where to get revealjs stuff
+revealjsurl=https://cdn.bootcss.com/reveal.js/3.2.0
+
+# Define "all", which is built by default
 all: openstack.pdf docker.pdf
 
 build/Makefile:
@@ -28,16 +38,20 @@ build/%-handout.tex: build/%.md
 	sed -i 's,\\{width=``.*},,' $@
 	sed -i 's,\\{height=``.*},,' $@
 
+%.html: build/%.md
+	pandoc $< -t revealjs -f markdown -s -o $@ --slide-level 3 -V navigation=frame -V revealjs-url=$(revealjsurl)
+
 %.pdf: build/%.tex
 	pdflatex -output-directory build/ $<
 	pdflatex -output-directory build/ $<
-	cp build/$@ $@
+	mv build/$@ $@
 
 %-print.pdf: %.pdf
-	touch $@ #TODO
+	pdfnup --nup 2x2 --frame true --suffix print $<
 
 clean:
 	rm -rf build/
 
 mrproper: clean
-	rm *.pdf
+	rm -f *.pdf
+	rm -f *.html
