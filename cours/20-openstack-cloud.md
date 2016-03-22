@@ -34,6 +34,7 @@
 ### Pourquoi migrer vers le cloud ? 
 
 Motivations d’ordre économique :
+
 -   appréhender les ressources IT comme des services “fournisseur”
 -   réduire les coûts en mutualisant les ressources
 -   réduire les délais d’approvisionnement de ressources
@@ -44,6 +45,7 @@ Motivations d’ordre économique :
 ### Pourquoi migrer vers le cloud ?
 
 Motivations d’ordre technique : 
+
 -   abstraire les couches basses (serveur, réseau, OS, stockage)
 -   s’affranchir de l’administration technique des ressources et services (BdD, pare-feux, load balancing,...)
 -   concevoir des infrastructures scalables à la volée
@@ -82,11 +84,10 @@ Motivations d’ordre technique :
 
 ### Correspondance OpenStack - AWS
 
-| Service        |     OpenStack     |      AWS     |
-| -------------- |: ---------------: | -----------: |
-| compute        |       Nova        |      EC2     |
-| block storage  |       Cinder      |      EBS     |
-| object storage |       Swift       |      S3      |
+-   Compute $\rightarrow$ EC2 $\rightarrow$ Nova
+-   Block storage $\rightarrow$ EBS $\rightarrow$ Cinder
+-   Object storage $\rightarrow$ S3 $\rightarrow$ Swift
+-   Orchestration $\rightarrow$ CFN $\rightarrow$ Heat
 
 ### Virtualisation dans le cloud
 

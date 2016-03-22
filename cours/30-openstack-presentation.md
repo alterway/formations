@@ -1,10 +1,8 @@
-# OpenStack : le projet, utilisation du IaaS
-
-### Présentation du projet
+# OpenStack : le projet
 
 ### Vue haut niveau
 
-![image](images/openstack-software-diagram.pdf)
+![image](images/openstack-software-diagram.png)
 
 ### Historique
 
@@ -12,20 +10,22 @@
 -   Objectif : le Cloud Operating System libre
 -   Fusion de deux projets de Rackspace (Storage) et de la NASA (Compute)
 -   Logiciel libre distribué sous licence Apache 2.0
--   Les releases jusqu’à aujourd’hui :
-    -   Austin (2010.1)
-    -   Bexar (2011.1)
-    -   Cactus (2011.2)
-    -   Diablo (2011.3)
-    -   Essex (2012.1)
-    -   Folsom (2012.2)
-    -   Grizzly (2013.1)
-    -   Havana (2013.2)
-    -   Icehouse (2014.1)
-    -   Juno (2014.2)
-    -   Kilo (2015.1)
-    -   **Liberty (2015.2)**
-    -   Avril 2016 : Mitaka
+
+### Les releases
+
+-   Austin (2010.1)
+-   Bexar (2011.1)
+-   Cactus (2011.2)
+-   Diablo (2011.3)
+-   Essex (2012.1)
+-   Folsom (2012.2)
+-   Grizzly (2013.1)
+-   Havana (2013.2)
+-   Icehouse (2014.1)
+-   Juno (2014.2)
+-   Kilo (2015.1)
+-   **Liberty (2015.2)**
+-   Avril 2016 : Mitaka
 
 ### Statistiques : Kilo
 
@@ -39,11 +39,10 @@ Source : <http://lists.openstack.org/pipermail/foundation-board/2015-April/00005
 
 ### Quelques soutiens/contributeurs ...
 
--   NASA
--   VMWare
--   Bull
--   Mais aussi : , eNovance (racheté par Red Hat), , Hastexo, StackOps
--   et **Google** ! (depuis juillet 2015)
+- Editeurs : RedHat, HP, IBM, Suse, Canonical, Vmware, ...
+- Constructeurs : Dell, Hitachi, Juniper, Cisco, NetApp, ...
+- En vrac: NASA, Yahoo, OVH, Citrix, SAP, Rackspace, ...
+-  **Google** ! (depuis juillet 2015)
 
 <http://www.openstack.org/foundation/companies/>
 
@@ -100,6 +99,9 @@ Source : <http://lists.openstack.org/pipermail/foundation-board/2015-April/00005
 -   Représentation juridique du projet
 -   Les membres du board sont issus des entreprises sponsors et élus par les membres individuels
 -   Tout le monde peut devenir membre individuel (gratuitement)
+
+### La fondation OpenStack
+
 -   La fondation supporte le projet par différents moyens :
     -   Événements : organisation (Summits) ou participation (OSCON, etc.)
     -   Infrastructure de développement (serveurs)
@@ -109,11 +111,11 @@ Source : <http://lists.openstack.org/pipermail/foundation-board/2015-April/00005
 
 ### La fondation OpenStack
 
-![image](images/foundation.png)
+![](images/foundation.png)
 
 ### Interface web / Dashboard : Horizon
 
-![image](images/horizon.png)
+![](images/horizon.png)
 
 ### Ressources
 
@@ -125,6 +127,9 @@ Source : <http://lists.openstack.org/pipermail/foundation-board/2015-April/00005
     -   openstack@lists.openstack.org
     -   \#openstack@Freenode
 -   SDK/APIs : <http://developer.openstack.org/>
+
+### Ressources
+
 -   Applications : <http://apps.openstack.org/>
 -   Actualités :
     -   Blog officiel : <http://www.openstack.org/blog/>
@@ -135,7 +140,7 @@ Source : <http://lists.openstack.org/pipermail/foundation-board/2015-April/00005
 
 ### Ressources - Communauté francophone
 
-![image](images/openstackfr.png)
+![](images/openstackfr.png)
 
 -   Site web : <http://openstack.fr/>
 -   Association des utilisateurs francophones d’OpenStack : <https://asso.openstack.fr/>
