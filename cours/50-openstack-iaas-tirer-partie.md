@@ -16,19 +16,22 @@ idée :
 -   Pertes de données
 -   Incompréhensions “le cloud ça marche pas”
 
-# Côté applications
-
-### Adapter ou penser ses applications “cloud ready”
+### Applications : adapter ou penser ses applications “cloud ready”
 Cf. les design tenets du projet OpenStack et Twelve-Factor <http://12factor.net/>
 
 -   Architecture distribuée plutôt que monolithique
     -   Facilite le passage à l’échelle
     -   Limite les domaines de *failure*
 -   Couplage faible entre les composants
+
+### Applications : adapter ou penser ses applications “cloud ready”
+
 -   Bus de messages pour les communications inter-composants
 -   Stateless : permet de multiplier les routes d’accès à l’application
 -   Dynamicité : l’application doit s’adapter à son environnement et se reconfigurer lorsque nécessaire
 -   Permettre le déploiement et l’exploitation par des outils d’automatisation
+
+### Applications : adapter ou penser ses applications “cloud ready”
 -   Limiter autant que possible les dépendances à du matériel ou du logiciel spécifique qui pourrait ne pas fonctionner dans un cloud
 -   Tolérance aux pannes (*fault tolerance*) intégrée
 -   Ne pas stocker les données en local, mais plutôt :
@@ -36,23 +39,19 @@ Cf. les design tenets du projet OpenStack et Twelve-Factor <http://12factor.net/
     -   Stockage objet
 -   Utiliser des outils standards de journalisation
 
-# Côté système
-
-### Adopter une philosophie DevOps
+### Système : adopter une philosophie DevOps
 -   Infrastructure as Code
 -   Scale out plutôt que scale up (horizontalement plutôt que verticalement)
 -   HA niveau application plutôt qu’infrastructure
 -   Automatisation, automatisation, automatisation
 -   Tests
 
-### Monitoring et backup
-
-Monitoring
+### Monitoring 
 
 -   Prendre en compte le cycle de vie des instances
 -   Monitorer le service plus que le serveur
 
-Backuper, quoi ?
+### Backup 
 
 -   Être capable de recréer ses instances (et le reste de son infrastructure)
 -   Données (applicatives, logs) : block, objet
@@ -64,9 +63,8 @@ Une image cloud c’est :
 -   Une image disque contenant un OS déjà installé
 -   Une image qui peut être instanciée en n machines sans erreur
 -   Un OS sachant parler à l’API de metadata du cloud (cloud-init)
-
-Détails : <http://docs.openstack.org/image-guide/content/ch_openstack_images.html>\
-La plupart des distributions fournissent aujourd’hui des images cloud.
+-   Détails : <http://docs.openstack.org/image-guide/content/ch_openstack_images.html>\
+-   La plupart des distributions fournissent aujourd’hui des images cloud.
 
 ### Cirros
 

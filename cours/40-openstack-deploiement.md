@@ -27,8 +27,6 @@
 -   Les composants découpés en plusieurs services ont souvent un fichier de configuration par service
 -   api-paste.ini contient des paramètres concernant le service API
 
-# Les briques nécessaires
-
 ### Système d’exploitation
 
 -   OS Linux avec Python
@@ -724,9 +722,7 @@ Guide sécurité : <http://docs.openstack.org/security-guide/content/>
 -   Nécessite la mise en place d’une infrastructure importante
 -   Facilite les mises à jour entre versions majeures
 
-# Faire face aux problèmes
-
-### Ressources FAILED/ERROR
+### Problèmes : ressources FAILED/ERROR
 
 -   Plusieurs causes possibles
 -   Possibilité de supprimer la ressource ?
