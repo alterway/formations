@@ -15,7 +15,7 @@
 
 ### Stockage objet : schéma
 
-![image](images/stockage-objet.png)
+![](images/stockage-objet.png)
 
 ### SDS : Software Defined Storage
 
@@ -33,7 +33,7 @@
 
 ### Théorème CAP
 
-![image](images/cap.jpg)
+![](images/cap.jpg)
 
 ### Swift
 
@@ -89,7 +89,7 @@
 
 ### Architecture
 
-![image](images/architecture-simple.jpg)
+![](images/architecture-simple.jpg)
 
 ### Cycle de développement : 6 mois
 
@@ -139,27 +139,27 @@
 
 ### Exemple du Summit d’avril 2013 à Portland
 
-![image](images/photo-summit.jpg)
+![](images/photo-summit.jpg)
 
 ### Exemple du Summit d’octobre 2015 à Tokyo
 
-![image](images/photo-summit1.jpg) Photo : Elizabeth K. Joseph, CC BY
+![](images/photo-summit1.jpg) Photo : Elizabeth K. Joseph, CC BY
 
 2.0, Flickr/pleia2
 
 ### Exemple du Summit d’octobre 2015 à Tokyo
 
-![image](images/photo-summit2.jpg) Photo : Elizabeth K. Joseph, CC BY
+![](images/photo-summit2.jpg) Photo : Elizabeth K. Joseph, CC BY
 2.0, Flickr/pleia2
 
 ### Exemple du Summit d’octobre 2015 à Tokyo
 
-![image](images/photo-summit3.jpg) Photo : Elizabeth K. Joseph, CC BY
+![](images/photo-summit3.jpg) Photo : Elizabeth K. Joseph, CC BY
 2.0, Flickr/pleia2
 
 ### Exemple du Summit d’octobre 2015 à Tokyo
 
-![image](images/photo-summit4.jpg) Photo : Elizabeth K. Joseph, CC BY
+![](images/photo-summit4.jpg) Photo : Elizabeth K. Joseph, CC BY
 2.0, Flickr/pleia2
 
 ### Développement du projet : en détails

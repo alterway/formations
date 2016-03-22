@@ -2,7 +2,7 @@
 
 ### Vue haut niveau
 
-![image](images/openstack-software-diagram.png)
+![](images/openstack-software-diagram.png)
 
 ### Historique
 

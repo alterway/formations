@@ -29,7 +29,7 @@
 
 ### Le cloud en un schéma
 
-![image](images/cloud.png)
+![](images/cloud.png)
 
 ### Pourquoi migrer vers le cloud ? 
 

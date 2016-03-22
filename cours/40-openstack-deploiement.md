@@ -10,15 +10,15 @@
 
 ### Architecture détaillée
 
-![image](images/architecture.jpg)
+![](images/architecture.jpg)
 
 ### Architecture réseau
 
-![image](images/archi-network.png)
+![](images/archi-network.png)
 
 ### Architecture services
 
-![image](images/archi-service.png)
+![](images/archi-service.png)
 
 ### Quelques éléments de configuration généraux
 
@@ -38,7 +38,7 @@
 
 ### Python
 
-![image](images/python-powered.png)
+![](images/python-powered.png)
 
 -   OpenStack est aujourd’hui compatible Python 2.7
 -   Afin de ne pas réinventer la roue, beaucoup de dépendances sont nécessaires
@@ -56,12 +56,12 @@
 
 ### Pourquoi l’utilisation de SQLAlchemy
 
-![image](images/sqlalchemy-logo.png)
+![](images/sqlalchemy-logo.png)
 
 -   Support de multiples BDD
 -   Gestion des migrations
 
-![image](images/mysql-logo.png)
+![](images/mysql-logo.png)
 
 ### Passage de messages
 
@@ -73,14 +73,14 @@
 
 ### RabbitMQ
 
-![image](images/rabbitmq-logo.png)
+![](images/rabbitmq-logo.png)
 
 -   RabbitMQ est implémenté en Erlang
 -   Une machine virtuelle Erlang est donc nécessaire
 
 ### “Hello world” RabbitMQ
 
-![image](images/rabbitmq-schema.png)
+![](images/rabbitmq-schema.png)
 
 # Keystone : Authentification, autorisation et catalogue de services
 
@@ -102,7 +102,7 @@
 
 ### Scénario d’utilisation typique
 
-![image](images/keystone-scenario.png)
+![](images/keystone-scenario.png)
 
 ### Installation et configuration
 -   Paquet : keystone
@@ -147,7 +147,7 @@ Keystone :
 
 ### Interactions avec les autres composants
 
-![image](images/compute-node.png)
+![](images/compute-node.png)
 
 ### Propriétés d’une instance
 
@@ -209,7 +209,7 @@ Les instances sont redimensionnables et migrables d’un hôte physique à un au
 
 ### Le scheduler Nova en action
 
-![image](images/scheduling-schema.png)
+![](images/scheduling-schema.png)
 
 ### Nova conductor
 
@@ -320,11 +320,11 @@ L’API permet notamment de manipuler ces ressources
 
 ### Schéma
 
-![image](images/neutron-schema.png)
+![](images/neutron-schema.png)
 
 ### Schéma
 
-![image](images/neutron-schema2.png)
+![](images/neutron-schema2.png)
 
 # Cinder : Stockage block
 
@@ -372,7 +372,7 @@ L’API permet notamment de manipuler ces ressources
 -   Horizon est un module Django
 -   OpenStack Dashboard est l’implémentation officielle de ce module
 
-![image](images/django-logo.png)
+![](images/django-logo.png)
 
 ### Configuration
 
@@ -412,7 +412,7 @@ L’API permet notamment de manipuler ces ressources
 
 ### Schéma
 
-![image](images/swift-schema.png)
+![](images/swift-schema.png)
 
 # Ceilometer : Collecte de métriques
 
@@ -683,7 +683,7 @@ Guide sécurité : <http://docs.openstack.org/security-guide/content/>
 
 ### Ubuntu Cloud Archive
 
-![image](images/ubuntu-cloud-archive.png)
+![](images/ubuntu-cloud-archive.png)
 
 ### Packaging d’OpenStack dans les autres distributions
 
