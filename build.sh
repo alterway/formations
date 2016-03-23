@@ -11,7 +11,8 @@ while IFS=: read cours modules; do
     for module in $modules; do
         cat $COURS_DIR/$module >> $COURS_DIR/slide-$cours
     done
-    pandoc $COURS_DIR/slide-$cours -t revealjs -f markdown -s -o $COURS_DIR/output-html/"$cours".html --slide-level 3 -V theme=osones -V navigation=frame -V revealjs-url=.
+    pandoc $COURS_DIR/slide-$cours -t revealjs -f markdown -s -o $COURS_DIR/output-html/"$cours".html --slide-level 3 -V theme=osones -V navigation=frame -V revealjs-url=. -V slideNumber="true"
+    rm -f $COURS_DIR/slide-$cours
 done < $LIST
 
 cp  $COURS_DIR/output-html/*.html $COURS_DIR/revealjs/
