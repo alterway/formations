@@ -40,4 +40,10 @@
 
 - Inclus Docker, etcd, fleet, flannel
 
+- Mise en cluster native
+
 - Pas de gestionnaire de paquets
+
+### CoreOS
+
+
