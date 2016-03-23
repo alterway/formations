@@ -8,9 +8,13 @@
 
 ### Où déployer ?
 
-### ECS
+- ECS
 
-### Rancher
+- Rancher
+
+- Mesos
+
+- Kubernetes
 
 ### Discovery Service
 
@@ -75,9 +79,14 @@ $ curl http://localhost:8500/v1/kv/container/key1 | jq .
 ]
 $ echo ZG9ja2Vy | base64 -d
 docker
+```
 
 ### Consul
 
-- Schéma avec registrator
+- L'enregistement des nouveaux conteneurs peut être automatisé
 
+- Registrator est un process écoutant le daemon Docker et enregistrant les évènements
 
+- [ Schéma avec registrator ]
+
+### Rancher
