@@ -1,25 +1,24 @@
-# Docker : les concepts
+# Les concepts
 
 ### Un ensemble de concepts et de composants
 
-#### Layers {.fragment .fade-in}
+- Layers
 
-#### Stockage{.fragment .fade-in}
+- Stockage
 
-#### Volumes{.fragment .fade-in}
+- Volumes
 
-#### Réseau{.fragment .fade-in}
+- Réseau
 
-#### Ports{.fragment .fade-in}
+- Publication de ports
 
-#### Links{.fragment .fade-in}
-
+- Links
 
 ### Layers
 
-- Les conteneurs et leurs images sont decomposées en couches (layers)
+- Les conteneurs et leurs images sont décomposés en couches (layers)
 
-- Les layers peuvent etre reutiliser entre differents conteneurs
+- Les layers peuvent être réutiliser entre différents conteneurs
 
 - Gestion optimisée de l'espace disque.
 
@@ -54,7 +53,7 @@
 
 - A unification filesystem
 
-- Stable : performances écriture moyennes
+- Stable : performance écriture moyenne
 
 - Non intégré dans le Kernel Linux (mainline)
 
@@ -66,7 +65,7 @@
 
 - Intégré dans le Kernel Linux (mainline)
 
-- Stable : performances écriture moyennes
+- Stable : performance écriture moyenne
 
 ### Stockage : OverlayFS
 
@@ -76,9 +75,39 @@
 
 - Relativement stable mais moins éprouvé que AUFS ou Device Mapper
 
-### Stockage : volumes
+### Stockage : Plugins
+
+- Étendre les drivers de stockages disponibles
+
+- Utiliser des systèmes de fichier distribués (GlusterFS)
+
+- Partager des volumes entre plusieurs hôtes docker
+
+### Volumes
+
+- Assurent une persistance des données
+
+- Indépendance du volume par rapport au conteneur et aux layers
+
+- Deux types de volumes :
+    - Conteneur : Les données sont stockées dans ce que l'on appelle un data conteneur
+    - Hôte : Montage d'un dossier de l'hôte docker dans le conteneur
+
+- Partage de volumes entre plusieurs conteneurs
+
+### Volumes : Exemple
 
 ![Un volume monté sur deux conteneurs](images/docker/shared-volume.jpg)
+
+### Volumes : Plugins
+
+- Permettre le partage de volumes entre differents hôtes
+
+- Fonctionnalité avancées : snapshot, migration, restauration
+
+- Quelques exemples:
+    - Convoy : multi-host et multi-backend (NFS, GlusterFS) 
+    - Flocker : migration de volumes dans un cluster
 
 ### Réseau : A la base, pas grand chose...
 
@@ -89,17 +118,53 @@ NETWORK ID      NAME      DRIVER
 0509391a1fbd    host      host
 ```
 
-### Réseau : Et puis des trucs sympas !
+### Réseau : Bridge
 
-- Driver réseau
+- SCHÉMA
 
-- libnetwork
+### Réseau : Host
+
+- SCHÉMA
+
+### Réseau : None
+
+- Est assez explicite
+
+### Réseau : Les évolutions
+
+- Refactorisation des composants réseau (*libnetwork*)
+
+- Système de plugins : multi host et multi backend (overlay network)
+
+- Quelques exemples d'overlay :
+    - Flannel : UDP et VXLAN
+    - Weaves : UDP
 
 ### Réseau : multihost overlay
 
 ![](images/docker/overlay_network.png)
 
-### Réseau : ports
+### Publication de ports
+
+- Dans le cas d'un réseaux diffèrent de l'hôte
+
+- Les conteneurs ne sont pas accessible depuis l'extérieur
+
+- Possibilité de publier des ports depuis l'hôte vers le conteneur (*iptables*) 
+
+- L'hôte sert de proxy au service
+
+### Publication de ports
 
 ![](images/docker/network_access.png)
+
+### Links
+
+- Les conteneurs d'un même réseaux peuvent communiquer via IP
+
+- Les liens permettent de lier deux conteneurs par nom
+
+- Système de DNS rudimentaire (`/etc/hosts`)
+
+- Remplacés par les *discovery services*
 
