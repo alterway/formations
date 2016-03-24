@@ -35,21 +35,21 @@
 
 Motivations d’ordre économique :
 
-#### appréhender les ressources IT comme des services “fournisseur”
-#### réduire les coûts en mutualisant les ressources
-#### réduire les délais d’approvisionnement de ressources
-#### faire glisser le budget “investissement” (Capex) vers le budget “fonctionnement” (Opex)
-#### aligner les coûts sur la consommation réelle des ressources
-#### automatiser les opérations sur le SI et le rendre ainsi plus flexible
+#### appréhender les ressources IT comme des services “fournisseur”{.fragment .fade-in}
+#### réduire les coûts en mutualisant les ressources{.fragment .fade-in}
+#### réduire les délais d’approvisionnement de ressources{.fragment .fade-in}
+#### faire glisser le budget “investissement” (Capex) vers le budget “fonctionnement” (Opex){.fragment .fade-in}
+#### aligner les coûts sur la consommation réelle des ressources{.fragment .fade-in}
+#### automatiser les opérations sur le SI et le rendre ainsi plus flexible{.fragment .fade-in}
 
 ### Pourquoi migrer vers le cloud ?
 
 Motivations d’ordre technique : 
 
-#### abstraire les couches basses (serveur, réseau, OS, stockage)
-#### s’affranchir de l’administration technique des ressources et services (BdD, pare-feux, load balancing,...)
-#### concevoir des infrastructures scalables à la volée
-#### agir sur les ressources via des lignes de code et gérer les infrastructures “comme du code”
+#### abstraire les couches basses (serveur, réseau, OS, stockage){.fragment .fade-in}
+#### s’affranchir de l’administration technique des ressources et services (BdD, pare-feux, load balancing,...){.fragment .fade-in}
+#### concevoir des infrastructures scalables à la volée{.fragment .fade-in}
+#### agir sur les ressources via des lignes de code et gérer les infrastructures “comme du code”{.fragment .fade-in}
 
 ### IaaS : Infrastructure as a Service
 
