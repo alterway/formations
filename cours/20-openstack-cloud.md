@@ -35,21 +35,21 @@
 
 Motivations d’ordre économique :
 
--   appréhender les ressources IT comme des services “fournisseur”
--   réduire les coûts en mutualisant les ressources
--   réduire les délais d’approvisionnement de ressources
--   faire glisser le budget “investissement” (Capex) vers le budget “fonctionnement” (Opex)
--   aligner les coûts sur la consommation réelle des ressources
--   automatiser les opérations sur le SI et le rendre ainsi plus flexible
+#### appréhender les ressources IT comme des services “fournisseur”
+#### réduire les coûts en mutualisant les ressources
+#### réduire les délais d’approvisionnement de ressources
+#### faire glisser le budget “investissement” (Capex) vers le budget “fonctionnement” (Opex)
+#### aligner les coûts sur la consommation réelle des ressources
+#### automatiser les opérations sur le SI et le rendre ainsi plus flexible
 
 ### Pourquoi migrer vers le cloud ?
 
 Motivations d’ordre technique : 
 
--   abstraire les couches basses (serveur, réseau, OS, stockage)
--   s’affranchir de l’administration technique des ressources et services (BdD, pare-feux, load balancing,...)
--   concevoir des infrastructures scalables à la volée
--   agir sur les ressources via des lignes de code et gérer les infrastructures “comme du code”
+#### abstraire les couches basses (serveur, réseau, OS, stockage)
+#### s’affranchir de l’administration technique des ressources et services (BdD, pare-feux, load balancing,...)
+#### concevoir des infrastructures scalables à la volée
+#### agir sur les ressources via des lignes de code et gérer les infrastructures “comme du code”
 
 ### IaaS : Infrastructure as a Service
 
