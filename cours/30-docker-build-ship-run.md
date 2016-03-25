@@ -6,19 +6,27 @@
 
 - Flexibilité et élasticité
 
-- Format standard
+- Format standard de facto
 
 - Instanciation illimitée
 
+### Construction d'une image
+
+- Possibilité de construire son image à la main (long et source d'erreurs)
+
+- Suivi de version et construction d'images de manière automatisée
+
+- Utilisation de *Dockerfile* afin de garantir l'idempotence des images
+
 ### Dockerfile
 
-- Définition d'une image
+- Suite d'instruction qui définit une image
 
 - Permet de vérifier le contenu d'une image
 
 ```
 FROM alpine:3.2
-MAINTAINER Romain Guichard <rgu@osones.io>
+MAINTAINER Osones <docker@osones.io>
 RUN apk -U add nginx
 EXPOSE 80 443
 CMD ["nginx"]
@@ -38,23 +46,29 @@ CMD ["nginx"]
 
 - `ENTRYPOINT` : "Préfixe" de la commande unique lancée par le conteneur
 
-### Best Practices des Dockerfile
+### Dockerfile : best practices
 
 - Bien choisir sa baseimage
 
+- Chaque commande Dockerfile génère un nouveau layer
+
 - Comptez vos layers !
 
-- schéma montrant les pb de tailles dues à une baseimage de merde
+### Dockerfile : best practices
 
-### Présentation de DockerHub
+- SCHEMA GOOD/BAD LAYERING
+
+### Dockerfile : DockerHub
+
+- Build automatisée d'images Docker
 
 - Intégration GitHub / DockerHub
 
-- screenshot
+- Plateforme de stockage et de distribution d'images Docker
 
 ### Ship
 
-### Les conteneurs sont indépendants !
+### Ship : Les conteneurs sont manipulables
 
 - Sauvegarder un conteneur :
 
@@ -66,19 +80,21 @@ CMD ["nginx"]
 
 `docker save -o mon-image.tar backup/mon-conteneur`
 
-- Importe un conteneur :
+- Importer un conteneur :
 
 `docker import mon-image.tar backup/mon-conteneur`
 
-### Docker Registry
+### Ship : Docker Registry
 
 - DockerHub n’est qu’au Docker registry ce que GitHub est à git
 
 - Pull and Push
 
+- Permet de stocker des images Docker *On premises*
+
 ### Run
 
-### Lancer un conteneur
+### Run : lancer un conteneur
 
 - docker run
 
@@ -88,7 +104,7 @@ CMD ["nginx"]
 
   - `-t` (pseudo tty)
 
-### avec beaucoup d’options...
+### Run : beaucoup d’options...
 
 - `-v` /directory/host:/directory/container
 
@@ -102,7 +118,7 @@ CMD ["nginx"]
 
 - `–name=mon-conteneur`
 
-### ...dont certaines un peu dangereuses
+### Run : ...dont certaines un peu dangereuses
 
 - `–privileged` (Accès à tous les devices)
 
@@ -110,17 +126,25 @@ CMD ["nginx"]
 
 - `–net=host` (Accès à la stack IP de l’host)
 
-### Se “connecter” à un conteneur
+### Run : se “connecter” à un conteneur
 
 - docker exec
 
 - docker attach
 
-### Détruire un conteneur
+### Run : Détruire un conteneur
 
 - docker kill (SIGKILL)
 
 - docker stop (SIGTERM puis SIGKILL)
 
 - docker rm (détruit complètement)
+
+### Build, Ship & Run : Conclusions
+
+- Écosystème de gestion d'images
+
+- Construction automatisée d'images
+
+- Contrôle au niveau conteneurs
 
