@@ -11,9 +11,9 @@
 
 ### OCI
 
-- Crée sous la Linux Fondation
+- Créé sous la Linux Fondation
 
-- But : Créer des standards opensource concernant la manière de "runner" et le
+- But : Créer des standards OpenSource concernant la manière de "runner" et le
   format des conteneurs
 
 - Non lié à des produits commerciaux
@@ -48,17 +48,20 @@ nginx:
     - "/srv/nginx/data:/var/www"
 ```
 
-### Machine
+### Docker-machine
 
 - "Metal" as a Service
 
-- Abstraction du cloud provider
+- Provisionne des hôtes Docker
+
+- Abstraction du Cloud Provider
+
 
 ### Swarm
 
-- Clustering
+- Clustering : Mutualisation d'hôtes Docker
 
-- Orchestration
+- Orchestration : placement des conteneurs au sein du cluster
 
 ![](images/docker/docker-swarm.png)
 
