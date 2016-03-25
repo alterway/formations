@@ -168,3 +168,11 @@ NETWORK ID      NAME      DRIVER
 
 - Remplacés par les *discovery services*
 
+### Les concepts: conclusion
+
+- Les composants de Docker sont modulaires
+
+- Nombreuses possibilités offertes par défaut.
+
+- Possibilité d'étendre les fonctionnalités via des plugins
+
