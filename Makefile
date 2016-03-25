@@ -17,7 +17,7 @@
 # Definition of cours based on modules
 cours=cours/list.md
 # Where to get revealjs stuff
-revealjsurl=https://cdn.bootcss.com/reveal.js/3.2.0
+revealjsurl=http://formation.osones.com/revealjs
 
 # Define "all", which is built by default
 all: openstack.pdf docker.pdf
