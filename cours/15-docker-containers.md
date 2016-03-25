@@ -119,3 +119,11 @@ CGroup: /
 
 - Adresse certains problèmes de sécurité inhérent à Docker
 
+### Les conteneurs: conclusion
+
+- Fonctionnalités offertes par le Kernel
+
+- Les conteneurs engine fournissent des interfaces
+
+- Plusieurs types de conteneurs pour différents besoins
+
