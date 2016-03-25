@@ -39,7 +39,7 @@ build/%-handout.tex: build/%.md
 	sed -i 's,\\{height=``.*},,' $@
 
 %.html: build/%.md
-	pandoc $< -t revealjs -f markdown -s -o $@ --slide-level 3 -V navigation=frame -V revealjs-url=$(revealjsurl)
+	pandoc $< -t revealjs -f markdown -s -o $@ --slide-level 3 -V theme=osones -V navigation=frame -V revealjs-url=$(revealjsurl)
 
 %.pdf: build/%.tex
 	pdflatex -output-directory build/ $<
