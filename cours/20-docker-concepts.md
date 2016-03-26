@@ -106,7 +106,7 @@
 - Fonctionnalité avancées : snapshot, migration, restauration
 
 - Quelques exemples:
-    - Convoy : multi-host et multi-backend (NFS, GlusterFS) 
+    - Convoy : multi-host et multi-backend (NFS, GlusterFS)
     - Flocker : migration de volumes dans un cluster
 
 ### Réseau : A la base, pas grand chose...
@@ -128,7 +128,7 @@ NETWORK ID      NAME      DRIVER
 
 ### Réseau : None
 
-- Est assez explicite
+- Nada !
 
 ### Réseau : Les évolutions
 
@@ -150,7 +150,7 @@ NETWORK ID      NAME      DRIVER
 
 - Les conteneurs ne sont pas accessible depuis l'extérieur
 
-- Possibilité de publier des ports depuis l'hôte vers le conteneur (*iptables*) 
+- Possibilité de publier des ports depuis l'hôte vers le conteneur (*iptables*)
 
 - L'hôte sert de proxy au service
 
