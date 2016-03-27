@@ -64,6 +64,8 @@
     - Clustering minimaliste d'hôte supportant systemd
     - Positionnement intelligent des units en fonction des besoins
 
+- [Github](https://github.com/coreos/etcd)
+
 ![](images/docker/etcd.png){height="100px"}
 
 ### Etcd/Fleet
