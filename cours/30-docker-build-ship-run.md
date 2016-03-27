@@ -72,17 +72,25 @@ CMD ["nginx"]
 
 - Sauvegarder un conteneur :
 
-`docker commit mon-conteneur backup/mon-conteneur`
+```
+docker commit mon-conteneur backup/mon-conteneur
+```
 
-`docker run -it backup/mon-conteneur`
+```
+docker run -it backup/mon-conteneur
+```
 
 - Exporter un conteneur :
 
-`docker save -o mon-image.tar backup/mon-conteneur`
+```
+docker save -o mon-image.tar backup/mon-conteneur
+```
 
 - Importer un conteneur :
 
-`docker import mon-image.tar backup/mon-conteneur`
+```
+docker import mon-image.tar backup/mon-conteneur
+```
 
 ### Ship : Docker Registry
 

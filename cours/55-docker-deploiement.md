@@ -1,42 +1,75 @@
 # Docker en production
 
+### Où déployer ?
+
+- Cloud public:
+    - GCE
+    - AWS
+
+![](images/docker/aws.png){height="100px"} ![](images/docker/gce.png){height="100px"}
+
+- Cloud privée: OpenStack
+
+![](images/docker/openstack.png){height="100px"}
+
+- Bare Metal
+
+### Comment ?
+
+- Utilisation de COE (Container Orchestration Engine)
+
+- Utilisation d'infrastructure as code
+
+- Utilisation d'un *Discovery Service*
+
+### Container Orchestration Engine
+
+- Gestion du cycle de vie des conteneurs/applications
+
+- Abstraction des hôtes et des cloud providers (clustering)
+
+- Scheduling en fonction des besoins de l'application
+
+- Quelques exemples:
+    - Etcd/Fleet (CoreOS)
+    - Docker Swarm
+    - Rancher
+    - Mesos / Kubernetes (K8s)
+
 ### Infrastructure as a Code
 
 - Version Control System
 
-- Intégration Continue
+- Intégration / Déploiement Continue
 
-### Où déployer ?
+- Outils de templating (Heat, Terraform, Cloudformation)
 
-- ECS
-
-- Rancher
-
-- Mesos
-
-- Kubernetes
-
-- Fleet
+![](images/docker/terraform.png){height="100px"} ![](images/docker/cloudformation.jpg){height="100px"} ![](images/docker/heat.png){height="100px"}
 
 ### Discovery Service
 
-- La nature ephémère des conteneurs empêche toute configuration manuelle
+- La nature éphémère des conteneurs empêche toute configuration manuelle
 
-- Un discovery service permet de connaître de façon automatique l'état de ses
-  conteneurs à tout instant
+- Connaître de façon automatique l'état de ses conteneurs à tout instant
 
-### etcd
+- Fournir un endpoint fixe a une application susceptible de bouger au sein d'un cluster
 
-- Distributed key-Value store (KV store)
+### Etcd/Fleet
 
-- Résilient de par sa construction, l'information est repliquée et une
-  défaillance du master n'impact pas les données
+- Etcd:
+    - Distributed key-Value store (KV store)
+    - Résilient de par sa construction, l'information est répliquée et une défaillance du master n'impact pas les données
+    - [Github](https://github.com/coreos/etcd)
+- Fleet:
+    - Clustering minimaliste d'hôte supportant systemd
+    - Positionnement intelligent des units en fonction des besoins
 
-- [](https://github.com/coreos/etcd)
+![](images/docker/etcd.png){height="100px"}
 
-### etcd
+### Etcd/Fleet
 
-Exemple :
+- Exemple :
+
 ```
 [Unit]
 Description=Apache-sidekick
@@ -59,7 +92,9 @@ MachineOf=apache.service
 
 - Datacenter aware
 
-- [](https://github.com/hashicorp/consul)
+- [Github](https://github.com/hashicorp/consul)
+
+![](images/docker/consul.png){height="100px"}
 
 ### Consul
 
@@ -85,9 +120,9 @@ docker
 
 ### Consul
 
-- L'enregistement des nouveaux conteneurs peut être automatisé
+- L'enregistrement des nouveaux conteneurs peut être automatisé
 
-- Registrator est un process écoutant le daemon Docker et enregistrant les évènements
+- *Registrator* est un process écoutant le daemon Docker et enregistrant les évènements
 
 - [ Schéma avec registrator ]
 

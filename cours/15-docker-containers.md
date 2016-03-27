@@ -10,6 +10,8 @@
 
 - Cgroups (control groups)
 
+![](images/docker/kernel.png){height="100px"}
+
 ### Les namespaces
 
 ### Mount namespaces ( Linux 2.4.19)
@@ -97,6 +99,8 @@ CGroup: /
 
 - Virtualisation d'un système complet (boot)
 
+![](images/docker/lxc.png){height="70px"}
+
 ### Docker
 
 - Développé par Docker Inc.
@@ -106,6 +110,8 @@ CGroup: /
 - Utilisait la *liblxc*
 
 - Utilise désormais la *libcontainer*
+
+![](images/docker-media-kit/small_h-trans.png){height="70px"}
 
 ### Rocket (rkt)
 
@@ -118,6 +124,8 @@ CGroup: /
 - Utilise systemd-nspawn
 
 - Adresse certains problèmes de sécurité inhérent à Docker
+
+![](images/docker/rkt.png){height="70px"}
 
 ### Les conteneurs: conclusion
 

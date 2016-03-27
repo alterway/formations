@@ -4,8 +4,7 @@
 
 - Docker Inc != Docker Project
 
-- Docker Inc est le principal développeur du Docker Engine, Compose, Machine,
-  Kitematic, Swarm etc.
+- Docker Inc est le principal développeur du Docker Engine, Compose, Machine, Kitematic, Swarm etc.
 
 - Ces projets restent OpenSource et les contributions sont possibles
 
@@ -13,14 +12,15 @@
 
 - Créé sous la Linux Fondation
 
-- But : Créer des standards OpenSource concernant la manière de "runner" et le
-  format des conteneurs
+- But : Créer des standards OpenSource concernant la manière de "runner" et le format des conteneurs
 
 - Non lié à des produits commerciaux
 
 - Non lié à des orchestrateurs ou des clients particuliers
 
 - runC a été donné par Docker à l'OCI comme base pour leurs travaux
+
+![](images/docker/oci.png){height="100px"}
 
 ### Les autres produits Docker
 
@@ -31,6 +31,8 @@
 - Infrastructure as a code
 
 - Scalabilité
+
+![](images/docker/compose.png){height="100px"}
 
 ### Docker-compose
 
@@ -56,14 +58,13 @@ nginx:
 
 - Abstraction du Cloud Provider
 
-
-### Swarm
+### Docker Swarm
 
 - Clustering : Mutualisation d'hôtes Docker
 
 - Orchestration : placement des conteneurs au sein du cluster
 
-![](images/docker/docker-swarm.png)
+![](images/docker/docker-swarm.png){height="100px"}
 
 ### Plugins réseau et stockage
 

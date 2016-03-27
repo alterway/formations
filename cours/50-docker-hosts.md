@@ -16,39 +16,41 @@
 
 - Cycle de release figé
 
-### OS orienté conteneurs
+### OS orientés conteneurs
 
-- Faire tourner le daemon Docker
+- Faire tourner un conteneur engine
 
-- Optimisée pour Docker: pas de services superflus 
+- Optimisée pour les conteneurs: pas de services superflus
 
-- Fonctionnalités avancée liées a Docker (clustering, network, etc.)
+- Fonctionnalités avancée liées aux conteneurs (clustering, network, etc.)
 
 - Sécurité accrue de part le minimalisme
 
 ### OS orientés conteneurs : exemples
 
-- CoreOS
+- CoreOS (CoreOS)
 
 - Atomic (RedHat)
 
-- RancherOS
+- RancherOS (Rancher)
 
 - Photon (VMware)
 
-- Ubuntu Core (Ubuntu)
+- Ubuntu Snappy Core (Ubuntu)
 
 ### CoreOS : philosophie
 
 - Trois "channels" : stable, beta, alpha
 
-- Dual root : facilité de mise a jour 
+- Dual root : facilité de mise a jour
 
 - Système de fichier en read only
 
-- Pas de gestionnaire de paquets : tout est conteneurisé 
+- Pas de gestionnaire de paquets : tout est conteneurisé
 
 - Forte intégration de *systemd*
+
+![](images/docker/coreos.png){height="100px"}
 
 ### CoreOS : fonctionnalités orientées conteneurs
 
@@ -56,18 +58,24 @@
     - Docker
     - Rkt
     - Etcd (base de donnée clé/valeur)
-    - Fleet (système d'init distribué)  
+    - Fleet (système d'init distribué)
     - Flannel (overlay network)
 
 - Permet nativement d'avoir un cluster complet
 
+- Stable et éprouvé en production
+
+- Idéal pour faire tourner Kubernetes (Tectonic)
+
 ### CoreOS : Etcd
 
-- Systeme de stockage simple : clé = valeur
+- Système de stockage simple : clé = valeur
 
 - Hautement disponible (quorum)
 
 - Accessible via API
+
+![](images/docker/etcd.png){height="100px"}
 
 ### CoreOS : Fleet
 
@@ -75,7 +83,7 @@
 
 - Orchestration de conteneur entre différents hôtes supportant systemd
 
-- S'appuie sur un systeme clé/valeur comme etcd
+- S'appuie sur un système clé/valeur comme etcd
 
 ### CoreOS : Flannel
 
@@ -85,6 +93,8 @@
 
 - S'appuie sur un système clé/valeur comme etcd
 
+![](images/docker/flannel.png){height="100px"}
+
 ### RancherOS : philosophie
 
 - Docker et juste Docker : Docker est le process de PID 1)
@@ -92,3 +102,28 @@
 - Docker in Docker : Daemon User qui tourne dans le Daemon System
 
 - Pas de processus tierces, pas d'init, juste Docker
+
+- Encore en beta
+
+![](images/docker/rancher.png){height="100px"}
+
+### Fedora Atomic : philosophie
+
+- Équivalent à CoreOS mais basée sur Fedora
+
+- Utilise *systemd*
+
+- Update Atomic (incrémentielles pour rollback)
+
+![](images/docker/atomic.png){height="100px"}
+
+### Project Photon
+
+- Développé par VMware mais Open Source [](https://github.com/vmware/photon)
+
+- Optimisé pour vSphere
+
+- Supporte Docker, Rkt et Pivotal Garden (Cloud Foundry)
+
+![](images/docker/photon.svg){height="100px"}
+
