@@ -42,7 +42,7 @@ build/%-handout.tex: build/%.md
 	sed -i 's,\\{height=``.*},,' $@
 
 %.html: build/%.md ## Build cours "%" in html/revealjs, optional argument revealjsurl=<url to revealjs>
-	pandoc $< -t revealjs -f markdown -s -o $@ --slide-level 3 -V theme=osones -V navigation=frame -V revealjs-url=$(revealjsurl)
+	pandoc $< -t revealjs -f markdown -s -o $@ --slide-level 3 -V theme=osones -V navigation=frame -V revealjs-url=$(revealjsurl) -V slideNumber="true"
 
 %.pdf: build/%.tex ## Build cours "%" in beamer/pdf
 	pdflatex -output-directory build/ $<
