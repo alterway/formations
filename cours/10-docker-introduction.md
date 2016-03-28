@@ -38,7 +38,7 @@
 
 - Le cloud IaaS repose souvent sur la virtualisation
 
-- Ressources compute -> virtualisation
+- Ressources compute : virtualisation
 
 - Virtualisation complète : KVM, Xen
 

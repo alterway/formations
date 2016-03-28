@@ -99,7 +99,7 @@ CGroup: /
 
 - Virtualisation d'un système complet (boot)
 
-![](images/docker/lxc.png){height="70px"}
+![](images/docker/lxc.png){height="100px"}
 
 ### Docker
 
@@ -111,7 +111,7 @@ CGroup: /
 
 - Utilise désormais la *libcontainer*
 
-![](images/docker-media-kit/small_h-trans.png){height="70px"}
+![](images/docker-media-kit/small_h-trans.png){height="100px"}
 
 ### Rocket (rkt)
 
@@ -125,7 +125,7 @@ CGroup: /
 
 - Adresse certains problèmes de sécurité inhérent à Docker
 
-![](images/docker/rkt.png){height="70px"}
+![](images/docker/rkt.png){height="100px"}
 
 ### Les conteneurs: conclusion
 

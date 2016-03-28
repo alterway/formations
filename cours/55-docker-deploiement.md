@@ -56,14 +56,12 @@
 
 ### Etcd/Fleet
 
-- Etcd:
+- [Etcd](https://github.com/coreos/etcd)
     - Distributed key-Value store (KV store)
     - Résilient de par sa construction, l'information est répliquée et une défaillance du master n'impact pas les données
-    - [Github](https://github.com/coreos/etcd)
-- Fleet:
-    - Clustering minimaliste d'hôte supportant systemd
+- [Fleet](https://github.com/coreos/fleet)
+    - Clustering minimaliste d'hôtes supportant systemd
     - Positionnement intelligent des units en fonction des besoins
-    - [Github](https://github.com/coreos/fleet)
 
 ![](images/docker/etcd.png){height="100px"}
 
@@ -125,7 +123,7 @@ docker
 
 - *Registrator* est un process écoutant le daemon Docker et enregistrant les évènements
 
-- [ Schéma avec registrator ]
+![](images/docker/registrator.png){height="100px"}
 
 ### Rancher
 
@@ -176,4 +174,6 @@ docker
 - Docker Cloud
 
 - Docker UCP (Universal Control Plane)
+
+### Docker en production : conclusion
 
