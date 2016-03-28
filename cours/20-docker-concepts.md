@@ -128,7 +128,7 @@ NETWORK ID      NAME      DRIVER
 
 ### Réseau : None
 
-- Nada !
+- Explicite
 
 ### Réseau : Les évolutions
 
