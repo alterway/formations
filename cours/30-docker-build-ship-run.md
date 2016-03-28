@@ -54,9 +54,50 @@ CMD ["nginx"]
 
 - Comptez vos layers !
 
-### Dockerfile : best practices
+### Dockerfile : Bad Layering
 
-- SCHEMA GOOD/BAD LAYERING
+```
+RUN apk --update add \
+    git \
+    tzdata \
+    python \
+    unrar \
+    zip \
+    libxslt \
+    py-pip \
+
+RUN rm -rf /var/cache/apk/*
+
+VOLUME /config /downloads
+
+EXPOSE 8081
+
+CMD ["--datadir=/config", "--nolaunch"]
+
+ENTRYPOINT ["/usr/bin/env","python2","/sickrage/SickBeard.py"]
+```
+
+### Dockerfile : Good Layering
+
+```
+RUN apk --update add \
+    git \
+    tzdata \
+    python \
+    unrar \
+    zip \
+    libxslt \
+    py-pip \
+    && rm -rf /var/cache/apk/*
+
+VOLUME /config /downloads
+
+EXPOSE 8081
+
+CMD ["--datadir=/config", "--nolaunch"]
+
+ENTRYPOINT ["/usr/bin/env","python2","/sickrage/SickBeard.py"]
+```
 
 ### Dockerfile : DockerHub
 
