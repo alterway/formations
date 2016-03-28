@@ -173,3 +173,7 @@ docker
 
 - Amazon Container Engine
 
+- Docker Cloud
+
+- Docker UCP (Universal Control Plane)
+
