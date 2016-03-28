@@ -1,4 +1,4 @@
-# Ecosystème Docker
+# Écosystème Docker
 
 ### Docker Inc.
 
@@ -66,9 +66,19 @@ nginx:
 
 ![](images/docker/docker-swarm.png){height="100px"}
 
-### Plugins réseau et stockage
+### Autour de Docker
 
-- Schéma
+- Plugins : étendre les fonctionnalités notamment réseau et volumes  
+
+![](images/docker/weave.png){height="80px"} ![](images/docker/kuryr.png){height="80px"} ![](images/docker/flocker.png){height="80px"} ![](images/docker/convoy.png){height="80px"}
+
+- Systèmes de gestion de conteneurs (COE)
+
+- Docker as a Service :
+    - Docker Cloud
+    - Tutum 
+
+![](images/docker/tutum.png){height="80px"} ![](images/docker-media-kit/small_h-trans.png){height="80px"}
 
 ### Écosystème Docker : conclusion
 
@@ -77,3 +87,4 @@ nginx:
 - Des outils permettent d'étendre les fonctionnalités de Docker
 
 - Docker Inc. construit des offres commerciales autour de Docker
+
