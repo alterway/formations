@@ -129,3 +129,47 @@ docker
 - [ Schéma avec registrator ]
 
 ### Rancher
+
+- Permet de provisionner et mutualiser des hôtes Docker sur différents Cloud Provider
+
+- Fournit des fonctionnalité de COE :
+    - Cattle : COE développé par Rancher
+    - Kubernetes : COE développé par Google
+
+- Bon compromis entre simplicité et fonctionnalités comparé à Mesos ou Kubernetes
+
+- Encore jeune, adapté aux environnement de taille moyenne (problèmes de passage a l'échelle)
+![](images/docker/rancher.png){height="100px"}
+
+### Apache Mesos / Marathon
+
+- Mesos : Gestion et orchestration de systèmes distribués
+
+- A la base orienté Big Data (Hadoop, Elasticsearch...) et étendu au conteneurs via Marathon
+
+- Marathon : Scheduler pour Apache Mesos orienté conteneur
+
+- Multi Cloud/Datacenter
+
+- Adapté aux gros environnements, éprouvé jusque 10000 nodes
+
+![](images/docker/mesos.png){height="100px"}
+
+### Kubernetes (K8s)
+
+- COE développé par Google, devenu open source en 2014
+
+- Utiliser par Google pour la gestion de leurs conteneurs
+
+- Adapté à tout type d'environnements
+
+- Devenu populaire en très peu de temps
+
+![](images/docker/kubernetes.png){height="100px"}
+
+### Quelques autres
+
+- Hashicorp Nomad
+
+- Amazon Container Engine
+

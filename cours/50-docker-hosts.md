@@ -127,3 +127,11 @@
 
 ![](images/docker/photon.svg){height="100px"}
 
+### Docker Hosts : conclusion
+
+- Répond a un besoin diffèrent des distributions classiques
+
+- Fourni des outils et une logique adaptée aux environnements full conteneurs
+
+- Sécurité accrue (mise a jour)
+

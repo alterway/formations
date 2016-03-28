@@ -62,7 +62,7 @@ nginx:
 
 - Clustering : Mutualisation d'hôtes Docker
 
-- Orchestration : placement des conteneurs au sein du cluster
+- Orchestration : placement intelligent des conteneurs au sein du cluster
 
 ![](images/docker/docker-swarm.png){height="100px"}
 
@@ -70,3 +70,10 @@ nginx:
 
 - Schéma
 
+### Écosystème Docker : conclusion
+
+- Le projet Docker est Open Source et n'appartient plus a Docker
+
+- Des outils permettent d'étendre les fonctionnalités de Docker
+
+- Docker Inc. construit des offres commerciales autour de Docker

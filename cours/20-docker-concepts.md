@@ -120,11 +120,11 @@ NETWORK ID      NAME      DRIVER
 
 ### Réseau : Bridge
 
-- SCHÉMA
+![](images/docker/docker-bridge.png){height="400px"}
 
 ### Réseau : Host
 
-- SCHÉMA
+![](images/docker/docker-hote.png){height="400px"}
 
 ### Réseau : None
 
