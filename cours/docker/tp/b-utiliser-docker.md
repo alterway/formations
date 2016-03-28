@@ -1,8 +1,8 @@
-# Lancer le conteneur Wordpress en y montant un volume
+# Lancer le conteneur etherpad en y montant un volume
 
 docker run -d \
-            -v /data/wordpress \
-            osones/wordpress:centrale
+            -p 80:9001 \
+            osones/etherpad:alpine
 
 # Utiliser l'image nginx construite précedemment
 
