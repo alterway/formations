@@ -139,6 +139,7 @@ docker
 - Bon compromis entre simplicité et fonctionnalités comparé à Mesos ou Kubernetes
 
 - Encore jeune, adapté aux environnement de taille moyenne (problèmes de passage a l'échelle)
+
 ![](images/docker/rancher.png){height="100px"}
 
 ### Apache Mesos / Marathon
@@ -165,7 +166,7 @@ docker
 
 - Devenu populaire en très peu de temps
 
-![](images/docker/kubernetes.png){height="100px"}
+![](images/docker/k8s.png){height="100px"}
 
 ### Quelques autres
 
