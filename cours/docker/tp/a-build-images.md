@@ -26,3 +26,18 @@ docker build -t local/test2 .
 - docker run -it local/test /bin/bash
 vérifier que le fichier est toujours présent
 
+## Construire une image Etherpad
+
+Paquets nécessaires :
+- gzip
+- git
+- curl
+- python
+- libssl-dev
+- pkg-config
+- build-essential
+- nodejs
+
+Repo git : git clone git://github.com/ether/etherpad-lite.git
+
+Exécutable : bin/run.sh
