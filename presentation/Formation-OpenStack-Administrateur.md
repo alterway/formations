@@ -1,4 +1,5 @@
-# OpenStack administrateur – formation avancée
+
+# Formation Administrateur OpenStack 
 Durée : 3 jours
 
 ## Description
@@ -32,17 +33,17 @@ La formation s'adresse aux administrateurs et architectes souhaitant mettre en p
 ### Déployer OpenStack de A à Z
 
 1. Les briques nécessaires
-2. Keystone : Authentification, autorisation et catalogue de services
-3. Nova : Compute
-4. Glance : Registre d’images
-5. Neutron : Réseau en tant que service
-6. Cinder : Stockage block
-7. Horizon : Dashboard web
-8. Swift : Stockage objet
-9. Ceilometer : Collecte de métriques
-10. Heat : Orchestration des ressources
-11. Trove : Database as a Service
-12. Designate : DNS as a Service
+2. Keystone : Authentification, autorisation et catalogue de services
+3. Nova : Compute
+4. Glance : Registre d’images
+5. Neutron : Réseau en tant que service
+6. Cinder : Stockage block
+7. Horizon : Dashboard web
+8. Swift : Stockage objet
+9. Ceilometer : Collecte de métriques
+10. Heat : Orchestration des ressources
+11. Trove : Database as a Service
+12. Designate : DNS as a Service
 13. Quelques autres composants intéressants
 
 ### OpenStack en production
@@ -64,7 +65,8 @@ La formation s'adresse aux administrateurs et architectes souhaitant mettre en p
 4. Vers le PaaS
 
 ### Travaux pratiques
+
 * Installation d'OpenStack avec les paquets de la distribution
-* Déploiement d'OpenStack avec Puppet
+* Déploiement d'OpenStack avec Ansible
 * Déployer une stack avec Heat
 * Générer sa propre image cloud
