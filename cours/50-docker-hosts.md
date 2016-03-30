@@ -20,9 +20,9 @@
 
 - Faire tourner un conteneur engine
 
-- Optimisée pour les conteneurs: pas de services superflus
+- Optimisée pour les conteneurs : pas de services superflus
 
-- Fonctionnalités avancée liées aux conteneurs (clustering, network, etc.)
+- Fonctionnalités avancées liées aux conteneurs (clustering, network, etc.)
 
 - Sécurité accrue de part le minimalisme
 
