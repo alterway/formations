@@ -27,7 +27,7 @@ all: openstack.pdf docker.pdf
 
 build/Makefile:
 	mkdir -p build
-	sed -E 's#^(.*):(.*)#build/\1.md: $$(addprefix cours/, \2)\n\trm $$@\n\t$$(foreach module,$$^,cat $$(module) >> $$@;)#' $(cours) > build/Makefile
+	sed -E 's#^(.*):(.*)#build/\1.md: $$(addprefix cours/, \2)\n\trm -f $$@\n\t$$(foreach module,$$^,cat $$(module) >> $$@;)#' $(cours) > build/Makefile
 
 -include build/Makefile
 
