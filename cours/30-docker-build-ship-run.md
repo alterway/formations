@@ -139,7 +139,7 @@ docker import mon-image.tar backup/mon-conteneur
 
 - Pull and Push
 
-- Permet de stocker des images Docker *On premises*
+- Image officielle : `registry`
 
 ### Run
 
