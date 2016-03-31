@@ -55,10 +55,10 @@ build/%-handout.tex: build/%.md
 	#	-V title=$(title) -V institute=Osones -V author=$(user) -V date="$(date)"
 
 %.pdf: build/%.tex ## Build cours "%" in beamer/pdf
-	ln -s cours/styles/beamer*metropolis.sty .
+	ln -sf cours/styles/beamer*metropolis.sty .
 	pdflatex -output-directory build/ $<
 	pdflatex -output-directory build/ $<
-	rm beamer*metropolis.sty
+	rm -f beamer*metropolis.sty
 	mv build/$@ $@
 
 %-print.pdf: %.pdf ## Build cours "%" in beamer/pdf, print (4 slides / page) version
@@ -66,6 +66,7 @@ build/%-handout.tex: build/%.md
 
 clean: ## Remove build files
 	rm -rf build/
+	rm -f beamer*metropolis.sty
 
 mrproper: ## Remove build files and .html/.pdf files
 mrproper: clean
