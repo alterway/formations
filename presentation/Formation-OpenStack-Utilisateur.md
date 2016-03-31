@@ -1,29 +1,30 @@
 # Formation OpenStack "Utilisateur"
 Durée : 4 jours
 
-## Objectifs
+## Description
+
+Ce cours s'adresse à un public technique de développeurs et d'intégrateurs d'applications désireux d'acquérir le socle de connaissances nécessaires pour envisager le développement d'applications "cloud-ready" et leur intégration dans une architecture hébergée sur un cloud OpenStack.
+
+Au long de la session, les stagiaires seront mis en situation via le développement et l'intégration d'une mini-application, les uns dans le rôle "développeur" et les autres dans le rôle "intégrateur".
+
+### Objectifs
 
 * Assimiler les concepts et le vocabulaire liés au cloud
-* Etre capable de définir, déployer et maintenir une infrastructure dans le cloud
-* Manipuler et orchestrer des ressources dans un cloud OpenStack
-* Concevoir et intégrer une application "cloud-ready"
+* Etre capable de définir, déployer et maintenir une infrastructure sur le cloud
+* Etre capable de manipuler et orchestrer des ressources sur un cloud OpenStack
+* Concevoir une application "cloud-ready" et l'intégrer sur un cloud OpenStack
 
-## Public visé
+### Public visé
 
 * Développeurs et intégrateurs d'applications
 
-## Pré-requis de la formation
+### Pré-requis
 
 * Pratique du langage de commande Linux (Shell)
 * Notions de virtualisation
 * Pratique d'un outil de versioning (git, subversion, ...)
 * Pratique d'un langage de programmation
 * Optionnel : pratique de Python (langage et environnement)
-
-## Note
-
-Ce cours a la particularité de mettre les stagiaires en situation via le développement et l'intégration d'une mini-application
-"cloud-ready", les uns dans le rôle "développeur" et les autres dans le rôle "intégrateur".
 
 ## Programme
 
@@ -47,4 +48,6 @@ Ce cours a la particularité de mettre les stagiaires en situation via le dével
 
 ### Travaux pratiques
 
-* Développement et intégration d'une mini-application Web "cloud-ready".
+* Réalisation d'une mini-application Web "cloud-ready"
+* Construction de l'infrastructure d'hébergement dans un tenant OpenStack
+* Intégration de l'application
