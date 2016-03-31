@@ -46,8 +46,10 @@ build/%-handout.tex: build/%.md
 	pandoc $<-html -t revealjs -f markdown -s -o $@ --slide-level 3 -V theme=osones -V navigation=frame -V revealjs-url=$(revealjsurl) -V slideNumber="true"
 
 %.pdf: build/%.tex ## Build cours "%" in beamer/pdf
+	ln -s cours/styles/beamer*metropolis.sty .
 	pdflatex -output-directory build/ $<
 	pdflatex -output-directory build/ $<
+	rm beamer*metropolis.sty
 	mv build/$@ $@
 
 %-print.pdf: %.pdf ## Build cours "%" in beamer/pdf, print (4 slides / page) version
