@@ -1,4 +1,4 @@
-# Colors
+% Colors
 
 \definecolor{oRed}{HTML}{9B1801}
 
@@ -22,10 +22,10 @@
   parent=palette osones
 }
 
-# Page numbering, progress bar
+% Page numbering, progress bar
 \metroset{numbering=fraction, progressbar=foot}
 
-# ToC
+% ToC
 \AtBeginSection[]
 {
   \begin{frame}[shrink]
