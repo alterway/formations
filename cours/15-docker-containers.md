@@ -42,10 +42,10 @@
 
 ```
 CGroup: /
-           ├─docker
-           │ ├─7a977a50f48f2970b6ede780d687e72c0416d9ab6e0b02030698c1633fdde956
-           │ │ ├─6807 nginx: master process ngin
-           │ │ ├─6847 nginx: worker proces
+           |--docker
+           |  |--7a977a50f48f2970b6ede780d687e72c0416d9ab6e0b02030698c1633fdde956
+           |  |--6807 nginx: master process ngin
+           |  |  |--6847 nginx: worker proces
 ```
 
 ### Cgroups : Limitation de ressources
