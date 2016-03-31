@@ -8,7 +8,7 @@
 
 ![](images/docker/aws.png){height="100px"} ![](images/docker/gce.png){height="100px"}
 
-- Cloud privée: OpenStack
+- Cloud privé: OpenStack
 
 ![](images/docker/openstack.png){height="100px"}
 
@@ -52,7 +52,7 @@
 
 - Connaître de façon automatique l'état de ses conteneurs à tout instant
 
-- Fournir un endpoint fixe a une application susceptible de bouger au sein d'un cluster
+- Fournir un endpoint fixe à une application susceptible de bouger au sein d'un cluster
 
 ### Etcd/Fleet
 
@@ -135,7 +135,7 @@ docker
 
 - Bon compromis entre simplicité et fonctionnalités comparé à Mesos ou Kubernetes
 
-- Encore jeune, adapté aux environnement de taille moyenne (problèmes de passage a l'échelle)
+- Encore jeune, adapté aux environnement de taille moyenne (problèmes de passage à l'échelle)
 
 ![](images/docker/rancher.png){height="100px"}
 
@@ -143,7 +143,7 @@ docker
 
 - Mesos : Gestion et orchestration de systèmes distribués
 
-- A la base orienté Big Data (Hadoop, Elasticsearch...) et étendu au conteneurs via Marathon
+- A la base orienté Big Data (Hadoop, Elasticsearch...) et étendu aux conteneurs via Marathon
 
 - Marathon : Scheduler pour Apache Mesos orienté conteneur
 
@@ -157,7 +157,7 @@ docker
 
 - COE développé par Google, devenu open source en 2014
 
-- Utiliser par Google pour la gestion de leurs conteneurs
+- Utilisé par Google pour la gestion de leurs conteneurs
 
 - Adapté à tout type d'environnements
 

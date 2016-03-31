@@ -12,7 +12,7 @@
 
 - Paquets inutiles ou out of date
 
-- Services par défaut/inutiles alourdissent les distribution
+- Services par défaut/inutiles alourdissent les distributions
 
 - Cycle de release figé
 
@@ -20,7 +20,7 @@
 
 - Faire tourner un conteneur engine
 
-- Optimisée pour les conteneurs : pas de services superflus
+- Optimisé pour les conteneurs : pas de services superflus
 
 - Fonctionnalités avancées liées aux conteneurs (clustering, network, etc.)
 
@@ -42,7 +42,7 @@
 
 - Trois "channels" : stable, beta, alpha
 
-- Dual root : facilité de mise a jour
+- Dual root : facilité de mise à jour
 
 - Système de fichier en read only
 
@@ -57,7 +57,7 @@
 - Inclus :
     - Docker
     - Rkt
-    - Etcd (base de donnée clé/valeur)
+    - Etcd (base de données clé/valeur)
     - Fleet (système d'init distribué)
     - Flannel (overlay network)
 
@@ -81,13 +81,13 @@
 
 - Système d'init distribué basé sur systemd
 
-- Orchestration de conteneur entre différents hôtes supportant systemd
+- Orchestration de conteneurs entre différents hôtes supportant systemd
 
 - S'appuie sur un système clé/valeur comme etcd
 
 ### CoreOS : Flannel
 
-- Communication multi-host
+- Communication multi-hosts
 
 - UDP ou VXLAN
 
@@ -101,7 +101,7 @@
 
 - Docker in Docker : Daemon User qui tourne dans le Daemon System
 
-- Pas de processus tierces, pas d'init, juste Docker
+- Pas de processus tiers, pas d'init, juste Docker
 
 - Encore en beta
 
@@ -129,9 +129,9 @@
 
 ### Docker Hosts : conclusion
 
-- Répond a un besoin diffèrent des distributions classiques
+- Répond à un besoin différent des distributions classiques
 
 - Fourni des outils et une logique adaptée aux environnements full conteneurs
 
-- Sécurité accrue (mise a jour)
+- Sécurité accrue (mise à jour)
 
