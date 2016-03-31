@@ -1,6 +1,6 @@
 # Docker
+
 Durée : 2 jours
-Intervenant : 1
 
 ## Description
 
@@ -8,17 +8,6 @@ Cette formation vous permettra de comprendre les enjeux des systèmes de contene
 applicatifs et d'avoir une vue d'ensemble de lu fonctionnement et de l'utilité de Docker,
 solution leader du marché. Vous serez en mesure d'utiliser Docker pour construire,
 déployer et maintenir vos containers dans un environnement Cloud.
-
-### À qui s'adresse la formation
-
-La formation s'adresse aux administrateurs système, développeurs et architectes souhaitant découvrir les notions autour des conteneurs Docker ainsi que l'écosystème gravitant autour de Docker.
-
-### Pré-requis de la formation
-
-Compétences d’administration système Linux tel qu’Ubuntu, Red Hat ou Debian.
-    * Édition de fichiers de configuration
-    * Gestion des paquets et des services
-    * Notions de virtualisation
 
 ### Objectifs
 
@@ -31,6 +20,17 @@ Compétences d’administration système Linux tel qu’Ubuntu, Red Hat ou Debia
 * Utiliser les bons outils pour déployer des conteneurs
 * Savoir construire une infrastructure fonctionnant avec Docker
 * Comprendre les systèmes de clustering pour Docker
+
+### Public visé
+
+La formation s'adresse aux administrateurs système, développeurs et architectes souhaitant découvrir les notions autour des conteneurs Docker ainsi que l'écosystème gravitant autour de Docker.
+
+### Pré-requis
+
+Compétences d’administration système Linux tel qu’Ubuntu, Red Hat ou Debian.
+    * Édition de fichiers de configuration
+    * Gestion des paquets et des services
+    * Notions de virtualisation
 
 ## Programme
 
@@ -104,4 +104,3 @@ Compétences d’administration système Linux tel qu’Ubuntu, Red Hat ou Debia
 - Automatisation
 - Discovery Service
 - Rolling updates
-

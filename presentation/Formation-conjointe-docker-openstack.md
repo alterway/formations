@@ -1,21 +1,11 @@
 # Cloud, OpenStack et Docker
+
 Durée : 5 jours
 Intervenant : 1 OpenStacker (Lun-Mer), 1 Dockerer (Mer-Ven)
 
 ## Description
 
 Cette formation vous permettra de comprendre les enjeux liés au cloud IaaS (Infrastructure as a Service) et d'avoir une vue d'ensemble du fonctionnement d'OpenStack, solution leader du marché. Vous serez en mesure d'utiliser un cloud IaaS, de définir des architectures logicielles et d'infrastructure compatibles cloud. Enfin, vous saurez utiliser un mieux la solution de conteneurs applicatifs Docker.
-
-### À qui s'adresse la formation
-
-La formation s'adresse aux administrateurs système, développeurs et architectes souhaitant découvrir les notions de cloud et de conteneurs applicatifs au travers de d'OpenStack et Docker.
-
-### Pré-requis de la formation
-
-Compétences d’administration système Linux tel qu’Ubuntu, Red Hat ou Debian.
-    * Édition de fichiers de configuration
-    * Gestion des paquets et des services
-    * Notions de virtualisation
 
 ### Objectifs
 
@@ -25,13 +15,24 @@ Compétences d’administration système Linux tel qu’Ubuntu, Red Hat ou Debia
 * Savoir déployer rapidement un OpenStack de test
 * Manipuler l'API (Application Programming Interface), la CLI (Command Line Interface) et le Dashboard
 * Pouvoir déterminer ce qui est compatible avec la philosophie cloud
-* Posséder les clés pour tirer partie au mieux de l’IaaS
+* Posséder les clés pour tirer parti au mieux de l’IaaS
 * Comprendre les principes des conteneurs Linux
 * Connaître l'écosystème autour de Docker
 * Savoir construire une image Docker, l'exécuter, la supprimer
 * Construire une application "Dockerisée"
 * Utiliser les bons outils pour déployer des conteneurs
 * Comprendre les systèmes de clustering pour Docker
+
+### Public visé
+
+La formation s'adresse aux administrateurs système, développeurs et architectes souhaitant découvrir les notions de cloud et de conteneurs applicatifs au travers de d'OpenStack et Docker.
+
+### Pré-requis
+
+Compétences d’administration système Linux tel qu’Ubuntu, Red Hat ou Debian.
+    * Édition de fichiers de configuration
+    * Gestion des paquets et des services
+    * Notions de virtualisation
 
 ## Programme
 
