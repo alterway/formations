@@ -1,58 +1,50 @@
-# Formation Utilisateur OpenStack
-Durée : 2 jours
+# Formation OpenStack "Utilisateur"
+Durée : 4 jours
 
-## Description
+## Objectifs
 
-Cette formation vous permettra de comprendre les enjeux liés au cloud IaaS (Infrastructure as a Service).
-Pendant la formation, vous manipulerez un cloud OpenStack, et construirez des architectures "Cloud Ready".
+* Assimiler les concepts et le vocabulaire liés au cloud
+* Etre capable de définir, déployer et maintenir une infrastructure dans le cloud
+* Manipuler et orchestrer des ressources dans un cloud OpenStack
+* Concevoir et intégrer une application "cloud-ready"
 
-IaaS est un modèle où les ressources d'infrastructure (telles que calcul, stockage et réseau) sont mises à disposition des utilisateurs par le biais d'APIs. Les APIs permettent l'accès à ces ressources par de multiples moyens : interface graphique/web, ligne de commande, script, programme, etc. Cette possibilité de programmer l'allocation, l'utilisation et la restitution des ressources fait la force du système cloud : mise à l'échelle automatique en fonction de la demande, facturation à l'usage, etc. Les processus deviennent plus agiles.
-Des clouds publics tels qu'Amazon Web Services (AWS) proposent de l'IaaS. Dans le domaine du cloud privé, c'est le logiciel libre OpenStack qui fait référence.
+## Public visé
 
-### À qui s'adresse la formation
+* Développeurs et intégrateurs d'applications
 
-La formation s'adresse aux futurs utilisateurs d'un cloud OpenStack. Administrateurs systèmes, architectes, intégrateurs, tout utilisateur souhaitant consommer les ressources d'un cloud OpenStack.
+## Pré-requis de la formation
 
-### Pré-requis de la formation
+* Pratique du langage de commande Linux (Shell)
+* Notions de virtualisation
+* Pratique d'un outil de versioning (git, subversion, ...)
+* Pratique d'un langage de programmation
+* Optionnel : pratique de Python (langage et environnement)
 
-Compétences d’administration basique des systèmes Linux tel qu’Ubuntu, Red Hat ou Debian.
+## Note
 
-### Objectifs
-
-* Découvrir OpenStack et manipuler les différents services,
-* Comprendre les principes du cloud et son intérêt, ainsi que le vocabulaire associé,
-* Avoir une vue d’ensemble sur les solutions existantes en cloud public et privé,
-* Pouvoir déterminer ce qui est compatible avec la philosophie cloud,
-* Connaître le fonctionnement du projet OpenStack et ses possibilités,
-* Manipuler l'API (Application Programming Interface), la CLI (Command Line Interface) et le Dashboard.
+Ce cours a la particularité de mettre les stagiaires en situation via le développement et l'intégration d'une mini-application
+"cloud-ready", les uns dans le rôle "développeur" et les autres dans le rôle "intégrateur".
 
 ## Programme
 
 ### Le Cloud : vue d’ensemble
 
-1. Les concepts du Cloud
-2. Comprendre l'IaaS (Infrastructure as a Service)
-3. Comprendre le PaaS (Platform as a Service)
-4. Le stockage dans le cloud, block, objet et SDS
-6. Comment orchestrer les ressources de son IaaS
-7. Les APIs, la clé du cloud
+1. Le Cloud : les concepts
+2. PaaS : Platform as a Service
+3. IaaS : Infrastructure as a Service
+4. Les APIs : quels rôles ?
 
-### OpenStack : projet et logiciel
+### Architectures "cloud-ready"
 
-1. Historique et présentation du projet OpenStack
-2. Le logiciel OpenStack
-3. Modèle de développement ouvert
+1. Concevoir une application pour le Cloud
+2. Concevoir une infrastructure pour le Cloud
 
-### Utiliser OpenStack
+### OpenStack
 
-1. Utilisation du Dashboard
-2. Utilisation des outils CLI
-3. Utilisation des APIs
-4. Fonctionnalités avancées
+1. Le projet, la fondation openstack.org
+2. Utiliser OpenStack via la console Horizon et le CLI
+3. Consommer le IaaS via les APIs
 
-## Travaux pratiques
+### Travaux pratiques
 
-* Lancer et configurer des ressources de base sur OpenStack.
-* Découvrir le fonctionnement des APIs en effectuant des requêtes HTTP avec curl
-* Manipuler les ressources de son cloud à l'aide des outils CLI
-* Utiliser le dashboard OpenStack
+* Développement et intégration d'une mini-application Web "cloud-ready".
