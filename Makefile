@@ -11,7 +11,8 @@
 #
 
 # Dependencies: pandoc
-#               pdflatex
+#               texlive-latex-base
+#               texlive-latex-extra
 #               texlive-extra-utils (pdfnup)
 
 # The following needs to be made variable somehow
