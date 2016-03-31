@@ -14,6 +14,11 @@
 #               pdflatex
 #               texlive-extra-utils (pdfnup)
 
+# The following needs to be made variable somehow
+title="Formation Osones"
+user="Osones"
+date="$$(date +%F)"
+
 # Definition of cours based on modules
 cours=cours/list.md
 # Where to get revealjs stuff
@@ -27,23 +32,26 @@ all: openstack.pdf docker.pdf
 
 build/Makefile:
 	mkdir -p build
-	sed -E 's#^(.*):(.*)#build/\1.md: $$(addprefix cours/, \2)\n\trm $$@\n\t$$(foreach module,$$^,cat $$(module) >> $$@;)#' $(cours) > build/Makefile
+	sed -E 's#^(.*):(.*)#build/\1.md: $$(addprefix cours/, \2)\n\trm -f $$@\n\t$$(foreach module,$$^,cat $$(module) >> $$@;)#' $(cours) > build/Makefile
 
 -include build/Makefile
 
 build/%.tex: build/%.md
-	pandoc $< -t beamer -f markdown -s -o $@ --slide-level 3 -V navigation=frame
+	pandoc $< -t beamer -f markdown -s -o $@ --slide-level 3 -H cours/styles/beamer.custom -V theme=metropolis  \
+		-V title=$(title) -V institute=Osones -V author=$(user) -V date=$(date)
 	sed -i 's,\\{width=``.*},,' $@ # workaround
 	sed -i 's,\\{height=``.*},,' $@
 
 build/%-handout.tex: build/%.md
-	pandoc $< -t beamer -f markdown -s -o $@ --slide-level 3 -V navigation=frame -V handout
+	pandoc $< -t beamer -f markdown -s -o $@ --slide-level 3 -H cours/styles/beamer.custom -V theme=metropolis -V handout \
+		-V title=$(title) -V institute=Osones -V author=$(user) -V date="$(date)"
 	sed -i 's,\\{width=``.*},,' $@
 	sed -i 's,\\{height=``.*},,' $@
 
 %.html: build/%.md ## Build cours "%" in html/revealjs, optional argument revealjsurl=<url to revealjs>
 	sed 's,^## ,### ,' $< > $<-html # revealjs doesn't support 3 levels
-	pandoc $<-html -t revealjs -f markdown -s -o $@ --slide-level 3 -V theme=osones -V navigation=frame -V revealjs-url=$(revealjsurl) -V slideNumber="true"
+	pandoc $<-html -t revealjs -f markdown -s -o $@ --slide-level 3 -V theme=osones -V navigation=frame -V revealjs-url=$(revealjsurl) -V slideNumber="true" #\
+	#	-V title=$(title) -V institute=Osones -V author=$(user) -V date="$(date)"
 
 %.pdf: build/%.tex ## Build cours "%" in beamer/pdf
 	ln -s cours/styles/beamer*metropolis.sty .
