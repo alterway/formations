@@ -1,0 +1,46 @@
+# Colors
+
+\definecolor{oRed}{HTML}{9B1801}
+
+\setbeamercolor{osones text}{%
+  fg=oRed,
+  bg=black!2
+}
+
+\setbeamercolor{alerted text}{%
+  fg=oRed
+}
+
+\setbeamercolor{palette osones}{%
+  use=osones text,
+  fg=osones text.bg,
+  bg=osones text.fg
+}
+
+\setbeamercolor{frametitle}{%
+  use=palette osones,
+  parent=palette osones
+}
+
+# Page numbering, progress bar
+\metroset{numbering=fraction, progressbar=foot}
+
+# ToC
+\AtBeginSection[]
+{
+  \begin{frame}[shrink]
+    \frametitle{Plan}
+    \tableofcontents[currentsection,hideothersubsections]
+  \end{frame}
+}
+\AtBeginSubsection[]
+{
+  \begin{frame}[shrink]
+    \frametitle{Plan}
+    \tableofcontents[
+      currentsection,
+      sectionstyle=show/show,
+      subsectionstyle=show/shaded/hide
+    ]
+  \end{frame}
+}
