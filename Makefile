@@ -45,7 +45,7 @@ build/%.tex: build/%.md
 
 build/%-handout.tex: build/%.md
 	pandoc $< -t beamer -f markdown -s -o $@ --slide-level 3 -H cours/styles/beamer.custom -V theme=metropolis -V handout \
-		-V title=$(title) -V institute=Osones -V author=$(user) -V date="$(date)"
+		-V title=$(title) -V institute=Osones -V author=$(user) -V date=$(date)
 	sed -i 's,\\{width=``.*},,' $@
 	sed -i 's,\\{height=``.*},,' $@
 
