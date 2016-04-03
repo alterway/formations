@@ -18,7 +18,7 @@
 # The following needs to be made variable somehow
 title="Formation Osones"
 user="Osones"
-date="$$(date +%F)"
+date="$$(date +'%d %B %Y')"
 
 # Definition of cours based on modules
 cours=cours/list.md
