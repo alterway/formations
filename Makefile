@@ -22,8 +22,8 @@ date="$$(date +'%d %B %Y')"
 revealjsurl=http://formation.osones.com/revealjs
 
 # Definition of cours based on modules
-cours=cours/list.md
-title="$$(grep ^$* $(cours) | cut -d '[' -f2 | cut -d ']' -f1)"
+cours=cours.list
+title="$$(grep ^$* $(cours) | cut -d '$$' -f2)"
 
 help: ## Show this help
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
@@ -33,7 +33,7 @@ all: openstack.pdf docker.pdf
 
 build/Makefile:
 	mkdir -p build
-	sed -E 's#^(.*)\[.*\]:(.*)#build/\1.md: $$(addprefix cours/, \2)\n\trm -f $$@\n\t$$(foreach module,$$^,cat $$(module) >> $$@;)#' $(cours) > build/Makefile
+	sed -E 's#^(.*)\$$.*\$$(.*)#build/\1.md: $$(addprefix cours/, \2)\n\trm -f $$@\n\t$$(foreach module,$$^,cat $$(module) >> $$@;)#' $(cours) > build/Makefile
 
 -include build/Makefile
 
