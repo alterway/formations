@@ -10,12 +10,12 @@
 #  make build/$cours.tex
 #
 
-# Dependencies: pandoc
+# Dependencies: pandoc (>= 1.16 recommended)
 #               texlive-latex-base
 #               texlive-latex-extra
 #               texlive-extra-utils (pdfnup)
 
-user="Team Osones"
+author="Team Osones"
 date="$$(date +'%d %B %Y')"
 
 # Where to get revealjs stuff
@@ -25,10 +25,10 @@ revealjsurl=http://formation.osones.com/revealjs
 cours=cours.list
 title="$$(grep ^$* $(cours) | cut -d '$$' -f2)"
 
-help: ## Show this help
-	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
+help: ##### Show this help
+	@fgrep -h "#####" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/#####//'
 
-all: ## Build all pdf cours
+all: ##### Build all pdf cours
 all: openstack.pdf docker.pdf
 
 build/Makefile:
@@ -38,37 +38,35 @@ build/Makefile:
 -include build/Makefile
 
 build/%.tex: build/%.md
-	pandoc $< -t beamer -f markdown -s -o $@ --slide-level 3 -H cours/styles/beamer.custom -V theme=metropolis  \
-		-V title=$(title) -V institute=Osones -V author=$(user) -V date=$(date)
-	sed -i 's,\\{width=``.*},,' $@ # workaround
-	sed -i 's,\\{height=``.*},,' $@
+	pandoc $< -t beamer -f markdown -s -o $@ --slide-level 3 -V theme=metropolis -H cours/styles/beamer.custom \
+		-V title=$(title) -V institute=Osones -V author=$(author) -V date=$(date)
 
 build/%-handout.tex: build/%.md
-	pandoc $< -t beamer -f markdown -s -o $@ --slide-level 3 -H cours/styles/beamer.custom -V theme=metropolis -V handout \
-		-V title=$(title) -V institute=Osones -V author=$(user) -V date=$(date)
-	sed -i 's,\\{width=``.*},,' $@
-	sed -i 's,\\{height=``.*},,' $@
+	pandoc $< -t beamer -f markdown -s -o $@ --slide-level 3 -V theme=metropolis -H cours/styles/beamer.custom -V handout \
+		-V title=$(title) -V institute=Osones -V author=$(author) -V date=$(date)
 
-%.html: build/%.md ## Build cours "%" in html/revealjs, optional argument revealjsurl=<url to revealjs>
+%.html: build/%.md ##### Build cours "%" in html/revealjs, optional argument revealjsurl=<url to revealjs>
 	sed 's,^## ,### ,' $< > $<-html # revealjs doesn't support 3 levels
-	pandoc $<-html -t revealjs -f markdown -s -o $@ --slide-level 3 -V theme=osones -V navigation=frame -V revealjs-url=$(revealjsurl) -V slideNumber="true" #\
-	#	-V title=$(title) -V institute=Osones -V author=$(user) -V date="$(date)"
+	pandoc $<-html -t revealjs -f markdown -s -o $@ --slide-level 3 -V theme=osones \
+		-V revealjs-url=$(revealjsurl) -V navigation=frame -V slideNumber="true" \
+		-V title=$(title) -V institute=Osones -V author=$(author) -V date="$(date)"
 
-%.pdf: build/%.tex ## Build cours "%" in beamer/pdf
+%.pdf: build/%.tex ##### Build cours "%" in beamer/pdf, use %-handout for the handout version
 	ln -sf cours/styles/beamer*metropolis.sty .
 	pdflatex -output-directory build/ $<
 	pdflatex -output-directory build/ $<
 	rm -f beamer*metropolis.sty
 	mv build/$@ $@
 
-%-print.pdf: %.pdf ## Build cours "%" in beamer/pdf, print (4 slides / page) version
+%-print.pdf: %-handout.pdf ##### Build cours "%" in beamer/pdf, print (4 slides / page) version
 	pdfnup --nup 2x2 --frame true --suffix print $<
+	mv $*-handout-print.pdf $*-print.pdf
 
-clean: ## Remove build files
+clean: ##### Remove build files
 	rm -rf build/
 	rm -f beamer*metropolis.sty
 
-mrproper: ## Remove build files and .html/.pdf files
+mrproper: ##### Remove build files and .html/.pdf files
 mrproper: clean
 	rm -f *.pdf
 	rm -f *.html
