@@ -15,15 +15,15 @@
 #               texlive-latex-extra
 #               texlive-extra-utils (pdfnup)
 
-# The following needs to be made variable somehow
-title="Formation Osones"
-user="Osones"
+user="Team Osones"
 date="$$(date +'%d %B %Y')"
+
+# Where to get revealjs stuff
+revealjsurl=http://formation.osones.com/revealjs
 
 # Definition of cours based on modules
 cours=cours/list.md
-# Where to get revealjs stuff
-revealjsurl=http://formation.osones.com/revealjs
+title="$$(grep ^$* $(cours) | cut -d '[' -f2 | cut -d ']' -f1)"
 
 help: ## Show this help
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
@@ -33,7 +33,7 @@ all: openstack.pdf docker.pdf
 
 build/Makefile:
 	mkdir -p build
-	sed -E 's#^(.*):(.*)#build/\1.md: $$(addprefix cours/, \2)\n\trm -f $$@\n\t$$(foreach module,$$^,cat $$(module) >> $$@;)#' $(cours) > build/Makefile
+	sed -E 's#^(.*)\[.*\]:(.*)#build/\1.md: $$(addprefix cours/, \2)\n\trm -f $$@\n\t$$(foreach module,$$^,cat $$(module) >> $$@;)#' $(cours) > build/Makefile
 
 -include build/Makefile
 
