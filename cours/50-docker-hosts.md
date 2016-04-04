@@ -125,7 +125,7 @@
 
 - Supporte Docker, Rkt et Pivotal Garden (Cloud Foundry)
 
-![](images/docker/photon.svg){height="100px"}
+![](images/docker/photon.png){height="100px"}
 
 ### Docker Hosts : conclusion
 
