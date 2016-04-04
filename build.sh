@@ -15,7 +15,7 @@ function build-html {
 #  if [[ $1 != "" ]]; then
 #    urlRevealjs=$1
 #  fi
-  while IFS=: read cours modules; do
+  while IFS=$ read cours titre modules; do
     for module in $modules; do
       cat $COURS_DIR/$module >> $COURS_DIR/slide-$cours
     done
@@ -31,7 +31,7 @@ function build-html {
 
 function build-pdf {
   mkdir -p output-pdf
-  for cours in $(cut -d: -f1 $LIST); do
+  for cours in $(cut -d$ -f1 $LIST); do
     docker run -v $PWD/output-pdf:/output -v $PWD/output-html/"$cours".html:/index.html -v $PWD/images:/images osones/wkhtmltopdf:stable -O landscape -s A5 -T 0 file:///index.html\?print-pdf /output/"$cours".pdf
   done
 }
