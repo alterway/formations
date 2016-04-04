@@ -44,3 +44,15 @@
     ]
   \end{frame}
 }
+
+% Navigation symbols
+\setbeamertemplate{navigation symbols}
+{
+  \vbox{
+  \hbox{\insertslidenavigationsymbol}
+  \hbox{\insertsubsectionnavigationsymbol}
+  \hbox{\insertsectionnavigationsymbol}}
+}
+
+% Footer
+\setbeamertemplate{frame footer}{\includegraphics[height=0.5cm]{images/logo-osones-picto.png} \hspace*{1cm} \inserttitle \hspace*{1cm} \insertsection}
