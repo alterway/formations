@@ -2,7 +2,7 @@
 
 COURS_DIR=cours
 IMG_DIR=images
-LIST=cours/list.md
+LIST=cours.list
 #mode=$1
 EXT=$2
 COURSE=$1
