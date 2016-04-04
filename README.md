@@ -27,30 +27,27 @@ Travis est en charge de builder régulièrement les supports de formation. Ceux 
 Builder en local
 ----------------
 
-Build du HTML :
-
 ```
 bash build.sh
 ```
 
 Pour visualiser :
 
-- Lire le(s) fichier(s) cours/revealjs/$(cours).html avec votre navigateur
+- Lire le(s) fichier(s) cours/output-html/$(cours).html avec votre navigateur
+- Les PDF se trouvent dans output-pdf/
 
 OU
 
-- `docker run -d -p 80:8001 -v images:/revealjs/images -v cours/output-html/$(cours).html:/revealjs/index.html -v cours/styles/osones.css:/revealjs/css/theme/osones.css vsense/revealjs`
-- http://localhost
-
-Générations des PDFs
---------------------
-
 ```
-bash build.sh
-docker run --rm -v cours/output-pdf:/output -v cours/revealjs:/input -v images:/input/images/ astefanutti/decktape /input/$(cours).html /output/$(cours).pdf
+docker run -d \
+            -p 80:8001 \
+            -v $PWD/images:/revealjs/images \
+            -v $PWD/cours/output-html/$(cours).html:/revealjs/index.html \
+            -v $PWD/cours/output-html/revealjs/css/theme/osones.css:/revealjs/css/theme/osones.css \
+            vsense/revealjs
 ```
 
-Les PDF se trouvent dans output-pdf/$(cours).pdf
+- Les slides sont ensuite accessibles sur http://localhost
 
 Copyright et licence
 --------------------
