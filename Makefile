@@ -49,7 +49,7 @@ build/%-handout.tex: build/%.md
 	sed 's,^## ,### ,' $< > $<-html # revealjs doesn't support 3 levels
 	pandoc $<-html -t revealjs -f markdown -s -o $@ --slide-level 3 -V theme=osones \
 		-V revealjs-url=$(revealjsurl) -V navigation=frame -V slideNumber="true" \
-		-V title=$(title) -V institute=Osones -V author=$(author) -V date="$(date)"
+		-V title=$(title) -V institute=Osones -V author=$(author) -V date=$(date)
 
 %.pdf: build/%.tex ##### Build cours "%" in beamer/pdf, use %-handout for the handout version
 	ln -sf cours/styles/beamer*metropolis.sty .
