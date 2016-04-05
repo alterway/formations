@@ -31,7 +31,7 @@ help: ##### Show this help
 all: ##### Build all pdf cours
 all: openstack.pdf docker.pdf
 
-build/Makefile:
+build/Makefile: $(cours)
 	mkdir -p build
 	sed -E 's#^(.*)\$$.*\$$(.*)#build/\1.md: $$(addprefix cours/, \2)\n\trm -f $$@\n\t$$(foreach module,$$^,cat $$(module) >> $$@;)#' $(cours) > build/Makefile
 
