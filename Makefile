@@ -16,6 +16,7 @@
 #               texlive-extra-utils (pdfnup)
 
 author="Team Osones"
+institute="Osones"
 date="$$(date +'%d %B %Y')"
 
 # Where to get revealjs stuff
@@ -39,17 +40,17 @@ build/Makefile: $(cours)
 
 build/%.tex: build/%.md
 	pandoc $< -t beamer -f markdown -s -o $@ --slide-level 3 -V theme=metropolis -H cours/styles/beamer.custom \
-		-V title=$(title) -V institute=Osones -V author=$(author) -V date=$(date)
+		-V title=$(title) -V institute=$(institute) -V author=$(author) -V date=$(date)
 
 build/%-handout.tex: build/%.md
 	pandoc $< -t beamer -f markdown -s -o $@ --slide-level 3 -V theme=metropolis -H cours/styles/beamer.custom -V handout \
-		-V title=$(title) -V institute=Osones -V author=$(author) -V date=$(date)
+		-V title=$(title) -V institute=$(institute) -V author=$(author) -V date=$(date)
 
 %.html: build/%.md ##### Build cours "%" in html/revealjs, optional argument revealjsurl=<url to revealjs>
 	sed 's,^## ,### ,' $< > $<-html # revealjs doesn't support 3 levels
 	pandoc $<-html -t revealjs -f markdown -s -o $@ --slide-level 3 -V theme=osones \
 		-V revealjs-url=$(revealjsurl) -V navigation=frame -V slideNumber="true" \
-		-V title=$(title) -V institute=Osones -V author=$(author) -V date=$(date)
+		-V title=$(title) -V institute=$(institute) -V author=$(author) -V date=$(date)
 
 %.pdf: build/%.tex ##### Build cours "%" in beamer/pdf, use %-handout for the handout version
 	ln -sf cours/styles/beamer*metropolis.sty .
