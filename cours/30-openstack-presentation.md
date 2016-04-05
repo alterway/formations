@@ -84,7 +84,7 @@ Source : <http://lists.openstack.org/pipermail/foundation-board/2015-April/00005
 -   Autres
     -   Les clients (python-\*client)
 
-### Développement du projet : les principes
+### Les 4 Opens
 
 -   Open Source
 -   Open Design
@@ -138,7 +138,7 @@ Source : <http://lists.openstack.org/pipermail/foundation-board/2015-April/00005
 
 ### Ressources - Communauté francophone
 
-![](images/openstackfr.png)
+![Logo OpenStack-fr](images/openstackfr.png){height=50px}
 
 -   Site web : <http://openstack.fr/>
 -   Association des utilisateurs francophones d’OpenStack : <https://asso.openstack.fr/>

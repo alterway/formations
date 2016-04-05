@@ -100,7 +100,7 @@
 
 ### Scénario d’utilisation typique
 
-![](images/keystone-scenario.png)
+![Interactions avec Keystone](images/keystone-scenario.png)
 
 ### Installation et configuration
 -   Paquet : keystone
@@ -145,7 +145,7 @@ Keystone :
 
 ### Interactions avec les autres composants
 
-![](images/compute-node.png)
+![Instance, image et volume](images/compute-node.png)
 
 ### Propriétés d’une instance
 
@@ -207,7 +207,7 @@ Les instances sont redimensionnables et migrables d’un hôte physique à un au
 
 ### Le scheduler Nova en action
 
-![](images/scheduling-schema.png)
+![Fonctionnement de nova-scheduler](images/scheduling-schema.png)
 
 ### Nova conductor
 
@@ -319,11 +319,11 @@ L’API permet notamment de manipuler ces ressources
 
 ### Schéma
 
-![](images/neutron-schema.png)
+![Vue utilisateur du réseau](images/neutron-schema.png)
 
 ### Schéma
 
-![](images/neutron-schema2.png)
+![Vue infra du réseau](images/neutron-schema2.png)
 
 ## Cinder : Stockage block
 
@@ -371,7 +371,7 @@ L’API permet notamment de manipuler ces ressources
 -   Horizon est un module Django
 -   OpenStack Dashboard est l’implémentation officielle de ce module
 
-![](images/django-logo.png)
+![Logo du framework web Python Django](images/django-logo.png)
 
 ### Configuration
 
@@ -411,7 +411,7 @@ L’API permet notamment de manipuler ces ressources
 
 ### Schéma
 
-![](images/swift-schema.png)
+![Architecture Swift](images/swift-schema.png)
 
 ## Ceilometer : Collecte de métriques
 
@@ -499,7 +499,7 @@ Multiples projets en cours de développement
 ### Ironic
 
 -   Anciennement Nova bare-metal
--   Permet le déploiement d’instance sur des machines physiques (plutôt que VMs)
+-   Permet le déploiement d’instances sur des machines physiques (plutôt que VMs)
 -   Repose sur des technologies telles que PXE, TFTP
 
 ### Oslo, ou OpenStack common
@@ -549,7 +549,7 @@ Multiples projets en cours de développement
 ### Les différentes méthodes d’installation
 
 -   DevStack est à oublier pour la production
--   TripleO est encore jeune
+-   TripleO est très complexe
 -   Le déploiement à la main comme vu précédemment n’est pas recommandé car peu maintenable
 -   Distributions OpenStack packagées et prêtes à l’emploi
 -   Distributions classiques et gestion de configuration
@@ -582,7 +582,7 @@ Ce modèle simplifié n’est pas HA.
 
 ### Haute disponibilité
 
-Haut disponibilité de l’IaaS
+Haute disponibilité du IaaS
 
 -   MySQL/MariaDB, RabbitMQ : HA classique (Galera, Clustering)
 -   Les services APIs sont stateless et HTTP : scale out et load balancers
@@ -682,9 +682,9 @@ Guide sécurité : <http://docs.openstack.org/security-guide/>
 -   Le packaging dans Ubuntu suit de près le développement d’OpenStack, et des tests automatisés sont réalisés
 -   Canonical fournit la Ubuntu Cloud Archive, qui met à disposition la dernière version d’OpenStack pour la dernière Ubuntu LTS
 
-### Ubuntu Cloud Archive
+### Ubuntu Cloud Archive (UCA)
 
-![](images/ubuntu-cloud-archive.png)
+![Support d'OpenStack dans Ubuntu via l'UCA](images/ubuntu-cloud-archive.png)
 
 ### Packaging d’OpenStack dans les autres distributions
 
@@ -713,15 +713,17 @@ Guide sécurité : <http://docs.openstack.org/security-guide/>
 -   Ces outils peuvent aider à déployer le cloud OpenStack
 -   ... mais aussi à gérer les instances (section suivante)
 
-### Modules Puppet
+### Modules Puppet, Playbooks Ansible
 
--   Puppet Labs maintient (avec d’autres) des modules pour déployer OpenStack
--   <https://forge.puppetlabs.com/puppetlabs/openstack>
+-   *Puppet OpenStack* et *OpenStack Ansible* : modules Puppet et playbooks Ansible
+-   Développés au sein du projet OpenStack
+-   <https://wiki.openstack.org/wiki/Puppet>
+-   <http://docs.openstack.org/developer/openstack-ansible/install-guide/>
 
 ### Déploiement continu
 
 -   OpenStack maintient un master (trunk) toujours stable
--   Possibilité de déployer au jour le jour le master (CD: *Continous Delivery*)
+-   Possibilité de déployer au jour le jour le `master` (CD : *Continous Delivery*)
 -   Nécessite la mise en place d’une infrastructure importante
 -   Facilite les mises à jour entre versions majeures
 

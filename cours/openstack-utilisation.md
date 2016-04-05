@@ -33,7 +33,7 @@
 -   Bibliothèques Python
 -   Outils CLI
     -   L’authentification se fait en passant les credentials par paramètres ou variables d’environnement
-    -   L’option –debug affiche la communication HTTP
+    -   L’option `--debug` affiche la communication HTTP
 
 ### OpenStack Client
 
@@ -73,7 +73,7 @@ La plupart des distributions fournissent aujourd’hui des images cloud.
 
 ### Cloud-init
 
--   Cloud-init est un moyen de tirer partie de l’API de metadata, et notamment des user data
+-   Cloud-init est un moyen de tirer parti de l’API de metadata, et notamment des user data
 -   L’outil est intégré par défaut dans la plupart des images cloud
 -   À partir des user data, cloud-init effectue les opérations de personnalisation de l’instance
 -   cloud-config est un format possible de user data

@@ -1,8 +1,4 @@
-## Stockage : block, objet, SDS
-
-### Stockage objet : une API
-
-![API de stockage objet](images/stockage-objet.png)
+## Stockage : derrière le cloud
 
 ### SDS : Software Defined Storage
 

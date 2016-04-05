@@ -1,4 +1,4 @@
-# Tirer partie de l’IaaS
+# Tirer parti du IaaS
 
 ### Deux visions
 
@@ -16,7 +16,9 @@ idée :
 -   Pertes de données
 -   Incompréhensions “le cloud ça marche pas”
 
-### Applications : adapter ou penser ses applications “cloud ready”
+## Côté applications
+
+### Adapter ou penser ses applications “cloud ready” 1/3
 Cf. les design tenets du projet OpenStack et Twelve-Factor <http://12factor.net/>
 
 -   Architecture distribuée plutôt que monolithique
@@ -24,14 +26,15 @@ Cf. les design tenets du projet OpenStack et Twelve-Factor <http://12factor.net/
     -   Limite les domaines de *failure*
 -   Couplage faible entre les composants
 
-### Applications : adapter ou penser ses applications “cloud ready”
+### Adapter ou penser ses applications “cloud ready” 2/3
 
 -   Bus de messages pour les communications inter-composants
 -   Stateless : permet de multiplier les routes d’accès à l’application
 -   Dynamicité : l’application doit s’adapter à son environnement et se reconfigurer lorsque nécessaire
 -   Permettre le déploiement et l’exploitation par des outils d’automatisation
 
-### Applications : adapter ou penser ses applications “cloud ready”
+### Adapter ou penser ses applications “cloud ready” 3/3
+
 -   Limiter autant que possible les dépendances à du matériel ou du logiciel spécifique qui pourrait ne pas fonctionner dans un cloud
 -   Tolérance aux pannes (*fault tolerance*) intégrée
 -   Ne pas stocker les données en local, mais plutôt :
@@ -39,7 +42,9 @@ Cf. les design tenets du projet OpenStack et Twelve-Factor <http://12factor.net/
     -   Stockage objet
 -   Utiliser des outils standards de journalisation
 
-### Système : adopter une philosophie DevOps
+## Côté système
+
+### Adopter une philosophie DevOps
 -   Infrastructure as Code
 -   Scale out plutôt que scale up (horizontalement plutôt que verticalement)
 -   HA niveau application plutôt qu’infrastructure
@@ -63,7 +68,7 @@ Une image cloud c’est :
 -   Une image disque contenant un OS déjà installé
 -   Une image qui peut être instanciée en n machines sans erreur
 -   Un OS sachant parler à l’API de metadata du cloud (cloud-init)
--   Détails : <http://docs.openstack.org/image-guide/openstack-images.html>\
+-   Détails : <http://docs.openstack.org/image-guide/openstack-images.html>
 -   La plupart des distributions fournissent aujourd’hui des images cloud.
 
 ### Cirros
@@ -76,7 +81,7 @@ Une image cloud c’est :
 
 ### Cloud-init
 
--   Cloud-init est un moyen de tirer partie de l’API de metadata, et notamment des user data
+-   Cloud-init est un moyen de tirer parti de l’API de metadata, et notamment des user data
 -   L’outil est intégré par défaut dans la plupart des images cloud
 -   À partir des user data, cloud-init effectue les opérations de personnalisation de l’instance
 -   cloud-config est un format possible de user data

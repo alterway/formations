@@ -63,6 +63,8 @@ Motivations d’ordre technique :
 -   Elastic Block Storage (EBS) $\rightarrow$ stockage bloc
 -   Simple Storage Service (S3) $\rightarrow$ stockage objet
 
+![Logo Amazon Web Services (AWS)](images/aws.png){height=50px}
+
 ### Les clouds publics concurrents d’AWS
 
 -   dans le monde :
@@ -98,7 +100,8 @@ Motivations d’ordre technique :
 -   Un cloud IaaS repose souvent sur la virtualisation
 -   Ressources “compute” $\leftarrow$ virtualisation
 -   Hyperviseurs : KVM, Xen (libvirt), ESX
--   Conteneurs : OpenVZ, LXC, Docker, Kubernetes
+-   Conteneurs : OpenVZ, LXC, LXD
+-   Conteneurs : Docker
 
 ### Notions et vocabulaire IaaS 1/4
 
@@ -145,7 +148,11 @@ Motivations d’ordre technique :
 -   Pousser et retirer des objets dans un container/bucket
 -   Pas de hiérarchie des données, pas de système de fichiers
 -   Accès par les APIs
--   L’application doit être conçue pour tirer partie du stockage objet
+-   L’application doit être conçue pour tirer parti du stockage objet
+
+### Stockage objet : une API
+
+![API de stockage objet](images/stockage-objet.png)
 
 ### Orchestrer les ressources de son IaaS
 
