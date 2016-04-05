@@ -23,7 +23,8 @@
 }
 
 % Page numbering, progress bar
-\metroset{numbering=fraction, progressbar=foot}
+\metroset{numbering=fraction}
+\mode<beamer>{\metroset{progressbar=foot}}
 
 % ToC
 \AtBeginSection[]
@@ -46,12 +47,14 @@
 }
 
 % Navigation symbols
+\mode<beamer>{
 \setbeamertemplate{navigation symbols}
 {
   \vbox{
   \hbox{\insertslidenavigationsymbol}
   \hbox{\insertsubsectionnavigationsymbol}
   \hbox{\insertsectionnavigationsymbol}}
+}
 }
 
 % Footer
