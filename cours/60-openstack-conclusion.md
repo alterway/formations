@@ -1,4 +1,4 @@
-# Conclusion 
+# Conclusion {-}
 
 ### Pour conclure
 

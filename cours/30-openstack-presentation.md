@@ -1,8 +1,10 @@
 # OpenStack : le projet
 
+## Tour d'horizon
+
 ### Vue haut niveau
 
-![](images/openstack-software-diagram.png)
+![Version simple](images/openstack-software-diagram.png)
 
 ### Historique
 
@@ -10,22 +12,18 @@
 -   Objectif : le Cloud Operating System libre
 -   Fusion de deux projets de Rackspace (Storage) et de la NASA (Compute)
 -   Logiciel libre distribué sous licence Apache 2.0
+-   Naissance de la Fondation en 2012
 
 ### Les releases
 
 -   Austin (2010.1)
--   Bexar (2011.1)
--   Cactus (2011.2)
--   Diablo (2011.3)
--   Essex (2012.1)
--   Folsom (2012.2)
--   Grizzly (2013.1)
--   Havana (2013.2)
--   Icehouse (2014.1)
--   Juno (2014.2)
--   Kilo (2015.1)
--   **Liberty (2015.2)**
--   Avril 2016 : Mitaka
+-   Bexar (2011.1), Cactus (2011.2), Diablo (2011.3)
+-   Essex (2012.1), Folsom (2012.2)
+-   Grizzly (2013.1), Havana (2013.2)
+-   Icehouse (2014.1), Juno (2014.2)
+-   Kilo (2015.1), Liberty (2015.2)
+-   **Mitaka** (2016.1)
+-   Fin 2016 : Newton, début 2017 : Ocata
 
 ### Statistiques : Kilo
 
@@ -111,11 +109,11 @@ Source : <http://lists.openstack.org/pipermail/foundation-board/2015-April/00005
 
 ### La fondation OpenStack
 
-![](images/foundation.png)
+![Les principales entités de la fondation](images/foundation.png)
 
 ### Interface web / Dashboard : Horizon
 
-![](images/horizon.png)
+![Screenshot Horizon (Liberty)](images/horizon.png)
 
 ### Ressources
 

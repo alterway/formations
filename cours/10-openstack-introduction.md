@@ -1,4 +1,4 @@
-# Introduction
+# Introduction {-}
 
 ### Objectifs de la formation : Cloud
 

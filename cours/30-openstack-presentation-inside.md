@@ -1,66 +1,14 @@
-# Stockage : block, objet, SDS
-
-### Stockage block
-
--   Accès à des raw devices type */dev/vdb*
--   Possibilité d’utiliser n’importe quel système de fichiers
--   Compatible avec toutes les applications legacy
-
-### Stockage objet
-
--   Pousser et retirer des objets dans un container/bucket
--   Pas de hiérarchie des données, pas de système de fichiers
--   Accès par les APIs
--   L’application doit être conçue pour tirer partie du stockage objet
-
-### Stockage objet : schéma
-
-![](images/stockage-objet.png)
-
-### SDS : Software Defined Storage
-
--   Utilisation de commodity hardware
--   Pas de RAID matériel
--   Le logiciel est responsable de garantir les données
--   Les pannes matérielles sont prises en compte et gérées
-
-### Deux solutions : OpenStack Swift et Ceph
-
--   Swift fait partie du projet OpenStack et fournit du stockage objet
--   Ceph fournit du stockage objet, block et FS
--   Les deux sont implémentés en SDS
--   Théorème CAP : on en choisit deux
-
-### Théorème CAP
-
-![](images/cap.jpg)
-
-### Swift
-
--   Swift est un projet OpenStack
--   Le projet est né chez Rackspace avant la création d’OpenStack
--   Swift est en production chez Rackspace depuis lors
--   C’est le composant le plus mature d’OpenStack
-
-### Ceph
-
--   Projet totalement parallèle à OpenStack
--   Supporté par une entreprise (Inktank) récemment rachetée par Red Hat
--   Fournit d’abord du stockage objet
--   L’accès aux données se fait via RADOS :
-    -   Accès direct depuis une application avec librados
-    -   Accès via une API REST grâce à radosgw
--   La couche RBD permet d’accéder aux données en mode block (volumes)
--   CephFS permet un accès par un système de fichiers POSIX
+## Développement et fonctionnement du projet
 
 ### Le nouveau modèle “big tent”
 
--   Évolutions presque totalement implémentées
--   Objectif : résoudre les limitations du modèle incubation/intégré
+-   Évolutions récemment implémentées
+-   Objectif : résoudre les limitations du précédent modèle incubation/intégré
 -   Inclusion a priori de l’ensemble de l’écosystème OpenStack
 -   *Programs* $\rightarrow$ *Project Teams*
--   Disparation des statuts en incubation et intégré
+<http://governance.openstack.org/reference/projects/index.html>
 -   Utilisation de tags factuels et objectifs
+<https://www.openstack.org/software/project-navigator/>
 
 ### Traduction
 
@@ -68,13 +16,6 @@
 -   Seules certaines parties sont traduites, comme Horizon
 -   La traduction française est aujourd’hui une des plus avancées
 -   Utilisation de la plateforme Transifex (en cours de migration vers l’outil libre Zanata)
-
-### Stackforge
-
--   Forge pour les nouveaux projets en lien avec OpenStack
--   Ils bénéficient de l’infrastructure du projet OpenStack, mais la séparation reste claire
--   Les projets démarrent dans Stackforge et peuvent ensuite rejoindre le projet OpenStack
--   En train de disparaitre au profit du modèle “big tent”
 
 ### Implémentation
 
@@ -89,11 +30,11 @@
 
 ### Architecture
 
-![](images/architecture-simple.jpg)
+![Vue détaillée des services](images/architecture-simple.jpg)
 
 ### Cycle de développement : 6 mois
 
--   Le planning est publié, exemple : <https://wiki.openstack.org/wiki/Mitaka_Release_Schedule>
+-   Le planning est publié, exemple : <http://releases.openstack.org/mitaka/schedule.html>
 -   Milestone releases
 -   Freezes : FeatureProposal, Feature, String
 -   RC releases
@@ -139,28 +80,23 @@
 
 ### Exemple du Summit d’avril 2013 à Portland
 
-![](images/photo-summit.jpg)
+![Photo : Adrien Cunin](images/photo-summit.jpg)
 
 ### Exemple du Summit d’octobre 2015 à Tokyo
 
-![](images/photo-summit1.jpg) Photo : Elizabeth K. Joseph, CC BY
-
-2.0, Flickr/pleia2
+![Photo : Elizabeth K. Joseph, CC BY 2.0, Flickr/pleia2](images/photo-summit1.jpg)
 
 ### Exemple du Summit d’octobre 2015 à Tokyo
 
-![](images/photo-summit2.jpg) Photo : Elizabeth K. Joseph, CC BY
-2.0, Flickr/pleia2
+![Photo : Elizabeth K. Joseph, CC BY 2.0, Flickr/pleia2](images/photo-summit2.jpg)
 
 ### Exemple du Summit d’octobre 2015 à Tokyo
 
-![](images/photo-summit3.jpg) Photo : Elizabeth K. Joseph, CC BY
-2.0, Flickr/pleia2
+![Photo : Elizabeth K. Joseph, CC BY 2.0, Flickr/pleia2](images/photo-summit3.jpg)
 
 ### Exemple du Summit d’octobre 2015 à Tokyo
 
-![](images/photo-summit4.jpg) Photo : Elizabeth K. Joseph, CC BY
-2.0, Flickr/pleia2
+![Photo : Elizabeth K. Joseph, CC BY 2.0, Flickr/pleia2](images/photo-summit4.jpg)
 
 ### Développement du projet : en détails
 
@@ -171,23 +107,14 @@
     -   Revue de code (peer review) : Gerrit, <https://review.openstack.org>
     -   Intégration continue (continous integration) : Jenkins, Zuul, etc., <http://zuul.openstack.org/>
 -   Développement hyper actif : 17000 commits dans Icehouse (+25%)
--   Fin 2012, création d’une entité indépendante de gouvernance : la fondation OpenStack
+
 ### OpenStack Infra
+
 -   Équipe projet en charge de l’infrastructure de développement d’OpenStack
 -   Travaille comme les équipes de dev d’OpenStack et utilise les mêmes outils
 -   Résultat : une infrastructure entièrement open source et développée comme tel
 
-# Orchestrer les ressources de son IaaS
-
-### Pourquoi orchestrer
-
--   Définir tout une infrastructure dans un seul fichier texte
--   Être en capacité d’instancier une infrastructure entière en un appel API
--   Autoscaling
-    -   Adapter ses ressources en fonction de ses besoins en temps réel
-    -   Fonctionnalité incluse dans le composant d’orchestration d’OpenStack
-
-# DevStack : faire tourner rapidement un OpenStack
+## DevStack : faire tourner rapidement un OpenStack
 
 ### Utilité de DevStack
 
@@ -226,3 +153,52 @@ Exemple
 -   Pour tester tous les composants OpenStack dans de bonnes conditions, plusieurs Go de RAM sont nécessaires
 -   L’utilisation de Vagrant est conseillée
 
+# Utiliser OpenStack
+
+### Le principe
+
+-   Toutes les fonctionnalités sont accessibles par l’API
+-   Les clients (y compris Horizon) utilisent l’API
+-   Des crédentials sont nécessaires
+    -   API OpenStack : utilisateur + mot de passe + tenant (+ domaine)
+    -   API AWS : access key ID + secret access key
+
+### Les APIs OpenStack
+
+-   Une API par service OpenStack
+-   <http://developer.openstack.org/api-ref.html>
+-   Chaque API est versionnée, la rétro-compatibilité est assurée
+-   REST
+-   Certains services sont aussi accessibles via une API différente compatible AWS
+
+### Accès aux APIs
+
+-   Direct, en HTTP, via des outils comme curl
+-   Avec une bibliothèque
+    -   Les implémentations officielles en Python
+    -   OpenStackSDK
+    -   D’autres implémentations, y compris pour d’autres langages (exemple : jclouds)
+    -   Shade
+-   Avec les outils officiels en ligne de commande
+-   Avec Horizon
+
+### Clients officiels
+
+-   Le projet fournit des clients officiels : python-PROJETclient
+-   Bibliothèques Python
+-   Outils CLI
+    -   L’authentification se fait en passant les credentials par paramètres ou variables d’environnement
+    -   L’option –debug affiche la communication HTTP
+
+### OpenStack Client
+
+-   Client CLI unifié
+-   Commandes du type *openstack \<service \>\<action \>*
+-   Vise à remplacer à terme les clients spécifiques
+-   Permet une expérience utilisateur plus homogène
+
+### Authentification et catalogue de service
+
+-   Une fois authentifié, récupération d’un jeton (*token*)
+-   Récupération du catalogue de services
+-   Pour chaque service, un endpoint HTTP (API)

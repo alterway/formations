@@ -14,6 +14,9 @@
     -   IaaS $\rightarrow$ Infrastructure as a Service
     -   PaaS $\rightarrow$ Platform as a Service
     -   SaaS $\rightarrow$ Software as a Service
+
+. . .
+
 -   Mais aussi :
     -   Object Storage as a Service
     -   Database as a Service
@@ -29,9 +32,9 @@
 
 ### Le cloud en un schéma
 
-![](images/cloud.png)
+![Le cloud selon Wikipedia](images/cloud.png)
 
-### Pourquoi migrer vers le cloud ? 
+### Pourquoi migrer vers le cloud ?
 
 Motivations d’ordre économique :
 
@@ -44,21 +47,21 @@ Motivations d’ordre économique :
 
 ### Pourquoi migrer vers le cloud ?
 
-Motivations d’ordre technique : 
+Motivations d’ordre technique :
 
 -   abstraire les couches basses (serveur, réseau, OS, stockage)
 -   s’affranchir de l’administration technique des ressources et services (BdD, pare-feux, load balancing,...)
 -   concevoir des infrastructures scalables à la volée
 -   agir sur les ressources via des lignes de code et gérer les infrastructures “comme du code”
 
-### IaaS : Infrastructure as a Service
+## IaaS : Infrastructure as a Service
 
 ### Le leader du IaaS public : Amazon Web Services (AWS)
 
 -   Pionnier du marché (dès 2006)
--   Elastic Compute Cloud ()$\rightarrow$ puissance de calcul
--   Elastic Block Storage ()$\rightarrow$ stockage bloc
--   Simple Storage Service ()$\rightarrow$ stockage objet
+-   Elastic Compute Cloud (EC2) $\rightarrow$ puissance de calcul
+-   Elastic Block Storage (EBS) $\rightarrow$ stockage bloc
+-   Simple Storage Service (S3) $\rightarrow$ stockage objet
 
 ### Les clouds publics concurrents d’AWS
 
@@ -66,6 +69,8 @@ Motivations d’ordre technique :
     -   Google Cloud Platform
     -   Microsoft Azure
     -   Rackspace
+    -   DreamHost
+    -   DigitalOcean
 -   en France :
     -   Cloudwatt (Orange Business Services)
     -   Numergy (SFR)
@@ -76,11 +81,10 @@ Motivations d’ordre technique :
 
 ### Logiciels libres permettant le déploiement d’un cloud privé
 
--   **OpenStack** (https://www.openstack.org)
--   CloudStack (https://cloudstack.apache.org/)
--   Eucalyptus (Acheté par HP en septembre 2014)
--   OpenNebula (http://opennebula.org/)
-
+-   **OpenStack** (<https://www.openstack.org>)
+-   Eucalyptus (société racheté par HP en septembre 2014)
+-   CloudStack (<https://cloudstack.apache.org/>)
+-   OpenNebula (<http://opennebula.org/>)
 
 ### Correspondance OpenStack - AWS
 
@@ -130,6 +134,27 @@ Motivations d’ordre technique :
     -   Stack : ensemble des ressources IaaS utilisées par une application.
     -   Template : fichier texte contenant la description d’une stack.
 
+### Stockage block
+
+-   Accès à des raw devices type */dev/vdb*
+-   Possibilité d’utiliser n’importe quel système de fichiers
+-   Compatible avec toutes les applications legacy
+
+### Stockage objet
+
+-   Pousser et retirer des objets dans un container/bucket
+-   Pas de hiérarchie des données, pas de système de fichiers
+-   Accès par les APIs
+-   L’application doit être conçue pour tirer partie du stockage objet
+
+### Orchestrer les ressources de son IaaS
+
+-   Définir tout une infrastructure dans un seul fichier texte
+-   Être en capacité d’instancier une infrastructure entière en un appel API
+-   Autoscaling
+    -   Adapter ses ressources en fonction de ses besoins en temps réel
+    -   Fonctionnalité incluse dans le composant d’orchestration d’OpenStack
+
 ### OpenStack est une API
 
 -   *Application Programming Interface*
@@ -137,15 +162,31 @@ Motivations d’ordre technique :
 -   Au sens cloud : Interface permettant à un logiciel d’utiliser un service (XaaS)
 -   Il s’agit le plus souvent d’API HTTP REST
 
+### REST
+
+-   Une ressource == une URI (*Uniform Resource Identifier*)
+-   Utilisation des verbes HTTP pour caractériser les opérations (CRUD)
+    - GET
+    - POST
+    - PUT
+    - DELETE
+-   Utilisation des codes de retour HTTP
+-   Représentation des ressources dans le corps des réponses HTTP
+
+### REST - Exemples
+
+    GET http://endpoint/volumes/
+    GET http://endpoint/volumes/?size=10
+    POST http://endpoint/volumes/
+    DELETE http://endpoint/volumes/xyz
+
 ### Exemple concret
 
-    GET /v2.0/networks/<network_id>
+    GET /v2.0/networks/d32019d3-bc6e-4319-9c1d-6722fc136a22
     {
        "network":{
           "status":"ACTIVE",
-          "subnets":[
-             "54d6f61d-db07-451c-9ab3-b9609b6b6f0b"
-          ],
+          "subnets":[ "54d6f61d-db07-451c-9ab3-b9609b6b6f0b" ],
           "name":"private-network",
           "provider:physical_network":null,
           "admin_state_up":true,
@@ -159,13 +200,17 @@ Motivations d’ordre technique :
     }
 
 
-### PaaS : Platform as a Service
+## PaaS : Platform as a Service
 
 ### PaaS : concept d’application managée
 
 -   Fourniture d’une plate-forme de “build, deploy and scale”
 -   Pour un langage / un framework (Python, Java, PHP, etc.)
 -   Principalement utilisé par des développeurs d’applications
+
+. . .
+
+-   Peut également désigner les *as a Service* type : DB, Queue, etc.
 
 ### Exemples de PaaS public
 

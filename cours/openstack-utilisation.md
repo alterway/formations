@@ -60,14 +60,14 @@ Une image cloud c’est :
 -   Une image qui peut être instanciée en n machines sans erreur
 -   Un OS sachant parler à l’API de metadata du cloud (cloud-init)
 
-Détails : <http://docs.openstack.org/image-guide/content/ch_openstack_images.html>\
+Détails : <http://docs.openstack.org/image-guide/openstack-images.html>\
 La plupart des distributions fournissent aujourd’hui des images cloud.
 
 ### Cirros
 
 -   Cirros est l’image cloud par excellence
 -   OS minimaliste
--   Contient cloud-init 
+-   Contient cloud-init
 
 <https://launchpad.net/cirros>
 

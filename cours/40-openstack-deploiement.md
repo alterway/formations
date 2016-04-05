@@ -1,24 +1,24 @@
-# Déployer OpenStack
+# Déployer et opérer OpenStack
 
 ### Ce qu’on va voir
 
 -   Installer OpenStack à la main
-    <http://docs.openstack.org/juno/install-guide/install/apt/content/>
+    <http://docs.openstack.org/liberty/install-guide-ubuntu/>
 -   Donc comprendre son fonctionnement
 -   Passer en revue chaque composant plus en détails
 -   Tour d’horizon des solutions de déploiement
 
 ### Architecture détaillée
 
-![](images/architecture.jpg)
+![Vue détaillée des services](images/architecture.jpg)
 
 ### Architecture réseau
 
-![](images/archi-network.png)
+![Machines "physiques" et interfaces réseau](images/archi-network.png)
 
 ### Architecture services
 
-![](images/archi-service.png)
+![Machines "physiques" et services](images/archi-service.png)
 
 ### Quelques éléments de configuration généraux
 
@@ -32,11 +32,11 @@
 -   OS Linux avec Python
 -   Historiquement : Ubuntu
 -   Red Hat s’est largement rattrapé
--   SUSE, etc.
+-   SUSE, Debian, CentOS, etc.
 
 ### Python
 
-![](images/python-powered.png)
+![Logo Python](images/python-powered.png){height=50px}
 
 -   OpenStack est aujourd’hui compatible Python 2.7
 -   Afin de ne pas réinventer la roue, beaucoup de dépendances sont nécessaires
@@ -54,12 +54,12 @@
 
 ### Pourquoi l’utilisation de SQLAlchemy
 
-![](images/sqlalchemy-logo.png)
+![Logo SQLAlchemy](images/sqlalchemy-logo.png){height=40px}
 
 -   Support de multiples BDD
 -   Gestion des migrations
 
-![](images/mysql-logo.png)
+![Logo MySQL](images/mysql-logo.png){height=40px}
 
 ### Passage de messages
 
@@ -71,16 +71,16 @@
 
 ### RabbitMQ
 
-![](images/rabbitmq-logo.png)
+![Logo RabbitMQ](images/rabbitmq-logo.png){height=40px}
 
 -   RabbitMQ est implémenté en Erlang
 -   Une machine virtuelle Erlang est donc nécessaire
 
 ### “Hello world” RabbitMQ
 
-![](images/rabbitmq-schema.png)
+![Illustration simple du fonctionnement de RabbitMQ](images/rabbitmq-schema.png)
 
-### Keystone : Authentification, autorisation et catalogue de services
+## Keystone : Authentification, autorisation et catalogue de services
 
 ### Principes
 
@@ -116,6 +116,7 @@
 
 Il faut renseigner l’existence des différents services (catalogue) dans
 Keystone :
+
     $ keystone service-create --name=cinderv2 --type=volumev2 \
       --description="Cinder Volume Service V2"
     $ keystone endpoint-create \
@@ -125,7 +126,6 @@ Keystone :
       --internalurl=http://controller:8776/v2/%\(tenant_id\)s \
       --adminurl=http://controller:8776/v2/%\(tenant_id\)s
 
-
 ### Tester
     $ keystone service-list
     ...
@@ -134,7 +134,7 @@ Keystone :
     $ keystone token-get
     ...
 
-### Nova : Compute
+## Nova : Compute
 
 ### Principes
 
@@ -188,7 +188,7 @@ Les instances sont redimensionnables et migrables d’un hôte physique à un au
 -   Double rôle
 -   API de manipulation des instances par l’utilisateur
 -   API à destination des instances : API de metadata
--   L’API de metadata doit être accessible à l’adresse http://169.254.169.254/
+-   L’API de metadata doit être accessible à l’adresse `http://169.254.169.254/`
 -   L’API de metadata fournit des informations de configuration personnalisées à chacune des instances
 
 ### Nova compute
@@ -222,7 +222,7 @@ Les instances sont redimensionnables et migrables d’un hôte physique à un au
     $ nova create
     ...
 
-### Glance : Registre d’images
+## Glance : Registre d’images
 
 ### Principes
 
@@ -264,13 +264,14 @@ Glance supporte un large éventail de types d’images, limité par le support d
 
 -   Paquet glance-api : fournit l’API
 -   Paquet glance-registry : démon du registre d’images en tant que tel
+
 ### Tester
     $ glance image-list
     ...
     $ glance image-create
     ...
 
-### Neutron : Réseau en tant que service
+## Neutron : Réseau en tant que service
 
 ### Principes
 
@@ -324,7 +325,7 @@ L’API permet notamment de manipuler ces ressources
 
 ![](images/neutron-schema2.png)
 
-### Cinder : Stockage block
+## Cinder : Stockage block
 
 ### Principes
 
@@ -362,7 +363,7 @@ L’API permet notamment de manipuler ces ressources
 -   Systèmes de stockage propriétaires type NetApp
 -   DRBD
 
-### Horizon : Dashboard web
+## Horizon : Dashboard web
 
 ### Principes
 
@@ -374,7 +375,7 @@ L’API permet notamment de manipuler ces ressources
 
 ### Configuration
 
--   local\_settings.py
+-   `local_settings.py`
 -   Les services apparaissent dans Horizon s’ils sont répertoriés dans le catalogue de services de Keystone
 
 ### Utilisation
@@ -382,11 +383,11 @@ L’API permet notamment de manipuler ces ressources
 -   Une zone “admin” restreinte
 -   Une interface par tenant
 
-### Swift : Stockage objet
+## Swift : Stockage objet
 
 ### Principes
 
--   SDS : Software Defined Storage
+-   SDS : *Software Defined Storage*
 -   Utilisation de commodity hardware
 -   Théorème CAP : on en choisit deux
 -   Accès par les APIs
@@ -412,7 +413,7 @@ L’API permet notamment de manipuler ces ressources
 
 ![](images/swift-schema.png)
 
-### Ceilometer : Collecte de métriques
+## Ceilometer : Collecte de métriques
 
 ### Surveiller l’utilisation de son infrastructure avec Ceilometer
 
@@ -427,7 +428,7 @@ L’API permet notamment de manipuler ces ressources
 -   Initié par des développeurs de Ceilometer et intégré à l’équipe projet Ceilometer
 -   Back-end remplaçant MongoDB pour Ceilometer
 
-### Heat : Orchestration des ressources
+## Heat : Orchestration des ressources
 
 ### Orchestrer son infrastructure avec Heat
 
@@ -471,7 +472,7 @@ Multiples projets en cours de développement
 -   HOT builder
 -   Merlin
 
-### Trove : Database as a Service
+## Trove : Database as a Service
 
 ### Principe
 
@@ -486,14 +487,14 @@ Multiples projets en cours de développement
 -   trove-taskmanager : gère les instances BDD
 -   trove-guestagent : agent interne à l’instance
 
-### Designate : DNS as a Service
+## Designate : DNS as a Service
 
 ### Principe
 
 -   Équivalent d’AWS Route 53
 -   Gère différents backends : BIND, etc.
 
-### Quelques autres composants intéressants
+## Quelques autres composants intéressants
 
 ### Ironic
 
@@ -526,7 +527,7 @@ Multiples projets en cours de développement
 -   Est très utilisé par les développeurs via l’intégration continue
 -   Le déployeur peut utiliser Tempest pour vérifier la bonne conformité de son cloud
 
-### Bonnes pratiques pour un déploiement en production
+## Bonnes pratiques pour un déploiement en production
 
 ### Quels composants dois-je installer ?
 -   Keystone est indispensable
@@ -534,7 +535,9 @@ Multiples projets en cours de développement
 -   Cinder s’avérera souvent utile
 -   Ceilometer et Heat vont souvent ensemble
 -   Swift est indépendant des autres composants
--   Neutron peut parfois être utilisé indépendamment (ex : avec oVirt) <http://docs.openstack.org/arch-design/content/>
+-   Neutron peut parfois être utilisé indépendamment (ex : avec oVirt)
+
+<http://docs.openstack.org/arch-design/>
 
 ### Penser dès le début aux choix structurants
 
@@ -585,7 +588,7 @@ Haut disponibilité de l’IaaS
 -   Les services APIs sont stateless et HTTP : scale out et load balancers
 -   La plupart des autres services OpenStack sont capables de scale out également
 
-Guide HA : <http://docs.openstack.org/high-availability-guide/content/>
+Guide HA : <http://docs.openstack.org/ha-guide/>
 
 ### Haute disponibilité de l’agent L3 de Neutron
 
@@ -602,7 +605,7 @@ Guide HA : <http://docs.openstack.org/high-availability-guide/content/>
 -   Backup
 -   QoS : en cours d’implémentation dans Neutron
 
-Guide Operations : <http://docs.openstack.org/trunk/openstack-ops/content/>
+Guide Operations : <http://docs.openstack.org/openstack-ops/content/>
 
 ### Utilisation des quotas
 
@@ -630,7 +633,7 @@ Guide Operations : <http://docs.openstack.org/trunk/openstack-ops/content/>
 -   Limiter l’accès en lecture des fichiers de configuration (mots de passe, token)
 -   Veille sur les failles de sécurité : OSSA (*OpenStack Security Advisory*), OSSN (*... Notes*)
 
-Guide sécurité : <http://docs.openstack.org/security-guide/content/>
+Guide sécurité : <http://docs.openstack.org/security-guide/>
 
 ### Segmenter son cloud
 
@@ -686,7 +689,7 @@ Guide sécurité : <http://docs.openstack.org/security-guide/content/>
 ### Packaging d’OpenStack dans les autres distributions
 
 -   OpenStack est intégré dans les dépôts officiels de Debian
--   Red Hat propose RHOS/RDO
+-   Red Hat propose RHOS/RDO (déploiement basé sur TripleO)
 -   Comme Ubuntu, le cycle de release de Fedora est synchronisé avec celui d’OpenStack
 
 ### Les distributions OpenStack
@@ -722,6 +725,8 @@ Guide sécurité : <http://docs.openstack.org/security-guide/content/>
 -   Nécessite la mise en place d’une infrastructure importante
 -   Facilite les mises à jour entre versions majeures
 
+## Gérer les problèmes
+
 ### Problèmes : ressources FAILED/ERROR
 
 -   Plusieurs causes possibles
@@ -740,7 +745,7 @@ Guide sécurité : <http://docs.openstack.org/security-guide/content/>
 ### Est-ce un bug ?
 
 -   Si le client CLI crash, c’est un bug
--   Si le dashboard web affiche une erreur 500, c’est peut-être un bug
+-   Si le dashboard web ou une API renvoie une erreur 500, c’est peut-être un bug
 -   Si les logs montrent une stacktrace Python, c’est un bug
 -   Sinon, à vous d’en juger
 

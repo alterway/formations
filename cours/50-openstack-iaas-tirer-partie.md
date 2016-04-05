@@ -46,12 +46,12 @@ Cf. les design tenets du projet OpenStack et Twelve-Factor <http://12factor.net/
 -   Automatisation, automatisation, automatisation
 -   Tests
 
-### Monitoring 
+### Monitoring
 
 -   Prendre en compte le cycle de vie des instances
 -   Monitorer le service plus que le serveur
 
-### Backup 
+### Backup
 
 -   Être capable de recréer ses instances (et le reste de son infrastructure)
 -   Données (applicatives, logs) : block, objet
@@ -63,7 +63,7 @@ Une image cloud c’est :
 -   Une image disque contenant un OS déjà installé
 -   Une image qui peut être instanciée en n machines sans erreur
 -   Un OS sachant parler à l’API de metadata du cloud (cloud-init)
--   Détails : <http://docs.openstack.org/image-guide/content/ch_openstack_images.html>\
+-   Détails : <http://docs.openstack.org/image-guide/openstack-images.html>\
 -   La plupart des distributions fournissent aujourd’hui des images cloud.
 
 ### Cirros
