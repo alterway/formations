@@ -12,20 +12,45 @@ Auteurs :
 * Kevin Lefevre <kevin.lefevre@osones.com>
 * Jean-François Taltavull <jft@osones.com>
 
-Intégration Continue
---------------------
+Build gérés par la CI (Travis) :
+* [Supports PDF](http://formation.osones.com/pdf)
+* [Support HTML OpenStack](http://formation.osones.com/openstack.html)
+* [Support HTML Docker](http://formation.osones.com/docker.html)
 
-Travis est en charge de builder régulièrement les supports de formation. Ceux ci sont écrits en markdown et sont buildés pour obtenir un support HTML et un support PDF
+Fonctionnement
+--------------
 
-[Support PDF](http://formation.osones.com/pdf)
+Les supports de formation (slides) sont écrits en Markdown. Chaque fichier dans `cours/` est un module indépendant.
 
-[Support HTML Docker](http://formation.osones.com/docker.html)
+`cours.list` définit les cours à partir des modules.
 
-[Support HTML OpenStack](http://formation.osones.com/openstack.html)
+Il est possible de générer ces slides sous différents formats :
+1. HTML / reveal.js
+2. PDF à partir du HTML / reveal.js
+3. PDF à partir de LaTeX / Beamer
 
+Deux méthodes de build sont disponibles :
+* Makefile : supporte 1. et 3.
+* .sh : supporte 1. et 2.
 
-Builder en local
-----------------
+Build Makefile
+--------------
+
+Le build se fait entièrement en local.
+* Voir le header du Makefile pour les dépendances nécessaires.
+* Voir `make help` pour l'utilisation.
+
+Quelques exemples :
+
+    make openstack.pdf
+    make docker-handout.pdf
+    make docker-print.pdf
+    make openstack.html
+
+Build .sh
+---------
+
+Le build se fait dans des containers Docker.
 
 ```
 bash build.sh
@@ -51,10 +76,10 @@ docker run -d \
 
 Copyright et licence
 --------------------
-Tous les contenus originaux (Makefile, les fichiers dans cours/, scripts) sont :
+Tous les contenus originaux (Makefile, scripts, fichiers dans cours/) sont :
 * Copyright © 2014-2016 Osones
 * Distribués sous licence Creative Commons BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)
 
-![Creative Commons BY-SA](http://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-sa.png){:width="100px"}.
+![Creative Commons BY-SA](http://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-sa.png)
 
 Les autres fichiers du répertoire images/ sont soumis à leur copyright et licence respectifs.
