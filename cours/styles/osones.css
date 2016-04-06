@@ -77,9 +77,9 @@ section.titleslide h1 {
   font-size: 1.55em; }
 
 /*
- * h4 is for fragment slides
+ * h6 is for fragment slides with a shape of a list
  */
-.reveal h4 {
+.reveal h6 {
   font-size: 1em;
   color: #383838;
   position: relative;
@@ -92,7 +92,7 @@ section.titleslide h1 {
   text-transform: lowercase;
   text-align: left;
 }
-.reveal h4:before {
+.reveal h6:before {
   content: '\2022';
   position: relative;
   bottom: .1em;
