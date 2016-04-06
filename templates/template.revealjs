@@ -62,23 +62,28 @@ $endfor$
 
 $if(title)$
 <section>
-  <h1 class="title">$title$</h1>
-$if(subtitle)$
-  <h1 class="subtitle">$subtitle$</h1>
-$endif$
-$for(author)$
-  <h2 class="author">$author$</h2>
-$endfor$
-$if(date)$
-  <h3 class="date">$date$</h3>
-$endif$
+  <!--  <section> -->
+    <h1 class="title">$title$</h1>
+  $if(subtitle)$
+    <h1 class="subtitle">$subtitle$</h1>
+  $endif$
+  $for(author)$
+    <h2 class="author">$author$</h2>
+  $endfor$
+  $if(date)$
+    <h3 class="date">$date$</h3>
+  $endif$
+<!--  </section>
+  <section>
+    <h2>Table of Contents</h2>
+    <nav id="presentable-toc" class="revealjs"></nav>
+  </section>
+-->
 </section>
 $endif$
 $if(toc)$
 <section id="$idprefix$TOC">
 $toc$
-  <h2>Table of Contents</h2>
-  <nav id="presentable-toc" class="revealjs"></nav>
 </section>
 $endif$
 
@@ -232,7 +237,7 @@ $endif$
         dependencies: [
           { src: '$revealjs-url$/lib/js/classList.js', condition: function() { return !document.body.classList; } },
           { src: '$revealjs-url$/plugin/zoom-js/zoom.js', async: true },
-          { src: '$revealjs-url$/plugin/notes/notes.js', async: true }
+          { src: '$revealjs-url$/plugin/notes/notes.js', async: true },
           { src: '$revealjs-url$/js/presentable.min.js', async: true, callback: function() { presentable.toc({framework: "revealjs"}); } }
         ]
       });
