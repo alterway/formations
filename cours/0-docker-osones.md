@@ -1,8 +1,6 @@
-# Formation Docker
+# Concernant ces supports de cours
 
-### Concernant ces supports de cours
-
-Supports de cours réalisés par Osones
+### Supports de cours réalisés par Osones
 
 <https://osones.com>
 
