@@ -17,8 +17,13 @@ html * {
  * GLOBAL STYLES
  *********************************************/
 body {
-  background: #fff;
-  background-color: #fff; }
+  background-image: url(../../images/osones_logo_noframe.png);
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 5% 95%;
+  background-size: 160px;
+}
 
 .reveal {
   font-family: "Source Sans Pro", sans-serif;
