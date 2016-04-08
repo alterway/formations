@@ -1,22 +1,41 @@
 #!/bin/bash -xe
 
+#########
+# USAGE
+########
+
+# ./build.sh COURSE (pdf | html) (RevealjsURL) (theme)
+
 COURS_DIR=cours
 IMG_DIR=images
 LIST=cours.list
 #mode=$1
 EXT=$2
 COURSE=$1
-#urlRevealjs=$3
+urlRevealjs=$3
+THEME=$4
 TITLE=""
 DATE=""
 
+# $1 : urlRevealJS
+# $2 : theme
 function build-html {
   mkdir -p output-html/revealjs/css/theme
-  cp $COURS_DIR/styles/osones.css output-html/revealjs/css/theme/osones.css
 
-#  if [[ $1 != "" ]]; then
-#    urlRevealjs=$1
-#  fi
+  if [[ $1 != "" ]]; then
+    urlRevealjs=$1
+  else
+    urlRevealjs="http://formation.osones.com/revealjs"
+  fi
+
+  if [[ $2 != "" ]]; then
+    THEME=$2
+  else
+    THEME="osones"
+  fi
+
+  cp $COURS_DIR/styles/"$THEME".css output-html/revealjs/css/theme/"$THEME".css
+
   while IFS=$ read cours titre modules; do
     for module in $modules; do
       cat $COURS_DIR/$module >> $COURS_DIR/slide-$cours
@@ -27,7 +46,7 @@ function build-html {
     sed 's/^## /### /' $COURS_DIR/slide-$cours > tmp_slide-$cours
     mv tmp_slide-$cours $COURS_DIR/slide-$cours
 
-    docker run -v $PWD:/formations osones/revealjs-builder:stable --standalone --template=/formations/templates/template.revealjs --slide-level 3 -V theme=osones -V navigation=frame -V revealjs-url=http://formation.osones.com/revealjs -V slideNumber=true -V title="$TITLE" -V institute=Osones -o /formations/output-html/$cours.html /formations/$COURS_DIR/slide-$cours
+    docker run -v $PWD:/formations osones/revealjs-builder:stable --standalone --template=/formations/templates/template.revealjs --slide-level 3 -V theme=$THEME -V navigation=frame -V revealjs-url=$urlRevealjs -V slideNumber=true -V title="$TITLE" -V institute=Osones -o /formations/output-html/$cours.html /formations/$COURS_DIR/slide-$cours
     rm -f $COURS_DIR/slide-$cours
   done < $LIST
 }
@@ -40,14 +59,14 @@ function build-pdf {
 
 case $EXT in
   html)
-    build-html
+    build-html $urlRevealjs $THEME
     ;;
   pdf)
-    build-html
+    build-html $urlRevealjs $THEME
     build-pdf
     ;;
   '')
-    build-html
+    build-html $urlRevealjs $THEME
     build-pdf
     ;;
 esac
