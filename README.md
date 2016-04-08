@@ -12,7 +12,7 @@ Auteurs :
 * Kevin Lefevre <kevin.lefevre@osones.com>
 * Jean-François Taltavull <jft@osones.com>
 
-Build gérés par la CI (Travis) :
+Build gérés par la CI :
 * [Supports PDF](http://formation.osones.com/pdf)
 * [Support HTML OpenStack](http://formation.osones.com/openstack.html)
 * [Support HTML Docker](http://formation.osones.com/docker.html)
@@ -30,8 +30,44 @@ Il est possible de générer ces slides sous différents formats :
 3. PDF à partir de LaTeX / Beamer
 
 Deux méthodes de build sont disponibles :
+* build.sh : supporte 1. et 2.
 * Makefile : supporte 1. et 3.
-* .sh : supporte 1. et 2.
+
+Build .sh
+---------
+
+Le build se fait dans des containers Docker.
+L'utilisation de containers Docker ne vise qu'à fournir un environnement stable (version des paquets fixes)
+et de ne pas "encrasser" le système hôte avec des paquets dont l'utilisation est faible.
+
+Les Dockerfiles des images Docker sont disponibles ici :
+
+- [revealjs-builder](https://github.com/Osones/docker-images/tree/master/revealjs-builder)
+- [wkhtmltopdf](https://github.com/Osones/docker-images/tree/master/wkhtmltopdf)
+
+Un daemon Docker est donc le seul prérequis pour le build via `build.sh`
+
+```
+bash build.sh
+```
+
+Pour visualiser :
+
+- Lire les fichiers dans `cours/output-html/*.html` avec votre navigateur
+- Les PDF se trouvent dans `output-pdf/`
+
+OU
+
+```
+docker run -d \
+            -p 80:8001 \
+            -v $PWD/images:/revealjs/images \
+            -v $PWD/cours/output-html/$(cours).html:/revealjs/index.html \
+            -v $PWD/cours/output-html/revealjs/css/theme:/revealjs/css/theme \
+            vsense/revealjs
+```
+
+- Les slides sont ensuite accessibles sur http://localhost
 
 Build Makefile
 --------------
@@ -47,32 +83,6 @@ Quelques exemples :
     make docker-print.pdf
     make openstack.html
 
-Build .sh
----------
-
-Le build se fait dans des containers Docker.
-
-```
-bash build.sh
-```
-
-Pour visualiser :
-
-- Lire le(s) fichier(s) cours/output-html/$(cours).html avec votre navigateur
-- Les PDF se trouvent dans output-pdf/
-
-OU
-
-```
-docker run -d \
-            -p 80:8001 \
-            -v $PWD/images:/revealjs/images \
-            -v $PWD/cours/output-html/$(cours).html:/revealjs/index.html \
-            -v $PWD/cours/output-html/revealjs/css/theme/osones.css:/revealjs/css/theme/osones.css \
-            vsense/revealjs
-```
-
-- Les slides sont ensuite accessibles sur http://localhost
 
 Copyright et licence
 --------------------
