@@ -46,7 +46,7 @@ function build-html {
     sed 's/^## /### /' $COURS_DIR/slide-$cours > tmp_slide-$cours
     mv tmp_slide-$cours $COURS_DIR/slide-$cours
 
-    docker run -v $PWD:/formations osones/revealjs-builder:stable --standalone --template=/formations/templates/template.revealjs --slide-level 3 -V theme=$THEME -V navigation=frame -V revealjs-url=$urlRevealjs -V slideNumber=true -V title="$TITLE" -V institute=Osones -o /formations/output-html/$cours.html /formations/$COURS_DIR/slide-$cours
+    docker run -v $PWD:/formations osones/revealjs-builder:stable --standalone --template=/formations/templates/template.revealjs --slide-level 3 -V theme=$THEME -V navigation=frame -V revealjs-url=$urlRevealjs -V slideNumber=true -V title="$TITLE" -V institute=Osones -o /formations/output-html/"$cours".html /formations/$COURS_DIR/slide-$cours
     rm -f $COURS_DIR/slide-$cours
   done < $LIST
 }
