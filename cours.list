@@ -1,2 +1,3 @@
 docker$Formation Docker$0-docker-osones.md 10-docker-introduction.md 15-docker-containers.md 20-docker-concepts.md 30-docker-build-ship-run.md 40-docker-ecosystem.md 50-docker-hosts.md 55-docker-deploiement.md 60-docker-conclusion.md
 openstack$Formation OpenStack administrateur$0-openstack-osones.md 10-openstack-introduction.md 20-openstack-cloud.md 20-openstack-cloud-inside.md 30-openstack-presentation.md 30-openstack-presentation-inside.md 40-openstack-deploiement.md 50-openstack-iaas-tirer-parti.md 60-openstack-conclusion.md
+openstack-user$Formation OpenStack utilisateur$0-openstack-osones.md introduction-user.md 20-openstack-cloud.md 30-openstack-presentation.md 50-openstack-iaas-tirer-parti.md archi-cloud-dev.md archi-cloud-infra.md 60-openstack-conclusion.md

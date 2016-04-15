@@ -1,6 +1,6 @@
 # Architectures cloud-ready
 
-### Concevoir une application pour le cloud
+## Concevoir une application pour le cloud
 
 ### 12-factor
 
