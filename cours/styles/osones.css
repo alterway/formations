@@ -17,7 +17,7 @@ html * {
  * GLOBAL STYLES
  *********************************************/
 body {
-  background-image: url(../../images/osones_logo_noframe.png);
+  background-image: url(/images/osones_logo_noframe.png);
   background-color: #fff;
   background-repeat: no-repeat;
   background-attachment: fixed;
