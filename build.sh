@@ -21,6 +21,7 @@ DATE=""
 # $2 : theme
 function build-html {
   mkdir -p output-html/revealjs/css/theme
+  mkdir -p output-html/images
 
   if [[ $1 != "" ]]; then
     urlRevealjs=$1
@@ -35,6 +36,7 @@ function build-html {
   fi
 
   cp $COURS_DIR/styles/"$THEME".css output-html/revealjs/css/theme/"$THEME".css
+  cp -r images/* output-html/images/
 
   while IFS=$ read cours titre modules; do
     for module in $modules; do
