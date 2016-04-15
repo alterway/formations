@@ -1,4 +1,4 @@
-# Concernant ces supports de cours
+# Concernant ces supports de cours {-}
 
 ### Supports de cours réalisés par Osones
 
