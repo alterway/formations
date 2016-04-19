@@ -26,7 +26,7 @@ function build-html {
   if [[ $1 != "" ]]; then
     urlRevealjs=$1
   else
-    urlRevealjs="http://formation.osones.com/revealjs"
+    urlRevealjs="http://formations.osones.com/revealjs"
   fi
 
   if [[ $2 != "" ]]; then
