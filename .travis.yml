@@ -28,4 +28,4 @@ deploy:
   upload-dir: pdf
 notifications:
   slack:
-    secure: X9K/xK3B04pyZzxB7jpQceG0etSD1ieztL+ERq6ogtMPy9p2lX0vmt8IxTG0P8yJll4OAofznQpDJmtRUPUIfOTrMUU8MnhZP9p5PROGIlC4BQFN1OkPlh+8y4ZFmLqVp/r5O38DCLqbweKq8fK3/L0iO/jPTh4hSWgR4NXw5Q8=
+    secure: fgpNzg6JIzg+QYwXuVgC6WsvZ9eiU57pl5y0WoDy8AEXUKIYDDdcBHCL7HQyveLvJQxWJs2FeLObk9invzQSJN2S5pXi83c99Z5aWFv2aZBazV3eAgFP4MlUUKVbsq4h/NytN7pfDNqA2aafky0YSCeKrlg9mA6fKN9TvsELmRI=
