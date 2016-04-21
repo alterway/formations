@@ -1,0 +1,61 @@
+% Colors
+
+\definecolor{oRed}{HTML}{9B1801}
+
+\setbeamercolor{osones text}{%
+  fg=oRed,
+  bg=black!2
+}
+
+\setbeamercolor{alerted text}{%
+  fg=oRed
+}
+
+\setbeamercolor{palette osones}{%
+  use=osones text,
+  fg=osones text.bg,
+  bg=osones text.fg
+}
+
+\setbeamercolor{frametitle}{%
+  use=palette osones,
+  parent=palette osones
+}
+
+% Page numbering, progress bar
+\metroset{numbering=fraction}
+\mode<beamer>{\metroset{progressbar=foot}}
+
+% ToC
+\AtBeginSection[]
+{
+  \begin{frame}[shrink]
+    \frametitle{Plan}
+    \tableofcontents[currentsection,hideothersubsections]
+  \end{frame}
+}
+\AtBeginSubsection[]
+{
+  \begin{frame}[shrink]
+    \frametitle{Plan}
+    \tableofcontents[
+      currentsection,
+      sectionstyle=show/show,
+      subsectionstyle=show/shaded/hide
+    ]
+  \end{frame}
+}
+
+% Navigation symbols
+\mode<beamer>{
+\setbeamertemplate{navigation symbols}
+{
+  \vbox{
+  \hbox{\insertslidenavigationsymbol}
+  \hbox{\insertsubsectionnavigationsymbol}
+  \hbox{\insertsectionnavigationsymbol}}
+}
+}
+
+% Footer
+\setbeamertemplate{frame footer}{\includegraphics[height=0.5cm]{images/logo-osones-picto.png} \hspace*{0.5cm} \inserttitle \hspace*{0.5cm} \insertsection}
