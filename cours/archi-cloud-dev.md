@@ -43,12 +43,15 @@
 -   Stockage éphémère
 -   Cache, temporaire
 
-### Design Tenets d’OpenStack (exemple)
+### Design Tenets d’OpenStack (exemple) 1/2
 
 1.  Scalability and elasticity are our main goals
 2.  Any feature that limits our main goals must be optional
 3.  Everything should be asynchronous. If you can’t do something asynchronously, see \#2
 4.  All required components must be horizontally scalable
+
+### Design Tenets d’OpenStack (exemple) 2/2
+
 5.  Always use shared nothing architecture (SN) or sharding. If you can’t Share nothing/shard, see \#2
 6.  Distribute everything. Especially logic. Move logic to where state naturally exists.
 7.  Accept eventual consistency and use it where it is appropriate.
