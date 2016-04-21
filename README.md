@@ -12,7 +12,7 @@ Auteurs :
 * Kevin Lefevre <kevin.lefevre@osones.com>
 * Jean-François Taltavull <jft@osones.com>
 
-[![Build Status](https://travis-ci.org/Osones/OpenStack-Formations.svg?branch=master)](https://travis-ci.org/Osones/OpenStack-Formations)
+[![Build Status](https://travis-ci.org/Osones/formations.svg?branch=master)](https://travis-ci.org/Osones/formations)
 
 Build gérés par la CI :
 * [Supports PDF](http://formation.osones.com/pdf)
