@@ -1,31 +1,31 @@
 branches:
   only:
-    - master
+  - master
 services:
-  - docker
+- docker
 before_install:
-  - docker pull osones/revealjs-builder:stable
-  - docker pull osones/wkhtmltopdf:stable
+- docker pull osones/revealjs-builder:stable
+- docker pull osones/wkhtmltopdf:stable
 script:
-  - /bin/bash build.sh
+- "/bin/bash build.sh"
 deploy:
-  - provider: s3
-    skip_cleanup: true
-    access_key_id: "$access_key_id"
-    secret_access_key: "$secret_access_key"
-    bucket: formations.osones.com
-    region: eu-west-1
-    acl: public_read
-    local_dir: output-html
-  - provider: s3
-    skip_cleanup: true
-    access_key_id: "$access_key_id"
-    secret_access_key: "$secret_access_key"
-    bucket: formations.osones.com
-    region: eu-west-1
-    acl: public_read
-    local_dir: output-pdf
-    upload-dir: pdf
+- provider: s3
+  skip_cleanup: true
+  access_key_id: "$access_key_id"
+  secret_access_key: "$secret_access_key"
+  bucket: formations.osones.com
+  region: eu-west-1
+  acl: public_read
+  local_dir: output-html
+- provider: s3
+  skip_cleanup: true
+  access_key_id: "$access_key_id"
+  secret_access_key: "$secret_access_key"
+  bucket: formations.osones.com
+  region: eu-west-1
+  acl: public_read
+  local_dir: output-pdf
+  upload-dir: pdf
 notifications:
   slack:
-    secure: TYTJiNrHD0i7D3d8WiYoDcnsoy2QhM9u9CdVdyJOdiVZkR41CJCxYeqo/FXtNp+sy7ViPdxbTQ9vNmANvps3LjXkp7qdq28vmdBid1fPThhQPZjDBVoZSXxcFrRBS91Svwt61KbyZVjhUYdNsGu2CRriUCdJ2hijuZIKl/5yk4QM5HTQW89xg4mqPWmEUd0RJFqdlgYBeDjrpftIndLuYpjxki2aLCNrb9vdR/4iTgymmtufL1eXRY5aZIqYaxm4BwN9eKfTNiZzqfal4dzhfO6GlMgdKZ7f/tIBBx/gt8cTnf0F8hGeG4alyvQZfa5zJllY/F6XBq8Pz4T2pI30+Y5Aeq//9B+qm3Uu/hnCLWYNiy/MTduQ6eC7v/zO8aZNy8TbKN/PIr9gREZgwOvJ87xQfy7ElOYMY6OEvYz2l8feNkmZK2eMGFE0kjEkkO7NH3ilc5vVWSPEwPN+hf9QZbFdfz8+ltDxWop+lPbo18p5w49/e8lgsEBNOX079DQZHxIvEKwOrXgqgte7qO4tnLfvPo7RZXQbr5pu84j8HgHn8gDDlUFt71QQQLE/SKMgTh63uiG3nw0YUI/akVuWSc3NkB55EG/HpBFeZptxFIVUYET1WZpMnU9XT+FRM9Hli+jyibrHVF0Llu8EPIycNg9HAdIy6l2PmKKSZghvpHQ=
+    secure: X9K/xK3B04pyZzxB7jpQceG0etSD1ieztL+ERq6ogtMPy9p2lX0vmt8IxTG0P8yJll4OAofznQpDJmtRUPUIfOTrMUU8MnhZP9p5PROGIlC4BQFN1OkPlh+8y4ZFmLqVp/r5O38DCLqbweKq8fK3/L0iO/jPTh4hSWgR4NXw5Q8=
