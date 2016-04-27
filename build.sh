@@ -59,18 +59,43 @@ function build-pdf {
   done
 }
 
-case $EXT in
-  html)
-    build-html $urlRevealjs $THEME
-    ;;
-  pdf)
-    build-html $urlRevealjs $THEME
-    build-pdf
-    ;;
-  '')
-    build-html $urlRevealjs $THEME
-    build-pdf
-    ;;
-esac
+display_help() {
+    cat <<EOF
+USAGE : $0 options
 
+-o output           Type of output you desire (html or pdf), if non precised all outputs are built
+-t theme            Theme to use
+-u revealjsURL      RevealJS URL that need to be use. If you build formation supports on local environment
+                    you should use "." and git clone http://github.com/hakimel/reveal.js and put your index.html into the repository clone.
+                    This option is also necessary even if you only want PDF output
+-c course           Course to  built (doesn't work, all courses are built)
 
+EOF
+
+exit 0
+
+}
+
+while getopts ":o:t:u:c:h" OPT; do
+    case $OPT in
+        h) display_help ;;
+        c) COURSE="$OPTARG";;
+        o) OUTPUT="$OPTARG";;
+        t) THEME="$OPTARG";;
+        u) REVEALJSURL="$OPTARG";;
+        ?)
+            echo "Invalid option: -$OPTARG" >&2
+            exit 1
+            ;;
+    esac
+done
+
+if [[ ! $OUTPUT =~ html|pdf|all ]]; then
+    echo "Invalid option: either html, pdf or all" >&2
+    exit 1
+elif [[ $OUTPUT == "html" ]]; then
+    build-html $REVEALJSURL $THEME
+elif [[ $OUTPUT == "pdf" || $OUTPUT == "all" ]]; then
+    build-html $REVEALJSURL $THEME
+    build-pdf
+fi
