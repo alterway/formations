@@ -1,4 +1,4 @@
-Supports de formation Osones
+Supports de formation Osones  [![Build Status](https://travis-ci.org/Osones/formations.svg?branch=master)](https://travis-ci.org/Osones/formations)
 ============================
 
 Supports de formation (sous forme de slides) écrits en Français et réalisés par Osones (https://osones.com/) pour ses offres de formation.
@@ -11,8 +11,6 @@ Auteurs :
 * Romain Guichard <romain.guichard@osones.com>
 * Kevin Lefevre <kevin.lefevre@osones.com>
 * Jean-François Taltavull <jft@osones.com>
-
-[![Build Status](https://travis-ci.org/Osones/formations.svg?branch=master)](https://travis-ci.org/Osones/formations)
 
 Build gérés par la CI :
 * [Supports PDF](http://formation.osones.com/pdf)
@@ -35,7 +33,7 @@ Deux méthodes de build sont disponibles :
 * build.sh : supporte 1. et 2.
 * Makefile : supporte 1. et 3.
 
-Build .sh
+Build.sh
 ---------
 
 Le build se fait dans des containers Docker.
@@ -88,10 +86,10 @@ Quelques exemples :
 
 Copyright et licence
 --------------------
-Tous les contenus originaux (Makefile, scripts, fichiers dans cours/) sont :
+Tous les contenus originaux (Makefile, scripts, fichiers dans `cours/`) sont :
 * Copyright © 2014-2016 Osones
 * Distribués sous licence Creative Commons BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)
 
 ![Creative Commons BY-SA](http://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-sa.png)
 
-Les autres fichiers du répertoire images/ sont soumis à leur copyright et licence respectifs.
+Les autres fichiers du répertoire `images/` sont soumis à leur copyright et licence respectifs.
