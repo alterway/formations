@@ -7,7 +7,7 @@ before_install:
 - docker pull osones/revealjs-builder:stable
 - docker pull osones/wkhtmltopdf:stable
 script:
-- "/bin/bash build.sh -o all -t osones -u http://formations.osones.com/revealjs -c all"
+    - "/bin/bash -x build.sh -o all -t osones -u http://formations.osones.com/revealjs"
 deploy:
 - provider: s3
   skip_cleanup: true
