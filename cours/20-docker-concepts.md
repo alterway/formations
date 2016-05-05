@@ -146,7 +146,7 @@ NETWORK ID      NAME      DRIVER
 
 ### Publication de ports
 
-- Dans le cas d'un réseaux diffèrent de l'hôte
+- Dans le cas d'un réseau diffèrent de l'hôte
 
 - Les conteneurs ne sont pas accessible depuis l'extérieur
 
@@ -160,7 +160,7 @@ NETWORK ID      NAME      DRIVER
 
 ### Links
 
-- Les conteneurs d'un même réseaux peuvent communiquer via IP
+- Les conteneurs d'un même réseau peuvent communiquer via IP
 
 - Les liens permettent de lier deux conteneurs par nom
 
