@@ -18,7 +18,7 @@
 
 - Les conteneurs et leurs images sont décomposés en couches (layers)
 
-- Les layers peuvent être réutiliser entre différents conteneurs
+- Les layers peuvent être réutilisés entre différents conteneurs
 
 - Gestion optimisée de l'espace disque.
 
