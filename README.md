@@ -13,9 +13,9 @@ Auteurs :
 * Jean-François Taltavull <jft@osones.com>
 
 Build gérés par la CI :
-* [Supports PDF](http://formation.osones.com/pdf)
-* [Support HTML OpenStack](http://formation.osones.com/openstack.html)
-* [Support HTML Docker](http://formation.osones.com/docker.html)
+* [Supports PDF](http://formations.osones.com/pdf)
+* [Support HTML OpenStack](http://formations.osones.com/openstack.html)
+* [Support HTML Docker](http://formations.osones.com/docker.html)
 
 Fonctionnement
 --------------

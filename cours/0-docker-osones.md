@@ -9,7 +9,7 @@
 - Copyright © 2016 Osones
 - Licence : [Creative Commons BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.fr)
 - Sources : <https://github.com/Osones/Formations/>
-- Online : <http://formation.osones.com>
+- Online : <http://formations.osones.com>
 
 ![](images/licence.png){height="100px"}
 

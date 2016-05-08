@@ -21,7 +21,7 @@ institute="Osones"
 date="$$(date +'%d %B %Y')"
 
 # Where to get revealjs stuff
-revealjsurl=http://formation.osones.com/revealjs
+revealjsurl=http://formations.osones.com/revealjs
 
 # Definition of cours based on modules
 cours=cours.list
