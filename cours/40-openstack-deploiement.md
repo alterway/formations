@@ -12,10 +12,6 @@
 
 ![Vue détaillée des services](images/architecture.jpg)
 
-### Architecture réseau
-
-![Machines "physiques" et interfaces réseau](images/archi-network.png)
-
 ### Architecture services
 
 ![Machines "physiques" et services](images/archi-service.png)
