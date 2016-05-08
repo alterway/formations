@@ -38,7 +38,7 @@
 ### OpenStack Client
 
 -   Client CLI unifié
--   Commandes du type *openstack \<service \>\<action \>*
+-   Commandes du type *openstack \<ressource \>\<action \>*
 -   Vise à remplacer à terme les clients spécifiques
 -   Permet une expérience utilisateur plus homogène
 

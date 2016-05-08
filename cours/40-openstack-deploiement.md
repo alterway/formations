@@ -85,6 +85,7 @@
 ### Principes
 
 -   Annuaire des utilisateurs et des groupes
+-   Liste des tenants/projets
 -   Catalogue de services
 -   Gère l’authentification et l’autorisation
 -   Support des domaines dans l’API v3
@@ -95,8 +96,9 @@
 -   API admin : port 35357
 -   API utilisateur : port 5000
 -   Deux versions : v2 (actuelle) et v3 (future; APIs admin et utilisateur fusionnées)
--   Gère *utilisateurs*, *groupes*, *domaines* (APIv3)
+-   Gère *utilisateurs*, *groupes*, *domaines* (API v3)
 -   Les utilisateurs ont des *rôles* sur des *tenants* (projets)
+-   Les *services* du catalogue sont associés à des *endpoints*
 
 ### Scénario d’utilisation typique
 
@@ -195,7 +197,7 @@ Les instances sont redimensionnables et migrables d’un hôte physique à un au
 
 -   Pilote les instances (machines virtuelles ou physiques)
 -   Tire partie de libvirt ou d’autres APIs comme XenAPI
--   Drivers : libvirt (KVM, LXC, etc.), XenAPI, VMWare vSphere, Docker, Ironic
+-   Drivers : libvirt (KVM, LXC, etc.), XenAPI, VMWare vSphere, Ironic
 -   Permet de récupérer les logs de la console et une console VNC
 
 ### Nova scheduler

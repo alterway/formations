@@ -12,7 +12,7 @@
 -   Réseau : OpenVSwitch
 -   En général : réutilisation de composants existants
 -   Tout est développé en Python (Django pour la partie web)
--   APIs supportées : OpenStack et équivalent Amazon
+-   APIs supportées : OpenStack et équivalent AWS
 -   Multi tenancy
 
 ### Développement du projet : en détails
@@ -45,7 +45,7 @@
 -   *Semantic versioning*
 -   Chaque projet est indépendant
 -   Dans le cadre du cycle de release néanmoins
--   <http://docs.openstack.org/releases/>
+-   <http://releases.openstack.org/>
 
 ### Le nouveau modèle “big tent”
 
@@ -214,7 +214,7 @@ Exemple
 ### OpenStack Client
 
 -   Client CLI unifié
--   Commandes du type *openstack \<service \>\<action \>*
+-   Commandes du type *openstack \<ressource \>\<action \>*
 -   Vise à remplacer à terme les clients spécifiques
 -   Permet une expérience utilisateur plus homogène
 

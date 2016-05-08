@@ -84,7 +84,7 @@ Motivations d’ordre technique :
 ### Logiciels libres permettant le déploiement d’un cloud privé
 
 -   **OpenStack** (<https://www.openstack.org>)
--   Eucalyptus (société racheté par HP en septembre 2014)
+-   Eucalyptus (société rachetée par HP en septembre 2014)
 -   CloudStack (<https://cloudstack.apache.org/>)
 -   OpenNebula (<http://opennebula.org/>)
 
