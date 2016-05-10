@@ -36,8 +36,8 @@ Deux méthodes de build sont disponibles :
 Build.sh
 ---------
 
-Le build se fait dans des containers Docker.
-L'utilisation de containers Docker ne vise qu'à fournir un environnement stable (version des paquets fixes)
+Le build utilise des conteneurs Docker.
+L'utilisation de conteneurs Docker ne vise qu'à fournir un environnement stable (version des paquets fixes)
 et de ne pas "encrasser" le système hôte avec des paquets dont l'utilisation est faible.
 
 Les Dockerfiles des images Docker sont disponibles ici :
@@ -48,12 +48,21 @@ Les Dockerfiles des images Docker sont disponibles ici :
 Un daemon Docker est donc le seul prérequis pour le build via `build.sh`
 
 ```
-bash build.sh
+USAGE : ./build.sh options
+
+-o output           Type of output you desire (html, pdf or all), if not specified all outputs are built
+-t theme            Theme to use
+                    (default : osones)
+-u revealjsURL      RevealJS URL that need to be use. If you build formation supports on local environment
+                    you should use "." and git clone http://github.com/hakimel/reveal.js and put your index.html into the repository clone.
+                    This option is also necessary even if you only want PDF output
+                    (default : http://formations.osones.com/revealjs)
+-c course           Course to build, if not specified all courses are builth
 ```
 
 Pour visualiser :
 
-- Lire les fichiers dans `cours/output-html/*.html` avec votre navigateur
+- Lire les fichiers HTML dans `cours/output-html/` avec votre navigateur
 - Les PDF se trouvent dans `output-pdf/`
 
 OU
