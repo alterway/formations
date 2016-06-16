@@ -30,7 +30,7 @@
 
 - CoreOS (CoreOS)
 
-- Atomic (RedHat)
+- Atomic (Red Hat)
 
 - RancherOS (Rancher)
 
