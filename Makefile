@@ -83,6 +83,10 @@ build/%-handout.tex: build/%.md
 	pdfnup --nup 2x2 --frame true --suffix print $<
 	mv $*-handout-print.pdf $*-print.pdf
 
+modules.png: ##### Build graph depency of the modules
+modules.png:
+	dot -Tpng modules.dot > modules.png
+
 clean: ##### Remove build files
 	rm -rf build/
 	rm -f beamer*metropolis.sty
@@ -91,3 +95,4 @@ mrproper: ##### Remove build files and .html/.pdf files
 mrproper: clean
 	rm -f *.pdf
 	rm -f *.html
+	rm -f modules.png

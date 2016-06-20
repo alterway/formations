@@ -1,0 +1,70 @@
+digraph formations {
+    cloud[label="Cloud : introduction"];
+
+    cloud -> openstack_projet;
+
+    openstack_projet[label="OpenStack : le projet"];
+
+    openstack_projet -> openstack_utilisation;
+
+    openstack_utilisation [label="Utiliser OpenStack"];
+    openstack_ops [label="Déployer et opérer OpenStack"];
+    openstack_contrib [label="Contribuer au projet OpenStack"];
+
+    subgraph cluster_openstack_utilisation {
+        node [style=filled,color=white];
+        style=filled;
+        color=lightgrey;
+        label = "OpenStack Utilisation";
+        openstack_utilisation->openstack_utilisation_admin;
+        openstack_utilisation->openstack_utilisation_user;
+        openstack_utilisation_user->openstack_utilisation_user_dev;
+        openstack_utilisation_user->openstack_utilisation_user_infra;
+        openstack_utilisation_admin [label="Administrer un cloud OpenStack"];
+        openstack_utilisation_user [label="Utiliser un cloud OpenStack en tant qu'end-user"];
+        openstack_utilisation_user_dev [label="Bonne pratiques d'utilisation d'OpenStack côté dev"];
+        openstack_utilisation_user_infra [label="Bonne pratiques d'utilisation d'OpenStack côté infra"];
+    }
+
+    subgraph cluster_openstack_ops {
+        node [style=filled,color=white];
+        style=filled;
+        color=lightgrey;
+        label = "OpenStack Ops";
+        openstack_utilisation->openstack_ops;
+        openstack_ops->openstack_ops_osa;
+        openstack_ops_osa [label="Déployer et opérer OpenStack avec OpenStack-Ansible"];
+    }
+
+    subgraph cluster_openstack_contrib {
+        node [style=filled,color=white];
+        style=filled;
+        color=lightgrey;
+        label = "OpenStack Contrib";
+        openstack_utilisation->openstack_contrib;
+    }
+
+    container [label="Conteneurs : introduction"];
+    container -> docker;
+
+    subgraph cluster_docker {
+        node [style=filled,color=white];
+        style=filled;
+        color=lightgrey;
+        label = "Docker";
+        docker -> docker_cli -> docker_ecosysteme;
+        docker_ecosysteme -> docker_tools;
+        docker_ecosysteme -> kubernetes;
+        docker [label="Docker"];
+        docker_cli [label="Utilisation de Docker"];
+        docker_ecosysteme [label="Écosystème Docker"];
+        docker_tools [label="Les outils signés Docker"];
+        kubernetes [label="Kubernetes, un Container Orchestration Engine"];
+    }
+
+    magnum [label="OpenStack et les conteneurs avec Magnum"];
+
+    cloud -> container;
+    docker_ecosysteme -> magnum;
+    openstack_ops -> magnum;
+}
