@@ -50,8 +50,8 @@ Inspiré de la définition du NIST <http://nvlpubs.nist.gov/nistpubs/Legacy/SP/n
 
 On distingue :
 
-    - modèles de service : IaaS, PaaS, SaaS
-    - modèles de déploiement : public, privé, hybride
+- modèles de service : IaaS, PaaS, SaaS
+- modèles de déploiement : public, privé, hybride
 
 ### IaaS
 
@@ -82,9 +82,9 @@ On distingue :
 - MonApplication as a Service (Software)
 - etc.
 
-### Un beau schéma
+### Les modèles de service en un schéma
 
-IaaS/PaaS/SaaS avec les couches
+![Selon Wikipedia](images/cloud.png)
 
 ### Cloud public ou privé ?
 
@@ -186,6 +186,7 @@ Mise au point.
 
 - Instance
 - Image
+- Flavor (gabarit)
 - Paire de clé (SSH)
 
 ### L'instance
@@ -207,13 +208,21 @@ Mise au point.
     - Port réseau
 - Réseau L3
     - Routeur
+    - IP flottante
+    - Groupe de sécurité
 
-### Ressources stockage ?
+### Ressources stockage
 
 Le cloud fournit deux types de stockage
 
 - Block
 - Objet
+
+### Stockage block
+
+- Accès à des raw devices type */dev/vdb*
+- Possibilité d’utiliser n’importe quel système de fichiers
+- Compatible avec toutes les applications existantes
 
 ### "Boot from volume"
 
@@ -222,14 +231,25 @@ Démarrer une instance avec un disque racine sur un **volume**
 - Persistance des données du disque racine
 - Se rapproche du serveur classique
 
+### Stockage objet
+
+- Pousser et retirer des objets dans un container/bucket
+- Pas de hiérarchie des données, pas de système de fichiers
+- Accès par les APIs
+- L’application doit être conçue pour tirer parti du stockage objet
+
 ### API ... de metadata
 
-- Cloud-init
+- `http://169.254.169.254`
+- Accessible depuis l'instance
+- Fournit des informations relatives à l'instance
+- `cloud-init` permet d'exploiter cette API
 
 ### Orchestration
 
-- Template
-- Stack
+- Orchestrer la création et la gestion des ressources dans le cloud
+- Définition de l'architecture dans un *template*
+- Les ressources créées à partir du *template* forment la *stack*
 
 ## Bonne pratiques d'utilisation
 
@@ -244,13 +264,16 @@ Le métier évolue : Infrastructure Developer
 
 ### Scaling, passage à l'échelle
 
-Out vs up
-
-- Auto-scaling ?
+- Scale out plutôt que Scale up
+    - Scale out : passage à l'échelle horizontal
+    - Scale up : passage à l'échelle vertical
+- Auto-scaling
 
 ### Applications cloud ready
 
 - Stockent leurs données au bon endroit
+- Sont architecturées pour tolérer les pannes
+- Etc.
 
 Cf. <http://12factor.net/>
 
@@ -262,9 +285,13 @@ Cf. <http://12factor.net/>
 - Containers
 - Bare metal
 
-### Implémentation du réseau : SDN
-- Quel rapport avec NFV ?
-
 ### Implémentation du stockage : SDS
 
-- Attention : ne pas confondre avec le sujet block vs objet
+- **Attention** : ne pas confondre avec le sujet block vs objet
+
+- Utilisation de commodity hardware
+- Pas de RAID matériel
+- Le logiciel est responsable de garantir les données
+- Les pannes matérielles sont prises en compte et gérées
+- Le projet **Ceph** et le composant **OpenStack Swift** implémentent du SDS
+
