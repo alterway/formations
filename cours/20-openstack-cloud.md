@@ -22,7 +22,7 @@
     -   Database as a Service
     -   Load Balancing as a Service
     -   DNS as a Service
-    -   \$Application as a Service
+    -   Application as a Service
 
 ### Cloud public, cloud privé, cloud hybride ?
 
