@@ -697,7 +697,7 @@ Guide sécurité : <http://docs.openstack.org/security-guide/>
 -   HP Helion
 -   etc.
 
-### Déploiement bare metal
+### Déploiement bare-metal
 
 -   Le déploiement des hôtes physiques OpenStack peut se faire à l’aide d’outils dédiés
 -   MaaS (Metal as a Service), par Ubuntu/Canonical : se couple avec Juju

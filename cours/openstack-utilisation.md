@@ -41,6 +41,7 @@
 -   Commandes du type *openstack \<ressource \>\<action \>*
 -   Vise à remplacer à terme les clients spécifiques
 -   Permet une expérience utilisateur plus homogène
+-   Fichier de configuration `clouds.yaml`
 
 ### Shade
 

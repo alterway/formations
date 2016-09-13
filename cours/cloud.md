@@ -101,6 +101,7 @@ Concernant le cloud hybride : utilisation mixte de multiples clouds privés et/o
 - Mise en œuvre a priori difficile
 - Certains cas d'usages s'y prêtent très bien
     - Exemple : jobs de CI
+- *Cloud bursting*
 
 ### L'instant virtualisation
 
@@ -124,7 +125,7 @@ Mise au point.
 - Appréhender les ressources IT comme des services “fournisseur”
 - Faire glisser le budget “investissement” (Capex) vers le budget
 “fonctionnement” (Opex)
-- Réduire les coûts em mutualisant les ressources, et éventuellement avec des économies d'échelle
+- Réduire les coûts en mutualisant les ressources, et éventuellement avec des économies d'échelle
 - Réduire les délais
 - Aligner les coûts sur la consommation réelle des ressources
 
@@ -139,6 +140,8 @@ Mise au point.
 
 ### Amazon Web Services (AWS), le leader
 
+![](images/aws.png){height=50px}
+
 - Lancement en 2006
 - À l'origine : services web "e-commerce" pour développeurs
 - Puis : d'autres services pour développeurs
@@ -147,8 +150,8 @@ Mise au point.
 
 ### Alternatives IaaS publics à AWS
 
-- **Google**
-- **Azure**
+- **Google Cloud Platform**
+- **Microsoft Azure**
 - Rackspace
 - DreamHost
 - DigitalOcean
@@ -165,8 +168,11 @@ Mise au point.
 - OpenStack
 - CloudStack
 - Eucalyptus
+- OpenNebula
 
 ### OpenStack en quelques mots
+
+![](images/docker/openstack.png){height="100px"}
 
 - Naissance en 2010
 - Fondation OpenStack depuis 2012
@@ -202,7 +208,14 @@ Mise au point.
 - Instanciable à l'infini
 - Sachant parler à l'API de metadata
 
-### Ressources réseau
+### API ... de metadata
+
+- `http://169.254.169.254`
+- Accessible depuis l'instance
+- Fournit des informations relatives à l'instance
+- `cloud-init` permet d'exploiter cette API
+
+### Ressources réseau 1/2
 
 - Réseau L2
     - Port réseau
@@ -210,6 +223,12 @@ Mise au point.
     - Routeur
     - IP flottante
     - Groupe de sécurité
+
+### Ressources réseau 2/2
+
+- Load Balancing as a Service
+- VPN as a Service
+- Firewall as a Service
 
 ### Ressources stockage
 
@@ -220,8 +239,10 @@ Le cloud fournit deux types de stockage
 
 ### Stockage block
 
+- **Volumes** attachables à une instance
 - Accès à des raw devices type */dev/vdb*
 - Possibilité d’utiliser n’importe quel système de fichiers
+- Possibilité d'utiliser du LVM, du chiffrement, etc.
 - Compatible avec toutes les applications existantes
 
 ### "Boot from volume"
@@ -238,13 +259,6 @@ Démarrer une instance avec un disque racine sur un **volume**
 - Accès par les APIs
 - L’application doit être conçue pour tirer parti du stockage objet
 
-### API ... de metadata
-
-- `http://169.254.169.254`
-- Accessible depuis l'instance
-- Fournit des informations relatives à l'instance
-- `cloud-init` permet d'exploiter cette API
-
 ### Orchestration
 
 - Orchestrer la création et la gestion des ressources dans le cloud
@@ -252,6 +266,18 @@ Démarrer une instance avec un disque racine sur un **volume**
 - Les ressources créées à partir du *template* forment la *stack*
 
 ## Bonne pratiques d'utilisation
+
+### Haute disponibilité (HA)
+
+- Le control plane (les APIs) du cloud est HA
+- Les ressources provisionnées ne le sont pas forcément
+
+### Pets vs Cattle
+
+Comment considérer ses instances ?
+
+- Pet
+- Cattle
 
 ### Infrastructure as Code
 
@@ -294,4 +320,5 @@ Cf. <http://12factor.net/>
 - Le logiciel est responsable de garantir les données
 - Les pannes matérielles sont prises en compte et gérées
 - Le projet **Ceph** et le composant **OpenStack Swift** implémentent du SDS
+- Voir aussi **Scality**
 

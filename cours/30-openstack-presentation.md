@@ -142,8 +142,8 @@ Source : <http://lists.openstack.org/pipermail/foundation-board/2015-April/00005
 
 -   Site web : <http://openstack.fr/>
 -   Association des utilisateurs francophones d’OpenStack : <https://asso.openstack.fr/>
--   Meetups : Paris, Rhônes-Alpes, Toulouse, Montréal, ...
--   Présence à des événements tels que Solutions Linux
+-   Meetups : Paris, Rhônes-Alpes, Toulouse, Montréal, etc.
+-   Présence à des événements tels que *Paris Open Source Summit*
 -   Canaux de communication :
     -   openstack-fr@lists.openstack.org
     -   \#openstack-fr@Freenode
