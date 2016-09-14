@@ -28,6 +28,7 @@ build-html() {
     rm -f $COURS_DIR/slide-$cours
   done < $LIST
 }
+
 build-pdf() {
   mkdir -p output-pdf
   for cours in $(cut -d$ -f1 $LIST); do
@@ -36,22 +37,27 @@ build-pdf() {
 }
 
 display_help() {
-    cat <<EOF
-USAGE : $0 options
+  cat <<EOF
 
--o output           Type of output you desire (html, pdf or all), if not specified all outputs are built
--t theme            Theme to use
-                    (default : osones)
--u revealjsURL      RevealJS URL that need to be use. If you build formation supports on local environment
-                    you should use "." and git clone http://github.com/hakimel/reveal.js and put your index.html into the repository clone.
-                    This option is also necessary even if you only want PDF output
-                    (default : http://formations.osones.com/revealjs)
--c course           Course to build, if not specified all courses are built
+  USAGE : $0 options
+
+    -o output           Output format (html, pdf or all). If none, all outputs
+                        are built
+
+    -t theme            Theme to use, default to osones.css
+
+    -u revealjsURL      RevealJS URL that need to be use. If you build formation
+                        supports on local environment you should use "." and git
+                        clone http://github.com/hakimel/reveal.js and put your
+                        index.html into the repository clone.
+                        This option is also necessary even if you only want PDF
+                        output (default : http://formations.osones.com/revealjs)
+
+    -c course           Courses to build, if not specified all courses are built
 
 EOF
 
 exit 0
-
 }
 
 while getopts ":o:t:u:c:h" OPT; do
