@@ -103,7 +103,7 @@ CGroup: /
 
 ### Docker
 
-- Développé par Docker Inc.
+- Développé par dotCloud et open sourcé en mars 2013
 
 - Fonctionne en mode daemon : difficulté d'intégration avec les init-process
 
@@ -131,7 +131,7 @@ CGroup: /
 
 - Fonctionnalités offertes par le Kernel
 
-- Les conteneurs engine fournissent des interfaces
+- Les conteneurs engine fournissent des interfaces d'abstraction
 
 - Plusieurs types de conteneurs pour différents besoins
 
