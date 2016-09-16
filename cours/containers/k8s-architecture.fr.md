@@ -1,34 +1,91 @@
 # Kubernetes
 
-### Kubernetes (K8s)
+### Kubernetes : Composants
 
-- COE développé par Google, devenu open source en 2014
+- kubelet : Service "agent" fonctionnant sur tous les nœuds et assure le fonctionnement des autres services
 
-- Utilisé par Google pour la gestion de leurs conteneurs (basé sur Borg)
+- kube-apiserver : API server qui permet la configuration d'objet Kubernetes (Pods, Service, Replication Controller, etc.)
 
-- Adapté à tout type d'environnements
+- kube-proxy : Permet le forwarding TCP/UDP et le load balancing entre les services et les backend (Pods)
 
-- Devenu populaire en très peu de temps
+- kube-scheduler : Implémente les fonctionnalité de scheduling
 
-![](images/docker/k8s.png){height="100px"}
+- kube-controller-manager : Responsable de l'état du cluster, boucle infinie qui régule l'état du cluster afin d'atteindre un état désiré
 
-### Kubernetes : Concepts
+- kubectl : Client qui permet de piloter un cluster Kubernetes
 
-- PODs
+### Kubernetes : Kubelet
 
-- Networking
+- Service principal de Kubernetes
 
-- Volumes
+- Permet à Kubernetes de s'auto configurer :
+    - Surveille un dossier contenant les *manifests* (fichiers YAML des différents composant de K8s).
+    - Applique les modifications si besoin (upgrade, rollback).
 
-- Replication Controllers
+- Surveille l'état des services du cluster via l'API server (*kube-apiserver*).
 
-- Services
+- Dossier de manifest sur un noeud master :
+```
+ls /etc/kubernetes/manifests/
+kube-apiserver.yaml  kube-controller-manager.yaml  kube-proxy.yaml  kube-scheduler.yaml  policy-controller.yaml
+```
 
-- Providers : Load Balancer
+### Kubernetes : Kubelet
 
-- Déploiements
+- Exemple du manifest *kube-proxy* :
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kube-proxy
+  namespace: kube-system
+  annotations:
+    rkt.alpha.kubernetes.io/stage1-name-override: coreos.com/rkt/stage1-fly
+spec:
+  hostNetwork: true
+  containers:
+  - name: kube-proxy
+    image: quay.io/coreos/hyperkube:v1.3.6_coreos.0
+    command:
+    - /hyperkube
+    - proxy
+    - --master=http://127.0.0.1:8080
+    - --proxy-mode=iptables
+    securityContext:
+      privileged: true
+    volumeMounts:
+    - mountPath: /etc/ssl/certs
+      name: ssl-certs-host
+      readOnly: true
+  volumes:
+  - hostPath:
+      path: /usr/share/ca-certificates
+    name: ssl-certs-host
+```
 
-### Kubernetes : POD
+### Kuberntes : kube-apiserver
+
+- Les configuration d'objets (Pods, Service, RC, etc.) se font via l'API server
+
+- Un point d'accès à l'état du cluster aux autres composant via une API REST
+
+- Tous les composant sont reliés à l'API server
+
+### Kubernetes : kube-scheduler
+
+- Planifie les ressources sur le cluster
+
+- En fonction de règles implicites (CPU, RAM, stockage disponible, etc.)
+
+- En fonction de règles explicites (règles d'affinité et anti-affinité, labels, etc.)
+
+### Kubernetes : kube-proxy
+
+- 
+- 
+- 
+
+### Kubernetes : 
 
 - Ensemble logique composé de un ou plusieurs conteneurs
 
@@ -259,7 +316,7 @@ spec:
 
 ### Kubernetes : Conclusion
 
-- Version 1.2 : stable en production
+- Version 1.3 : stable en production
 
 - Solution complète et une des plus utilisées
 
