@@ -121,9 +121,9 @@ CGroup: /
 
 - Pas de daemon : intégration avec systemd
 
-- Utilise systemd-nspawn
+- Utilise systemd-nspawn et propose maintenant d'autres solutions (eg. KVM)
 
-- Adresse certains problèmes de sécurité inhérent à Docker
+- Adresse certains problèmes de sécurité inhérents à Docker
 
 ![](images/docker/rkt.png){height="100px"}
 
@@ -134,4 +134,3 @@ CGroup: /
 - Les conteneurs engine fournissent des interfaces d'abstraction
 
 - Plusieurs types de conteneurs pour différents besoins
-

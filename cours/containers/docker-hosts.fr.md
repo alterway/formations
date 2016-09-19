@@ -60,6 +60,7 @@
     - Etcd (base de données clé/valeur)
     - Fleet (système d'init distribué)
     - Flannel (overlay network)
+    - Kubernetes Kubelet
 
 - Permet nativement d'avoir un cluster complet
 
@@ -134,4 +135,3 @@
 - Fourni des outils et une logique adaptée aux environnements full conteneurs
 
 - Sécurité accrue (mise à jour)
-

@@ -28,6 +28,8 @@
 
 - Déploiements
 
+- Ingress et Ingress controller
+
 ### Kubernetes : POD
 
 - Ensemble logique composé de un ou plusieurs conteneurs
@@ -266,4 +268,3 @@ spec:
 - Éprouvée par Google
 
 - S'intègre parfaitement à CoreOS (support de *rkt* en cours) : Tectonic
-
