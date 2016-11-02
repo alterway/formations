@@ -25,7 +25,7 @@
 - Permet de vérifier le contenu d'une image
 
 ```
-FROM alpine:3.2
+FROM alpine:3.4
 MAINTAINER Osones <docker@osones.io>
 RUN apk -U add nginx
 EXPOSE 80 443
@@ -189,7 +189,7 @@ docker import mon-image.tar backup/mon-conteneur
 
 - docker rm (détruit complètement)
 
-### Build, Ship & Run : Conclusions
+### Build, Ship and Run : Conclusions
 
 - Écosystème de gestion d'images
 

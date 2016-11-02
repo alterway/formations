@@ -68,7 +68,7 @@ nginx:
 
 ### Autour de Docker
 
-- Plugins : étendre les fonctionnalités notamment réseau et volumes  
+- Plugins : étendre les fonctionnalités notamment réseau et volumes
 
 ![](images/docker/weave.png){height="80px"} ![](images/docker/kuryr.png){height="80px"} ![](images/docker/flocker.png){height="80px"} ![](images/docker/convoy.png){height="80px"}
 
@@ -76,7 +76,7 @@ nginx:
 
 - Docker as a Service :
     - Docker Cloud
-    - Tutum 
+    - Tutum
 
 ![](images/docker/tutum.png){height="80px"} ![](images/docker-media-kit/small_h-trans.png){height="80px"}
 

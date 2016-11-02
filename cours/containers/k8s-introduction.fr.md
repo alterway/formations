@@ -1,4 +1,4 @@
-# Kubernetes
+# Kubernetes : Introduction
 
 ### Kubernetes (K8s)
 
@@ -27,6 +27,8 @@
 - Providers : Load Balancer
 
 - Déploiements
+
+- Ingress et Ingress controller
 
 ### Kubernetes : POD
 
@@ -259,7 +261,7 @@ spec:
 
 ### Kubernetes : Conclusion
 
-- Version 1.2 : stable en production
+- Version 1.3 : stable en production
 
 - Solution complète et une des plus utilisées
 
