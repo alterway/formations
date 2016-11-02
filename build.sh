@@ -11,7 +11,7 @@ build-html() {
   mkdir -p output-html/revealjs/css/theme
   mkdir -p output-html/images
 
-  cp $COURS_DIR/styles/"$THEME".css output-html/revealjs/css/theme/"$THEME".css
+  cp styles/"$THEME".css output-html/revealjs/css/theme/"$THEME".css
   cp -r images/* output-html/images/
 
   while IFS=$ read cours titre modules; do
@@ -79,7 +79,7 @@ done
 if [[ $THEME == "" ]]; then
   THEME="osones"
 else
-  ls $COURS_DIR/styles/"$THEME".css &> /dev/null
+  ls styles/"$THEME".css &> /dev/null
   [ $? -eq 2 ] && echo "Theme $THEME doesn't exist" && exit 1
 fi
 
