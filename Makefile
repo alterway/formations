@@ -55,11 +55,11 @@ all-pdf: ##### Build all cours in beamer/pdf
 all-pdf: $(addsuffix .pdf, $(all)) $(addsuffix -handout.pdf, $(all)) $(addsuffix -print.pdf, $(all))
 
 build/%.tex: build/%.md
-	pandoc $< -t beamer -f markdown -s -o $@ --slide-level 3 -V theme=metropolis -H cours/styles/beamer.custom \
+	pandoc $< -t beamer -f markdown -s -o $@ --slide-level 3 -V theme=metropolis -H styles/beamer.custom \
 		-V title=$(title) -V institute=$(institute) -V author=$(author) -V date=$(date)
 
 build/%-handout.tex: build/%.md
-	pandoc $< -t beamer -f markdown -s -o $@ --slide-level 3 -V theme=metropolis -H cours/styles/beamer.custom -V handout \
+	pandoc $< -t beamer -f markdown -s -o $@ --slide-level 3 -V theme=metropolis -H styles/beamer.custom -V handout \
 		-V title=$(title) -V institute=$(institute) -V author=$(author) -V date=$(date)
 
 %.html: ##### Build cours "%" in html/revealjs, optional argument revealjsurl=<url to revealjs>
@@ -71,7 +71,7 @@ build/%-handout.tex: build/%.md
 
 %.pdf: ##### Build cours "%" in beamer/pdf
 %.pdf: build/%.tex
-	ln -sf cours/styles/beamer*metropolis.sty .
+	ln -sf styles/beamer*metropolis.sty .
 	pdflatex -output-directory build/ $<
 	pdflatex -output-directory build/ $<
 	rm -f beamer*metropolis.sty
