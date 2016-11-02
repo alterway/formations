@@ -44,7 +44,7 @@ display_help() {
     -o output           Output format (html, pdf or all). If none, all outputs
                         are built
 
-    -t theme            Theme to use, default to osones.css
+    -t theme            Theme to use, default to osones
 
     -u revealjsURL      RevealJS URL that need to be use. If you build formation
                         supports on local environment you should use "." and git
