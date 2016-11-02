@@ -196,3 +196,4 @@ docker import mon-image.tar backup/mon-conteneur
 - Construction automatisée d'images
 
 - Contrôle au niveau conteneurs
+

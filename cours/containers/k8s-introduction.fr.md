@@ -1,4 +1,4 @@
-# Kubernetes
+# Kubernetes : Introduction
 
 ### Kubernetes (K8s)
 
@@ -268,3 +268,4 @@ spec:
 - Éprouvée par Google
 
 - S'intègre parfaitement à CoreOS (support de *rkt* en cours) : Tectonic
+
