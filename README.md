@@ -12,10 +12,12 @@ Auteurs :
 * Kevin Lefevre <kevin.lefevre@osones.com>
 * Jean-François Taltavull <jft@osones.com>
 
-Build gérés par la CI :
-* [Supports PDF](http://formations.osones.com/pdf)
-* [Support HTML OpenStack](http://formations.osones.com/openstack.html)
-* [Support HTML Docker](http://formations.osones.com/docker.html)
+Build généré par la CI :
+* [Support PDF OpenStack User](https://osones.com/formations/pdf/openstack-user.pdf)
+* [Support PDF OpenStack Admin](https://osones.com/formations/pdf/openstack.pdf)
+* [Support HTML OpenStack User](https://osones.com/formations/openstack-user.html)
+* [Support HTML OpenStack Admin](https://osones.com/formations/openstack.html)
+* [Support HTML Docker](https://osones.com/formations/docker.html)
 
 Fonctionnement
 --------------
@@ -45,19 +47,24 @@ Les Dockerfiles des images Docker sont disponibles ici :
 - [revealjs-builder](https://github.com/Osones/docker-images/tree/master/revealjs-builder)
 - [wkhtmltopdf](https://github.com/Osones/docker-images/tree/master/wkhtmltopdf)
 
-Un daemon Docker est donc le seul prérequis pour le build via `build.sh`
+Un daemon Docker est donc le seul pré-requis pour le build via `build.sh`
 
 ```
-USAGE : ./build.sh options
+  USAGE : $0 options
 
--o output           Type of output you desire (html, pdf or all), if not specified all outputs are built
--t theme            Theme to use
-                    (default : osones)
--u revealjsURL      RevealJS URL that need to be use. If you build formation supports on local environment
-                    you should use "." and git clone http://github.com/hakimel/reveal.js and put your index.html into the repository clone.
-                    This option is also necessary even if you only want PDF output
-                    (default : http://formations.osones.com/revealjs)
--c course           Course to build, if not specified all courses are builth
+    -o output           Output format (html, pdf or all). If none, all outputs
+                        are built
+
+    -t theme            Theme to use, default to osones
+
+    -u revealjsURL      RevealJS URL that need to be use. If you build formation
+                        supports on local environment you should use "." and git
+                        clone http://github.com/hakimel/reveal.js and put your
+                        index.html into the repository clone.
+                        This option is also necessary even if you only want PDF
+                        output (default : https://osones.com/revealjs)
+
+    -c course           Courses to build, if not specified all courses are built
 ```
 
 Pour visualiser :
