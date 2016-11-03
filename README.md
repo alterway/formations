@@ -1,7 +1,7 @@
 Supports de formation Osones  [![Build Status](https://travis-ci.org/Osones/formations.svg?branch=master)](https://travis-ci.org/Osones/formations)
 ============================
 
-Supports de formation (sous forme de slides) écrits en Français et réalisés par Osones (https://osones.com/) pour ses offres de formation.
+Supports de formation (sous forme de slides) écrits en Français et réalisés par [Osones](https://osones.com/) pour ses offres de [formation](https://osones.com/formations.html).
 
 Sont notamment abordés les sujets suivants : le cloud, sa philosophie, le projet OpenStack, l'utilisation d'OpenStack, le déploiement d'OpenStack, le principe des conteneurs, le projet Docker, l'utilisation de Docker, l'orchestration de conteneurs Docker.
 
