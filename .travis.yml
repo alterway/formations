@@ -13,23 +13,6 @@ deploy:
   skip_cleanup: true
   access_key_id: "$access_key_id"
   secret_access_key: "$secret_access_key"
-  bucket: formations.osones.com
-  region: eu-west-1
-  acl: public_read
-  local_dir: output-html
-- provider: s3
-  skip_cleanup: true
-  access_key_id: "$access_key_id"
-  secret_access_key: "$secret_access_key"
-  bucket: formations.osones.com
-  region: eu-west-1
-  acl: public_read
-  local_dir: output-pdf
-  upload-dir: pdf
-- provider: s3
-  skip_cleanup: true
-  access_key_id: "$access_key_id"
-  secret_access_key: "$secret_access_key"
   bucket: osones-training
   region: eu-west-1
   acl: public_read
