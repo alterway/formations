@@ -51,7 +51,7 @@ display_help() {
                         clone http://github.com/hakimel/reveal.js and put your
                         index.html into the repository clone.
                         This option is also necessary even if you only want PDF
-                        output (default : http://formations.osones.com/revealjs)
+                        output (default : https://osones.com/revealjs)
 
     -c course           Courses to build, if not specified all courses are built
 
@@ -75,7 +75,7 @@ while getopts ":o:t:u:c:h" OPT; do
     esac
 done
 
-[[ $REVEALJSURL == "" ]] &&  REVEALJSURL="http://formations.osones.com/revealjs"
+[[ $REVEALJSURL == "" ]] &&  REVEALJSURL="https://osones.com/revealjs"
 if [[ $THEME == "" ]]; then
   THEME="osones"
 else

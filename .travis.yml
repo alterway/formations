@@ -34,6 +34,7 @@ deploy:
   region: eu-west-1
   acl: public_read
   local_dir: output-html
+  upload-dir: formations
 - provider: s3
   skip_cleanup: true
   access_key_id: "$access_key_id"
@@ -42,7 +43,7 @@ deploy:
   region: eu-west-1
   acl: public_read
   local_dir: output-pdf
-  upload-dir: pdf
+  upload-dir: formations/pdf
 notifications:
   slack:
     secure: fgpNzg6JIzg+QYwXuVgC6WsvZ9eiU57pl5y0WoDy8AEXUKIYDDdcBHCL7HQyveLvJQxWJs2FeLObk9invzQSJN2S5pXi83c99Z5aWFv2aZBazV3eAgFP4MlUUKVbsq4h/NytN7pfDNqA2aafky0YSCeKrlg9mA6fKN9TvsELmRI=
