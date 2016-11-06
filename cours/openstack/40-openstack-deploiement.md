@@ -20,8 +20,8 @@
 
 -   Tous les composants doivent être configurés pour communiquer avec Keystone
 -   La plupart doivent être configurés pour communiquer avec MySQL/MariaDB et RabbitMQ
--   Les composants découpés en plusieurs services ont souvent un fichier de configuration par service
--   api-paste.ini contient des paramètres concernant le service API
+-   Les composants découpés en plusieurs services ont parfois un fichier de configuration par service
+-   Le fichier de configuration `policy.json` précise les droits nécessaires pour chaque appel API
 
 ### Système d’exploitation
 
@@ -89,9 +89,10 @@
 
 ### API
 
--   API admin : port 35357
--   API utilisateur : port 5000
--   Deux versions : v2 (actuelle) et v3 (future; APIs admin et utilisateur fusionnées)
+-   API v2 admin : port 35357
+-   API v2 utilisateur : port 5000
+-   API v3 unifiée : port 5000
+-   L'API v2 est dépréciée
 -   Gère *utilisateurs*, *groupes*, *domaines* (API v3)
 -   Les utilisateurs ont des *rôles* sur des *tenants* (projets)
 -   Les *services* du catalogue sont associés à des *endpoints*
@@ -101,14 +102,13 @@
 ![Interactions avec Keystone](images/keystone-scenario.png)
 
 ### Installation et configuration
+
 -   Paquet : keystone
--   Configuration d’un token ADMIN pour la configuration initiale
 -   Backends : choix de SQL ou LDAP (ou AD)
--   Backends tokens : SQL, Memcache
--   Configurer les différents services
--   Policy.json
--   Services et endpoints
--   Utilisateurs, groupes, domaines
+-   Backends tokens : SQL, Memcache, aucun
+-   Configuration d’un token *ADMIN* pour la configuration initiale
+-   Création des services et endpoints
+-   Création d'utilisateurs, groupes, domaines
 
 ### Enregistrer un service et son endpoint
 
@@ -524,6 +524,7 @@ Multiples projets en cours de développement
 -   Effectue des appels à l’API et vérifie le résultat
 -   Est très utilisé par les développeurs via l’intégration continue
 -   Le déployeur peut utiliser Tempest pour vérifier la bonne conformité de son cloud
+-   Cf. aussi Rally
 
 ## Bonnes pratiques pour un déploiement en production
 
