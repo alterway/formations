@@ -1,6 +1,6 @@
 # Docker
 
-Durée : 2 jours
+Durée : 2 / 3 jours
 
 ## Description
 
@@ -92,7 +92,7 @@ Compétences d’administration système Linux tel qu’Ubuntu, Red Hat ou Debia
 - Lequel choisir ?
 - Gérer ses conteneurs avec Systemd
 
-#### Clustering
+#### Orchestration et Clustering
 - Swarm
 - CoreOS
 - Rancher
@@ -104,3 +104,15 @@ Compétences d’administration système Linux tel qu’Ubuntu, Red Hat ou Debia
 - Automatisation
 - Discovery Service
 - Rolling updates
+
+#### Monitoring en environnement conteneurisé
+- Quel monitoring ?
+- Problematique des conteneurs
+- Comment les monitorer
+- Monitoring et orchestrateur
+- Quelles solutions ?
+
+#### Introduction a Kubernetes
+- Principe et fonctionnalités
+- L'API et les differents Objets
+- Comment les utiliser ?
