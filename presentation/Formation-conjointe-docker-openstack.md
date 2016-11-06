@@ -151,3 +151,15 @@ Compétences d’administration système Linux tel qu’Ubuntu, Red Hat ou Debia
 - Automatisation
 - Discovery Service
 - Rolling updates
+
+#### Monitoring en environnement conteneurisé
+- Quel monitoring ?
+- Problematique des conteneurs
+- Comment les monitorer
+- Monitoring et orchestrateur
+- Quelles solutions ?
+
+#### Introduction a Kubernetes
+- Principe et fonctionnalités
+- L'API et les differents Objets
+- Comment les utiliser ?
