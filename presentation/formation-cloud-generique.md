@@ -4,7 +4,7 @@ Durée : 2 jours
 
 ## Description
 
-Ce séminaire vous permettra de comprendre les principes fondamentaux et les notions de base du Cloud. Vous verrez également des scénarios d'utilisation et d’automatisations qui vous permettront d'avoir une vision claire et complète du Cloud Computing.
+Cette formation vous permettra de comprendre les principes fondamentaux et les notions de base du Cloud. Vous verrez également des scénarios d'utilisation et d’automatisation qui vous permettront d'avoir une vision claire et complète du Cloud Computing.
 
 ### Objectifs
 
@@ -13,7 +13,7 @@ Ce séminaire vous permettra de comprendre les principes fondamentaux et les not
 * Comprendre les bénéfices du cloud
 * Overview des acteurs cloud du marché et focus sur AWS et OpenStack
 * Comprendre le modèle de consommation des ressources via les API
-* Voir l’interface web Horizon d’OpenStack, une demo d’infra as code
+* Voir l’interface web Horizon d’OpenStack, une demo d'infrastructure as code
 
 ### Public visé
 
@@ -21,7 +21,7 @@ La formation s'adresse aux directions informatiques et fonctionnelles, ainsi qu�
 
 ### Pré-requis
 
-* Connaissance de base sur le management du SI et sur les architectures techniques.
+* Connaissances de base sur le management du SI et sur les architectures techniques
 
 ## Programme
 
