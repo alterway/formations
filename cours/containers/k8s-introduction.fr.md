@@ -1,4 +1,4 @@
-# Kubernetes : Introduction
+# Kubernetes : Concepts et Objets
 
 ### Kubernetes (K8s)
 
@@ -20,15 +20,19 @@
 
 - Volumes
 
+- Namespaces
+
 - Replication Controllers
 
 - Services
 
 - Providers : Load Balancer
 
-- Déploiements
+- Deployments / ReplicaSet
 
 - Ingress et Ingress controller
+
+- NetworkPolicy
 
 ### Kubernetes : POD
 
@@ -45,7 +49,7 @@
 
 ### Kubernetes : POD
 
-- Les PODs sont définis en YAML comme les fichiers `docker-compose`
+- Les PODs sont définis en YAML comme les fichiers `docker-compose` :
 
 ```
 apiVersion: v1
@@ -63,9 +67,11 @@ spec:
 ### Kubernetes : Networking
 
 - Overlay Network nécessaire (idem que ceux utilisables avec Docker) :
-    - Flannel
+    - Cannal : Flannel + Calico
     - Weaves
-    - Calico
+    - OpenShift
+    - OpenContrail
+    - Romana
 
 - Les conteneurs peuvent communiquer sans NAT
 
@@ -82,13 +88,13 @@ spec:
 - Support de multiples backend de stockage :
     - GCE : PD
     - AWS : EBS
-    - glusterFS
+    - glusterFS / NFS
     - Ceph
     - iSCSI
 
 ### Kubernetes : Volumes
 
-- On déclare d'abord le volume et on l'affecte à un service
+- On déclare d'abord le volume et on l'affecte à un service :
 
 ```
 apiVersion: v1
@@ -107,6 +113,17 @@ spec:
     emptyDir: {}
 ```
 
+### Kubernetes : Namespaces
+
+- Fournissent une séparation logique des ressources par exemple :
+  - Par utilisateurs
+  - Par projet / applications
+  - Autres...
+
+- Les objets existent uniquement au sein d'un namespaces donné
+
+- Évitent la collision de nom d'objets
+
 ### Kubernetes : Labels
 
 - Système de clé/valeur
@@ -117,7 +134,7 @@ spec:
 
 ### Kubernetes : Labels
 
-- Exemple de label
+- Exemple de label :
 
 ```
 apiVersion: v1
@@ -181,11 +198,13 @@ spec:
 
 - Node Port forwarding : limitations
 
+- ClusterIP : IP dans le réseau privé Kubernetes (VIP)
+
 - IP Externes : le routage de l'IP publique vers le cluster est manuel
 
 ### Kubernetes : Services
 
-- Exemple de service :
+- Exemple de service (on remarque la selection sur le label):
 
 ```
 {
@@ -204,20 +223,20 @@ spec:
     },
     "type": "LoadBalancer"
   }
-  }
+}
 ```
 
-### Kubernetes : Déploiements
+### Kubernetes : Deployments et ReplicaSets
 
-- Simplifier les déploiements sous forme de groupes logiques
+- Evolution des ReplicationController
 
-- Permet de définir un ensemble de PODs ainsi que leurs RCs
+- Permet de définir un ensemble de PODs ainsi qu'un ReplicaSet
 
 - Version, Update et Rollback
 
 - Souvent combiné avec un objet de type *service*
 
-### Kubernetes : Déploiements
+### Kubernetes : Deployments et ReplicaSets
 
 ```
 apiVersion: v1
@@ -251,21 +270,98 @@ spec:
         - containerPort: 80
 ```
 
-### Kubernetes : Run
+### Kubernetes : Ingress Resource
 
-- WebUI
+- Définition de règles de routage applicative (HTTP/HTTPS)
 
-- Kubectl
+- Traffic load balancing, SSL termination, name based virtual hosting
+
+- Définies dans l'API et ensuite implémentées par un Ingress Controller
+
+```
+    internet    |   internet
+        |       |       |
+  ------------  |  [ Ingress ]
+  [ Services ]  |  --|-----|--
+                |  [ Services ]
+```
+
+### Kubernetes : Ingress Resource
+
+- Exemple :
+
+```
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  namespace: default
+  name: traefik
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+spec:
+  rules:
+    - host: traefik.archifleks.net
+      http:
+        paths:
+          - backend:
+              serviceName: traefik-console
+              servicePort: 8080
+```
+
+### Kubernetes : Ingress Controller
+
+- Routeur applicatif de bordure (L7 Load Balancer)
+
+- Implémente les Ingress Resources
+
+- Plusieurs implémentations :
+  - [Træfɪk](https://traefik.io/)
+  - [nginx](https://github.com/kubernetes/contrib/tree/master/ingress/controllers)
+
+### Kubernetes : NetworkPolicy
+
+- Contrôle la communication entre les PODs au sein d'un namespace
+
+- Pare-feu entre les éléments composant une application :
+
+```
+apiVersion: extensions/v1beta1
+kind: NetworkPolicy
+metadata:
+ name: test-network-policy
+ namespace: default
+spec:
+ podSelector:
+  matchLabels:
+    role: db
+ ingress:
+  - from:
+     - namespaceSelector:
+        matchLabels:
+         project: myproject
+     - podSelector:
+        matchLabels:
+         role: frontend
+    ports:
+     - protocol: tcp
+       port: 6379
+```
+
+### Kubernetes : Run et administration
+
+- WebUI (Kubernetes Dashboard)
+
+- Kubectl (Outil CLI)
 
 - Objets: *Secret* et *ConfigMap* : paramétrages, plus sécurisés que les variables d'environnements
 
-### Kubernetes : Conclusion
+### Kubernetes : Aujourd'hui
 
-- Version 1.3 : stable en production
+- Version 1.4 : stable en production
 
 - Solution complète et une des plus utilisées
 
 - Éprouvée par Google
 
-- S'intègre parfaitement à CoreOS (support de *rkt* en cours) : Tectonic
+- S'intègre parfaitement à CoreOS (support de *rkt* et Tectonic, la solution commerciale) et Atomic
 

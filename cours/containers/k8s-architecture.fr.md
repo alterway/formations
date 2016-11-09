@@ -2,6 +2,16 @@
 
 ### Kubernetes : Composants
 
+- Kubernetes est écrit en Go, compilé statiquement.
+
+- Un ensemble de binaires sans dépendances
+
+- Faciles à conteneuriser et à packager
+
+- Peut se déployer uniquement avec des conteneurs sans dépendances d'OS
+
+### Kubernetes : Composants
+
 - kubelet : Service "agent" fonctionnant sur tous les nœuds et assure le fonctionnement des autres services
 
 - kube-apiserver : API server qui permet la configuration d'objet Kubernetes (Pods, Service, Replication Controller, etc.)
@@ -12,9 +22,11 @@
 
 - kube-controller-manager : Responsable de l'état du cluster, boucle infinie qui régule l'état du cluster afin d'atteindre un état désiré
 
+- (network-policy-controller) : Composant qui implémente l'objet NetworkPolicy
+
 - kubectl : Client qui permet de piloter un cluster Kubernetes
 
-### Kubernetes : Kubelet
+### Kubernetes : kubelet
 
 - Service principal de Kubernetes
 
@@ -31,7 +43,7 @@ ls /etc/kubernetes/manifests/
 kube-apiserver.yaml  kube-controller-manager.yaml  kube-proxy.yaml  kube-scheduler.yaml  policy-controller.yaml
 ```
 
-### Kubernetes : Kubelet
+### Kubernetes : kubelet
 
 - Exemple du manifest *kube-proxy* :
 
@@ -83,7 +95,31 @@ spec:
 
 ### Kubernetes : kube-proxy
 
-- 
-- 
-- 
+- Responsable de la publication de services
+
+- Utilise *iptables*
+
+- Route les paquets a destination des PODs et réalise le load balancing TCP/UDP
+
+### Kubernetes : kube-controller-manager
+
+- Boucle infinie qui contrôle l'état d'un cluster
+
+- Effectue des opérations pour atteindre un état donné
+
+- De base dans Kubernetes : replication controller, endpoints controller, namespace controller et serviceaccounts controller
+
+### Kubernetes : network-policy-controller
+
+- Implémente l'objet NetworkPolicy
+
+- Contrôle la communication entre les PODs
+
+- Externe à Kubernetes et implémenté par la solution de Networking choisie :
+  - OpenShift
+  - OpenContrail
+  - Romana
+  - Calico
+
+### kubernetes : Conclusion
 
