@@ -5,8 +5,8 @@
 - Solution de PaaS développée par Red Hat
 
 - Deux version :
-  - Open Source : [OpenShift Origin](https://www.openshift.org/)
-  - Entreprise : [OpenShift Container Platform](https://www.openshift.com/)
+    - Open Source : [OpenShift Origin](https://www.openshift.org/)
+    - Entreprise : [OpenShift Container Platform](https://www.openshift.com/)
 
 - Se base sur Kubernetes en tant qu'orchestrateur de conteneurs
 
@@ -27,8 +27,8 @@
 - Fournissent les même fonctionnalités
 
 - Deux implementations :
-  - HAProxy
-  - F5 Big IP
+    - HAProxy
+    - F5 Big IP
 
 ### OpenShift : Build
 

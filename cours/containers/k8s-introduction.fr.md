@@ -116,9 +116,9 @@ spec:
 ### Kubernetes : Namespaces
 
 - Fournissent une séparation logique des ressources par exemple :
-  - Par utilisateurs
-  - Par projet / applications
-  - Autres...
+    - Par utilisateurs
+    - Par projet / applications
+    - Autres...
 
 - Les objets existent uniquement au sein d'un namespaces donné
 
@@ -279,11 +279,11 @@ spec:
 - Définies dans l'API et ensuite implémentées par un Ingress Controller
 
 ```
-    internet    |   internet
-        |       |       |
-  ------------  |  [ Ingress ]
-  [ Services ]  |  --|-----|--
-                |  [ Services ]
+            internet    |   internet
+                |       |       |
+          ------------  |  [ Ingress ]
+          [ Services ]  |  --|-----|--
+                        |  [ Services ]
 ```
 
 ### Kubernetes : Ingress Resource
@@ -315,8 +315,8 @@ spec:
 - Implémente les Ingress Resources
 
 - Plusieurs implémentations :
-  - [Træfɪk](https://traefik.io/)
-  - [nginx](https://github.com/kubernetes/contrib/tree/master/ingress/controllers)
+    - [Træfɪk](https://traefik.io/)
+    - [nginx](https://github.com/kubernetes/contrib/tree/master/ingress/controllers)
 
 ### Kubernetes : NetworkPolicy
 
