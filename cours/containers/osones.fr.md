@@ -6,10 +6,10 @@
 
 ![](images/logo-osones.png){height="100px"}
 
-- Copyright © 2016 Osones
+- Copyright © 2017 Osones
 - Licence : [Creative Commons BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.fr)
 - Sources : <https://github.com/Osones/Formations/>
-- Online : <http://formations.osones.com>
+- Online : <https://osones.com/formations/docker.html>
 
 ![](images/licence.png){height="100px"}
 
