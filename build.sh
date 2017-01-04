@@ -7,6 +7,8 @@ LIST=cours.list
 TITLE=""
 DATE=""
 
+DOCKER_TAG=$(printenv DOCKER_TAG)
+
 if [ -z "$(eval echo \$$DOCKER_TAG)" ]; then
   DOCKER_TAG="stable"
 fi
