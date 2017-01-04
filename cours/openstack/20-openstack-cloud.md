@@ -32,7 +32,7 @@
 
 ### Le cloud en un schéma
 
-![Le cloud selon Wikipedia](images/cloud.png)
+![IaaS - PaaS - SaaS](images/cloud.png)
 
 ### Pourquoi migrer vers le cloud ?
 

@@ -84,7 +84,7 @@ On distingue :
 
 ### Les modèles de service en un schéma
 
-![Selon Wikipedia](images/cloud.png)
+![IaaS - PaaS - SaaS](images/cloud.png)
 
 ### Cloud public ou privé ?
 
