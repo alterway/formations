@@ -31,7 +31,7 @@
 
 ### Cycle de développement : 6 mois
 
--   Le planning est publié, exemple : <http://releases.openstack.org/mitaka/schedule.html>
+-   Le planning est publié, exemple : <https://releases.openstack.org/ocata/schedule.html>
 -   Milestone releases
 -   Freezes : FeatureProposal, Feature, String
 -   RC releases

@@ -22,8 +22,8 @@
 -   Grizzly (2013.1), Havana (2013.2)
 -   Icehouse (2014.1), Juno (2014.2)
 -   Kilo (2015.1), Liberty (2015.2)
--   **Mitaka** (2016.1)
--   Fin 2016 : Newton, début 2017 : Ocata
+-   Mitaka (2016.1), **Newton** (2016.2)
+-   Début 2017 : Ocata
 
 ### Statistiques : Kilo
 
