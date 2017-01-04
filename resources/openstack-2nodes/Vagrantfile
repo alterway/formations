@@ -15,8 +15,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     controller.vm.network :forwarded_port, guest: 80, host: 8080
     controller.vm.network :forwarded_port, guest: 6080, host: 6080
     config.vm.provider "virtualbox" do |vb|
-      vb.customize ["modifyvm", :id, "--cpus", "1"]
-      vb.customize ["modifyvm", :id, "--memory", "4096"]
+      vb.cpus = "1"
+      vb.memory = "4096"
     end
   end
 
@@ -25,8 +25,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     compute.vm.network "private_network", ip: "10.42.42.11", virtualbox__intnet: "management"
     compute.vm.network "private_network", ip: "192.168.33.111", virtualbox__intnet: "instances"
     config.vm.provider "virtualbox" do |vb|
-      vb.customize ["modifyvm", :id, "--cpus", "1"]
-      vb.customize ["modifyvm", :id, "--memory", "1024"]
+      vb.cpus = "1"
+      vb.memory = "1024"
     end
   end
 
