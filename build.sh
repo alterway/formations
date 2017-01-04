@@ -9,7 +9,7 @@ DATE=""
 
 DOCKER_TAG=$(printenv DOCKER_TAG)
 
-if [ -z "$(eval echo \$$DOCKER_TAG)" ]; then
+if if [ -z ${DOCKER_TAG+x} ]; then
   DOCKER_TAG="stable"
 fi
 
