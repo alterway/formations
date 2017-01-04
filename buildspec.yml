@@ -6,10 +6,11 @@ phases:
     - docker pull osones/revealjs-builder:latest
     - docker pull osones/wkhtmltopdf:latest
   pre_build:
+    commands:
     - aws s3 sync styles/osones.css s3://$BUCKET_CSS_PATH
   build:
     commands:
-      - "/bin/bash -x build.sh -o all -t osones -u https://osones.com/revealjs"
+      - /bin/bash -x build.sh -o all -t osones -u https://osones.com/revealjs
   post_build:
     commands:
       - aws s3 sync output-html/ s3://$BUCKET_HTML
