@@ -119,6 +119,7 @@ Mise au point.
 - Frontière explicite entre le fournisseur (provider) et l'utilisateur (user)
 - Définit la manière dont l'utilisateur communique avec le cloud pour gérer ses ressources
 - Gérer : CRUD (Create, Read, Update, Delete)
+- REST
 
 ### Pourquoi le cloud ? côté économique
 
@@ -214,6 +215,18 @@ Mise au point.
 - Accessible depuis l'instance
 - Fournit des informations relatives à l'instance
 - `cloud-init` permet d'exploiter cette API
+
+### Flavor (gabarit)
+
+-   *Instance type* chez AWS
+-   Définit un modèle d’instance en termes de CPU, RAM, disque (racine), disque éphémère
+-   Le disque éphémère a, comme le disque racine, l’avantage d’être souvent local donc rapide
+
+### Paire de clé
+
+-   Clé publique + clé privée SSH
+-   Le cloud manipule et stocke la clé publique
+-   Cette clé publique est utilisée pour donner un accès SSH aux instances
 
 ### Ressources réseau 1/2
 
@@ -311,7 +324,7 @@ Cf. <http://12factor.net/>
 - Containers
 - Bare metal
 
-### Implémentation du stockage : SDS
+### Implémentation du stockage : (Software Defined Storage) SDS
 
 - **Attention** : ne pas confondre avec le sujet block vs objet
 
@@ -321,4 +334,8 @@ Cf. <http://12factor.net/>
 - Les pannes matérielles sont prises en compte et gérées
 - Le projet **Ceph** et le composant **OpenStack Swift** implémentent du SDS
 - Voir aussi **Scality**
+
+### SDS - Théorème CAP
+
+![Consistency - Availability - Partition tolerance](images/cap.jpg)
 
