@@ -1,0 +1,14 @@
+version: 0.1
+
+phases:
+  install:
+    commands:
+    - docker pull osones/revealjs-builder:latest
+    - docker pull osones/wkhtmltopdf:latest
+  build:
+    commands:
+      - "/bin/bash -x build.sh -o all -t osones -u https://osones.com/revealjs"
+  post_build:
+    commands:
+      - aws s3 sync output-html/ s3://$BUCKET_HTML
+      - aws s3 sync output-pdf/ s3://$BUCKET_PDF
