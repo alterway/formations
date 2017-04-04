@@ -3,4 +3,3 @@ openstack$Formation OpenStack administrateur$openstack/0-openstack-osones.md ope
 openstack-user$Formation OpenStack utilisateur$openstack/0-openstack-osones.md cloud/introduction-user.md openstack/20-openstack-cloud.md openstack/30-openstack-presentation.md openstack/50-openstack-iaas-tirer-parti.md cloud/archi-cloud-dev.md cloud/archi-cloud-infra.md openstack/60-openstack-conclusion.md
 cloud$Formation Cloud$openstack/0-openstack-osones.md cloud/10-cloud-introduction.md cloud/cloud.md
 openstack-admin-user$Formation OpenStack Ops Users$openstack/0-openstack-osones.md openstack/10-openstack-introduction.md openstack/30-openstack-presentation.md openstack/30-openstack-presentation-inside.md openstack/40-openstack-deploiement.md openstack/50-openstack-iaas-tirer-parti.md cloud/archi-cloud-dev.md cloud/archi-cloud-infra.md openstack/60-openstack-conclusion.md
-openstack-short$Presentation OpenStack$openstack/os-short.md
