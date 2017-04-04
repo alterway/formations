@@ -492,6 +492,15 @@ Multiples projets en cours de développement
 -   Équivalent d’AWS Route 53
 -   Gère différents backends : BIND, etc.
 
+## Barbican - Key management as a Service
+
+-   Gère des secrets / clés privées
+-   Backends possibles :
+    -    Fichiers chiffrés
+    -    PKCS#11
+    -    KMIP
+    -    Dogtag
+
 ## Quelques autres composants intéressants
 
 ### Ironic

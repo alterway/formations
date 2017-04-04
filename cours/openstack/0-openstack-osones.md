@@ -16,7 +16,7 @@ Supports de cours réalisés par **Osones** <https://osones.com>
 
 ### Concernant ces supports de cours 2/2
 
-- Copyright © 2014-2016 Osones
+- Copyright © 2014-2017 Osones
 - Licence : [Creative Commons BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.fr)
 - Sources : <https://github.com/Osones/Formations/>
 - Online : <https://osones.com/formations.html>

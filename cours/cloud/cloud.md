@@ -157,8 +157,8 @@ Mise au point.
 - DreamHost
 - DigitalOcean
 - En France :
-    - Cloudwatt
-    - Numergy
+    - Cloudwatt (Orange Business Services)
+    - Numergy (SFR)
     - OVH
     - Ikoula
     - Scaleway
@@ -166,7 +166,7 @@ Mise au point.
 
 ### Faire du IaaS privé
 
-- OpenStack
+- **OpenStack**
 - CloudStack
 - Eucalyptus
 - OpenNebula

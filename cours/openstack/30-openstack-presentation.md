@@ -10,6 +10,10 @@
 
 -   Démarrage en 2010
 -   Objectif : le Cloud Operating System libre
+```To produce a ubiquitous Open Source Cloud Computing platform that is
+easy to use, simple to implement, interoperable between deployments,
+works well at all scales, and meets the needs of users and operators of
+both public and private clouds.```
 -   Fusion de deux projets de Rackspace (Storage) et de la NASA (Compute)
 -   Logiciel libre distribué sous licence Apache 2.0
 -   Naissance de la Fondation en 2012
@@ -25,24 +29,16 @@
 -   Mitaka (2016.1), **Newton** (2016.2)
 -   Début 2017 : Ocata
 
-### Statistiques : Kilo
-
--   1492 contributeurs (Liberty : 1933)
--   169 organisations
--   394 nouvelles fonctionnalités et 7257 bugs corrigés
--   113 drivers/plugins
--   792200 chaines traduites
-
-Source : <http://lists.openstack.org/pipermail/foundation-board/2015-April/000050.html>
-
 ### Quelques soutiens/contributeurs ...
 
-- Editeurs : Red Hat, HP, IBM, Suse, Canonical, Vmware, ...
-- Constructeurs : Dell, Hitachi, Juniper, Cisco, NetApp, ...
-- En vrac : NASA, Yahoo, OVH, Citrix, SAP, Rackspace, ...
+- Editeurs : Red Hat, Suse, Canonical, Vmware, ...
+- Constructeurs : IBM, HP, Dell, ...
+- Constructeurs/réseau : Juniper, Cisco, ...
+- Constructeurs/stockage : NetApp, Hitachi, ...
+- En vrac : NASA, Yahoo, Rackspace, OVH, Citrix, SAP, ...
 -  **Google** ! (depuis juillet 2015)
 
-<http://www.openstack.org/foundation/companies/>
+<https://www.openstack.org/foundation/companies/>
 
 ### ... et utilisateurs
 
@@ -55,7 +51,7 @@ Source : <http://lists.openstack.org/pipermail/foundation-board/2015-April/00005
 -   BMW
 -   Etc. Sans compter les implémentations confidentielles
 
-<http://www.openstack.org/user-stories/>
+<https://www.openstack.org/user-stories/>
 
 ### Les différents sous-projets
 
@@ -82,7 +78,9 @@ Source : <http://lists.openstack.org/pipermail/foundation-board/2015-April/00005
     -   PaaS (Solum)
     -   Container (Magnum)
 -   Autres
-    -   Les clients (python-\*client)
+    -   Les clients (python-\*client), CLI et bibliothèques
+    -   Les bibliothèques utilisées par OpenStack
+    -   Les outils utilisés pour développer OpenStack
 
 ### Les 4 Opens
 
@@ -105,21 +103,18 @@ Source : <http://lists.openstack.org/pipermail/foundation-board/2015-April/00005
     -   Infrastructure de développement (serveurs)
     -   Ressources humaines : marketing, release manager, quelques développeurs (principalement sur l’infrastructure)
 -   500 organisations à travers le monde
--   23000 membres individuels dans 160 pays
+-   60000 membres individuels dans 160 pays
 
 ### La fondation OpenStack
 
 ![Les principales entités de la fondation](images/foundation.png)
 
-### Interface web / Dashboard : Horizon
-
-![Screenshot Horizon (Liberty)](images/horizon.png)
-
 ### Ressources
 
--   Annonces/sécurité : openstack-announce@lists.openstack.org
--   Documentation : <http://docs.openstack.org/>
--   Gouvernance du projet : <http://governance.openstack.org/>
+-   Annonces (nouvelles versions, avis de sécurité) : <openstack-announce@lists.openstack.org>
+-   Portail documentation : <http://docs.openstack.org/>
+-   Gouvernance du projet : <https://governance.openstack.org/>
+-   <https://releases.openstack.org>
 -   Support :
     -   <https://ask.openstack.org>
     -   openstack@lists.openstack.org

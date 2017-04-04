@@ -9,21 +9,38 @@
 -   Chaque sous-projet est découpé en plusieurs services
 -   Communication entre les services : AMQP (RabbitMQ)
 -   Base de données : relationnelle SQL (MySQL/MariaDB)
--   Réseau : OpenVSwitch
+-   Réseau : LinuxBridge, OpenVSwitch
 -   En général : réutilisation de composants existants
 -   Tout est développé en Python (Django pour la partie web)
 -   APIs supportées : OpenStack et équivalent AWS
 -   Multi tenancy
+
+### APIs
+-   Chaque projet supporte *son* API OpenStack
+-   Certains projets supportent l'API AWS équivalente
+
+## Mode de développement
+
+### Statistiques
+
+-   2581 contributeurs à Newston
+-   309 organisations contributrices à Newton
+-   20 millions de lignes de code écrites depuis le début du projet
 
 ### Développement du projet : en détails
 
 -   Ouvert à tous (individuels et entreprises)
 -   Cycle de développement de 6 mois débuté par un (design) summit
 -   Développement hyper actif : 25000 commits dans Liberty
--   Sur chaque patch proposé :
-    -   Revue de code (peer review) : Gerrit
-    -   Intégration continue (continous integration) : Jenkins, Zuul, etc.
--   Outils : Launchpad $\rightarrow$ Storyboard (blueprints, bugs) + Git + GitHub (code)
+
+### Les outils
+
+-   Revue de code (peer review) : Gerrit
+-   Intégration continue (continous integration) : Jenkins, Zuul, etc.
+-   Blueprints/spécifications et bugs :
+    -    Launchpad
+    -    Storyboard
+-   Code : Git + GitHub
 
 ### Développement du projet : en détails
 
