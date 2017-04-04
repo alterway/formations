@@ -1,12 +1,12 @@
 # Formation OpenStack Neutron
 
-Durée : 1 jour
+Durée : 2 jours
 
 ## Description
 
-Cette formation vous permettra de monter en compétence sur les composant réseaux d'OpenStack.
+Cette formation vous permettra de monter en compétences sur les composants réseaux d'OpenStack.
 
-Neutron est la solution de networking intégrée à OpenStack qui permet de creer des creer divers fonction réseaux virtuelles (routeur, sous-réseaux, LBaaS, etc.).
+Neutron est la solution de networking intégrée à OpenStack qui permet de créer diverses fonctions réseaux virtuelles (routeurs, réseaux, sous-réseaux, load-balancers, etc.).
 
 Neutron est un ensemble complexe de composants et dispose également de nombreux plugins qui sont plus ou moins adaptés en fonction du type de déploiement.
 
@@ -17,11 +17,11 @@ Neutron est un ensemble complexe de composants et dispose également de nombreux
 * Comprendre le fonctionnement de chaque service
 * État de l'art des plugins Neutron
 * Savoir quel plugin utiliser pour quel déploiement
-* Rentrer en détail sur le fonctionnement interne des plugins les plus répandus 
+* Rentrer en détails sur le fonctionnement interne des plugins les plus répandus
 
 ### Public visé
 
-La formation s'adresse aux administrateurs et architectes souhaitant mettre en place un cloud OpenStack avec la solution de déploiement OSA.
+La formation s'adresse aux administrateurs et architectes souhaitant mettre en place un cloud OpenStack fournissant des fonctionnalités réseau.
 
 ### Pré-requis
 
@@ -31,7 +31,7 @@ La formation s'adresse aux administrateurs et architectes souhaitant mettre en p
 
 ## Programme
 
-### Neutron : Presentaton
+### Neutron : Présentation
 
 1. Concepts généraux
 2. Fonction réseaux de base
@@ -45,4 +45,15 @@ La formation s'adresse aux administrateurs et architectes souhaitant mettre en p
 3. neutron{plugin}-agent
 4. neutron-metadata-agent
 5. neutron-dhcp-agent
-6. 
+
+### Neutron : Les plugins
+
+* OpenVSwitch
+* LinuxBridge
+
+### Neutron : Load-balancing
+
+* API
+* Plugin HAProxy
+* Plugin Octavia
+
