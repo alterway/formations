@@ -4,20 +4,19 @@ Durée : 2 jours
 
 ## Description
 
-Cette formation vous permettra de monter en compétences sur les composants réseaux d'OpenStack.
+Cette formation vous permettra de monter en compétences sur les composants réseau d'OpenStack et principalement Neutron.
 
-Neutron est la solution de networking intégrée à OpenStack qui permet de créer diverses fonctions réseaux virtuelles (routeurs, réseaux, sous-réseaux, load-balancers, etc.).
+Neutron est la solution de networking intégrée à OpenStack qui permet de gérer diverses fonctions réseau (routeurs, réseaux, sous-réseaux, load-balancers, etc.).
 
 Neutron est un ensemble complexe de composants et dispose également de nombreux plugins qui sont plus ou moins adaptés en fonction du type de déploiement.
 
 ### Objectifs
 
-* Présentation de Neutron
-* Les fonctions proposées par Neutron
-* Comprendre le fonctionnement de chaque service
-* État de l'art des plugins Neutron
+* Pouvoir expliquer le rôle de Neutron
+* Comprendre les fonctionnalités offertes par Neutron
+* Appréhender les logiques internesà chaque service
 * Savoir quel plugin utiliser pour quel déploiement
-* Rentrer en détails sur le fonctionnement interne des plugins les plus répandus
+* Connaitre fonctionnement interne des plugins les plus répandus
 
 ### Public visé
 
@@ -25,35 +24,59 @@ La formation s'adresse aux administrateurs et architectes souhaitant mettre en p
 
 ### Pré-requis
 
-* Connaissance minimale d'OpenStack et ses composant
-* Connaissance minimal des fonctionnalité réseaux offertes par le Kernel Linux (bridge, macvlan, tap, veth, iproute2, etc.)
+* Connaissance d'OpenStack et ses composants
+* Connaissance minimale des fonctionnalités réseau offertes par le noyau Linux (bridge, macvlan, tap, veth, iproute2, etc.)
 * Être capable de déployer, configurer et opérer un cloud OpenStack
 
 ## Programme
 
-### Neutron : Présentation
+### Introduction SDN
 
-1. Concepts généraux
-2. Fonction réseaux de base
-3. Fonction réseaux étendus
-4. Architecture
+* Concepts généraux
+* Architecture SDN
 
-### Neutron : Les services
+### Utilisation de Neutron
 
-1. neutron-server
-2. neutron-l3-agent
-3. neutron{plugin}-agent
-4. neutron-metadata-agent
-5. neutron-dhcp-agent
+* Fonctions réseau de base
+    * Networks
+    * Subnets
+    * Ports
+    * Routers
+    * Provider networks
+* Fonctions réseau étendues
+    * Load Balancing
+    * Firewall
+    * VPN
 
-### Neutron : Les plugins
+### Implémentation de Neutron
 
-* OpenVSwitch
+* neutron-server
+* neutron-{plugin}-agent
+    * l2pop
+    * overlay (vxlan, gre)
+* neutron-l3-agent
+* neutron-dhcp-agent
+* neutron-metadata-agent
+
+#### Les plugins ML2
+
 * LinuxBridge
+    * L3 HA avec VRRP
+* OpenVSwitch
+    * L3 HA avec DVR
+* Tour d'horizon des solutions alternatives
 
-### Neutron : Load-balancing
+### Implémentation Load-balancing as a Service
 
-* API
 * Plugin HAProxy
 * Plugin Octavia
+
+### Neutron avancé
+
+* Fonctions avancées
+    * QoS
+    * Subnet pools
+    * L2 Gateway
+    * BGP
+    * Intégration Designate
 
