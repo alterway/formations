@@ -14,7 +14,7 @@ Neutron est un ensemble complexe de composants et dispose également de nombreux
 
 * Pouvoir expliquer le rôle de Neutron
 * Comprendre les fonctionnalités offertes par Neutron
-* Appréhender les logiques internesà chaque service
+* Appréhender les logiques internes à chaque service
 * Savoir quel plugin utiliser pour quel déploiement
 * Connaitre fonctionnement interne des plugins les plus répandus
 
@@ -34,6 +34,7 @@ La formation s'adresse aux administrateurs et architectes souhaitant mettre en p
 
 * Concepts généraux
 * Architecture SDN
+* SDN, NVF, VNF ?
 
 ### Utilisation de Neutron
 
@@ -43,6 +44,8 @@ La formation s'adresse aux administrateurs et architectes souhaitant mettre en p
     * Ports
     * Routers
     * Provider networks
+    * Floating IP
+    * Security Groups
 * Fonctions réseau étendues
     * Load Balancing
     * Firewall
