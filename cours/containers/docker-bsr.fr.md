@@ -46,6 +46,14 @@ CMD ["nginx"]
 
 - `ENTRYPOINT` : "Préfixe" de la commande unique lancée par le conteneur
 
+### Construction de l'image
+
+- Construire l'image depuis le `Dockerfile` du répertoire courant (`.`)
+
+```
+docker build -t backup/mon-conteneur
+```
+
 ### Dockerfile : best practices
 
 - Bien choisir sa baseimage
