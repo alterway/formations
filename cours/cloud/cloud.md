@@ -115,11 +115,51 @@ Mise au point.
 
 ### Les APIs, la clé du cloud
 
+- Rappel : API pour *Application Programming Interface*
+    -   Au sens logiciel : Interface permettant à un logiciel d’utiliser une bibliothèque
+    -   Au sens cloud : Interface permettant à un logiciel d’utiliser un service (XaaS)
 - Interface de programmation (via le réseau, souvent HTTP)
 - Frontière explicite entre le fournisseur (provider) et l'utilisateur (user)
 - Définit la manière dont l'utilisateur communique avec le cloud pour gérer ses ressources
 - Gérer : CRUD (Create, Read, Update, Delete)
 - REST
+
+### REST
+
+-   Une ressource == une URI (*Uniform Resource Identifier*)
+-   Utilisation des verbes HTTP pour caractériser les opérations (CRUD)
+    - GET
+    - POST
+    - PUT
+    - DELETE
+-   Utilisation des codes de retour HTTP
+-   Représentation des ressources dans le corps des réponses HTTP
+
+### REST - Exemples
+
+    GET http://endpoint/volumes/
+    GET http://endpoint/volumes/?size=10
+    POST http://endpoint/volumes/
+    DELETE http://endpoint/volumes/xyz
+
+### Exemple concret
+
+    GET /v2.0/networks/d32019d3-bc6e-4319-9c1d-6722fc136a22
+    {
+       "network":{
+          "status":"ACTIVE",
+          "subnets":[ "54d6f61d-db07-451c-9ab3-b9609b6b6f0b" ],
+          "name":"private-network",
+          "provider:physical_network":null,
+          "admin_state_up":true,
+          "tenant_id":"4fd44f30292945e481c7b8a0c8908869",
+          "provider:network_type":"local",
+          "router:external":true,
+          "shared":true,
+          "id":"d32019d3-bc6e-4319-9c1d-6722fc136a22",
+          "provider:segmentation_id":null
+       }
+    }
 
 ### Pourquoi le cloud ? côté économique
 
@@ -179,6 +219,18 @@ Mise au point.
 - Fondation OpenStack depuis 2012
 - Écrit en Python et distribué sous licence Apache 2.0
 - Soutien très large de l'industrie et contributions variées
+
+### Exemples de PaaS public
+
+-   Amazon Elastic Beanstalk (<https://aws.amazon.com/fr/elasticbeanstalk>)
+-   Google App Engine (<https://cloud.google.com/appengine>)
+-   Heroku (<https://www.heroku.com>)
+
+### Solutions de PaaS privé
+
+-   Cloud Foundry (<https://www.cloudfoundry.org>)
+-   OpenShift (<http://www.openshift.org>)
+-   Solum (<https://wiki.openstack.org/wiki/Solum>)
 
 ## Les concepts Infrastructure as a Service
 
