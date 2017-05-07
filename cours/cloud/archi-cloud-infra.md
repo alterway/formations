@@ -55,7 +55,7 @@
 
 -   API à destination des instances
 -   Standard de fait initié par AWS
--   Accessible depuis l’instance sur http://169.254.169.254/
+-   Accessible depuis l’instance sur `http://169.254.169.254/`
 -   Expose des informations relatives à l’instance
 -   Expose un champ libre dit “userdata”
 
