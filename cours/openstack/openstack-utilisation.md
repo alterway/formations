@@ -11,9 +11,10 @@
 ### Les APIs OpenStack
 
 -   Une API par service OpenStack
--   <http://developer.openstack.org/#api>
 -   Chaque API est versionnée, la rétro-compatibilité est assurée
--   REST
+-   Le corps des requêtes et réponses est formatté avec JSON
+-   Architecure REST
+-   <http://developer.openstack.org/#api>
 -   Certains services sont aussi accessibles via une API différente compatible AWS
 
 ### Accès aux APIs
@@ -47,11 +48,59 @@
 
 -   Bibliothèque Python incluant la business logic
 
+## Authentification
+
 ### Authentification et catalogue de service
 
 -   Une fois authentifié, récupération d’un jeton (*token*)
 -   Récupération du catalogue de services
 -   Pour chaque service, un endpoint HTTP (API)
+
+### Scénario d’utilisation typique
+
+![Interactions avec Keystone](images/keystone-scenario.png)
+
+## Compute
+
+### Propriétés d’une instance
+
+-   Éphémère, a priori non hautement disponible
+-   Définie par une flavor
+-   Construite à partir d’une image
+-   Optionnel : attachement de volumes
+-   Optionnel : boot depuis un volume
+-   Optionnel : une clé SSH publique
+-   Optionnel : des ports réseaux
+
+### Flavors
+
+-   *Gabarit*
+-   Équivalent des “instance types” d’AWS
+-   Définit un modèle d’instance en termes de CPU, RAM, disque (racine), disque éphémère
+-   Un disque de taille nul équivaut à prendre la taille de l’image de base
+-   Le disque éphémère a, comme le disque racine, l’avantage d’être souvent local donc rapide
+
+### Types d’images
+
+Glance supporte un large éventail de types d’images, limité par le support de l’hyperviseur sous-jacent à Nova
+
+-   raw
+-   qcow2
+-   ami
+-   vmdk
+-   iso
+
+### Propriétés des images dans Glance
+
+L’utilisateur peut définir un certain nombre de propriétés dont certaines seront utilisées lors de l’instanciation
+
+-   Type d’image
+-   Architecture
+-   Distribution
+-   Version de la distribution
+-   Espace disque minimum
+-   RAM minimum
+-   Publique ou non
 
 ### Utiliser des images cloud
 
@@ -98,63 +147,7 @@ La plupart des distributions fournissent aujourd’hui des images cloud.
     -   Packer
     -   solution “maison”
 
-### Propriétés d’une instance
-
--   Éphémère, a priori non hautement disponible
--   Définie par une flavor
--   Construite à partir d’une image
--   Optionnel : attachement de volumes
--   Optionnel : boot depuis un volume
--   Optionnel : une clé SSH publique
--   Optionnel : des ports réseaux
-
-### Les groupes de sécurité
-
--   Équivalent à un firewall devant chaque instance
--   Une instance peut être associée à un ou plusieurs groupes de sécurité
--   Gestion des accès en entrée et sortie
--   Règles par protocole (TCP/UDP/ICMP) et par port
--   Cible une adresse IP, un réseau ou un autre groupe de sécurité
-
-### Flavors
-
--   *Gabarit*
--   Équivalent des “instance types” d’AWS
--   Définit un modèle d’instance en termes de CPU, RAM, disque (racine), disque éphémère
--   Un disque de taille nul équivaut à prendre la taille de l’image de base
--   Le disque éphémère a, comme le disque racine, l’avantage d’être souvent local donc rapide
-
-### Propriétés des images dans Glance
-
-L’utilisateur peut définir un certain nombre de propriétés dont certaines seront utilisées lors de l’instanciation
-
--   Type d’image
--   Architecture
--   Distribution
--   Version de la distribution
--   Espace disque minimum
--   RAM minimum
--   Publique ou non
-
-### Types d’images
-
-Glance supporte un large éventail de types d’images, limité par le support de l’hyperviseur sous-jacent à Nova
-
--   raw
--   qcow2
--   ami
--   vmdk
--   iso
-
-### Fonctionnalités supplémentaires
-
-Outre les fonctions réseau de base niveaux 2 et 3, Neutron peut fournir d’autres services :
-
--   Load Balancing (HAProxy, ...)
--   Firewall (vArmour, ...) : diffère des groupes de sécurité
--   VPN (Openswan, ...) : permet d’accéder à un réseau privé sans IP flottantes
-
-Ces fonctionnalités se basent également sur des plugins
+## Réseau
 
 ### API
 
@@ -165,7 +158,31 @@ L’API permet notamment de manipuler ces ressources
 -   Port : attachable à une interface sur une instance, un load-balancer, etc.
 -   Routeur
 
-### Un template HOT
+### Les groupes de sécurité
+
+-   Équivalent à un firewall devant chaque instance
+-   Une instance peut être associée à un ou plusieurs groupes de sécurité
+-   Gestion des accès en entrée et sortie
+-   Règles par protocole (TCP/UDP/ICMP) et par port
+-   Cible une adresse IP, un réseau ou un autre groupe de sécurité
+
+### Fonctionnalités supplémentaires
+
+Outre les fonctions réseau de base niveaux 2 et 3, Neutron peut fournir d’autres services :
+
+-   Load Balancing
+-   Firewall : diffère des groupes de sécurité
+-   VPN : permet d’accéder à un réseau privé sans IP flottantes
+
+## Orchestration
+
+### Natif OpenStack et alternatives
+
+* Heat est la solution native OpenStack
+* Heat fournit une API de manipulation de *stacks* à partir de *templates*
+* Des alternatives externes à OpenStack existent, comme **Terraform**
+
+### Un template Heat Orchestration Template (HOT)
 
 *parameters* - *resources* - *outputs*
 
@@ -186,6 +203,8 @@ Multiples projets en cours de développement
 -   Flame (Cloudwatt)
 -   HOT builder
 -   Merlin
+
+## Avancé
 
 ### Un grand cloud
 
