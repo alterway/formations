@@ -3,7 +3,7 @@
 ### Ce qu’on va voir
 
 -   Installer OpenStack à la main
-    <http://docs.openstack.org/newton/install-guide-ubuntu/>
+    <http://docs.openstack.org/ocata/install-guide-ubuntu/>
 -   Donc comprendre son fonctionnement
 -   Passer en revue chaque composant plus en détails
 -   Tour d’horizon des solutions de déploiement

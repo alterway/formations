@@ -23,15 +23,15 @@
 
 ### Statistiques
 
--   2581 contributeurs à Newston
+-   2581 contributeurs à Newton
 -   309 organisations contributrices à Newton
 -   20 millions de lignes de code écrites depuis le début du projet
+-   Développement hyper actif : 25000 commits dans Liberty
 
 ### Développement du projet : en détails
 
 -   Ouvert à tous (individuels et entreprises)
 -   Cycle de développement de 6 mois débuté par un (design) summit
--   Développement hyper actif : 25000 commits dans Liberty
 
 ### Les outils
 
