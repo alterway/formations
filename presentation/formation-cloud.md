@@ -4,7 +4,9 @@ Durée : 2 jours
 
 ## Description
 
-Cette formation vous permettra de comprendre les principes fondamentaux et les notions de base du Cloud. Vous verrez également des scénarios d'utilisation et d’automatisation qui vous permettront d'avoir une vision claire et complète du Cloud Computing.
+Cette formation vous permettra de comprendre les principes fondamentaux et les notions de base du Cloud. Vous verrez également des scénarios d'utilisation et d’automatisation qui vous permettront d'avoir une vision claire et complète du Cloud Computing et du IaaS.
+
+IaaS est un modèle où les ressources d'infrastructure (telles que calcul, stockage et réseau) sont mises à disposition des utilisateurs par le biais d'APIs. Les APIs permettent l'accès à ces ressources par de multiples moyens : interface graphique/web, ligne de commande, script, programme, etc. Cette possibilité de programmer l'allocation, l'utilisation et la restitution des ressources fait la force du système cloud : mise à l'échelle automatique en fonction de la demande, facturation à l'usage, etc. Les processus deviennent plus agiles. Des clouds publics tels qu'Amazon Web Services (AWS) proposent de l'IaaS. Dans le domaine du cloud privé, c'est le logiciel libre OpenStack qui fait référence.
 
 ### Objectifs
 

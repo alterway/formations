@@ -1,6 +1,6 @@
 # Docker
 
-Durée : 2 / 3 jours
+Durée : 4 jours
 
 ## Description
 

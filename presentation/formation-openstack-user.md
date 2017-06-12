@@ -1,4 +1,5 @@
-# Formation OpenStack "Utilisateur"
+# Formation OpenStack Utilisateur
+
 Durée : 4 jours
 
 ## Description
@@ -9,7 +10,9 @@ Au long de la session, les stagiaires seront mis en situation via le développem
 
 ### Objectifs
 
-* Assimiler les concepts et le vocabulaire liés au cloud
+* Découvrir OpenStack et manipuler les différents services
+* Connaître le fonctionnement du projet OpenStack et ses possibilités
+* Manipuler l'API (Application Programming Interface), la CLI (Command Line Interface) et le Dashboard
 * Etre capable de définir, déployer et maintenir une infrastructure sur le cloud
 * Etre capable de manipuler et orchestrer des ressources sur un cloud OpenStack
 * Concevoir une application "cloud-ready" et l'intégrer sur un cloud OpenStack
@@ -20,6 +23,8 @@ Au long de la session, les stagiaires seront mis en situation via le développem
 
 ### Pré-requis
 
+* Compréhension des notions cloud
+* Utilisation d'un cloud
 * Pratique du langage de commande Linux (Shell)
 * Notions de virtualisation
 * Pratique d'un outil de versioning (git, subversion, ...)
@@ -28,26 +33,40 @@ Au long de la session, les stagiaires seront mis en situation via le développem
 
 ## Programme
 
-### Le Cloud : vue d’ensemble
+### OpenStack : projet et logiciel
 
-1. Le Cloud : les concepts
-2. PaaS : Platform as a Service
-3. IaaS : Infrastructure as a Service
-4. Les APIs : quels rôles ?
+1. Historique et présentation du projet OpenStack
+2. Le logiciel OpenStack
+3. Modèle de développement ouvert
+
+### Utiliser OpenStack
+
+1. DevStack : faire tourner rapidement un OpenStack
+2. Utilisation des APIs
+3. Utilisation des outils CLI
+4. Utilisation du Dashboard
+5. Fonctionnalités avancées
+
+### Tirer parti de l’IaaS
+
+1. Penser ses applications pour le cloud
+2. Infrastructure as Code
+3. Gérer et manipuler ses images cloud
+4. Vers le PaaS
 
 ### Architectures "cloud-ready"
 
 1. Concevoir une application pour le Cloud
 2. Concevoir une infrastructure pour le Cloud
 
-### OpenStack
-
-1. Le projet, la fondation openstack.org
-2. Utiliser OpenStack via la console Horizon et le CLI
-3. Consommer le IaaS via les APIs
-
 ### Travaux pratiques
 
+* Découvrir le fonctionnement des APIs en effectuant des requêtes HTTP avec curl
+* Manipuler les ressources de son cloud à l'aide des outils CLI
+* Utiliser le dashboard OpenStack
+* Déployer une stack avec Heat
+* Générer sa propre image cloud
 * Réalisation d'une mini-application Web "cloud-ready"
 * Construction de l'infrastructure d'hébergement dans un tenant OpenStack
 * Intégration de l'application
+
