@@ -28,9 +28,10 @@ La formation s'adresse aux administrateurs système, développeurs et architecte
 ### Pré-requis
 
 Compétences d’administration système Linux tel qu’Ubuntu, Red Hat ou Debian.
-    * Édition de fichiers de configuration
-    * Gestion des paquets et des services
-    * Notions de virtualisation
+
+* Édition de fichiers de configuration
+* Gestion des paquets et des services
+* Notions de virtualisation
 
 ## Programme
 
