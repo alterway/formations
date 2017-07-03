@@ -14,25 +14,25 @@
 
 ### Kubernetes : Concepts
 
-- PODs
-
 - Networking
 
 - Volumes
 
-- Namespaces
-
-- Replication Controllers
-
-- Services
-
 - Providers : Load Balancer
 
-- Deployments / ReplicaSet
+### Kubernetes : Ressources
+
+- PODs
+
+- Deployments
 
 - Ingress et Ingress controller
 
 - NetworkPolicy
+
+- Namespaces
+
+- Services
 
 ### Kubernetes : POD
 
@@ -151,37 +151,6 @@ spec:
     - containerPort: 80
 ```
 
-### Kubernetes : Replication Controllers
-
-- Permet de manager les PODs de manière homogène (version de PODs, nombres, etc.)
-
-- Gère la durée de vie des PODs :  création et destruction
-
-- Assure qu'un nombre minimum de PODs est présent à l'instant T sur l'infrastructure K8s (scaling)
-
-### Kubernetes : Replication Controllers
-
-```
-apiVersion: v1
-kind: ReplicationController
-metadata:
-  name: nginx-controller
-spec:
-  replicas: 2
-  selector:
-    app: nginx
-  template:
-    metadata:
-      labels:
-        app: nginx
-    spec:
-      containers:
-      - name: nginx
-        image: nginx
-        ports:
-        - containerPort: 80
-```
-
 ### Kubernetes : Services
 
 - Abstraction des PODs et RCs, sous forme d'une VIP de service
@@ -204,7 +173,7 @@ spec:
 
 ### Kubernetes : Services
 
-- Exemple de service (on remarque la selection sur le label):
+- Exemple de service (on remarque la sélection sur le label):
 
 ```
 {
@@ -226,17 +195,15 @@ spec:
 }
 ```
 
-### Kubernetes : Deployments et ReplicaSets
+### Kubernetes : Deployments
 
-- Evolution des ReplicationController
-
-- Permet de définir un ensemble de PODs ainsi qu'un ReplicaSet
+- Permet d'assurer le fonctionnement d'un ensemble de PODs
 
 - Version, Update et Rollback
 
 - Souvent combiné avec un objet de type *service*
 
-### Kubernetes : Deployments et ReplicaSets
+### Kubernetes : Deployments
 
 ```
 apiVersion: v1
@@ -357,7 +324,7 @@ spec:
 
 ### Kubernetes : Aujourd'hui
 
-- Version 1.4 : stable en production
+- Version 1.7 : stable en production
 
 - Solution complète et une des plus utilisées
 

@@ -12,7 +12,7 @@
 
 - Publication de ports
 
-- Links
+- Service Discovery
 
 ### Layers
 

@@ -58,7 +58,6 @@
     - Docker
     - Rkt
     - Etcd (base de données clé/valeur)
-    - Fleet (système d'init distribué)
     - Flannel (overlay network)
     - Kubernetes Kubelet
 
@@ -77,14 +76,6 @@
 - Accessible via API
 
 ![](images/docker/etcd.png){height="100px"}
-
-### CoreOS : Fleet
-
-- Système d'init distribué basé sur systemd
-
-- Orchestration de conteneurs entre différents hôtes supportant systemd
-
-- S'appuie sur un système clé/valeur comme etcd
 
 ### CoreOS : Flannel
 

@@ -31,10 +31,10 @@
 - Scheduling en fonction des besoins de l'application
 
 - Quelques exemples:
-    - Etcd/Fleet (CoreOS)
     - Docker Swarm
     - Rancher
-    - Mesos / Kubernetes (K8s)
+    - Mesos
+    - Kubernetes
 
 ### Infrastructure as a Code
 
@@ -53,35 +53,6 @@
 - Connaître de façon automatique l'état de ses conteneurs à tout instant
 
 - Fournir un endpoint fixe à une application susceptible de bouger au sein d'un cluster
-
-### Etcd/Fleet
-
-- [Etcd](https://github.com/coreos/etcd)
-    - Distributed key-Value store (KV store)
-    - Résilient de par sa construction, l'information est répliquée et une défaillance du master n'impact pas les données
-- [Fleet](https://github.com/coreos/fleet)
-    - Clustering minimaliste d'hôtes supportant systemd
-    - Positionnement intelligent des units en fonction des besoins
-
-![](images/docker/etcd.png){height="100px"}
-
-### Etcd/Fleet
-
-- Exemple :
-
-```
-[Unit]
-Description=Apache-sidekick
-BindsTo=apache.service
-After=apache.service
-
-[Service]
-ExecStart=/bin/sh -c "while true; do etcdctl set /services/website/apache '{\"host\": \"%H\", \"port\": 80}' --ttl 60; sleep 45;done"
-ExecStop=/usr/bin/etcdctl rm /services/website/apache
-
-[X-Fleet]
-MachineOf=apache.service
-```
 
 ### Consul
 

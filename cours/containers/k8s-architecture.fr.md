@@ -17,7 +17,6 @@
 - kube-proxy : Permet le forwarding TCP/UDP et le load balancing entre les services et les backend (Pods)
 - kube-scheduler : Implémente les fonctionnalité de scheduling
 - kube-controller-manager : Responsable de l'état du cluster, boucle infinie qui régule l'état du cluster afin d'atteindre un état désiré
-- (network-policy-controller) : Composant qui implémente l'objet NetworkPolicy
 - kubectl : Client qui permet de piloter un cluster Kubernetes
 
 ### Kubernetes : kubelet
