@@ -75,7 +75,7 @@ spec:
 
 - Les conteneurs peuvent communiquer sans NAT
 
-- Un nœuds peut accéder aux conteneurs des autres nœuds sans NAT
+- Un nœud peut accéder aux conteneurs des autres nœuds sans NAT
 
 ### Kubernetes : Volumes
 
@@ -120,7 +120,7 @@ spec:
     - Par projet / applications
     - Autres...
 
-- Les objets existent uniquement au sein d'un namespaces donné
+- Les objets existent uniquement au sein d'un namespace donné
 
 - Évitent la collision de nom d'objets
 
@@ -239,7 +239,7 @@ spec:
 
 ### Kubernetes : Ingress Resource
 
-- Définition de règles de routage applicative (HTTP/HTTPS)
+- Définition de règles de routage applicatives (HTTP/HTTPS)
 
 - Traffic load balancing, SSL termination, name based virtual hosting
 

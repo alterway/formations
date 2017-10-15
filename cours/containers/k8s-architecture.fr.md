@@ -15,7 +15,7 @@
 - kubelet : Service "agent" fonctionnant sur tous les nœuds et assure le fonctionnement des autres services
 - kube-apiserver : API server qui permet la configuration d'objet Kubernetes (Pods, Service, Replication Controller, etc.)
 - kube-proxy : Permet le forwarding TCP/UDP et le load balancing entre les services et les backend (Pods)
-- kube-scheduler : Implémente les fonctionnalité de scheduling
+- kube-scheduler : Implémente les fonctionnalités de scheduling
 - kube-controller-manager : Responsable de l'état du cluster, boucle infinie qui régule l'état du cluster afin d'atteindre un état désiré
 - kubectl : Client qui permet de piloter un cluster Kubernetes
 
@@ -72,11 +72,11 @@ spec:
 
 ### Kuberntes : kube-apiserver
 
-- Les configuration d'objets (Pods, Service, RC, etc.) se font via l'API server
+- Les configurations d'objets (Pods, Service, RC, etc.) se font via l'API server
 
-- Un point d'accès à l'état du cluster aux autres composant via une API REST
+- Un point d'accès à l'état du cluster aux autres composants via une API REST
 
-- Tous les composant sont reliés à l'API server
+- Tous les composants sont reliés à l'API server
 
 ### Kubernetes : kube-scheduler
 
@@ -92,7 +92,7 @@ spec:
 
 - Utilise *iptables*
 
-- Route les paquets a destination des PODs et réalise le load balancing TCP/UDP
+- Route les paquets à destination des PODs et réalise le load balancing TCP/UDP
 
 ### Kubernetes : kube-controller-manager
 
