@@ -81,20 +81,18 @@
 ### Principes
 
 -   Annuaire des utilisateurs et des groupes
+-   Gère des domaines
 -   Liste des tenants/projets
 -   Catalogue de services
 -   Gère l’authentification et l’autorisation
--   Support des domaines dans l’API v3
 -   Fournit un token à l’utilisateur
 
 ### API
 
--   API v2 admin : port 35357
--   API v2 utilisateur : port 5000
--   API v3 unifiée : port 5000
--   L'API v2 est dépréciée
--   Gère *utilisateurs*, *groupes*, *domaines* (API v3)
--   Les utilisateurs ont des *rôles* sur des *tenants* (projets)
+-   API v2 (dépréciée) : admin port 35357, utilisateur port 5000
+-   API v3 : port 5000
+-   Gère *utilisateurs*, *groupes*, *domaines*
+-   Les utilisateurs ont des *rôles* sur des *projets* (tenants)
 -   Les *services* du catalogue sont associés à des *endpoints*
 
 ### Scénario d’utilisation typique
@@ -104,33 +102,12 @@
 ### Installation et configuration
 
 -   Paquet : keystone
--   Backends : choix de SQL ou LDAP (ou AD)
--   Backends tokens : SQL, Memcache, aucun
--   Configuration d’un token *ADMIN* pour la configuration initiale
+-   Intégration serveur web WSGI
+-   Backends : SQL, LDAP (ou Active Directory)
+-   Backends tokens : SQL, Memcache, aucun (suivant le type de tokens)
+-   *Bootstrap*
 -   Création des services et endpoints
 -   Création d'utilisateurs, groupes, domaines
-
-### Enregistrer un service et son endpoint
-
-Il faut renseigner l’existence des différents services (catalogue) dans
-Keystone :
-
-    $ keystone service-create --name=cinderv2 --type=volumev2 \
-      --description="Cinder Volume Service V2"
-    $ keystone endpoint-create \
-      --region=myRegion
-      --service-id=...
-      --publicurl=http://controller:8776/v2/%\(tenant_id\)s \
-      --internalurl=http://controller:8776/v2/%\(tenant_id\)s \
-      --adminurl=http://controller:8776/v2/%\(tenant_id\)s
-
-### Tester
-    $ keystone service-list
-    ...
-    $ keystone user-list
-    ...
-    $ keystone token-get
-    ...
 
 ## Nova : Compute
 
@@ -161,17 +138,10 @@ Gère :
 
 -   Instances
 -   Flavors (types d’instance)
+-   Keypairs
 -   Indirectement : images, security groups (groupes de sécurité), floating IPs (IPs flottantes)
 
 Les instances sont redimensionnables et migrables d’un hôte physique à un autre.
-
-### Les groupes de sécurité
-
--   Équivalent à un firewall devant chaque instance
--   Une instance peut être associée à un ou plusieurs groupes de sécurité
--   Gestion des accès en entrée et sortie
--   Règles par protocole (TCP/UDP/ICMP) et par port
--   Cible une adresse IP, un réseau ou un autre groupe de sécurité
 
 ### Flavors
 
@@ -212,13 +182,6 @@ Les instances sont redimensionnables et migrables d’un hôte physique à un au
 -   Service facultatif qui améliore la sécurité
 -   Fait office de proxy entre les nœuds compute et la BDD
 -   Les nœuds compute, vulnérables, n’ont donc plus d’accès à la BDD
-
-### Tester
-
-    $ nova list
-    ...
-    $ nova create
-    ...
 
 ## Glance : Registre d’images
 
@@ -263,23 +226,16 @@ Glance supporte un large éventail de types d’images, limité par le support d
 -   Paquet glance-api : fournit l’API
 -   Paquet glance-registry : démon du registre d’images en tant que tel
 
-### Tester
-    $ glance image-list
-    ...
-    $ glance image-create
-    ...
-
 ## Neutron : Réseau en tant que service
 
 ### Principes
 
 -   *Software Defined Networking* (SDN)
 -   Auparavant Quantum et nova-network
--   IP flottantes, groupes de sécurité
 -   neutron-server : fournit l’API
 -   Agent DHCP : fournit le service de DHCP pour les instances
 -   Agent L3 : gère la couche 3 du réseau, le routage
--   Plugin : OpenVSwitch par défaut, d’autres implémentations libres/propriétaires, logicielles/matérielles existent
+-   Plugin : LinuxBridge par défaut, d’autres implémentations libres/propriétaires, logicielles/matérielles existent
 
 ### Fonctionnalités supplémentaires
 
@@ -293,16 +249,26 @@ Ces fonctionnalités se basent également sur des plugins
 
 ### API
 
-L’API permet notamment de manipuler ces ressources
+L’API permet notamment de manipuler ces ressources :
 
 -   Réseau (*network*) : niveau 2
 -   Sous-réseau (*subnet*) : niveau 3
 -   Port : attachable à une interface sur une instance, un load-balancer, etc.
 -   Routeur
+-   IP flottante, groupe de sécurité
+
+### Les groupes de sécurité
+
+-   Équivalent à un firewall devant chaque instance
+-   Une instance peut être associée à un ou plusieurs groupes de sécurité
+-   Gestion des accès en entrée et sortie
+-   Règles par protocole (TCP/UDP/ICMP) et par port
+-   Cible une adresse IP, un réseau ou un autre groupe de sécurité
 
 ### Plugins ML2
 
--   Modular Layer 2
+-   **Modular Layer 2**
+-   LinuxBridge
 -   OpenVSwitch
 -   OpenDaylight
 -   Contrail, OpenContrail

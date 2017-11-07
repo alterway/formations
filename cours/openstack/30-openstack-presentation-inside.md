@@ -1,4 +1,4 @@
-## Fonctionnement interne et mode de développement
+## Fonctionnement interne
 
 ### Architecture
 
@@ -16,6 +16,7 @@
 -   Multi tenancy
 
 ### APIs
+
 -   Chaque projet supporte *son* API OpenStack
 -   Certains projets supportent l'API AWS équivalente
 
