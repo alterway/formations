@@ -25,6 +25,7 @@
     -   Gestion des paquets
     -   Manipulation de fichiers de configuration et de services
     -   LVM et systèmes de fichiers
+    -   SQL
 -   Notions :
     -   Virtualisation : KVM, libvirt
     -   Réseau : iptables, namespaces
