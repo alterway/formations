@@ -4,8 +4,6 @@
 
 - COE développé par Google, devenu open source en 2014
 
-- Utilisé par Google pour la gestion de leurs conteneurs (basé sur Borg)
-
 - Adapté à tout type d'environnements
 
 - Devenu populaire en très peu de temps
@@ -324,7 +322,7 @@ spec:
 
 ### Kubernetes : Aujourd'hui
 
-- Version 1.7 : stable en production
+- Version 1.8 : stable en production
 
 - Solution complète et une des plus utilisées
 
