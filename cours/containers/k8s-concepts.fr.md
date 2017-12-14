@@ -1,24 +1,14 @@
 # Kubernetes : Concepts et Objets
 
-### Kubernetes (K8s)
-
-- COE développé par Google, devenu open source en 2014
-
-- Adapté à tout type d'environnements
-
-- Devenu populaire en très peu de temps
-
-![](images/docker/k8s.png){height="100px"}
-
 ### Kubernetes : Concepts
 
 - Networking
 
 - Volumes
 
-- Providers : Load Balancer
+- Cloud Providers : Load Balancer
 
-### Kubernetes : Ressources
+### Kubernetes : API Ressources
 
 - PODs
 
@@ -64,16 +54,28 @@ spec:
 
 ### Kubernetes : Networking
 
-- Overlay Network nécessaire (idem que ceux utilisables avec Docker) :
+- Les conteneurs peuvent communiquer sans NAT
+
+- Un nœud peut accéder aux conteneurs des autres nœuds sans NAT
+
+- Nécessite une solution tierce :
     - Cannal : Flannel + Calico
     - Weaves
     - OpenShift
     - OpenContrail
     - Romana
 
-- Les conteneurs peuvent communiquer sans NAT
+- Ces solutions implémentent [CNI](https://github.com/containernetworking/cni) (Container Network Interface)
 
-- Un nœud peut accéder aux conteneurs des autres nœuds sans NAT
+### Kubernetes : CNI
+
+- Projet de la CNCF
+
+- Spécifications sur la configuration d'interface réseaux des conteneurs
+
+- Ensemble de plugins [core](https://github.com/containernetworking/plugins/releases) ainsi que [tierce partie](https://github.com/containernetworking/cni#3rd-party-plugins)
+
+- Docker n'utilise pas CNI mais [CNM](https://github.com/docker/libnetwork/blob/master/docs/design.md) (Containter Network Model) et son implémentation _libnetwork_.
 
 ### Kubernetes : Volumes
 

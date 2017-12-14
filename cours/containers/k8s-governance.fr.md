@@ -1,4 +1,16 @@
-# Kubernetes : gouvernance et communauté
+# Kubernetes : projet, gouvernance et communauté
+
+### Kubernetes (K8s)
+
+- COE développé par Google, devenu open source en 2014
+
+- Adapté à tout type d'environnements
+
+- Devenu populaire en très peu de temps
+
+- Premier projet de la C.N.C.F
+
+![](images/docker/k8s.png){height="100px"}
 
 ### CNCF
 
@@ -47,9 +59,9 @@ The Foundation’s mission is to create and drive the adoption of a new computin
 - [Stack Overflow](https://stackoverflow.com/questions/tagged/kubernetes)
 
 - Hébergé sur [Github](https://github.com/kubernetes/kubernetes):
-  - [Issues](https://github.com/kubernetes/kubernetes/issues)
-  - [Pull Request](https://github.com/kubernetes/kubernetes/pulls)
-  - [Release](https://github.com/kubernetes/kubernetes/releases)
+    - [Issues](https://github.com/kubernetes/kubernetes/issues)
+    - [Pull Request](https://github.com/kubernetes/kubernetes/pulls)
+    - [Release](https://github.com/kubernetes/kubernetes/releases)
 
 - [Projets en incubation](https://github.com/kubernetes-incubator/)
 
@@ -60,10 +72,10 @@ The Foundation’s mission is to create and drive the adoption of a new computin
 - Décomposée en [SIG](https://github.com/kubernetes/community/blob/master/sig-list.md)(Special Interest Group)
 
 - Les SIG sont des projets, centres d'intérêts ou Working Group différents :
-  - Network
-  - Docs
-  - AWS
-  - etc
+    - Network
+    - Docs
+    - AWS
+    - etc
 
 - Chaque SIG peut avoir des guideline différentes.
 
