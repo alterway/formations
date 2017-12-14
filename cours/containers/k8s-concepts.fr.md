@@ -59,7 +59,7 @@ spec:
 - Un nœud peut accéder aux conteneurs des autres nœuds sans NAT
 
 - Nécessite une solution tierce :
-    - Cannal : Flannel + Calico
+    - Canal : Flannel + Calico
     - Weaves
     - OpenShift
     - OpenContrail
