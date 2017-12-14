@@ -3,6 +3,7 @@
 COURS_DIR=cours
 IMG_DIR=images
 LIST=cours.list
+LANGUAGE=fr
 
 TITLE=""
 DATE=""
@@ -22,7 +23,7 @@ build-html() {
 
   while IFS=$ read cours titre modules; do
     for module in $modules; do
-      cat $COURS_DIR/$module >> $COURS_DIR/slide-$cours
+      cat $COURS_DIR/"$module"."$LANGUAGE".md >> $COURS_DIR/slide-$cours
     done
     TITLE=$titre
 
