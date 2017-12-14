@@ -12,11 +12,14 @@
 
 ### Kubernetes : Composants
 
-- kubelet : Service "agent" fonctionnant sur tous les nœuds et assure le fonctionnement des autres services
 - kube-apiserver : API server qui permet la configuration d'objet Kubernetes (Pods, Service, Replication Controller, etc.)
 - kube-proxy : Permet le forwarding TCP/UDP et le load balancing entre les services et les backend (Pods)
 - kube-scheduler : Implémente les fonctionnalités de scheduling
 - kube-controller-manager : Responsable de l'état du cluster, boucle infinie qui régule l'état du cluster afin d'atteindre un état désiré
+
+### Kubernetes : Composants
+
+- kubelet : Service "agent" fonctionnant sur tous les nœuds et assure le fonctionnement des autres services
 - kubectl : Client qui permet de piloter un cluster Kubernetes
 
 ### Kubernetes : kubelet
@@ -70,7 +73,7 @@ spec:
     name: ssl-certs-host
 ```
 
-### Kuberntes : kube-apiserver
+### Kubernetes : kube-apiserver
 
 - Les configurations d'objets (Pods, Service, RC, etc.) se font via l'API server
 
@@ -114,5 +117,5 @@ spec:
     - Romana
     - Calico
 
-### kubernetes : Conclusion
+### Kubernetes : Conclusion
 
