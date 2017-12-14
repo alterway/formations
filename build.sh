@@ -47,19 +47,20 @@ display_help() {
 
   USAGE : $0 options
 
-    -o output           Output format (html, pdf or all). If none, all outputs
-                        are built
+    -o output           Output format (html, pdf or all). Default: all
 
-    -t theme            Theme to use, default to osones
+    -t theme            Theme to use. Default: osones
 
     -u revealjsURL      RevealJS URL that need to be use. If you build formation
                         supports on local environment you should use "." and git
                         clone http://github.com/hakimel/reveal.js and put your
                         index.html into the repository clone.
                         This option is also necessary even if you only want PDF
-                        output (default : https://osones.com/revealjs)
+                        output. Default : https://osones.com/revealjs
 
     -c course           Courses to build, if not specified all courses are built
+
+    -l language         Language in which you want the course to be built. Default: fr
 
 EOF
 
@@ -73,6 +74,7 @@ while getopts ":o:t:u:c:h" OPT; do
         o) OUTPUT="$OPTARG";;
         t) THEME="$OPTARG";;
         u) REVEALJSURL="$OPTARG";;
+        u) LANGUAGE="$OPTARG";;
         ?)
             echo "Invalid option: -$OPTARG" >&2
             display_help
