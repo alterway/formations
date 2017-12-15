@@ -19,6 +19,7 @@
 author="Team Osones"
 institute="Osones"
 date="$$(date +'%d %B %Y')"
+lang=fr
 
 # Where to get revealjs stuff
 revealjsurl=https://osones.com/revealjs
@@ -33,7 +34,7 @@ help: ##### Show this help
 # This Makefile will contain targets that depend on the cours list
 build/Makefile: $(cours)
 	mkdir -p build
-	sed -E 's#^(.*)\$$.*\$$(.*)#build/\1.md: $$(addprefix cours/, \2)\n\trm -f $$@\n\t$$(foreach module,$$^,cat $$(module) >> $$@;)#' $(cours) > build/Makefile
+	sed -E 's#^(.*)\$$.*\$$(.*)#build/\1.md: $$(addsuffix .$(lang).md, $$(addprefix cours/, \2))\n\trm -f $$@\n\t$$(foreach module,$$^,cat $$(module) >> $$@;)#' $(cours) > build/Makefile
 	echo >> build/Makefile
 	echo -n 'all=' >> build/Makefile
 	for i in `cut -d '$$' -f1 $(cours)`; do echo -n "$$i " >> build/Makefile; done
