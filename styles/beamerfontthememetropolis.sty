@@ -17,13 +17,17 @@
 %% International License (https://creativecommons.org/licenses/by-sa/4.0/).
 %% ---------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{beamerfontthememetropolis}[2016/03/14 Metropolis font theme]
+\ProvidesPackage{beamerfontthememetropolis}[2017/01/23 Metropolis font theme]
 \RequirePackage{etoolbox}
 \RequirePackage{ifxetex}
 \RequirePackage{ifluatex}
 \RequirePackage{pgfopts}
 \ifboolexpr{bool {xetex} or bool {luatex}}{
-  \RequirePackage[no-math]{fontspec}
+  \@ifpackageloaded{fontspec}{
+    \PassOptionsToPackage{no-math}{fontspec}
+  }{
+    \RequirePackage[no-math]{fontspec}
+  }
   \newcounter{fontsnotfound}
   \newcommand{\checkfont}[1]{%
     \suppressfontnotfounderror=1%
@@ -243,31 +247,69 @@
   {\def\inserttitle{#2}}%
   {\def\inserttitle{\metropolis@titleformat{#2}}}%
   {}%
-  {\PackageError{beamerfontthememetropolis}{Patching title failed}}
+  {\PackageError{beamerfontthememetropolis}{Patching title failed}\@ehc}
 \patchcmd{\beamer@subtitle}%
   {\def\insertsubtitle{#2}}%
   {\def\insertsubtitle{\metropolis@subtitleformat{#2}}}%
   {}%
-  {\PackageError{beamerfontthememetropolis}{Patching subtitle failed}}
+  {\PackageError{beamerfontthememetropolis}{Patching subtitle failed}\@ehc}
 \patchcmd{\sectionentry}
   {\def\insertsectionhead{#2}}
   {\def\insertsectionhead{\metropolis@sectiontitleformat{#2}}}
   {}
-  {\PackageError{beamerfontthememetropolis}{Patching section title failed}}
+  {\PackageError{beamerfontthememetropolis}{Patching section title failed}\@ehc}
+\@tempswafalse
+\patchcmd{\beamer@section}
+  {\edef\insertsectionhead{\noexpand\hyperlink{Navigation\the\c@page}{\unexpanded{#1}}}}
+  {\edef\insertsectionhead{\noexpand\hyperlink{Navigation\the\c@page}{%
+    \noexpand\metropolis@sectiontitleformat{\unexpanded{#1}}}}}
+  {\@tempswatrue}
+  {}
 \patchcmd{\beamer@section}
   {\def\insertsectionhead{\hyperlink{Navigation\the\c@page}{#1}}}
   {\def\insertsectionhead{\hyperlink{Navigation\the\c@page}{%
     \metropolis@sectiontitleformat{#1}}}}
+  {\@tempswatrue}
   {}
-  {\PackageError{beamerfontthememetropolis}{Patching section title failed}}
+\patchcmd{\beamer@section}
+  {\protected@edef\insertsectionhead{\noexpand\hyperlink{Navigation\the\c@page}{#1}}}
+  {\protected@edef\insertsectionhead{\noexpand\hyperlink{Navigation\the\c@page}{%
+    \noexpand\metropolis@sectiontitleformat{#1}}}}
+  {\@tempswatrue}
+  {}
+\if@tempswa\else
+  \PackageError{beamerfontthememetropolis}{Patching section title failed}\@ehc
+\fi
+\@tempswafalse
+\patchcmd{\beamer@subsection}
+  {\edef\insertsubsectionhead{\noexpand\hyperlink{Navigation\the\c@page}{\unexpanded{#1}}}}
+  {\edef\insertsubsectionhead{\noexpand\hyperlink{Navigation\the\c@page}{%
+    \noexpand\metropolis@sectiontitleformat{\unexpanded{#1}}}}}
+  {\@tempswatrue}
+  {}
+\patchcmd{\beamer@subsection}
+  {\def\insertsubsectionhead{\hyperlink{Navigation\the\c@page}{#1}}}
+  {\def\insertsubsectionhead{\hyperlink{Navigation\the\c@page}{%
+    \metropolis@sectiontitleformat{#1}}}}
+  {\@tempswatrue}
+  {}
+\patchcmd{\beamer@subsection}
+  {\protected@edef\insertsubsectionhead{\noexpand\hyperlink{Navigation\the\c@page}{#1}}}
+  {\protected@edef\insertsubsectionhead{\noexpand\hyperlink{Navigation\the\c@page}{%
+    \noexpand\metropolis@sectiontitleformat{#1}}}}
+  {\@tempswatrue}
+  {}
+\if@tempswa\else
+  \PackageError{beamerfontthememetropolis}{Patching section title failed}\@ehc
+\fi
 \patchcmd{\beamer@@frametitle}
-  {\beamer@ifempty{#2}{}{%
+  {{%
       \gdef\insertframetitle{{#2\ifnum\beamer@autobreakcount>0\relax{}\space%
       \usebeamertemplate*{frametitle continuation}\fi}}%
     \gdef\beamer@frametitle{#2}%
     \gdef\beamer@shortframetitle{#1}%
     }}
-  {\beamer@ifempty{#2}{}{%
+  {{%
       \gdef\insertframetitle{{\metropolis@frametitleformat{#2}\ifnum%
       \beamer@autobreakcount>0\relax{}\space%
       \usebeamertemplate*{frametitle continuation}\fi}}%
@@ -275,7 +317,7 @@
     \gdef\beamer@shortframetitle{#1}%
     }}
   {}
-  {\PackageError{beamerfontthememetropolis}{Patching frame title failed}}
+  {\PackageError{beamerfontthememetropolis}{Patching frame title failed}\@ehc}
 \metropolis@font@setdefaults
 \ProcessPgfPackageOptions{/metropolis/font}
 \endinput

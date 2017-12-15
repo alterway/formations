@@ -17,7 +17,7 @@
 %% International License (https://creativecommons.org/licenses/by-sa/4.0/).
 %% ---------------------------------------------------------------------------
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{beamerinnerthememetropolis}[2016/03/14 Metropolis inner theme]
+\ProvidesPackage{beamerinnerthememetropolis}[2017/01/23 Metropolis inner theme]
 \RequirePackage{etoolbox}
 \RequirePackage{keyval}
 \RequirePackage{calc}
@@ -86,14 +86,19 @@
   \vspace*{0.5em}
 }
 \setbeamertemplate{subtitle}{
+  \raggedright%
   \insertsubtitle%
   \par%
   \vspace*{0.5em}
 }
+\newlength{\metropolis@titleseparator@linewidth}
+\setlength{\metropolis@titleseparator@linewidth}{0.4pt}
 \setbeamertemplate{title separator}{
+  \tikzexternaldisable%
   \begin{tikzpicture}
-    \fill[fg] (0,0) rectangle (\textwidth, 0.4pt);
+    \fill[fg] (0,0) rectangle (\textwidth, \metropolis@titleseparator@linewidth);
   \end{tikzpicture}%
+  \tikzexternalenable%
   \par%
 }
 \setbeamertemplate{author}{
@@ -116,10 +121,10 @@
     \usebeamercolor[fg]{section title}
     \usebeamerfont{section title}
     \insertsectionhead\par
-    \ifx\insertsubsection\@empty\else
+    \ifx\insertsubsectionhead\@empty\else
       \usebeamercolor[fg]{subsection title}
       \usebeamerfont{subsection title}
-      \insertsubsection
+      \insertsubsectionhead
     \fi
   \end{center}
 }
@@ -132,10 +137,10 @@
     \insertsectionhead\\[-1ex]
     \usebeamertemplate*{progress bar in section page}
     \par
-    \ifx\insertsubsection\@empty\else%
+    \ifx\insertsubsectionhead\@empty\else%
       \usebeamercolor[fg]{subsection title}%
       \usebeamerfont{subsection title}%
-      \insertsubsection
+      \insertsubsectionhead
     \fi
   \end{minipage}
   \par
@@ -173,14 +178,18 @@
   }
 }
 \newlength{\metropolis@progressonsectionpage}
+\newlength{\metropolis@progressonsectionpage@linewidth}
+\setlength{\metropolis@progressonsectionpage@linewidth}{0.4pt}
 \setbeamertemplate{progress bar in section page}{
   \setlength{\metropolis@progressonsectionpage}{%
     \textwidth * \ratio{\insertframenumber pt}{\inserttotalframenumber pt}%
   }%
+  \tikzexternaldisable%
   \begin{tikzpicture}
-    \fill[bg] (0,0) rectangle (\textwidth, 0.4pt);
-    \fill[fg] (0,0) rectangle (\metropolis@progressonsectionpage, 0.4pt);
+    \fill[bg] (0,0) rectangle (\textwidth, \metropolis@progressonsectionpage@linewidth);
+    \fill[fg] (0,0) rectangle (\metropolis@progressonsectionpage, \metropolis@progressonsectionpage@linewidth);
   \end{tikzpicture}%
+  \tikzexternalenable%
 }
 \def\inserttotalframenumber{100}
 \newlength{\metropolis@blocksep}
@@ -264,9 +273,12 @@
         bg=palette primary.bg
       }
     }
-  \centering
-  \usebeamercolor[fg]{palette primary}
-  \usebeamerfont{standout}
+    \setbeamercolor{local structure}{
+      fg=palette primary.fg
+    }
+    \centering
+    \usebeamercolor[fg]{palette primary}
+    \usebeamerfont{standout}
 }
   \apptocmd{\beamer@reseteecodes}{%
     \ifbool{metropolis@standout}{
