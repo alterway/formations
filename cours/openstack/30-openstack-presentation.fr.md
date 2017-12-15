@@ -27,8 +27,9 @@ both public and private clouds.```
 -   Icehouse (2014.1), Juno (2014.2)
 -   Kilo (2015.1), Liberty (2015.2)
 -   Mitaka (2016.1), Newton (2016.2)
--   **Ocata** (2017.1)
--   Fin 2017 : Pike
+-   Ocata (2017.1)
+-   **Pike** (2017.2)
+-   Début 2018 : Queens
 
 ### Quelques soutiens/contributeurs ...
 
@@ -36,7 +37,7 @@ both public and private clouds.```
 - Constructeurs : IBM, HP, Dell, ...
 - Constructeurs/réseau : Juniper, Cisco, ...
 - Constructeurs/stockage : NetApp, Hitachi, ...
-- En vrac : NASA, Yahoo, Rackspace, OVH, Citrix, SAP, ...
+- En vrac : NASA, Rackspace, Yahoo, OVH, Citrix, SAP, ...
 -  **Google** ! (depuis juillet 2015)
 
 <https://www.openstack.org/foundation/companies/>
@@ -76,11 +77,11 @@ both public and private clouds.```
     -   DNS service (Designate)
     -   Shared File Systems (Manila)
     -   Key management (Barbican)
-    -   PaaS (Solum)
     -   Container (Magnum)
 -   Autres
-    -   Les clients (python-\*client), CLI et bibliothèques
     -   Les bibliothèques utilisées par OpenStack
+    -   Les clients (python-\*client), CLI et bibliothèques
+    -   Les outils de déploiement d'OpenStack
     -   Les outils utilisés pour développer OpenStack
 
 ### Les 4 Opens
@@ -90,7 +91,9 @@ both public and private clouds.```
 -   Open Development
 -   Open Community
 
-### La fondation OpenStack
+<https://governance.openstack.org/tc/reference/opens.html>
+
+### La Fondation OpenStack
 
 -   Entité de gouvernance principale du projet
 -   Représentation juridique du projet
@@ -113,18 +116,17 @@ both public and private clouds.```
 ### Ressources
 
 -   Annonces (nouvelles versions, avis de sécurité) : <openstack-announce@lists.openstack.org>
--   Portail documentation : <http://docs.openstack.org/>
+-   Portail documentation : <https://docs.openstack.org/>
+-   SDK/APIs : <http://developer.openstack.org/>
 -   Gouvernance du projet : <https://governance.openstack.org/>
--   <https://releases.openstack.org>
+-   Versions : <https://releases.openstack.org/>
 -   Support :
-    -   <https://ask.openstack.org>
+    -   <https://ask.openstack.org/>
     -   openstack@lists.openstack.org
     -   \#openstack@Freenode
--   SDK/APIs : <http://developer.openstack.org/>
 
 ### Ressources
 
--   Applications : <http://apps.openstack.org/>
 -   Actualités :
     -   Blog officiel : <http://www.openstack.org/blog/>
     -   Planet : <http://planet.openstack.org>

@@ -37,11 +37,16 @@
 ### Les outils
 
 -   Revue de code (peer review) : Gerrit
--   Intégration continue (continous integration) : Jenkins, Zuul, etc.
+-   Intégration continue (CI: Continous Integration) : Zuul
 -   Blueprints/spécifications et bugs :
     -    Launchpad
     -    Storyboard
--   Code : Git + GitHub
+-   Code : Git (GitHub est utilisé comme miroir)
+
+### Communication
+
+-   IRC
+-   Mailing-lists
 
 ### Développement du projet : en détails
 
@@ -86,14 +91,15 @@
 
 ### Où trouver des informations sur le développement d’OpenStack
 
--   Principalement sur le wiki
+-   Comment contribuer
+    -   <https://docs.openstack.org/project-team-guide/>
+    -   <https://docs.openstack.org/infra/manual/>
+-   Informations diverses, sur le wiki
     -   <https://wiki.openstack.org>
 -   Les blueprints et bugs sur Launchpad/StoryBoard
     -   <https://launchpad.net/openstack>
     -   <https://storyboard.openstack.org>
     -   <http://specs.openstack.org/>
--   Comment contribuer
-    -   <http://docs.openstack.org/contributor-guide/>
 
 ### Où trouver des informations sur le développement d’OpenStack
 
@@ -104,6 +110,11 @@
 -   Le code (Git) et les tarballs sont disponibles
     -   <https://git.openstack.org>
     -   <http://tarballs.openstack.org/>
+-   IRC
+    - Réseau Freenode
+    - Logs discussions et infos réunions : <http://eavesdrop.openstack.org/>
+-   Mailing-lists
+    - <http://lists.openstack.org/>
 
 ### OpenStack Infra
 
