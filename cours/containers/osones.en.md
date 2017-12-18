@@ -1,6 +1,6 @@
-# Concernant ces supports de cours {-}
+# About  {-}
 
-### Supports de cours réalisés par Osones
+### Course materials created by Osones
 
 <https://osones.com>
 
@@ -13,7 +13,7 @@
 
 ![](images/licence.png){height="100px"}
 
-### Auteurs
+### Authors
 
 - Romain Guichard <romain.guichard@osones.io>
 - Kevin Lefevre <kevin.lefevre@osones.io>
