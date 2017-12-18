@@ -4,6 +4,7 @@ COURS_DIR=cours
 IMG_DIR=images
 LIST=cours.list
 LANGUAGE=fr
+FALLBACK_LANGUAGE=fr
 
 TITLE=""
 DATE=""
@@ -23,7 +24,11 @@ build-html() {
 
   while IFS=$ read cours titre modules; do
     for module in $modules; do
-      cat $COURS_DIR/"$module"."$LANGUAGE".md >> $COURS_DIR/slide-$cours
+      if [ -f $COURS_DIR/"$module"."$LANGUAGE".md ]; then
+        cat $COURS_DIR/"$module"."$LANGUAGE".md >> $COURS_DIR/slide-$cours
+      else
+        cat $COURS_DIR/"$module"."$FALLBACK_LANGUAGE".md >> $COURS_DIR/slide-$cours
+      fi
     done
     TITLE=$titre
 
@@ -68,14 +73,14 @@ EOF
 exit 0
 }
 
-while getopts ":o:t:u:c:h" OPT; do
+while getopts ":o:t:u:c:l:h" OPT; do
     case $OPT in
         h) display_help ;;
         c) COURSE="$OPTARG";;
         o) OUTPUT="$OPTARG";;
         t) THEME="$OPTARG";;
         u) REVEALJSURL="$OPTARG";;
-        u) LANGUAGE="$OPTARG";;
+        l) LANGUAGE="$OPTARG";;
         ?)
             echo "Invalid option: -$OPTARG" >&2
             display_help
@@ -98,7 +103,8 @@ if [[ $COURSE != "" ]]; then
   LIST=cours.list.tmp
 fi
 
-if [[ ! $OUTPUT =~ html|pdf|all ]]; then
+OUTPUT=${OUTPUT:-all}
+if  [[ ! $OUTPUT =~ html|pdf|all ]]; then
     echo "Invalid option: either html, pdf or all" >&2
     display_help
     exit 1
