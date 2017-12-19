@@ -36,7 +36,7 @@ build-html() {
     sed 's/^## /### /' $COURS_DIR/slide-$cours > tmp_slide-$cours
     mv tmp_slide-$cours $COURS_DIR/slide-$cours
     echo "Build $TITLE"
-    docker run -v $PWD:/formations osones/revealjs-builder:$DOCKER_TAG --standalone --template=/formations/templates/template.revealjs --slide-level 3 -V theme=$THEME -V navigation=frame -V revealjs-url=$REVEALJSURL -V slideNumber=true -V title="$TITLE" -V institute=Osones -o /formations/output-html/"$cours".html /formations/$COURS_DIR/slide-$cours
+    docker run -v $PWD:/formations osones/revealjs-builder:$DOCKER_TAG --standalone --template=/formations/templates/template.revealjs --slide-level 3 -V theme=$THEME -V navigation=frame -V revealjs-url=$REVEALJSURL -V slideNumber=true -V title="$TITLE" -V institute=Osones -o /formations/output-html/"$cours"."$LANGUAGE".html /formations/$COURS_DIR/slide-$cours
     rm -f $COURS_DIR/slide-$cours
   done < $LIST
 }
@@ -44,7 +44,7 @@ build-html() {
 build-pdf() {
   mkdir -p output-pdf
   for cours in $(cut -d$ -f1 $LIST); do
-    docker run -v $PWD/output-pdf:/output -v $PWD/output-html/"$cours".html:/index.html -v $PWD/images:/images osones/wkhtmltopdf:$DOCKER_TAG -O landscape -s A5 -T 0 file:///index.html\?print-pdf /output/"$cours".pdf
+    docker run -v $PWD/output-pdf:/output -v $PWD/output-html/"$cours".html:/index.html -v $PWD/images:/images osones/wkhtmltopdf:$DOCKER_TAG -O landscape -s A5 -T 0 file:///index.html\?print-pdf /output/"$cours"."$LANGUAGE".pdf
   done
 }
 
