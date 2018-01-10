@@ -5,7 +5,7 @@
 -   Toutes les fonctionnalités sont accessibles par l’API
 -   Les clients (y compris Horizon) utilisent l’API
 -   Des crédentials sont nécessaires
-    -   API OpenStack : utilisateur + mot de passe + tenant
+    -   API OpenStack : utilisateur + mot de passe + projet (tenant) + domaine
     -   API AWS : access key ID + secret access key
 
 ### Les APIs OpenStack
@@ -13,7 +13,7 @@
 -   Une API par service OpenStack
 -   Chaque API est versionnée, la rétro-compatibilité est assurée
 -   Le corps des requêtes et réponses est formatté avec JSON
--   Architecure REST
+-   Architecture REST
 -   <http://developer.openstack.org/#api>
 -   Certains services sont aussi accessibles via une API différente compatible AWS
 
@@ -24,7 +24,7 @@
     -   Les implémentations officielles en Python
     -   OpenStackSDK
     -   D’autres implémentations, y compris pour d’autres langages (exemple : jclouds)
-    -   Shade
+    -   Shade (bibliothèque Python incluant la business logic)
 -   Avec les outils officiels en ligne de commande
 -   Avec Horizon
 
@@ -44,9 +44,7 @@
 -   Permet une expérience utilisateur plus homogène
 -   Fichier de configuration `clouds.yaml`
 
-### Shade
-
--   Bibliothèque Python incluant la business logic
+<https://docs.openstack.org/python-openstackclient/pike/configuration/index.html#clouds-yaml>
 
 ## Authentification
 
@@ -72,14 +70,6 @@
 -   Optionnel : une clé SSH publique
 -   Optionnel : des ports réseaux
 
-### Flavors
-
--   *Gabarit*
--   Équivalent des “instance types” d’AWS
--   Définit un modèle d’instance en termes de CPU, RAM, disque (racine), disque éphémère
--   Un disque de taille nul équivaut à prendre la taille de l’image de base
--   Le disque éphémère a, comme le disque racine, l’avantage d’être souvent local donc rapide
-
 ### Types d’images
 
 Glance supporte un large éventail de types d’images, limité par le support de l’hyperviseur sous-jacent à Nova
@@ -101,51 +91,6 @@ L’utilisateur peut définir un certain nombre de propriétés dont certaines s
 -   Espace disque minimum
 -   RAM minimum
 -   Publique ou non
-
-### Utiliser des images cloud
-
-Une image cloud c’est :
-
--   Une image disque contenant un OS déjà installé
--   Une image qui peut être instanciée en n machines sans erreur
--   Un OS sachant parler à l’API de metadata du cloud (cloud-init)
-
-Détails : <http://docs.openstack.org/image-guide/openstack-images.html>\
-La plupart des distributions fournissent aujourd’hui des images cloud.
-
-### Cirros
-
--   Cirros est l’image cloud par excellence
--   OS minimaliste
--   Contient cloud-init
-
-<https://launchpad.net/cirros>
-
-### Cloud-init
-
--   Cloud-init est un moyen de tirer parti de l’API de metadata, et notamment des user data
--   L’outil est intégré par défaut dans la plupart des images cloud
--   À partir des user data, cloud-init effectue les opérations de personnalisation de l’instance
--   cloud-config est un format possible de user data
-
-### Exemple cloud-config
-
-    #cloud-config
-    mounts:
-     - [ xvdc, /var/www ]
-    packages:
-     - apache2
-     - htop
-
-### Comment gérer ses images ?
-
--   Utilisation d’images génériques et personnalisation à l’instanciation
--   Création d’images intermédiaires et/ou totalement personnalisées :
-    *Golden images*
-    -   libguestfs, virt-builder, virt-sysprep
-    -   diskimage-builder (TripleO)
-    -   Packer
-    -   solution “maison”
 
 ## Réseau
 
@@ -178,9 +123,9 @@ Outre les fonctions réseau de base niveaux 2 et 3, Neutron peut fournir d’aut
 
 ### Natif OpenStack et alternatives
 
-* Heat est la solution native OpenStack
-* Heat fournit une API de manipulation de *stacks* à partir de *templates*
-* Des alternatives externes à OpenStack existent, comme **Terraform**
+- Heat est la solution native OpenStack
+- Heat fournit une API de manipulation de *stacks* à partir de *templates*
+- Des alternatives externes à OpenStack existent, comme **Terraform**
 
 ### Un template Heat Orchestration Template (HOT)
 
@@ -203,11 +148,4 @@ Multiples projets en cours de développement
 -   Flame (Cloudwatt)
 -   HOT builder
 -   Merlin
-
-## Avancé
-
-### Un grand cloud
-
--   Régions
--   Zones de disponibilité (AZ)
 

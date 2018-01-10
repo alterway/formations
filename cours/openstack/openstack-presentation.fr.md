@@ -100,7 +100,7 @@ both public and private clouds.```
 -   Les membres du board sont issus des entreprises sponsors et élus par les membres individuels
 -   Tout le monde peut devenir membre individuel (gratuitement)
 
-### La fondation OpenStack
+### La Fondation OpenStack
 
 -   La fondation supporte le projet par différents moyens :
     -   Événements : organisation (Summits) ou participation (OSCON, etc.)
@@ -109,7 +109,7 @@ both public and private clouds.```
 -   500 organisations à travers le monde
 -   60000 membres individuels dans 160 pays
 
-### La fondation OpenStack
+### La Fondation OpenStack
 
 ![Les principales entités de la fondation](images/foundation.png)
 

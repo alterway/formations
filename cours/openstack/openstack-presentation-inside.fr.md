@@ -9,16 +9,16 @@
 -   Chaque sous-projet est découpé en plusieurs services
 -   Communication entre les services : AMQP (RabbitMQ)
 -   Base de données : relationnelle SQL (MySQL/MariaDB)
--   Réseau : LinuxBridge, OpenVSwitch
+-   Memcached
+-   etcd (à l'avenir)
 -   En général : réutilisation de composants existants
 -   Tout est développé en Python (Django pour la partie web)
--   APIs supportées : OpenStack et équivalent AWS
 -   Multi tenancy
 
 ### APIs
 
 -   Chaque projet supporte *son* API OpenStack
--   Certains projets supportent l'API AWS équivalente
+-   Certains projets supportent l'API AWS équivalente (EC2, S3)
 
 ## Mode de développement
 
@@ -32,9 +32,11 @@
 ### Développement du projet : en détails
 
 -   Ouvert à tous (individuels et entreprises)
--   Cycle de développement de 6 mois débuté par un (design) summit
+-   Cycle de développement de 6 mois
+-   Chaque cycle débute par un Project Team Gathering (PTG)
+-   Pendant chaque cycle a lieu un OpenStack Summit
 
-### Les outils
+### Les outils et la communication
 
 -   Revue de code (peer review) : Gerrit
 -   Intégration continue (CI: Continous Integration) : Zuul
@@ -42,11 +44,7 @@
     -    Launchpad
     -    Storyboard
 -   Code : Git (GitHub est utilisé comme miroir)
-
-### Communication
-
--   IRC
--   Mailing-lists
+-   Communication : IRC et mailing-lists
 
 ### Développement du projet : en détails
 
@@ -54,28 +52,19 @@
 
 ### Cycle de développement : 6 mois
 
--   Le planning est publié, exemple : <https://releases.openstack.org/ocata/schedule.html>
+-   Le planning est publié, exemple : <https://releases.openstack.org/pike/schedule.html>
 -   Milestone releases
 -   Freezes : FeatureProposal, Feature, String
 -   RC releases
 -   Stable releases
--   Ce modèle de cycle de développement a évolué depuis le début du projet
--   Cas particulier de Swift et de plus en plus de composants
--   Depuis Liberty, chaque composant gère son propre versionnement
+-   Cas particulier de certains composants : <https://releases.openstack.org/reference/release_models.html>
 
-### Versionnement depuis Liberty
+### Projets
 
+-   Chaque composant gère son propre versionnement
 -   *Semantic versioning*
--   Chaque projet est indépendant
--   Dans le cadre du cycle de release néanmoins
 -   <http://releases.openstack.org/>
-
-### Le nouveau modèle “big tent”
-
--   Évolutions récemment implémentées
--   Objectif : résoudre les limitations du précédent modèle incubation/intégré
--   Inclusion a priori de l’ensemble de l’écosystème OpenStack
--   *Programs* $\rightarrow$ *Project Teams* <http://governance.openstack.org/reference/projects/index.html>
+-   *Project Teams* <http://governance.openstack.org/reference/projects/index.html>
 -   Utilisation de tags factuels et objectifs <https://www.openstack.org/software/project-navigator/>
 
 ### Qui contribue ?
@@ -127,9 +116,8 @@
 -   Aux USA jusqu’en 2013
 -   Aujourd’hui : alternance Amérique de Nord et Asie/Europe
 -   Quelques dizaines au début à 6000 participants aujourd’hui
--   En parallèle : conférence (utilisateurs, décideurs) et Design Summit (développeurs)
--   Détermine le nom de la release : lieu/ville à proximité du Summit
--   *Upstream Training*
+-   En parallèle : conférence (utilisateurs, décideurs) et Forum (développeurs/opérateurs, remplace une partie du précédent Design Summit)
+-   Détermine le nom de la prochaine release : lieu/ville à proximité du Summit
 
 ### Exemple du Summit d’avril 2013 à Portland
 
@@ -151,9 +139,24 @@
 
 ![Photo : Elizabeth K. Joseph, CC BY 2.0, Flickr/pleia2](images/photo-summit4.jpg)
 
+### Project Team Gathering (PTG)
+
+-   Depuis 2017
+-   Au début de chaque cycle
+-   Remplace une partie du précédent Design Summit
+-   Dédié aux développeurs
+
+### Upstream Training
+
+-   2 jours de formation
+-   Apprendre à devenir contributeur à OpenStack
+-   Les outils
+-   Les processes
+-   Travailler et collaborer de manière ouverte
+
 ### Traduction
 
--   La question de la traduction est dorénavant prise en compte (officialisation de l’équipe *i18n*)
+-   Équipe officielle *i18n*
 -   Seules certaines parties sont traduites, comme Horizon
 -   La traduction française est aujourd’hui une des plus avancées
 -   Utilisation d'une plateforme web basée sur Zanata : <https://translate.openstack.org/>
@@ -174,7 +177,7 @@
 -   Un fichier de configuration : local.conf
 -   Installe toutes les dépendances nécessaires (paquets)
 -   Clone les dépôts git (branche master par défaut)
--   Lance tous les composants dans un screen
+-   Lance tous les composants
 
 ### Configuration : local.conf
 
@@ -197,54 +200,4 @@ Exemple
 -   Pour tester tous les composants OpenStack dans de bonnes conditions, plusieurs Go de RAM sont nécessaires
 -   L’utilisation de Vagrant est conseillée
 
-## Utiliser OpenStack
-
-### Le principe
-
--   Toutes les fonctionnalités sont accessibles par l’API
--   Les clients (y compris Horizon) utilisent l’API
--   Des crédentials sont nécessaires
-    -   API OpenStack : utilisateur + mot de passe + tenant (+ domaine)
-    -   API AWS : access key ID + secret access key
-
-### Les APIs OpenStack
-
--   Une API par service OpenStack
--   <http://developer.openstack.org/api-ref.html>
--   Chaque API est versionnée, la rétro-compatibilité est assurée
--   REST
--   Certains services sont aussi accessibles via une API différente compatible AWS
-
-### Authentification et catalogue de service
-
--   Une fois authentifié, récupération d’un jeton (*token*)
--   Récupération du catalogue de services
--   Pour chaque service, un endpoint HTTP (API)
-
-### Accès aux APIs
-
--   Direct, en HTTP, via des outils comme curl
--   Avec une bibliothèque
-    -   Les implémentations officielles en Python
-    -   OpenStackSDK
-    -   D’autres implémentations, y compris pour d’autres langages (exemple : jclouds)
-    -   Shade
--   Avec les outils officiels en ligne de commande
--   Avec Horizon
-
-### Clients officiels
-
--   Le projet fournit des clients officiels : python-PROJETclient
--   Bibliothèques Python
--   Outils CLI
-    -   L’authentification se fait en passant les credentials par paramètres ou variables d’environnement
-    -   L’option `--debug` affiche la communication HTTP
-
-### OpenStack Client
-
--   Client CLI unifié
--   Commandes du type *openstack \<ressource \>\<action \>*
--   Vise à remplacer à terme les clients spécifiques
--   Permet une expérience utilisateur plus homogène
--   Fichier de configuration `clouds.yaml`
 

@@ -93,15 +93,14 @@ On distingue :
 - Public : tout le monde, disponible sur internet
 - Privé : à une organisation, disponible sur son réseau
 
-Concernant le cloud hybride : utilisation mixte de multiples clouds privés et/ou publics
-
 ### Cloud hybride
 
+- Utilisation mixte de multiples clouds privés et/ou publics
 - Concept séduisant
 - Mise en œuvre a priori difficile
 - Certains cas d'usages s'y prêtent très bien
-    - Exemple : jobs de CI
-- *Cloud bursting*
+    - Intégration continue (CI)
+    - Débordement (*cloud bursting*)
 
 ### L'instant virtualisation
 
@@ -359,6 +358,8 @@ Le métier évolue : Infrastructure Developer
     - Scale out : passage à l'échelle horizontal
     - Scale up : passage à l'échelle vertical
 - Auto-scaling
+    - Géré par le cloud
+    - Géré par un composant extérieur
 
 ### Applications cloud ready
 
