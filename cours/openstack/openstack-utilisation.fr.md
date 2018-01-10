@@ -46,7 +46,16 @@
 
 <https://docs.openstack.org/python-openstackclient/pike/configuration/index.html#clouds-yaml>
 
-## Authentification
+## Keystone : Authentification, autorisation et catalogue de services
+
+### Principes
+
+-   Annuaire des utilisateurs et des groupes
+-   Gère des domaines
+-   Liste des projets (tenants)
+-   Catalogue de services
+-   Gère l’authentification et l’autorisation
+-   Fournit un token à l’utilisateur
 
 ### Authentification et catalogue de service
 
@@ -54,11 +63,30 @@
 -   Récupération du catalogue de services
 -   Pour chaque service, un endpoint HTTP (API)
 
+### API
+
+-   API v2 (dépréciée) : admin port 35357, utilisateur port 5000
+-   API v3 : port 5000
+-   Gère *utilisateurs*, *groupes*, *domaines*
+-   Les utilisateurs ont des *rôles* sur des *projets* (tenants)
+-   Les *services* du catalogue sont associés à des *endpoints*
+
 ### Scénario d’utilisation typique
 
 ![Interactions avec Keystone](images/keystone-scenario.png)
 
-## Compute
+## Nova : Compute
+
+### Principes
+
+-   Gère les instances
+-   Les instances sont créées à partir des images fournies par Glance
+-   Les interfaces réseaux des instances sont associées à des ports Neutron
+-   Du stockage block peut être fourni aux instances par Cinder
+
+### Interactions avec les autres composants
+
+![Instance, image et volume](images/compute-node.png)
 
 ### Propriétés d’une instance
 
@@ -69,6 +97,25 @@
 -   Optionnel : boot depuis un volume
 -   Optionnel : une clé SSH publique
 -   Optionnel : des ports réseaux
+
+### API
+
+Gère :
+
+-   Instances
+-   Flavors (types d’instance)
+-   Keypairs
+-   Indirectement : images, security groups (groupes de sécurité), floating IPs (IPs flottantes)
+
+Les instances sont redimensionnables et migrables d’un hôte physique à un autre.
+
+## Glance
+
+### Principes
+
+-   Registre d’images (et des snapshots)
+-   Propriétés sur les images
+-   Est utilisé par Nova pour démarrer des instances
 
 ### Types d’images
 
@@ -102,6 +149,12 @@ L’API permet notamment de manipuler ces ressources
 -   Sous-réseau (*subnet*) : niveau 3
 -   Port : attachable à une interface sur une instance, un load-balancer, etc.
 -   Routeur
+-   IP flottante, groupe de sécurité
+
+### Les IP flottantes
+
+-   *Allocation* d'une IP depuis un *pool*
+-   *Association* d'une IP allouée à un port
 
 ### Les groupes de sécurité
 
@@ -118,6 +171,26 @@ Outre les fonctions réseau de base niveaux 2 et 3, Neutron peut fournir d’aut
 -   Load Balancing
 -   Firewall : diffère des groupes de sécurité
 -   VPN : permet d’accéder à un réseau privé sans IP flottantes
+
+## Cinder : Stockage block
+
+### Principes
+
+-   Fournit des volumes (stockage block) attachables aux instances
+-   Gère différents types de volume
+-   Gère snapshots et backups de volumes
+
+### Utilisation
+
+-   Volume supplémentaire (et stockage persistant) sur une instance
+-   Boot from volume : l’OS est sur le volume
+-   Fonctionnalité de backup vers un object store (Swift ou Ceph)
+
+### Du stockage partagé ?
+
+-   Cinder n’est **pas** une solution de stockage partagé comme NFS
+-   Le projet OpenStack Manila a pour objectif d’être un *NFS as a Service*
+-   AWS n’a introduit une telle fonctionnalité que récemment
 
 ## Orchestration
 

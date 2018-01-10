@@ -78,27 +78,6 @@
 
 ## Keystone : Authentification, autorisation et catalogue de services
 
-### Principes
-
--   Annuaire des utilisateurs et des groupes
--   Gère des domaines
--   Liste des tenants/projets
--   Catalogue de services
--   Gère l’authentification et l’autorisation
--   Fournit un token à l’utilisateur
-
-### API
-
--   API v2 (dépréciée) : admin port 35357, utilisateur port 5000
--   API v3 : port 5000
--   Gère *utilisateurs*, *groupes*, *domaines*
--   Les utilisateurs ont des *rôles* sur des *projets* (tenants)
--   Les *services* du catalogue sont associés à des *endpoints*
-
-### Scénario d’utilisation typique
-
-![Interactions avec Keystone](images/keystone-scenario.png)
-
 ### Installation et configuration
 
 -   Paquet : keystone
@@ -110,46 +89,6 @@
 -   Création d'utilisateurs, groupes, domaines
 
 ## Nova : Compute
-
-### Principes
-
--   Gère les instances
--   Les instances sont créées à partir des images fournies par Glance
--   Les interfaces réseaux des instances sont associées à des ports Neutron
--   Du stockage block peut être fourni aux instances par Cinder
-
-### Interactions avec les autres composants
-
-![Instance, image et volume](images/compute-node.png)
-
-### Propriétés d’une instance
-
--   Éphémère, a priori non hautement disponible
--   Définie par une flavor
--   Construite à partir d’une image
--   Optionnel : attachement de volumes
--   Optionnel : boot depuis un volume
--   Optionnel : une clé SSH publique
--   Optionnel : des ports réseaux
-
-### API
-
-Gère :
-
--   Instances
--   Flavors (types d’instance)
--   Keypairs
--   Indirectement : images, security groups (groupes de sécurité), floating IPs (IPs flottantes)
-
-Les instances sont redimensionnables et migrables d’un hôte physique à un autre.
-
-### Flavors
-
--   *Gabarit*
--   Équivalent des “instance types” d’AWS
--   Définit un modèle d’instance en termes de CPU, RAM, disque (racine), disque éphémère
--   Un disque de taille nul équivaut à prendre la taille de l’image de base
--   Le disque éphémère a, comme le disque racine, l’avantage d’être souvent local donc rapide
 
 ### Nova api
 
@@ -185,35 +124,6 @@ Les instances sont redimensionnables et migrables d’un hôte physique à un au
 
 ## Glance : Registre d’images
 
-### Principes
-
--   Registre d’images (et des snapshots)
--   Propriétés sur les images
--   Est utilisé par Nova pour démarrer des instances
--   Peut utiliser Swift comme back-end de stockage
-
-### Propriétés des images dans Glance
-
-L’utilisateur peut définir un certain nombre de propriétés dont certaines seront utilisées lors de  l’instanciation
-
--   Type d’image
--   Architecture
--   Distribution
--   Version de la distribution
--   Espace disque minimum
--   RAM minimum
--   Publique ou non
-
-### Types d’images
-
-Glance supporte un large éventail de types d’images, limité par le support de l’hyperviseur sous-jacent à Nova
-
--   raw
--   qcow2
--   ami
--   vmdk
--   iso
-
 ### Backends
 
 -   Swift ou S3
@@ -247,24 +157,6 @@ Outre les fonctions réseau de base niveaux 2 et 3, Neutron peut fournir d’aut
 
 Ces fonctionnalités se basent également sur des plugins
 
-### API
-
-L’API permet notamment de manipuler ces ressources :
-
--   Réseau (*network*) : niveau 2
--   Sous-réseau (*subnet*) : niveau 3
--   Port : attachable à une interface sur une instance, un load-balancer, etc.
--   Routeur
--   IP flottante, groupe de sécurité
-
-### Les groupes de sécurité
-
--   Équivalent à un firewall devant chaque instance
--   Une instance peut être associée à un ou plusieurs groupes de sécurité
--   Gestion des accès en entrée et sortie
--   Règles par protocole (TCP/UDP/ICMP) et par port
--   Cible une adresse IP, un réseau ou un autre groupe de sécurité
-
 ### Plugins ML2
 
 -   **Modular Layer 2**
@@ -294,22 +186,7 @@ L’API permet notamment de manipuler ces ressources :
 ### Principes
 
 -   Auparavant nova-volume
--   Fournit des volumes (stockage block) attachables aux instances
--   Gère différents types de volume
--   Gère snapshots et backups de volumes
 -   Attachement via iSCSI par défaut
-
-### Du stockage partagé ?
-
--   Cinder n’est **pas** une solution de stockage partagé comme NFS
--   Le projet OpenStack Manila a pour objectif d’être un *NFS as a Service*
--   AWS n’a introduit une telle fonctionnalité que récemment
-
-### Utilisation
-
--   Volume supplémentaire (et stockage persistant) sur une instance
--   Boot from volume : l’OS est sur le volume
--   Fonctionnalité de backup vers un object store (Swift ou Ceph)
 
 ### Installation
 
@@ -401,13 +278,6 @@ L’API permet notamment de manipuler ces ressources :
 -   Doit se coupler avec cloud-init
 -   Description de son infrastructure dans un fichier template, format JSON (CFN) ou YAML (HOT)
 
-### Autoscaling avec Heat
-
-Heat implémente la fonctionnalité d’autoscaling
-
--   Se déclenche en fonction des alarmes produites par Ceilometer
--   Entraine la création de nouvelles instances
-
 ### Un template HOT
 
 *parameters* - *resources* - *outputs*
@@ -422,51 +292,6 @@ Heat implémente la fonctionnalité d’autoscaling
           image: F18-x86_64-cfntools
           flavor: m1.small
 
-### Fonctionnalités avancées de Heat
-
--   Nested stacks
--   Environments
--   Providers
-
-### Construire un template à partir d’existant
-
-Multiples projets en cours de développement
-
--   Flame (Cloudwatt)
--   HOT builder
--   Merlin
-
-## Trove : Database as a Service
-
-### Principe
-
--   Fournit des bases de données relationnelles, à la AWS RDS
--   A vocation à supporter des bases NoSQL aussi
--   Gère notamment MySQL/MariaDB comme back-end
--   Se repose sur Nova pour les instances dans lesquelles se fait l’installation d’une BDD
-
-### Services
-
--   trove-api : API
--   trove-taskmanager : gère les instances BDD
--   trove-guestagent : agent interne à l’instance
-
-## Designate : DNS as a Service
-
-### Principe
-
--   Équivalent d’AWS Route 53
--   Gère différents backends : BIND, etc.
-
-## Barbican - Key management as a Service
-
--   Gère des secrets / clés privées
--   Backends possibles :
-    -    Fichiers chiffrés
-    -    PKCS#11
-    -    KMIP
-    -    Dogtag
-
 ## Quelques autres composants intéressants
 
 ### Ironic
@@ -480,7 +305,7 @@ Multiples projets en cours de développement
 -   Oslo contient le code commun à plusieurs composants d’OpenStack
 -   Son utilisation est transparente pour le déployeur
 
-### rootwrap
+### rootwrap -> privsep
 
 -   Wrapper pour l’utilisation de commandes en root
 -   Configuration au niveau de chaque composant qui l’utilise
@@ -500,228 +325,4 @@ Multiples projets en cours de développement
 -   Est très utilisé par les développeurs via l’intégration continue
 -   Le déployeur peut utiliser Tempest pour vérifier la bonne conformité de son cloud
 -   Cf. aussi Rally
-
-## Bonnes pratiques pour un déploiement en production
-
-### Quels composants dois-je installer ?
--   Keystone est indispensable
--   L’utilisation de Nova va de paire avec Glance et Neutron
--   Cinder s’avérera souvent utile
--   Ceilometer et Heat vont souvent ensemble
--   Swift est indépendant des autres composants
--   Neutron peut parfois être utilisé indépendamment (ex : avec oVirt)
-
-<http://docs.openstack.org/arch-design/>
-
-### Penser dès le début aux choix structurants
-
--   Distribution et méthode de déploiement
--   Hyperviseur
--   Réseau : quelle architecture et quels drivers
--   Politique de mise à jour
-
-### Les différentes méthodes d’installation
-
--   DevStack est à oublier pour la production
--   TripleO est très complexe
--   Le déploiement à la main comme vu précédemment n’est pas recommandé car peu maintenable
--   Distributions OpenStack packagées et prêtes à l’emploi
--   Distributions classiques et gestion de configuration
--   Déploiement continu
-
-### Mises à jour entre versions majeures
-
--   OpenStack supporte les mises à jour N $\rightarrow$ N+1
--   Swift : très bonne gestion en mode *rolling upgrade*
--   Autres composants : tester préalablement avec vos données
--   Lire les release notes
--   Cf. articles de blog du CERN
-
-### Mises à jour dans une version stable
-
--   Fourniture de correctifs de bugs majeurs et de sécurité
--   OpenStack intègre ces correctifs sous forme de patchs dans la branche stable
--   Publication de *point releases* intégrant ces correctifs issus de la branche stable
--   Durée variable du support des versions stables, dépendant de l’intérêt des intégrateurs
-
-### Assigner des rôles aux machines
-
-Beaucoup de documentations font référence à ces rôles :
-
--   Controller node : APIs, BDD, AMQP
--   Network node : DHCP, routeur, IPs flottantes
--   Compute node : Hyperviseur/pilotage des instances
-
-Ce modèle simplifié n’est pas HA.
-
-### Haute disponibilité
-
-Haute disponibilité du IaaS
-
--   MySQL/MariaDB, RabbitMQ : HA classique (Galera, Clustering)
--   Les services APIs sont stateless et HTTP : scale out et load balancers
--   La plupart des autres services OpenStack sont capables de scale out également
-
-Guide HA : <http://docs.openstack.org/ha-guide/>
-
-### Haute disponibilité de l’agent L3 de Neutron
-
--   Plusieurs solutions et contournements possibles
--   Depuis Juno : *Distributed Virtual Router* (DVR)
-
-### Considérations pour une environnement de production
-
--   Des URLs uniformes pour toutes les APIs : utiliser un reverse proxy
--   Apache/mod\_wsgi pour servir les APIs lorsque cela est possible (Keystone)
--   Utilisation des quotas
--   Prévoir les bonnes volumétries, notamment pour les données Ceilometer
--   Monitoring
--   Backup
--   QoS : en cours d’implémentation dans Neutron
-
-Guide Operations : <http://docs.openstack.org/openstack-ops/content/>
-
-### Utilisation des quotas
-
--   Limiter le nombre de ressources allouables
--   Par utilisateur ou par tenant
--   Support dans Nova
--   Support dans Cinder
--   Support dans Neutron
-
-<http://docs.openstack.org/user-guide-admin/content/cli_set_quotas.html>
-
-### Découpage réseau
-
--   Management network : réseau d’administration
--   Data network : réseau pour la communication inter instances
--   External network : réseau externe, dans l’infrastructure réseau existante
--   API network : réseau contenant les endpoints API
-
-### Considérations liées à la sécurité
-
--   Indispensable : HTTPS sur l’accès des APIs à l’extérieur
--   Sécurisation des communications MySQL/MariaDB et RabbitMQ
--   Un accès MySQL/MariaDB par base et par service
--   Un utilisateur Keystone par service
--   Limiter l’accès en lecture des fichiers de configuration (mots de passe, token)
--   Veille sur les failles de sécurité : OSSA (*OpenStack Security Advisory*), OSSN (*... Notes*)
-
-Guide sécurité : <http://docs.openstack.org/security-guide/>
-
-### Segmenter son cloud
-
--   Host aggregates : machines physiques avec des caractéristiques similaires
--   Availability zones : machines dépendantes d’une même source électrique, d’un même switch, d’un même DC, etc.
--   Regions : chaque région a son API
--   Cells : permet de regrouper plusieurs cloud différents sous une même API
-
-<http://docs.openstack.org/openstack-ops/content/scaling.html#segregate_cloud>
-
-### Host aggregates / agrégats d’hôtes
-
--   Spécifique Nova
--   L’administrateur définit des agrégats d’hôtes via l’API
--   L’administrateur associe flavors et agrégats via des couples clé/valeur communs
--   1 agrégat $\equiv$ 1 point commun, ex : GPU
--   L’utilisateur choisit un agrégat à travers son choix de flavor à la création d’instance
-
-### Availability zones / zones de disponibilité
-
--   Spécifique Nova et Cinder
--   Groupes d’hôtes
--   Découpage en termes de disponibilité : Rack, Datacenter, etc.
--   L’utilisateur choisit une zone de disponibilité à la création d’instance
--   L’utilisateur peut demander à ce que des instances soient démarrées dans une même zone, ou au contraire dans des zones différentes
-
-### Régions
-
--   Générique OpenStack
--   Équivalent des régions d’AWS
--   Un service peut avoir différents endpoints dans différentes régions
--   Chaque région est autonome
--   Cas d’usage : cloud de grande ampleur (comme certains clouds publics)
-
-### Cells / Cellules
-
--   Spécifique Nova
--   Un seul nova-api devant plusieurs cellules
--   Chaque cellule a sa propre BDD et file de messages
--   Ajoute un niveau de scheduling (choix de la cellule)
-
-### Packaging d’OpenStack - Ubuntu
-
--   Le packaging est fait dans de multiples distributions, RPM, DEB et autres
--   Ubuntu est historiquement la plateforme de référence pour le développement d’OpenStack
--   Le packaging dans Ubuntu suit de près le développement d’OpenStack, et des tests automatisés sont réalisés
--   Canonical fournit la Ubuntu Cloud Archive, qui met à disposition la dernière version d’OpenStack pour la dernière Ubuntu LTS
-
-### Ubuntu Cloud Archive (UCA)
-
-![Support d'OpenStack dans Ubuntu via l'UCA](images/ubuntu-cloud-archive.png)
-
-### Packaging d’OpenStack dans les autres distributions
-
--   OpenStack est intégré dans les dépôts officiels de Debian
--   Red Hat propose RHOS/RDO (déploiement basé sur TripleO)
--   Comme Ubuntu, le cycle de release de Fedora est synchronisé avec celui d’OpenStack
-
-### Les distributions OpenStack
-
--   StackOps
--   Mirantis
--   HP Helion
--   etc.
-
-### Déploiement bare-metal
-
--   Le déploiement des hôtes physiques OpenStack peut se faire à l’aide d’outils dédiés
--   MaaS (Metal as a Service), par Ubuntu/Canonical : se couple avec Juju
--   Crowbar / OpenCrowbar (initialement Dell) : utilise Chef
--   eDeploy (eNovance) : déploiement par des images
--   Ironic via TripleO
-
-### Gestion de configuration
-
--   Puppet, Chef, CFEngine, Saltstack, Ansible, etc.
--   Ces outils peuvent aider à déployer le cloud OpenStack
--   ... mais aussi à gérer les instances (section suivante)
-
-### Modules Puppet, Playbooks Ansible
-
--   *Puppet OpenStack* et *OpenStack Ansible* : modules Puppet et playbooks Ansible
--   Développés au sein du projet OpenStack
--   <https://wiki.openstack.org/wiki/Puppet>
--   <http://docs.openstack.org/developer/openstack-ansible/install-guide/>
-
-### Déploiement continu
-
--   OpenStack maintient un master (trunk) toujours stable
--   Possibilité de déployer au jour le jour le `master` (CD : *Continous Delivery*)
--   Nécessite la mise en place d’une infrastructure importante
--   Facilite les mises à jour entre versions majeures
-
-## Gérer les problèmes
-
-### Problèmes : ressources FAILED/ERROR
-
--   Plusieurs causes possibles
--   Possibilité de supprimer la ressource ?
--   L’appel API *reset-state* peut servir
-
-### Les réflexes en cas d’erreur ou de comportement erroné
-
--   Travaille-t-on sur le bon tenant ?
--   Est-ce que l’API renvoie une erreur ? (le dashboard peut cacher certaines informations)
--   Si nécessaire d’aller plus loin :
-    -   Regarder les logs sur le cloud controller (/var/log/\<composant\>/\*.log)
-    -   Regarder les logs sur le compute node et le network node si le problème est spécifique réseau/instance
-    -   Éventuellement modifier la verbosité des logs dans la configuration
-
-### Est-ce un bug ?
-
--   Si le client CLI crash, c’est un bug
--   Si le dashboard web ou une API renvoie une erreur 500, c’est peut-être un bug
--   Si les logs montrent une stacktrace Python, c’est un bug
--   Sinon, à vous d’en juger
 

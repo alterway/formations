@@ -53,3 +53,41 @@ La plupart des distributions fournissent aujourd’hui des images cloud.
     -   diskimage-builder (TripleO)
     -   Packer
     -   solution “maison”
+
+## Heat : Orchestration des ressources
+
+### Autoscaling avec Heat
+
+Heat implémente la fonctionnalité d’autoscaling
+
+-   Se déclenche en fonction des alarmes produites par Ceilometer
+-   Entraine la création de nouvelles instances
+
+### Fonctionnalités avancées de Heat
+
+-   Nested stacks
+-   Environments
+-   Providers
+
+### Construire un template à partir d’existant
+
+Multiples projets en cours de développement
+
+-   Flame (Cloudwatt)
+-   HOT builder
+-   Merlin
+
+## Trove : Database as a Service
+
+-   Fournit des bases de données relationnelles, à la AWS RDS
+-   A vocation à supporter des bases NoSQL aussi
+-   Gère notamment MySQL/MariaDB comme back-end
+-   Se repose sur Nova pour les instances dans lesquelles se fait l’installation d’une BDD
+
+## Designate : DNS as a Service
+
+-   Équivalent d’AWS Route 53
+
+## Barbican - Key management as a Service
+
+-   Gère des secrets / clés privées
