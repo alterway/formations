@@ -1,0 +1,110 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "bento/ubuntu-16.04"
+
+  config.vm.define "deployer", primary: true do |deployer|
+    deployer.vm.hostname = "deployer"
+    deployer.vm.network "private_network", ip: "10.42.42.10", virtualbox__intnet: "management"
+    config.vm.provider "virtualbox" do |vb|
+      vb.cpus = "1"
+      vb.memory = "1024"
+    end
+  end
+
+  config.vm.define "controller1", primary: true do |controller1|
+    controller1.vm.hostname = "controller1"
+    controller1.vm.network "private_network", ip: "10.42.42.21", virtualbox__intnet: "management"
+    controller1.vm.network :forwarded_port, guest: 80, host: 8081
+    controller1.vm.network :forwarded_port, guest: 6080, host: 6081
+    controller1.vm.network :forwarded_port, guest: 443, host: 8443
+    config.vm.provider "virtualbox" do |vb|
+      vb.cpus = "2"
+      vb.memory = "6192"
+    end
+  end
+
+  config.vm.define "controller2", primary: true do |controller2|
+    controller2.vm.hostname = "controller2"
+    controller2.vm.network "private_network", ip: "10.42.42.22", virtualbox__intnet: "management"
+    controller2.vm.network :forwarded_port, guest: 80, host: 8082
+    controller2.vm.network :forwarded_port, guest: 6080, host: 6082
+    controller2.vm.network :forwarded_port, guest: 443, host: 8444
+    config.vm.provider "virtualbox" do |vb|
+      vb.cpus = "2"
+      vb.memory = "6192"
+    end
+  end
+
+  config.vm.define "controller3", primary: true do |controller3|
+    controller3.vm.hostname = "controller3"
+    controller3.vm.network "private_network", ip: "10.42.42.23", virtualbox__intnet: "management"
+    controller3.vm.network :forwarded_port, guest: 80, host: 8083
+    controller3.vm.network :forwarded_port, guest: 6080, host: 6083
+    controller3.vm.network :forwarded_port, guest: 443, host: 8445
+    config.vm.provider "virtualbox" do |vb|
+      vb.cpus = "2"
+      vb.memory = "6192"
+    end
+  end
+
+  config.vm.define "network1", primary: true do |network1|
+    network1.vm.hostname = "network1"
+    network1.vm.network "private_network", ip: "10.42.42.31", virtualbox__intnet: "management"
+    network1.vm.network "private_network", ip: "192.168.33.31", virtualbox__intnet: "instances"
+    network1.vm.network "private_network", ip: "10.12.34.31", virtualbox__intnet: "external", auto_config: false
+    config.vm.provider "virtualbox" do |vb|
+      vb.cpus = "1"
+      vb.memory = "1024"
+    end
+  end
+
+  config.vm.define "network2", primary: true do |network2|
+    network2.vm.hostname = "network2"
+    network2.vm.network "private_network", ip: "10.42.42.32", virtualbox__intnet: "management"
+    network2.vm.network "private_network", ip: "192.168.33.32", virtualbox__intnet: "instances"
+    network2.vm.network "private_network", ip: "10.12.34.32", virtualbox__intnet: "external", auto_config: false
+    config.vm.provider "virtualbox" do |vb|
+      vb.cpus = "1"
+      vb.memory = "1024"
+    end
+  end
+
+  config.vm.define "network3", primary: true do |network3|
+    network3.vm.hostname = "network3"
+    network3.vm.network "private_network", ip: "10.42.42.33", virtualbox__intnet: "management"
+    network3.vm.network "private_network", ip: "192.168.33.33", virtualbox__intnet: "instances"
+    network3.vm.network "private_network", ip: "10.12.34.33", virtualbox__intnet: "external", auto_config: false
+    config.vm.provider "virtualbox" do |vb|
+      vb.cpus = "1"
+      vb.memory = "1024"
+    end
+  end
+
+  config.vm.define "compute1" do |compute1|
+    compute1.vm.hostname = "compute1"
+    compute1.vm.network "private_network", ip: "10.42.42.41", virtualbox__intnet: "management"
+    compute1.vm.network "private_network", ip: "192.168.33.41", virtualbox__intnet: "instances"
+    compute1.vm.network "private_network", ip: "10.12.34.41", virtualbox__intnet: "external", auto_config: false
+    config.vm.provider "virtualbox" do |vb|
+      vb.cpus = "1"
+      vb.memory = "2048"
+    end
+  end
+
+  config.vm.define "compute2" do |compute2|
+    compute2.vm.hostname = "compute2"
+    compute2.vm.network "private_network", ip: "10.42.42.42", virtualbox__intnet: "management"
+    compute2.vm.network "private_network", ip: "192.168.33.42", virtualbox__intnet: "instances"
+    compute2.vm.network "private_network", ip: "10.12.34.42", virtualbox__intnet: "external", auto_config: false
+    config.vm.provider "virtualbox" do |vb|
+      vb.cpus = "1"
+      vb.memory = "2048"
+    end
+  end
+
+end

@@ -5,13 +5,13 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "ubuntu/trusty"
+  config.vm.box = "bento/ubuntu-16.04"
 
   config.vm.define "controller", primary: true do |controller|
     controller.vm.hostname = "controller"
     controller.vm.network "private_network", ip: "10.42.42.5", virtualbox__intnet: "management"
     controller.vm.network "private_network", ip: "192.168.33.100", virtualbox__intnet: "instances"
-    controller.vm.network "private_network", ip: "10.12.34.56", virtualbox__intnet: "external"
+    controller.vm.network "private_network", ip: "10.12.34.56", virtualbox__intnet: "external", auto_config: false
     controller.vm.network :forwarded_port, guest: 80, host: 8080
     controller.vm.network :forwarded_port, guest: 6080, host: 6080
     config.vm.provider "virtualbox" do |vb|
@@ -24,6 +24,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     compute.vm.hostname = "compute"
     compute.vm.network "private_network", ip: "10.42.42.11", virtualbox__intnet: "management"
     compute.vm.network "private_network", ip: "192.168.33.111", virtualbox__intnet: "instances"
+    compute.vm.network "private_network", ip: "10.12.34.57", virtualbox__intnet: "external", auto_config: false
     config.vm.provider "virtualbox" do |vb|
       vb.cpus = "1"
       vb.memory = "1024"
