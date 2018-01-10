@@ -48,12 +48,7 @@ La formation s'adresse aux administrateurs et architectes souhaitant mettre en p
 5. Neutron : Réseau en tant que service
 6. Cinder : Stockage block
 7. Horizon : Dashboard web
-8. Swift : Stockage objet
-9. Ceilometer : Collecte de métriques
-10. Heat : Orchestration des ressources
-11. Trove : Database as a Service
-12. Designate : DNS as a Service
-13. Quelques autres composants intéressants
+8. Quelques autres composants intéressants
 
 ### OpenStack en production
 
