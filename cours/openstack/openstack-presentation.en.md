@@ -9,7 +9,7 @@
 ### History
 
 -   Started in 2010
--   Goal : the Free Open Source Cloud Operating System
+-   Goal: the Free Open Source Cloud Operating System
 ```To produce a ubiquitous Open Source Cloud Computing platform that is
 easy to use, simple to implement, interoperable between deployments,
 works well at all scales, and meets the needs of users and operators of
@@ -29,15 +29,15 @@ both public and private clouds.```
 -   Mitaka (2016.1), Newton (2016.2)
 -   Ocata (2017.1)
 -   **Pike** (2017.2)
--   Early 2018 : Queens
+-   Early 2018: Queens
 
 ### Some of the supporters/contributors ...
 
-- Editors : Red Hat, Suse, Canonical, Vmware, ...
-- Hardware makers : IBM, HP, Dell, ...
-- Hardware makers/network : Juniper, Cisco, ...
-- Hardware makers/storage : NetApp, Hitachi, ...
-- Also : NASA, Rackspace, Yahoo, OVH, Citrix, SAP, ...
+- Editors: Red Hat, Suse, Canonical, Vmware, ...
+- Hardware makers: IBM, HP, Dell, ...
+- Hardware makers/network: Juniper, Cisco, ...
+- Hardware makers/storage: NetApp, Hitachi, ...
+- Also: NASA, Rackspace, Yahoo, OVH, Citrix, SAP, ...
 -  **Google**! (since July 2015)
 
 <https://www.openstack.org/foundation/companies/>
@@ -45,7 +45,7 @@ both public and private clouds.```
 ### ... and users
 
 -   All the previously mentioned contributors
--   In France : **Cloudwatt** and **Numergy**
+-   In France: **Cloudwatt** and **Numergy**
 -   Wikimedia
 -   CERN
 -   Paypal
@@ -139,7 +139,7 @@ both public and private clouds.```
 ![Logo OpenStack-fr](images/openstackfr.png){height=50px}
 
 -   Website: <http://openstack.fr/>
--   Association des utilisateurs francophones d’OpenStack : <https://asso.openstack.fr/>
+-   Association des utilisateurs francophones d’OpenStack: <https://asso.openstack.fr/>
 -   Meetups: Paris, Rhônes-Alpes, Toulouse, Montréal, etc.
 -   Attending events such as *Paris Open Source Summit*
 -   Communication channels:

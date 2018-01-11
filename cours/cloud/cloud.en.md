@@ -48,30 +48,30 @@ Inspired by the NIST definition <http://nvlpubs.nist.gov/nistpubs/Legacy/SP/nist
 
 ### Models
 
-- service models : IaaS, PaaS, SaaS
-- deployment models : public, private, hybrid
+- service models: IaaS, PaaS, SaaS
+- deployment models: public, private, hybrid
 
 ### IaaS
 
 - *Infrastructure as a Service*
-- Infrastructure :
+- Infrastructure:
     - Compute
     - Storage
     - Network
-- Target users : administrators (system, storage, network)
+- Target users: administrators (system, storage, network)
 
 ### PaaS
 
 - *Platform as a Service*
-- Environnement permettant de développer/déployer une application
-- Spécifique à un language/framework (exemple : Python/Django)
-- Ressources plus haut niveau que l'infrastructure, exemple : BDD
-- Target users : application developers
+- Development/deployment environment of an application
+- Language/framework specific (example: Python/Django)
+- Higher level resources than infrastructure, example: DBMS
+- Target users: application developers
 
 ### SaaS
 
 - *Software as a Service*
-- Target users : end users
+- Target users: end users
 
 ### Something as a Service?
 
@@ -89,7 +89,7 @@ Inspired by the NIST definition <http://nvlpubs.nist.gov/nistpubs/Legacy/SP/nist
 Who is it for?
 
 - Public: everyone, available on internet
-- Private : to an organization, available on its network
+- Private: to an organization, available on its network
 
 ### Hybrid cloud
 
@@ -118,7 +118,7 @@ Let's make it clear.
 - Programming interface (through the network, often HTTP)
 - Explicit boundary between the provider and the user
 - Defines how the user interacts with the cloud to manage their resources
-- Manages : CRUD (Create, Read, Update, Delete)
+- Manages: CRUD (Create, Read, Update, Delete)
 - REST
 
 ### REST
@@ -233,7 +233,7 @@ Let's make it clear.
 
 ### Basics
 
-- Infrastructure :
+- Infrastructure:
     - Compute
     - Storage
     - Network
@@ -348,13 +348,13 @@ With code
 - Provision infrastructure resources
 - Configure said resources, instances in particular
 
-The job is changing : Infrastructure Developer
+The job is changing: Infrastructure Developer
 
 ### Scaling
 
 - Scale out rather than Scale up
-    - Scale out : horizontal scaling
-    - Scale up : vertical scaling
+    - Scale out: horizontal scaling
+    - Scale up: vertical scaling
 - Auto-scaling
     - Managed by the cloud
     - Managed by an external component

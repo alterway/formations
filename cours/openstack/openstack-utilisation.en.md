@@ -23,7 +23,7 @@
 -   With a library
     -   Official implementations in Python
     -   OpenStackSDK
-    -   Other implementations, including for other languages (example : jclouds)
+    -   Other implementations, including for other languages (example: jclouds)
     -   Shade (Python library which includes business logic)
 -   With official command line tools
 -   With Horizon
@@ -65,8 +65,8 @@
 
 ### API
 
--   API v2 (deprecated) : admin port 35357, user port 5000
--   API v3 : port 5000
+-   API v2 (deprecated): admin port 35357, user port 5000
+-   API v3: port 5000
 -   Manages *users*, *groups*, *domains*
 -   Users have *roles* on *projects* (tenants)
 -   *Services* from the catalog are associated to *endpoints*
@@ -93,19 +93,19 @@
 -   Ephemeral, a priori not HA
 -   Defined by a flavor
 -   Built from an image
--   Optional : volume attachments
--   Optional : boot from volume
--   Optional : public SSH key
--   Optional : network ports
+-   Optional: volume attachments
+-   Optional: boot from volume
+-   Optional: public SSH key
+-   Optional: network ports
 
 ### API
 
-Manages :
+Manages:
 
 -   Instances
 -   Flavors
 -   Keypairs
--   Indirectly : images, security groups, floating IPs
+-   Indirectly: images, security groups, floating IPs
 
 Instances can be resized and migrated from a physical host to another.
 
@@ -170,10 +170,10 @@ The API exposes these main resources:
 Beyond the basic L2 and L3 networking features, Neutron may provide other services:
 
 -   Load Balancing
--   Firewall : diffère des groupes de sécurité
--   VPN : permet d’accéder à un réseau privé sans IP flottantes
+-   Firewall: diffère des groupes de sécurité
+-   VPN: permet d’accéder à un réseau privé sans IP flottantes
 
-## Cinder : Block storage
+## Cinder: Block storage
 
 ### Principles
 

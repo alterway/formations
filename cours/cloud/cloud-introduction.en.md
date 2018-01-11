@@ -1,4 +1,4 @@
-### Goals of the training : Cloud
+### Goals of the training: Cloud
 
 - Understand concepts and benefits of cloud
 - Know the vocabulary related to cloud

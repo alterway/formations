@@ -6,7 +6,7 @@
 
 ### Implementation
 
--   Each sub-project is splitted in multiple services
+-   Each sub-project is split in multiple services
 -   Communication between services: AMQP (RabbitMQ)
 -   Database: relational SQL (MySQL/MariaDB)
 -   Memcached
@@ -100,7 +100,7 @@
     -   <http://tarballs.openstack.org/>
 -   IRC
     - Freenode network
-    - Logs and meetings informations : <http://eavesdrop.openstack.org/>
+    - Logs and meetings informations: <http://eavesdrop.openstack.org/>
 -   Mailing-lists
     - <http://lists.openstack.org/>
 
@@ -113,30 +113,30 @@
 ### OpenStack Summit
 
 -   In the USA until 2013
--   Now : between North America and Asia/Europe
+-   Now: between North America and Asia/Europe
 -   A few dozens at the beginning to 6000 attendees today
 -   At the same time: conference (users, decision makers)and Forum (developers/operators, replaces part of the previous Design Summit)
--   Defines the name of the next release : place/city near the Summit
+-   Defines the name of the next release: place/city near the Summit
 
 ### Example of the April 2013 Summit in Portland
 
-![Photo : Adrien Cunin](images/photo-summit.jpg)
+![Photo: Adrien Cunin](images/photo-summit.jpg)
 
 ### Example of the October 2015 Summit in Tokyo
 
-![Photo : Elizabeth K. Joseph, CC BY 2.0, Flickr/pleia2](images/photo-summit1.jpg)
+![Photo: Elizabeth K. Joseph, CC BY 2.0, Flickr/pleia2](images/photo-summit1.jpg)
 
 ### Example of the October 2015 Summit in Tokyo
 
-![Photo : Elizabeth K. Joseph, CC BY 2.0, Flickr/pleia2](images/photo-summit2.jpg)
+![Photo: Elizabeth K. Joseph, CC BY 2.0, Flickr/pleia2](images/photo-summit2.jpg)
 
 ### Example of the October 2015 Summit in Tokyo
 
-![Photo : Elizabeth K. Joseph, CC BY 2.0, Flickr/pleia2](images/photo-summit3.jpg)
+![Photo: Elizabeth K. Joseph, CC BY 2.0, Flickr/pleia2](images/photo-summit3.jpg)
 
 ### Example of the October 2015 Summit in Tokyo
 
-![Photo : Elizabeth K. Joseph, CC BY 2.0, Flickr/pleia2](images/photo-summit4.jpg)
+![Photo: Elizabeth K. Joseph, CC BY 2.0, Flickr/pleia2](images/photo-summit4.jpg)
 
 ### Project Team Gathering (PTG)
 
@@ -160,7 +160,7 @@
 -   The French translation is one of the most complete today
 -   Use of a web platform based on Zanata: <https://translate.openstack.org/>
 
-## DevStack : quickly run OpenStack
+## DevStack: quickly run OpenStack
 
 ### DevStack use cases
 
