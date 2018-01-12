@@ -10,7 +10,8 @@ phases:
     - aws s3 cp styles/osones.css s3://$BUCKET_CSS_PATH
   build:
     commands:
-      - /bin/bash -x build.sh -o all -t osones -u https://osones.com/revealjs
+      - /bin/bash -x build.sh -l fr
+      - /bin/bash -x build.sh -l en
   post_build:
     commands:
       - aws s3 sync output-html/ s3://$BUCKET_HTML
