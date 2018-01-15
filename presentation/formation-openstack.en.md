@@ -30,8 +30,14 @@ This training targets administrators and architects looking to implement an Open
 
 * Advanced sys admin skills for Linux such as Ubuntu, Red Hat or Debian, including:
     * Package management
+    * Configuration files and services handling
     * LVM (Logical Volume Management) and filesystems
-    * Notions of virtualization, KVM (Kernel-based Virtual Machine) and libvirt
+* Notions:
+    * Virtualization: KVM (Kernel-based Virtual Machine) and libvirt
+    * Network: iptables, namespaces
+    * SQL
+* May be useful:
+    * Comfortable in a Python environment
 
 ## Agenda
 

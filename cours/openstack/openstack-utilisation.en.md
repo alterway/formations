@@ -12,7 +12,7 @@
 
 -   One API per OpenStack service
 -   Each API is versioned, backwards compatiblity is guaranteed
--   Body of requests and responses is formatted with JSON
+-   Body of requests and responses is formatted with JSON (XML used to be supported as well)
 -   REST architecture
 -   <http://developer.openstack.org/#api>
 -   Some services are also available through a different API, compatible with AWS
@@ -109,13 +109,12 @@ Manages:
 
 Instances can be resized and migrated from a physical host to another.
 
-## Glance
+## Glance: Image registry
 
 ### Principles
 
 -   Image (and snapshot) registry
 -   Image properties
--   Est utilisé par Nova pour démarrer des instances
 -   Is used by Nova to start instances
 
 ### Image types
@@ -140,7 +139,7 @@ The user can define a number of properties among which some will be used at inst
 -   Minimum RAM
 -   Public or not
 
-## Network
+## Neutron: Network
 
 ### API
 
@@ -170,8 +169,8 @@ The API exposes these main resources:
 Beyond the basic L2 and L3 networking features, Neutron may provide other services:
 
 -   Load Balancing
--   Firewall: diffère des groupes de sécurité
--   VPN: permet d’accéder à un réseau privé sans IP flottantes
+-   Firewall: different from security groups
+-   VPN: to reach a private network without floating IPs
 
 ## Cinder: Block storage
 
@@ -193,7 +192,7 @@ Beyond the basic L2 and L3 networking features, Neutron may provide other servic
 -   The Manila OpenStack project aims at being *NFS as a Service*
 -   AWS introduced such a feature only recently
 
-## Orchestration
+## Heat: Orchestration
 
 ### OpenStack native and alternatives
 

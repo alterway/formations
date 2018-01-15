@@ -4,7 +4,7 @@
 
 -   Install OpenStack manually
     <https://docs.openstack.org/install-guide/>
--   Understand its internels
+-   Understand its internals
 -   Go through each component in more details
 -   Overview of deployment solutions
 
@@ -21,7 +21,6 @@
 -   All the components must be configured to talk with Keystone
 -   Most must be configured to talk with MySQL/MariaDB and RabbitMQ
 -   Components split in multiple services sometimes have one configuration file per service
--   Le fichier de configuration `policy.json` précise les droits nécessaires pour chaque appel API
 -   The `policy.json` configuraton file specify the required permissions for each API call
 
 ### Operating system
@@ -33,7 +32,7 @@
 
 ### Python
 
-![Logo Python](images/python-powered.png){height=50px}
+![Python logo](images/python-powered.png){height=50px}
 
 -   OpenStack today is Python 2.7 compatible
 -   So as not to reinvent the wheel, a lot of dependencies are necessary
@@ -51,12 +50,12 @@
 
 ### Why use SQLAlchemy
 
-![Logo SQLAlchemy](images/sqlalchemy-logo.png){height=40px}
+![SQLAlchemy logo](images/sqlalchemy-logo.png){height=40px}
 
 -   Supports multiple DBMS
 -   Supports migrations
 
-![Logo MySQL](images/mysql-logo.png){height=40px}
+![MySQL logo](images/mysql-logo.png){height=40px}
 
 ### Message bus
 
@@ -68,7 +67,7 @@
 
 ### RabbitMQ
 
-![Logo RabbitMQ](images/rabbitmq-logo.png){height=40px}
+![RabbitMQ logo](images/rabbitmq-logo.png){height=40px}
 
 -   RabbitMQ is written in Erlang
 -   An Erlang virtual machine is therefore required
@@ -146,7 +145,7 @@
 -   neutron-server: provides the API
 -   DHCP agent: provides DHCP service to instances
 -   L3 agent: manages network layer 3, routing
--   Plugin: LinuxBridge by default, other open source / proprietary, software/hardware implementations exit
+-   Plugin: LinuxBridge by default, other open source / proprietary, software/hardware implementations exist
 
 ### Additional features
 
@@ -241,7 +240,7 @@ These features are also based on plugins
 -   Proxy: API server for all the requests
 -   Object server: storage server
 -   Container server: maintains list of objects in containers
--   Account server: maintans list of containers in accounts
+-   Account server: maintains list of containers in accounts
 -   Each object is replicated n times (3 by default)
 
 ### The ring
@@ -267,15 +266,15 @@ These features are also based on plugins
 ### Gnocchi: time-series database
 
 -   Why Gnocchi? To solve Ceilometer scality issues
--   Initiated Ceilometer developers and integrated in the Ceilometer project team
--   Back-end remplacing MongoDB for Ceilometer
+-   Initiated by Ceilometer developers and integrated in the Ceilometer project team
+-   Back-end replacing MongoDB for Ceilometer
 
 ## Heat: Resources orchestration
 
 ### Orchestrating infrastructure with Heat
 
--   Amazon Cloud Formation's counterpart
--   Orchestrate compute, storage, network, etc. resources
+-   Amazon Cloudformation's counterpart
+-   Orchestrates compute, storage, network, etc. resources
 -   Has to be used with cloud-init
 -   Description of infrastructure in a template file, JSON (CFN) or YAML (HOT) format
 

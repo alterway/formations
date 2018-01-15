@@ -103,9 +103,8 @@ both public and private clouds.```
 ### La Fondation OpenStack
 
 -   La fondation supporte le projet par différents moyens :
-    -   Événements : organisation (Summits) ou participation (OSCON, etc.)
-    -   Infrastructure de développement (serveurs)
-    -   Ressources humaines : marketing, release manager, quelques développeurs (principalement sur l’infrastructure)
+    -   Événements : organisation (Summits, PTGs) ou participation (OSCON, KubeCon, etc.)
+    -   Ressources humaines : marketing, release management, quelques développeurs (principalement sur l’infrastructure)
 -   500 organisations à travers le monde
 -   60000 membres individuels dans 160 pays
 
@@ -133,6 +132,13 @@ both public and private clouds.```
     -   Superuser : <http://superuser.openstack.org/>
     -   OpenStack Community Weekly Newsletter
 -   Ressources commerciales : <http://www.openstack.org/marketplace/> entre autres
+-   Job board : <https://www.openstack.org/community/jobs/>
+
+### User Survey
+
+-   Sondage réalisé régulièrement par la Fondation (tous les 6 mois)
+-   Auprès des déployeurs et utilisateurs
+-   Données exploitables : <https://www.openstack.org/analytics>
 
 ### Ressources - Communauté francophone
 
@@ -140,6 +146,7 @@ both public and private clouds.```
 
 -   Site web : <http://openstack.fr/>
 -   Association des utilisateurs francophones d’OpenStack : <https://asso.openstack.fr/>
+-   OpenStack Days France à Paris : <https://openstackdayfrance.fr/>
 -   Meetups : Paris, Rhônes-Alpes, Toulouse, Montréal, etc.
 -   Présence à des événements tels que *Paris Open Source Summit*
 -   Canaux de communication :

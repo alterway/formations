@@ -1,4 +1,4 @@
-# OpenStack déploiement avancé
+# Déployer et opérer OpenStack - avancé
 
 ## Quelques autres composants intéressants
 
@@ -19,6 +19,10 @@
     -    PKCS#11
     -    KMIP
     -    Dogtag
+
+### Magnum: Container Infrastructure as a Service
+
+-   Backends: Swarm, Kubernetes
 
 ## Bonnes pratiques pour un déploiement en production
 
@@ -244,3 +248,15 @@ Guide sécurité : <http://docs.openstack.org/security-guide/>
 -   Si le dashboard web ou une API renvoie une erreur 500, c’est peut-être un bug
 -   Si les logs montrent une stacktrace Python, c’est un bug
 -   Sinon, à vous d’en juger
+
+## Opérations
+
+### Étendre CIDR Neutron
+
+### Nova compute maintenance mode
+
+### Gestion des logs
+
+### Backup
+
+### Monitoring

@@ -12,7 +12,7 @@
 
 -   Une API par service OpenStack
 -   Chaque API est versionnée, la rétro-compatibilité est assurée
--   Le corps des requêtes et réponses est formatté avec JSON
+-   Le corps des requêtes et réponses est formatté avec JSON (auparavant XML était supporté aussi)
 -   Architecture REST
 -   <http://developer.openstack.org/#api>
 -   Certains services sont aussi accessibles via une API différente compatible AWS
@@ -109,7 +109,7 @@ Gère :
 
 Les instances sont redimensionnables et migrables d’un hôte physique à un autre.
 
-## Glance
+## Glance : registre d'images
 
 ### Principes
 
@@ -139,7 +139,7 @@ L’utilisateur peut définir un certain nombre de propriétés dont certaines s
 -   RAM minimum
 -   Publique ou non
 
-## Réseau
+## Neutron : réseau
 
 ### API
 
@@ -192,7 +192,7 @@ Outre les fonctions réseau de base niveaux 2 et 3, Neutron peut fournir d’aut
 -   Le projet OpenStack Manila a pour objectif d’être un *NFS as a Service*
 -   AWS n’a introduit une telle fonctionnalité que récemment
 
-## Orchestration
+## Heat : Orchestration
 
 ### Natif OpenStack et alternatives
 

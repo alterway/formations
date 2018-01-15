@@ -9,6 +9,12 @@
 
 -   Un disque de taille nul équivaut à prendre la taille de l’image de base
 
+### Metadata
+
+-   API
+-   Disk drive
+-   Vendor data
+
 ### Utiliser des images cloud
 
 Une image cloud c’est :

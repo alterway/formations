@@ -16,7 +16,7 @@ works well at all scales, and meets the needs of users and operators of
 both public and private clouds.```
 -   Merge of two projects from Rackspace (Storage) and NASA (Compute)
 -   Free software distributed under Apache 2.0 license
--   Birth of the Foundatiob in 2012
+-   Birth of the Foundation in 2012
 
 ### Releases
 
@@ -103,9 +103,8 @@ both public and private clouds.```
 ### The OpenStack Foundation
 
 -   The Foundation supports the project at different levels:
-    -   Events: organization (Summits) and participation (OSCON, etc.)
-    -   Developement infrastructure (servers)
-    -   Human resources: marketing, release manager, a few developers (mainly on infrastructure)
+    -   Events: organization (Summits, PTGs) and participation (OSCON, KubeCon, etc.)
+    -   Human resources: marketing, release management, a few developers (mainly on infrastructure)
 -   500 organizations across the world
 -   60000 individual members in 160 countries
 
@@ -133,6 +132,13 @@ both public and private clouds.```
     -   Superuser: <http://superuser.openstack.org/>
     -   OpenStack Community Weekly Newsletter
 -   Commercial resources: <http://www.openstack.org/marketplace/> among others
+-   Job board: <https://www.openstack.org/community/jobs/>
+
+### User Survey
+
+-   Regular survey done by the Foundation (every 6 months)
+-   Targets deployers and users
+-   Usable data: <https://www.openstack.org/analytics>
 
 ### Resources - French community
 
@@ -140,6 +146,7 @@ both public and private clouds.```
 
 -   Website: <http://openstack.fr/>
 -   Association des utilisateurs francophones d’OpenStack: <https://asso.openstack.fr/>
+-   OpenStack Days France in Paris: <https://openstackdayfrance.fr>
 -   Meetups: Paris, Rhônes-Alpes, Toulouse, Montréal, etc.
 -   Attending events such as *Paris Open Source Summit*
 -   Communication channels:

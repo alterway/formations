@@ -1,0 +1,15 @@
+# About these training material {-}
+
+### Training materials written by Osones
+
+<https://osones.com>
+
+![Osones logo](images/logo-osones.png){height="50px"}
+
+- Copyright © 2014 - 2018 Osones
+- License: [Creative Commons BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.fr)
+- Sources: <https://github.com/Osones/Formations/>
+- Online: <https://osones.com/formations/TRAINING.html>
+
+![Creative Commons BY-SA 4.0 license](images/licence.png){height="50px"}
+

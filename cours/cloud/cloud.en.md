@@ -95,7 +95,7 @@ Who is it for?
 
 - Usage of multiple public and/or private clouds
 - Attractive concept
-- Implement is hard *a priori*
+- Implementation is hard *a priori*
 - Some use cases fit perfectly
     - Continuous integration (CI)
     - *Cloud bursting*
@@ -130,7 +130,7 @@ Let's make it clear.
     - PUT
     - DELETE
 -   Usage of HTTP return codes
--   Resources are reprensented in the HTTP responses' body
+-   Resources are represented in the HTTP responses' body
 
 ### REST - Examples
 
@@ -160,19 +160,20 @@ Let's make it clear.
 
 ### Why cloud? economical point of view
 
-- Appréhender les ressources IT comme des services “fournisseur”
+- Consider IT resources as service provider resources
 - Faire glisser le budget “investissement” (Capex) vers le budget
-“fonctionnement” (Opex)
+- Shift the "investment" budget (Capex) to the "operation" budget (Opex)
 - Réduire les coûts en mutualisant les ressources, et éventuellement avec des économies d'échelle
-- Réduire les délais
-- Aligner les coûts sur la consommation réelle des ressources
+- Cut costs by sharing resources, and maybe with economies of scale
+- Reduce delivery times
+- Match costs to the real usage of resources
 
 ### Why cloud? technical point of view
 
-- Abstraire les couches basses (serveur, réseau, OS, stockage)
-- S’affranchir de l’administration technique des ressources et services (BDD, pare-feux, load-balancing, etc.)
-- Concevoir des infrastructures scalables à la volée
-- Agir sur les ressources via des lignes de code et gérer les infrastructures “comme du code”
+- Abstract from the lower layers (server, network, OS, storage)
+- Get rid of the technical administration of resources and services (DB, firewalls, load-balancing, etc.)
+- Design infrastructures which can scale on the fly
+- Act on resources through lines of code and manage infrastructures "as code"
 
 ## Market
 
@@ -238,7 +239,7 @@ Let's make it clear.
     - Storage
     - Network
 
-### *compute* resources
+### *Compute* resources
 
 - Instance
 - Image
@@ -254,7 +255,7 @@ Let's make it clear.
 
 ### Cloud image
 
-- Disk image containing and already installed OS
+- Disk image containing an already installed OS
 - Infinitely instanciable
 - Can talk to the metadata API
 
@@ -275,7 +276,7 @@ Let's make it clear.
 
 -   SSH public key + private key
 -   Cloud manages and stores the public key
--   This public key is used to give SSH acceéss to the instances
+-   This public key is used to give SSH access to the instances
 
 ### Network resources 1/2
 
@@ -367,24 +368,24 @@ The job is changing: Infrastructure Developer
 
 Cf. <http://12factor.net/>
 
-## Derrière le cloud
+## Behind cloud
 
-### Comment implémenter un service de Compute
+### How to implement a Compute service
 
-- Virtualisation
+- Virtualization
 - Containers
 - Bare metal
 
-### Implémentation du stockage : (Software Defined Storage) SDS
+### Storage implementation: (Software Defined Storage) SDS
 
-- **Attention** : ne pas confondre avec le sujet block vs objet
+- **Warning** : not to be confiused with the block vs object topic
 
-- Utilisation de commodity hardware
-- Pas de RAID matériel
-- Le logiciel est responsable de garantir les données
-- Les pannes matérielles sont prises en compte et gérées
-- Le projet **Ceph** et le composant **OpenStack Swift** implémentent du SDS
-- Voir aussi **Scality**
+- Use of commodity hardware
+- No hardware RAID
+- Software is reponsible for the data
+- Hardware failures are taken into account and managed
+- The **Ceph** project and the **OpenStack Swift** component implement SDS
+- See also **Scality**
 
 ### SDS - CAP theorem
 

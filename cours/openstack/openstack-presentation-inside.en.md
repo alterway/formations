@@ -6,17 +6,17 @@
 
 ### Implementation
 
--   Each sub-project is split in multiple services
+-   Each project is split in multiple services (example: API, scheduler, etc.)
 -   Communication between services: AMQP (RabbitMQ)
 -   Database: relational SQL (MySQL/MariaDB)
--   Memcached
--   etcd (à l'avenir)
--   Generally: re-use of existing components
+-   Caching: Memcached
+-   Distributed storage of configuration (to come): etcd
 -   Everything is written in Python (Django for the web part)
--   Multi tenancy
+-   Re-use of existing components
 
-### APIs
+### Multi-tenancy and APIs
 
+-   All projects are multi-tenants
 -   Each project has its *own* OpenStack API
 -   Some projects support the corresponding AWS API (EC2, S3)
 
@@ -70,7 +70,7 @@
 ### Who contributes?
 
 -   *Active Technical Contributor*
--   ATCs are invited to summits and have the right to vote
+-   ATCs have the right to vote (TC and PTL)
 -   *Core reviewer*: ATC with permissions to approve patches in a project
 -   *Project Team Lead* (PTL): elected by the ATC of each project
 -   Stackalytics provides stats on contributions
@@ -108,12 +108,15 @@
 
 -   Team in charge of the OpenStack development infrastructure
 -   Works like the OpenStack developement teams and uses the same tools
--   Result: and entirely open source infracture, developed as such
+-   Result: an entirely open source infrastructure, developed as such
+-   Develops some tools:
+    - Zuul
+    - yaml2ical
 
 ### OpenStack Summit
 
--   In the USA until 2013
--   Now: between North America and Asia/Europe
+-   Every 6 months
+-   In the USA until 2013, now between North America and Asia/Europe
 -   A few dozens at the beginning to 6000 attendees today
 -   At the same time: conference (users, decision makers)and Forum (developers/operators, replaces part of the previous Design Summit)
 -   Defines the name of the next release: place/city near the Summit
@@ -180,7 +183,7 @@
 
 ### Configuration: local.conf
 
-Exemple
+Example
 
     [[local|localrc]]
     ADMIN_PASSWORD=secrete

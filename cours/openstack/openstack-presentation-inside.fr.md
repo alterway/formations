@@ -6,17 +6,17 @@
 
 ### Implémentation
 
--   Chaque sous-projet est découpé en plusieurs services
+-   Chaque projet est découpé en plusieurs services (exemple : API, scheduler, etc.)
 -   Communication entre les services : AMQP (RabbitMQ)
 -   Base de données : relationnelle SQL (MySQL/MariaDB)
--   Memcached
--   etcd (à l'avenir)
--   En général : réutilisation de composants existants
+-   Mise en cache : Memcached
+-   Stockage distribué de configuration (à venir) : etcd
 -   Tout est développé en Python (Django pour la partie web)
--   Multi tenancy
+-   Réutilisation de composants existants
 
-### APIs
+### Multi-tenancy et APIs
 
+-   Tous les projets sont multi-tenants
 -   Chaque projet supporte *son* API OpenStack
 -   Certains projets supportent l'API AWS équivalente (EC2, S3)
 
@@ -71,7 +71,7 @@
 
 -   *Active Technical Contributor*
 -   ATC : personne ayant au moins une contribution récente dans un projet OpenStack reconnu
--   Les ATC sont invités aux summits et ont le droit de vote
+-   Les ATC ont le droit de vote (TC et PTL)
 -   *Core reviewer* : ATC ayant les droits pour valider les patchs dans un projet
 -   *Project Team Lead* (PTL) : élu par les ATCs de chaque projet
 -   Stackalytics fournit des statistiques sur les contributions
@@ -110,11 +110,14 @@
 -   Équipe projet en charge de l’infrastructure de développement d’OpenStack
 -   Travaille comme les équipes de dev d’OpenStack et utilise les mêmes outils
 -   Résultat : une infrastructure entièrement open source et développée comme tel
+-   Développe certains outils
+    - Zuul
+    - yaml2ical
 
 ### OpenStack Summit
 
--   Aux USA jusqu’en 2013
--   Aujourd’hui : alternance Amérique de Nord et Asie/Europe
+-   Tous les 6 mois
+-   Aux USA jusqu’en 2013, aujourd'hui alternance Amérique de Nord et Asie/Europe
 -   Quelques dizaines au début à 6000 participants aujourd’hui
 -   En parallèle : conférence (utilisateurs, décideurs) et Forum (développeurs/opérateurs, remplace une partie du précédent Design Summit)
 -   Détermine le nom de la prochaine release : lieu/ville à proximité du Summit
@@ -199,5 +202,4 @@ Exemple
 -   Il est recommandé de travailler dans une VM
 -   Pour tester tous les composants OpenStack dans de bonnes conditions, plusieurs Go de RAM sont nécessaires
 -   L’utilisation de Vagrant est conseillée
-
 

@@ -24,11 +24,11 @@
 -   Compétences d’administration système Linux tel qu’Ubuntu
     -   Gestion des paquets
     -   Manipulation de fichiers de configuration et de services
-    -   LVM et systèmes de fichiers
-    -   SQL
+    -   LVM (Logical Volume Management) et systèmes de fichiers
 -   Notions :
-    -   Virtualisation : KVM, libvirt
+    -   Virtualisation : KVM (Kernel-Based Virtual Machine), libvirt
     -   Réseau : iptables, namespaces
+    -   SQL
 -   Peut servir :
     -   À l’aise dans un environnement Python
 

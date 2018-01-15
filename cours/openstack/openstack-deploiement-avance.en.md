@@ -1,24 +1,28 @@
-# OpenStack deployment - advanced
+# Deploy and operate OpenStack - advanced
 
 ## Some other interesting components
 
-## Trove: Database as a Service
+### Trove: Database as a Service
 
 -   trove-api: API
 -   trove-taskmanager: manages DB instances
 -   trove-guestagent: internal agent in instances
 
-## Designate: DNS as a Service
+### Designate: DNS as a Service
 
 -   Manages different backends: BIND, PowerDNS, etc.
 
-## Barbican: Key management as a Service
+### Barbican: Key management as a Service
 
 -   Possible backends:
     -    Encrypted files
     -    PKCS#11
     -    KMIP
     -    Dogtag
+
+### Magnum: Container Infrastructure as a Service
+
+-   Backends: Swarm, Kubernetes
 
 ## Best practices for a production deployment
 
@@ -66,7 +70,7 @@
 
 ### Assign roles to machines
 
-Lots of documentations mention these role:
+Lots of documentations mention these roles:
 
 -   Controller node: APIs, DB, AMQP
 -   Network node: DHCP, router, floating IPs
@@ -142,7 +146,6 @@ Security guide: <http://docs.openstack.org/security-guide/>
 
 -   Nova specific
 -   Admin defines host aggregates through the API
--   L’administrateur associe flavors et agrégats via des couples clé/valeur communs
 -   Admin associates flavors and aggregates through common key/values
 -   1 aggregate $\equiv$ 1 similarity, ex: GPU
 -   User chooses an aggregate through their flavor choice when creating an instance
@@ -245,4 +248,16 @@ Security guide: <http://docs.openstack.org/security-guide/>
 -   If the web dashboard or the API responds with an error 500, it might be a bug
 -   If the logs show a Python stacktrace, it's a bug
 -   Otherwise, you decide
+
+## Operations
+
+### Expand Neutron CIDR
+
+### Nova compute maintenance mode
+
+### Logs management
+
+### Backup
+
+### Monitoring
 
