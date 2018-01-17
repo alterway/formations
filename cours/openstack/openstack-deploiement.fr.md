@@ -1,4 +1,4 @@
-# Déployer et opérer OpenStack
+# Déployer OpenStack
 
 ### Ce qu’on va voir
 
