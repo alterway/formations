@@ -163,7 +163,6 @@ Let's make it clear.
 - Consider IT resources as service provider resources
 - Faire glisser le budget “investissement” (Capex) vers le budget
 - Shift the "investment" budget (Capex) to the "operation" budget (Opex)
-- Réduire les coûts en mutualisant les ressources, et éventuellement avec des économies d'échelle
 - Cut costs by sharing resources, and maybe with economies of scale
 - Reduce delivery times
 - Match costs to the real usage of resources
@@ -179,7 +178,7 @@ Let's make it clear.
 
 ### Amazon Web Services (AWS), leader
 
-![](images/aws.png){height=50px}
+![AWS logo](images/aws.png){height=50px}
 
 - Started in 2006
 - At first: "e-commerce" web services for developers
@@ -211,7 +210,7 @@ Let's make it clear.
 
 ### OpenStack in a few words
 
-![](images/openstack.png){height="100px"}
+![OpenStack logo](images/openstack.png){height="100px"}
 
 - Was born in 2010
 - OpenStack Foundation since 2012

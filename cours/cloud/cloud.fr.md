@@ -180,7 +180,7 @@ Mise au point.
 
 ### Amazon Web Services (AWS), le leader
 
-![](images/aws.png){height=50px}
+![AWS logo](images/aws.png){height=50px}
 
 - Lancement en 2006
 - À l'origine : services web "e-commerce" pour développeurs
@@ -212,7 +212,7 @@ Mise au point.
 
 ### OpenStack en quelques mots
 
-![](images/openstack.png){height="100px"}
+![OpenStack logo](images/openstack.png){height="100px"}
 
 - Naissance en 2010
 - Fondation OpenStack depuis 2012

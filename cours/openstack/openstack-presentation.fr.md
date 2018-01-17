@@ -116,7 +116,7 @@ both public and private clouds.```
 
 -   Annonces (nouvelles versions, avis de sécurité) : <openstack-announce@lists.openstack.org>
 -   Portail documentation : <https://docs.openstack.org/>
--   SDK/APIs : <http://developer.openstack.org/>
+-   SDK/APIs : <https://developer.openstack.org/>
 -   Gouvernance du projet : <https://governance.openstack.org/>
 -   Versions : <https://releases.openstack.org/>
 -   Support :

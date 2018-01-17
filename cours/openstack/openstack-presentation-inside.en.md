@@ -40,10 +40,10 @@
 
 -   Peer review for code: Gerrit
 -   Continous Integration (CI): Zuul
--   Blueprints/spécifications and bugs:
+-   Blueprints/specifications and bugs:
     -    Launchpad
     -    Storyboard
--   Code: Git (GitHub is used as a miror)
+-   Code: Git (GitHub is used as a mirror)
 -   Communication: IRC and mailing-lists
 
 ### Development: in details
@@ -176,7 +176,7 @@
 ### DevStack internals
 
 -   Support for Ubuntu 16.04/17.04, Fedora 24/25, CentOS/RHEL 7, Debian, OpenSUSE
--   A shell script is responsible for everthing: stack.sh
+-   A shell script is responsible for everything: stack.sh
 -   A config file: local.conf
 -   Installs all the required dependencies (packages)
 -   Clones all the git repositories (master branch by défaut)

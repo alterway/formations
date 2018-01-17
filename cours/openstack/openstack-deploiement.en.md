@@ -57,7 +57,7 @@
 -   AMQP: Advanced Message Queuing Protocol
 -   Messages, queues, routing
 -   OpenStack processes interact through AMQP
--   Multiply possible implementations: Qpid, 0MQ, etc.
+-   Multiple possible implementations: Qpid, 0MQ, etc.
 -   RabbitMQ by default
 
 ### RabbitMQ
@@ -279,7 +279,7 @@ These features are also based on plugins
 
 ### Gnocchi: time-series database
 
--   Why Gnocchi? To solve Ceilometer scality issues
+-   Why Gnocchi? To solve Ceilometer scaling issues
 -   Initiated by Ceilometer developers and integrated in the Ceilometer project team
 -   Back-end replacing MongoDB for Ceilometer
 
@@ -311,7 +311,7 @@ These features are also based on plugins
 ### Ironic
 
 -   Formerly Nova bare-metal
--   Enabled deploying instances on bare metal machines (rather than VMs)
+-   Enable deploying instances on bare metal machines (rather than VMs)
 -   Based upon technologies such as PXE, TFTP
 
 ### Oslo, or OpenStack common

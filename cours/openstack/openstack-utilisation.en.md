@@ -14,7 +14,7 @@
 -   Each API is versioned, backwards compatiblity is guaranteed
 -   Body of requests and responses is formatted with JSON (XML used to be supported as well)
 -   REST architecture
--   <http://developer.openstack.org/#api>
+-   <https://developer.openstack.org/#api>
 -   Some services are also available through a different API, compatible with AWS
 
 ### API access
@@ -33,8 +33,8 @@
 -   The project provides official clients: python-PROJECTclient
 -   Python libraries
 -   CLI tools
-    -   Authentification is done by passing credentials as parameters or environment variables
-    -   The `--debug` parameter show the HTTP connection
+    -   Authentication is done by passing credentials as parameters or environment variables
+    -   The `--debug` parameter shows the HTTP connection
 
 ### OpenStack Client
 
@@ -160,7 +160,7 @@ The API exposes these main resources:
 ### Floating IPs
 
 -   IP is *allocated* from a *pool*
--   Allocation IP is *associated* to a port
+-   Allocated IP is *associated* to a port
 
 ### Security groups
 
@@ -204,7 +204,7 @@ Beyond the basic L2 and L3 networking features, Neutron may provide other servic
 ### OpenStack native and alternatives
 
 - Heat is the native OpenStack solution
-- Heat provides an API to manafge *stacks* from *templates*
+- Heat provides an API to manage *stacks* from *templates*
 - Alternatives external to OpenStack exist, like **Terraform**
 
 ### A Heat Orchestration Template (HOT) template

@@ -14,7 +14,7 @@
 -   Chaque API est versionnée, la rétro-compatibilité est assurée
 -   Le corps des requêtes et réponses est formatté avec JSON (auparavant XML était supporté aussi)
 -   Architecture REST
--   <http://developer.openstack.org/#api>
+-   <https://developer.openstack.org/#api>
 -   Certains services sont aussi accessibles via une API différente compatible AWS
 
 ### Accès aux APIs

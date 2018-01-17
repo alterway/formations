@@ -108,7 +108,7 @@ Operations guide: <http://docs.openstack.org/openstack-ops/content/>
 
 Security guide: <http://docs.openstack.org/security-guide/>
 
-### Segment its cloud
+### Segment a cloud
 
 -   Host aggregates: physical hosts with similar features
 -   Availability zones: hosts depending on the same electrical supply, same switch, same DC, etc.
@@ -153,7 +153,7 @@ Security guide: <http://docs.openstack.org/security-guide/>
 -   Packaging is done in multiples distributions, RPM, DEB and others
 -   Ubuntu historically is the reference platform for OpenStack developement
 -   Packaging in Ubuntu closely follows OpenStack development, and automated tests are performed
--   Canonical provides the Ubuntu Cloud Archives, which includes the latest OpenStack version for the latest Ubuntu LTS
+-   Canonical provides the Ubuntu Cloud Archive, which includes the latest OpenStack version for the latest Ubuntu LTS
 
 ### Ubuntu Cloud Archive (UCA)
 
@@ -202,12 +202,6 @@ Security guide: <http://docs.openstack.org/security-guide/>
 
 ## Facing issues
 
-### Issues: FAILED/ERROR resources
-
--   Multiple possible causes
--   Ability to delete the ressource?
--   The *reset-state* API call can help
-
 ### Tips in case of error or faulty behavior
 
 -   Are we working on the appropriate tenant?
@@ -226,13 +220,24 @@ Security guide: <http://docs.openstack.org/security-guide/>
 
 ## Operations
 
-### Expand Neutron CIDR
-
-### Nova compute maintenance mode
-
 ### Logs management
+
+-   Centralize logs
+-   API logs
+-   Other OpenStack components logs
+-   DB, AMQP, etc. logs
 
 ### Backup
 
+-   Databases
+-   Deployment mechanism, rather than configuration files
+
 ### Monitoring
 
+-   API response
+-   Checking OpenStack services and dependencies
+
+### Misc
+
+-    Expand Neutron CIDR
+-    Nova compute maintenance mode
