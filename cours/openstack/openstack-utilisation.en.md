@@ -177,6 +177,7 @@ Beyond the basic L2 and L3 networking features, Neutron may provide other servic
 -   Load Balancing
 -   Firewall: different from security groups
 -   VPN: to reach a private network without floating IPs
+-   QoS
 
 ## Cinder: Block storage
 

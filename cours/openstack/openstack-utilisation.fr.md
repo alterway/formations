@@ -177,6 +177,7 @@ Outre les fonctions réseau de base niveaux 2 et 3, Neutron peut fournir d’aut
 -   Load Balancing
 -   Firewall : diffère des groupes de sécurité
 -   VPN : permet d’accéder à un réseau privé sans IP flottantes
+-   QoS
 
 ## Cinder : Stockage block
 

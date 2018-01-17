@@ -77,7 +77,6 @@ Guide HA : <http://docs.openstack.org/ha-guide/>
 -   Prévoir les bonnes volumétries, notamment pour les données Ceilometer
 -   Monitoring
 -   Backup
--   QoS : en cours d’implémentation dans Neutron
 
 Guide Operations : <http://docs.openstack.org/openstack-ops/content/>
 
@@ -236,7 +235,7 @@ Guide sécurité : <http://docs.openstack.org/security-guide/>
 ### Monitoring
 
 -   Réponse des APIs
--   Vériciation des services OpenStack et dépendances
+-   Vérification des services OpenStack et dépendances
 
 ### Divers
 

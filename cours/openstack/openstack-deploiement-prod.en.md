@@ -77,7 +77,6 @@ HA guide: <http://docs.openstack.org/ha-guide/>
 -   Plan for the appropriate capacities, in particular for Ceilometer data
 -   Monitoring
 -   Backup
--   QoS: currently being implemented in Neutron
 
 Operations guide: <http://docs.openstack.org/openstack-ops/content/>
 
