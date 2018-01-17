@@ -2,7 +2,7 @@
 
 ### Un grand cloud
 
-Tirer partie de :
+Tirer parti de :
 
 -   Régions
 -   Zones de disponibilité (AZ)
