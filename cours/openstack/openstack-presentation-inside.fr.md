@@ -176,6 +176,7 @@
 
 ### Fonctionnement de DevStack
 
+-   Support d'Ubuntu 16.04/17.04, Fedora 24/25, CentOS/RHEL 7, Debian, OpenSUSE
 -   Un script shell qui fait tout le travail : stack.sh
 -   Un fichier de configuration : local.conf
 -   Installe toutes les dépendances nécessaires (paquets)

@@ -26,35 +26,30 @@
 ### Operating system
 
 -   Linux OS with Python
--   Historically: Ubuntu
--   Red Hat caught up
--   SUSE, Debian, CentOS, etc.
+-   Ubuntu
+-   Red Hat
+-   SUSE
+-   Debian, Fedora, CentOS, etc.
 
 ### Python
 
 ![Python logo](images/python-powered.png){height=50px}
 
--   OpenStack today is Python 2.7 compatible
+-   OpenStack is Python 2.7 compatible
+-   Python 3 comptability almost complete
 -   So as not to reinvent the wheel, a lot of dependencies are necessary
--   Python 3 migration work is in progress
 
 ### Base de données
 
 -   Stores most of the data managed by OpenStack
 -   Each component has it own database
 -   OpenStack uses the SQLAlchemy Python ORM
--   Theoretical support of what SQLAlchemy supports
+-   Theoretical support of what SQLAlchemy supports (and migrations support)
 -   MySQL/MariaDB is the most tested and used implementation
 -   SQLite is mainly used for tests and demos
 -   Some deployments work with PostgreSQL
 
-### Why use SQLAlchemy
-
 ![SQLAlchemy logo](images/sqlalchemy-logo.png){height=40px}
-
--   Supports multiple DBMS
--   Supports migrations
-
 ![MySQL logo](images/mysql-logo.png){height=40px}
 
 ### Message bus
@@ -78,15 +73,34 @@
 
 ## Keystone: Authentication, authorization and service catalog
 
-### Installa and configuration
+### Install and configuration
 
--   Package: keystone
--   WSGI web server integration
--   Backends: SQL, LDAP (or Active Directory)
+-   APT package: keystone
+-   WSGI web server integration (Apache by default)
+-   Configuration file: `/etc/keystone/keystone.conf`
+-   Users/groups backends: SQL, LDAP (or Active Directory)
+-   Roles/services/endpoints backends: SQL
 -   Tokens backends: SQL, Memcache, none (depending on the token type)
--   *Bootstrap*
--   Creation of services and endpoints
--   Creation of users, groups, domains
+
+### Tokens drivers
+
+-   Uuid
+-   PKI
+-   Fernet
+
+### Bootstrap
+
+-   Services and endpoints creation (starting with Keystone)
+-   Users, groups and domains creation
+-   Bootstrap feature
+
+### Services catalog
+
+-   1 service, n endpoints (1 per region)
+-   1 endpoint, 3 types:
+    - internalURL
+    - adminURL
+    - publicURL
 
 ## Nova: Compute
 

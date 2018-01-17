@@ -90,8 +90,8 @@ HA guide: <http://docs.openstack.org/ha-guide/>
 
 ### High availability of the Neutron L3 agent
 
--   Multiple possible solutions and workarounds
--   Since Juno: *Distributed Virtual Router* (DVR)
+-   *Distributed Virtual Router* (DVR)
+-   L3 agent HA (VRRP)
 
 ### Production environment concerns
 
@@ -192,9 +192,9 @@ Security guide: <http://docs.openstack.org/security-guide/>
 
 ### OpenStack distributions
 
--   StackOps
--   Mirantis
--   HP Helion
+-   StackOps: history
+-   Mirantis: Fuel
+-   HP Helion: Ansible custom
 -   etc.
 
 ### Bare metal deployment

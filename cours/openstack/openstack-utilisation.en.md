@@ -39,7 +39,8 @@
 ### OpenStack Client
 
 -   Unified CLI client
--   *openstack \<ressource \>\<action \>* commands
+-   *openstack \<resource \>\<action \>* commands
+-   Or interactive shell
 -   Aims at replacing specific clients eventually
 -   Provides a more homogeneous user experience
 -   `clouds.yaml` configuration file
@@ -116,6 +117,11 @@ Instances can be resized and migrated from a physical host to another.
 -   Image (and snapshot) registry
 -   Image properties
 -   Is used by Nova to start instances
+
+### API
+
+-   API v2: current
+-   API artifacts: future
 
 ### Image types
 

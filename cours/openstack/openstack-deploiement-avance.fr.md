@@ -59,7 +59,7 @@
 -   Swift : très bonne gestion en mode *rolling upgrade*
 -   Autres composants : tester préalablement avec vos données
 -   Lire les release notes
--   Cf. articles de blog du CERN
+-   Cf. articles de blog du CERN <https://openstack-in-production.blogspot.fr/>
 
 ### Mises à jour dans une version stable
 
@@ -90,8 +90,8 @@ Guide HA : <http://docs.openstack.org/ha-guide/>
 
 ### Haute disponibilité de l’agent L3 de Neutron
 
--   Plusieurs solutions et contournements possibles
--   Depuis Juno : *Distributed Virtual Router* (DVR)
+-   *Distributed Virtual Router* (DVR)
+-   L3 agent HA (VRRP)
 
 ### Considérations pour une environnement de production
 
@@ -192,9 +192,9 @@ Guide sécurité : <http://docs.openstack.org/security-guide/>
 
 ### Les distributions OpenStack
 
--   StackOps
--   Mirantis
--   HP Helion
+-   StackOps : historique
+-   Mirantis : Fuel
+-   HP Helion : Ansible custom
 -   etc.
 
 ### Déploiement bare-metal

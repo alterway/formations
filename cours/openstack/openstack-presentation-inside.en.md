@@ -175,6 +175,7 @@
 
 ### DevStack internals
 
+-   Support for Ubuntu 16.04/17.04, Fedora 24/25, CentOS/RHEL 7, Debian, OpenSUSE
 -   A shell script is responsible for everthing: stack.sh
 -   A config file: local.conf
 -   Installs all the required dependencies (packages)

@@ -133,6 +133,7 @@ both public and private clouds.```
     -   OpenStack Community Weekly Newsletter
 -   Ressources commerciales : <http://www.openstack.org/marketplace/> entre autres
 -   Job board : <https://www.openstack.org/community/jobs/>
+-   Certification Certified OpenStack Administrator (COA) : <https://www.openstack.org/coa/>
 
 ### User Survey
 

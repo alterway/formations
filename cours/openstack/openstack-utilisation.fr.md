@@ -40,6 +40,7 @@
 
 -   Client CLI unifié
 -   Commandes du type *openstack \<ressource \>\<action \>*
+-   Ou shell interactif
 -   Vise à remplacer à terme les clients spécifiques
 -   Permet une expérience utilisateur plus homogène
 -   Fichier de configuration `clouds.yaml`
@@ -116,6 +117,11 @@ Les instances sont redimensionnables et migrables d’un hôte physique à un au
 -   Registre d’images (et des snapshots)
 -   Propriétés sur les images
 -   Est utilisé par Nova pour démarrer des instances
+
+### API
+
+-   API v2 : actuelle
+-   API artifacts : future
 
 ### Types d’images
 

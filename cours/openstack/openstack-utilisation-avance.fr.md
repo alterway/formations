@@ -1,6 +1,8 @@
-## Avancé
+## Utiliser OpenStack - avancé
 
 ### Un grand cloud
+
+Tirer partie de :
 
 -   Régions
 -   Zones de disponibilité (AZ)
@@ -23,7 +25,8 @@ Une image cloud c’est :
 -   Une image qui peut être instanciée en n machines sans erreur
 -   Un OS sachant parler à l’API de metadata du cloud (cloud-init)
 
-Détails : <http://docs.openstack.org/image-guide/openstack-images.html>\
+Détails : <http://docs.openstack.org/image-guide/openstack-images.html>
+
 La plupart des distributions fournissent aujourd’hui des images cloud.
 
 ### Cirros
@@ -60,6 +63,12 @@ La plupart des distributions fournissent aujourd’hui des images cloud.
     -   Packer
     -   solution “maison”
 
+### Affinity / anti-affinity dans Nova
+
+### Glance image members
+
+- Partager des images entre projets
+
 ## Heat : Orchestration des ressources
 
 ### Autoscaling avec Heat
@@ -83,17 +92,18 @@ Multiples projets en cours de développement
 -   HOT builder
 -   Merlin
 
-## Trove : Database as a Service
+### Trove : Database as a Service
 
 -   Fournit des bases de données relationnelles, à la AWS RDS
 -   A vocation à supporter des bases NoSQL aussi
 -   Gère notamment MySQL/MariaDB comme back-end
 -   Se repose sur Nova pour les instances dans lesquelles se fait l’installation d’une BDD
 
-## Designate : DNS as a Service
+### Designate : DNS as a Service
 
 -   Équivalent d’AWS Route 53
 
-## Barbican - Key management as a Service
+### Barbican : Key management as a Service
 
 -   Gère des secrets / clés privées
+

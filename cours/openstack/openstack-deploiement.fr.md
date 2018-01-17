@@ -26,35 +26,30 @@
 ### Système d’exploitation
 
 -   OS Linux avec Python
--   Historiquement : Ubuntu
--   Red Hat s’est largement rattrapé
--   SUSE, Debian, CentOS, etc.
+-   Ubuntu
+-   Red Hat
+-   SUSE
+-   Debian, Fedora, CentOS, etc.
 
 ### Python
 
 ![Logo Python](images/python-powered.png){height=50px}
 
--   OpenStack est aujourd’hui compatible Python 2.7
+-   OpenStack est compatible Python 2.7
+-   Comptabilité Python 3 presque complète
 -   Afin de ne pas réinventer la roue, beaucoup de dépendances sont nécessaires
--   Un travail de portage vers Python 3 est en cours
 
 ### Base de données
 
 -   Permet de stocker la majorité des données gérées par OpenStack
 -   Chaque composant a sa propre base
 -   OpenStack utilise l’ORM Python SQLAlchemy
--   Support théorique équivalent à celui de SQLAlchemy
+-   Support théorique équivalent à celui de SQLAlchemy (et support des migrations)
 -   MySQL/MariaDB est l’implémentation la plus largement testée et utilisée
 -   SQLite est principalement utilisé dans le cadre de tests et démo
 -   Certains déploiements fonctionnent avec PostgreSQL
 
-### Pourquoi l’utilisation de SQLAlchemy
-
 ![Logo SQLAlchemy](images/sqlalchemy-logo.png){height=40px}
-
--   Support de multiples BDD
--   Gestion des migrations
-
 ![Logo MySQL](images/mysql-logo.png){height=40px}
 
 ### Passage de messages
@@ -80,13 +75,32 @@
 
 ### Installation et configuration
 
--   Paquet : keystone
--   Intégration serveur web WSGI
--   Backends : SQL, LDAP (ou Active Directory)
+-   Paquet APT : keystone
+-   Intégration serveur web WSGI (Apache par défaut)
+-   Fichier de configuration: `/etc/keystone/keystone.conf`
+-   Backends utilisateurs/groupes : SQL, LDAP (ou Active Directory)
+-   Backends rôles/services/endpoints : SQL
 -   Backends tokens : SQL, Memcache, aucun (suivant le type de tokens)
--   *Bootstrap*
--   Création des services et endpoints
+
+### Drivers pour tokens
+
+-   Uuid
+-   PKI
+-   Fernet
+
+### Bootstrap
+
+-   Création des services et endpoints (à commencer par Keystone)
 -   Création d'utilisateurs, groupes, domaines
+-   Fonctionnalité de bootstrap
+
+### Catalogue de services
+
+-   1 service, n endpoints (1 par région)
+-   1 endpoint, 3 types :
+    - internalURL
+    - adminURL
+    - publicURL
 
 ## Nova : Compute
 
