@@ -10,7 +10,7 @@
 
 - Cloud privé: OpenStack
 
-![](images/docker/openstack.png){height="100px"}
+![](images/openstack.png){height="100px"}
 
 - Bare Metal
 

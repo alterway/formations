@@ -212,7 +212,7 @@ Mise au point.
 
 ### OpenStack en quelques mots
 
-![](images/docker/openstack.png){height="100px"}
+![](images/openstack.png){height="100px"}
 
 - Naissance en 2010
 - Fondation OpenStack depuis 2012

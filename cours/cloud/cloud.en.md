@@ -211,7 +211,7 @@ Let's make it clear.
 
 ### OpenStack in a few words
 
-![](images/docker/openstack.png){height="100px"}
+![](images/openstack.png){height="100px"}
 
 - Was born in 2010
 - OpenStack Foundation since 2012
