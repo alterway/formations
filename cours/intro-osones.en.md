@@ -1,4 +1,4 @@
-# About these training material {-}
+# About these training materials {-}
 
 ### Training materials written by Osones
 

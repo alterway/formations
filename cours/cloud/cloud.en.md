@@ -161,7 +161,6 @@ Let's make it clear.
 ### Why cloud? economical point of view
 
 - Consider IT resources as service provider resources
-- Faire glisser le budget “investissement” (Capex) vers le budget
 - Shift the "investment" budget (Capex) to the "operation" budget (Opex)
 - Cut costs by sharing resources, and maybe with economies of scale
 - Reduce delivery times
@@ -377,11 +376,11 @@ Cf. <http://12factor.net/>
 
 ### Storage implementation: (Software Defined Storage) SDS
 
-- **Warning** : not to be confiused with the block vs object topic
+- **Warning**: not to be confused with the block vs object topic
 
 - Use of commodity hardware
 - No hardware RAID
-- Software is reponsible for the data
+- Software is responsible for the data
 - Hardware failures are taken into account and managed
 - The **Ceph** project and the **OpenStack Swift** component implement SDS
 - See also **Scality**
