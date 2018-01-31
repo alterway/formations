@@ -310,7 +310,7 @@ Cloud provides two kinds of storage
 
 Starting an instance with its root disk on a **volume**
 
-- Root disk data peristence
+- Root disk data persistence
 - Gets similar to classical server
 
 ### Object storage

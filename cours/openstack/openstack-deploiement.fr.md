@@ -272,16 +272,22 @@ Ces fonctionnalités se basent également sur des plugins
 
 ### Surveiller l’utilisation de son infrastructure avec Ceilometer
 
--   Indexe différentes métriques concernant l’utilisation des différents services du cloud
--   Fournit des APIs permettant de récupérer ces données
+-   Indexer et stocker différentes métriques concernant l’utilisation des différents services du cloud
+-   Fournir des APIs permettant de récupérer ces données
 -   Base pour construire des outils de facturation (exemple : CloudKitty)
--   Utilise MongoDB (par défaut) pour le stockage
+
+### Ceilometer
+
+-   Récupère les données et les stocke
+-   Historiquement : stockage MongoDB
+-   Aujourd'hui : stockage Gnocchi
 
 ### Gnocchi : time-series database
 
--   Pourquoi Gnocchi ? Palier aux problème de scalabilité de Ceilometer
+-   Pourquoi Gnocchi ? Palier aux problème de scalabilité de Ceilometer + MongoDB
 -   Initié par des développeurs de Ceilometer et intégré à l’équipe projet Ceilometer
--   Back-end remplaçant MongoDB pour Ceilometer
+-   Fournit une API pour lire et écrire les données
+-   Se base sur une BDD relationnelle et un système de stockage objet
 
 ## Heat : Orchestration des ressources
 

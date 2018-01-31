@@ -275,13 +275,19 @@ These features are also based on plugins
 -   Stores different metrics regarding usage of cloud services
 -   Provides APIs to retrieve these data
 -   Base to build billing tools (example: CloudKitty)
--   Uses MongoDB (by default) for storage
+
+### Ceilometer
+
+-   Retrieves data and stores them
+-   Used to be stored in MongoDB
+-   Now stored in Gnocchi
 
 ### Gnocchi: time-series database
 
--   Why Gnocchi? To solve Ceilometer scaling issues
+-   Why Gnocchi? To solve Ceilometer + MongoDB scaling issues
 -   Initiated by Ceilometer developers and integrated in the Ceilometer project team
--   Back-end replacing MongoDB for Ceilometer
+-   Provides an API to read and write data
+-   Uses a relational DB and an object storage system
 
 ## Heat: Resources orchestration
 

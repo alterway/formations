@@ -1,6 +1,6 @@
 # Déployer OpenStack avec Ansible
 
-## Rappels : Ansible
+### Rappels : Ansible
 
 - Déploiement de configuration
 - Masterless
@@ -9,18 +9,18 @@
 - Inventaire
 - Écrit en Python
 
-## OpenStack-Ansible (OSA)
+### OpenStack-Ansible (OSA)
 
 - Projet officiel OpenStack
 - Ensemble de playbooks
 - Supporte Ubuntu 16.04, CentOS, openSUSE
 - Installation dépendances via apt
 - Installation OpenStack/Python via pip et git
-- Services déployés dans des containers LXC
-- Réseau/Neutron : support linuxbridge, Open vSwitch
+- Services déployés dans des *venvs* Python dans des containers LXC
+- Réseau/Neutron : support de LinuxBridge, Open vSwitch
 - Déploiement de Ceph
 
-## Principaux composants supportés
+### Principaux composants supportés
 
 - Keystone
 - Nova
@@ -30,27 +30,30 @@
 - Heat
 - Horizon
 
-## Mise en oeuvre de la haute disponibilité (HA)
+### Mise en oeuvre de la haute disponibilité (HA)
 
 - HAProxy
 - Keepalived
 - MySQL : Galera
 - RabbitMQ : Clustering
 
-## openstack-ansible-ops
+### openstack-ansible-ops
 
-- cleanup venvs
+- Dépôt d'outils pour OSA
+- Exemple :
+  - Supprimer les anciens *venvs*
+
 <https://git.openstack.org/cgit/openstack-ansible-ops.git>
 
-## Updates
+### Updates
 
 - process update sha1s
 
-## Réseau
+### Réseau
 
 - DVR
 - OVS
 
-## OSA en multirégions
+### Rsyslog centralisé
 
-## Rsyslog centralisé
+### OSA en multirégions
