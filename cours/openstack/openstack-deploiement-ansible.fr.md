@@ -37,6 +37,41 @@
 - MySQL : Galera
 - RabbitMQ : Clustering
 
+### Organisation
+
+Sur la *machine de déploiement*
+
+- Composant principal `openstack-ansible`
+  - Scripts
+  - Inventaire dynamique
+  - Playbooks
+- Un rôle par service
+
+### Récupérer les rôles
+
+- Addresses et versions sont définis dans `openstack-ansible`/`ansible-role-requirements.yml`
+- `scripts/bootstrap-ansible.sh` les télécharge dans `/etc/ansible/roles`
+
+### Configurer
+
+- `/etc/openstack_deploy/`
+  - `/etc/openstack_deploy/openstack_user_config.yml`
+  - `/etc/openstack_deploy/user_variables.yml`
+  - `/etc/openstack_deploy/user_secrets.yml`
+
+### Déployer
+
+- `openstack-ansible setup-everything.yml`
+  - `openstack-ansible setup-hosts.yml`
+  - `openstack-ansible setup-infrastructure.yml`
+  - `openstack-ansible setup-openstack.yml`
+
+### Mettre à jour
+
+- `git pull` d'`openstack-ansible`
+- Relancer `scripts/bootstrap-ansible.sh`
+- Relancer `openstack-ansible setup-everything.yml`
+
 ### openstack-ansible-ops
 
 - Dépôt d'outils pour OSA
@@ -45,15 +80,18 @@
 
 <https://git.openstack.org/cgit/openstack-ansible-ops.git>
 
-### Updates
-
-- process update sha1s
-
 ### Réseau
 
-- DVR
-- OVS
+- LinuxBridge ou OpenVSwitch
+- DVR possible
 
 ### Rsyslog centralisé
 
-### OSA en multirégions
+- Un container type `rsyslog`
+- Tous les services lui transmettent les logs
+- Ce `rsyslog` peut lui même transférer les logs ailleurs
+
+### OSA en multi-régions
+
+- Un déploiement OSA par région
+- Un déploiement pour le Keystone central
