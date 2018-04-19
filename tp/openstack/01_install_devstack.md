@@ -4,6 +4,7 @@
 
 * Mettre en place rapidement un OpenStack utilisable pour démo/test
 * Découvrir le fonctionnement de DevStack
+* Avoir un moyen de manipuler les APIs OpenStack
 
 ## Démarche
 
@@ -13,13 +14,12 @@ Avec Vagrant, déploiement d'une VM Ubuntu.
 
 ### Installation de DevStack
 
-Dans la VM !
+Suivi de <http://devstack.org/> (<https://docs.openstack.org/devstack/latest/>).
+
+Dans la VM :
 
 * Installation de git
 * Clone du dépôt DevStack
-* Configuration minimale pour DevStack
-* ./stack.sh
+* Configuration minimale pour DevStack (`HOST_IP`)
+* `./stack.sh`
 
-### Fonctionnement interne de DevStack
-
-Rejoindre le screen et parcourir les processes exécutés.

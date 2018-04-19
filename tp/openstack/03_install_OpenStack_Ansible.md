@@ -12,17 +12,19 @@
 ### Déploiement de VMs
 
 On utilise des VMs Ubuntu simulant des nodes physiques :
+
  * 1 controller node
- * 1 network node
  * 1 compute node
 
 Avec une configuration réseau simulant les réseaux physiques suivants :
+
  * Management network
  * Instances network
  * External network
 
-Utilisation de Vagrant (Vagrantfile disponible dans resources/) pour le déploiement.
+Utilisation de Vagrant (Vagrantfile disponible dans `resources/`) pour le déploiement.
 
 ### Procédure d'installation
 
-cf. Install guide officiel.
+Utilisation du guide de déploiement officiel `https://docs.openstack.org/project-deploy-guide/openstack-ansible/queens/`.
+
