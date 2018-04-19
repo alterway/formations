@@ -16,7 +16,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  config.vm.define "controller1", primary: true do |controller1|
+  config.vm.define "controller1" do |controller1|
     controller1.vm.hostname = "controller1"
     controller1.vm.network "private_network", ip: "10.42.42.21", virtualbox__intnet: "management"
     controller1.vm.network :forwarded_port, guest: 80, host: 8081
@@ -28,7 +28,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  config.vm.define "controller2", primary: true do |controller2|
+  config.vm.define "controller2" do |controller2|
     controller2.vm.hostname = "controller2"
     controller2.vm.network "private_network", ip: "10.42.42.22", virtualbox__intnet: "management"
     controller2.vm.network :forwarded_port, guest: 80, host: 8082
@@ -40,7 +40,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  config.vm.define "controller3", primary: true do |controller3|
+  config.vm.define "controller3" do |controller3|
     controller3.vm.hostname = "controller3"
     controller3.vm.network "private_network", ip: "10.42.42.23", virtualbox__intnet: "management"
     controller3.vm.network :forwarded_port, guest: 80, host: 8083
@@ -52,7 +52,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  config.vm.define "network1", primary: true do |network1|
+  config.vm.define "network1" do |network1|
     network1.vm.hostname = "network1"
     network1.vm.network "private_network", ip: "10.42.42.31", virtualbox__intnet: "management"
     network1.vm.network "private_network", ip: "192.168.33.31", virtualbox__intnet: "instances"
@@ -63,7 +63,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  config.vm.define "network2", primary: true do |network2|
+  config.vm.define "network2" do |network2|
     network2.vm.hostname = "network2"
     network2.vm.network "private_network", ip: "10.42.42.32", virtualbox__intnet: "management"
     network2.vm.network "private_network", ip: "192.168.33.32", virtualbox__intnet: "instances"
@@ -74,7 +74,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  config.vm.define "network3", primary: true do |network3|
+  config.vm.define "network3" do |network3|
     network3.vm.hostname = "network3"
     network3.vm.network "private_network", ip: "10.42.42.33", virtualbox__intnet: "management"
     network3.vm.network "private_network", ip: "192.168.33.33", virtualbox__intnet: "instances"
