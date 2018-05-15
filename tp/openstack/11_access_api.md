@@ -22,10 +22,10 @@ Avec un outil comme curl, et à l'aide de la documentation des APIs, écrire les
 
 Via APT sur un OS Ubuntu récent. Sinon via le système de paquets Python :
 
-  apt install python-dev virtualenv
-  virtualenv venv
-  cd venv && source venv/bin/activate
-  pip install python-openstackclient
+    apt install python-dev virtualenv
+    virtualenv venv
+    cd venv && source venv/bin/activate
+    pip install python-openstackclient
 
  * Configurer `openstackclient` en créant un fichier `clouds.yaml`
 
