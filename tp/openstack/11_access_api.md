@@ -24,7 +24,7 @@ Via APT sur un OS Ubuntu récent. Sinon via le système de paquets Python :
 
     apt install python-dev virtualenv
     virtualenv venv
-    cd venv && source venv/bin/activate
+    cd venv && source bin/activate
     pip install python-openstackclient
 
  * Configurer `openstackclient` en créant un fichier `clouds.yaml`
