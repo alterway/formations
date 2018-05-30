@@ -16,11 +16,12 @@ if [ -z ${DOCKER_TAG} ]; then
 fi
 
 build-html() {
-  mkdir -p output-html/revealjs/css/theme
-  mkdir -p output-html/images
 
-  cp styles/"$THEME".css output-html/revealjs/css/theme/"$THEME".css
-  cp -r images/* output-html/images/
+  echo $REVEALJSURL | grep -q http
+  if [ $? == 1 ]; then
+    cp styles/"$THEME".css $REVEALJSURL/css/theme/"$THEME".css
+    cp -r images/ $REVEALJSURL/
+  fi
 
   for cours in $((jq keys | jq -r '.[]') < $LIST); do
     for module in $(jq -r '.["'"$cours"'"].modules[]' $LIST); do
