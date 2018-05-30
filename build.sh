@@ -77,9 +77,9 @@ display_help() {
     -t theme            Theme to use. Default: osones
 
     -u revealjsURL      RevealJS URL that need to be use. If you build formation
-                        supports on local environment you should use "." and git
-                        clone http://github.com/hakimel/reveal.js and put your
-                        index.html into the repository clone.
+                        supports on local environment you should git
+                        clone http://github.com/hakimel/reveal.js and set
+                        this variable to your local copy.
                         This option is also necessary even if you only want PDF
                         output. Default: https://osones.com/revealjs
 
