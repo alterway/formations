@@ -16,6 +16,7 @@ if [ -z ${DOCKER_TAG} ]; then
 fi
 
 build-html() {
+  mkdir -p output-html
 
   echo $REVEALJSURL | grep -q http
   if [ $? == 1 ]; then
