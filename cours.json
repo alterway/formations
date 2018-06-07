@@ -10,7 +10,7 @@
     ]
   },
   "openstack": {
-    "course_name": "OpenStack",
+    "course_name": "openstack",
     "course_description": "Formation OpenStack administrateur",
     "modules": [
       "intro-osones",
