@@ -5,6 +5,7 @@ phases:
     commands:
     - docker pull osones/revealjs-builder:latest
     - docker pull osones/wkhtmltopdf:latest
+    - apt update && apt install -y jq
   pre_build:
     commands:
     - aws s3 cp styles/osones.css s3://$BUCKET_CSS_PATH
