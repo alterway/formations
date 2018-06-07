@@ -25,21 +25,23 @@ lang=fr
 revealjsurl=https://osones.com/revealjs
 
 # Definition of cours based on modules
-cours=cours.list
+cours=cours.json
 title="$$(grep '^$*\$$' $(cours) | cut -d '$$' -f2)"
 
 help: ##### Show this help
 	@fgrep -h "#####" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/#####//'
 
-# This Makefile will contain targets that depend on the cours list
-build/Makefile: $(cours)
+build/cours.list: $(cours)
 	mkdir -p build
-	sed -E 's#^(.*)\$$.*\$$(.*)#build/\1.md: $$(addsuffix .$(lang).md, $$(addprefix cours/, \2))\n\trm -f $$@\n\t$$(foreach module,$$^,cat $$(module) >> $$@;)#' $(cours) > build/Makefile
+	jq -r '.[] | [ .course_name, .course_description, .modules[] ] | @tsv' $(cours) | sed 's,\t, ,g3;s,\t,$$,g' > build/cours.list
+
+build/Makefile: build/cours.list
+	sed -E 's#^(.*)\$$.*\$$(.*)#build/\1.md: $$(addsuffix .$(lang).md, $$(addprefix cours/, \2))\n\trm -f $$@\n\t$$(foreach module,$$^,cat $$(module) >> $$@;)#' build/cours.list > build/Makefile
 	echo >> build/Makefile
 	echo -n 'all=' >> build/Makefile
-	for i in `cut -d '$$' -f1 $(cours)`; do echo -n "$$i " >> build/Makefile; done
+	for i in `cut -d '$$' -f1 build/cours.list`; do echo -n "$$i " >> build/Makefile; done
 	echo >> build/Makefile
-	for i in `cut -d '$$' -f1 $(cours)`; do echo "$$i: $(addprefix $$i, .html .pdf -handout.pdf -print.pdf)" >> build/Makefile; done
+	for i in `cut -d '$$' -f1 build/cours.list`; do echo "$$i: $(addprefix $$i, .html .pdf -handout.pdf -print.pdf)" >> build/Makefile; done
 
 -include build/Makefile
 

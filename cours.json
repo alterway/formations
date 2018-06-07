@@ -1,0 +1,111 @@
+{
+  "cloud": {
+    "course_name": "cloud",
+    "course_description": "Formation Cloud",
+    "modules": [
+      "intro-osones",
+      "openstack/intro-osones",
+      "cloud/cloud-introduction",
+      "cloud/cloud"
+    ]
+  },
+  "openstack": {
+    "course_name": "openstack",
+    "course_description": "Formation OpenStack administrateur",
+    "modules": [
+      "intro-osones",
+      "openstack/intro-osones",
+      "openstack/openstack-introduction",
+      "cloud/cloud",
+      "openstack/openstack-presentation",
+      "openstack/openstack-presentation-inside",
+      "openstack/openstack-utilisation",
+      "openstack/openstack-deploiement",
+      "openstack/openstack-deploiement-prod",
+      "openstack/openstack-iaas-tirer-parti",
+      "openstack/openstack-conclusion"
+    ]
+  },
+  "openstack-ops": {
+    "course_name": "openstack-ops",
+    "course_description": "Formation OpenStack administrateur",
+    "modules": [
+      "intro-osones",
+      "openstack/intro-osones",
+      "openstack/openstack-presentation",
+      "openstack/openstack-presentation-inside",
+      "openstack/openstack-deploiement",
+      "openstack/openstack-deploiement-avance",
+      "openstack/openstack-deploiement-prod",
+      "openstack/openstack-conclusion"
+    ]
+  },
+  "openstack-user": {
+    "course_name": "openstack-user",
+    "course_description": "Formation OpenStack utilisateur",
+    "modules": [
+      "intro-osones",
+      "openstack/intro-osones",
+      "cloud/introduction-user",
+      "cloud/cloud",
+      "cloud/cloud-avance",
+      "openstack/openstack-presentation",
+      "openstack/openstack-utilisation",
+      "cloud/archi-cloud-dev",
+      "cloud/archi-cloud-infra",
+      "openstack/openstack-user-conclusion"
+    ]
+  },
+  "openstack-admin-user": {
+    "course_name": "openstack-admin-user",
+    "course_description": "Formation OpenStack Ops Users",
+    "modules": [
+      "intro-osones",
+      "openstack/intro-osones",
+      "openstack/openstack-introduction",
+      "openstack/openstack-presentation",
+      "openstack/openstack-presentation-inside",
+      "openstack/openstack-utilisation",
+      "openstack/openstack-deploiement",
+      "openstack/openstack-deploiement-avance",
+      "openstack/openstack-deploiement-prod",
+      "openstack/openstack-iaas-tirer-parti",
+      "cloud/archi-cloud-dev",
+      "cloud/archi-cloud-infra",
+      "openstack/openstack-conclusion"
+    ]
+  },
+  "docker": {
+    "course_name": "docker",
+    "course_description": "Formation Docker",
+    "modules": [
+      "intro-osones",
+      "containers/intro-osones",
+      "containers/containers-introduction",
+      "containers/containers-runtimes",
+      "containers/docker-concepts",
+      "containers/docker-bsr",
+      "containers/docker-ecosystem",
+      "containers/docker-hosts",
+      "containers/docker-orchestration",
+      "containers/docker-monitoring",
+      "containers/k8s-concepts",
+      "containers/k8s-architecture",
+      "containers/k8s-openshift-introduction",
+      "containers/conclusion"
+    ]
+  },
+  "kubernetes": {
+    "course_name": "kubernetes",
+    "course_description": "Formation Kubernetes",
+    "modules": [
+      "intro-osones",
+      "containers/intro-osones",
+      "containers/k8s-governance",
+      "containers/k8s-concepts",
+      "containers/k8s-architecture",
+      "containers/k8s-deployment",
+      "containers/conclusion"
+    ]
+  }
+}
