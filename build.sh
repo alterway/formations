@@ -16,6 +16,7 @@ if [ -z ${DOCKER_TAG} ]; then
 fi
 
 build-html() {
+  mkdir -p output-html
 
   echo $REVEALJSURL | grep -q http
   if [ $? == 1 ]; then
@@ -63,7 +64,7 @@ build-pdf() {
       -v $PWD/images:/images osones/wkhtmltopdf:$DOCKER_TAG \
           -O landscape \
           -s A5 \
-          -T 0 file:///index.html\?print-pdf /output/"$cours"."$LANGUAGE".pdf
+          -T 0 -B 0 file:///index.html\?print-pdf /output/"$cours"."$LANGUAGE".pdf
   done
 }
 
