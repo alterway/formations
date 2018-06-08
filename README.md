@@ -61,7 +61,7 @@ Un daemon Docker est donc le seul pré-requis pour le build via `build.sh`
                         supports on local environment you should git clone http://github.com/hakimel/reveal.js
                         and set this variable to your local copy.
                         This option is also necessary even if you only want PDF
-                        output (default : https://osones.com/revealjs)
+                        output (default : https://osones.com/formations/revealjs)
 
     -c course           Courses to build, if not specified all courses are built
 ```

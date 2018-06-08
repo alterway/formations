@@ -82,7 +82,7 @@ display_help() {
                         clone http://github.com/hakimel/reveal.js and set
                         this variable to your local copy.
                         This option is also necessary even if you only want PDF
-                        output. Default: https://osones.com/revealjs
+                        output. Default: https://osones.com/formations/revealjs
 
     -c course           Courses to build, if not specified all courses are built
 
@@ -108,7 +108,7 @@ while getopts ":o:t:u:c:l:h" OPT; do
     esac
 done
 
-[[ $REVEALJSURL == "" ]] && REVEALJSURL="https://osones.com/revealjs"
+[[ $REVEALJSURL == "" ]] && REVEALJSURL="https://osones.com/formations/revealjs"
 if [[ $THEME == "" ]]; then
   THEME="osones"
 else

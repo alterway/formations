@@ -23,7 +23,7 @@ date="$$(date +'%d %B %Y')"
 lang=fr
 
 # Where to get revealjs stuff
-revealjsurl=https://osones.com/revealjs
+revealjsurl=https://osones.com/formations/revealjs
 
 # Definition of cours based on modules
 cours=cours.json
