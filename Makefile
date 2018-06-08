@@ -14,6 +14,7 @@
 #               texlive-latex-base
 #               texlive-latex-extra
 #               texlive-extra-utils (pdfnup)
+#               jq
 
 # These vars can be overridden
 author="Team Osones"
