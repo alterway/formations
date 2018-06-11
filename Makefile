@@ -27,7 +27,7 @@ revealjsurl=https://osones.com/formations/revealjs
 
 # Definition of cours based on modules
 cours=cours.json
-title="$$(grep '^$*\$$' $(cours) | cut -d '$$' -f2)"
+title="$$(jq -r '."$*".course_description' $(cours))"
 
 help: ##### Show this help
 	@fgrep -h "#####" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/#####//'
