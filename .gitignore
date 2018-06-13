@@ -1,2 +1,7 @@
-output-html
-output-pdf
+output-html/
+output-pdf/
+*.pdf
+*.html
+build/
+beamer*metropolis.sty
+modules.png
