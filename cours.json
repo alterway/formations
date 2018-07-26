@@ -95,6 +95,21 @@
       "containers/conclusion"
     ]
   },
+  "kubernetes-user": {
+    "course_name": "kubernetes-user",
+    "course_description": "Formation Kubernetes Utilisateur",
+    "modules": [
+      "intro-osones",
+      "containers/kubernetes/intro-osones",
+      "containers/kubernetes/k8s-governance",
+      "containers/kubernetes/k8s-architecture",
+      "containers/kubernetes/k8s-concepts",
+      "containers/kubernetes/k8s-deployment",
+      "containers/kubernetes/k8s-jobs",
+      "containers/kubernetes/k8s-applications",
+      "containers/kubernetes/k8s-usage"
+    ]
+  },
   "kubernetes": {
     "course_name": "kubernetes",
     "course_description": "Formation Kubernetes",
