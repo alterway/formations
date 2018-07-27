@@ -112,10 +112,10 @@ spec:
 - Contrôle la communication entre les PODs
 
 - Externe à Kubernetes et implémenté par la solution de Networking choisie :
-    - OpenShift
-    - OpenContrail
-    - Romana
-    - Calico
+    - [Calico](https://projectcalico.org/)
+    - [flannel](https://coreos.com/flannel)
+    - [Romana](https://romana.io/)
+    - [Weave](https://www.weave.works/oss/net/)
+    - [more](https://kubernetes.io/docs/concepts/cluster-administration/networking/#how-to-implement-the-kubernetes-networking-model)
 
 ### Kubernetes : Conclusion
-
