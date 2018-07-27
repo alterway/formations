@@ -282,8 +282,10 @@ spec:
 - Implémente les Ingress Resources
 
 - Plusieurs implémentations :
-    - [Træfɪk](https://traefik.io/)
-    - [nginx](https://github.com/kubernetes/contrib/tree/master/ingress/controllers)
+    - [Træfik](https://traefik.io/)
+    - [nginx](https://github.com/kubernetes/ingress-nginx)
+    - [Contour](https://github.com/heptio/contour/)
+    - [more](https://github.com/mhausenblas/cn-ref#ingress-and-gateways)
 
 ### Kubernetes : NetworkPolicy
 
