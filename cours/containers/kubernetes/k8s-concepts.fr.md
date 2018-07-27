@@ -8,7 +8,7 @@
 
 - Cloud Providers : Load Balancer
 
-### Kubernetes : API Ressources
+### Kubernetes : API Resources
 
 - PODs
 
@@ -71,7 +71,7 @@ spec:
 
 - Projet de la CNCF
 
-- Spécifications sur la configuration d'interface réseaux des conteneurs
+- Spécifications sur la configuration d'interfaces réseaux des conteneurs
 
 - Ensemble de plugins [core](https://github.com/containernetworking/plugins/releases) ainsi que [tierce partie](https://github.com/containernetworking/cni#3rd-party-plugins)
 
@@ -153,7 +153,7 @@ spec:
 
 ### Kubernetes : Services
 
-- Abstraction des PODs et RCs, sous forme d'une VIP de service
+- Abstraction des PODs et Replication Controllers, sous forme d'une VIP de service
 
 - Rendre un ensemble de PODs accessibles depuis l'extérieur
 
@@ -324,11 +324,10 @@ spec:
 
 ### Kubernetes : Aujourd'hui
 
-- Version 1.8 : stable en production
+- Version 1.11 : stable en production
 
 - Solution complète et une des plus utilisées
 
 - Éprouvée par Google
 
 - S'intègre parfaitement à CoreOS (support de *rkt* et Tectonic, la solution commerciale) et Atomic
-
