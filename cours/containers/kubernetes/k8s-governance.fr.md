@@ -4,7 +4,7 @@
 
 - COE développé par Google, devenu open source en 2014
 
-- Adapté à tout type d'environnements
+- Adapté à tout type d'environnement
 
 - Devenu populaire en très peu de temps
 
@@ -14,7 +14,7 @@
 
 ### CNCF
 
-The Foundation’s mission is to create and drive the adoption of a new computing paradigm that is optimized for modern distributed systems environments capable of scaling to tens of thousands of self healing multi-tenant nodes.
+*The Foundation’s mission is to create and drive the adoption of a new computing paradigm that is optimized for modern distributed systems environments capable of scaling to tens of thousands of self healing multi-tenant nodes.*
 
 ![](images/docker/cncf.png){height="100px"}
 
@@ -58,6 +58,8 @@ The Foundation’s mission is to create and drive the adoption of a new computin
 
 - [Stack Overflow](https://stackoverflow.com/questions/tagged/kubernetes)
 
+- [Serverfault](https://stackoverflow.com/questions/taggeg/kubernetes)
+
 - Hébergé sur [Github](https://github.com/kubernetes/kubernetes):
     - [Issues](https://github.com/kubernetes/kubernetes/issues)
     - [Pull Request](https://github.com/kubernetes/kubernetes/pulls)
@@ -77,5 +79,4 @@ The Foundation’s mission is to create and drive the adoption of a new computin
     - AWS
     - etc
 
-- Chaque SIG peut avoir des guideline différentes.
-
+- Chaque SIG peut avoir des guidelines différentes.
