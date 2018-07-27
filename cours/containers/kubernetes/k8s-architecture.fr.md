@@ -118,4 +118,14 @@ spec:
     - [Weave](https://www.weave.works/oss/net/)
     - [more](https://kubernetes.io/docs/concepts/cluster-administration/networking/#how-to-implement-the-kubernetes-networking-model)
 
+### Kubernetes : Aujourd'hui
+
+- Version 1.11 : stable en production
+
+- Solution complète et une des plus utilisées
+
+- Éprouvée par Google
+
+- S'intègre parfaitement à CoreOS (support de *rkt* et Tectonic, la solution commerciale) et Atomic
+
 ### Kubernetes : Conclusion
