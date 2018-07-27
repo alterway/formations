@@ -61,7 +61,7 @@ spec:
 - Nécessite une solution tierce :
     - Canal : Flannel + Calico
     - Weaves
-    - OpenShift
+    - OpenShift SDN
     - OpenContrail
     - Romana
 
