@@ -1,4 +1,4 @@
-# Kubernetes : Concepts et Objets {-}
+# Kubernetes : Concepts et Objets  {-}
 
 ### Kubernetes : API Resources
 
@@ -24,7 +24,7 @@
 
 - Les conteneurs d'un pod fonctionnent ensemble (instanciation et destruction) et sont orchestrés sur un même hôte
 
-- Les conteneurs partagent certaines spécifications du POD :
+- Les conteneurs partagent certaines spécifications du Pod :
     - La stack IP (network namespace)
     - Inter-process communication (PID namespace)
     - Volumes
@@ -33,7 +33,7 @@
 
 ### Kubernetes : POD
 
-- Les PODs sont définis en YAML comme les fichiers `docker-compose` :
+- Les Pods sont définis en YAML comme les fichiers `docker-compose` :
 
 ```
 apiVersion: v1
@@ -48,15 +48,15 @@ spec:
     - containerPort: 80
 ```
 
-### Kubernetes : Deployments
+### Kubernetes : Deployment
 
-- Permet d'assurer le fonctionnement d'un ensemble de PODs
+- Permet d'assurer le fonctionnement d'un ensemble de Pods
 
 - Version, Update et Rollback
 
 - Souvent combiné avec un objet de type *service*
 
-### Kubernetes : Deployments
+### Kubernetes : Deployment
 
 ```
 apiVersion: v1
@@ -89,13 +89,87 @@ spec:
         ports:
         - containerPort: 80
 ```
+
+### Kubernetes : DaemonSet
+
+- assure que tous les noeuds exécutent une copie du pod. 
+
+- utilisé pour des besoins particuliers comme:
+  * l'exécution d'agents de collection de logs comme `fluentd` ou `logstash`
+  * l'exécution de pilotes pour du matériel comme `nvidia-plugin`
+  * l'exécution d'agents de supervision comme NewRelic agent, Prometheus node exporter
+
+### Kubernetes : DaemonSet
+
+```yaml
+
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: newrelic-infra-agent
+  labels:
+    tier: monitoring
+    app: newrelic-infra-agent
+    version: v1
+spec:
+  template:
+    metadata:
+      labels:
+        name: newrelic
+    spec:
+      # Filter to specific nodes:
+      # nodeSelector:
+      #  app: newrelic
+      hostPID: true
+      hostIPC: true
+      hostNetwork: true
+      containers:
+        - resources:
+            requests:
+              cpu: 0.15
+          securityContext:
+            privileged: true
+          image: newrelic/infrastructure
+          name: newrelic
+          command: [ "bash", "-c", "source /etc/kube-nr-infra/config && /usr/bin/newrelic-infra" ]
+          volumeMounts:
+            - name: newrelic-config
+              mountPath: /etc/kube-nr-infra
+              readOnly: true
+            - name: dev
+              mountPath: /dev
+            - name: run
+              mountPath: /var/run/docker.sock
+            - name: log
+              mountPath: /var/log
+            - name: host-root
+              mountPath: /host
+              readOnly: true
+      volumes:
+        - name: newrelic-config
+          secret:
+            secretName: newrelic-config
+        - name: dev
+          hostPath:
+              path: /dev
+        - name: run
+          hostPath:
+              path: /var/run/docker.sock
+        - name: log
+          hostPath:
+              path: /var/log
+        - name: host-root
+          hostPath:
+              path: /
+```
+
 ### Kubernetes : Labels
 
 - Système de clé/valeur
 
-- Organiser les différents objets de Kubernetes (PODs, RC, Services, etc.) d'une manière cohérente qui reflète la structure de l'application
+- Organiser les différents objets de Kubernetes (Pods, RC, Services, etc.) d'une manière cohérente qui reflète la structure de l'application
 
-- Corréler des éléments de Kubernetes : par exemple un service vers des PODs
+- Corréler des éléments de Kubernetes : par exemple un service vers des Pods
 
 ### Kubernetes : Labels
 
