@@ -1,4 +1,4 @@
-# Kubernetes : Architecture
+# Kubernetes : Architecture {-}
 
 ### Kubernetes : Composants
 
@@ -109,7 +109,7 @@ spec:
 
 - Implémente l'objet NetworkPolicy
 
-- Contrôle la communication entre les PODs
+- Contrôle la communication entre les Pods
 
 - Externe à Kubernetes et implémenté par la solution de Networking choisie :
     - [Calico](https://projectcalico.org/)
@@ -126,6 +126,7 @@ spec:
 
 - Éprouvée par Google
 
-- S'intègre parfaitement à CoreOS (support de *rkt* et Tectonic, la solution commerciale) et Atomic
+- S'intègre parfaitement à d'autres _Container Runtime Interfaces (CRI)_ comme containerd, cri-o, rktlet, fraki, etc...
+
 
 ### Kubernetes : Conclusion
