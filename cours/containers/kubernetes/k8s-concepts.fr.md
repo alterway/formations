@@ -99,6 +99,8 @@ spec:
   * l'exécution de pilotes pour du matériel comme `nvidia-plugin`
   * l'exécution d'agents de supervision comme NewRelic agent, Prometheus node exporter
 
+  P.S.: kubectl ne peut pas créer de DaemonSet
+
 ### Kubernetes : DaemonSet
 
 ```yaml
@@ -163,6 +165,58 @@ spec:
               path: /
 ```
 
+### Kubernetes : StatefulSet
+
+Similaire au `Deployment`
+
+- Les pods possèdent des identifiants uniques.
+
+- chaque replica de pod est créé par ordre d'index
+
+- Nécessite un `Persistent Volume` et un `Storage Class`.
+
+- Supprimer un StatefulSet ne supprime pas le PV associé
+
+
+### Kubernetes : StatefulSet
+
+```yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: web
+spec:
+  selector:
+    matchLabels:
+      app: nginx # has to match .spec.template.metadata.labels
+  serviceName: "nginx"
+  replicas: 3 # by default is 1
+  template:
+    metadata:
+      labels:
+        app: nginx # has to match .spec.selector.matchLabels
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: nginx
+        image: k8s.gcr.io/nginx-slim:0.27
+        ports:
+        - containerPort: 80
+          name: web
+        volumeMounts:
+        - name: www
+          mountPath: /usr/share/nginx/html
+  volumeClaimTemplates:
+  - metadata:
+      name: www
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "my-storage-class"
+      resources:
+        requests:
+          storage: 1Gi
+```
+
 ### Kubernetes : Labels
 
 - Système de clé/valeur
@@ -188,6 +242,28 @@ spec:
     image: nginx
     ports:
     - containerPort: 80
+```
+
+### Kubernetes : Storage Class
+
+- permet de définir les différents types de stockage disponibles
+
+- utilisé par les `Persistent Volumes` pour solliciter un espace de stockage au travers des `Persistent Volume Claims`
+
+- 
+
+### Kubernetes : Storage Class
+
+```yaml
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: slow
+provisioner: kubernetes.io/aws-ebs
+parameters:
+  type: io1
+  zones: us-east-1d, us-east-1c
+  iopsPerGB: "10"
 ```
 
 ### Kubernetes : Volumes
