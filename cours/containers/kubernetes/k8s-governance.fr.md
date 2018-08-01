@@ -1,6 +1,6 @@
 # Kubernetes : projet, gouvernance et communauté
 
-### Kubernetes (K8s)
+### Kubernetes
 
 - COE développé par Google, devenu open source en 2014
 
@@ -50,7 +50,7 @@
 
 ![](images/docker/oci.png){height="100px"}
 
-### K8s : Projet
+### Kubernetes : Projet
 
 - [Docs](https://kubernetes.io)
 
@@ -67,7 +67,7 @@
 
 - [Projets en incubation](https://github.com/kubernetes-incubator/)
 
-### K8s : Communauté
+### Kubernetes : Communauté
 
 - [Contributor and community guide](https://github.com/kubernetes/community/blob/master/README.md#kubernetes-community)
 
