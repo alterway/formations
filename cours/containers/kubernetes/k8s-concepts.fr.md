@@ -357,6 +357,21 @@ spec:
 }
 ```
 
+### Kubernetes : Job
+
+- crée des pods et s'assurent qu'un certain nombre d'entre eux se terminent avec succès.
+
+- peut éxécuter plusieurs pods en parallèle
+
+- si un pod échoue, 
+
+### Kubernetes : Job
+
+Jobs Patterns
+
+*TBD*
+
+
 ### Kubernetes : Ingress Resource
 
 - Définition de règles de routage applicatives (HTTP/HTTPS)
