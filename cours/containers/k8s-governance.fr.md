@@ -1,6 +1,6 @@
 # Kubernetes : projet, gouvernance et communauté
 
-### Kubernetes (K8s)
+### Kubernetes
 
 - COE développé par Google, devenu open source en 2014
 
