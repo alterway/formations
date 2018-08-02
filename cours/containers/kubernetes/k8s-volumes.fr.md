@@ -1,11 +1,9 @@
 ### Kubernetes : Volumes {-}
 
 - Fournir du stockage persistent aux PODs
-
 - Fonctionnent de la même façon que les volumes Docker pour les volumes hôte :
     - EmptyDir ~= volumes docker
     - HostPath ~= volumes hôte
-
 - Support de multiples backend de stockage :
     - GCE : PD
     - AWS : EBS
@@ -37,10 +35,8 @@ spec:
 ### Kubernetes : Storage Class
 
 - permet de définir les différents types de stockage disponibles
-
 - utilisé par les `Persistent Volumes` pour solliciter un espace de stockage au travers des `Persistent Volume Claims`
 
-- 
 
 ### Kubernetes : Storage Class
 
@@ -59,9 +55,7 @@ parameters:
 ### Kubernetes : PervistentVolumeClaims
 
 - resource utilisée et vue comme une requête pour solliciter du stockage persistant
-
 - offre aux PV une variété d'options en fonction du cas d'utilisation
-
 - utilisé par les `StatefulSets` pour solliciter du stockage (Utilisaltion du champ `volumeClaimTemplates`)
 
 ### Kubernetes : PervistentVolumeClaims
@@ -88,11 +82,8 @@ spec:
 ### Kubernetes : PersistentVolume
 
 - composant de stockage dans le cluster kubernetes
-
 - stockage externe aux noeuds du cluster 
-
 - cycle de vie d'indépendant du pod qui le consomme
-
 - peut être provisionné manuellement par un administrateur ou dynamiquement grâce un `StorageClass`
 
 ### Kubernetes : PersistentVolume

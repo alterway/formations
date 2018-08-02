@@ -1,4 +1,4 @@
-# Kubernetes : Architecture {-}
+# Kubernetes : Architecture
 
 ### Kubernetes : Composants
 
@@ -22,7 +22,6 @@
 ### Kubernetes : kubelet
 
 - Service principal de Kubernetes
-
 - Permet à Kubernetes de s'auto configurer :
     - Surveille un dossier contenant les *manifests* (fichiers YAML des différents composant de Kubernetes).
     - Applique les modifications si besoin (upgrade, rollback).
@@ -38,7 +37,7 @@ kube-apiserver.yaml  kube-controller-manager.yaml  kube-proxy.yaml  kube-schedul
 
 - Exemple du manifest *kube-proxy* :
 
-```
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -71,41 +70,31 @@ spec:
 ### Kubernetes : kube-apiserver
 
 - Les configurations d'objets (Pods, Service, RC, etc.) se font via l'API server
-
 - Un point d'accès à l'état du cluster aux autres composants via une API REST
-
 - Tous les composants sont reliés à l'API server
 
 ### Kubernetes : kube-scheduler
 
 - Planifie les ressources sur le cluster
-
 - En fonction de règles implicites (CPU, RAM, stockage disponible, etc.)
-
 - En fonction de règles explicites (règles d'affinité et anti-affinité, labels, etc.)
 
 ### Kubernetes : kube-proxy
 
 - Responsable de la publication de services
-
 - Utilise *iptables*
-
 - Route les paquets à destination des PODs et réalise le load balancing TCP/UDP
 
 ### Kubernetes : kube-controller-manager
 
 - Boucle infinie qui contrôle l'état d'un cluster
-
 - Effectue des opérations pour atteindre un état donné
-
 - De base dans Kubernetes : replication controller, endpoints controller, namespace controller et serviceaccounts controller
 
 ### Kubernetes : network-policy-controller
 
 - Implémente l'objet NetworkPolicy
-
 - Contrôle la communication entre les Pods
-
 - Externe à Kubernetes et implémenté par la solution de Networking choisie :
     - [Calico](https://projectcalico.org/)
     - [flannel](https://coreos.com/flannel)
@@ -116,12 +105,8 @@ spec:
 ### Kubernetes : Aujourd'hui
 
 - Version 1.11 : stable en production
-
 - Solution complète et une des plus utilisées
-
 - Éprouvée par Google
-
 - S'intègre parfaitement à d'autres _Container Runtime Interfaces (CRI)_ comme containerd, cri-o, rktlet, fraki, etc...
-
 
 ### Kubernetes : Conclusion
