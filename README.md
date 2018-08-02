@@ -6,6 +6,8 @@ Supports de formation (sous forme de slides) écrits en Français et traduits en
 
 Sont notamment abordés les sujets suivants : le cloud, sa philosophie, le projet OpenStack, l'utilisation d'OpenStack, le déploiement d'OpenStack, le principe des conteneurs, le projet Docker, l'utilisation de Docker, l'orchestration de conteneurs Docker.
 
+Sources : <https://github.com/Osones/formations/>
+
 Auteurs :
 
 * Adrien Cunin <adrien.cunin@osones.com>
@@ -14,7 +16,7 @@ Auteurs :
 * Kevin Lefevre <kevin.lefevre@osones.com>
 * Jean-François Taltavull <jft@osones.com>
 
-HTML et PDF construits automatiquement :
+HTML et PDF construits automatiquement : <https://osones.com/formations/>
 
 * [Support PDF OpenStack User](https://osones.com/formations/pdf/openstack-user.fr.pdf)
 * [Support PDF OpenStack Admin](https://osones.com/formations/pdf/openstack.fr.pdf)
