@@ -1,4 +1,4 @@
-# Kubernetes : Concepts et Objets  {-}
+# Kubernetes : Concepts et Objets
 
 ### Kubernetes : API Resources
 
@@ -14,14 +14,11 @@
 ### Kubernetes : POD
 
 - Ensemble logique composé de un ou plusieurs conteneurs
-
 - Les conteneurs d'un pod fonctionnent ensemble (instanciation et destruction) et sont orchestrés sur un même hôte
-
 - Les conteneurs partagent certaines spécifications du Pod :
     - La stack IP (network namespace)
     - Inter-process communication (PID namespace)
     - Volumes
-
 - C'est la plus petite et la plus simple unité dans Kubernetes
 
 ### Kubernetes : POD
@@ -44,9 +41,7 @@ spec:
 ### Kubernetes : Deployment
 
 - Permet d'assurer le fonctionnement d'un ensemble de Pods
-
 - Version, Update et Rollback
-
 - Souvent combiné avec un objet de type *service*
 
 ### Kubernetes : Deployment
@@ -182,7 +177,6 @@ metadata:
 - Nécessite un `Persistent Volume` et un `Storage Class`.
 - Supprimer un StatefulSet ne supprime pas le PV associé
 
-
 ### Kubernetes : StatefulSet
 
 ```yaml
@@ -232,7 +226,7 @@ spec:
 
 - Exemple de label :
 
-```
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
