@@ -1,4 +1,4 @@
-# Kubernetes : projet, gouvernance et communauté
+# Kubernetes : projet, gouvernance et communauté  {-}
 
 ### Kubernetes
 

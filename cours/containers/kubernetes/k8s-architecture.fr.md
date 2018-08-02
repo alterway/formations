@@ -3,11 +3,8 @@
 ### Kubernetes : Composants
 
 - Kubernetes est écrit en Go, compilé statiquement.
-
 - Un ensemble de binaires sans dépendances
-
 - Faciles à conteneuriser et à packager
-
 - Peut se déployer uniquement avec des conteneurs sans dépendances d'OS
 
 ### Kubernetes : Composants
@@ -29,9 +26,7 @@
 - Permet à Kubernetes de s'auto configurer :
     - Surveille un dossier contenant les *manifests* (fichiers YAML des différents composant de Kubernetes).
     - Applique les modifications si besoin (upgrade, rollback).
-
 - Surveille l'état des services du cluster via l'API server (*kube-apiserver*).
-
 - Dossier de manifest sur un noeud master :
 
 ```
