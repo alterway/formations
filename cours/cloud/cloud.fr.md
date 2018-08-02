@@ -31,8 +31,9 @@ Inspiré de la définition du NIST <http://nvlpubs.nist.gov/nistpubs/Legacy/SP/n
 ### Mutualisation des ressources
 
 - Un cloud propose ses services à de multiples utilisateurs/organisations → *Multi-tenant*
-- Les ressources sont disponibles en grandes quantités
-- La localisation précise et le taux d'occupation des ressources ne sont pas visibles
+- *Tenant* ou *projet* : isolation logique des ressources
+- Les ressources sont disponibles en grandes quantités (considérées illimitées) mais leur taux d'occupation n'est pas visible
+- La localisation précise des ressources n'est pas visible
 
 ### Élasticité rapide
 
@@ -84,7 +85,7 @@ On distingue :
 
 ### Les modèles de service en un schéma
 
-![IaaS - PaaS - SaaS](images/cloud.png)
+![IaaS - PaaS - SaaS (source : Wikipedia)](images/cloud.png)
 
 ### Cloud public ou privé ?
 
@@ -96,8 +97,7 @@ On distingue :
 ### Cloud hybride
 
 - Utilisation mixte de multiples clouds privés et/ou publics
-- Concept séduisant
-- Mise en œuvre a priori difficile
+- Concept séduisant mais mise en œuvre a priori difficile
 - Certains cas d'usages s'y prêtent très bien
     - Intégration continue (CI)
     - Débordement (*cloud bursting*)
@@ -227,9 +227,9 @@ Mise au point.
 
 ### Solutions de PaaS privé
 
--   Cloud Foundry (<https://www.cloudfoundry.org>)
--   OpenShift (<http://www.openshift.org>)
--   Solum (<https://wiki.openstack.org/wiki/Solum>)
+-   Cloud Foundry, Fondation (<https://www.cloudfoundry.org>)
+-   OpenShift, Red Hat (<http://www.openshift.org>)
+-   Solum, OpenStack (<https://wiki.openstack.org/wiki/Solum>)
 
 ## Les concepts Infrastructure as a Service
 
@@ -247,12 +247,13 @@ Mise au point.
 - Flavor (gabarit)
 - Paire de clé (SSH)
 
-### L'instance
+### Instance
 
-- Éphémère, durée de vie typiquement courte
 - Dédiée au compute
+- Durée de vie typiquement courte, à considérer comme éphémère
 - Ne doit pas stocker de données persistantes
 - Disque racine non persistant
+- Basée sur une image
 
 ### Image cloud
 
@@ -309,6 +310,12 @@ Le cloud fournit deux types de stockage
 - Possibilité d'utiliser du LVM, du chiffrement, etc.
 - Compatible avec toutes les applications existantes
 
+### Du stockage partagé ?
+
+- Le stockage block n’est **pas** une solution de stockage partagé comme NFS
+- NFS se situe à une couche plus haute : système de fichiers
+- Un volume est *a priori* connecté à une seule machine
+
 ### "Boot from volume"
 
 Démarrer une instance avec un disque racine sur un **volume**
@@ -328,8 +335,18 @@ Démarrer une instance avec un disque racine sur un **volume**
 - Orchestrer la création et la gestion des ressources dans le cloud
 - Définition de l'architecture dans un *template*
 - Les ressources créées à partir du *template* forment la *stack*
+- Il existe également des *outils* d'orchestration (plutôt que des *services*)
 
-## Bonne pratiques d'utilisation
+## Bonnes pratiques d'utilisation
+
+### Pourquoi des bonnes pratiques ?
+
+Deux approches :
+
+- Ne pas évoluer
+  - Risquer de ne pas répondre aux attentes
+  - Se contenter d'un cas d'usage *test & dev*
+- Adapter ses pratiques au cloud pour en tirer parti pleinement
 
 ### Haute disponibilité (HA)
 
@@ -374,7 +391,7 @@ Cf. <http://12factor.net/>
 ### Comment implémenter un service de Compute
 
 - Virtualisation
-- Containers
+- Containers (système)
 - Bare metal
 
 ### Implémentation du stockage : (Software Defined Storage) SDS

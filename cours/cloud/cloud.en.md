@@ -31,8 +31,9 @@ Inspired by the NIST definition <http://nvlpubs.nist.gov/nistpubs/Legacy/SP/nist
 ### Sharing ressources
 
 - A cloud provided services to multiple users/organizations → *Multi-tenant*
-- Resources are available in large quantities
-- Accurate location and resources usage rate are not visible
+- *Tenant* or *project*: logical isolation of resources
+- Resources are available in large quantities (considered unlimited) but resources usage is not visible
+- Accurate location of resources is not visible
 
 ### Fast elasticity
 
@@ -82,7 +83,7 @@ Inspired by the NIST definition <http://nvlpubs.nist.gov/nistpubs/Legacy/SP/nist
 
 ### Service models in one diagram
 
-![IaaS - PaaS - SaaS](images/cloud.png)
+![IaaS - PaaS - SaaS (source: Wikipedia)](images/cloud.png)
 
 ### Public or private cloud?
 
@@ -94,8 +95,7 @@ Who is it for?
 ### Hybrid cloud
 
 - Usage of multiple public and/or private clouds
-- Attractive concept
-- Implementation is hard *a priori*
+- Attractive concept but implementation is hard *a priori*
 - Some use cases fit perfectly
     - Continuous integration (CI)
     - *Cloud bursting*
@@ -224,9 +224,9 @@ Let's make it clear.
 
 ### Private PaaS solutions
 
--   Cloud Foundry (<https://www.cloudfoundry.org>)
--   OpenShift (<http://www.openshift.org>)
--   Solum (<https://wiki.openstack.org/wiki/Solum>)
+-   Cloud Foundry, Foundation (<https://www.cloudfoundry.org>)
+-   OpenShift, Red Hat (<http://www.openshift.org>)
+-   Solum, OpenStack (<https://wiki.openstack.org/wiki/Solum>)
 
 ## Infrastructure as a Service concepts
 
@@ -246,10 +246,11 @@ Let's make it clear.
 
 ### Instance
 
-- Ephemeral, short typical lifetime
 - Dedicated to compute
+- Short typical lifetime, to be considered ephemeral
 - Should not store persistent data
 - Non persistent root disk
+- Based on an image
 
 ### Cloud image
 
@@ -306,6 +307,12 @@ Cloud provides two kinds of storage
 - Ability to use LVM, encryption, etc.
 - Compatible with all existing applications
 
+### Shared storage?
+
+- Block storage is **not** a shared storage solution like NFS
+- NFS is at a higher layer: file system
+- A volume is *a priori* connected to a single host
+
 ### "Boot from volume"
 
 Starting an instance with its root disk on a **volume**
@@ -325,8 +332,18 @@ Starting an instance with its root disk on a **volume**
 - Orchestrate creation and management of resources in the cloud
 - Architecture definition in a *template*
 - Resources created from a *template* make a *stack*
+- There are also orchestration *tools* (rather than *services*)
 
 ## Usage best practices
+
+### Why best practices?
+
+Two differents possible views:
+
+- Don't change anything
+  - Risk not meeting expectations
+  - Limit usage to *test & dev* use case
+- Adapt to new cloud compliant practices to take advantage of it
 
 ### High availability (HA)
 
@@ -371,7 +388,7 @@ Cf. <http://12factor.net/>
 ### How to implement a Compute service
 
 - Virtualization
-- Containers
+- (system) Containers
 - Bare metal
 
 ### Storage implementation: (Software Defined Storage) SDS
