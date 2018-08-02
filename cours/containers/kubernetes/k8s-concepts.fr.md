@@ -3,19 +3,12 @@
 ### Kubernetes : API Resources
 
 - Pods
-
 - Deployments
-
 - DaemonSets
-
 - Services
-
 - Namespaces
-
 - Ingress
-
 - NetworkPolicy
-
 - Volumes
 
 ### Kubernetes : POD
@@ -29,7 +22,7 @@
     - Inter-process communication (PID namespace)
     - Volumes
 
-- C'est la plus petite unité orchestrable dans Kubernetes
+- C'est la plus petite et la plus simple unité dans Kubernetes
 
 ### Kubernetes : POD
 
@@ -58,7 +51,7 @@ spec:
 
 ### Kubernetes : Deployment
 
-```
+```yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -72,7 +65,7 @@ spec:
   selector:
     app: nginx
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: my-nginx
@@ -85,59 +78,72 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx:1.7.9
+        image: nginx:stable
         ports:
         - containerPort: 80
 ```
 
 ### Kubernetes : Services {-}
 
-- Abstraction des PODs et Replication Controllers, sous forme d'une VIP de service
-
+- Abstraction des Pods et Replication Controllers, sous forme d'une VIP de service
 - Rendre un ensemble de PODs accessibles depuis l'extérieur
-
 - Load Balancing entre les PODs d'un même service
 
 ### Kubernetes : Services
 
 - Load Balancing : intégration avec des cloud provider :
     - AWS ELB
-    - GCE
-
-- Node Port forwarding : limitations
-
-- ClusterIP : IP dans le réseau privé Kubernetes (VIP)
-
-- IP Externes : le routage de l'IP publique vers le cluster est manuel
+    - GCP
+    - Azure Kubernetes Service
+    - Openstack 
+- `NodePort` : chaque noeud du cluster ouvre un port  statique et redirige le trafic vers le port indiqué
+- `ClusterIP` : IP dans le réseau privé Kubernetes (VIP)
+- `LoadBalancer` :  expose le service à l'externe en utilisant le loadbalancer d'un cloud provider (AWS, Google, Azure)
+- `ExternalIP`: le routage de l'IP publique vers le cluster est manuel
 
 ### Kubernetes : Services
 
-- Exemple de service (on remarque la sélection sur le label):
+*Picture of Service*
 
+### Kubernetes : Services
+
+- Exemple de service (on remarque la sélection sur le label et le mode d'exposition):
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  labels:
+    app: guestbook
+    tier: frontend
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+  selector:
+    app: guestbook
+    tier: frontend
 ```
-{
-  "kind": "Service",
-  "apiVersion": "v1",
-  "metadata": {
-    "name": "example-service"
-  },
-  "spec": {
-    "ports": [{
-      "port": 8765,
-      "targetPort": 9376
-    }],
-    "selector": {
-      "app": "example"
-    },
-    "type": "LoadBalancer"
-  }
-}
-```
+### Kubenetes : Services 
+
+Il est aussi possible de mapper un service avec un nom de domaine en spécifiant le paramètre `spec.externalName`. 
+
+```yaml
+kind: Service
+apiVersion: v1
+metadata:
+  name: my-service
+  namespace: prod
+spec:
+  type: ExternalName
+  externalName: my.database.example.com
+  ```
 
 ### Kubernetes : DaemonSet
 
-- assure que tous les noeuds exécutent une copie du pod. 
-
+- assure que tous les noeuds exécutent une copie du pod sur tous les noeuds du cluster
+- ne connaît pas la notion de `replicas`. 
 - utilisé pour des besoins particuliers comme:
   * l'exécution d'agents de collection de logs comme `fluentd` ou `logstash`
   * l'exécution de pilotes pour du matériel comme `nvidia-plugin`
@@ -148,77 +154,32 @@ spec:
 ### Kubernetes : DaemonSet
 
 ```yaml
-
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1beta2
 kind: DaemonSet
 metadata:
-  name: newrelic-infra-agent
-  labels:
-    tier: monitoring
-    app: newrelic-infra-agent
-    version: v1
-spec:
+  name: ssd-monitor
+  spec:
+  selector:
+    matchLabels:
+      app: ssd-monitor
   template:
     metadata:
       labels:
-        name: newrelic
-    spec:
-      # Filter to specific nodes:
-      # nodeSelector:
-      #  app: newrelic
-      hostPID: true
-      hostIPC: true
-      hostNetwork: true
-      containers:
-        - resources:
-            requests:
-              cpu: 0.15
-          securityContext:
-            privileged: true
-          image: newrelic/infrastructure
-          name: newrelic
-          command: [ "bash", "-c", "source /etc/kube-nr-infra/config && /usr/bin/newrelic-infra" ]
-          volumeMounts:
-            - name: newrelic-config
-              mountPath: /etc/kube-nr-infra
-              readOnly: true
-            - name: dev
-              mountPath: /dev
-            - name: run
-              mountPath: /var/run/docker.sock
-            - name: log
-              mountPath: /var/log
-            - name: host-root
-              mountPath: /host
-              readOnly: true
-      volumes:
-        - name: newrelic-config
-          secret:
-            secretName: newrelic-config
-        - name: dev
-          hostPath:
-              path: /dev
-        - name: run
-          hostPath:
-              path: /var/run/docker.sock
-        - name: log
-          hostPath:
-              path: /var/log
-        - name: host-root
-          hostPath:
-              path: /
+        app: ssd-monitor
+  spec:
+    nodeSelector:
+    disk: ssd
+    containers:
+    - name: main
+      image: luksa/ssd-monitor
 ```
 
 ### Kubernetes : StatefulSet
 
-Similaire au `Deployment`
-
+-Similaire au `Deployment`
 - Les pods possèdent des identifiants uniques.
-
 - chaque replica de pod est créé par ordre d'index
-
 - Nécessite un `Persistent Volume` et un `Storage Class`.
-
 - Supprimer un StatefulSet ne supprime pas le PV associé
 
 
@@ -264,9 +225,7 @@ spec:
 ### Kubernetes : Labels
 
 - Système de clé/valeur
-
 - Organiser les différents objets de Kubernetes (Pods, RC, Services, etc.) d'une manière cohérente qui reflète la structure de l'application
-
 - Corréler des éléments de Kubernetes : par exemple un service vers des Pods
 
 ### Kubernetes : Labels
@@ -294,7 +253,5 @@ spec:
     - Par utilisateurs
     - Par projet / applications
     - Autres...
-
 - Les objets existent uniquement au sein d'un namespace donné
-
 - Évitent la collision de nom d'objets
