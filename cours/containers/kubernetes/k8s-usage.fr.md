@@ -56,3 +56,55 @@ controller-manager   Healthy      ok
 scheduler                  Healthy      ok                   
 etcd-0                       Healthy      {"health": "true"}
 ```
+
+### Kubernetes : Kubectl 
+
+- le seul (ou presque) outil pour interagir avec des clusters Kubernetes
+- utilise un fichier de configuration pour communiquer avec l'API de Kubernetes 
+- le(s) fichier(s) se trouve(nt) par défaut dans `~/.kube/config`
+- le fichier de config. contient :
+    - l'adresse(URI) de l'APIServer
+    - les chemins des certificats TLS utilisés pour l'authentification
+
+- fichier `kubeconfig` peut être passé en paramètre de kubectl avec le _flag_ `--kubeconfig`
+
+### Kubernetes : Kubectl
+
+- Afficher la liste des ressources API supportées par le serveur:
+
+```console
+$ kubectl api-resources
+NAME                             SHORTNAMES   APIGROUP                       NAMESPACED   KIND
+bindings                                                         true         Binding
+componentstatuses         cs                            false        ComponentStatus
+configmaps                     cm                          true         ConfigMap
+endpoints                        ep                           true         Endpoints
+events                             ev                           true         Event
+limitranges                     limits                      true         LimitRange
+namespaces                    ns                           false        Namespace
+nodes                              no                          false        Node
+persistentvolumeclaims  pvc                        true         PersistentVolumeClaim
+persistentvolumes           pv                          false        PersistentVolume
+pods                                po                           true         Pod
+```
+
+### Kubernetes : Kubectl
+
+- afficher les noeuds du cluster
+
+```console
+kubectl get nodes
+```
+- Ces commandes sont équivalentes :
+```
+kubectl get no
+kubectl get nodes
+```
+
+### Kubernetes : Kubectl
+
+- afficher les services (pour le namespace par défaut)
+```
+kubectl get services
+kubectl get svc
+```
