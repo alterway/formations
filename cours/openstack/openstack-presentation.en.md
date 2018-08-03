@@ -127,11 +127,11 @@ both public and private clouds.```
 ### Resources
 
 -   News:
-    -   Official blog: <http://www.openstack.org/blog/>
+    -   Official blog: <https://www.openstack.org/blog/>
     -   Planet: <http://planet.openstack.org>
     -   Superuser: <http://superuser.openstack.org/>
     -   OpenStack Community Weekly Newsletter
--   Commercial resources: <http://www.openstack.org/marketplace/> among others
+-   Commercial resources: <https://www.openstack.org/marketplace/> among others
 -   Job board: <https://www.openstack.org/community/jobs/>
 -   Certified OpenStack Administrator (COA) certification: <https://www.openstack.org/coa/>
 
@@ -145,7 +145,7 @@ both public and private clouds.```
 
 ![Logo OpenStack-fr](images/openstackfr.png){height=50px}
 
--   Website: <http://openstack.fr/>
+-   Website: <https://openstack.fr/>
 -   Association des utilisateurs francophones d’OpenStack: <https://asso.openstack.fr/>
 -   OpenStack Days France in Paris: <https://openstackdayfrance.fr>
 -   Meetups: Paris, Rhônes-Alpes, Toulouse, Montréal, etc.

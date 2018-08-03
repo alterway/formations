@@ -63,7 +63,7 @@ Un daemon Docker est donc le seul pré-requis pour le build via `build.sh`
     -t theme            Theme to use, default to osones
 
     -u revealjsURL      RevealJS URL that need to be use. If you build formation
-                        supports on local environment you should git clone http://github.com/hakimel/reveal.js
+                        supports on local environment you should git clone https://github.com/hakimel/reveal.js
                         and set this variable to your local copy.
                         This option is also necessary even if you only want PDF
                         output (default : https://osones.com/formations/revealjs)
@@ -75,7 +75,7 @@ If you want to build the courses locally, you'll need to :
 
 - pull the Docker image osones/revealjs-builder
 - pull the Docker image osones/wkhtmltopdf
-- clone http://github.com/hakimel/reveal.js (see `-u` parameter)
+- clone https://github.com/hakimel/reveal.js (see `-u` parameter)
 
 Pour visualiser :
 
@@ -116,7 +116,7 @@ Tous les contenus originaux (Makefile, scripts, fichiers dans `cours/`) sont :
 * Copyright © 2014-2018 Osones
 * Distribués sous licence Creative Commons BY-SA 4.0 (<https://creativecommons.org/licenses/by-sa/4.0/>)
 
-![Creative Commons BY-SA](http://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-sa.png)
+![Creative Commons BY-SA](https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-sa.png)
 
 Les autres fichiers du répertoire `images/` sont soumis à leur copyright et licence respectifs.
 

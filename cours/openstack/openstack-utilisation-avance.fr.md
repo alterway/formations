@@ -23,11 +23,9 @@ Une image cloud c’est :
 
 -   Une image disque contenant un OS déjà installé
 -   Une image qui peut être instanciée en n machines sans erreur
--   Un OS sachant parler à l’API de metadata du cloud (cloud-init)
-
-Détails : <http://docs.openstack.org/image-guide/openstack-images.html>
-
-La plupart des distributions fournissent aujourd’hui des images cloud.
+-   Un OS sachant parler à l’API de metadata du cloud (outil comme `cloud-init`)
+-   Détails : <https://docs.openstack.org/image-guide/openstack-images.html>
+-   La plupart des distributions fournissent aujourd’hui des images cloud
 
 ### Cirros
 

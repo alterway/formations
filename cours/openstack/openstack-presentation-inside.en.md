@@ -63,8 +63,8 @@
 
 -   Each project has its own versioning
 -   *Semantic versioning*
--   <http://releases.openstack.org/>
--   *Project Teams* <http://governance.openstack.org/reference/projects/index.html>
+-   <https://releases.openstack.org/>
+-   *Project Teams* <https://governance.openstack.org/reference/projects/index.html>
 -   Use of factual and impartial tags <https://www.openstack.org/software/project-navigator/>
 
 ### Who contributes?
@@ -87,7 +87,7 @@
 -   Blueprints and bugs on Launchpad/StoryBoard
     -   <https://launchpad.net/openstack>
     -   <https://storyboard.openstack.org>
-    -   <http://specs.openstack.org/>
+    -   <https://specs.openstack.org/>
 
 ### Where to find informations about the OpenStack development
 
@@ -97,7 +97,7 @@
     -   <http://status.openstack.org>
 -   Code (Git) and tarballs are availabble
     -   <https://git.openstack.org>
-    -   <http://tarballs.openstack.org/>
+    -   <https://tarballs.openstack.org/>
 -   IRC
     - Freenode network
     - Logs and meetings informations: <http://eavesdrop.openstack.org/>

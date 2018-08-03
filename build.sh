@@ -79,7 +79,7 @@ display_help() {
 
     -u revealjsURL      RevealJS URL that need to be use. If you build formation
                         supports on local environment you should git
-                        clone http://github.com/hakimel/reveal.js and set
+                        clone https://github.com/hakimel/reveal.js and set
                         this variable to your local copy.
                         This option is also necessary even if you only want PDF
                         output. Default: https://osones.com/formations/revealjs

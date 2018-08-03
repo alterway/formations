@@ -4,7 +4,7 @@
 
 ### 12-factor
 
-“The Twelve-Factor App” <http://12factor.net/>
+“The Twelve-Factor App” <https://12factor.net/>
 
 -   Écrit par Heroku
 -   Suivre (tout) le code dans un VCS

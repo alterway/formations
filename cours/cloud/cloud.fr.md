@@ -12,7 +12,7 @@ Fournir un (des) service(s)...
 - Élasticité rapide
 - Mesurabilité
 
-Inspiré de la définition du NIST <http://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-145.pdf>
+Inspiré de la définition du NIST <https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-145.pdf>
 
 ### Self service
 
@@ -228,7 +228,7 @@ Mise au point.
 ### Solutions de PaaS privé
 
 -   Cloud Foundry, Fondation (<https://www.cloudfoundry.org>)
--   OpenShift, Red Hat (<http://www.openshift.org>)
+-   OpenShift, Red Hat (<https://www.openshift.org>)
 -   Solum, OpenStack (<https://wiki.openstack.org/wiki/Solum>)
 
 ## Les concepts Infrastructure as a Service
@@ -384,7 +384,7 @@ Le métier évolue : Infrastructure Developer
 - Sont architecturées pour tolérer les pannes
 - Etc.
 
-Cf. <http://12factor.net/>
+Cf. <https://12factor.net/>
 
 ## Derrière le cloud
 

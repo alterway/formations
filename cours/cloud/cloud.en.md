@@ -12,7 +12,7 @@ Provide one or more service(s)...
 - Fast elasticity
 - Metering
 
-Inspired by the NIST definition <http://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-145.pdf>
+Inspired by the NIST definition <https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-145.pdf>
 
 ### Self service
 
@@ -225,7 +225,7 @@ Let's make it clear.
 ### Private PaaS solutions
 
 -   Cloud Foundry, Foundation (<https://www.cloudfoundry.org>)
--   OpenShift, Red Hat (<http://www.openshift.org>)
+-   OpenShift, Red Hat (<https://www.openshift.org>)
 -   Solum, OpenStack (<https://wiki.openstack.org/wiki/Solum>)
 
 ## Infrastructure as a Service concepts
@@ -381,7 +381,7 @@ The job is changing: Infrastructure Developer
 - Are architected to be fault tolerant
 - Etc.
 
-Cf. <http://12factor.net/>
+Cf. <https://12factor.net/>
 
 ## Behind cloud
 
