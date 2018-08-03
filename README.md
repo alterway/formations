@@ -22,6 +22,14 @@ HTML et PDF construits automatiquement :
 * [Support HTML OpenStack Admin](https://osones.com/formations/openstack.fr.html)
 * [Support HTML Docker](https://osones.com/formations/docker.fr.html)
 
+## Prérequis
+
+* make : <https://www.gnu.org/software/make/>
+* jq : <https://github.com/stedolan/jq>
+* Docker : <https://docs.docker.com/install>
+* pandoc : <https://pandoc.org>
+* TeX Live : <https://www.tug.org/texlive/>
+
 ## Fonctionnement
 
 Les supports de formation (slides) sont écrits en Markdown. Chaque fichier dans `cours/` est un module indépendant.
