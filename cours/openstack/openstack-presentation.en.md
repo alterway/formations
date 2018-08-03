@@ -27,9 +27,9 @@ both public and private clouds.```
 -   Icehouse (2014.1), Juno (2014.2)
 -   Kilo (2015.1), Liberty (2015.2)
 -   Mitaka (2016.1), Newton (2016.2)
--   Ocata (2017.1)
--   **Pike** (2017.2)
--   Early 2018: Queens
+-   Ocata (2017.1), Pike (2017.2)
+-   **Queens** (2018.1)
+-   Late 2018: Rocky
 
 ### Some of the supporters/contributors ...
 
@@ -66,13 +66,13 @@ both public and private clouds.```
 -   OpenStack Dashboard - Horizon
 -   OpenStack Telemetry - Ceilometer
 -   OpenStack Orchestration - Heat
--   OpenStack Database Service - Trove
 
 ### The different sub-projects (2)
 
 -   But also:
     -   Bare metal (Ironic)
     -   Queue service (Zaqar)
+    -   Database service (Trove)
     -   Data processing (Sahara)
     -   DNS service (Designate)
     -   Shared File Systems (Manila)
