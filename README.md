@@ -24,11 +24,16 @@ HTML et PDF construits automatiquement :
 
 ## Prérequis
 
+### Option 1 : Utiliser le Makefile
+
 * make : <https://www.gnu.org/software/make/>
 * jq : <https://github.com/stedolan/jq>
-* Docker : <https://docs.docker.com/install>
 * pandoc : <https://pandoc.org>
 * TeX Live : <https://www.tug.org/texlive/>
+
+### Option 2 : Utiliser le script build.sh
+
+* Docker : <https://docs.docker.com/install>
 
 ## Fonctionnement
 
