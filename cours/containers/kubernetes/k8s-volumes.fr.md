@@ -71,7 +71,7 @@ spec:
   resources:
     requests:
       storage: 5Gi
-  storageClassName: "normal"
+  storageClassName: "slowl"
   selector:
     matchLabels:
       release: "stable"
@@ -94,7 +94,7 @@ kind: PersistentVolume
 metadata:
   name: persistent-volume-1
 spec:
-  storageClassName: fast
+  storageClassName: slow
   capacity:
     storage: 1Gi
   accessModes:
