@@ -47,19 +47,6 @@ spec:
 ### Kubernetes : Deployment
 
 ```yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: my-nginx-svc
-  labels:
-    app: nginx
-spec:
-  type: LoadBalancer
-  ports:
-  - port: 80
-  selector:
-    app: nginx
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
