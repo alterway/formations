@@ -90,21 +90,49 @@ pods                                po                           true         Po
 
 ### Kubernetes : Kubectl
 
-- afficher les noeuds du cluster
+- afficher les noeuds du cluster :
 
 ```console
 kubectl get nodes
 ```
+
 - Ces commandes sont équivalentes :
-```
+
+```console
 kubectl get no
 kubectl get nodes
 ```
 
+### Kubernetes : Kubectl 
+
+- afficher les _namespaces_
+
+```console
+kubectl get ns
+kubectl get namespaces
+```
+
+- par défaut, kubectl utilise le _namespace_ `default`
+- il est possible de sélectionner un _namespace_ avec l'option `-n` ou `--namespace`
+
+```console
+kubectl get -n kube-system get pods
+```
+
+### Kubernetes : Kubectl 
+
+- affficher les pods (pour le namespace _default_)
+
+```console
+kubectl get pods
+kubectl get pod
+```
+
 ### Kubernetes : Kubectl
 
-- afficher les services (pour le namespace par défaut)
-```
+- afficher les services (pour le namespace par défaut)*
+
+```console
 kubectl get services
 kubectl get svc
 ```

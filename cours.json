@@ -104,11 +104,11 @@
       "containers/kubernetes/k8s-governance",
       "containers/kubernetes/k8s-architecture",
       "containers/kubernetes/k8s-concepts",
-      "containers/kubernetes/k8s-networking",
+      "containers/kubernetes/k8s-usage",
+      "containers/kubernetes/k8s-deployment",
       "containers/kubernetes/k8s-volumes",
       "containers/kubernetes/k8s-jobs",
-      "containers/kubernetes/k8s-applications",
-      "containers/kubernetes/k8s-usage"
+      "containers/kubernetes/k8s-applications"
     ]
   },
   "kubernetes": {
