@@ -24,3 +24,43 @@ kubectl create -f https://raw.githubusercontent.com/kubernetes/examples/master/g
 ```console
 kubectl delete -f object.yaml
 ```
+
+### Kubernetes : Labels
+
+- Système de clé/valeur
+
+- Organiser les différents objets de Kubernetes (Pods, ReplicationControllers, Services, etc.) d'une manière cohérente qui reflète la structure de l'application
+
+- Corréler des éléments de Kubernetes : par exemple un service vers des Pods
+
+- une ressource Kubernetes peut avoir plusieurs labels.
+
+### Kubernetes : Labels
+
+- Exemple de label :
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+    env: prod
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    ports:
+    - containerPort: 80
+```
+
+### Kubernetes: Labels
+
+- La commande `kubectl get pods`, par défaut, ne liste pas les labels. Il est possible de les voir en utilisant `--show-labels`:
+
+```console
+$ kubectl get pods --show-labels
+NAME      READY     STATUS    RESTARTS   AGE       LABELS
+nginx        1/1              Running     0                    31s          app=nginx,env=prod
+```
