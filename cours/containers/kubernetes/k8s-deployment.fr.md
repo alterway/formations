@@ -25,6 +25,12 @@ kubectl create -f https://raw.githubusercontent.com/kubernetes/examples/master/g
 kubectl delete -f object.yaml
 ```
 
+- Mettre à jour un objet Kubernetes en écrasant la configuration existante:
+
+```console
+kubectl replace -f object.yaml
+```
+
 ### Kubernetes : Labels
 
 - Système de clé/valeur
@@ -64,3 +70,7 @@ $ kubectl get pods --show-labels
 NAME      READY     STATUS    RESTARTS   AGE       LABELS
 nginx        1/1              Running     0                    31s          app=nginx,env=prod
 ```
+
+### Kubernetes : Update, Rollbacks
+
+*TBD*
