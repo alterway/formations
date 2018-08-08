@@ -136,3 +136,16 @@ kubectl get pod
 kubectl get services
 kubectl get svc
 ```
+
+### Kubernetes : Kubernetes Dashboard
+
+- Interface graphique web pour les clusters Kubernetes 
+- permet de gérer les différents objets Kubernetes créés dans le(s) cluster(s). 
+- 
+- installé par défaut dans minikube
+
+### Kubernetes : Kubernetes Dashboard
+![Kubernetes Dashboard](https://raw.githubusercontent.com/kubernetes/website/master/static/images/docs/ui-dashboard.png)
+
+### Kubernetes : Kubernetes Dashboard
+![Logs in Kubernetes Dashboard](https://raw.githubusercontent.com/kubernetes/website/master/static/images/docs/ui-dashboard-logs-view.png)
