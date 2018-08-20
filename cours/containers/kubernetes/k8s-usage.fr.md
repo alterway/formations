@@ -149,3 +149,25 @@ kubectl get svc
 
 ### Kubernetes : Kubernetes Dashboard
 ![Logs in Kubernetes Dashboard](https://raw.githubusercontent.com/kubernetes/website/master/static/images/docs/ui-dashboard-logs-view.png)
+
+
+### Kubernetes : ConfigMaps
+
+- Objet Kubernetes permettant stocker séparer les fichiers de configuration
+- Il peut être créé d'un ensemble de valeurs ou d'un fichier resource Kubernetes (YAML ou JSON)
+- Un `ConfigMap` peut sollicité par plusieurs `pods`
+
+
+### Kubernetes : ConfigMaps
+
+```yaml
+apiVersion: v1
+data:
+    redis-config: |
+      maxmemory 2mb
+      maxmemory-policy allkeys-lru
+kind: ConfigMap
+metadata:
+  name: redis-config
+  namespace: default
+```
