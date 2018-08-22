@@ -1,4 +1,4 @@
-### Kubernetes : Volumes {-}
+### Kubernetes : Volumes
 
 - Fournir du stockage persistent aux PODs
 - Fonctionnent de la même façon que les volumes Docker pour les volumes hôte :
