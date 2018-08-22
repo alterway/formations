@@ -171,3 +171,57 @@ metadata:
   name: redis-config
   namespace: default
 ```
+
+### Kubernetes : Secrets
+
+- Objet Kubernetes de type `secret` utilisé pour stocker des informations sensibles comme les mots de passe, les _tokens_, les clés SSH...
+- Similaire à un `ConfigMap`, à la seule différence que le contenu des entrées présentes dans le champ `data` sont encodés en base64.
+- il est possible de directement créer un `Secret` spécifique à l'authentification sur un registre Docker privé. 
+- Il est possible de directement créer un `Secret` à partir d'une 
+
+### Kubernetes : Secrets
+
+```console
+kubectl create secret docker-registry mydockerhubsecret \
+--docker-username="employeeusername" --docker-password="employeepassword" \
+--docker-email="employee.email@organization.com"
+```
+
+
+### Kubernets : Secrets
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+	name: private-pod
+	spec:
+	imagePullSecrets:
+	- name: mydockersecret
+	containers:
+	- image: privateregistry/privateimage:tag
+	  name: main
+```
+
+
+### Kubernetes : Introduction to Helm
+
+- une application conçue pour faciliter l'installation et la gestion des applications sur Kubernetes.
+- Il utilise un format de paquetage appelé `Charts`.
+- Il est comparable à apt/yum/homebrew.
+- Plusieurs charts existent déjà sur le répertoire officiel : `https://github.com/kubernetes/charts`.
+
+### Kubernetes : Introduction to Helm
+
+-`Tiller` : Serveur Helm. Il interagit avec l'APIServer de Kubernetes pour installer, mettre à jour et supprimer les ressources Kubernetes.
+- `Chart` : Contient toutes les ressources définies et nécessaires pour éxecuter une application ou un service à  l'intérieur de cluster Kubernetes. Un chart est pratiquement un regroupement de ressources Kubernetes pré-configurées.
+- `Release` : Une instance d'un chart helm s'éxécutant dans un cluster Kubernetes.
+- `Repository` : répertoire ou espace (public ou privé) où sont regroupés les `charts`. 
+
+### Kubernetes : Introduction to Helm 
+
+- Installer Helm (sur une distribution Linux):`curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash`
+- Deployer tiller :`helm init`
+- voir la liste des `charts` disponibles sur les répertoire officiel`helm search`
+- afficher la liste des `charts` disponibles pour _prometheus_ : `helm search prometheus`
+- afficher les options disponibles dans un `chart` Helm:`helm inspect stable/prometheus`

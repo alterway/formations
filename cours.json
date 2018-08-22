@@ -108,20 +108,20 @@
       "containers/kubernetes/k8s-volumes",
       "containers/kubernetes/k8s-jobs",
       "containers/kubernetes/k8s-usage",
-      "containers/kubernetes/k8s-applications"
+      "containers/kubernetes/k8s-applications",
+      "containers/kubernetes/conclusion"
     ]
   },
-  "kubernetes": {
-    "course_name": "kubernetes",
-    "course_description": "Formation Kubernetes",
+  "kubernetes-ops": {
+    "course_name": "kubernetes-ops",
+    "course_description": "Formation Kubernetes Opérateur",
     "modules": [
       "intro-osones",
-      "containers/intro-osones",
-      "containers/k8s-governance",
-      "containers/k8s-concepts",
-      "containers/k8s-architecture",
-      "containers/k8s-deployment",
-      "containers/conclusion"
+      "containers/kubernetes/ops-guide/intro-osones",
+      "containers/kubernetes/ops-guide/k8s-installation",
+      "containers/kubernetes/ops-guide/k8s-operations",
+      "containers/kubernetes/ops-guide/k8s-security",
+      "containers/kubernetes/ops-guide/conclusion"
     ]
   }
 }
