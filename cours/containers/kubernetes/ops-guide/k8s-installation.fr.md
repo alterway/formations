@@ -36,3 +36,9 @@ Il existe des solutions managées pour Kubernetes :
 - il existe aussi des projects open source basés sur le langage Go :
     - kube-aws : <https://github.com/kubernetes-incubator/kube-aws>
     - kops : <https://github.com/kubernetes/kops>
+
+### Introduction à Sonobuoy
+
+- outil de conformité de clusters Kubernetes
+- permet de facilement générer des données de diagnostics pour les applications déployées
+- <https://github.com/heptio/sonobuoy/>
