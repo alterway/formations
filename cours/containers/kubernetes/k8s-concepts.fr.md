@@ -7,7 +7,7 @@
 - DaemonSets
 - Services
 - Namespaces
-- Ingress
+- 
 - NetworkPolicy
 - Volumes
 
