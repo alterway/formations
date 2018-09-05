@@ -68,6 +68,25 @@ roleRef:
   ### ClusterRole
 
 - l'objet `ClusterRole` est similaire au `Role` à la différence qu'il n'est pas limité à un seul `namespace`
+- il permet d'accéder à des ressources non limitées à un `namespace` comme les `nodes`
+
+### ClusterRole
+
+```yaml
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: secret-reader
+rules:
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["get", "watch", "list"]
+```
+
+### ClusterRoleBinding
+
+*TBD*
+
 
 ### Gestion des security contexts
 
@@ -76,3 +95,22 @@ roleRef:
 ### Introduction au Pod Security Policy
 
 ### Introduction au Network Policy
+
+- La ressource `NetworkPolicy` est une spécification permettant de définir comment un ensemble de `pods` communiquent entre eux ou avec d'autres endpoints
+- le `NetworkPolicy` utilisent les labels pour sélectionner les pods sur lesquels s'appliquent les règles qui définissent le trafic alloué sur les pods sélectionnés
+- le `NetworkPolicy` est générique et fait partie de l'API Kubernetes. Il est nécessaire que le plugin réseau déployé supporte cette spécification
+
+### NetworkPolicies
+
+- exemple de `NetworkPolicy` permet de blocker le trafic entrant 
+```yaml
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: web-deny-all
+spec:
+  podSelector:
+    matchLabels:
+      app: web
+  ingress: []
+  ```
