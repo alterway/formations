@@ -109,7 +109,7 @@ spec:
 ```
 ### Kubenetes : Services 
 
-Il est aussi possible de mapper un service avec un nom de domaine en spécifiant le paramètre `spec.externalName`. 
+Il est aussi possible de mapper un service avec un nom de domaine en spécifiant le paramètre `spec.externalName`.
 
 ```yaml
 kind: Service
@@ -121,6 +121,36 @@ spec:
   type: ExternalName
   externalName: my.database.example.com
   ```
+
+### Kubernetes: Ingress
+
+- l'objet `Ingress` permet d'exposer un service à l'extérieur d'un cluster Kubernetes
+- il permet de fournir une URL visible permettant d'accéder un Service Kubernetes
+- il permet d'avoir des terminations TLS, de faire du _Load Balancing_, etc...
+- Pour utiliser un `Ingress`, il faut un controlleur Ingress. Il existe plusieurs offres sur le marché:
+    - Traefik : <https://github.com/containous/traefik>
+    - Istio: <https://github.com/istio/istio>
+    - Linkerd: <https://github.com/linkerd/linkerd>
+    - Contour: <https://www.github.com/heptio/contour/>
+    - Nginx Controller : <https://github.com/kubernetes/ingress-nginx>
+
+### Kubernetes : Ingress
+
+```yaml
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: osones
+spec:
+  rules:
+  - host: blog.osones.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: osones-nodeport
+          servicePort: 80
+```
 
 ### Kubernetes : DaemonSet
 
