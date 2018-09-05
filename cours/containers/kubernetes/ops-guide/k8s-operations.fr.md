@@ -51,3 +51,31 @@ deployment.apps/nginx created
 
 ### Kubectl : Logging
 
+### Monitoring
+
+### LimitRanges
+
+- l'objet `LimitRange` permet de définir les valeurs minimum et maximum pour les ressources utilisées par les containers et les pods
+- l'objet `LimitRange` ne s'applique dans un seul `namespace` mais peut être utilisé pour d'autres `namespaces`
+- les limites spécifiées s'appliquent à chaque pod/container créé dans le `namespace`
+- le `LimitRange` ne limite pas le nombre total de ressources disponibles dans le namespace
+
+
+### LimitRanges 
+
+```yaml
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: limit-example
+spec:
+  limits:
+  - default:
+      memory: 512Mi
+    defaultRequest:
+      memory: 256 Mi
+    type: Container
+  ```
+
+### RessourceQuotas
+
