@@ -77,5 +77,23 @@ spec:
     type: Container
   ```
 
-### RessourceQuotas
+### ResourceQuotas
 
+- un objet `ResourceQuota` limite le total des ressources de calcul consommées par les pods ainsi que
+  le total de l'espace de stockage consommé par les `PersistentVolumeClaims` dans un namespace
+- il permet aussi de limiter le nombre de `pods`, `PVCs` et autres objets qui peuvent être créés dans un `namespace`
+
+### ResourceQuotas 
+
+```yaml
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: cpu-and-ram
+spec:
+  hard:
+    requests.cpu: 400m
+    requests.memory: 200Mi
+    limits.cpu: 600m
+    limits.memory: 500Mi
+```
