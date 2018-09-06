@@ -92,6 +92,32 @@ rules:
 
 ### Gestion des secrets
 
+- les `secrets` peuvent être montés comme des volumes de données dans des pods
+- les `secrets` peuvent être exposés comme des variables d'environnement.
+
+
+### Gestion des secrets
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+spec:
+  containers:
+  - name: mypod
+    image: redis
+    volumeMounts:
+    - name: foo
+      mountPath: "/etc/foo"
+      readOnly: true
+  volumes:
+  - name: foo
+    secret:
+      secretName: mysecret
+```
+
+
 ### Introduction au Pod Security Policy
 
 ### Introduction au Network Policy

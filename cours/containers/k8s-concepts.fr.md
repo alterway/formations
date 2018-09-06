@@ -264,7 +264,7 @@ spec:
 
 - Pare-feu entre les éléments composant une application :
 
-```
+```yaml
 apiVersion: extensions/v1beta1
 kind: NetworkPolicy
 metadata:
