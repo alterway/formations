@@ -7,11 +7,11 @@
 - DaemonSets
 - Services
 - Namespaces
-- 
+- Ingress
 - NetworkPolicy
 - Volumes
 
-### Kubernetes : POD
+### Kubernetes : Pod
 
 - Ensemble logique composé de un ou plusieurs conteneurs
 - Les conteneurs d'un pod fonctionnent ensemble (instanciation et destruction) et sont orchestrés sur un même hôte
@@ -21,7 +21,7 @@
     - Volumes
 - C'est la plus petite et la plus simple unité dans Kubernetes
 
-### Kubernetes : POD
+### Kubernetes : Pod
 
 - Les Pods sont définis en YAML comme les fichiers `docker-compose` :
 
@@ -68,8 +68,8 @@ spec:
 ### Kubernetes : Services {-}
 
 - Abstraction des Pods et Replication Controllers, sous forme d'une VIP de service
-- Rendre un ensemble de PODs accessibles depuis l'extérieur
-- Load Balancing entre les PODs d'un même service
+- Rendre un ensemble de Pods accessibles depuis l'extérieur
+- Load Balancing entre les Pods d'un même service
 
 ### Kubernetes : Services
 
