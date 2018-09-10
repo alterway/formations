@@ -80,7 +80,6 @@ spec:
     - Openstack 
 - `NodePort` : chaque noeud du cluster ouvre un port  statique et redirige le trafic vers le port indiqué
 - `ClusterIP` : IP dans le réseau privé Kubernetes (VIP)
-- `LoadBalancer` :  expose le service à l'externe en utilisant le loadbalancer d'un cloud provider (AWS, Google, Azure)
 - `ExternalIP`: le routage de l'IP publique vers le cluster est manuel
 
 ### Kubernetes : Services
@@ -107,7 +106,7 @@ spec:
     app: guestbook
     tier: frontend
 ```
-### Kubenetes : Services 
+### Kubenetes : Services
 
 Il est aussi possible de mapper un service avec un nom de domaine en spécifiant le paramètre `spec.externalName`.
 
@@ -120,19 +119,14 @@ metadata:
 spec:
   type: ExternalName
   externalName: my.database.example.com
-  ```
+```
 
-### Kubernetes: Ingress
+### Kubernetes : Ingress
 
 - l'objet `Ingress` permet d'exposer un service à l'extérieur d'un cluster Kubernetes
 - il permet de fournir une URL visible permettant d'accéder un Service Kubernetes
-- il permet d'avoir des terminations TLS, de faire du _Load Balancing_, etc...
-- Pour utiliser un `Ingress`, il faut un controlleur Ingress. Il existe plusieurs offres sur le marché:
-    - Traefik : <https://github.com/containous/traefik>
-    - Istio: <https://github.com/istio/istio>
-    - Linkerd: <https://github.com/linkerd/linkerd>
-    - Contour: <https://www.github.com/heptio/contour/>
-    - Nginx Controller : <https://github.com/kubernetes/ingress-nginx>
+- il permet d'avoir des terminaisons TLS, de faire du _Load Balancing_, etc...
+
 
 ### Kubernetes : Ingress
 
@@ -152,16 +146,26 @@ spec:
           servicePort: 80
 ```
 
+### Kubernetes : Ingress Controller
+
+Pour utiliser un `Ingress`, il faut un Ingress Controller. Il existe plusieurs offres sur le marché :
+
+  - Traefik : <https://github.com/containous/traefik>
+  - Istio: <https://github.com/istio/istio>
+  - Linkerd: <https://github.com/linkerd/linkerd>
+  - Contour: <https://www.github.com/heptio/contour/>
+  - Nginx Controller : <https://github.com/kubernetes/ingress-nginx>
+
 ### Kubernetes : DaemonSet
 
-- assure que tous les noeuds exécutent une copie du pod sur tous les noeuds du cluster
-- ne connaît pas la notion de `replicas`. 
-- utilisé pour des besoins particuliers comme:
+- Assure que tous les noeuds exécutent une copie du pod
+- Ne connaît pas la notion de `replicas`.
+- Utilisé pour des besoins particuliers comme:
   * l'exécution d'agents de collection de logs comme `fluentd` ou `logstash`
   * l'exécution de pilotes pour du matériel comme `nvidia-plugin`
-  * l'exécution d'agents de supervision comme NewRelic agent, Prometheus node exporter
+  * l'exécution d'agents de supervision
 
-  P.S.: kubectl ne peut pas créer de DaemonSet
+  NB : kubectl ne peut pas créer de DaemonSet
 
 ### Kubernetes : DaemonSet
 
@@ -188,9 +192,10 @@ metadata:
 
 ### Kubernetes : StatefulSet
 
--Similaire au `Deployment`
+Similaire au `Deployment`
+
 - Les pods possèdent des identifiants uniques.
-- chaque replica de pod est créé par ordre d'index
+- Chaque replica de pod est créé par ordre d'index
 - Nécessite un `Persistent Volume` et un `Storage Class`.
 - Supprimer un StatefulSet ne supprime pas le PV associé
 
@@ -204,33 +209,19 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: nginx # has to match .spec.template.metadata.labels
+      app: nginx
   serviceName: "nginx"
-  replicas: 3 # by default is 1
+  replicas: 3
   template:
     metadata:
       labels:
-        app: nginx # has to match .spec.selector.matchLabels
+        app: nginx
     spec:
-      terminationGracePeriodSeconds: 10
       containers:
       - name: nginx
-        image: k8s.gcr.io/nginx-slim:0.27
+        image: nginx
         ports:
         - containerPort: 80
-          name: web
-        volumeMounts:
-        - name: www
-          mountPath: /usr/share/nginx/html
-  volumeClaimTemplates:
-  - metadata:
-      name: www
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      storageClassName: "my-storage-class"
-      resources:
-        requests:
-          storage: 1Gi
 ```
 
 ### Kubernetes : Labels
@@ -266,3 +257,4 @@ spec:
     - Autres...
 - Les objets existent uniquement au sein d'un namespace donné
 - Évitent la collision de nom d'objets
+

@@ -52,9 +52,9 @@ parameters:
   iopsPerGB: "10"
 ```
 
-### Kubernetes : PervistentVolumeClaims
+### Kubernetes : PersistentVolumeClaims
 
-- resource utilisée et vue comme une requête pour solliciter du stockage persistant
+- ressource utilisée et vue comme une requête pour solliciter du stockage persistant
 - offre aux PV une variété d'options en fonction du cas d'utilisation
 - utilisé par les `StatefulSets` pour solliciter du stockage (Utilisaltion du champ `volumeClaimTemplates`)
 
@@ -81,10 +81,10 @@ spec:
 
 ### Kubernetes : PersistentVolume
 
-- composant de stockage dans le cluster kubernetes
-- stockage externe aux noeuds du cluster 
-- cycle de vie d'indépendant du pod qui le consomme
-- peut être provisionné manuellement par un administrateur ou dynamiquement grâce un `StorageClass`
+- Composant de stockage dans le cluster kubernetes
+- Stockage externe aux noeuds du cluster
+- Cycle de vie d'indépendant du pod qui le consomme
+- Peut être provisionné manuellement par un administrateur ou dynamiquement grâce un `StorageClass`
 
 ### Kubernetes : PersistentVolume
 
@@ -102,3 +102,4 @@ spec:
   hostPath:
     path: "/tmp/data"
 ```
+

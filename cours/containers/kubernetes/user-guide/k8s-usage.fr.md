@@ -12,8 +12,8 @@
 - Création d'un cluster Kubernetes
 
 ```console
-$minikube get-k8s-versions
-The following Kubernetes versions are available when using the localkube bootstrapper: 
+$ minikube get-k8s-versions
+The following Kubernetes versions are available when using the localkube bootstrapper:
 	- v1.10.0
 	- v1.9.4
 	- v1.9.0
@@ -23,7 +23,7 @@ The following Kubernetes versions are available when using the localkube bootstr
 ```
 
 ```console
-$minikube start --kubernetes-version="v1.11.1"
+$ minikube start --kubernetes-version="v1.11.1"
 Starting local Kubernetes v1.11.1 cluster...
 Starting VM...
 Getting VM IP address...
@@ -50,23 +50,23 @@ Client Version: v1.11.1
 Server Version: v1.11.1
 ```
 ```console
-$kubectl get componentstatuses 
+$ kubectl get componentstatuses
 NAME                      STATUS    MESSAGE              ERROR
 controller-manager   Healthy      ok                   
 scheduler                  Healthy      ok                   
 etcd-0                       Healthy      {"health": "true"}
 ```
 
-### Kubernetes : Kubectl 
+### Kubernetes : Kubectl
 
-- le seul (ou presque) outil pour interagir avec des clusters Kubernetes
-- utilise un fichier de configuration pour communiquer avec l'API de Kubernetes 
-- le(s) fichier(s) se trouve(nt) par défaut dans `~/.kube/config`
-- le fichier de config. contient :
-    - l'adresse(URI) de l'APIServer
-    - les chemins des certificats TLS utilisés pour l'authentification
+- Le seul (ou presque) outil pour interagir avec des clusters Kubernetes
+- Utilise un fichier de configuration pour communiquer avec l'API de Kubernetes
+- Le(s) fichier(s) se trouve(nt) par défaut dans `~/.kube/config`
+- Le fichier de config. contient :
+    - L'adresse(URI) de l'APIServer
+    - Les chemins des certificats TLS utilisés pour l'authentification
 
-- fichier `kubeconfig` peut être passé en paramètre de kubectl avec le _flag_ `--kubeconfig`
+- Fichier `kubeconfig` peut être passé en paramètre de kubectl avec le _flag_ `--kubeconfig`
 
 ### Kubernetes : Kubectl
 
@@ -103,7 +103,7 @@ kubectl get no
 kubectl get nodes
 ```
 
-### Kubernetes : Kubectl 
+### Kubernetes : Kubectl
 
 - afficher les _namespaces_
 
@@ -119,7 +119,7 @@ kubectl get namespaces
 kubectl get -n kube-system get pods
 ```
 
-### Kubernetes : Kubectl 
+### Kubernetes : Kubectl
 
 - affficher les pods (pour le namespace _default_)
 
@@ -130,7 +130,7 @@ kubectl get pod
 
 ### Kubernetes : Kubectl
 
-- afficher les services (pour le namespace par défaut)*
+- afficher les services (pour le namespace par défaut)
 
 ```console
 kubectl get services
@@ -139,10 +139,9 @@ kubectl get svc
 
 ### Kubernetes : Kubernetes Dashboard
 
-- Interface graphique web pour les clusters Kubernetes 
-- permet de gérer les différents objets Kubernetes créés dans le(s) cluster(s). 
-- 
-- installé par défaut dans minikube
+- Interface graphique web pour les clusters Kubernetes
+- Permet de gérer les différents objets Kubernetes créés dans le(s) cluster(s).
+- Installé par défaut dans minikube
 
 ### Kubernetes : Kubernetes Dashboard
 ![Kubernetes Dashboard](https://raw.githubusercontent.com/kubernetes/website/master/static/images/docs/ui-dashboard.png)
@@ -176,13 +175,13 @@ metadata:
 
 - Objet Kubernetes de type `secret` utilisé pour stocker des informations sensibles comme les mots de passe, les _tokens_, les clés SSH...
 - Similaire à un `ConfigMap`, à la seule différence que le contenu des entrées présentes dans le champ `data` sont encodés en base64.
-- il est possible de directement créer un `Secret` spécifique à l'authentification sur un registre Docker privé. 
-- Il est possible de directement créer un `Secret` à partir d'une 
+- il est possible de directement créer un `Secret` spécifique à l'authentification sur un registre Docker privé.
+- Il est possible de directement créer un `Secret` à partir d'une
 
 ### Kubernetes : Secrets
 
 ```console
-kubectl create secret docker-registry mydockerhubsecret \
+$ kubectl create secret docker-registry mydockerhubsecret \
 --docker-username="employeeusername" --docker-password="employeepassword" \
 --docker-email="employee.email@organization.com"
 ```
@@ -213,7 +212,7 @@ metadata:
 
 ### Kubernetes : Introduction to Helm
 
--`Tiller` : Serveur Helm. Il interagit avec l'APIServer de Kubernetes pour installer, mettre à jour et supprimer les ressources Kubernetes.
+- `Tiller` : Serveur Helm. Il interagit avec l'APIServer de Kubernetes pour installer, mettre à jour et supprimer les ressources Kubernetes.
 - `Chart` : Contient toutes les ressources définies et nécessaires pour éxecuter une application ou un service à  l'intérieur de cluster Kubernetes. Un chart est pratiquement un regroupement de ressources Kubernetes pré-configurées.
 - `Release` : Une instance d'un chart helm s'éxécutant dans un cluster Kubernetes.
 - `Repository` : répertoire ou espace (public ou privé) où sont regroupés les `charts`. 

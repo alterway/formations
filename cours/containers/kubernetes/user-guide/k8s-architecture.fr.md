@@ -109,4 +109,3 @@ spec:
 - Éprouvée par Google
 - S'intègre parfaitement à d'autres _Container Runtime Interfaces (CRI)_ comme containerd, cri-o, rktlet, fraki, etc...
 
-### Kubernetes : Conclusion
