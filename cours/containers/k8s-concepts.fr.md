@@ -255,7 +255,7 @@ spec:
 - Implémente les Ingress Resources
 
 - Plusieurs implémentations :
-    - [Træfɪk](https://traefik.io/)
+    - [Træfik](https://traefik.io/)
     - [nginx](https://github.com/kubernetes/contrib/tree/master/ingress/controllers)
 
 ### Kubernetes : NetworkPolicy
