@@ -25,7 +25,7 @@
 
 - Les Pods sont définis en YAML comme les fichiers `docker-compose` :
 
-```
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -73,9 +73,9 @@ spec:
 
 ### Kubernetes : Services
 
-- Load Balancing : intégration avec des cloud provider :
-    - AWS ELB
-    - GCP
+- Load Balancing : intégration avec des cloud providers :
+    - Amazon Web Services
+    - Google Cloud Platform
     - Azure Kubernetes Service
     - Openstack 
 - `NodePort` : chaque noeud du cluster ouvre un port  statique et redirige le trafic vers le port indiqué
