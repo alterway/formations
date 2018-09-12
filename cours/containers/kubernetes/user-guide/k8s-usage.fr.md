@@ -144,10 +144,10 @@ kubectl get svc
 - Installé par défaut dans minikube
 
 ### Kubernetes : Kubernetes Dashboard
-![Kubernetes Dashboard](https://raw.githubusercontent.com/kubernetes/website/master/static/images/docs/ui-dashboard.png)
+![Kubernetes Dashboard](images/kubernetes/ui-dashboard.png)
 
 ### Kubernetes : Kubernetes Dashboard
-![Logs in Kubernetes Dashboard](https://raw.githubusercontent.com/kubernetes/website/master/static/images/docs/ui-dashboard-logs-view.png)
+![Logs in Kubernetes Dashboard](images/kubernetes/ui-dashboard-logs-view.png)
 
 
 ### Kubernetes : ConfigMaps

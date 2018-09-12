@@ -7,13 +7,13 @@
 - Devenu populaire en très peu de temps
 - Premier projet de la C.N.C.F
 
-![](images/docker/k8s.png){height="100px"}
+![](images/kubernetes/kubernetes.png){height="100px"}
 
 ### CNCF
 
 *The Foundation’s mission is to create and drive the adoption of a new computing paradigm that is optimized for modern distributed systems environments capable of scaling to tens of thousands of self healing multi-tenant nodes.*
 
-![](images/docker/cncf.png){height="100px"}
+![](images/kubernetes/cncf.png){height="100px"}
 
 ### CNCF: Prérequis
 
