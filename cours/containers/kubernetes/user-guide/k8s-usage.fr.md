@@ -1,6 +1,6 @@
 ### Kubernetes : Minikube
 
-- outil permettant de démarrer rapidement un cluster _1 noeud_ Kubernetes localement pour développer des applications.
+- Outil permettant de démarrer rapidement un cluster _1 noeud_ Kubernetes localement pour développer des applications.
 - Execute Kubernetes dans une machine virtuelle
 - Nécessite des outils de virtualisation (VirtualBox, VMware Fusion, KVM, etc...)
 - Offre plusieurs version de Kubernetes à éxecuter
@@ -112,8 +112,8 @@ kubectl get ns
 kubectl get namespaces
 ```
 
-- par défaut, kubectl utilise le _namespace_ `default`
-- il est possible de sélectionner un _namespace_ avec l'option `-n` ou `--namespace`
+- Par défaut, kubectl utilise le _namespace_ `default`
+- Il est possible de sélectionner un _namespace_ avec l'option `-n` ou `--namespace`
 
 ```console
 kubectl get -n kube-system get pods
@@ -121,7 +121,7 @@ kubectl get -n kube-system get pods
 
 ### Kubernetes : Kubectl
 
-- affficher les pods (pour le namespace _default_)
+- Afficher les pods (pour le namespace _default_)
 
 ```console
 kubectl get pods
@@ -130,7 +130,7 @@ kubectl get pod
 
 ### Kubernetes : Kubectl
 
-- afficher les services (pour le namespace par défaut)
+- Afficher les services (pour le namespace par défaut)
 
 ```console
 kubectl get services
@@ -175,7 +175,7 @@ metadata:
 
 - Objet Kubernetes de type `secret` utilisé pour stocker des informations sensibles comme les mots de passe, les _tokens_, les clés SSH...
 - Similaire à un `ConfigMap`, à la seule différence que le contenu des entrées présentes dans le champ `data` sont encodés en base64.
-- il est possible de directement créer un `Secret` spécifique à l'authentification sur un registre Docker privé.
+- Il est possible de directement créer un `Secret` spécifique à l'authentification sur un registre Docker privé.
 - Il est possible de directement créer un `Secret` à partir d'une
 
 ### Kubernetes : Secrets
@@ -205,7 +205,7 @@ metadata:
 
 ### Kubernetes : Introduction to Helm
 
-- une application conçue pour faciliter l'installation et la gestion des applications sur Kubernetes.
+- Une application conçue pour faciliter l'installation et la gestion des applications sur Kubernetes.
 - Il utilise un format de paquetage appelé `Charts`.
 - Il est comparable à apt/yum/homebrew.
 - Plusieurs charts existent déjà sur le répertoire officiel : `https://github.com/kubernetes/charts`.
@@ -221,6 +221,6 @@ metadata:
 
 - Installer Helm (sur une distribution Linux):`curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash`
 - Deployer tiller :`helm init`
-- voir la liste des `charts` disponibles sur les répertoire officiel`helm search`
-- afficher la liste des `charts` disponibles pour _prometheus_ : `helm search prometheus`
-- afficher les options disponibles dans un `chart` Helm:`helm inspect stable/prometheus`
+- Voir la liste des `charts` disponibles sur les répertoire officiel`helm search`
+- Afficher la liste des `charts` disponibles pour _prometheus_ : `helm search prometheus`
+- Afficher les options disponibles dans un `chart` Helm:`helm inspect stable/prometheus`

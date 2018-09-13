@@ -7,7 +7,7 @@
 - Support de multiples backend de stockage :
     - GCE : PD
     - AWS : EBS
-    - glusterFS / NFS
+    - GlusterFS / NFS
     - Ceph
     - iSCSI
 
@@ -15,7 +15,7 @@
 
 - On déclare d'abord le volume et on l'affecte à un service :
 
-```
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -34,8 +34,8 @@ spec:
 
 ### Kubernetes : Storage Class
 
-- permet de définir les différents types de stockage disponibles
-- utilisé par les `Persistent Volumes` pour solliciter un espace de stockage au travers des `Persistent Volume Claims`
+- Permet de définir les différents types de stockage disponibles
+- Utilisé par les `Persistent Volumes` pour solliciter un espace de stockage au travers des `Persistent Volume Claims`
 
 
 ### Kubernetes : Storage Class
@@ -54,9 +54,9 @@ parameters:
 
 ### Kubernetes : PersistentVolumeClaims
 
-- ressource utilisée et vue comme une requête pour solliciter du stockage persistant
-- offre aux PV une variété d'options en fonction du cas d'utilisation
-- utilisé par les `StatefulSets` pour solliciter du stockage (Utilisaltion du champ `volumeClaimTemplates`)
+- Ressource utilisée et vue comme une requête pour solliciter du stockage persistant
+- Offre aux PV une variété d'options en fonction du cas d'utilisation
+- Utilisé par les `StatefulSets` pour solliciter du stockage (Utilisaltion du champ `volumeClaimTemplates`)
 
 ### Kubernetes : PervistentVolumeClaims
 
@@ -102,4 +102,3 @@ spec:
   hostPath:
     path: "/tmp/data"
 ```
-

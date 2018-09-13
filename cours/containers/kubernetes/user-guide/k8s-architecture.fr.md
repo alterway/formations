@@ -28,7 +28,7 @@
 - Surveille l'état des services du cluster via l'API server (*kube-apiserver*).
 - Dossier de manifest sur un noeud master :
 
-```
+```console
 ls /etc/kubernetes/manifests/
 kube-apiserver.yaml  kube-controller-manager.yaml  kube-proxy.yaml  kube-scheduler.yaml  policy-controller.yaml
 ```
