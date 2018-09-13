@@ -1,9 +1,9 @@
 ### Kubernetes : Minikube
 
 - outil permettant de démarrer rapidement un cluster _1 noeud_ Kubernetes localement pour développer des applications.
-- éxecute Kubernetes dans une machine virtuelle
-- nécessite des outils de virtualisation (VirtualBox, VMware Fusion, KVM, etc...)
-- offre plusieurs version de Kubernetes à éxecuter
+- Execute Kubernetes dans une machine virtuelle
+- Nécessite des outils de virtualisation (VirtualBox, VMware Fusion, KVM, etc...)
+- Offre plusieurs version de Kubernetes à éxecuter
 - Supporte plusieurs systèmes d'exploitation : Linux, Mac OS, Windows
 - Installation : <https://github.com/kubernetes/minikube#Installation>
 
@@ -42,7 +42,7 @@ Loading cached images from config file.
 
 ### Kubernetes : Minikube
 
-- effectuer un diagnostic basique du cluster
+- Effectuer un diagnostic basique du cluster
 
 ```console
 $ kubectl version
@@ -90,7 +90,7 @@ pods                                po                           true         Po
 
 ### Kubernetes : Kubectl
 
-- afficher les noeuds du cluster :
+- Afficher les noeuds du cluster :
 
 ```console
 kubectl get nodes
@@ -105,7 +105,7 @@ kubectl get nodes
 
 ### Kubernetes : Kubectl
 
-- afficher les _namespaces_
+- Afficher les _namespaces_
 
 ```console
 kubectl get ns

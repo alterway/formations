@@ -151,9 +151,9 @@ spec:
 Pour utiliser un `Ingress`, il faut un Ingress Controller. Il existe plusieurs offres sur le marché :
 
   - Traefik : <https://github.com/containous/traefik>
-  - Istio: <https://github.com/istio/istio>
-  - Linkerd: <https://github.com/linkerd/linkerd>
-  - Contour: <https://www.github.com/heptio/contour/>
+  - Istio : <https://github.com/istio/istio>
+  - Linkerd : <https://github.com/linkerd/linkerd>
+  - Contour : <https://www.github.com/heptio/contour/>
   - Nginx Controller : <https://github.com/kubernetes/ingress-nginx>
 
 ### Kubernetes : DaemonSet

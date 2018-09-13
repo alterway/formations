@@ -40,24 +40,35 @@
 
 ### Kubernetes : Projet
 
-- [Docs](https://kubernetes.io)
-- [Slack](http://slack.k8s.io/)
-- [Stack Overflow](https://stackoverflow.com/questions/tagged/kubernetes)
-- [Serverfault](https://stackoverflow.com/questions/taggeg/kubernetes)
-- Hébergé sur [Github](https://github.com/kubernetes/kubernetes):
-    - [Issues](https://github.com/kubernetes/kubernetes/issues)
-    - [Pull Request](https://github.com/kubernetes/kubernetes/pulls)
-    - [Release](https://github.com/kubernetes/kubernetes/releases)
-- [Projets en incubation](https://github.com/kubernetes-incubator/)
+- Docs : <https://kubernetes.io/docs/>
+- Slack : <http://slack.k8s.io/>
+- Stack Overflow : <https://stackoverflow.com/questions/tagged/kubernetes>
+- Serverfault <https://stackoverflow.com/questions/taggeg/kubernetes>
+- Hébergé sur Github : <https://github.com/kubernetes/kubernetes> :
+    - Issues : <https://github.com/kubernetes/kubernetes/issues>
+    - Pull Requests <https://github.com/kubernetes/kubernetes/pulls>
+    - Releases : <https://github.com/kubernetes/kubernetes/releases>
+- Projets en incubation : 
+    - <https://github.com/kubernetes-incubator/> (Deprécié)
+    - <https://github.com/kubernetes-sigs/>
+
+### Kubernetes : Cycle de développement
+
+- Chaque _release_ a son propre planning, pour exemple : <https://github.com/kubernetes/sig-release/tree/master/releases/release-1.12#timeline>
+- Chaque cycle de développement dure 12 semaines et peut être étendu si nécessaire
+- Features freeze
+- Code Freeze
+- Alpha Release
+- Beta Releases
+- Release Candidates
 
 ### Kubernetes : Communauté
 
-- [Contributor and community guide](https://github.com/kubernetes/community/blob/master/README.md#kubernetes-community)
-- Décomposée en [SIG](https://github.com/kubernetes/community/blob/master/sig-list.md)(Special Interest Group)
+- Contributor and community guide : <https://github.com/kubernetes/community/blob/master/README.md#kubernetes-community>
+- Décomposée en [Special Interest Groups] : <https://github.com/kubernetes/community/blob/master/sig-list.md>
 - Les SIG sont des projets, centres d'intérêts ou Working Group différents :
     - Network
     - Docs
     - AWS
     - etc
 - Chaque SIG peut avoir des guidelines différentes.
-

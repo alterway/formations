@@ -96,15 +96,15 @@ spec:
 - Implémente l'objet NetworkPolicy
 - Contrôle la communication entre les Pods
 - Externe à Kubernetes et implémenté par la solution de Networking choisie :
-    - [Calico](https://projectcalico.org/)
-    - [flannel](https://coreos.com/flannel)
-    - [Romana](https://romana.io/)
-    - [Weave](https://www.weave.works/oss/net/)
-    - [more](https://kubernetes.io/docs/concepts/cluster-administration/networking/#how-to-implement-the-kubernetes-networking-model)
+    - Calico : <https://projectcalico.org/>
+    - Flannel : <https://coreos.com/flannel>
+    - Romana : <https://romana.io/>
+    - Weave : <https://www.weave.works/oss/net/>
+    - more :  <https://kubernetes.io/docs/concepts/cluster-administration/networking/#how-to-implement-the-kubernetes-networking-model>
 
 ### Kubernetes : Aujourd'hui
 
-- Version 1.11 : stable en production
+- Version 1.11.x : stable en production
 - Solution complète et une des plus utilisées
 - Éprouvée par Google
 - S'intègre parfaitement à d'autres _Container Runtime Interfaces (CRI)_ comme containerd, cri-o, rktlet, fraki, etc...
