@@ -40,8 +40,3 @@ $ kubectl get pods --show-labels
 NAME      READY     STATUS    RESTARTS   AGE       LABELS
 nginx        1/1              Running     0                    31s          app=nginx,env=prod
 ```
-
-### Kubernetes : Update, Rollbacks
-
-*TBD*
-
