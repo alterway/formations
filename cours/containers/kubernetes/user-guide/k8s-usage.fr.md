@@ -220,7 +220,10 @@ metadata:
 ### Kubernetes : Introduction to Helm 
 
 - Installer Helm (sur une distribution Linux):`curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash`
-- Deployer tiller :`helm init`
-- Voir la liste des `charts` disponibles sur les répertoire officiel`helm search`
-- Afficher la liste des `charts` disponibles pour _prometheus_ : `helm search prometheus`
-- Afficher les options disponibles dans un `chart` Helm:`helm inspect stable/prometheus`
+- Deployer tiller : `helm init`
+- Voir la liste des `charts` disponibles sur les répertoire officiel:
+	`helm search`
+- Afficher la liste des `charts` disponibles pour _prometheus_ :
+	`helm search prometheus`
+- Afficher les options disponibles dans un `chart` Helm:
+	`helm inspect stable/prometheus`
