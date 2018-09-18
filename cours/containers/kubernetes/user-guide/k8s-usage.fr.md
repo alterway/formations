@@ -130,7 +130,7 @@ kubectl get pod
 
 ### Kubernetes : Kubectl
 
-- Afficher les services (pour le namespace par défaut)
+- Afficher les services (pour le _namespace_ `default`)
 
 ```console
 kubectl get services
