@@ -1,4 +1,4 @@
-# Kubernetes : projet, gouvernance et communauté
+# Kubernetes : Projet, gouvernance et communauté
 
 ### Kubernetes
 
@@ -43,7 +43,10 @@
 - Docs : <https://kubernetes.io/docs/>
 - Slack : <http://slack.k8s.io/>
 - Stack Overflow : <https://stackoverflow.com/questions/tagged/kubernetes>
-- Serverfault <https://stackoverflow.com/questions/taggeg/kubernetes>
+- Serverfault <https://stackoverflow.com/questions/tagged/kubernetes>
+
+### Kubernetes : Projet
+
 - Hébergé sur Github : <https://github.com/kubernetes/kubernetes> :
     - Issues : <https://github.com/kubernetes/kubernetes/issues>
     - Pull Requests <https://github.com/kubernetes/kubernetes/pulls>
@@ -72,3 +75,4 @@
     - AWS
     - etc
 - Chaque SIG peut avoir des guidelines différentes.
+

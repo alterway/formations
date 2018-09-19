@@ -3,9 +3,8 @@
 - Outil permettant de démarrer rapidement un cluster _1 noeud_ Kubernetes localement pour développer des applications.
 - Execute Kubernetes dans une machine virtuelle
 - Nécessite des outils de virtualisation (VirtualBox, VMware Fusion, KVM, etc...)
-- Offre plusieurs version de Kubernetes à éxecuter
+- Offre plusieurs versions de Kubernetes à éxecuter
 - Supporte plusieurs systèmes d'exploitation : Linux, Mac OS, Windows
-- Installation : <https://github.com/kubernetes/minikube#Installation>
 
 ### Kubernetes : Minikube
 
@@ -49,6 +48,9 @@ $ kubectl version
 Client Version: v1.11.1
 Server Version: v1.11.1
 ```
+
+### Kubernetes : Minikube
+
 ```console
 $ kubectl get componentstatuses
 NAME                      STATUS    MESSAGE              ERROR
@@ -116,7 +118,7 @@ kubectl get namespaces
 - Il est possible de sélectionner un _namespace_ avec l'option `-n` ou `--namespace`
 
 ```console
-kubectl get -n kube-system get pods
+kubectl -n kube-system get pods
 ```
 
 ### Kubernetes : Kubectl
@@ -136,19 +138,6 @@ kubectl get pod
 kubectl get services
 kubectl get svc
 ```
-
-### Kubernetes : Kubernetes Dashboard
-
-- Interface graphique web pour les clusters Kubernetes
-- Permet de gérer les différents objets Kubernetes créés dans le(s) cluster(s).
-- Installé par défaut dans minikube
-
-### Kubernetes : Kubernetes Dashboard
-![Kubernetes Dashboard](images/kubernetes/ui-dashboard.png)
-
-### Kubernetes : Kubernetes Dashboard
-![Logs in Kubernetes Dashboard](images/kubernetes/ui-dashboard-logs-view.png)
-
 
 ### Kubernetes : ConfigMaps
 
@@ -176,7 +165,7 @@ metadata:
 - Objet Kubernetes de type `secret` utilisé pour stocker des informations sensibles comme les mots de passe, les _tokens_, les clés SSH...
 - Similaire à un `ConfigMap`, à la seule différence que le contenu des entrées présentes dans le champ `data` sont encodés en base64.
 - Il est possible de directement créer un `Secret` spécifique à l'authentification sur un registre Docker privé.
-- Il est possible de directement créer un `Secret` à partir d'une
+- Il est possible de directement créer un `Secret` à partir d'un compte utilisateur et d'un mot de passe.
 
 ### Kubernetes : Secrets
 
@@ -202,6 +191,17 @@ metadata:
 	  name: main
 ```
 
+### Kubernetes : Kubernetes Dashboard
+
+- Interface graphique web pour les clusters Kubernetes
+- Permet de gérer les différents objets Kubernetes créés dans le(s) cluster(s).
+- Installé par défaut dans minikube
+
+### Kubernetes : Kubernetes Dashboard
+![Kubernetes Dashboard](images/kubernetes/ui-dashboard.png)
+
+### Kubernetes : Kubernetes Dashboard
+![Logs in Kubernetes Dashboard](images/kubernetes/ui-dashboard-logs-view.png)
 
 ### Kubernetes : Introduction to Helm
 
@@ -215,11 +215,12 @@ metadata:
 - `Tiller` : Serveur Helm. Il interagit avec l'APIServer de Kubernetes pour installer, mettre à jour et supprimer les ressources Kubernetes.
 - `Chart` : Contient toutes les ressources définies et nécessaires pour éxecuter une application ou un service à  l'intérieur de cluster Kubernetes. Un chart est pratiquement un regroupement de ressources Kubernetes pré-configurées.
 - `Release` : Une instance d'un chart helm s'éxécutant dans un cluster Kubernetes.
-- `Repository` : répertoire ou espace (public ou privé) où sont regroupés les `charts`. 
+- `Repository` : répertoire ou espace (public ou privé) où sont regroupés les `charts`.
 
 ### Kubernetes : Introduction to Helm 
 
-- Installer Helm (sur une distribution Linux):`curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash`
+- Installer Helm (sur une distribution Linux):
+`curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash`
 - Deployer tiller : `helm init`
 - Voir la liste des `charts` disponibles sur les répertoire officiel:
 	`helm search`

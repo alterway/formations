@@ -54,9 +54,3 @@ spec:
                        command: ["perl",  "-Mbignum=bpi", "-wle", "print bpi(2000)"]
 ```
 
-### Kubernetes : Run et administration
-
-- WebUI (Kubernetes Dashboard)
-- Kubectl (Outil CLI)
-- Objets: *Secret* et *ConfigMap* : paramétrages, plus sécurisés que les variables d'environnements
-

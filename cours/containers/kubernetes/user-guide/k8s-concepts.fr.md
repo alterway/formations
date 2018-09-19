@@ -65,7 +65,7 @@ spec:
         - containerPort: 80
 ```
 
-### Kubernetes : Services {-}
+### Kubernetes : Services
 
 - Abstraction des Pods et Replication Controllers, sous forme d'une VIP de service
 - Rendre un ensemble de Pods accessibles depuis l'extérieur
@@ -106,7 +106,7 @@ spec:
     app: guestbook
     tier: frontend
 ```
-### Kubenetes : Services
+### Kubernetes : Services
 
 Il est aussi possible de mapper un service avec un nom de domaine en spécifiant le paramètre `spec.externalName`.
 
@@ -247,6 +247,16 @@ spec:
     image: nginx
     ports:
     - containerPort: 80
+```
+
+### Kubernetes : Labels
+
+- La commande `kubectl get pods`, par défaut, ne liste pas les labels. Il est possible de les voir en utilisant `--show-labels`:
+
+```console
+$ kubectl get pods --show-labels
+NAME      READY     STATUS    RESTARTS   AGE       LABELS
+nginx        1/1              Running     0                    31s          app=nginx,env=prod
 ```
 
 ### Kubernetes : Namespaces
