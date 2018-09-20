@@ -8,9 +8,9 @@ RBAC : Role-Based Access Control
 
 ### Service Accounts
 
-- ressource Kubernetes permettant d'identifier une application s'éxecutant dans un pod
-- par défaut, un `ServiceAccount` par `namespace`
-- le `ServiceAccount` est formatté ainsi :
+- Objet Kubernetes permettant d'identifier une application s'éxecutant dans un pod
+- Par défaut, un `ServiceAccount` par `namespace`
+- Le `ServiceAccount` est formatté ainsi :
     `system:serviceaccount:<namespace>:<service_account_name>`
 
 ### Service Accounts
@@ -24,8 +24,8 @@ metadata:
 ```
 ### Role
 
-- l'objet `Role` est un ensemble de règles permettant de définir quelle opération (ou _verbe) peut être effectuée et sur quelle ressource
-- le `Role` ne s'applique qu'à un seul `namespace` et les ressources liées à ce `namespace`
+- L'objet `Role` est un ensemble de règles permettant de définir quelle opération (ou _verbe) peut être effectuée et sur quelle ressource
+- Le `Role` ne s'applique qu'à un seul `namespace` et les ressources liées à ce `namespace`
 
 ### Role
 
@@ -67,8 +67,8 @@ roleRef:
 
   ### ClusterRole
 
-- l'objet `ClusterRole` est similaire au `Role` à la différence qu'il n'est pas limité à un seul `namespace`
-- il permet d'accéder à des ressources non limitées à un `namespace` comme les `nodes`
+- L'objet `ClusterRole` est similaire au `Role` à la différence qu'il n'est pas limité à un seul `namespace`
+- Il permet d'accéder à des ressources non limitées à un `namespace` comme les `nodes`
 
 ### ClusterRole
 
@@ -92,8 +92,8 @@ rules:
 
 ### Gestion des secrets
 
-- les `secrets` peuvent être montés comme des volumes de données dans des pods
-- les `secrets` peuvent être exposés comme des variables d'environnement.
+- Les `secrets` peuvent être montés comme des volumes de données dans des pods
+- Les `secrets` peuvent être exposés comme des variables d'environnement.
 
 
 ### Gestion des secrets
@@ -123,12 +123,13 @@ spec:
 ### Introduction au Network Policy
 
 - La ressource `NetworkPolicy` est une spécification permettant de définir comment un ensemble de `pods` communiquent entre eux ou avec d'autres endpoints
-- le `NetworkPolicy` utilisent les labels pour sélectionner les pods sur lesquels s'appliquent les règles qui définissent le trafic alloué sur les pods sélectionnés
-- le `NetworkPolicy` est générique et fait partie de l'API Kubernetes. Il est nécessaire que le plugin réseau déployé supporte cette spécification
+- Le `NetworkPolicy` utilisent les labels pour sélectionner les pods sur lesquels s'appliquent les règles qui définissent le trafic alloué sur les pods sélectionnés
+- Le `NetworkPolicy` est générique et fait partie de l'API Kubernetes. Il est nécessaire que le plugin réseau déployé supporte cette spécification
 
 ### NetworkPolicies
 
-- exemple de `NetworkPolicy` permet de blocker le trafic entrant 
+- Exemple de `NetworkPolicy` permet de blocker le trafic entrant :
+
 ```yaml
 kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1

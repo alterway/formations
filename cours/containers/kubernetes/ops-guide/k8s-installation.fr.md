@@ -14,7 +14,7 @@ Certains pré-requis sont nécessaires avant d'installer Kubernetes :
 
 ### Installation de Kubernetes 
 
-- installer les composants Kubernetes (kubeadm, kubectl, kubelet)<https://kubernetes.io/docs/setup/independent/install-kubeadm/>
+- Installer les composants Kubernetes (kubeadm, kubectl, kubelet)<https://kubernetes.io/docs/setup/independent/install-kubeadm/>
 - Exécuter `sudo kubeadm init` sur le noeud master
 - Exécuter `sudo kubeadm join` sur les autres noeuds (avec le token fournir par la commande `kubeadm init`)
 - Copier le fichier de configuration généré par `kubeadm init`
@@ -33,13 +33,13 @@ Il existe des solutions managées pour Kubernetes :
 
 - via Ansible : kubespray <https://github.com/kuberntes-incubator/kubespray>
 - via Terraform : <https://github.com/poseidon/typhoon>
-- il existe aussi des projects open source basés sur le langage Go :
+- Il existe aussi des projects open source basés sur le langage Go :
     - kube-aws : <https://github.com/kubernetes-incubator/kube-aws>
     - kops : <https://github.com/kubernetes/kops>
 
 ### Introduction à Sonobuoy
 
-- outil de conformité de clusters Kubernetes
-- permet de facilement générer des données de diagnostics pour les applications déployées
+- Outil de conformité de clusters Kubernetes
+- Permet de facilement générer des données de diagnostics pour les applications déployées
 - <https://github.com/heptio/sonobuoy/>
 
