@@ -99,8 +99,8 @@
     "course_name": "kubernetes-user",
     "course_description": "Formation Kubernetes Utilisateur",
     "modules": [
-      "intro-osones",
       "containers/kubernetes/authors",
+      "containers/kubernetes/user-guide/intro-osones",
       "containers/kubernetes/user-guide/k8s-governance",
       "containers/kubernetes/user-guide/k8s-architecture",
       "containers/kubernetes/user-guide/k8s-concepts",
@@ -116,8 +116,8 @@
     "course_name": "kubernetes-ops",
     "course_description": "Formation Kubernetes Opérateur",
     "modules": [
-      "intro-osones",
       "containers/kubernetes/authors",
+      "containers/kubernetes/ops-guide/intro-osones",
       "containers/kubernetes/ops-guide/k8s-installation",
       "containers/kubernetes/ops-guide/k8s-operations",
       "containers/kubernetes/ops-guide/k8s-security",

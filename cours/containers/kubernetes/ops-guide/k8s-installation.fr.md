@@ -18,7 +18,7 @@ Certains pré-requis sont nécessaires avant d'installer Kubernetes :
 - Exécuter `sudo kubeadm init` sur le noeud master
 - Exécuter `sudo kubeadm join` sur les autres noeuds (avec le token fournir par la commande `kubeadm init`)
 - Copier le fichier de configuration généré par `kubeadm init`
-- Installer le plugin Réseau (Dans notre cas nous utiliserons _TBD_)
+- Installer le plugin Réseau (Dans notre cas nous utiliserons Weave Net)
 
 ### Installation de Kubernetes 
 
@@ -42,3 +42,4 @@ Il existe des solutions managées pour Kubernetes :
 - outil de conformité de clusters Kubernetes
 - permet de facilement générer des données de diagnostics pour les applications déployées
 - <https://github.com/heptio/sonobuoy/>
+
