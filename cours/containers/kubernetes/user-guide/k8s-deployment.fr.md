@@ -19,6 +19,8 @@ kubectl create -f object.yaml
 kubectl create -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook/frontend-deployment.yaml
 ```
 
+### Kubernetes : Création d'objets Kubernetes
+
 - Pour les supprimer exécuter simplement :
 
 ```console
@@ -30,3 +32,4 @@ kubectl delete -f object.yaml
 ```console
 kubectl replace -f object.yaml
 ```
+

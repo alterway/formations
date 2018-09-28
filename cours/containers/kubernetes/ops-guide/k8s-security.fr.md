@@ -1,10 +1,20 @@
-# Introduction au RBAC
+### Authentication & Autorisation 
 
-RBAC : Role-Based Access Control
+- RBAC (Role Based Access Control)
+- ABAC (Attribute-based access control)
+- WebHook
+- Certificates
+- Token
+
+
+### RBAC
+
 - 3 entités sont utilisées :
+
     - Utilisateurs représentés par les `Users` ou les `ServiceAccounts`
     - Resources représentées par les `Deployments`, `Pods`, `Services`, etc...
     - les différentes opérations possibles : `create, list, get, delete, watch, patch`
+
 
 ### Service Accounts
 
@@ -12,6 +22,7 @@ RBAC : Role-Based Access Control
 - Par défaut, un `ServiceAccount` par `namespace`
 - Le `ServiceAccount` est formatté ainsi :
     `system:serviceaccount:<namespace>:<service_account_name>`
+
 
 ### Service Accounts
 
@@ -22,10 +33,13 @@ metadata:
     name: default
     namespace: default
 ```
+
+
 ### Role
 
 - L'objet `Role` est un ensemble de règles permettant de définir quelle opération (ou _verbe) peut être effectuée et sur quelle ressource
 - Le `Role` ne s'applique qu'à un seul `namespace` et les ressources liées à ce `namespace`
+
 
 ### Role
 
@@ -36,10 +50,10 @@ metadata:
   namespace: default
   name: pod-reader
 rules:
-- apiGroups: [""] # "" indicates the core API group
+- apiGroups: [""]
   resources: ["pods"]
   verbs: ["get", "watch", "list"]
-  ```
+```
 
 ### RoleBinding
 
@@ -63,9 +77,9 @@ roleRef:
   kind: Role 
   name: pod-reader
   apiGroup: rbac.authorization.k8s.io
-  ```
+```
 
-  ### ClusterRole
+### ClusterRole
 
 - L'objet `ClusterRole` est similaire au `Role` à la différence qu'il n'est pas limité à un seul `namespace`
 - Il permet d'accéder à des ressources non limitées à un `namespace` comme les `nodes`
@@ -85,42 +99,32 @@ rules:
 
 ### ClusterRoleBinding
 
-*TBD*
-
-
-### Gestion des security contexts
-
-### Gestion des secrets
-
-- Les `secrets` peuvent être montés comme des volumes de données dans des pods
-- Les `secrets` peuvent être exposés comme des variables d'environnement.
-
-
-### Gestion des secrets
-
 ```yaml
-apiVersion: v1
-kind: Pod
+ kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: mypod
-spec:
-  containers:
-  - name: mypod
-    image: redis
-    volumeMounts:
-    - name: foo
-      mountPath: "/etc/foo"
-      readOnly: true
-  volumes:
-  - name: foo
-    secret:
-      secretName: mysecret
+  name: salme-reads-all-pods
+subjects:
+- kind: User
+  name: jsalmeron
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: secret-reader
+  apiGroup: rbac.authorization.k8s.io
 ```
 
 
-### Introduction au Pod Security Policy
+### RBAC
 
-### Introduction au Network Policy
+```
+kubectl auth can-i get pods /
+--namespace=default /
+--as=spesnova@example.com
+```
+
+
+### NetworkPolicies
 
 - La ressource `NetworkPolicy` est une spécification permettant de définir comment un ensemble de `pods` communiquent entre eux ou avec d'autres endpoints
 - Le `NetworkPolicy` utilisent les labels pour sélectionner les pods sur lesquels s'appliquent les règles qui définissent le trafic alloué sur les pods sélectionnés
@@ -128,7 +132,15 @@ spec:
 
 ### NetworkPolicies
 
-- Exemple de `NetworkPolicy` permet de blocker le trafic entrant :
+- DENY tout le trafic sur une application
+- LIMIT le trafic sur une application 
+- DENY le trafic all non alloué dans un namespace
+- DENY tout le trafic venant d'autres namespaces
+- exemples de Network Policies : <https://github.com/ahmetb/kubernetes-network-policy-recipes>
+
+### NetworkPolicies
+
+- Exemple de `NetworkPolicy` permettant de blocker le trafic entrant :
 
 ```yaml
 kind: NetworkPolicy
@@ -140,4 +152,32 @@ spec:
     matchLabels:
       app: web
   ingress: []
-  ```
+```
+
+### PodSecurityPolicies
+
+- Nécessite d'être activés spécifiquement
+- Permet de définir ce qui est alloué pour l'éxecution
+- Il faut une PSP par défaut
+- A utiliser dans un contexte multitenant
+- Peut-être combiné avec le RBAC
+- Attention: Activer cette fonctionnalité peut endommager votre environnement
+
+
+### Admission Controllers
+
+- Interceptes les requêtes sur l'API Kubernetes
+- Peut effectuer des modifications si nécessaires
+- Conception personnalisée possible
+
+
+### Admission Controllers
+
+- `DenyEscalatingExec`
+- `ImagePolicyWebhook`
+- `NodeRestriction`
+- `PodSecurityPolicy`
+- `SecurityContextDeny`
+- `ServiceAccount`
+
+

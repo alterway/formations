@@ -49,9 +49,64 @@ deployment.apps/nginx created
 - Il est possible de changer l'image d'un container utilisée par un _Deployment_ : 
 `kubectl set image deployment nginx nginx=nginx:1.15`
 
+### Kubectl : Advanced Usage 
+
+- Dry run. Afficher les objets de l'API correspondant sans les créer :
+`kubectl run nginx --image=nginx --dry-run`
+  
+- Démarrer un container en utiliser une commande différente et des arguments différents :
+```console
+kubectl run nginx --image=nginx \
+--command -- <cmd> <arg1> ... <argN>
+```
+
+- Démarrer un Cron Job qui calcule π et l'affiche toutes les 5 minutes :
+```console
+kubectl run pi --schedule="0/5 * * * ?" --image=perl --restart=OnFailure \
+-- perl -Mbignum=bpi -wle 'print bpi(2000)'
+```
+
+
+### Kubectl : Advanced Usage
+
+- Accéder à la console d'un container :
+`kubectl run -i --tty busybox --image=busybox -- sh`
+
+- S'attacher à un container existant :
+`kubectl attach my-pod -i `
+
+- Accéder en local à un service via un port
+`kubectl port-forward my-svc 6000`
+
+
 ### Kubectl : Logging
 
-### Monitoring
+- Utiliser `kubectl` pour diagnostiquer les applications et le cluster kubernetes :
+
+kubectl cluster-info <br/>
+kubectl get events  <br/>
+kubectl describe node <NODE_NAME> <br/>
+kubectl  logs (-f) <POD_NAME> <br/>
+
+
+### Kubectl : Maintenance
+
+- Obtenir la liste des noeuds ainsi que les informations détaillées :
+
+```console
+# kubectl get nodes
+# kubectl describe nodes
+```
+
+### Kubectl : Maintenance
+
+- Marquer le noeud comme _unschedulable_ (+ drainer les pods) et _schedulable_ :
+
+```
+kubectl cordon <NODE_NAME>
+kubectl drain <NDOE_NAME>
+kubectl uncordon <NODE_NAME>
+```
 
 ### LimitRanges
 
@@ -75,7 +130,7 @@ spec:
     defaultRequest:
       memory: 256 Mi
     type: Container
-  ```
+```
 
 ### ResourceQuotas
 

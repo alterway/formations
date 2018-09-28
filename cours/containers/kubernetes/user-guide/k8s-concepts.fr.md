@@ -84,7 +84,7 @@ spec:
 
 ### Kubernetes : Services
 
-*Picture of Service*
+![](images/services.png)
 
 ### Kubernetes : Services
 

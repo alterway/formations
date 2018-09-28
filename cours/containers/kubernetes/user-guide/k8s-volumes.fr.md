@@ -58,7 +58,7 @@ parameters:
 - Offre aux PV une variété d'options en fonction du cas d'utilisation
 - Utilisé par les `StatefulSets` pour solliciter du stockage (Utilisaltion du champ `volumeClaimTemplates`)
 
-### Kubernetes : PervistentVolumeClaims
+### Kubernetes : PersistentVolumeClaims
 
 ```yaml
 apiVersion: v1
@@ -102,3 +102,4 @@ spec:
   hostPath:
     path: "/tmp/data"
 ```
+

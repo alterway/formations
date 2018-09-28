@@ -21,6 +21,8 @@ The following Kubernetes versions are available when using the localkube bootstr
 	- v1.7.4
 ```
 
+### Kubernetes : Minikube
+
 ```console
 $ minikube start --kubernetes-version="v1.11.1"
 Starting local Kubernetes v1.11.1 cluster...
@@ -197,11 +199,25 @@ metadata:
 - Permet de gérer les différents objets Kubernetes créés dans le(s) cluster(s).
 - Installé par défaut dans minikube
 
-### Kubernetes : Kubernetes Dashboard
-![Kubernetes Dashboard](images/kubernetes/ui-dashboard.png)
 
 ### Kubernetes : Kubernetes Dashboard
-![Logs in Kubernetes Dashboard](images/kubernetes/ui-dashboard-logs-view.png)
+![](images/kubernetes/ui-dashboard.png)
+
+### Kubernetes : Kubernetes Dashboard
+
+- Pour déployer le Dashboard, éxecuter la commande suivante:
+```console
+$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
+```
+
+- Pour accéder au Dashboard, il faut établir une communication entre votre poste et le cluster Kubernetes :
+```console
+$ kubectl proxy
+```
+
+- Now access Dashboard at:
+<http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/>
+
 
 ### Kubernetes : Introduction to Helm
 

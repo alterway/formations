@@ -15,13 +15,13 @@
 
 ![](images/kubernetes/cncf.png){height="100px"}
 
-### CNCF: Prérequis
+### CNCF : Prérequis
 
 - Distribuer sous forme de conteneurs
 - Gestion dynamique de la configuration
 - Orienté micro services
 
-### CNCF: Les rôles
+### CNCF : Les rôles
 
 - Intendance des projets
 - Faire grossir et évoluer l'écosystème
@@ -42,6 +42,7 @@
 
 - Docs : <https://kubernetes.io/docs/>
 - Slack : <http://slack.k8s.io/>
+- Discuss : <https://discuss.kubernetes.io>
 - Stack Overflow : <https://stackoverflow.com/questions/tagged/kubernetes>
 - Serverfault <https://stackoverflow.com/questions/tagged/kubernetes>
 
