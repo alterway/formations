@@ -14,7 +14,7 @@ Certains pré-requis sont nécessaires avant d'installer Kubernetes :
 
 ### Installation de Kubernetes 
 
-- Installer les composants Kubernetes (kubeadm, kubectl, kubelet)<https://kubernetes.io/docs/setup/independent/install-kubeadm/>
+- Installer les composants Kubernetes (kubeadm, kubectl, kubelet) : <https://kubernetes.io/docs/setup/independent/install-kubeadm/>
 - Exécuter `sudo kubeadm init` sur le noeud master
 - Exécuter `sudo kubeadm join` sur les autres noeuds (avec le token fournir par la commande `kubeadm init`)
 - Copier le fichier de configuration généré par `kubeadm init`
@@ -26,12 +26,14 @@ Il existe des solutions managées pour Kubernetes :
 
 - Azure Kubernetes Service : <https://azure.microsoft.com/en-us/services/kubernetes-service/>
 - Google Kubernetes Engine : <https://cloud.google.com/kubernetes-engine/>
-- Elastic Kubernetes Services: <https://aws.amazon.com/eks/>
-- Docker for mac : <https://docs.docker.com/docker-for-mac/kubernetes/>
+- Elastic Kubernetes Service: <https://aws.amazon.com/eks/>
+- IBM Cloud Kubernetes Service : <https://www.ibm.com/cloud/container-service>
+
+
 
 ### Installation de Kubernetes
 
-- via Ansible : kubespray <https://github.com/kuberntes-incubator/kubespray>
+- Kubespray(via Ansible) : <https://github.com/kuberntes-incubator/kubespray>
 - via Terraform : <https://github.com/poseidon/typhoon>
 - Il existe aussi des projects open source basés sur le langage Go :
     - kube-aws : <https://github.com/kubernetes-incubator/kube-aws>

@@ -21,7 +21,7 @@
 - Objet Kubernetes permettant d'identifier une application s'éxecutant dans un pod
 - Par défaut, un `ServiceAccount` par `namespace`
 - Le `ServiceAccount` est formatté ainsi :
-    `system:serviceaccount:<namespace>:<service_account_name>`
+`system:serviceaccount:<namespace>:<service_account_name>`
 
 
 ### Service Accounts

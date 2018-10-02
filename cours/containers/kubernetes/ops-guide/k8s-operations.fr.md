@@ -1,18 +1,14 @@
 ### Kubectl : Advanced Usage
 
 - Il est possible de mettre à jour un service sans incident grâce ce qui est appelé le _rolling-update_. 
-- Avec les _rolling updates_, les resources qu'expose un objet `Service` se mettent à jour progressivement.
+- Avec les _rolling updates_, les resources exposées par un objet `Service` se mettent à jour progressivement.
 - Seuls les objets `Deployments`, `DaemonSet` et `StatefulSet` support les _rolling updates_.
 - Les arguments `maxSurge` et `maxUnavailabe` définissent le rythme du _rolling update_.
-- La commande `kubectl rollout` permet de suivre les _rolling updates_ éffectués.
+- La commande `kubectl rollout` permet de suivre les _rolling updates_ effectués.
 
 ### Kubectl : Advanced Usage
 
 ```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: nginx
 spec:
   selector:
     matchLabels:
@@ -23,15 +19,6 @@ spec:
       maxSurge: 1
       maxUnavailable: 0
     type: RollingUpdate
-  template:
-    metadata:
-      name: nginx
-      labels:
-        app: frontend
-    spec:
-      containers:
-        - image: nginx:1.9.1
-          name: nginx
 ```
 
 ### Kubectl : Advanced Usage
@@ -43,7 +30,7 @@ deployment.apps/nginx created
 
 ### Kubectl : Advanced Usage
 
-- Il est possible d'augmenter le nombre de pods avec la commande `kubectl scale` :
+- Il est possible d'augmenter le nombre de pods  :
 `kubectl scale --replicas=5 deployment nginx`
 
 - Il est possible de changer l'image d'un container utilisée par un _Deployment_ : 
@@ -95,7 +82,7 @@ kubectl  logs (-f) <POD_NAME> <br/>
 
 ```console
 # kubectl get nodes
-# kubectl describe nodes
+# kubectl describe node <NODE_NAME>
 ```
 
 ### Kubectl : Maintenance
@@ -104,14 +91,14 @@ kubectl  logs (-f) <POD_NAME> <br/>
 
 ```
 kubectl cordon <NODE_NAME>
-kubectl drain <NDOE_NAME>
+kubectl drain <NODE_NAME>
 kubectl uncordon <NODE_NAME>
 ```
 
 ### LimitRanges
 
 - L'objet `LimitRange` permet de définir les valeurs minimum et maximum pour les ressources utilisées par les containers et les pods
-- L'objet `LimitRange` ne s'applique dans un seul `namespace` mais peut être utilisé pour d'autres `namespaces`
+- L'objet `LimitRange` ne s'applique que dans un seul `namespace` mais peut être utilisé pour d'autres `namespaces`
 - Les limites spécifiées s'appliquent à chaque pod/container créé dans le `namespace`
 - Le `LimitRange` ne limite pas le nombre total de ressources disponibles dans le namespace
 

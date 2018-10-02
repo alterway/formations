@@ -8,5 +8,5 @@ Arnaud Meukam
 
 - `Bug Triage Shadow (Kubernetes v1.12)`
 - `Enhancements Shadow (Kubernetes v1.13)`
-- `Volunteer inf SIG-Contribex (Kubernetes Project)`
+- `Volunteer in SIG-Contribex (Kubernetes Project)`
 
