@@ -31,16 +31,22 @@ deployment.apps/nginx created
 ### Kubectl : Advanced Usage
 
 - Il est possible d'augmenter le nombre de pods  :
-`kubectl scale --replicas=5 deployment nginx`
+```console
+kubectl scale --replicas=5 deployment nginx
+```
 
 - Il est possible de changer l'image d'un container utilisée par un _Deployment_ : 
-`kubectl set image deployment nginx nginx=nginx:1.15`
+```console
+kubectl set image deployment nginx nginx=nginx:1.15
+```
 
 ### Kubectl : Advanced Usage 
 
 - Dry run. Afficher les objets de l'API correspondant sans les créer :
-`kubectl run nginx --image=nginx --dry-run`
-  
+```console
+kubectl run nginx --image=nginx --dry-run
+```  
+
 - Démarrer un container en utiliser une commande différente et des arguments différents :
 ```console
 kubectl run nginx --image=nginx \

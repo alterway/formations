@@ -6,11 +6,11 @@
 
 ### Installation de Kubernetes
 
-Certains pré-requis sont nécessaires avant d'installer Kubernetes : 
+* Certains pré-requis sont nécessaires avant d'installer Kubernetes : 
 
-- Désactiver le swap 
-- Assurer que les ports requis soient ouverts : <https://kubernetes.io/docs/setup/independent/install-kubeadm/#check-required-ports>
-- Installer Docker : <https://docs.docker.com/install>
+    * Désactiver le swap 
+    * Assurer que les ports requis soient ouverts : <https://kubernetes.io/docs/setup/independent/install-kubeadm/#check-required-ports>
+    * Installer Docker : <https://docs.docker.com/install>
 
 ### Installation de Kubernetes 
 
@@ -22,12 +22,12 @@ Certains pré-requis sont nécessaires avant d'installer Kubernetes :
 
 ### Installation de Kubernetes 
 
-Il existe des solutions managées pour Kubernetes :
+* Il existe des solutions managées pour Kubernetes :
 
-- Azure Kubernetes Service : <https://azure.microsoft.com/en-us/services/kubernetes-service/>
-- Google Kubernetes Engine : <https://cloud.google.com/kubernetes-engine/>
-- Elastic Kubernetes Service: <https://aws.amazon.com/eks/>
-- IBM Cloud Kubernetes Service : <https://www.ibm.com/cloud/container-service>
+    * Azure Kubernetes Service : <https://azure.microsoft.com/en-us/services/kubernetes-service/>
+    * Google Kubernetes Engine : <https://cloud.google.com/kubernetes-engine/>
+    * Elastic Kubernetes Service: <https://aws.amazon.com/eks/>
+    * IBM Cloud Kubernetes Service : <https://www.ibm.com/cloud/container-service>
 
 
 

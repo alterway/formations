@@ -21,7 +21,9 @@
 - Objet Kubernetes permettant d'identifier une application s'éxecutant dans un pod
 - Par défaut, un `ServiceAccount` par `namespace`
 - Le `ServiceAccount` est formatté ainsi :
-`system:serviceaccount:<namespace>:<service_account_name>`
+```
+system:serviceaccount:<namespace>:<service_account_name>
+```
 
 
 ### Service Accounts
@@ -37,8 +39,10 @@ metadata:
 
 ### Role
 
-- L'objet `Role` est un ensemble de règles permettant de définir quelle opération (ou _verbe) peut être effectuée et sur quelle ressource
+- L'objet `Role` est un ensemble de règles permettant de définir quelle opération peut être effectuée et sur quelle ressource
 - Le `Role` ne s'applique qu'à un seul `namespace` et les ressources liées à ce `namespace`
+- Un verbe va permettre d'identifier une action : 
+  _create,list,get,watch,delete_
 
 
 ### Role
@@ -118,9 +122,7 @@ roleRef:
 ### RBAC
 
 ```
-kubectl auth can-i get pods /
---namespace=default /
---as=spesnova@example.com
+kubectl auth can-i create pods --all-namespaces
 ```
 
 
