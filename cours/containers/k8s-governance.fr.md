@@ -1,6 +1,6 @@
 # Kubernetes : projet, gouvernance et communauté
 
-### Kubernetes (K8s)
+### Kubernetes
 
 - COE développé par Google, devenu open source en 2014
 
@@ -54,7 +54,7 @@ The Foundation’s mission is to create and drive the adoption of a new computin
 
 - [Docs](https://kubernetes.io)
 
-- [Slack](http://slack.k8s.io/)
+- [Slack](http://
 
 - [Stack Overflow](https://stackoverflow.com/questions/tagged/kubernetes)
 

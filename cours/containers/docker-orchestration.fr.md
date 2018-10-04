@@ -124,7 +124,7 @@ docker
 
 ![](images/docker/mesos.png){height="100px"}
 
-### Kubernetes (K8s)
+### Kubernetes
 
 - COE développé par Google, devenu open source en 2014
 

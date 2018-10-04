@@ -124,33 +124,6 @@ spec:
 
 - Évitent la collision de nom d'objets
 
-### Kubernetes : Labels
-
-- Système de clé/valeur
-
-- Organiser les différents objets de Kubernetes (PODs, RC, Services, etc.) d'une manière cohérente qui reflète la structure de l'application
-
-- Corréler des éléments de Kubernetes : par exemple un service vers des PODs
-
-### Kubernetes : Labels
-
-- Exemple de label :
-
-```
-apiVersion: v1
-kind: Pod
-metadata:
-  name: nginx
-  labels:
-    app: nginx
-spec:
-  containers:
-  - name: nginx
-    image: nginx
-    ports:
-    - containerPort: 80
-```
-
 ### Kubernetes : Services
 
 - Abstraction des PODs et RCs, sous forme d'une VIP de service
@@ -282,7 +255,7 @@ spec:
 - Implémente les Ingress Resources
 
 - Plusieurs implémentations :
-    - [Træfɪk](https://traefik.io/)
+    - [Træfik](https://traefik.io/)
     - [nginx](https://github.com/kubernetes/contrib/tree/master/ingress/controllers)
 
 ### Kubernetes : NetworkPolicy
@@ -291,7 +264,7 @@ spec:
 
 - Pare-feu entre les éléments composant une application :
 
-```
+```yaml
 apiVersion: extensions/v1beta1
 kind: NetworkPolicy
 metadata:

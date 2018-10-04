@@ -3,11 +3,8 @@
 ### Kubernetes : Composants
 
 - Kubernetes est écrit en Go, compilé statiquement.
-
 - Un ensemble de binaires sans dépendances
-
 - Faciles à conteneuriser et à packager
-
 - Peut se déployer uniquement avec des conteneurs sans dépendances d'OS
 
 ### Kubernetes : Composants
@@ -25,12 +22,34 @@
 ### Kubernetes : kubelet
 
 - Service principal de Kubernetes
-
 - Permet à Kubernetes de s'auto configurer :
-    - Surveille un dossier contenant les *manifests* (fichiers YAML des différents composants de Kubenertes).
+    - Surveille un dossier contenant les *manifests* (fichiers YAML des différents composant de Kubernetes).
     - Applique les modifications si besoin (upgrade, rollback).
-
 - Surveille l'état des services du cluster via l'API server (*kube-apiserver*).
+
+### Kubernetes : kube-apiserver
+
+- Les configurations d'objets (Pods, Service, RC, etc.) se font via l'API server
+- Un point d'accès à l'état du cluster aux autres composants via une API REST
+- Tous les composants sont reliés à l'API server
+
+### Kubernetes : kube-scheduler
+
+- Planifie les ressources sur le cluster
+- En fonction de règles implicites (CPU, RAM, stockage disponible, etc.)
+- En fonction de règles explicites (règles d'affinité et anti-affinité, labels, etc.)
+
+### Kubernetes : kube-proxy
+
+- Responsable de la publication de services
+- Utilise *iptables*
+- Route les paquets à destination des PODs et réalise le load balancing TCP/UDP
+
+### Kubernetes : kube-controller-manager
+
+- Boucle infinie qui contrôle l'état d'un cluster
+- Effectue des opérations pour atteindre un état donné
+- De base dans Kubernetes : replication controller, endpoints controller, namespace controller et serviceaccounts controller
 
 ### Kubernetes : kubelet
 
@@ -43,83 +62,21 @@ total 16K
 -rw------- 1 root root 1.1K Sep 23 20:04 kube-scheduler.yaml
 ```
 
-### Kubernetes : kubelet
-
-- Exemple du manifest *kube-proxy* :
-
-```
-apiVersion: v1
-kind: Pod
-metadata:
-  name: kube-proxy
-  namespace: kube-system
-  annotations:
-    rkt.alpha.kubernetes.io/stage1-name-override: coreos.com/rkt/stage1-fly
-spec:
-  hostNetwork: true
-  containers:
-  - name: kube-proxy
-    image: quay.io/coreos/hyperkube:v1.3.6_coreos.0
-    command:
-    - /hyperkube
-    - proxy
-    - --master=http://127.0.0.1:8080
-    - --proxy-mode=iptables
-    securityContext:
-      privileged: true
-    volumeMounts:
-    - mountPath: /etc/ssl/certs
-      name: ssl-certs-host
-      readOnly: true
-  volumes:
-  - hostPath:
-      path: /usr/share/ca-certificates
-    name: ssl-certs-host
-```
-
-### Kubernetes : kube-apiserver
-
-- Les configurations d'objets (Pods, Service, RC, etc.) se font via l'API server
-
-- Un point d'accès à l'état du cluster aux autres composants via une API REST
-
-- Tous les composants sont reliés à l'API server
-
-### Kubernetes : kube-scheduler
-
-- Planifie les ressources sur le cluster
-
-- En fonction de règles implicites (CPU, RAM, stockage disponible, etc.)
-
-- En fonction de règles explicites (règles d'affinité et anti-affinité, labels, etc.)
-
-### Kubernetes : kube-proxy
-
-- Responsable de la publication de services
-
-- Utilise *iptables*
-
-- Route les paquets à destination des PODs et réalise le load balancing TCP/UDP
-
-### Kubernetes : kube-controller-manager
-
-- Boucle infinie qui contrôle l'état d'un cluster
-
-- Effectue des opérations pour atteindre un état donné
-
-- De base dans Kubernetes : replication controller, endpoints controller, namespace controller et serviceaccounts controller
-
 ### Kubernetes : network-policy-controller
 
 - Implémente l'objet NetworkPolicy
-
-- Contrôle la communication entre les PODs
-
+- Contrôle la communication entre les Pods
 - Externe à Kubernetes et implémenté par la solution de Networking choisie :
-    - OpenShift
-    - OpenContrail
-    - Romana
-    - Calico
+    - Calico : <https://projectcalico.org/>
+    - Flannel : <https://coreos.com/flannel>
+    - Romana : <https://romana.io/>
+    - Weave : <https://www.weave.works/oss/net/>
+    - more :  <https://kubernetes.io/docs/concepts/cluster-administration/networking/#how-to-implement-the-kubernetes-networking-model>
 
-### Kubernetes : Conclusion
+### Kubernetes : Aujourd'hui
+
+- Version 1.11.x : stable en production
+- Solution complète et une des plus utilisées
+- Éprouvée par Google
+- S'intègre parfaitement à d'autres _Container Runtime Interfaces (CRI)_ comme containerd, cri-o, rktlet, fraki, etc...
 
