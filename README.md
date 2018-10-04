@@ -6,6 +6,8 @@ Supports de formation (sous forme de slides) écrits en Français et traduits en
 
 Sont notamment abordés les sujets suivants : le cloud, sa philosophie, le projet OpenStack, l'utilisation d'OpenStack, le déploiement d'OpenStack, le principe des conteneurs, le projet Docker, l'utilisation de Docker, l'orchestration de conteneurs Docker.
 
+Sources : <https://github.com/Osones/formations/>
+
 Auteurs :
 
 * Adrien Cunin <adrien.cunin@osones.com>
@@ -14,13 +16,26 @@ Auteurs :
 * Kevin Lefevre <kevin.lefevre@osones.com>
 * Jean-François Taltavull <jft@osones.com>
 
-HTML et PDF construits automatiquement :
+HTML et PDF construits automatiquement : <https://osones.com/formations/>
 
 * [Support PDF OpenStack User](https://osones.com/formations/pdf/openstack-user.fr.pdf)
 * [Support PDF OpenStack Admin](https://osones.com/formations/pdf/openstack.fr.pdf)
 * [Support HTML OpenStack User](https://osones.com/formations/openstack-user.fr.html)
 * [Support HTML OpenStack Admin](https://osones.com/formations/openstack.fr.html)
 * [Support HTML Docker](https://osones.com/formations/docker.fr.html)
+
+## Prérequis
+
+### Option 1 : Utiliser le Makefile
+
+* make : <https://www.gnu.org/software/make/>
+* jq : <https://github.com/stedolan/jq>
+* pandoc : <https://pandoc.org>
+* TeX Live : <https://www.tug.org/texlive/>
+
+### Option 2 : Utiliser le script build.sh
+
+* Docker : <https://docs.docker.com/install>
 
 ## Fonctionnement
 
@@ -61,7 +76,7 @@ Un daemon Docker est donc le seul pré-requis pour le build via `build.sh`
     -t theme            Theme to use, default to osones
 
     -u revealjsURL      RevealJS URL that need to be use. If you build formation
-                        supports on local environment you should git clone http://github.com/hakimel/reveal.js
+                        supports on local environment you should git clone https://github.com/hakimel/reveal.js
                         and set this variable to your local copy.
                         This option is also necessary even if you only want PDF
                         output (default : https://osones.com/formations/revealjs)
@@ -73,7 +88,7 @@ If you want to build the courses locally, you'll need to :
 
 - pull the Docker image osones/revealjs-builder
 - pull the Docker image osones/wkhtmltopdf
-- clone http://github.com/hakimel/reveal.js (see `-u` parameter)
+- clone https://github.com/hakimel/reveal.js (see `-u` parameter)
 
 Pour visualiser :
 
@@ -114,7 +129,7 @@ Tous les contenus originaux (Makefile, scripts, fichiers dans `cours/`) sont :
 * Copyright © 2014-2018 Osones
 * Distribués sous licence Creative Commons BY-SA 4.0 (<https://creativecommons.org/licenses/by-sa/4.0/>)
 
-![Creative Commons BY-SA](http://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-sa.png)
+![Creative Commons BY-SA](https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-sa.png)
 
 Les autres fichiers du répertoire `images/` sont soumis à leur copyright et licence respectifs.
 

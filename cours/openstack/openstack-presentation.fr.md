@@ -27,9 +27,9 @@ both public and private clouds.```
 -   Icehouse (2014.1), Juno (2014.2)
 -   Kilo (2015.1), Liberty (2015.2)
 -   Mitaka (2016.1), Newton (2016.2)
--   Ocata (2017.1)
--   **Pike** (2017.2)
--   Début 2018 : Queens
+-   Ocata (2017.1), Pike (2017.2)
+-   **Queens** (2018.1)
+-   Second semestre 2018 : Rocky
 
 ### Quelques soutiens/contributeurs ...
 
@@ -66,13 +66,13 @@ both public and private clouds.```
 -   OpenStack Dashboard - Horizon
 -   OpenStack Telemetry - Ceilometer
 -   OpenStack Orchestration - Heat
--   OpenStack Database Service - Trove
 
 ### Les différents sous-projets (2)
 
 -   Mais aussi :
     -   Bare metal (Ironic)
     -   Queue service (Zaqar)
+    -   Database Service (Trove)
     -   Data processing (Sahara)
     -   DNS service (Designate)
     -   Shared File Systems (Manila)
@@ -127,11 +127,11 @@ both public and private clouds.```
 ### Ressources
 
 -   Actualités :
-    -   Blog officiel : <http://www.openstack.org/blog/>
+    -   Blog officiel : <https://www.openstack.org/blog/>
     -   Planet : <http://planet.openstack.org>
     -   Superuser : <http://superuser.openstack.org/>
     -   OpenStack Community Weekly Newsletter
--   Ressources commerciales : <http://www.openstack.org/marketplace/> entre autres
+-   Ressources commerciales : <https://www.openstack.org/marketplace/> entre autres
 -   Job board : <https://www.openstack.org/community/jobs/>
 -   Certification Certified OpenStack Administrator (COA) : <https://www.openstack.org/coa/>
 
@@ -145,7 +145,7 @@ both public and private clouds.```
 
 ![Logo OpenStack-fr](images/openstackfr.png){height=50px}
 
--   Site web : <http://openstack.fr/>
+-   Site web : <https://openstack.fr/>
 -   Association des utilisateurs francophones d’OpenStack : <https://asso.openstack.fr/>
 -   OpenStack Days France à Paris : <https://openstackdayfrance.fr/>
 -   Meetups : Paris, Rhônes-Alpes, Toulouse, Montréal, etc.

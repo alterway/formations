@@ -19,7 +19,7 @@ idée :
 ## Côté applications
 
 ### Adapter ou penser ses applications “cloud ready” 1/3
-Cf. les design tenets du projet OpenStack et Twelve-Factor <http://12factor.net/>
+Cf. les design tenets du projet OpenStack et Twelve-Factor <https://12factor.net/>
 
 -   Architecture distribuée plutôt que monolithique
     -   Facilite le passage à l’échelle

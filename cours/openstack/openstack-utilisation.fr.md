@@ -193,11 +193,6 @@ Outre les fonctions réseau de base niveaux 2 et 3, Neutron peut fournir d’aut
 -   Boot from volume : l’OS est sur le volume
 -   Fonctionnalité de backup vers un object store (Swift ou Ceph)
 
-### Du stockage partagé ?
-
--   Cinder n’est **pas** une solution de stockage partagé comme NFS
--   Le projet OpenStack Manila a pour objectif d’être un *NFS as a Service*
--   AWS n’a introduit une telle fonctionnalité que récemment
 
 ## Heat : Orchestration
 

@@ -19,7 +19,7 @@ Running *legacy* applications in the cloud is a bad idea:
 
 ### Adapt or think “cloud ready” applications 1/3
 
-See OpenStack project design tenets and Twelve-Factor <http://12factor.net/>
+See OpenStack project design tenets and Twelve-Factor <https://12factor.net/>
 
 -   Distributed rather than monolithic architecture
     -   Eases scaling
@@ -69,7 +69,7 @@ A cloud image is:
 -   Disk image containing an already installed OS
 -   Image that can be instantiated as n servers without error
 -   An OS that talks to the cloud metadata API (cloud-init)
--   Details: <http://docs.openstack.org/image-guide/openstack-images.html>
+-   Details: <https://docs.openstack.org/image-guide/openstack-images.html>
 -   Most of the distributions provide cloud images
 
 ### Cirros
