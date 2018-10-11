@@ -77,7 +77,7 @@ spec:
     - AWS ELB
     - GCP
     - Azure Kubernetes Service
-    - Openstack 
+    - OpenStack
 - `NodePort` : chaque noeud du cluster ouvre un port  statique et redirige le trafic vers le port indiqué
 - `ClusterIP` : IP dans le réseau privé Kubernetes (VIP)
 - `LoadBalancer` :  expose le service à l'externe en utilisant le loadbalancer d'un cloud provider (AWS, Google, Azure)
@@ -107,7 +107,7 @@ spec:
     app: guestbook
     tier: frontend
 ```
-### Kubenetes : Services 
+### Kubenetes : Services
 
 Il est aussi possible de mapper un service avec un nom de domaine en spécifiant le paramètre `spec.externalName`.
 
@@ -120,19 +120,19 @@ metadata:
 spec:
   type: ExternalName
   externalName: my.database.example.com
-  ```
+```
 
 ### Kubernetes: Ingress
 
-- l'objet `Ingress` permet d'exposer un service à l'extérieur d'un cluster Kubernetes
-- il permet de fournir une URL visible permettant d'accéder un Service Kubernetes
-- il permet d'avoir des terminations TLS, de faire du _Load Balancing_, etc...
+- L'objet `Ingress` permet d'exposer un service à l'extérieur d'un cluster Kubernetes
+- Il permet de fournir une URL visible permettant d'accéder un Service Kubernetes
+- Il permet d'avoir des terminations TLS, de faire du _Load Balancing_, etc...
 - Pour utiliser un `Ingress`, il faut un controlleur Ingress. Il existe plusieurs offres sur le marché:
+    - Nginx Controller : <https://github.com/kubernetes/ingress-nginx>
     - Traefik : <https://github.com/containous/traefik>
     - Istio: <https://github.com/istio/istio>
     - Linkerd: <https://github.com/linkerd/linkerd>
     - Contour: <https://www.github.com/heptio/contour/>
-    - Nginx Controller : <https://github.com/kubernetes/ingress-nginx>
 
 ### Kubernetes : Ingress
 
@@ -154,14 +154,14 @@ spec:
 
 ### Kubernetes : DaemonSet
 
-- assure que tous les noeuds exécutent une copie du pod sur tous les noeuds du cluster
-- ne connaît pas la notion de `replicas`. 
-- utilisé pour des besoins particuliers comme:
+- Assure que tous les noeuds exécutent une copie du pod sur tous les noeuds du cluster
+- Ne connaît pas la notion de `replicas`.
+- Utilisé pour des besoins particuliers comme:
   * l'exécution d'agents de collection de logs comme `fluentd` ou `logstash`
   * l'exécution de pilotes pour du matériel comme `nvidia-plugin`
   * l'exécution d'agents de supervision comme NewRelic agent, Prometheus node exporter
 
-  P.S.: kubectl ne peut pas créer de DaemonSet
+  NB : kubectl ne peut pas créer de DaemonSet
 
 ### Kubernetes : DaemonSet
 
@@ -188,7 +188,7 @@ metadata:
 
 ### Kubernetes : StatefulSet
 
--Similaire au `Deployment`
+- Similaire au `Deployment`
 - Les pods possèdent des identifiants uniques.
 - chaque replica de pod est créé par ordre d'index
 - Nécessite un `Persistent Volume` et un `Storage Class`.
@@ -266,3 +266,4 @@ spec:
     - Autres...
 - Les objets existent uniquement au sein d'un namespace donné
 - Évitent la collision de nom d'objets
+

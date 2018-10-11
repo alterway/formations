@@ -5,7 +5,7 @@
 - L'utilisation de fichiers YAML permet de les stocker dans un système de contrôle de version comme git, mercurial, etc...
 - La documentation de référence pour l'API Kubernetes <https://kubernetes.io/docs/reference/#api-reference>
 
-### Kubernetes : Création d'objets Kubernetes
+### Kubernetes : Création d'objets Kubernetes (1/3)
 
 - Pour créer un object Kubernetes depuis votre fichier YAML, utilisez la commande `kubectl create` :
 
@@ -19,7 +19,9 @@ kubectl create -f object.yaml
 kubectl create -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook/frontend-deployment.yaml
 ```
 
-- Pour les supprimer exécuter simplement : 
+### Kubernetes : Création d'objets Kubernetes (2/3)
+
+- Pour les supprimer exécuter simplement :
 
 ```console
 kubectl delete -f object.yaml
@@ -73,4 +75,6 @@ nginx        1/1              Running     0                    31s          app=
 
 ### Kubernetes : Update, Rollbacks
 
-*TBD*
+**TBD**
+
+

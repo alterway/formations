@@ -35,7 +35,7 @@ spec:
 ### Kubernetes : Storage Class
 
 - permet de définir les différents types de stockage disponibles
-- utilisé par les `Persistent Volumes` pour solliciter un espace de stockage au travers des `Persistent Volume Claims`
+- utilisé par les `PersistentVolumes` pour solliciter un espace de stockage au travers des `PersistentVolumeClaims`
 
 
 ### Kubernetes : Storage Class
@@ -54,9 +54,9 @@ parameters:
 
 ### Kubernetes : PervistentVolumeClaims
 
-- resource utilisée et vue comme une requête pour solliciter du stockage persistant
-- offre aux PV une variété d'options en fonction du cas d'utilisation
-- utilisé par les `StatefulSets` pour solliciter du stockage (Utilisaltion du champ `volumeClaimTemplates`)
+- Ressource utilisée et vue comme une requête pour solliciter du stockage persistant
+- Offre aux PV une variété d'options en fonction du cas d'utilisation
+- Utilisé par les `StatefulSets` pour solliciter du stockage (Utilisaltion du champ `volumeClaimTemplates`)
 
 ### Kubernetes : PervistentVolumeClaims
 
@@ -72,19 +72,14 @@ spec:
     requests:
       storage: 5Gi
   storageClassName: "slowl"
-  selector:
-    matchLabels:
-      release: "stable"
-    matchExpressions:
-      - {key: capacity, operator: In, values: [10Gi, 20Gi]}
 ```
 
 ### Kubernetes : PersistentVolume
 
-- composant de stockage dans le cluster kubernetes
-- stockage externe aux noeuds du cluster 
-- cycle de vie d'indépendant du pod qui le consomme
-- peut être provisionné manuellement par un administrateur ou dynamiquement grâce un `StorageClass`
+- Composant de stockage dans le cluster kubernetes
+- Stockage externe aux noeuds du cluster
+- Cycle de vie d'indépendant du pod qui le consomme
+- Peut être provisionné manuellement par un administrateur ou dynamiquement grâce un `StorageClass`
 
 ### Kubernetes : PersistentVolume
 
@@ -102,3 +97,4 @@ spec:
   hostPath:
     path: "/tmp/data"
 ```
+

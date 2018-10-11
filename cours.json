@@ -120,6 +120,7 @@
       "containers/kubernetes/ops-guide/intro-osones",
       "containers/kubernetes/ops-guide/k8s-installation",
       "containers/kubernetes/ops-guide/k8s-operations",
+      "containers/kubernetes/ops-guide/k8s-monitoring",
       "containers/kubernetes/ops-guide/k8s-security",
       "containers/kubernetes/ops-guide/conclusion"
     ]

@@ -4,6 +4,8 @@
 - peut éxécuter plusieurs pods en parallèle
 - si un pod échoue, 
 
+**TBD**
+
 ### Kubernetes : Job
 
 Jobs Patterns
@@ -14,8 +16,3 @@ Jobs Patterns
 
 *TBD*
 
-### Kubernetes : Run et administration
-
-- WebUI (Kubernetes Dashboard)
-- Kubectl (Outil CLI)
-- Objets: *Secret* et *ConfigMap* : paramétrages, plus sécurisés que les variables d'environnements
