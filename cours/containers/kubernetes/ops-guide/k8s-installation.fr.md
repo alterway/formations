@@ -6,15 +6,14 @@
 
 ### Installation de Kubernetes
 
-Certains pré-requis sont nécessaires avant d'installer Kubernetes : 
-
-- Désactiver le swap 
-- Assurer que les ports requis soient ouverts : <https://kubernetes.io/docs/setup/independent/install-kubeadm/#check-required-ports>
-- Installer Docker : <https://docs.docker.com/install>
+- Certains pré-requis sont nécessaires avant d'installer Kubernetes : 
+    - Désactiver le swap 
+    - Assurer que les ports requis soient ouverts : <https://kubernetes.io/docs/setup/independent/install-kubeadm/#check-required-ports>
+    - Installer Docker : <https://docs.docker.com/install>
 
 ### Installation de Kubernetes 
 
-- Installer les composants Kubernetes (kubeadm, kubectl, kubelet)<https://kubernetes.io/docs/setup/independent/install-kubeadm/>
+- Installer les composants Kubernetes (kubeadm, kubectl, kubelet) : <https://kubernetes.io/docs/setup/independent/install-kubeadm/>
 - Exécuter `sudo kubeadm init` sur le noeud master
 - Exécuter `sudo kubeadm join` sur les autres noeuds (avec le token fournir par la commande `kubeadm init`)
 - Copier le fichier de configuration généré par `kubeadm init`
@@ -22,17 +21,16 @@ Certains pré-requis sont nécessaires avant d'installer Kubernetes :
 
 ### Installation de Kubernetes 
 
-Il existe des solutions managées pour Kubernetes :
-
-- Azure Kubernetes Service : <https://azure.microsoft.com/en-us/services/kubernetes-service/>
-- Google Kubernetes Engine : <https://cloud.google.com/kubernetes-engine/>
-- Elastic Kubernetes Services: <https://aws.amazon.com/eks/>
-- Docker for mac : <https://docs.docker.com/docker-for-mac/kubernetes/>
+- Il existe des solutions managées pour Kubernetes :
+    - Azure Kubernetes Service : <https://azure.microsoft.com/en-us/services/kubernetes-service/>
+    - Google Kubernetes Engine : <https://cloud.google.com/kubernetes-engine/>
+    - Elastic Kubernetes Services: <https://aws.amazon.com/eks/>
+    - Docker for mac : <https://docs.docker.com/docker-for-mac/kubernetes/>
 
 ### Installation de Kubernetes
 
-- via Ansible : kubespray <https://github.com/kuberntes-incubator/kubespray>
-- via Terraform : <https://github.com/poseidon/typhoon>
+- Via Ansible : kubespray <https://github.com/kuberntes-incubator/kubespray>
+- Via Terraform : <https://github.com/poseidon/typhoon>
 - Il existe aussi des projects open source basés sur le langage Go :
     - kube-aws : <https://github.com/kubernetes-incubator/kube-aws>
     - kops : <https://github.com/kubernetes/kops>

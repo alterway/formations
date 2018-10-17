@@ -2,7 +2,7 @@
 
 - Il est possible de mettre à jour un service sans incident grâce ce qui est appelé le _rolling-update_. 
 - Avec les _rolling updates_, les resources qu'expose un objet `Service` se mettent à jour progressivement.
-- Seuls les objets `Deployments`, `DaemonSet` et `StatefulSet` support les _rolling updates_.
+- Seuls les objets `Deployment`, `DaemonSet` et `StatefulSet` support les _rolling updates_.
 - Les arguments `maxSurge` et `maxUnavailabe` définissent le rythme du _rolling update_.
 - La commande `kubectl rollout` permet de suivre les _rolling updates_ éffectués.
 
@@ -45,10 +45,14 @@ deployment.apps/nginx created
 ### Kubectl : Advanced Usage
 
 - Il est possible d'augmenter le nombre de pods avec la commande `kubectl scale` :
-`kubectl scale --replicas=5 deployment nginx`
+```console
+kubectl scale --replicas=5 deployment nginx
+```
 
 - Il est possible de changer l'image d'un container utilisée par un _Deployment_ : 
-`kubectl set image deployment nginx nginx=nginx:1.15`
+```console
+kubectl set image deployment nginx nginx=nginx:1.15
+```
 
 
 ### Kubectl : Advanced Usage 
@@ -70,14 +74,23 @@ kubectl run pi --schedule="0/5 * * * ?" --image=perl --restart=OnFailure \
 
 ### Kubectl : Advanced Usage
 
-- Accéder à la console d'un container :
-`kubectl run -i --tty busybox --image=busybox -- sh`
+- Se connecter à un container:
+
+```console
+kubectl run -it busybox --image=busybox -- sh
+```
 
 - S'attacher à un container existant :
-`kubectl attach my-pod -i `
 
-- Accéder en local à un service via un port
-`kubectl port-forward my-svc 6000`
+```console
+kubectl attach my-pod -i
+```
+
+- Accéder à un service via un port :
+
+```console
+kubectl port-forward my-svc 6000
+```
 
 
 ### Kubectl : Logging
@@ -96,8 +109,8 @@ kubectl  logs (-f) <POD_NAME>
 - Obtenir la liste des noeuds ainsi que les informations détaillées :
 
 ```console
-# kubectl get nodes
-# kubectl describe nodes
+kubectl get nodes
+kubectl describe nodes
 ```
 
 ### Kubectl : Maintenance

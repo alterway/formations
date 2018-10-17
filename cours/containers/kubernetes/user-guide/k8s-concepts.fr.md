@@ -133,12 +133,6 @@ spec:
 - L'objet `Ingress` permet d'exposer un service à l'extérieur d'un cluster Kubernetes
 - Il permet de fournir une URL visible permettant d'accéder un Service Kubernetes
 - Il permet d'avoir des terminations TLS, de faire du _Load Balancing_, etc...
-- Pour utiliser un `Ingress`, il faut un controlleur Ingress. Il existe plusieurs offres sur le marché:
-    - Nginx Controller : <https://github.com/kubernetes/ingress-nginx>
-    - Traefik : <https://github.com/containous/traefik>
-    - Istio: <https://github.com/istio/istio>
-    - Linkerd: <https://github.com/linkerd/linkerd>
-    - Contour: <https://www.github.com/heptio/contour/>
 
 
 ### Kubernetes : Ingress
@@ -174,10 +168,10 @@ Pour utiliser un `Ingress`, il faut un Ingress Controller. Il existe plusieurs o
 
 - Assure que tous les noeuds exécutent une copie du pod sur tous les noeuds du cluster
 - Ne connaît pas la notion de `replicas`.
-- Utilisé pour des besoins particuliers comme:
-  * l'exécution d'agents de collection de logs comme `fluentd` ou `logstash`
-  * l'exécution de pilotes pour du matériel comme `nvidia-plugin`
-  * l'exécution d'agents de supervision comme NewRelic agent, Prometheus node exporter
+- Utilisé pour des besoins particuliers comme :
+    - l'exécution d'agents de collection de logs comme `fluentd` ou `logstash`
+    - l'exécution de pilotes pour du matériel comme `nvidia-plugin`
+    - l'exécution d'agents de supervision comme NewRelic agent, Prometheus node exporter
 
   NB : kubectl ne peut pas créer de DaemonSet
 

@@ -98,7 +98,7 @@ pods                                po                           true         Po
 kubectl get nodes
 ```
 
-- Ces commandes sont équivalentes :
+- Ces commandes sont équivalentes:
 
 ```console
 kubectl get no
@@ -138,19 +138,6 @@ kubectl get pod
 kubectl get services
 kubectl get svc
 ```
-
-### Kubernetes : Kubernetes Dashboard
-
-- Interface graphique web pour les clusters Kubernetes
-- Permet de gérer les différents objets Kubernetes créés dans le cluster
-- Installé par défaut dans minikube
-
-### Kubernetes : Kubernetes Dashboard
-![Kubernetes Dashboard](https://raw.githubusercontent.com/kubernetes/website/master/static/images/docs/ui-dashboard.png)
-
-### Kubernetes : Kubernetes Dashboard
-![Logs in Kubernetes Dashboard](https://raw.githubusercontent.com/kubernetes/website/master/static/images/docs/ui-dashboard-logs-view.png)
-
 
 ### Kubernetes : ConfigMaps
 

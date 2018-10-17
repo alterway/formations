@@ -21,7 +21,7 @@
 - Objet Kubernetes permettant d'identifier une application s'éxecutant dans un pod
 - Par défaut, un `ServiceAccount` par `namespace`
 - Le `ServiceAccount` est formatté ainsi :
-    `system:serviceaccount:<namespace>:<service_account_name>`
+`system:serviceaccount:<namespace>:<service_account_name>`
 
 
 ### Service Accounts
@@ -36,7 +36,7 @@ metadata:
 
 ### Role
 
-- L'objet `Role` est un ensemble de règles permettant de définir quelle opération (ou _verbe) peut être effectuée et sur quelle ressource
+- L'objet `Role` est un ensemble de règles permettant de définir quelle opération (ou _verbe_) peut être effectuée et sur quelle ressource
 - Le `Role` ne s'applique qu'à un seul `namespace` et les ressources liées à ce `namespace`
 
 
@@ -56,9 +56,9 @@ rules:
 
 ### RoleBinding
 
-- l'objet `RoleBinding` va allouer à un `User`, `ServiceAccount` ou un groupe les permissions dans l'objet `Role` associé
+- L'objet `RoleBinding` va allouer à un `User`, `ServiceAccount` ou un groupe les permissions dans l'objet `Role` associé
 - Un objet `RoleBinding` doit référencer un `Role` dans le même `namespace`.
-- l'objet `roleRef` spécifié dans le `RoleBinding` est celui qui crée le liaison
+-L'objet `roleRef` spécifié dans le `RoleBinding` est celui qui crée le liaison
 
 
 ### RoleBinding
