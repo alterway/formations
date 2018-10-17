@@ -19,13 +19,14 @@
 - kubelet : Service "agent" fonctionnant sur tous les nœuds et assure le fonctionnement des autres services
 - kubectl : Client qui permet de piloter un cluster Kubernetes
 
-### Kubernetes : kubelet
+### Kubernetes : Kubelet
 
 - Service principal de Kubernetes
 - Permet à Kubernetes de s'auto configurer :
     - Surveille un dossier contenant les *manifests* (fichiers YAML des différents composant de Kubernetes).
     - Applique les modifications si besoin (upgrade, rollback).
 - Surveille l'état des services du cluster via l'API server (*kube-apiserver*).
+
 
 ### Kubernetes : kube-apiserver
 
@@ -79,4 +80,5 @@ total 16K
 - Solution complète et une des plus utilisées
 - Éprouvée par Google
 - S'intègre parfaitement à d'autres _Container Runtime Interfaces (CRI)_ comme containerd, cri-o, rktlet, fraki, etc...
+
 

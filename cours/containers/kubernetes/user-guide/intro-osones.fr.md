@@ -1,12 +1,7 @@
+### Auteurs
 
-### Who Am I
+- Romain Guichard <romain.guichard@osones.io>
+- Kevin Lefevre <kevin.lefevre@osones.io>
+- Arnaud Meukam <arnaud.meukam@osones.com>
 
-Arnaud Meukam
-
-- Ingénieur Cloud Kubernetes
-- Anciennent DevOps Engineer chez Vente Privée
-
-- `Bug Triage Shadow (Kubernetes v1.12)`
-- `Enhancements Shadow (Kubernetes v1.13)`
-- `Volunteer inf SIG-Contribex (Kubernetes Project)`
 

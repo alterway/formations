@@ -1,10 +1,11 @@
 ### Kubernetes : Minikube
 
-- Outil permettant de démarrer rapidement un cluster _1 noeud_ Kubernetes localement pour développer des applications.
+- Outil permettant de démarrer rapidement un cluster mono-node Kubernetes localement
 - Execute Kubernetes dans une machine virtuelle
 - Nécessite des outils de virtualisation (VirtualBox, VMware Fusion, KVM, etc...)
-- Offre plusieurs versions de Kubernetes à éxecuter
 - Supporte plusieurs systèmes d'exploitation : Linux, Mac OS, Windows
+- Installation : <https://github.com/kubernetes/minikube#Installation>
+
 
 ### Kubernetes : Minikube
 
@@ -24,16 +25,11 @@ The following Kubernetes versions are available when using the localkube bootstr
 ### Kubernetes : Minikube
 
 ```console
-$ minikube start --kubernetes-version="v1.11.1"
+$minikube start --kubernetes-version="v1.11.1"
 Starting local Kubernetes v1.11.1 cluster...
 Starting VM...
 Getting VM IP address...
-Moving files into cluster...
-Downloading kubeadm v1.11.1
-Downloading kubelet v1.11.1
-Finished Downloading kubeadm v1.11.1
-Finished Downloading kubelet v1.11.1
-Setting up certs...
+[...]
 Connecting to cluster...
 Setting up kubeconfig...
 Starting cluster components...
@@ -50,6 +46,7 @@ $ kubectl version
 Client Version: v1.11.1
 Server Version: v1.11.1
 ```
+
 
 ### Kubernetes : Minikube
 
@@ -71,6 +68,7 @@ etcd-0                       Healthy      {"health": "true"}
     - Les chemins des certificats TLS utilisés pour l'authentification
 
 - Fichier `kubeconfig` peut être passé en paramètre de kubectl avec le _flag_ `--kubeconfig`
+
 
 ### Kubernetes : Kubectl
 
@@ -134,12 +132,25 @@ kubectl get pod
 
 ### Kubernetes : Kubectl
 
-- Afficher les services (pour le _namespace_ `default`)
+- Afficher les services (pour le _namespace_ `default`):
 
 ```console
 kubectl get services
 kubectl get svc
 ```
+
+### Kubernetes : Kubernetes Dashboard
+
+- Interface graphique web pour les clusters Kubernetes
+- Permet de gérer les différents objets Kubernetes créés dans le cluster
+- Installé par défaut dans minikube
+
+### Kubernetes : Kubernetes Dashboard
+![Kubernetes Dashboard](https://raw.githubusercontent.com/kubernetes/website/master/static/images/docs/ui-dashboard.png)
+
+### Kubernetes : Kubernetes Dashboard
+![Logs in Kubernetes Dashboard](https://raw.githubusercontent.com/kubernetes/website/master/static/images/docs/ui-dashboard-logs-view.png)
+
 
 ### Kubernetes : ConfigMaps
 
@@ -168,6 +179,7 @@ metadata:
 - Similaire à un `ConfigMap`, à la seule différence que le contenu des entrées présentes dans le champ `data` sont encodés en base64.
 - Il est possible de directement créer un `Secret` spécifique à l'authentification sur un registre Docker privé.
 - Il est possible de directement créer un `Secret` à partir d'un compte utilisateur et d'un mot de passe.
+
 
 ### Kubernetes : Secrets
 
@@ -203,6 +215,7 @@ metadata:
 ### Kubernetes : Kubernetes Dashboard
 ![](images/kubernetes/ui-dashboard.png)
 
+
 ### Kubernetes : Kubernetes Dashboard
 
 - Pour déployer le Dashboard, éxecuter la commande suivante:
@@ -226,12 +239,14 @@ $ kubectl proxy
 - Il est comparable à apt/yum/homebrew.
 - Plusieurs charts existent déjà sur le répertoire officiel : `https://github.com/kubernetes/charts`.
 
+
 ### Kubernetes : Introduction to Helm
 
 - `Tiller` : Serveur Helm. Il interagit avec l'APIServer de Kubernetes pour installer, mettre à jour et supprimer les ressources Kubernetes.
 - `Chart` : Contient toutes les ressources définies et nécessaires pour éxecuter une application ou un service à  l'intérieur de cluster Kubernetes. Un chart est pratiquement un regroupement de ressources Kubernetes pré-configurées.
 - `Release` : Une instance d'un chart helm s'éxécutant dans un cluster Kubernetes.
 - `Repository` : répertoire ou espace (public ou privé) où sont regroupés les `charts`.
+
 
 ### Kubernetes : Introduction to Helm 
 

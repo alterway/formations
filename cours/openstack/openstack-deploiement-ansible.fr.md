@@ -49,7 +49,7 @@ Sur la *machine de déploiement*
 
 ### Récupérer les rôles
 
-- Addresses et versions sont définis dans `openstack-ansible`/`ansible-role-requirements.yml`
+- Adresses et versions sont définis dans `openstack-ansible`/`ansible-role-requirements.yml`
 - `scripts/bootstrap-ansible.sh` les télécharge dans `/etc/ansible/roles`
 
 ### Configurer
@@ -95,3 +95,4 @@ Sur la *machine de déploiement*
 
 - Un déploiement OSA par région
 - Un déploiement pour le Keystone central
+

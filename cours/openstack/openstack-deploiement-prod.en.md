@@ -11,7 +11,7 @@
 -   Swift is separate from other components
 -   Neutron may be used separately (ex: with oVirt)
 
-<http://docs.openstack.org/arch-design/>
+<https://docs.openstack.org/arch-design/>
 
 ### Think about fundamental choices at the beginning
 
@@ -62,7 +62,7 @@ IaaS High Availability
 -   API services Are stateless and HTTP: scale out and load balancers
 -   Most other OpenStack services are able to scale out as well
 
-HA guide: <http://docs.openstack.org/ha-guide/>
+HA guide: <https://docs.openstack.org/ha-guide/>
 
 ### High availability of the Neutron L3 agent
 
@@ -78,7 +78,7 @@ HA guide: <http://docs.openstack.org/ha-guide/>
 -   Monitoring
 -   Backup
 
-Operations guide: <http://docs.openstack.org/openstack-ops/content/>
+Operations guide: <https://docs.openstack.org/openstack-ops/content/>
 
 ### Quotas usage
 
@@ -88,7 +88,7 @@ Operations guide: <http://docs.openstack.org/openstack-ops/content/>
 -   Support in Cinder
 -   Support in Neutron
 
-<http://docs.openstack.org/user-guide-admin/content/cli_set_quotas.html>
+<https://docs.openstack.org/user-guide-admin/content/cli_set_quotas.html>
 
 ### Networks
 
@@ -106,7 +106,7 @@ Operations guide: <http://docs.openstack.org/openstack-ops/content/>
 -   Limit read permissions to configuration files (passwords, token)
 -   Security vulnerabilities: OSSA (*OpenStack Security Advisory*), OSSN (*... Notes*)
 
-Security guide: <http://docs.openstack.org/security-guide/>
+Security guide: <https://docs.openstack.org/security-guide/>
 
 ### Segment a cloud
 
@@ -115,7 +115,7 @@ Security guide: <http://docs.openstack.org/security-guide/>
 -   Regions: each region has its own API
 -   Cells: gather multiple clouds within a unique API
 
-<http://docs.openstack.org/openstack-ops/content/scaling.html#segregate_cloud>
+<https://docs.openstack.org/openstack-ops/content/scaling.html#segregate_cloud>
 
 ### Host aggregates
 
@@ -191,7 +191,7 @@ Security guide: <http://docs.openstack.org/security-guide/>
 -   *Puppet OpenStack* and *OpenStack Ansible*: Puppet modules and Ansible playbooks
 -   Developed as part of the OpenStack project
 -   <https://wiki.openstack.org/wiki/Puppet>
--   <http://docs.openstack.org/developer/openstack-ansible/install-guide/>
+-   <https://docs.openstack.org/developer/openstack-ansible/install-guide/>
 
 ### Continuous deployment
 

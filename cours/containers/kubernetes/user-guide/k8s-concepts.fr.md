@@ -65,6 +65,7 @@ spec:
         - containerPort: 80
 ```
 
+
 ### Kubernetes : Services
 
 - Abstraction des Pods et Replication Controllers, sous forme d'une VIP de service
@@ -73,18 +74,22 @@ spec:
 
 ### Kubernetes : Services
 
-- Load Balancing : intégration avec des cloud providers :
-    - Amazon Web Services
-    - Google Cloud Platform
+- Load Balancing : intégration avec des cloud provider :
+    - AWS ELB
+    - GCP
     - Azure Kubernetes Service
-    - Openstack 
+    - OpenStack
 - `NodePort` : chaque noeud du cluster ouvre un port  statique et redirige le trafic vers le port indiqué
 - `ClusterIP` : IP dans le réseau privé Kubernetes (VIP)
+- `LoadBalancer` :  expose le service à l'externe en utilisant le loadbalancer d'un cloud provider (AWS, Google, Azure)
 - `ExternalIP`: le routage de l'IP publique vers le cluster est manuel
+
+
 
 ### Kubernetes : Services
 
 ![](images/services.png)
+
 
 ### Kubernetes : Services
 
@@ -106,6 +111,7 @@ spec:
     app: guestbook
     tier: frontend
 ```
+
 ### Kubernetes : Services
 
 Il est aussi possible de mapper un service avec un nom de domaine en spécifiant le paramètre `spec.externalName`.
@@ -121,11 +127,18 @@ spec:
   externalName: my.database.example.com
 ```
 
-### Kubernetes : Ingress
 
-- l'objet `Ingress` permet d'exposer un service à l'extérieur d'un cluster Kubernetes
-- il permet de fournir une URL visible permettant d'accéder un Service Kubernetes
-- il permet d'avoir des terminaisons TLS, de faire du _Load Balancing_, etc...
+### Kubernetes: Ingress
+
+- L'objet `Ingress` permet d'exposer un service à l'extérieur d'un cluster Kubernetes
+- Il permet de fournir une URL visible permettant d'accéder un Service Kubernetes
+- Il permet d'avoir des terminations TLS, de faire du _Load Balancing_, etc...
+- Pour utiliser un `Ingress`, il faut un controlleur Ingress. Il existe plusieurs offres sur le marché:
+    - Nginx Controller : <https://github.com/kubernetes/ingress-nginx>
+    - Traefik : <https://github.com/containous/traefik>
+    - Istio: <https://github.com/istio/istio>
+    - Linkerd: <https://github.com/linkerd/linkerd>
+    - Contour: <https://www.github.com/heptio/contour/>
 
 
 ### Kubernetes : Ingress
@@ -156,16 +169,18 @@ Pour utiliser un `Ingress`, il faut un Ingress Controller. Il existe plusieurs o
   - Contour : <https://www.github.com/heptio/contour/>
   - Nginx Controller : <https://github.com/kubernetes/ingress-nginx>
 
+
 ### Kubernetes : DaemonSet
 
-- Assure que tous les noeuds exécutent une copie du pod
+- Assure que tous les noeuds exécutent une copie du pod sur tous les noeuds du cluster
 - Ne connaît pas la notion de `replicas`.
 - Utilisé pour des besoins particuliers comme:
   * l'exécution d'agents de collection de logs comme `fluentd` ou `logstash`
   * l'exécution de pilotes pour du matériel comme `nvidia-plugin`
-  * l'exécution d'agents de supervision
+  * l'exécution d'agents de supervision comme NewRelic agent, Prometheus node exporter
 
   NB : kubectl ne peut pas créer de DaemonSet
+
 
 ### Kubernetes : DaemonSet
 
@@ -190,14 +205,15 @@ metadata:
       image: luksa/ssd-monitor
 ```
 
+
 ### Kubernetes : StatefulSet
 
-Similaire au `Deployment`
-
+- Similaire au `Deployment`
 - Les pods possèdent des identifiants uniques.
 - Chaque replica de pod est créé par ordre d'index
 - Nécessite un `Persistent Volume` et un `Storage Class`.
 - Supprimer un StatefulSet ne supprime pas le PV associé
+
 
 ### Kubernetes : StatefulSet
 
@@ -224,11 +240,13 @@ spec:
         - containerPort: 80
 ```
 
+
 ### Kubernetes : Labels
 
 - Système de clé/valeur
 - Organiser les différents objets de Kubernetes (Pods, RC, Services, etc.) d'une manière cohérente qui reflète la structure de l'application
 - Corréler des éléments de Kubernetes : par exemple un service vers des Pods
+
 
 ### Kubernetes : Labels
 
@@ -256,7 +274,7 @@ spec:
 ```console
 $ kubectl get pods --show-labels
 NAME      READY     STATUS    RESTARTS   AGE       LABELS
-nginx        1/1              Running     0                    31s          app=nginx,env=prod
+nginx     1/1       Running   0          31s       app=nginx,env=prod
 ```
 
 ### Kubernetes : Namespaces

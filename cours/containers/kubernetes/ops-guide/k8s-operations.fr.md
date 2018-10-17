@@ -6,6 +6,7 @@
 - Les arguments `maxSurge` et `maxUnavailabe` définissent le rythme du _rolling update_.
 - La commande `kubectl rollout` permet de suivre les _rolling updates_ éffectués.
 
+
 ### Kubectl : Advanced Usage
 
 ```yaml
@@ -49,6 +50,7 @@ deployment.apps/nginx created
 - Il est possible de changer l'image d'un container utilisée par un _Deployment_ : 
 `kubectl set image deployment nginx nginx=nginx:1.15`
 
+
 ### Kubectl : Advanced Usage 
 
 - Dry run. Afficher les objets de l'API correspondant sans les créer :
@@ -66,7 +68,6 @@ kubectl run pi --schedule="0/5 * * * ?" --image=perl --restart=OnFailure \
 -- perl -Mbignum=bpi -wle 'print bpi(2000)'
 ```
 
-
 ### Kubectl : Advanced Usage
 
 - Accéder à la console d'un container :
@@ -83,11 +84,12 @@ kubectl run pi --schedule="0/5 * * * ?" --image=perl --restart=OnFailure \
 
 - Utiliser `kubectl` pour diagnostiquer les applications et le cluster kubernetes :
 
-kubectl cluster-info <br/>
-kubectl get events  <br/>
-kubectl describe node <NODE_NAME> <br/>
-kubectl  logs (-f) <POD_NAME> <br/>
-
+```console
+kubectl cluster-info
+kubectl get events
+kubectl describe node <NODE_NAME>
+kubectl  logs (-f) <POD_NAME>
+```
 
 ### Kubectl : Maintenance
 

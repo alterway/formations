@@ -32,6 +32,7 @@ spec:
     emptyDir: {}
 ```
 
+
 ### Kubernetes : Storage Class
 
 - Permet de définir les différents types de stockage disponibles
@@ -52,11 +53,13 @@ parameters:
   iopsPerGB: "10"
 ```
 
+
 ### Kubernetes : PersistentVolumeClaims
 
 - Ressource utilisée et vue comme une requête pour solliciter du stockage persistant
 - Offre aux PV une variété d'options en fonction du cas d'utilisation
 - Utilisé par les `StatefulSets` pour solliciter du stockage (Utilisaltion du champ `volumeClaimTemplates`)
+
 
 ### Kubernetes : PersistentVolumeClaims
 
@@ -78,6 +81,7 @@ spec:
     matchExpressions:
       - {key: capacity, operator: In, values: [10Gi, 20Gi]}
 ```
+
 
 ### Kubernetes : PersistentVolume
 

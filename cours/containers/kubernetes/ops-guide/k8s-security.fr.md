@@ -34,7 +34,6 @@ metadata:
     namespace: default
 ```
 
-
 ### Role
 
 - L'objet `Role` est un ensemble de règles permettant de définir quelle opération (ou _verbe) peut être effectuée et sur quelle ressource
@@ -61,6 +60,7 @@ rules:
 - Un objet `RoleBinding` doit référencer un `Role` dans le même `namespace`.
 - l'objet `roleRef` spécifié dans le `RoleBinding` est celui qui crée le liaison
 
+
 ### RoleBinding
 
 ```yaml
@@ -83,6 +83,7 @@ roleRef:
 
 - L'objet `ClusterRole` est similaire au `Role` à la différence qu'il n'est pas limité à un seul `namespace`
 - Il permet d'accéder à des ressources non limitées à un `namespace` comme les `nodes`
+
 
 ### ClusterRole
 
@@ -114,7 +115,6 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ```
 
-
 ### RBAC
 
 ```
@@ -130,6 +130,7 @@ kubectl auth can-i get pods /
 - Le `NetworkPolicy` utilisent les labels pour sélectionner les pods sur lesquels s'appliquent les règles qui définissent le trafic alloué sur les pods sélectionnés
 - Le `NetworkPolicy` est générique et fait partie de l'API Kubernetes. Il est nécessaire que le plugin réseau déployé supporte cette spécification
 
+
 ### NetworkPolicies
 
 - DENY tout le trafic sur une application
@@ -137,6 +138,7 @@ kubectl auth can-i get pods /
 - DENY le trafic all non alloué dans un namespace
 - DENY tout le trafic venant d'autres namespaces
 - exemples de Network Policies : <https://github.com/ahmetb/kubernetes-network-policy-recipes>
+
 
 ### NetworkPolicies
 

@@ -11,7 +11,7 @@
 -   Swift est indépendant des autres composants
 -   Neutron peut parfois être utilisé indépendamment (ex : avec oVirt)
 
-<http://docs.openstack.org/arch-design/>
+<https://docs.openstack.org/arch-design/>
 
 ### Penser dès le début aux choix structurants
 
@@ -62,7 +62,7 @@ Haute disponibilité du IaaS
 -   Les services APIs sont stateless et HTTP : scale out et load balancers
 -   La plupart des autres services OpenStack sont capables de scale out également
 
-Guide HA : <http://docs.openstack.org/ha-guide/>
+Guide HA : <https://docs.openstack.org/ha-guide/>
 
 ### Haute disponibilité de l’agent L3 de Neutron
 
@@ -78,7 +78,7 @@ Guide HA : <http://docs.openstack.org/ha-guide/>
 -   Monitoring
 -   Backup
 
-Guide Operations : <http://docs.openstack.org/openstack-ops/content/>
+Guide Operations : <https://docs.openstack.org/openstack-ops/content/>
 
 ### Utilisation des quotas
 
@@ -88,7 +88,7 @@ Guide Operations : <http://docs.openstack.org/openstack-ops/content/>
 -   Support dans Cinder
 -   Support dans Neutron
 
-<http://docs.openstack.org/user-guide-admin/content/cli_set_quotas.html>
+<https://docs.openstack.org/user-guide-admin/content/cli_set_quotas.html>
 
 ### Découpage réseau
 
@@ -106,7 +106,7 @@ Guide Operations : <http://docs.openstack.org/openstack-ops/content/>
 -   Limiter l’accès en lecture des fichiers de configuration (mots de passe, token)
 -   Veille sur les failles de sécurité : OSSA (*OpenStack Security Advisory*), OSSN (*... Notes*)
 
-Guide sécurité : <http://docs.openstack.org/security-guide/>
+Guide sécurité : <https://docs.openstack.org/security-guide/>
 
 ### Segmenter son cloud
 
@@ -115,7 +115,7 @@ Guide sécurité : <http://docs.openstack.org/security-guide/>
 -   Regions : chaque région a son API
 -   Cells : permet de regrouper plusieurs cloud différents sous une même API
 
-<http://docs.openstack.org/openstack-ops/content/scaling.html#segregate_cloud>
+<https://docs.openstack.org/openstack-ops/content/scaling.html#segregate_cloud>
 
 ### Host aggregates / agrégats d’hôtes
 
@@ -191,7 +191,7 @@ Guide sécurité : <http://docs.openstack.org/security-guide/>
 -   *Puppet OpenStack* et *OpenStack Ansible* : modules Puppet et playbooks Ansible
 -   Développés au sein du projet OpenStack
 -   <https://wiki.openstack.org/wiki/Puppet>
--   <http://docs.openstack.org/developer/openstack-ansible/install-guide/>
+-   <https://docs.openstack.org/developer/openstack-ansible/install-guide/>
 
 ### Déploiement continu
 

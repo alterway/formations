@@ -1,5 +1,6 @@
 # Kubernetes : Projet, gouvernance et communauté
 
+
 ### Kubernetes
 
 - COE développé par Google, devenu open source en 2014
@@ -9,11 +10,13 @@
 
 ![](images/kubernetes/kubernetes.png){height="100px"}
 
+
 ### CNCF
 
 *The Foundation’s mission is to create and drive the adoption of a new computing paradigm that is optimized for modern distributed systems environments capable of scaling to tens of thousands of self healing multi-tenant nodes.*
 
 ![](images/kubernetes/cncf.png){height="100px"}
+
 
 ### CNCF : Prérequis
 
@@ -22,6 +25,7 @@
 - Orienté micro services
 
 ### CNCF : Les rôles
+
 
 - Intendance des projets
 - Faire grossir et évoluer l'écosystème
@@ -76,4 +80,5 @@
     - AWS
     - etc
 - Chaque SIG peut avoir des guidelines différentes.
+
 

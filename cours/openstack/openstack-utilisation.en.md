@@ -193,12 +193,6 @@ Beyond the basic L2 and L3 networking features, Neutron may provide other servic
 -   Boot from volume: OS is on the volume
 -   Backup to object store (Swift ou Ceph) feature
 
-### Shared storage?
-
--   Cinder is **not** a shared storage solution like NFS
--   The Manila OpenStack project aims at being *NFS as a Service*
--   AWS introduced such a feature only recently
-
 ## Heat: Orchestration
 
 ### OpenStack native and alternatives
