@@ -89,10 +89,10 @@
       "containers/docker-hosts",
       "containers/docker-orchestration",
       "containers/docker-monitoring",
-      "containers/user-guide/k8s-concepts",
-      "containers/user-guide/k8s-architecture",
+      "containers/kubernetes/user-guide/k8s-concepts",
+      "containers/kubernetes/user-guide/k8s-architecture",
       "containers/k8s-openshift-introduction",
-      "containers/user-guide/conclusion"
+      "containers/kubernetes/user-guide/conclusion"
     ]
   },
   "kubernetes-user": {
