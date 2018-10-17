@@ -1,4 +1,5 @@
-# Kubernetes : projet, gouvernance et communauté  {-}
+# Kubernetes : Projet, gouvernance et communauté
+
 
 ### Kubernetes
 
@@ -7,21 +8,24 @@
 - Devenu populaire en très peu de temps
 - Premier projet de la C.N.C.F
 
-![](images/docker/k8s.png){height="100px"}
+![](images/kubernetes/kubernetes.png){height="100px"}
+
 
 ### CNCF
 
 *The Foundation’s mission is to create and drive the adoption of a new computing paradigm that is optimized for modern distributed systems environments capable of scaling to tens of thousands of self healing multi-tenant nodes.*
 
-![](images/docker/cncf.png){height="100px"}
+![](images/kubernetes/cncf.png){height="100px"}
 
-### CNCF: Prérequis
+
+### CNCF : Prérequis
 
 - Distribuer sous forme de conteneurs
 - Gestion dynamique de la configuration
 - Orienté micro services
 
-### CNCF: Les rôles
+### CNCF : Les rôles
+
 
 - Intendance des projets
 - Faire grossir et évoluer l'écosystème
@@ -40,23 +44,41 @@
 
 ### Kubernetes : Projet
 
-- [Docs](https://kubernetes.io)
-- [Slack](http://slack.k8s.io/)
-- [Stack Overflow](https://stackoverflow.com/questions/tagged/kubernetes)
-- [Serverfault](https://stackoverflow.com/questions/taggeg/kubernetes)
-- Hébergé sur [Github](https://github.com/kubernetes/kubernetes):
-    - [Issues](https://github.com/kubernetes/kubernetes/issues)
-    - [Pull Request](https://github.com/kubernetes/kubernetes/pulls)
-    - [Release](https://github.com/kubernetes/kubernetes/releases)
-- [Projets en incubation](https://github.com/kubernetes-incubator/)
+- Docs : <https://kubernetes.io/docs/>
+- Slack : <http://slack.k8s.io/>
+- Discuss : <https://discuss.kubernetes.io>
+- Stack Overflow : <https://stackoverflow.com/questions/tagged/kubernetes>
+- Serverfault <https://stackoverflow.com/questions/tagged/kubernetes>
+
+### Kubernetes : Projet
+
+- Hébergé sur Github : <https://github.com/kubernetes/kubernetes> :
+    - Issues : <https://github.com/kubernetes/kubernetes/issues>
+    - Pull Requests <https://github.com/kubernetes/kubernetes/pulls>
+    - Releases : <https://github.com/kubernetes/kubernetes/releases>
+- Projets en incubation : 
+    - <https://github.com/kubernetes-incubator/> (Deprécié)
+    - <https://github.com/kubernetes-sigs/>
+
+### Kubernetes : Cycle de développement
+
+- Chaque _release_ a son propre planning, pour exemple : <https://github.com/kubernetes/sig-release/tree/master/releases/release-1.12#timeline>
+- Chaque cycle de développement dure 12 semaines et peut être étendu si nécessaire
+- Features freeze
+- Code Freeze
+- Alpha Release
+- Beta Releases
+- Release Candidates
 
 ### Kubernetes : Communauté
 
-- [Contributor and community guide](https://github.com/kubernetes/community/blob/master/README.md#kubernetes-community)
-- Décomposée en [SIG](https://github.com/kubernetes/community/blob/master/sig-list.md)(Special Interest Group)
+- Contributor and community guide : <https://github.com/kubernetes/community/blob/master/README.md#kubernetes-community>
+- Décomposée en [Special Interest Groups] : <https://github.com/kubernetes/community/blob/master/sig-list.md>
 - Les SIG sont des projets, centres d'intérêts ou Working Group différents :
     - Network
     - Docs
     - AWS
     - etc
 - Chaque SIG peut avoir des guidelines différentes.
+
+

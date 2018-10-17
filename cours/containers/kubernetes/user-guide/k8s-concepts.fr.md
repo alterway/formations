@@ -25,7 +25,7 @@
 
 - Les Pods sont définis en YAML comme les fichiers `docker-compose` :
 
-```
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -65,7 +65,8 @@ spec:
         - containerPort: 80
 ```
 
-### Kubernetes : Services {-}
+
+### Kubernetes : Services
 
 - Abstraction des Pods et Replication Controllers, sous forme d'une VIP de service
 - Rendre un ensemble de Pods accessibles depuis l'extérieur
@@ -83,9 +84,12 @@ spec:
 - `LoadBalancer` :  expose le service à l'externe en utilisant le loadbalancer d'un cloud provider (AWS, Google, Azure)
 - `ExternalIP`: le routage de l'IP publique vers le cluster est manuel
 
+
+
 ### Kubernetes : Services
 
-*Picture of Service*
+![](images/services.png)
+
 
 ### Kubernetes : Services
 
@@ -107,7 +111,8 @@ spec:
     app: guestbook
     tier: frontend
 ```
-### Kubenetes : Services
+
+### Kubernetes : Services
 
 Il est aussi possible de mapper un service avec un nom de domaine en spécifiant le paramètre `spec.externalName`.
 
@@ -122,17 +127,13 @@ spec:
   externalName: my.database.example.com
 ```
 
+
 ### Kubernetes: Ingress
 
 - L'objet `Ingress` permet d'exposer un service à l'extérieur d'un cluster Kubernetes
 - Il permet de fournir une URL visible permettant d'accéder un Service Kubernetes
 - Il permet d'avoir des terminations TLS, de faire du _Load Balancing_, etc...
-- Pour utiliser un `Ingress`, il faut un controlleur Ingress. Il existe plusieurs offres sur le marché:
-    - Nginx Controller : <https://github.com/kubernetes/ingress-nginx>
-    - Traefik : <https://github.com/containous/traefik>
-    - Istio: <https://github.com/istio/istio>
-    - Linkerd: <https://github.com/linkerd/linkerd>
-    - Contour: <https://www.github.com/heptio/contour/>
+
 
 ### Kubernetes : Ingress
 
@@ -152,16 +153,28 @@ spec:
           servicePort: 80
 ```
 
+### Kubernetes : Ingress Controller
+
+Pour utiliser un `Ingress`, il faut un Ingress Controller. Il existe plusieurs offres sur le marché :
+
+  - Traefik : <https://github.com/containous/traefik>
+  - Istio : <https://github.com/istio/istio>
+  - Linkerd : <https://github.com/linkerd/linkerd>
+  - Contour : <https://www.github.com/heptio/contour/>
+  - Nginx Controller : <https://github.com/kubernetes/ingress-nginx>
+
+
 ### Kubernetes : DaemonSet
 
 - Assure que tous les noeuds exécutent une copie du pod sur tous les noeuds du cluster
 - Ne connaît pas la notion de `replicas`.
-- Utilisé pour des besoins particuliers comme:
-  * l'exécution d'agents de collection de logs comme `fluentd` ou `logstash`
-  * l'exécution de pilotes pour du matériel comme `nvidia-plugin`
-  * l'exécution d'agents de supervision comme NewRelic agent, Prometheus node exporter
+- Utilisé pour des besoins particuliers comme :
+    - l'exécution d'agents de collection de logs comme `fluentd` ou `logstash`
+    - l'exécution de pilotes pour du matériel comme `nvidia-plugin`
+    - l'exécution d'agents de supervision comme NewRelic agent, Prometheus node exporter
 
   NB : kubectl ne peut pas créer de DaemonSet
+
 
 ### Kubernetes : DaemonSet
 
@@ -186,13 +199,15 @@ metadata:
       image: luksa/ssd-monitor
 ```
 
+
 ### Kubernetes : StatefulSet
 
 - Similaire au `Deployment`
 - Les pods possèdent des identifiants uniques.
-- chaque replica de pod est créé par ordre d'index
+- Chaque replica de pod est créé par ordre d'index
 - Nécessite un `Persistent Volume` et un `Storage Class`.
 - Supprimer un StatefulSet ne supprime pas le PV associé
+
 
 ### Kubernetes : StatefulSet
 
@@ -204,40 +219,28 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: nginx # has to match .spec.template.metadata.labels
+      app: nginx
   serviceName: "nginx"
-  replicas: 3 # by default is 1
+  replicas: 3
   template:
     metadata:
       labels:
-        app: nginx # has to match .spec.selector.matchLabels
+        app: nginx
     spec:
-      terminationGracePeriodSeconds: 10
       containers:
       - name: nginx
-        image: k8s.gcr.io/nginx-slim:0.27
+        image: nginx
         ports:
         - containerPort: 80
-          name: web
-        volumeMounts:
-        - name: www
-          mountPath: /usr/share/nginx/html
-  volumeClaimTemplates:
-  - metadata:
-      name: www
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      storageClassName: "my-storage-class"
-      resources:
-        requests:
-          storage: 1Gi
 ```
+
 
 ### Kubernetes : Labels
 
 - Système de clé/valeur
 - Organiser les différents objets de Kubernetes (Pods, RC, Services, etc.) d'une manière cohérente qui reflète la structure de l'application
 - Corréler des éléments de Kubernetes : par exemple un service vers des Pods
+
 
 ### Kubernetes : Labels
 
@@ -256,6 +259,16 @@ spec:
     image: nginx
     ports:
     - containerPort: 80
+```
+
+### Kubernetes : Labels
+
+- La commande `kubectl get pods`, par défaut, ne liste pas les labels. Il est possible de les voir en utilisant `--show-labels`:
+
+```console
+$ kubectl get pods --show-labels
+NAME      READY     STATUS    RESTARTS   AGE       LABELS
+nginx     1/1       Running   0          31s       app=nginx,env=prod
 ```
 
 ### Kubernetes : Namespaces
