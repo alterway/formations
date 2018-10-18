@@ -1,8 +1,10 @@
+# Kubernetes : Jobs
+
 ### Kubernetes : Job
 
 - Crée des pods et s'assurent qu'un certain nombre d'entre eux se terminent avec succès.
 - Peut éxécuter plusieurs pods en parallèle
-- Si un noeud du cluster est en panne, les pods sont reschedulés vers un autre noeud. 
+- Si un noeud du cluster est en panne, les pods sont reschedulés vers un autre noeud.
 
 ### Kubernetes : Job
 
@@ -12,9 +14,9 @@ kind: Job
 metadata:
   name: pi
 spec:
-  parallelism: 1    
-  completions: 1    
-  template:         
+  parallelism: 1
+  completions: 1
+  template:
     metadata:
       name: pi
     spec:
@@ -50,7 +52,7 @@ spec:
                     restartPolicy: OnFailure
                     containers:
                     -  name: pi
-                       image: perl 
+                       image: perl
                        command: ["perl",  "-Mbignum=bpi", "-wle", "print bpi(2000)"]
 ```
 

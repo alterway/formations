@@ -1,4 +1,6 @@
-### Authentication & Autorisation 
+# Kubernetes : Securité et Controle d'accès
+
+### Authentication & Autorisation
 
 - RBAC (Role Based Access Control)
 - ABAC (Attribute-based access control)
@@ -74,7 +76,7 @@ subjects:
   name: jane
   apiGroup: rbac.authorization.k8s.io
 roleRef:
-  kind: Role 
+  kind: Role
   name: pod-reader
   apiGroup: rbac.authorization.k8s.io
 ```
@@ -134,7 +136,7 @@ kubectl auth can-i get pods /
 ### NetworkPolicies
 
 - DENY tout le trafic sur une application
-- LIMIT le trafic sur une application 
+- LIMIT le trafic sur une application
 - DENY le trafic all non alloué dans un namespace
 - DENY tout le trafic venant d'autres namespaces
 - exemples de Network Policies : <https://github.com/ahmetb/kubernetes-network-policy-recipes>

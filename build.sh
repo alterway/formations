@@ -84,7 +84,7 @@ display_help() {
                         This option is also necessary even if you only want PDF
                         output. Default: https://osones.com/formations/revealjs
 
-    -c course           Courses to build, if not specified all courses are built
+    -c course           Course to build, "all" for build them all !
 
     -l language         Language in which you want the course to be built. Default: fr
 EOF
@@ -109,6 +109,7 @@ while getopts ":o:t:u:c:l:h" OPT; do
 done
 
 [[ $REVEALJSURL == "" ]] && REVEALJSURL="https://osones.com/formations/revealjs"
+
 if [[ $THEME == "" ]]; then
   THEME="osones"
 else

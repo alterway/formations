@@ -89,10 +89,31 @@
       "containers/docker-hosts",
       "containers/docker-orchestration",
       "containers/docker-monitoring",
-      "containers/kubernetes/user-guide/k8s-concepts",
-      "containers/kubernetes/user-guide/k8s-architecture",
+      "containers/kubernetes/k8s-concepts",
+      "containers/kubernetes/k8s-architecture",
       "containers/k8s-openshift-introduction",
-      "containers/kubernetes/user-guide/conclusion"
+      "containers/kubernetes/conclusion"
+    ]
+  },
+  "kubernetes-full": {
+    "course_name": "Kubernetes",
+    "course_description": "Formation Kubernetes",
+    "modules": [
+      "intro-osones",
+      "containers/kubernetes/intro-osones",
+      "containers/kubernetes/k8s-governance",
+      "containers/kubernetes/k8s-concepts",
+      "containers/kubernetes/k8s-architecture",
+      "containers/kubernetes/k8s-deployment",
+      "containers/kubernetes/k8s-volumes",
+      "containers/kubernetes/k8s-jobs",
+      "containers/kubernetes/k8s-usage",
+      "containers/kubernetes/k8s-installation",
+      "containers/kubernetes/k8s-operations",
+      "containers/kubernetes/k8s-monitoring",
+      "containers/kubernetes/k8s-security",
+      "containers/kubernetes/k8s-applications",
+      "containers/kubernetes/conclusion"
     ]
   },
   "kubernetes-user": {
@@ -100,16 +121,16 @@
     "course_description": "Formation Kubernetes Utilisateur",
     "modules": [
       "intro-osones",
-      "containers/kubernetes/user-guide/intro-osones",
-      "containers/kubernetes/user-guide/k8s-governance",
-      "containers/kubernetes/user-guide/k8s-architecture",
-      "containers/kubernetes/user-guide/k8s-concepts",
-      "containers/kubernetes/user-guide/k8s-deployment",
-      "containers/kubernetes/user-guide/k8s-volumes",
-      "containers/kubernetes/user-guide/k8s-jobs",
-      "containers/kubernetes/user-guide/k8s-usage",
-      "containers/kubernetes/user-guide/k8s-applications",
-      "containers/kubernetes/user-guide/conclusion"
+      "containers/kubernetes/intro-osones",
+      "containers/kubernetes/k8s-governance",
+      "containers/kubernetes/k8s-architecture",
+      "containers/kubernetes/k8s-concepts",
+      "containers/kubernetes/k8s-deployment",
+      "containers/kubernetes/k8s-volumes",
+      "containers/kubernetes/k8s-jobs",
+      "containers/kubernetes/k8s-usage",
+      "containers/kubernetes/k8s-applications",
+      "containers/kubernetes/conclusion"
     ]
   },
   "kubernetes-ops": {
@@ -117,12 +138,12 @@
     "course_description": "Formation Kubernetes Opérateur",
     "modules": [
       "intro-osones",
-      "containers/kubernetes/ops-guide/intro-osones",
-      "containers/kubernetes/ops-guide/k8s-installation",
-      "containers/kubernetes/ops-guide/k8s-operations",
-      "containers/kubernetes/ops-guide/k8s-monitoring",
-      "containers/kubernetes/ops-guide/k8s-security",
-      "containers/kubernetes/ops-guide/conclusion"
+      "containers/kubernetes/intro-osones",
+      "containers/kubernetes/k8s-installation",
+      "containers/kubernetes/k8s-operations",
+      "containers/kubernetes/k8s-monitoring",
+      "containers/kubernetes/k8s-security",
+      "containers/kubernetes/conclusion"
     ]
   }
 }
