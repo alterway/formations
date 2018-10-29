@@ -41,3 +41,5 @@ Optionnel :
  * Se connecter en SSH à l'instance
  * Se connecter à l'API de metadata `http://169.254.169.254`
 
+ * Créer un volume
+ * Attacher le volume à l'instance
