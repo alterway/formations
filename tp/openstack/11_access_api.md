@@ -3,7 +3,7 @@
 ## Objectifs
 
 * Comprendre et manipuler le concept d'API
-* Découvrir le mode de fonctonnement des APIs OpenStack
+* Découvrir le mode de fonctionnement des APIs OpenStack
 
 ## Démarche
 
@@ -31,7 +31,7 @@ Via APT sur un OS Ubuntu récent. Sinon via le système de paquets Python :
 
 Se baser sur un exemple de la documentation.
 
- * Réaliser les meês opérations que précédemment, mais avec `openstackclient`
+ * Réaliser les mêmes opérations que précédemment, mais avec `openstackclient`
  * Rajouter l'option `--debug`
 
 ### Dashboard web
