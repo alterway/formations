@@ -79,6 +79,6 @@ total 16K
 - Version 1.11.x : stable en production
 - Solution complète et une des plus utilisées
 - Éprouvée par Google
-- S'intègre parfaitement à d'autres _Container Runtime Interfaces (CRI)_ comme containerd, cri-o, rktlet, fraki, etc...
+- S'intègre parfaitement à d'autres _Container Runtime Interfaces (CRI)_ comme containerd, cri-o, rktlet, frakti, etc...
 
 
