@@ -28,8 +28,8 @@ both public and private clouds.```
 -   Kilo (2015.1), Liberty (2015.2)
 -   Mitaka (2016.1), Newton (2016.2)
 -   Ocata (2017.1), Pike (2017.2)
--   **Queens** (2018.1)
--   Late 2018: Rocky
+-   Queens (2018.1), **Rocky** (2018.2)
+-   Early 2019: Stein
 
 ### Some of the supporters/contributors ...
 
