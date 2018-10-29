@@ -344,8 +344,8 @@ Démarrer une instance avec un disque racine sur un **volume**
 Deux approches :
 
 - Ne pas évoluer
-  - Risquer de ne pas répondre aux attentes
-  - Se contenter d'un cas d'usage *test & dev*
+    - Risquer de ne pas répondre aux attentes
+    - Se contenter d'un cas d'usage *test & dev*
 - Adapter ses pratiques au cloud pour en tirer parti pleinement
 
 ### Haute disponibilité (HA)

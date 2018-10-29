@@ -341,8 +341,8 @@ Starting an instance with its root disk on a **volume**
 Two differents possible views:
 
 - Don't change anything
-  - Risk not meeting expectations
-  - Limit usage to *test & dev* use case
+    - Risk not meeting expectations
+    - Limit usage to *test & dev* use case
 - Adapt to new cloud compliant practices to take advantage of it
 
 ### High availability (HA)

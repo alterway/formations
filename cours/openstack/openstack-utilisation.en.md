@@ -27,6 +27,7 @@
     -   Shade (Python library which includes business logic)
 -   With official command line tools
 -   With Horizon
+-   Through higher-level third-party tools (example: Terraform)
 
 ### Official clients
 
@@ -80,7 +81,7 @@
 
 ### Principles
 
--   Manages instances
+-   Mainly manages **instances**
 -   Instances are created from images provided by Glance
 -   Instances' network interfaces are associated with Neutron ports
 -   Block storage can be provided to instances by Cinder
@@ -108,7 +109,14 @@ Manages:
 -   Keypairs
 -   Indirectly: images, security groups, floating IPs
 
-Instances can be resized and migrated from a physical host to another.
+### Actions on instances
+
+-   Reboot / shutdown
+-   Snapshot
+-   Logs
+-   VNC access
+-   Resize
+-   Migration (admin)
 
 ## Glance: Image registry
 
@@ -125,7 +133,7 @@ Instances can be resized and migrated from a physical host to another.
 
 ### Image types
 
-Glance supports a wide range of image types, limited by Nova's underlying hypervisor support
+Glance supports a wide range of image types, limited by Nova's underlying technology support
 
 -   raw
 -   qcow2
@@ -159,8 +167,10 @@ The API exposes these main resources:
 
 ### Floating IPs
 
--   IP is *allocated* from a *pool*
--   Allocated IP is *associated* to a port
+-   In addition to *fixed IPs* which are set on instances
+-   *Allocation* (reservation for the project) of an IP from a *pool*
+-   *Association* of an allocated IP to a port (of an instance, for example)
+-   Not directly set on instances
 
 ### Security groups
 
@@ -195,10 +205,11 @@ Beyond the basic L2 and L3 networking features, Neutron may provide other servic
 
 ## Heat: Orchestration
 
-### OpenStack native and alternatives
+### Principles
 
 - Heat is the native OpenStack solution
 - Heat provides an API to manage *stacks* from *templates*
+- A Heat template follows the HOT format, based on YAML
 - Alternatives external to OpenStack exist, like **Terraform**
 
 ### A Heat Orchestration Template (HOT) template

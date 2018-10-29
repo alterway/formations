@@ -41,7 +41,7 @@
 -   Notion générale : un déploiement du logiciel permet de multiples utilisations
 -   Un cloud OpenStack permet aux utilisateurs de travailler dans des environnements isolés
 -   Les instances, réseaux, images, etc. sont associés à un tenant
--   Certaines ressources peuvent être partagées entre tenants (exemple :image publique)
+-   Certaines ressources peuvent être partagées entre tenants (exemple : image publique)
 -   On peut aussi parler de “projet”
 
 ### Les instances
@@ -99,14 +99,10 @@
 
 ### Monitoring
 
-Monitoring
-
 -   Prendre en compte le cycle de vie des instances : DOWN != ALERT
 -   Monitorer le service plus que le serveur
 
 ### Backup
-
-Backuper, quoi ?
 
 -   Être capable de recréer ses instances (et le reste de son infrastructure)
 -   Données (applicatives, logs) : block, objet
@@ -116,6 +112,6 @@ Backuper, quoi ?
 -   Équipe projet en charge de l’infrastructure de développement d’OpenStack
 -   Travaille comme les équipes de dev d’OpenStack et utilise les mêmes outils
 -   Infrastructure as code
--   Infrastructure ouverte : code “open source”
+-   Infrastructure ouverte : code “open source” <https://opensourceinfra.org/>
 -   Utilise du cloud (hybride)
 

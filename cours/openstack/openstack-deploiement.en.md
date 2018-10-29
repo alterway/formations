@@ -39,7 +39,7 @@
 -   Python 3 comptability almost complete
 -   So as not to reinvent the wheel, a lot of dependencies are necessary
 
-### Base de données
+### MySQL/MariaDB database
 
 -   Stores most of the data managed by OpenStack
 -   Each component has it own database
@@ -71,6 +71,11 @@
 
 ![Simple example of RabbitMQ operation](images/rabbitmq-schema.png)
 
+### Memcached cache
+
+-   Multiple services make use of a caching mechanism
+-   Memcached is the default implementation
+
 ## Keystone: Authentication, authorization and service catalog
 
 ### Install and configuration
@@ -79,7 +84,7 @@
 -   WSGI web server integration (Apache by default)
 -   Configuration file: `/etc/keystone/keystone.conf`
 -   Users/groups backends: SQL, LDAP (or Active Directory)
--   Roles/services/endpoints backends: SQL
+-   Projects/roles/services/endpoints backends: SQL
 -   Tokens backends: SQL, Memcache, none (depending on the token type)
 
 ### Tokens drivers

@@ -27,6 +27,7 @@
     -   Shade (bibliothèque Python incluant la business logic)
 -   Avec les outils officiels en ligne de commande
 -   Avec Horizon
+-   Au travers d'outils tiers, plus haut niveau (exemple : Terraform)
 
 ### Clients officiels
 
@@ -80,7 +81,7 @@
 
 ### Principes
 
--   Gère les instances
+-   Gère principalement les **instances**
 -   Les instances sont créées à partir des images fournies par Glance
 -   Les interfaces réseaux des instances sont associées à des ports Neutron
 -   Du stockage block peut être fourni aux instances par Cinder
@@ -108,13 +109,18 @@ Gère :
 -   Keypairs
 -   Indirectement : images, security groups (groupes de sécurité), floating IPs (IPs flottantes)
 
-Les instances sont redimensionnables et migrables d’un hôte physique à un autre.
+-   Reboot / shutdown
+-   Snapshot
+-   Lecture des logs
+-   Accès VNC
+-   Redimensionnement
+-   Migration (admin)
 
 ## Glance : registre d'images
 
 ### Principes
 
--   Registre d’images (et des snapshots)
+-   Registre d'images et de snapshots
 -   Propriétés sur les images
 -   Est utilisé par Nova pour démarrer des instances
 
@@ -125,7 +131,7 @@ Les instances sont redimensionnables et migrables d’un hôte physique à un au
 
 ### Types d’images
 
-Glance supporte un large éventail de types d’images, limité par le support de l’hyperviseur sous-jacent à Nova
+Glance supporte un large éventail de types d’images, limité par le support de la technologie sous-jacente à Nova
 
 -   raw
 -   qcow2
@@ -145,11 +151,11 @@ L’utilisateur peut définir un certain nombre de propriétés dont certaines s
 -   RAM minimum
 -   Publique ou non
 
-## Neutron : réseau
+## Neutron : réseau
 
 ### API
 
-L’API permet notamment de manipuler ces ressources
+L’API permet notamment de manipuler ces ressources :
 
 -   Réseau (*network*) : niveau 2
 -   Sous-réseau (*subnet*) : niveau 3
@@ -159,8 +165,10 @@ L’API permet notamment de manipuler ces ressources
 
 ### Les IP flottantes
 
--   *Allocation* d'une IP depuis un *pool*
--   *Association* d'une IP allouée à un port
+-   En plus des *fixed IPs* portées par les instances
+-   *Allocation* (réservation pour le projet) d'une IP depuis un *pool*
+-   *Association* d'une IP allouée à un port (d'une instance, par exemple)
+-   Non portées directement par les instances
 
 ### Les groupes de sécurité
 
@@ -193,13 +201,13 @@ Outre les fonctions réseau de base niveaux 2 et 3, Neutron peut fournir d’aut
 -   Boot from volume : l’OS est sur le volume
 -   Fonctionnalité de backup vers un object store (Swift ou Ceph)
 
+## Heat : Orchestration
 
-## Heat : Orchestration
-
-### Natif OpenStack et alternatives
+### Généralités
 
 - Heat est la solution native OpenStack
 - Heat fournit une API de manipulation de *stacks* à partir de *templates*
+- Un template Heat suit le format HOT, basé sur YAML
 - Des alternatives externes à OpenStack existent, comme **Terraform**
 
 ### Un template Heat Orchestration Template (HOT)
