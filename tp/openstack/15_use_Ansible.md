@@ -16,7 +16,7 @@ Via APT ou le système de paquets Python.
 
 ### Tester l'inventaire dynamique
 
-Rapatrier le script d'inventaire dynamique pour OpenStack depuis `https://raw.githubusercontent.com/ansible/ansible/devel/contrib/inventory/openstack.py`.
+Rapatrier le script d'inventaire dynamique pour OpenStack depuis `https://raw.githubusercontent.com/ansible/ansible/devel/contrib/inventory/openstack_inventory.py`.
 
 Avec un `clouds.yaml` configuré, l'exécution du script d'inventaire dynamique doit retourner un inventaire au format JSON comprenant les instances présentes dans le cloud.
 
