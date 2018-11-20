@@ -3,13 +3,13 @@
 ### Kubernetes : Composants
 
 - Kubernetes est écrit en Go, compilé statiquement.
-- Un ensemble de binaires sans dépendances
+- Un ensemble de binaires sans dépendance
 - Faciles à conteneuriser et à packager
-- Peut se déployer uniquement avec des conteneurs sans dépendances d'OS
+- Peut se déployer uniquement avec des conteneurs sans dépendance d'OS
 
 ### Kubernetes : Composants
 
-- kube-apiserver : API server qui permet la configuration d'objet Kubernetes (Pods, Service, Replication Controller, etc.)
+- kube-apiserver : API server qui permet la configuration d'objet Kubernetes (Pod, Service, Deployment, etc.)
 - kube-proxy : Permet le forwarding TCP/UDP et le load balancing entre les services et les backend (Pods)
 - kube-scheduler : Implémente les fonctionnalités de scheduling
 - kube-controller-manager : Responsable de l'état du cluster, boucle infinie qui régule l'état du cluster afin d'atteindre un état désiré
@@ -17,7 +17,7 @@
 ### Kubernetes : Composants
 
 - kubelet : Service "agent" fonctionnant sur tous les nœuds et assure le fonctionnement des autres services
-- kubectl : Client qui permet de piloter un cluster Kubernetes
+- kubectl : Ligne de commande permettant de piloter un cluster Kubernetes
 
 ### Kubernetes : Kubelet
 
