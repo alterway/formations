@@ -146,5 +146,16 @@
       "containers/kubernetes/k8s-security",
       "containers/kubernetes/conclusion"
     ]
+  },
+  "cloud-devops-aws": {
+    "course_name": "cloud-devops-aws",
+    "course_description": "Formation Cloud AWS et Devops",
+    "modules": [
+      "intro-osones",
+      "cours/aws-devops/intro-osones",
+      "cours/aws-devops/formation-aws-devops-iam",
+      "cours/aws-devops/formation-aws-devops-networking",
+      "cours/aws-devops/conclusion"
+    ]
   }
 }
