@@ -152,10 +152,10 @@
     "course_description": "Formation Cloud AWS et Devops",
     "modules": [
       "intro-osones",
-      "cours/aws-devops/intro-osones",
-      "cours/aws-devops/formation-aws-devops-iam",
-      "cours/aws-devops/formation-aws-devops-networking",
-      "cours/aws-devops/conclusion"
+      "cours/cloud/formation-aws-devops-intro-osones",
+      "cours/cloud/formation-aws-devops-iam",
+      "cours/cloud/formation-aws-devops-networking",
+      "cours/cloud/formation-aws-devops-conclusion"
     ]
   }
 }

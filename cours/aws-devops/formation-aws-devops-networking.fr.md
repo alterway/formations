@@ -92,6 +92,13 @@
 
 ![Schéma VPC](https://docs.aws.amazon.com/fr_fr/vpc/latest/userguide/images/custom-route-table-diagram.png)
 
+### VPC peering
+
+ - Connexion pour mettre en réseau deux VPC
+ - Permet de router le trafic entre les VPC de manière privée (sans passer par internet)
+ - Peut se créer pour des VPC sur le même compe AWS ou entre VPCs de différents comptes
+
+
 ## Amazon Route 53
 
 ### Qu'est-ce qu'Amazon Route 53 ?
@@ -103,20 +110,58 @@
  - Achemine le trafic Internet vers les ressources du domaine
  - Vérifie l'état de santé des ressources
 
+### Acheminement du trafic Internet vers un site web ou une application
+
+![Schéma rout 53 traffic](https://docs.aws.amazon.com/fr_fr/Route53/latest/DeveloperGuide/images/how-route-53-routes-traffic.png)
+
 ### Enregistrement de domaine
 
  - Choisir un nom de domaine et confirmer qu'il est disponible
  - Enregistrement le nom de domaine Route 53 avec les noms et les informations sur le contact pour le propriétaire du domaine
  - Création automatique d'une **hosted zone**
 
-### Acheminement du trafic Internet vers un site web ou une application
+### Hosted zone ou zone hébergée
 
-![Schéma rout 53 traffic](https://docs.aws.amazon.com/fr_fr/Route53/latest/DeveloperGuide/images/how-route-53-routes-traffic.png)
+ - Conteneur d'enregistrements des informations sur la gestion du trafic pour un domaine
+  - Serveurs de noms
+  - Alias
+  - Adresses IP
+  - Enregistrements DNS (AAAA, CNAME, SRV, MX, etc)
+  - Sous domaines
+  - Stratégies de routage
+
+### Stratégies de routage
+
+ - Déterminent la façon dont Amazon Route 53 répond aux requêtes pour un enregistrement donné
+ - Stratégie de routage simple
+ - Stratégie de routage par basculement: basculement actif-passif
+ - Stratégie de routage par géolocalisation: achemine le trafic en fonction de l'emplacement de l'utilisateur
+ - Stratégie de routage par proximité géographique : achemine du trafic en fonction de l'emplacement des ressources/détourne le trafic des ressources d'un emplacement donné vers un autre
+ - Stratégie de routage avec latence : achemine le trafic vers la région qui fournit la meilleure latence
+ - Stratégie de routage de réponse multivaleur : Route 53 répond aux requêtes DNS avec jusqu'à huit enregistrements sains sélectionnés de manière aléatoire.
+ - Stratégie de routage pondéré : achemine le trafic vers plusieurs ressources selon les proportions spécifiée
+
+### Schéma
+
+![Schéma Routage par proximité géographique](https://docs.aws.amazon.com/fr_fr/Route53/latest/DeveloperGuide/images/geoproximity-routing-bias.png)
 
 ### Vérification de l'intégrité des ressources
+
+ - Permet de : 
+  - Vérifier si un point de terminaison spécifié, tel qu'un serveur web, est sain
+  - Etre averti quand un point de terminaison tombe
+  - Configurer également le basculement DNS, qui permet de rediriger le trafic Internet à partir d'une ressource non saine vers une ressource saine
 
 ![Schéma Healthcheck Route53](https://docs.aws.amazon.com/fr_fr/Route53/latest/DeveloperGuide/images/how-health-checks-work.png)
 
 
 ## Direct Connect
 
+### Concept Direct Connect 
+
+ - Relie le réseau interne d'une entreprise à un emplacement AWS Direct Connect via un lien physique (fibre optique)
+ - Un emplacement AWS Direct Connect donne accès à AWS dans la région à laquelle il est associé
+ 
+ ![Schéma Direct connect](https://docs.aws.amazon.com/fr_fr/directconnect/latest/UserGuide/images/direct_connect_overview.png)
+
+ 
