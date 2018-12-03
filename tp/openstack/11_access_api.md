@@ -22,7 +22,7 @@ Avec un outil comme curl, et à l'aide de la documentation des APIs, écrire les
 
 Via APT sur un OS Ubuntu récent. Sinon via le système de paquets Python :
 
-    apt install python-dev virtualenv
+    sudo apt install python-dev virtualenv
     virtualenv venv
     cd venv && source bin/activate
     pip install python-openstackclient

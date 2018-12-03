@@ -26,5 +26,5 @@ Utilisation de Vagrant (Vagrantfile disponible dans `resources/`) pour le déplo
 
 ### Procédure d'installation
 
-Utilisation du guide d'installation officiel `https://docs.openstack.org/install-guide/`.
+Utilisation du guide d'installation officiel <https://docs.openstack.org/install-guide/>.
 
