@@ -1,5 +1,3 @@
-# Introduction {-}
-
 ### Objectifs de la formation
 
 -   Assimiler les concepts et le vocabulaire liés au cloud

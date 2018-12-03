@@ -1,15 +1,3 @@
-# Introduction {-}
-
-### Goals of the training: Cloud
-
--   Understand concepts and vocabulary related to cloud
--   Understand the difference between cloud and virtualization
--   Understand benefits of cloud
--   Overview of cloud market players for public and private clouds
--   Know how to take advantage of IaaS
--   Be able to decide what is cloud compatible or not
--   Adapt its system administration and development methods to a cloud environment
-
 ### Goals of the training: OpenStack
 
 -   Discover OpenStack and use its different services

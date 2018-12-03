@@ -4,7 +4,7 @@
     "course_description": "Formation Cloud",
     "modules": [
       "intro-osones",
-      "openstack/intro-osones",
+      "intro",
       "cloud/cloud-introduction",
       "cloud/cloud"
     ]
@@ -14,7 +14,9 @@
     "course_description": "Formation OpenStack administrateur",
     "modules": [
       "intro-osones",
-      "openstack/intro-osones",
+      "intro",
+      "cloud/cloud-introduction",
+      "openstack/openstack-user-introduction",
       "openstack/openstack-introduction",
       "cloud/cloud",
       "openstack/openstack-presentation",
@@ -31,7 +33,8 @@
     "course_description": "Formation OpenStack administrateur",
     "modules": [
       "intro-osones",
-      "openstack/intro-osones",
+      "intro",
+      "openstack/openstack-introduction",
       "openstack/openstack-presentation",
       "openstack/openstack-presentation-inside",
       "openstack/openstack-deploiement",
@@ -45,8 +48,9 @@
     "course_description": "Formation OpenStack utilisateur",
     "modules": [
       "intro-osones",
-      "openstack/intro-osones",
-      "cloud/introduction-user",
+      "intro",
+      "cloud/cloud-introduction",
+      "openstack/openstack-introduction",
       "cloud/cloud",
       "cloud/cloud-avance",
       "openstack/openstack-presentation",
@@ -61,7 +65,8 @@
     "course_description": "Formation OpenStack Ops Users",
     "modules": [
       "intro-osones",
-      "openstack/intro-osones",
+      "intro",
+      "openstack/openstack-user-introduction",
       "openstack/openstack-introduction",
       "openstack/openstack-presentation",
       "openstack/openstack-presentation-inside",
@@ -80,7 +85,6 @@
     "course_description": "Formation Docker",
     "modules": [
       "intro-osones",
-      "containers/intro-osones",
       "containers/containers-introduction",
       "containers/containers-runtimes",
       "containers/docker-concepts",
@@ -100,7 +104,6 @@
     "course_description": "Formation Kubernetes",
     "modules": [
       "intro-osones",
-      "containers/kubernetes/intro-osones",
       "containers/kubernetes/k8s-governance",
       "containers/kubernetes/k8s-concepts",
       "containers/kubernetes/k8s-architecture",
@@ -121,7 +124,6 @@
     "course_description": "Formation Kubernetes Utilisateur",
     "modules": [
       "intro-osones",
-      "containers/kubernetes/intro-osones",
       "containers/kubernetes/k8s-governance",
       "containers/kubernetes/k8s-architecture",
       "containers/kubernetes/k8s-concepts",
@@ -138,7 +140,6 @@
     "course_description": "Formation Kubernetes Opérateur",
     "modules": [
       "intro-osones",
-      "containers/kubernetes/intro-osones",
       "containers/kubernetes/k8s-installation",
       "containers/kubernetes/k8s-operations",
       "containers/kubernetes/k8s-monitoring",

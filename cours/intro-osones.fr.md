@@ -11,6 +11,5 @@
 - Sources : <https://github.com/Osones/formations/>
 - HTML/PDF : <https://osones.com/formations/>
 
-
 ![Licence Creative Commons BY-SA 4.0](images/licence.png){height="50px"}
 

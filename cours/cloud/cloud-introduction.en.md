@@ -1,5 +1,3 @@
-# Introduction {-}
-
 ### Goals of the training: Cloud
 
 - Understand concepts and benefits of cloud
