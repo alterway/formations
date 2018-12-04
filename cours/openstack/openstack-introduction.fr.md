@@ -18,6 +18,6 @@
     -   Virtualisation : KVM (Kernel-Based Virtual Machine), libvirt
     -   Réseau : iptables, namespaces
     -   SQL
--   Peut servir :
+-   Optionnel :
     -   À l’aise dans un environnement Python
 

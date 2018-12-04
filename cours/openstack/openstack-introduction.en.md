@@ -19,6 +19,6 @@
     -   Virtualization: KVM (Kernel-based Virtual Machine), libvirt
     -   Network: iptables, namespaces
     -   SQL
--   May be useful:
+-   Optional:
     -   Comfortable in a Python environment
 
