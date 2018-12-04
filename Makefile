@@ -10,11 +10,11 @@
 #  make build/$cours.tex
 #
 
-# Dependencies: pandoc (>= 1.16 recommended)
+# Dependencies: jq
+#               pandoc (>= 1.16 recommended)
 #               texlive-latex-base
 #               texlive-latex-extra
 #               texlive-extra-utils (pdfnup)
-#               jq
 
 # These vars can be overridden
 author="Team Osones"
