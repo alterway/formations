@@ -86,10 +86,6 @@
 -   Instances' network interfaces are associated with Neutron ports
 -   Block storage can be provided to instances by Cinder
 
-### Interactions with other components
-
-![Instance, image and volume](images/compute-node.png)
-
 ### Instance properties
 
 -   Ephemeral, a priori not HA

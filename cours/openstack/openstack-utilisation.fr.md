@@ -86,10 +86,6 @@
 -   Les interfaces réseaux des instances sont associées à des ports Neutron
 -   Du stockage block peut être fourni aux instances par Cinder
 
-### Interactions avec les autres composants
-
-![Instance, image et volume](images/compute-node.png)
-
 ### Propriétés d’une instance
 
 -   Éphémère, a priori non hautement disponible
