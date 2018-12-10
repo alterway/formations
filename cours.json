@@ -100,7 +100,7 @@
     ]
   },
   "kubernetes-full": {
-    "course_name": "Kubernetes",
+    "course_name": "kubernetes",
     "course_description": "Formation Kubernetes",
     "modules": [
       "intro-osones",
