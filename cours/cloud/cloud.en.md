@@ -350,7 +350,7 @@ Two differents possible views:
 - Cloud control plane (APIs) is HA
 - Managed resources might not be
 
-### Pets vs Cattle
+### Pet vs Cattle
 
 How to consider instances?
 

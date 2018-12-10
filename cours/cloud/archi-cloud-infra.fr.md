@@ -9,9 +9,11 @@
 ### Infrastructure as Code
 
 -   Travailler comme un développeur
--   Décrire son infrastructure sous forme de code (Heat, Ansible)
+-   Décrire son infrastructure sous forme de code (Heat/Terraform, Ansible)
 -   Suivre les changements dans un VCS (git)
--   Utiliser des outils de tests
+-   Mettre en place de la revue de code
+-   Utiliser des mécanismes de tests
+-   Exploiter des systèmes d'intégration et déploiement continue
 
 ### Besoin d’orchestration
 
@@ -23,79 +25,21 @@
 
 -   Style de code
 -   Validation de la syntaxe
--   Voire plus si possible
+-   Tests unitaires
+-   Tests d'intégration
+-   Tests de déploiement complet
+
+### Tolérance aux pannes
+
+-   Tirer parti des capacités de l'application
+-   Ne pas tenter de rendre l'infrastructure compute HA
 
 ### Autoscaling group
 
 -   Groupe d’instances similaires
 -   Nombre variable d’instances
 -   Scaling automatique en fonction de métriques
-
-### L’isolation
-
--   Niveau control plane : Tenant (projet)
--   Niveau réseau : L2, L3, security groups
-
-### Multi-tenant
-
--   Notion générale : un déploiement du logiciel permet de multiples utilisations
--   Un cloud OpenStack permet aux utilisateurs de travailler dans des environnements isolés
--   Les instances, réseaux, images, etc. sont associés à un tenant
--   Certaines ressources peuvent être partagées entre tenants (exemple : image publique)
--   On peut aussi parler de “projet”
-
-### Les instances
-
--   Éphémère
--   Pets vs Cattle
--   Basé sur une *image*
--   API de metadata
-
-### L’API de metadata
-
--   API à destination des instances
--   Standard de fait initié par AWS
--   Accessible depuis l’instance sur `http://169.254.169.254/`
--   Expose des informations relatives à l’instance
--   Expose un champ libre dit “userdata”
-
-### Réseau
-
--   Fixed IP
--   Multiples interfaces réseaux
--   Floating IPs : pool, allocate, associate
-
-### Floating IPs
-
--   *IP flottantes*
--   Surcharge des “Fixed IPs”
--   Non portée par l’instance
--   Souvent une IP “publique”
--   Une fois allouée à un tenant, l’IP est réservée
--   Elle est ensuite associable et désassociable à loisir
-
-### Security groups
-
--   Équivalent à un firewall devant chaque instance
--   Une instance peut être associée à un ou plusieurs groupes de sécurité
--   Gestion des accès en entrée et sortie
--   Règles par protocole (TCP/UDP/ICMP) et par port
--   Cible une adresse IP, un réseau ou un autre groupe de sécurité
-
-### Flavors
-
--   *Gabarit*
--   Équivalent des “instance types” d’AWS
--   Définit un modèle d’instance en termes de CPU, RAM, disque (racine), disque éphémère
--   Un disque de taille nul équivaut à prendre la taille de l’image de base
--   Le disque éphémère a, comme le disque racine, l’avantage d’être souvent local donc rapide
-
-### Keypairs
-
--   *Paires de clé*
--   Clés SSH publiques/privés
--   Le cloud a connaissance de la clé publique
--   La clé publique est injectée dans les instances
+-   Permet le passage à l'échelle *horizontal*
 
 ### Monitoring
 
@@ -107,11 +51,12 @@
 -   Être capable de recréer ses instances (et le reste de son infrastructure)
 -   Données (applicatives, logs) : block, objet
 
-### Un exemple : l’équipe openstack-infra
+### Comment gérer ses images ?
 
--   Équipe projet en charge de l’infrastructure de développement d’OpenStack
--   Travaille comme les équipes de dev d’OpenStack et utilise les mêmes outils
--   Infrastructure as code
--   Infrastructure ouverte : code “open source” <https://opensourceinfra.org/>
--   Utilise du cloud (hybride)
+-   Utilisation d’images génériques et personnalisation à l’instanciation
+-   Création d’images plus ou moins personnalisées :
+    -   Modification à froid : libguestfs, virt-builder, virt-sysprep
+    -   Modification au travers d'une instance : automatisation possible avec Packer
+    -   Construction *from scratch* : diskimage-builder (TripleO)
+    -   Construction *from scratch* avec des outils spécifiques aux distributions (`openstack-debian-images` pour Debian)
 

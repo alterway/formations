@@ -24,7 +24,8 @@
       "openstack/openstack-utilisation",
       "openstack/openstack-deploiement",
       "openstack/openstack-deploiement-prod",
-      "openstack/openstack-iaas-tirer-parti",
+      "cloud/archi-cloud-dev",
+      "cloud/archi-cloud-infra",
       "openstack/openstack-conclusion"
     ]
   },
@@ -74,7 +75,6 @@
       "openstack/openstack-deploiement",
       "openstack/openstack-deploiement-avance",
       "openstack/openstack-deploiement-prod",
-      "openstack/openstack-iaas-tirer-parti",
       "cloud/archi-cloud-dev",
       "cloud/archi-cloud-infra",
       "openstack/openstack-conclusion"

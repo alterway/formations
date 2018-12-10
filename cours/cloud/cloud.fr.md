@@ -353,7 +353,7 @@ Deux approches :
 - Le control plane (les APIs) du cloud est HA
 - Les ressources provisionnées ne le sont pas forcément
 
-### Pets vs Cattle
+### Pet vs Cattle
 
 Comment considérer ses instances ?
 

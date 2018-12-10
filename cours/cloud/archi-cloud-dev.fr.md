@@ -10,6 +10,31 @@
 -   Suivre (tout) le code dans un VCS
 -   Configuration
 
+### Adapter ou penser ses applications “cloud ready” 1/3
+
+Cf. les design tenets du projet OpenStack et Twelve-Factor <https://12factor.net/>
+
+-   Architecture distribuée plutôt que monolithique
+    -   Facilite le passage à l’échelle
+    -   Limite les domaines de *failure*
+-   Couplage faible entre les composants
+
+### Adapter ou penser ses applications “cloud ready” 2/3
+
+-   Bus de messages pour les communications inter-composants
+-   Stateless : permet de multiplier les routes d’accès à l’application
+-   Dynamicité : l’application doit s’adapter à son environnement et se reconfigurer lorsque nécessaire
+-   Permettre le déploiement et l’exploitation par des outils d’automatisation
+
+### Adapter ou penser ses applications “cloud ready” 3/3
+
+-   Limiter autant que possible les dépendances à du matériel ou du logiciel spécifique qui pourrait ne pas fonctionner dans un cloud
+-   Tolérance aux pannes (*fault tolerance*) intégrée
+-   Ne pas stocker les données en local, mais plutôt :
+    -   Base de données
+    -   Stockage objet
+-   Utiliser des outils standards de journalisation
+
 ### Modulaire
 
 -   Multiples composants de taille raisonnable
