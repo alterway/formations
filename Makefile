@@ -75,6 +75,7 @@ build/%-handout.tex: build/%.md
 
 %.pdf: ##### Build cours "%" in beamer/pdf
 %.pdf: build/%.tex
+	sed -i 's,π,\\\\pi,g' $< # ugly workaround ...
 	ln -sf styles/beamer*metropolis.sty .
 	pdflatex -output-directory build/ $<
 	pdflatex -output-directory build/ $<
