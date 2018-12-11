@@ -10,5 +10,5 @@
 -   À l'aise dans un environnement Linux (shell)
 -   Notions de virtualisation
 -   Optionnel :
-    -   Notions de Python (langage et environnement)
+    -   À l’aise dans un environnement Python
 
