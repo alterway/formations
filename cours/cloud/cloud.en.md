@@ -30,22 +30,25 @@ Inspired by the NIST definition <https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nis
 
 ### Sharing ressources
 
-- A cloud provided services to multiple users/organizations → *Multi-tenant*
+- A cloud provided services to multiple users/organizations (*multi-tenant*)
 - *Tenant* or *project*: logical isolation of resources
-- Resources are available in large quantities (considered unlimited) but resources usage is not visible
+- Resources are available in large quantities (considered unlimited)
+- Resources usage is not visible
 - Accurate location of resources is not visible
 
 ### Fast elasticity
 
 - Provisionning and deletion of resources almost instantaneous
-- Ability to automate *scaling* actions
+- Enables *scaling*
+- Ability to automate these *scaling* actions
 - Virtually no limit to this elasticity
 
 ### Metering
 
 - Usage of cloud resources is monitored by the provider
-- The provider can do *capacity planning* from these informations
-- User is billed depending on accurate usage of resources
+- The provider can do *capacity planning* and billing from these informations
+- User is therefore billed depending on accurate usage of resources
+- User can take advantage of these informations
 
 ### Models
 
@@ -64,15 +67,16 @@ Inspired by the NIST definition <https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nis
 ### PaaS
 
 - *Platform as a Service*
-- Development/deployment environment of an application
-- Language/framework specific (example: Python/Django)
-- Higher level resources than infrastructure, example: DBMS
+- Two concepts:
+    - Environment to develop/deploy an application (language/framework specific - example: Python/Django)
+    - Higher level resources than infrastructure, example: DBMS
 - Target users: application developers
 
 ### SaaS
 
 - *Software as a Service*
 - Target users: end users
+- Not to be confused with the *economic* definition of SaaS
 
 ### Something as a Service?
 
@@ -98,6 +102,8 @@ Who is it for?
 - Attractive concept but implementation is hard *a priori*
 - Some use cases fit perfectly
     - Continuous integration (CI)
+- Incentives:
+    - Avoid *lock-in*
     - *Cloud bursting*
 
 ### Virtualization instant
@@ -119,9 +125,8 @@ Let's make it clear.
 - Explicit boundary between the provider and the user
 - Defines how the user interacts with the cloud to manage their resources
 - Manages: CRUD (Create, Read, Update, Delete)
-- REST
 
-### REST
+### API REST
 
 -   One ressource == one URI (*Uniform Resource Identifier*)
 -   Usage of HTTP verbs to define operations (CRUD)
@@ -263,7 +268,8 @@ Let's make it clear.
 - `http://169.254.169.254`
 - Available from the instance
 - Provides informations about the instance
-- `cloud-init` helps take advantage of this API
+- Exposes *userdata*
+- The `cloud-init` tool helps take advantage of this API
 
 ### Flavor
 
@@ -306,6 +312,7 @@ Cloud provides two kinds of storage
 - Ability to use any kind of file system
 - Ability to use LVM, encryption, etc.
 - Compatible with all existing applications
+- Requires *provisioning* space by defining volume size
 
 ### Shared storage?
 
@@ -322,16 +329,18 @@ Starting an instance with its root disk on a **volume**
 
 ### Object storage
 
-- Push and retrieve objects in/from a container/bucket
-- No data hierachy, no file system
-- API access
+- API: CRUD on data
+- Push and retrieve **objects** in/from a **container**/bucket
+- No data hierachy, no directories, no file system
+- Read/write access through APIs only
+- No *provisioning* necessary
 - Application must be designed to take advantage of object storage
 
 ### Orchestration
 
 - Orchestrate creation and management of resources in the cloud
-- Architecture definition in a *template*
-- Resources created from a *template* make a *stack*
+- Architecture definition in a **template**
+- Resources created from a **template** make a **stack**
 - There are also orchestration *tools* (rather than *services*)
 
 ## Usage best practices

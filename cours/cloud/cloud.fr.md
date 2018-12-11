@@ -30,22 +30,25 @@ Inspiré de la définition du NIST <https://nvlpubs.nist.gov/nistpubs/Legacy/SP/
 
 ### Mutualisation des ressources
 
-- Un cloud propose ses services à de multiples utilisateurs/organisations → *Multi-tenant*
+- Un cloud propose ses services à de multiples utilisateurs/organisations (*multi-tenant*)
 - *Tenant* ou *projet* : isolation logique des ressources
-- Les ressources sont disponibles en grandes quantités (considérées illimitées) mais leur taux d'occupation n'est pas visible
+- Les ressources sont disponibles en grandes quantités (considérées illimitées)
+- Le taux d'occupation du cloud n'est pas visible
 - La localisation précise des ressources n'est pas visible
 
 ### Élasticité rapide
 
 - Provisionning et suppression des ressources quasi instantané
-- Possibilité d'automatiser ces actions de *scaling* (passage à l'échelle)
+- Permet le *scaling* (passage à l'échelle)
+- Possibilité d'automatiser ces actions de *scaling*
 - Virtuellement pas de limite à cette élasticité
 
 ### Mesurabilité
 
 - L'utilisation des ressources cloud est monitorée par le fournisseur
-- Le fournisseur peut gérer son *capacity planning* à partir de ces informations
-- L'utilisateur est facturé en fonction de son usage précis des ressources
+- Le fournisseur peut gérer son *capacity planning* et sa facturation à partir de ces informations
+- L'utilisateur est ainsi facturé en fonction de son usage précis des ressources
+- L'utilisateur peut tirer parti de ces informations
 
 ### Modèles
 
@@ -66,15 +69,16 @@ On distingue :
 ### PaaS
 
 - *Platform as a Service*
-- Environnement permettant de développer/déployer une application
-- Spécifique à un language/framework (exemple : Python/Django)
-- Ressources plus haut niveau que l'infrastructure, exemple : BDD
+- Désigne deux concepts :
+    - Environnement permettant de développer/déployer une application (spécifique à un langage/framework - exemple : Python/Django)
+    - Ressources plus haut niveau que l'infrastructure, exemple : BDD
 - Utilisateurs cibles : développeurs d'application
 
 ### SaaS
 
 - *Software as a Service*
 - Utilisateurs cibles : utilisateurs finaux
+- Ne pas confondre avec la définition *économique* du SaaS
 
 ### Quelquechose as a Service ?
 
@@ -100,6 +104,8 @@ On distingue :
 - Concept séduisant mais mise en œuvre a priori difficile
 - Certains cas d'usages s'y prêtent très bien
     - Intégration continue (CI)
+- Motivations
+    - Éviter le *lock-in*
     - Débordement (*cloud bursting*)
 
 ### L'instant virtualisation
@@ -110,7 +116,7 @@ Mise au point.
 - Un cloud fournissant du compute *peut* utiliser la virtualisation
 - Mais peut également utiliser :
     - Du bare-metal
-    - Des containers
+    - Des containers (système)
 
 ### Les APIs, la clé du cloud
 
@@ -121,9 +127,8 @@ Mise au point.
 - Frontière explicite entre le fournisseur (provider) et l'utilisateur (user)
 - Définit la manière dont l'utilisateur communique avec le cloud pour gérer ses ressources
 - Gérer : CRUD (Create, Read, Update, Delete)
-- REST
 
-### REST
+### API REST
 
 -   Une ressource == une URI (*Uniform Resource Identifier*)
 -   Utilisation des verbes HTTP pour caractériser les opérations (CRUD)
@@ -266,7 +271,8 @@ Mise au point.
 - `http://169.254.169.254`
 - Accessible depuis l'instance
 - Fournit des informations relatives à l'instance
-- `cloud-init` permet d'exploiter cette API
+- Expose les *userdata*
+- L'outil `cloud-init` permet d'exploiter cette API
 
 ### Flavor (gabarit)
 
@@ -309,6 +315,7 @@ Le cloud fournit deux types de stockage
 - Possibilité d’utiliser n’importe quel système de fichiers
 - Possibilité d'utiliser du LVM, du chiffrement, etc.
 - Compatible avec toutes les applications existantes
+- Nécessite de *provisionner* l'espace en définissant la taille du volume
 
 ### Du stockage partagé ?
 
@@ -325,16 +332,18 @@ Démarrer une instance avec un disque racine sur un **volume**
 
 ### Stockage objet
 
-- Pousser et retirer des objets dans un container/bucket
-- Pas de hiérarchie des données, pas de système de fichiers
-- Accès par les APIs
+- API : faire du CRUD sur les données
+- Pousser et retirer des **objets** dans un **container**/bucket
+- Pas de hiérarchie, pas de répertoires, pas de système de fichiers
+- Accès lecture/écriture uniquement par les APIs
+- Pas de *provisioning* nécessaire
 - L’application doit être conçue pour tirer parti du stockage objet
 
 ### Orchestration
 
 - Orchestrer la création et la gestion des ressources dans le cloud
-- Définition de l'architecture dans un *template*
-- Les ressources créées à partir du *template* forment la *stack*
+- Définition de l'architecture dans un **template**
+- Les ressources créées à partir du **template** forment la **stack**
 - Il existe également des *outils* d'orchestration (plutôt que des *services*)
 
 ## Bonnes pratiques d'utilisation
