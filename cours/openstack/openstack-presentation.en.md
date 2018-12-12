@@ -10,13 +10,16 @@
 
 -   Started in 2010
 -   Goal: the Free Open Source Cloud Operating System
+-   Merge of two projects from Rackspace (Storage) and NASA (Compute)
+-   Free software distributed under Apache 2.0 license
+-   Birth of the Foundation in 2012
+
+### Mission statement
+
 ```To produce a ubiquitous Open Source Cloud Computing platform that is
 easy to use, simple to implement, interoperable between deployments,
 works well at all scales, and meets the needs of users and operators of
 both public and private clouds.```
--   Merge of two projects from Rackspace (Storage) and NASA (Compute)
--   Free software distributed under Apache 2.0 license
--   Birth of the Foundation in 2012
 
 ### Releases
 
@@ -57,6 +60,8 @@ both public and private clouds.```
 
 ### The different sub-projects
 
+<https://www.openstack.org/software/project-navigator/>
+
 -   OpenStack Compute - Nova
 -   OpenStack (Object) Storage - Swift
 -   OpenStack Block Storage - Cinder
@@ -79,10 +84,15 @@ both public and private clouds.```
     -   Key management (Barbican)
     -   Container (Magnum)
 -   Others
-    -   Libraries used by OpenStack
-    -   Clients (python-\*client), CLI and libraries
+    -   Client CLI and libraries
     -   OpenStack deployment tools
+    -   Libraries used by OpenStack
     -   Tools used to develop OpenStack
+
+### APIs
+
+-   Each project supports *its* OpenStack API
+-   Some projects support the corresponding AWS API (Nova/EC2, Swift/S3)
 
 ### The 4 Opens
 
@@ -93,47 +103,50 @@ both public and private clouds.```
 
 <https://governance.openstack.org/tc/reference/opens.html>
 
+<https://www.openstack.org/four-opens/>
+
 ### The OpenStack Foundation
 
--   Main governance entity of the project
--   Legal representation of the project
+-   Main governance entity and legal representation of the project
 -   Board members are part of the sponsoring companies and elected by individual members
 -   Everyone can (freely) become an individual member
-
-### The OpenStack Foundation
-
--   The Foundation supports the project at different levels:
-    -   Events: organization (Summits, PTGs) and participation (OSCON, KubeCon, etc.)
-    -   Human resources: marketing, release management, a few developers (mainly on infrastructure)
--   500 organizations across the world
--   60000 individual members in 160 countries
+-   Human resources: marketing, event managemement, release management, a few developers (mainly on infrastructure)
+-   600 organizations across the world
+-   80000 individual members in 170 countries
 
 ### The OpenStack Foundation
 
 ![Main entities of the Foundation](images/foundation.png)
 
+### Open Infrastructure
+
+-   Lately, the OpenStack Foundation expands to **Open Infrastructure**
+-   Beyond OpenStack, new projects:
+    -   Kata Containers
+    -   Zuul
+    -   Airship
+    -   StarlingX
+
 ### Resources
 
 -   Announcements (new versions, security advisories): <openstack-announce@lists.openstack.org>
 -   Documentation portal: <https://docs.openstack.org/>
--   SDK/APIs: <https://developer.openstack.org/>
+-   API/SDK: <https://developer.openstack.org/>
 -   Project governance: <https://governance.openstack.org/>
 -   Releases: <https://releases.openstack.org/>
 -   Support:
     -   <https://ask.openstack.org/>
-    -   openstack@lists.openstack.org
+    -   openstack-discuss@lists.openstack.org
     -   \#openstack@Freenode
 
 ### Resources
 
 -   News:
     -   Official blog: <https://www.openstack.org/blog/>
-    -   Planet: <http://planet.openstack.org>
+    -   Planet: <http://planet.openstack.org/>
     -   Superuser: <http://superuser.openstack.org/>
-    -   OpenStack Community Weekly Newsletter
 -   Commercial resources: <https://www.openstack.org/marketplace/> among others
 -   Job board: <https://www.openstack.org/community/jobs/>
--   Certified OpenStack Administrator (COA) certification: <https://www.openstack.org/coa/>
 
 ### User Survey
 
@@ -141,14 +154,30 @@ both public and private clouds.```
 -   Targets deployers and users
 -   Usable data: <https://www.openstack.org/analytics>
 
-### Resources - French community
+### Certified OpenStack Administrator (COA)
+
+-   The only certification:
+    - Approved by the OpenStack Foundation
+    - Not linked to a specific company
+-   Content:
+    -   Mainly OpenStack cloud *user* oriented
+    -   <https://www.openstack.org/coa/requirements/>
+-   Practical aspects:
+    -   Practical exam, remote, duration: 2.5 hours
+    -   Cost: $300 (one re-take possible)
+-   Ressources
+    - <https://www.openstack.org/coa/>
+    - Tips: <https://www.openstack.org/coa/tips/>
+    - Handbook: <http://www.openstack.org/coa/handbook>
+    - (unofficial) Exercises: <https://github.com/AJNOURI/COA>
+
+### Resources - French community and association
 
 ![Logo OpenStack-fr](images/openstackfr.png){height=50px}
 
--   Website: <https://openstack.fr/>
--   Association des utilisateurs francophones d’OpenStack: <https://asso.openstack.fr/>
--   OpenStack Days France in Paris: <https://openstackdayfrance.fr>
--   Meetups: Paris, Rhônes-Alpes, Toulouse, Montréal, etc.
+-   <https://openstack.fr/> - <https://asso.openstack.fr/>
+-   Meetups: Paris, Lyon, Toulouse, Montréal, etc.
+-   OpenStack Days France (Paris): <https://openstackdayfrance.fr>
 -   Attending events such as *Paris Open Source Summit*
 -   Communication channels:
     -   openstack-fr@lists.openstack.org
