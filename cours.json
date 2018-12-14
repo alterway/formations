@@ -9,6 +9,19 @@
       "cloud/cloud"
     ]
   },
+  "cloud-bp": {
+    "course_name": "cloud-bp",
+    "course_description": "Formation Cloud Bonnes Pratiques",
+    "modules": [
+      "intro-osones",
+      "intro",
+      "cloud-bp/bp-introduction",
+      "cloud-bp/bp-app",
+      "cloud-bp/bp-infra",
+      "cloud-bp/bp-orga",
+      "openstack/openstack-conclusion"
+    ]
+  },
   "openstack": {
     "course_name": "openstack",
     "course_description": "Formation OpenStack administrateur",
