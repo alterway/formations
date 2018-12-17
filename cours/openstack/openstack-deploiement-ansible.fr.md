@@ -12,13 +12,13 @@
 ### OpenStack-Ansible (OSA)
 
 - Projet officiel OpenStack
-- Ensemble de playbooks
-- Supporte Ubuntu 16.04, CentOS, openSUSE
+- Ensemble de playbooks et de rôles
+- Supporte Ubuntu 16.04/18.04, CentOS, openSUSE
 - Installation dépendances via apt
 - Installation OpenStack/Python via pip et git
 - Services déployés dans des *venvs* Python dans des containers LXC
 - Réseau/Neutron : support de LinuxBridge, Open vSwitch
-- Déploiement de Ceph
+- Déploiement de Ceph via `ceph-ansible`
 
 ### Principaux composants supportés
 
@@ -82,7 +82,7 @@ Sur la *machine de déploiement*
 
 ### Réseau
 
-- LinuxBridge ou OpenVSwitch
+- LinuxBridge ou Open vSwitch
 - DVR possible
 
 ### Rsyslog centralisé
