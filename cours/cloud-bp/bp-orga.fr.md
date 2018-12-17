@@ -1,4 +1,4 @@
-## Les dimensions Métier et Organisation
+## Adapter le Métier et l'Organisation
 
 ### Impacts sur les métiers
 

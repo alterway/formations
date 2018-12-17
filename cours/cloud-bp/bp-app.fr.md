@@ -5,7 +5,7 @@
 ### Les motivations
 
 -   Time2Market, Time2Value
--   Déploiement et agilité
+-   Rester agile jusqu'au déploiement
 -   Mises en production : entrer dans le cercle vertueux
 -   Optimiser la facture
 
@@ -13,11 +13,11 @@
 
 “The Twelve-Factor App” <https://12factor.net/>
 
--   Écrit par Heroku
+-   Publié par Heroku
 -   Suivre (tout) le code dans un VCS
 -   Configuration
 
-### Adapter ou penser ses applications “cloud ready” 1/3
+### Penser son application “cloud ready” 1/3
 
 Cf. les design tenets du projet OpenStack et Twelve-Factor <https://12factor.net/>
 
@@ -26,14 +26,14 @@ Cf. les design tenets du projet OpenStack et Twelve-Factor <https://12factor.net
     -   Limite les domaines de *failure*
 -   Couplage faible entre les composants
 
-### Adapter ou penser ses applications “cloud ready” 2/3
+### Penser son application “cloud ready” 2/3
 
 -   Bus de messages pour les communications inter-composants
 -   Stateless : permet de multiplier les routes d’accès à l’application
 -   Dynamicité : l’application doit s’adapter à son environnement et se reconfigurer lorsque nécessaire
 -   Permettre le déploiement et l’exploitation par des outils d’automatisation
 
-### Adapter ou penser ses applications “cloud ready” 3/3
+### Penser son application “cloud ready” 3/3
 
 -   Limiter autant que possible les dépendances à du matériel ou du logiciel spécifique qui pourrait ne pas fonctionner dans un cloud
 -   Tolérance aux pannes (*fault tolerance*) intégrée
@@ -42,16 +42,16 @@ Cf. les design tenets du projet OpenStack et Twelve-Factor <https://12factor.net
     -   Stockage objet
 -   Utiliser des outils standards de journalisation
 
-### Modulaire
+### Modularité
 
+-   Philosophie Unix (KISS)
 -   Multiples composants de taille raisonnable
--   Philosophie Unix
 -   Couplage faible et interface documentée
 
 ### Passage à l’échelle
 
 -   Vertical vs Horizontal
--   Scale up vs Scale out
+-   Scale up/down vs Scale out/in
 -   Plusieurs petites instances plutôt qu’une grosse instance
 
 ### Stateful vs stateless
@@ -66,6 +66,11 @@ Cf. les design tenets du projet OpenStack et Twelve-Factor <https://12factor.net
 -   L’API d’infrastructure est hautement disponible
 -   L’application doit anticiper et réagir aux pannes
 
+### Patterns de déploiement
+
+-   Blue-Green
+-   Rolling update
+
 ### Stockage des données
 
 -   Base de données relationnelles
@@ -75,10 +80,41 @@ Cf. les design tenets du projet OpenStack et Twelve-Factor <https://12factor.net
 -   Stockage éphémère
 -   Cache, temporaire
 
+### Production de logs
+
+-   Enrichir les logs
+-   Rester "applicatif"
+-   Backend de traitement dans la conf
+
+### Exemple en python
+
+app.py:
+```
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+import logging
+
+log = logging.getLogger('mycompany.myapp.maintask')
+log.info('Main worker started')
+```
+appLog.conf:
+```
+[logger_myapp]
+qualname=mycompany.myapp
+level=INFO
+handlers=console
+propagate=0
+```
+
+### Logging flow
+
+![](images/cloud-bp/logging_flow.png){height="250px"}
+
 ### Migration des applications legacy
 
 -   Rappel des enjeux
--   Critères de décision
+-   Migrer ou non : critères de décision
 
 ### Design Tenets d’OpenStack (exemple) 1/2
 

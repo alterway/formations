@@ -59,3 +59,8 @@
 
 % Footer
 \setbeamertemplate{frame footer}{\includegraphics[height=0.5cm]{images/logo-osones-picto.png} \hspace*{0.5cm} \inserttitle \hspace*{0.5cm} \insertsection}
+
+% Verbatim font size
+\usepackage{fancyvrb}
+\fvset{fontsize=\tiny}
+\RecustomVerbatimEnvironment{verbatim}{Verbatim}{}

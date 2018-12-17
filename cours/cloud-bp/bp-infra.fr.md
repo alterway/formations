@@ -30,14 +30,25 @@
 -   Cas d'usage type
 
 ### Exemple Heat
+
 ```
 ---
-
 heat_template_version: 2018-08-31
-
-description: A "boot on image" instance with a floating IP
-
+description: A single nova instance
 parameters:
+  flavorName:
+    type: string
+resources:
+  instance:
+    type: OS::Nova::Server
+    properties:
+      name: MonInstance
+      image: debian9OfTheDay
+      flavor: {get_param: flavorName}
+      key_name: MaCleSSH
+outputs:
+  instanceId:
+    value: {get_resource: instance}
 ```
 
 ### Approche de Terraform
@@ -47,6 +58,27 @@ parameters:
 -   Cas d'usage type
 
 ### Exemple Terraform
+
+```
+#  A single nova instance
+
+# Configure the OpenStack Provider
+provider "openstack" {
+  user_name   = "MyName"
+  tenant_name = "MyTenant"
+  password    = "MyPwd"
+  auth_url    = "http://myauthurl:5000/v2.0"
+  region      = "RegionOne"
+}
+
+resource "openstack_compute_instance_v2" "MonInstance" {
+  name            = "MonInstance"
+  count           = "1"
+  image_name      = ""
+  flavor_name     = "${var.flavor}"
+  key_pair        = "MaCleSSh"
+}
+```
 
 ### Tests et intégration continue
  
