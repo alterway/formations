@@ -6,28 +6,27 @@
 
 ### Implementation
 
+-   Everything is written in Python (Django for the web part)
 -   Each project is split in multiple services (example: API, scheduler, etc.)
--   Communication between services: AMQP (RabbitMQ)
+-   Re-use of existing components and existing libraries
+-   Usage of `oslo.*` libraries (developed by and for OpenStack): logs, config, etc.
+-   Usage of `rootwrap` to call underlying programs as root
+
+### Implementation - dependencies
+
 -   Database: relational SQL (MySQL/MariaDB)
+-   Communication between services: AMQP (RabbitMQ)
 -   Caching: Memcached
 -   Distributed storage of configuration (to come): etcd
--   Everything is written in Python (Django for the web part)
--   Re-use of existing components
-
-### Multi-tenancy and APIs
-
--   All projects are multi-tenants
--   Each project has its *own* OpenStack API
--   Some projects support the corresponding AWS API (EC2, S3)
 
 ## Development model
 
-### Stats
+### Stats (2017)
 
--   2581 contributors Newton
--   309 contributing organizations to Newton
--   20 millions lines of code written since the beginning of the project
--   Very fast development: 25000 commits in Liberty
+-   2344 developers
+-   65823 changes (commits)
+
+<https://www.openstack.org/assets/reports/OpenStack-AnnualReport2017.pdf>
 
 ### Development: in details
 
@@ -38,13 +37,14 @@
 
 ### Tools and communication
 
+-   Code: Git (GitHub is used as a mirror)
 -   Peer review for code: Gerrit
 -   Continous Integration (CI): Zuul
 -   Blueprints/specifications and bugs:
     -    Launchpad
-    -    Storyboard
--   Code: Git (GitHub is used as a mirror)
+    -    StoryBoard
 -   Communication: IRC and mailing-lists
+-   Translation: Zanata
 
 ### Development: in details
 
@@ -52,30 +52,27 @@
 
 ### Release cyle: 6 months
 
--   The schedule is published, example: <https://releases.openstack.org/pike/schedule.html>
+-   The schedule is published, example: <https://releases.openstack.org/stein/schedule.html>
 -   Milestone releases
--   Freezes: FeatureProposal, Feature, String
+-   Freezes: Feature, Requirements, String
 -   RC releases
 -   Stable releases
 -   Special case for some projects: <https://releases.openstack.org/reference/release_models.html>
 
 ### Projects
 
--   Each project has its own versioning
--   *Semantic versioning*
+-   *Project Teams*: <https://governance.openstack.org/reference/projects/index.html>
+-   Each deliverable has its own versioning - *Semantic versioning*
 -   <https://releases.openstack.org/>
--   *Project Teams* <https://governance.openstack.org/reference/projects/index.html>
--   Use of factual and impartial tags <https://www.openstack.org/software/project-navigator/>
 
 ### Who contributes?
 
--   *Active Technical Contributor*
--   ATCs have the right to vote (TC and PTL)
+-   *Active Technical Contributor* (ATC)
+    -   Person with at least one recent contribution in a recognized OpenStack project
+    -   Voting rights (TC and PTL)
 -   *Core reviewer*: ATC with permissions to approve patches in a project
 -   *Project Team Lead* (PTL): elected by the ATC of each project
--   Stackalytics provides stats on contributions
-
-<http://stackalytics.com/>
+-   Stackalytics provides stats on contributions <http://stackalytics.com/>
 
 ### Where to find informations about the OpenStack development
 
@@ -83,20 +80,20 @@
     -   <https://docs.openstack.org/project-team-guide/>
     -   <https://docs.openstack.org/infra/manual/>
 -   Various informations, on the wiki
-    -   <https://wiki.openstack.org>
+    -   <https://wiki.openstack.org/>
 -   Blueprints and bugs on Launchpad/StoryBoard
-    -   <https://launchpad.net/openstack>
-    -   <https://storyboard.openstack.org>
+    -   <https://launchpad.net/openstack/>
+    -   <https://storyboard.openstack.org/>
     -   <https://specs.openstack.org/>
 
 ### Where to find informations about the OpenStack development
 
 -   Proposed patches and their reviews on Gerrit
-    -   <https://review.openstack.org>
+    -   <https://review.openstack.org/>
 -   CI state (among others)
-    -   <http://status.openstack.org>
--   Code (Git) and tarballs are availabble
-    -   <https://git.openstack.org>
+    -   <http://status.openstack.org/>
+-   Code (Git) and tarballs are available
+    -   <https://git.openstack.org/>
     -   <https://tarballs.openstack.org/>
 -   IRC
     - Freenode network
@@ -104,20 +101,29 @@
 -   Mailing-lists
     - <http://lists.openstack.org/>
 
+### Upstream Training
+
+-   2 days training
+-   Learn how to become an OpenStack contributor
+-   Tools
+-   Processes
+-   Work and collaborate in an open way
+
 ### OpenStack Infra
 
 -   Team in charge of the OpenStack development infrastructure
 -   Works like the OpenStack developement teams and uses the same tools
--   Result: an entirely open source infrastructure, developed as such
+-   Result: Infrastructure as code **open source** <https://opensourceinfra.org/>
+-   Uses (hybrid) cloud
 -   Develops some tools:
     - Zuul
     - yaml2ical
 
 ### OpenStack Summit
 
--   Every 6 months
+-   Every 6 months at the middle of the development cycle
 -   In the USA until 2013, now between North America and Asia/Europe
--   A few dozens at the beginning to 6000 attendees today
+-   A few dozens at the beginning to thousands attendees today
 -   At the same time: conference (users, decision makers)and Forum (developers/operators, replaces part of the previous Design Summit)
 -   Defines the name of the next release: place/city near the Summit
 
@@ -147,14 +153,6 @@
 -   At the beginning of each cycle
 -   Replaces part of the previous Design Summit
 -   Dedicated to developers
-
-### Upstream Training
-
--   2 days training
--   Learn how to become an OpenStack contributor
--   Tools
--   Processes
--   Work and collaborate in an open way
 
 ### Translation
 
