@@ -4,10 +4,11 @@
 
 ### Les motivations
 
--   Time2Market, Time2Value
+-   S'appuyer sur les services du cloud et se concentrer sur le métier
+-   Permettre l'élasticité
 -   Rester agile jusqu'au déploiement
 -   Mises en production : entrer dans le cercle vertueux
--   Optimiser la facture
+-   Optimiser la facture cloud
 
 ### 12-factor : la référence
 
