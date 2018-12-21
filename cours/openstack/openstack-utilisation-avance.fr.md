@@ -7,6 +7,13 @@ Tirer parti de :
 -   Régions
 -   Zones de disponibilité (AZ)
 
+### Affinity / anti-affinity dans Nova
+
+-   Demander à Nova de démarrer 2 ou plus instances :
+    - Le plus proche possible (affinity)
+    - Le plus éloigné possible (anti-affinity)
+-   Besoin de performances ou besoin de distribution
+
 ### Flavors
 
 -   Un disque de taille nul équivaut à prendre la taille de l’image de base
@@ -51,23 +58,9 @@ Une image cloud c’est :
      - apache2
      - htop
 
-### Comment gérer ses images ?
-
--   Utilisation d’images génériques et personnalisation à l’instanciation
--   Création d’images intermédiaires et/ou totalement personnalisées :
-    *Golden images*
-    -   libguestfs, virt-builder, virt-sysprep
-    -   diskimage-builder (TripleO)
-    -   Packer
-    -   solution “maison”
-
-### Affinity / anti-affinity dans Nova
-
 ### Glance image members
 
 - Partager des images entre projets
-
-## Heat : Orchestration des ressources
 
 ### Autoscaling avec Heat
 
