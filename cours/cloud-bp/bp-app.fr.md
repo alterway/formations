@@ -1,27 +1,37 @@
-# Architectures cloud-ready
+# Concevoir une application pour le Cloud
 
-## Concevoir une application destinée au Cloud
+### La référence : les 12 facteurs
 
-### Les motivations
+“The Twelve-Factor App” <https://12factor.net/fr/>
 
--   S'appuyer sur les services du cloud et se concentrer sur le métier
--   Permettre l'élasticité
--   Rester agile jusqu'au déploiement
--   Mises en production : entrer dans le cercle vertueux
--   Optimiser la facture cloud
+-   Publié par Heroku <https://www.heroku.com/what/>
+-   Ecrit par des développeurs, des architectes et des ops
+-   Recueil de préconisations techniques issues d'expériences terrain
+-   Destiné aux développeurs et aux personnes en charge du déploiement et du Run
+-   Applicable quel que soit le langage de programmation
 
-### 12-factor : la référence
+### Les 12 facteurs en détails (1/2)
 
-“The Twelve-Factor App” <https://12factor.net/>
+1. Base de code : unique, suivie dans un VCS, plusieurs déploiements
+2. Dépendances : les isoler et les déclarer explicitement
+3. Configuration : différencier les environnements via les variables de conf.
+4. Services externes : les traiter comme des ressources attachées
+5. Build, release, run : séparer strictement les étapes d’assemblage et d’exécution
+6. Processus : exécuter l’application comme un ou plusieurs processus sans état
 
--   Publié par Heroku
--   Suivre (tout) le code dans un VCS
--   Configuration
+### Les 12 facteurs en détails (2/2)
+
+7. Ports : exporter les services de l'application via des ports TCP
+8. Mise à l'échelle : utiliser le modèle de processus
+9. Jetable : maximisez la robustesse avec des démarrages rapides et des arrêts  en douceur
+10. Parité dev/prod : gardez les différents environnements aussi proches que possible
+11. Logs : les traiter comme des flux d’évènements
+12. Processus d’administration et de maintenance : les lancer comme des processus _one-off_
 
 ### Penser son application “cloud ready” 1/3
 
-Cf. les design tenets du projet OpenStack et Twelve-Factor <https://12factor.net/>
-
+-   Une base de code unique suivie dans un VCS (Git,...)
+-   Configuration
 -   Architecture distribuée plutôt que monolithique
     -   Facilite le passage à l’échelle
     -   Limite les domaines de *failure*
@@ -67,10 +77,13 @@ Cf. les design tenets du projet OpenStack et Twelve-Factor <https://12factor.net
 -   L’API d’infrastructure est hautement disponible
 -   L’application doit anticiper et réagir aux pannes
 
-### Patterns de déploiement
+### Modèles de déploiement
 
--   Blue-Green
--   Rolling update
+-   Blue/Green
+-   Rolling
+-   Canary
+
+![](images/cloud-bp/deployment-strategies.png){height="150px"}
 
 ### Stockage des données
 
@@ -81,24 +94,14 @@ Cf. les design tenets du projet OpenStack et Twelve-Factor <https://12factor.net
 -   Stockage éphémère
 -   Cache, temporaire
 
-### Production de logs
+### Gestion des logs
 
 -   Enrichir les logs
 -   Rester "applicatif"
--   Backend de traitement dans la conf
+-   Ne pas présupposer le backend de traitement ->  dans la conf
 
 ### Exemple en python
 
-app.py:
-```
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-
-import logging
-
-log = logging.getLogger('mycompany.myapp.maintask')
-log.info('Main worker started')
-```
 appLog.conf:
 ```
 [logger_myapp]
@@ -106,6 +109,18 @@ qualname=mycompany.myapp
 level=INFO
 handlers=console
 propagate=0
+```
+
+app.py:
+```
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+import logging
+log = logging.getLogger('mycompany.myapp.maintask')
+log.info('Main worker started')
+```
+```
+2018-12-24 22:20:02 INFO appuser Main worker started
 ```
 
 ### Logging flow
@@ -116,20 +131,4 @@ propagate=0
 
 -   Rappel des enjeux
 -   Migrer ou non : critères de décision
-
-### Design Tenets d’OpenStack (exemple) 1/2
-
-1.  Scalability and elasticity are our main goals
-2.  Any feature that limits our main goals must be optional
-3.  Everything should be asynchronous. If you can’t do something asynchronously, see \#2
-4.  All required components must be horizontally scalable
-
-### Design Tenets d’OpenStack (exemple) 2/2
-
-5.  Always use shared nothing architecture (SN) or sharding. If you can’t Share nothing/shard, see \#2
-6.  Distribute everything. Especially logic. Move logic to where state naturally exists.
-7.  Accept eventual consistency and use it where it is appropriate.
-8.  Test everything. We require tests with submitted code. (We will help you if you need it)
-
-<https://wiki.openstack.org/wiki/BasicDesignTenets>
 

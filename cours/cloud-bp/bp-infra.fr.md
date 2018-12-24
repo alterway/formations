@@ -1,9 +1,9 @@
-## Concevoir l'infra d'une application "cloud ready"
+# Concevoir une infra pour le cloud
 
 ### Une infra, ça évolue !
 
--   Sizing des clusters
--   Ugrade des O.S. « guest » et du middleware
+-   Dimensionnement des clusters
+-   Maintenance des O.S. « guest » et du middleware
 -   Règles SSI : segmentation réseau, filtrage de flux, proxys, bastions, annuaires
 -   Ajout de nouveaux services
 
@@ -25,7 +25,7 @@
 -   L'infra s'appréhende comme du code
 -   Travailler comme un développeur
 -   Décrire son infrastructure sous forme de code (Heat, Terraform)
--   Suivre les changements dans un VCS (git)
+-   Suivre les changements dans un VCS (git), qui devient la référence
 -   Mettre en oeuvre un système d'intégration et déploiement continus (CI/CD)
 
 ### Approche de Heat
