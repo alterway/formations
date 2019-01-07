@@ -9,7 +9,7 @@
 
 ### Des bonnes pratiques : pour quoi faire ?
 
--   Pouvoir déployer les applications sur n'importe quel cloud
+-   Déployer les applications sur n'importe quel cloud
 -   Utiliser pleinement les services du cloud
 -   Minimiser le coût et le temps d'intégration des nouveaux équipiers
 -   Mettre l'application à l'échelle sans remise en cause lourde

@@ -13,18 +13,18 @@ Sinon, risque de ne pas répondre aux attentes et/ou de se contenter d'un cas d'
     - pets vs cattle
     - horizontal plutôt que vertical 
 
--   L'application prend elle-même en charge sa haute-disponibilté
+-   L'application prend elle-même en charge sa haute disponibilté
 
 - Approche et organisation DevOps
 
 ### Les bénéfices
 
--   Infrastructures programmables → + souples que les traditionnels schémas et les workflows associés
+-   Infrastructures programmables → **+ souples** que les traditionnels schémas et les workflows associés
 
--   MEP mécanisées et reproductibles → dédramatisées, donc plus fréquentes, donc dédramatisées => cercle vertueux
+-   MEP mécanisées et reproductibles → dédramatisées, donc **+ fréquentes**, donc dédramatisées => cercle vertueux
 
--   Approche « zero admin » des serveurs en production → - d 'erreurs humaines, + de dispo
+-   Approche « zero admin » des serveurs en production → **- d 'erreurs humaines**, **+ de disponibilité** des applications
 
 -   Applications outillées : → exploitabilité industrielle prise en compte dès les phases poc/pilote.
 
--   Catalogue de composants → des équipes de développement qui créent plus de valeur « métier » 
+-   Catalogue de composants → des équipes de développement qui créent **+ de valeur** « métier » 

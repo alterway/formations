@@ -31,7 +31,7 @@
 ### Penser son application “cloud ready” 1/3
 
 -   Une base de code unique suivie dans un VCS (Git,...)
--   Configuration
+-   Une configuration par environnement
 -   Architecture distribuée plutôt que monolithique
     -   Facilite le passage à l’échelle
     -   Limite les domaines de *failure*
@@ -50,20 +50,22 @@
 -   Tolérance aux pannes (*fault tolerance*) intégrée
 -   Ne pas stocker les données en local, mais plutôt :
     -   Base de données
+    -   Stockage bloc
     -   Stockage objet
--   Utiliser des outils standards de journalisation
+-   Utiliser des outils de journalisation standards
 
 ### Modularité
 
--   Philosophie Unix (KISS)
+-   Philosophie Unix (Keep It Simple Stupid)
 -   Multiples composants de taille raisonnable
 -   Couplage faible et interface documentée
 
 ### Passage à l’échelle
 
+-   Pets versus Cattle
 -   Vertical vs Horizontal
 -   Scale up/down vs Scale out/in
--   Plusieurs petites instances plutôt qu’une grosse instance
+-   Plusieurs petites instances plutôt qu’une seule grosse
 
 ### Stateful vs stateless
 
@@ -73,13 +75,13 @@
 
 ### Tolérance aux pannes
 
--   L’infrastructure n’est pas hautement disponible
--   L’API d’infrastructure est hautement disponible
--   L’application doit anticiper et réagir aux pannes
+-   Les APIs du cloud sont hautement disponibles
+-   Le cloud ne garantit pas la haute disponibilté de l'application
+-   L’application prend en charge sa propre tolérance aux pannes
 
 ### Modèles de déploiement
 
--   Blue/Green
+-   Blue-Green *(attention aux quotas)*
 -   Rolling
 -   Canary
 
@@ -87,17 +89,16 @@
 
 ### Stockage des données
 
--   Base de données relationnelles
+-   Base de données relationnelle
 -   Base de données NoSQL
 -   Stockage bloc
 -   Stockage objet
 -   Stockage éphémère
--   Cache, temporaire
 
 ### Gestion des logs
 
--   Enrichir les logs
 -   Rester "applicatif"
+-   Enrichir les logs
 -   Ne pas présupposer le backend de traitement ->  dans la conf
 
 ### Exemple en python

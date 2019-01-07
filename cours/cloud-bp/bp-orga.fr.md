@@ -11,7 +11,8 @@
 
 -   Convergence de métiers existants : architecte // intégrateur
     - doivent se comprendre et collaborer
--   Apparition d'un nouveau méier : développeur d'infra
+-   Apparition d'un nouveau métier : _développeur d'infra_
+-   Pilotage projet : doit être traité comme un développeur d'application en termes de budget, de compétences requises et d'organisation.
 
 ### Repenser l'organisation
 

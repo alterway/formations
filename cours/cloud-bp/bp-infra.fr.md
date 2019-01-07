@@ -1,5 +1,12 @@
 # Concevoir une infra pour le cloud
 
+### L'infra au service de son application
+
+-  Souplesse
+-  Résilience
+-  Performance
+-  Opérabilité
+
 ### Une infra, ça évolue !
 
 -   Dimensionnement des clusters
@@ -9,7 +16,9 @@
 
 ### Mécaniser, automatiser, industrialiser
 
--   Notions expliquées
+-   *Le niveau d'anxiété des comités face à la décision de déployer est inversement proportionnelle à la fréquence des MEP => cercle vicieux*
+-   (re)Construire, faire évoluer et maintenir les infras hébergées dans le cloud
+-   Reconstruction totale ou partielle à la demande
 -   Reproductibilité
 -   C'est Automagique !
 
@@ -26,11 +35,11 @@
 -   Travailler comme un développeur
 -   Décrire son infrastructure sous forme de code (Heat, Terraform)
 -   Suivre les changements dans un VCS (git), qui devient la référence
--   Mettre en oeuvre un système d'intégration et déploiement continus (CI/CD)
+-   Mettre en oeuvre un système d'intégration et de déploiement continus (CI/CD)
 
 ### Approche de Heat
 
--   Un service / une API OpenStack
+-   Un service <-> une API OpenStack
 -   Notions de stack et description YAML
 -   Précautions d'usage (stack update)
 -   Cas d'usage type
@@ -61,7 +70,7 @@ outputs:
 
 -   L'aspect "cloud agnostique"
 -   Le DSL de Terraform
--   L'exigence Infra as Code
+-   L'exigence Infra as Code (terraform.tfstate)
 -   Cas d'usage type
 
 ### Exemple Terraform
@@ -90,34 +99,38 @@ resource "openstack_compute_instance_v2" "MonInstance" {
 ### Agilité et CI/CD appliquées à l'infra
  
 -   Style de code
--   Validation de la syntaxe
+-   Vérification de la syntaxe
 -   Tests unitaires
 -   Tests d'intégration
--   Tests de déploiement complet
+-   Tests fonctionnels de bout en bout
 
 ### Tolérance aux pannes
 
--   Tirer parti des capacités de l'application
--   Ne pas tenter de rendre l'infrastructure compute HA
+-   Notion de résilience
+-   Load balancers
+-   Floating IPs
+-   Groupes de serveurs stateless
+-   Healthchecks
 
-### Autoscaling group
+### Mise à l'échelle / élasticité horizontale
 
--   Groupe d’instances similaires
--   Nombre variable d’instances
+-   Groupe d’instances similaires, autoscaling group
+-   Nombre d’instances variable
 -   Scaling automatique en fonction de métriques
--   Permet le passage à l'échelle *horizontal*
 
-### Monitoring
+### Supervision
 
 -   Prendre en compte le cycle de vie des instances : DOWN != ALERT
--   Monitorer le service plus que le serveur
+-   Monitorer les services plutôt que les serveurs
+-   Oublier les adresses IP ! Exposer un web service
+-   Prévoir un healthcheck fonctionnel (use case "métier")
 
-### Backup
+### Backup, PCA
 
--   Être capable de recréer ses instances (et le reste de son infrastructure)
--   Données (applicatives, logs) : block, objet
+-   Infrastructure : être capable de reconstruire n'importe quel environnement à tout moment
+-   Données (de l'application, logs) : utiliser les modes de stockage bloc (volumes) et objet (dossiers)
 
-### Comment gérer ses images ?
+### Gérer ses images
 
 -   Utilisation d’images génériques et personnalisation à l’instanciation (cloud-init)
 -   Création d’images offline :
