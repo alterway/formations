@@ -4,7 +4,6 @@
     "course_description": "Formation Cloud",
     "modules": [
       "intro-osones",
-      "intro",
       "cloud/cloud-introduction",
       "cloud/cloud"
     ]
@@ -14,7 +13,6 @@
     "course_description": "Formation OpenStack administrateur",
     "modules": [
       "intro-osones",
-      "intro",
       "cloud/cloud-introduction",
       "openstack/openstack-user-introduction",
       "openstack/openstack-introduction",
@@ -34,7 +32,6 @@
     "course_description": "Formation OpenStack administrateur",
     "modules": [
       "intro-osones",
-      "intro",
       "openstack/openstack-introduction",
       "openstack/openstack-presentation",
       "openstack/openstack-presentation-inside",
@@ -49,7 +46,6 @@
     "course_description": "Formation OpenStack utilisateur",
     "modules": [
       "intro-osones",
-      "intro",
       "cloud/cloud-introduction",
       "openstack/openstack-introduction",
       "cloud/cloud",
@@ -66,7 +62,6 @@
     "course_description": "Formation OpenStack Ops Users",
     "modules": [
       "intro-osones",
-      "intro",
       "openstack/openstack-user-introduction",
       "openstack/openstack-introduction",
       "openstack/openstack-presentation",
