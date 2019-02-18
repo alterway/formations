@@ -146,5 +146,15 @@
       "containers/kubernetes/k8s-security",
       "containers/kubernetes/conclusion"
     ]
+  },
+  "aws": {
+    "course_name": "Amazon Web Services",
+    "course_description": "Formation Cloud Amazon Web Services",
+    "modules": [
+      "intro-osones",
+      "aws/iam",
+      "aws/networking",
+      "aws/conclusion"
+    ]
   }
 }
