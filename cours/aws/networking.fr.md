@@ -25,7 +25,7 @@
   - VPC: CIDR block compris entre /16 et /28
   - Subnet: CIDR block compris entre /16 et /28
 
-Evitons les problèmes, restons sur la [RFC1918](https://tools.ietf.org/html/rfc1918) !
+Évitons les problèmes, restons sur la [RFC1918](https://tools.ietf.org/html/rfc1918) !
 
 ### VPC et subnets
 
@@ -45,9 +45,9 @@ Evitons les problèmes, restons sur la [RFC1918](https://tools.ietf.org/html/rfc
 
   - Composant de VPC redondant et hautement disponible qui permet la communication entre des ressources dans un VPC et Internet
   - Fournit une cible dans les tables de routage VPC pour le trafic routable sur Internet
-  
+
   Besoins:
-  
+
   - Table de routage
   - Attacher l'IGW au VPC
   - Attribuer une IP publique à l'instance

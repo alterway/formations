@@ -7,7 +7,7 @@ IAM: Identity Access Management
   - Gestion des accès aux services et ressources AWS
   - Création et gestion des utilisateurs et des groupes
   - Gestion des rôles et autorisations
-  - Gestion des utilisateurs fédéréq et leurs permissions
+  - Gestion des utilisateurs fédérés et leurs permissions
 
 ### IAM Users: users
 
@@ -27,8 +27,8 @@ IAM: Identity Access Management
   - Format JSON décrivant les permissions
   - Peut être assignée à:
     - Des users
-    - Des groupes 
-    - Des rôles 
+    - Des groupes
+    - Des rôles
     - Des ressources
 
 ### IAM Policies: types de policies
@@ -40,7 +40,7 @@ IAM: Identity Access Management
 
 
 ### IAM Policies: propriétés
- 
+
   - Version
   - Id
   - Statement
@@ -71,7 +71,7 @@ IAM: Identity Access Management
 ### IAM Roles: définition
 
   - Permettent déléguer l'accès à des users, applications et services qui, en temps normal, n'ont pas accès aux ressources AWS
-  - Permettent d'éviter de partager des informations d'identification ou de définire des autorisations pour chaque entité afin faire des appels d'API AWS 
+  - Permettent d'éviter de partager des informations d'identification ou de définire des autorisations pour chaque entité afin faire des appels d'API AWS
   - Un rôle IAM est associé une policy IAM
   - Pas de credentials associés à un rôle
   - Le service utilisant un rôle IAM se voit attribué dynamiquement une paire d'Access key/Secret key temporaire
@@ -96,8 +96,8 @@ IAM: Identity Access Management
 ### IAM: Best practices
 
   - Utiliser les rôles pour les applications hébergées sur AWS EC2
-  - Déléguer des rôle plutôt que de partager des credentials (cross-accounts)
-  - Etablir une politique de renouvellement des credentials régulier
+  - Déléguer des rôles plutôt que de partager des credentials (cross-accounts)
+  - Établir une politique de renouvellement des credentials régulier
   - Supprimer les users et les credentials inutilisés
   - Utiliser les conditions dans les policies pour un niveau supplémentaire de sécurité
   - Monitorer l'activité des comptes AWS
