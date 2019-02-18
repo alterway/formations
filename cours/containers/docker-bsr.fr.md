@@ -24,7 +24,7 @@
 
 - Permet de vérifier le contenu d'une image
 
-```
+```bash
 FROM alpine:3.4
 MAINTAINER Osones <docker@osones.io>
 RUN apk -U add nginx
@@ -56,7 +56,7 @@ CMD ["nginx"]
 
 ### Dockerfile : Bad Layering
 
-```
+```bash
 RUN apk --update add \
     git \
     tzdata \
@@ -79,7 +79,7 @@ ENTRYPOINT ["/usr/bin/env","python2","/sickrage/SickBeard.py"]
 
 ### Dockerfile : Good Layering
 
-```
+```bash
 RUN apk --update add \
     git \
     tzdata \
@@ -113,23 +113,23 @@ ENTRYPOINT ["/usr/bin/env","python2","/sickrage/SickBeard.py"]
 
 - Sauvegarder un conteneur :
 
-```
+```bash
 docker commit mon-conteneur backup/mon-conteneur
 ```
 
-```
+```bash
 docker run -it backup/mon-conteneur
 ```
 
 - Exporter un conteneur :
 
-```
+```bash
 docker save -o mon-image.tar backup/mon-conteneur
 ```
 
 - Importer un conteneur :
 
-```
+```bash
 docker import mon-image.tar backup/mon-conteneur
 ```
 

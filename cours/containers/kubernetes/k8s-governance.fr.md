@@ -56,7 +56,7 @@
     - Issues : <https://github.com/kubernetes/kubernetes/issues>
     - Pull Requests <https://github.com/kubernetes/kubernetes/pulls>
     - Releases : <https://github.com/kubernetes/kubernetes/releases>
-- Projets en incubation : 
+- Projets en incubation :
     - <https://github.com/kubernetes-incubator/> (Deprécié)
     - <https://github.com/kubernetes-sigs/>
 

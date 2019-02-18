@@ -37,9 +37,10 @@
 ### Docker-compose
 
 docker-compose.yml
-```
+
+```bash
 nginx:
-  image: vsense/nginx
+  image: nginx
   ports:
     - "80:80"
     - "443:443"

@@ -59,17 +59,17 @@ Inspired by the NIST definition <https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nis
 
 - *Infrastructure as a Service*
 - Infrastructure:
-    - Compute
-    - Storage
-    - Network
+  - Compute
+  - Storage
+  - Network
 - Target users: administrators (system, storage, network)
 
 ### PaaS
 
 - *Platform as a Service*
 - Two concepts:
-    - Environment to develop/deploy an application (language/framework specific - example: Python/Django)
-    - Higher level resources than infrastructure, example: DBMS
+  - Environment to develop/deploy an application (language/framework specific - example: Python/Django)
+  - Higher level resources than infrastructure, example: DBMS
 - Target users: application developers
 
 ### SaaS
@@ -101,10 +101,10 @@ Who is it for?
 - Usage of multiple public and/or private clouds
 - Attractive concept but implementation is hard *a priori*
 - Some use cases fit perfectly
-    - Continuous integration (CI)
+  - Continuous integration (CI)
 - Incentives:
-    - Avoid *lock-in*
-    - *Cloud bursting*
+  - Avoid *lock-in*
+  - *Cloud bursting*
 
 ### Virtualization instant
 
@@ -113,14 +113,14 @@ Let's make it clear.
 - Virtualization is a technology that can implement the *compute* function
 - A cloud providing compute resources *can* use virtualization
 - But it can also use:
-    - Bare-metal
-    - Containers
+  - Bare-metal
+  - Containers
 
 ### APIs are key
 
 - Reminder: API stands for *Application Programming Interface*
-    -   In the software sense: Interface for a program to use a library
-    -   In the cloud sense: Interface for a program to use a service (XaaS)
+  - In the software sense: Interface for a program to use a library
+  - In the cloud sense: Interface for a program to use a service (XaaS)
 - Programming interface (through the network, often HTTP)
 - Explicit boundary between the provider and the user
 - Defines how the user interacts with the cloud to manage their resources
@@ -128,40 +128,44 @@ Let's make it clear.
 
 ### API REST
 
--   One ressource == one URI (*Uniform Resource Identifier*)
--   Usage of HTTP verbs to define operations (CRUD)
-    - GET
-    - POST
-    - PUT
-    - DELETE
--   Usage of HTTP return codes
--   Resources are represented in the HTTP responses' body
+- One ressource == one URI (*Uniform Resource Identifier*)
+- Usage of HTTP verbs to define operations (CRUD)
+  - GET
+  - POST
+  - PUT
+  - DELETE
+- Usage of HTTP return codes
+- Resources are represented in the HTTP responses' body
 
 ### REST - Examples
 
-    GET http://endpoint/volumes/
-    GET http://endpoint/volumes/?size=10
-    POST http://endpoint/volumes/
-    DELETE http://endpoint/volumes/xyz
+```bash
+GET http://endpoint/volumes/
+GET http://endpoint/volumes/?size=10
+POST http://endpoint/volumes/
+DELETE http://endpoint/volumes/xyz
+```
 
 ### Real example
 
-    GET /v2.0/networks/d32019d3-bc6e-4319-9c1d-6722fc136a22
-    {
-       "network":{
-          "status":"ACTIVE",
-          "subnets":[ "54d6f61d-db07-451c-9ab3-b9609b6b6f0b" ],
-          "name":"private-network",
-          "provider:physical_network":null,
-          "admin_state_up":true,
-          "tenant_id":"4fd44f30292945e481c7b8a0c8908869",
-          "provider:network_type":"local",
-          "router:external":true,
-          "shared":true,
-          "id":"d32019d3-bc6e-4319-9c1d-6722fc136a22",
-          "provider:segmentation_id":null
-       }
-    }
+```bash
+GET /v2.0/networks/d32019d3-bc6e-4319-9c1d-6722fc136a22
+{
+ "network":{
+  "status":"ACTIVE",
+  "subnets":[ "54d6f61d-db07-451c-9ab3-b9609b6b6f0b" ],
+  "name":"private-network",
+  "provider:physical_network":null,
+  "admin_state_up":true,
+  "tenant_id":"4fd44f30292945e481c7b8a0c8908869",
+  "provider:network_type":"local",
+  "router:external":true,
+  "shared":true,
+  "id":"d32019d3-bc6e-4319-9c1d-6722fc136a22",
+  "provider:segmentation_id":null
+ }
+}
+```
 
 ### Why cloud? economical point of view
 
@@ -198,12 +202,12 @@ Let's make it clear.
 - DreamHost
 - DigitalOcean
 - In France:
-    - Cloudwatt (Orange Business Services)
-    - Numergy (SFR)
-    - OVH
-    - Ikoula
-    - Scaleway
-    - Outscale
+  - Cloudwatt (Orange Business Services)
+  - Numergy (SFR)
+  - OVH
+  - Ikoula
+  - Scaleway
+  - Outscale
 
 ### Private IaaS
 
@@ -223,24 +227,24 @@ Let's make it clear.
 
 ### Public PaaS examples
 
--   Amazon Elastic Beanstalk (<https://aws.amazon.com/fr/elasticbeanstalk>)
--   Google App Engine (<https://cloud.google.com/appengine>)
--   Heroku (<https://www.heroku.com>)
+- Amazon Elastic Beanstalk (<https://aws.amazon.com/fr/elasticbeanstalk>)
+- Google App Engine (<https://cloud.google.com/appengine>)
+- Heroku (<https://www.heroku.com>)
 
 ### Private PaaS solutions
 
--   Cloud Foundry, Foundation (<https://www.cloudfoundry.org>)
--   OpenShift, Red Hat (<https://www.openshift.org>)
--   Solum, OpenStack (<https://wiki.openstack.org/wiki/Solum>)
+- Cloud Foundry, Foundation (<https://www.cloudfoundry.org>)
+- OpenShift, Red Hat (<https://www.openshift.org>)
+- Solum, OpenStack (<https://wiki.openstack.org/wiki/Solum>)
 
 ## Infrastructure as a Service concepts
 
 ### Basics
 
 - Infrastructure:
-    - Compute
-    - Storage
-    - Network
+  - Compute
+  - Storage
+  - Network
 
 ### *Compute* resources
 
@@ -273,24 +277,24 @@ Let's make it clear.
 
 ### Flavor
 
--   *Instance type* in AWS
--   Defines an instance model regarding CPU, RAM, disk (root), ephemeral disk
--   The ephemeral disk has, like the root disk, the advantage of often being local and thus fast
+- *Instance type* in AWS
+- Defines an instance model regarding CPU, RAM, disk (root), ephemeral disk
+- The ephemeral disk has, like the root disk, the advantage of often being local and thus fast
 
 ### Keypair
 
--   SSH public key + private key
--   Cloud manages and stores the public key
--   This public key is used to give SSH access to the instances
+- SSH public key + private key
+- Cloud manages and stores the public key
+- This public key is used to give SSH access to the instances
 
 ### Network resources 1/2
 
 - L2 network
-    - Network port
+  - Network port
 - L3 network
-    - Router
-    - Floating IP
-    - Security group
+  - Router
+  - Floating IP
+  - Security group
 
 ### Network resources 2/2
 
@@ -350,8 +354,8 @@ Starting an instance with its root disk on a **volume**
 Two differents possible views:
 
 - Don't change anything
-    - Risk not meeting expectations
-    - Limit usage to *test & dev* use case
+  - Risk not meeting expectations
+  - Limit usage to *test & dev* use case
 - Adapt to new cloud compliant practices to take advantage of it
 
 ### High availability (HA)
@@ -378,11 +382,11 @@ The job is changing: Infrastructure Developer
 ### Scaling
 
 - Scale out rather than Scale up
-    - Scale out: horizontal scaling
-    - Scale up: vertical scaling
+  - Scale out: horizontal scaling
+  - Scale up: vertical scaling
 - Auto-scaling
-    - Managed by the cloud
-    - Managed by an external component
+  - Managed by the cloud
+  - Managed by an external component
 
 ### Cloud ready applications
 

@@ -14,12 +14,12 @@
 ```console
 $ minikube get-k8s-versions
 The following Kubernetes versions are available when using the localkube bootstrapper:
-	- v1.10.0
-	- v1.9.4
-	- v1.9.0
-	- v1.8.0
-	- v1.7.5
-	- v1.7.4
+  - v1.10.0
+  - v1.9.4
+  - v1.9.0
+  - v1.8.0
+  - v1.7.5
+  - v1.7.4
 ```
 
 ### Kubernetes : Minikube
@@ -53,8 +53,8 @@ Server Version: v1.11.1
 ```console
 $ kubectl get componentstatuses
 NAME                      STATUS    MESSAGE              ERROR
-controller-manager   Healthy      ok                   
-scheduler                  Healthy      ok                   
+controller-manager   Healthy      ok
+scheduler                  Healthy      ok
 etcd-0                       Healthy      {"health": "true"}
 ```
 
@@ -183,13 +183,13 @@ $ kubectl create secret docker-registry mydockerhubsecret \
 apiVersion: v1
 kind: Pod
 metadata:
-	name: private-pod
-	spec:
-	imagePullSecrets:
-	- name: mydockersecret
-	containers:
-	- image: privateregistry/privateimage:tag
-	  name: main
+  name: private-pod
+  spec:
+  imagePullSecrets:
+  - name: mydockersecret
+  containers:
+  - image: privateregistry/privateimage:tag
+    name: main
 ```
 
 ### Kubernetes : Kubernetes Dashboard
@@ -200,22 +200,26 @@ metadata:
 
 
 ### Kubernetes : Kubernetes Dashboard
+
 ![](images/kubernetes/ui-dashboard.png)
 
 
 ### Kubernetes : Kubernetes Dashboard
 
 - Pour déployer le Dashboard, éxecuter la commande suivante:
+
 ```console
 $ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
 ```
 
 - Pour accéder au Dashboard, il faut établir une communication entre votre poste et le cluster Kubernetes :
+
 ```console
 $ kubectl proxy
 ```
 
 - Now access Dashboard at:
+
 <http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/>
 
 
@@ -235,14 +239,10 @@ $ kubectl proxy
 - `Repository` : répertoire ou espace (public ou privé) où sont regroupés les `charts`.
 
 
-### Kubernetes : Introduction to Helm 
+### Kubernetes : Introduction to Helm
 
 - Installer Helm (sur une distribution Linux):
-`curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | bash`
 - Deployer tiller : `helm init`
-- Voir la liste des `charts` disponibles sur les répertoire officiel:
-	`helm search`
-- Afficher la liste des `charts` disponibles pour _prometheus_ :
-	`helm search prometheus`
-- Afficher les options disponibles dans un `chart` Helm:
-	`helm inspect stable/prometheus`
+- Voir la liste des `charts` disponibles sur les répertoire officiel : `helm search`
+- Afficher la liste des `charts` disponibles pour _prometheus_ : `helm search prometheus`
+- Afficher les options disponibles dans un `chart` Helm:  `helm inspect stable/prometheus`
