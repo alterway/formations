@@ -147,14 +147,14 @@
       "containers/kubernetes/conclusion"
     ]
   },
-  "cloud-devops-aws": {
-    "course_name": "AWS",
-    "course_description": "Formation Cloud AWS et Devops",
+  "aws": {
+    "course_name": "Amazon Web Services",
+    "course_description": "Formation Cloud Amazon Web Services",
     "modules": [
       "intro-osones",
-      "aws-devops/formation-aws-devops-iam",
-      "aws-devops/formation-aws-devops-networking",
-      "aws-devops/formation-aws-devops-conclusion"
+      "aws/iam",
+      "aws/networking",
+      "aws/conclusion"
     ]
   }
 }
