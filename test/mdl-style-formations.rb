@@ -1,0 +1,12 @@
+rule 'MD004'
+rule 'MD005'
+rule 'MD009', :br_spaces => 2
+rule 'MD010'
+rule 'MD011'
+rule 'MD022'
+rule 'MD023'
+rule 'MD027'
+rule 'MD031'
+rule 'MD032'
+rule 'MD040'
+rule 'MD046'
