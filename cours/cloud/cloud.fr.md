@@ -172,10 +172,7 @@ GET /v2.0/networks/d32019d3-bc6e-4319-9c1d-6722fc136a22
 ### Pourquoi le cloud ? côté économique
 
 - Appréhender les ressources IT comme des services “fournisseur”
-- Faire glisser le budget “investissement” (Capex) vers le budget
-
-“fonctionnement” (Opex)
-
+- Faire glisser le budget “investissement” (Capex) vers le budget “fonctionnement” (Opex)
 - Réduire les coûts en mutualisant les ressources, et éventuellement avec des économies d'échelle
 - Réduire les délais
 - Aligner les coûts sur la consommation réelle des ressources
