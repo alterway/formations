@@ -1,9 +1,6 @@
 version: 0.1
 
 phases:
-  tests:
-    commands:
-    - docker run -v $PWD:/content rguichard/mdl-alpine /bin/sh -c "cd /content && mdl cours"
   install:
     commands:
     - docker pull osones/revealjs-builder:latest
