@@ -52,7 +52,7 @@ IAM: Identity Access Management
 
 ### IAM Policies: exemple
 
-```
+```json
 {
    "Version":"2012-10-17",
    "Statement":[

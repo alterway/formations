@@ -11,19 +11,18 @@
 
 ### RBAC
 
-- 3 entités sont utilisées :
+3 entités sont utilisées :
 
-    - Utilisateurs représentés par les `Users` ou les `ServiceAccounts`
-    - Resources représentées par les `Deployments`, `Pods`, `Services`, etc...
-    - les différentes opérations possibles : `create, list, get, delete, watch, patch`
+- Utilisateurs représentés par les `Users` ou les `ServiceAccounts`
+- Resources représentées par les `Deployments`, `Pods`, `Services`, etc...
+- les différentes opérations possibles : `create, list, get, delete, watch, patch`
 
 
 ### Service Accounts
 
 - Objet Kubernetes permettant d'identifier une application s'éxecutant dans un pod
 - Par défaut, un `ServiceAccount` par `namespace`
-- Le `ServiceAccount` est formatté ainsi :
-`system:serviceaccount:<namespace>:<service_account_name>`
+- Le `ServiceAccount` est formatté ainsi : `system:serviceaccount:<namespace>:<service_account_name>`
 
 
 ### Service Accounts
@@ -60,8 +59,7 @@ rules:
 
 - L'objet `RoleBinding` va allouer à un `User`, `ServiceAccount` ou un groupe les permissions dans l'objet `Role` associé
 - Un objet `RoleBinding` doit référencer un `Role` dans le même `namespace`.
--L'objet `roleRef` spécifié dans le `RoleBinding` est celui qui crée le liaison
-
+- L'objet `roleRef` spécifié dans le `RoleBinding` est celui qui crée le liaison
 
 ### RoleBinding
 
@@ -119,7 +117,7 @@ roleRef:
 
 ### RBAC
 
-```
+```bash
 kubectl auth can-i get pods /
 --namespace=default /
 --as=spesnova@example.com

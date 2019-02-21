@@ -70,7 +70,7 @@
 
 Exemple :
 
-```
+```bash
 $ curl -X PUT -d 'docker' http://localhost:8500/v1/kv/container/key1
 true
 $ curl http://localhost:8500/v1/kv/container/key1 | jq .

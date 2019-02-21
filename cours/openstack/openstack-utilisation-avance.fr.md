@@ -4,59 +4,61 @@
 
 Tirer parti de :
 
--   Régions
--   Zones de disponibilité (AZ)
+- Régions
+- Zones de disponibilité (AZ)
 
 ### Affinity / anti-affinity dans Nova
 
--   Demander à Nova de démarrer 2 ou plus instances :
-    - Le plus proche possible (affinity)
-    - Le plus éloigné possible (anti-affinity)
--   Besoin de performances ou besoin de distribution
+- Demander à Nova de démarrer 2 ou plus instances :
+  - Le plus proche possible (affinity)
+  - Le plus éloigné possible (anti-affinity)
+- Besoin de performances ou besoin de distribution
 
 ### Flavors
 
--   Un disque de taille nul équivaut à prendre la taille de l’image de base
+- Un disque de taille nul équivaut à prendre la taille de l’image de base
 
 ### Metadata
 
--   API
--   Disk drive
--   Vendor data
+- API
+- Disk drive
+- Vendor data
 
 ### Utiliser des images cloud
 
 Une image cloud c’est :
 
--   Une image disque contenant un OS déjà installé
--   Une image qui peut être instanciée en n machines sans erreur
--   Un OS sachant parler à l’API de metadata du cloud (outil comme `cloud-init`)
--   Détails : <https://docs.openstack.org/image-guide/openstack-images.html>
--   La plupart des distributions fournissent aujourd’hui des images cloud
+- Une image disque contenant un OS déjà installé
+- Une image qui peut être instanciée en n machines sans erreur
+- Un OS sachant parler à l’API de metadata du cloud (outil comme `cloud-init`)
+- Détails : <https://docs.openstack.org/image-guide/openstack-images.html>
+- La plupart des distributions fournissent aujourd’hui des images cloud
 
 ### Cirros
 
--   Cirros est l’image cloud par excellence
--   OS minimaliste
--   Contient cloud-init
+- Cirros est l’image cloud par excellence
+- OS minimaliste
+- Contient cloud-init
 
 <https://launchpad.net/cirros>
 
 ### Cloud-init
 
--   Cloud-init est un moyen de tirer parti de l’API de metadata, et notamment des user data
--   L’outil est intégré par défaut dans la plupart des images cloud
--   À partir des user data, cloud-init effectue les opérations de personnalisation de l’instance
--   cloud-config est un format possible de user data
+- Cloud-init est un moyen de tirer parti de l’API de metadata, et notamment des user data
+- L’outil est intégré par défaut dans la plupart des images cloud
+- À partir des user data, cloud-init effectue les opérations de personnalisation de l’instance
+- cloud-config est un format possible de user data
 
 ### Exemple cloud-config
 
-    #cloud-config
-    mounts:
-     - [ xvdc, /var/www ]
-    packages:
-     - apache2
-     - htop
+```bash
+#cloud-config
+mounts:
+ - [ xvdc, /var/www ]
+packages:
+ - apache2
+ - htop
+```
 
 ### Glance image members
 
@@ -66,35 +68,35 @@ Une image cloud c’est :
 
 Heat implémente la fonctionnalité d’autoscaling
 
--   Se déclenche en fonction des alarmes produites par Ceilometer
--   Entraine la création de nouvelles instances
+- Se déclenche en fonction des alarmes produites par Ceilometer
+- Entraine la création de nouvelles instances
 
 ### Fonctionnalités avancées de Heat
 
--   Nested stacks
--   Environments
--   Providers
+- Nested stacks
+- Environments
+- Providers
 
 ### Construire un template à partir d’existant
 
 Multiples projets en cours de développement
 
--   Flame (Cloudwatt)
--   HOT builder
--   Merlin
+- Flame (Cloudwatt)
+- HOT builder
+- Merlin
 
 ### Trove : Database as a Service
 
--   Fournit des bases de données relationnelles, à la AWS RDS
--   A vocation à supporter des bases NoSQL aussi
--   Gère notamment MySQL/MariaDB comme back-end
--   Se repose sur Nova pour les instances dans lesquelles se fait l’installation d’une BDD
+- Fournit des bases de données relationnelles, à la AWS RDS
+- A vocation à supporter des bases NoSQL aussi
+- Gère notamment MySQL/MariaDB comme back-end
+- Se repose sur Nova pour les instances dans lesquelles se fait l’installation d’une BDD
 
 ### Designate : DNS as a Service
 
--   Équivalent d’AWS Route 53
+- Équivalent d’AWS Route 53
 
 ### Barbican : Key management as a Service
 
--   Gère des secrets / clés privées
+- Gère des secrets / clés privées
 

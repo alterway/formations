@@ -8,6 +8,7 @@
 ### Kubernetes : Création d'objets Kubernetes
 
 - Pour créer un object Kubernetes depuis votre fichier YAML, utilisez la commande `kubectl create` :
+
 ```console
 kubectl create -f object.yaml
 ```

@@ -111,7 +111,7 @@
 
 ### Réseau : A la base, pas grand chose...
 
-```
+```bash
 NETWORK ID      NAME      DRIVER
 42f7f9558b7a    bridge    bridge
 6ebf7b150515    none      null

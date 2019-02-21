@@ -61,17 +61,17 @@ On distingue :
 
 - *Infrastructure as a Service*
 - Infrastructure :
-    - Compute (calcul)
-    - Storage (stockage)
-    - Network (réseau)
+  - Compute (calcul)
+  - Storage (stockage)
+  - Network (réseau)
 - Utilisateurs cibles : administrateurs (système, stockage, réseau)
 
 ### PaaS
 
 - *Platform as a Service*
 - Désigne deux concepts :
-    - Environnement permettant de développer/déployer une application (spécifique à un langage/framework - exemple : Python/Django)
-    - Ressources plus haut niveau que l'infrastructure, exemple : BDD
+  - Environnement permettant de développer/déployer une application (spécifique à un langage/framework - exemple : Python/Django)
+  - Ressources plus haut niveau que l'infrastructure, exemple : BDD
 - Utilisateurs cibles : développeurs d'application
 
 ### SaaS
@@ -103,10 +103,10 @@ On distingue :
 - Utilisation mixte de multiples clouds privés et/ou publics
 - Concept séduisant mais mise en œuvre a priori difficile
 - Certains cas d'usages s'y prêtent très bien
-    - Intégration continue (CI)
+  - Intégration continue (CI)
 - Motivations
-    - Éviter le *lock-in*
-    - Débordement (*cloud bursting*)
+  - Éviter le *lock-in*
+  - Débordement (*cloud bursting*)
 
 ### L'instant virtualisation
 
@@ -115,14 +115,14 @@ Mise au point.
 - La virtualisation est une technologie permettant d'implémenter la fonction *compute*
 - Un cloud fournissant du compute *peut* utiliser la virtualisation
 - Mais peut également utiliser :
-    - Du bare-metal
-    - Des containers (système)
+  - Du bare-metal
+  - Des containers (système)
 
 ### Les APIs, la clé du cloud
 
 - Rappel : API pour *Application Programming Interface*
-    -   Au sens logiciel : Interface permettant à un logiciel d’utiliser une bibliothèque
-    -   Au sens cloud : Interface permettant à un logiciel d’utiliser un service (XaaS)
+  - Au sens logiciel : Interface permettant à un logiciel d’utiliser une bibliothèque
+  - Au sens cloud : Interface permettant à un logiciel d’utiliser un service (XaaS)
 - Interface de programmation (via le réseau, souvent HTTP)
 - Frontière explicite entre le fournisseur (provider) et l'utilisateur (user)
 - Définit la manière dont l'utilisateur communique avec le cloud pour gérer ses ressources
@@ -130,46 +130,52 @@ Mise au point.
 
 ### API REST
 
--   Une ressource == une URI (*Uniform Resource Identifier*)
--   Utilisation des verbes HTTP pour caractériser les opérations (CRUD)
-    - GET
-    - POST
-    - PUT
-    - DELETE
--   Utilisation des codes de retour HTTP
--   Représentation des ressources dans le corps des réponses HTTP
+- Une ressource == une URI (*Uniform Resource Identifier*)
+- Utilisation des verbes HTTP pour caractériser les opérations (CRUD)
+  - GET
+  - POST
+  - PUT
+  - DELETE
+- Utilisation des codes de retour HTTP
+- Représentation des ressources dans le corps des réponses HTTP
 
 ### REST - Exemples
 
-    GET http://endpoint/volumes/
-    GET http://endpoint/volumes/?size=10
-    POST http://endpoint/volumes/
-    DELETE http://endpoint/volumes/xyz
+```bash
+GET http://endpoint/volumes/
+GET http://endpoint/volumes/?size=10
+POST http://endpoint/volumes/
+DELETE http://endpoint/volumes/xyz
+```
 
 ### Exemple concret
 
-    GET /v2.0/networks/d32019d3-bc6e-4319-9c1d-6722fc136a22
-    {
-       "network":{
-          "status":"ACTIVE",
-          "subnets":[ "54d6f61d-db07-451c-9ab3-b9609b6b6f0b" ],
-          "name":"private-network",
-          "provider:physical_network":null,
-          "admin_state_up":true,
-          "tenant_id":"4fd44f30292945e481c7b8a0c8908869",
-          "provider:network_type":"local",
-          "router:external":true,
-          "shared":true,
-          "id":"d32019d3-bc6e-4319-9c1d-6722fc136a22",
-          "provider:segmentation_id":null
-       }
-    }
+```bash
+GET /v2.0/networks/d32019d3-bc6e-4319-9c1d-6722fc136a22
+{
+ "network":{
+  "status":"ACTIVE",
+  "subnets":[ "54d6f61d-db07-451c-9ab3-b9609b6b6f0b" ],
+  "name":"private-network",
+  "provider:physical_network":null,
+  "admin_state_up":true,
+  "tenant_id":"4fd44f30292945e481c7b8a0c8908869",
+  "provider:network_type":"local",
+  "router:external":true,
+  "shared":true,
+  "id":"d32019d3-bc6e-4319-9c1d-6722fc136a22",
+  "provider:segmentation_id":null
+ }
+}
+```
 
 ### Pourquoi le cloud ? côté économique
 
 - Appréhender les ressources IT comme des services “fournisseur”
 - Faire glisser le budget “investissement” (Capex) vers le budget
+
 “fonctionnement” (Opex)
+
 - Réduire les coûts en mutualisant les ressources, et éventuellement avec des économies d'échelle
 - Réduire les délais
 - Aligner les coûts sur la consommation réelle des ressources
@@ -201,12 +207,12 @@ Mise au point.
 - DreamHost
 - DigitalOcean
 - En France :
-    - Cloudwatt (Orange Business Services)
-    - Numergy (SFR)
-    - OVH
-    - Ikoula
-    - Scaleway
-    - Outscale
+  - Cloudwatt (Orange Business Services)
+  - Numergy (SFR)
+  - OVH
+  - Ikoula
+  - Scaleway
+  - Outscale
 
 ### Faire du IaaS privé
 
@@ -226,24 +232,24 @@ Mise au point.
 
 ### Exemples de PaaS public
 
--   Amazon Elastic Beanstalk (<https://aws.amazon.com/fr/elasticbeanstalk>)
--   Google App Engine (<https://cloud.google.com/appengine>)
--   Heroku (<https://www.heroku.com>)
+- Amazon Elastic Beanstalk (<https://aws.amazon.com/fr/elasticbeanstalk>)
+- Google App Engine (<https://cloud.google.com/appengine>)
+- Heroku (<https://www.heroku.com>)
 
 ### Solutions de PaaS privé
 
--   Cloud Foundry, Fondation (<https://www.cloudfoundry.org>)
--   OpenShift, Red Hat (<https://www.openshift.org>)
--   Solum, OpenStack (<https://wiki.openstack.org/wiki/Solum>)
+- Cloud Foundry, Fondation (<https://www.cloudfoundry.org>)
+- OpenShift, Red Hat (<https://www.openshift.org>)
+- Solum, OpenStack (<https://wiki.openstack.org/wiki/Solum>)
 
 ## Les concepts Infrastructure as a Service
 
 ### La base
 
 - Infrastructure :
-    - Compute
-    - Storage
-    - Network
+  - Compute
+  - Storage
+  - Network
 
 ### Ressources *compute*
 
@@ -276,24 +282,24 @@ Mise au point.
 
 ### Flavor (gabarit)
 
--   *Instance type* chez AWS
--   Définit un modèle d’instance en termes de CPU, RAM, disque (racine), disque éphémère
--   Le disque éphémère a, comme le disque racine, l’avantage d’être souvent local donc rapide
+- *Instance type* chez AWS
+- Définit un modèle d’instance en termes de CPU, RAM, disque (racine), disque éphémère
+- Le disque éphémère a, comme le disque racine, l’avantage d’être souvent local donc rapide
 
 ### Paire de clé
 
--   Clé publique + clé privée SSH
--   Le cloud manipule et stocke la clé publique
--   Cette clé publique est utilisée pour donner un accès SSH aux instances
+- Clé publique + clé privée SSH
+- Le cloud manipule et stocke la clé publique
+- Cette clé publique est utilisée pour donner un accès SSH aux instances
 
 ### Ressources réseau 1/2
 
 - Réseau L2
-    - Port réseau
+  - Port réseau
 - Réseau L3
-    - Routeur
-    - IP flottante
-    - Groupe de sécurité
+  - Routeur
+  - IP flottante
+  - Groupe de sécurité
 
 ### Ressources réseau 2/2
 
@@ -353,8 +359,8 @@ Démarrer une instance avec un disque racine sur un **volume**
 Deux approches :
 
 - Ne pas évoluer
-    - Risquer de ne pas répondre aux attentes
-    - Se contenter d'un cas d'usage *test & dev*
+  - Risquer de ne pas répondre aux attentes
+  - Se contenter d'un cas d'usage *test & dev*
 - Adapter ses pratiques au cloud pour en tirer parti pleinement
 
 ### Haute disponibilité (HA)
@@ -381,11 +387,11 @@ Le métier évolue : Infrastructure Developer
 ### Scaling, passage à l'échelle
 
 - Scale out plutôt que Scale up
-    - Scale out : passage à l'échelle horizontal
-    - Scale up : passage à l'échelle vertical
+  - Scale out : passage à l'échelle horizontal
+  - Scale up : passage à l'échelle vertical
 - Auto-scaling
-    - Géré par le cloud
-    - Géré par un composant extérieur
+  - Géré par le cloud
+  - Géré par un composant extérieur
 
 ### Applications cloud ready
 
