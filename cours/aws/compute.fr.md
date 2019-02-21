@@ -12,7 +12,7 @@
 
 - Amazon Machine Image
 - Modèle préconfiguré pour les instances
-- Doit être psécifiée pour lancer une instance
+- Doit être spécifiée pour lancer une instance
 - Une AMI comprend les éléments suivants :
   - Un modèle pour le volume racine de l'instance (système d'exploitation, un serveur d'applications et des applications)
   - Les autorisations de lancement qui contrôlent les comptes AWS qui peuvent utiliser l'AMI pour lancer les instances
