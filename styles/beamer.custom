@@ -58,4 +58,4 @@
 }
 
 % Footer
-\setbeamertemplate{frame footer}{\includegraphics[height=0.5cm]{images/logo-osones-picto.png} \hspace*{0.5cm} \inserttitle \hspace*{0.5cm} \insertsection}
+\setbeamertemplate{frame footer}{\includegraphics[height=0.5cm]{images/logo-awcc.jpg} \hspace*{0.5cm} \inserttitle \hspace*{0.5cm} \insertsection}

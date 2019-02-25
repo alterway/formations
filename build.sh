@@ -49,7 +49,7 @@ build-html() {
       -V revealjs-url="$REVEALJSURL" \
       -V slideNumber=true \
       -V title="$TITLE" \
-      -V institute=Osones \
+      -V institute="alter way Cloud Consulting" \
       -o /formations/output-html/"$cours"."$LANGUAGE".html \
       /formations/"$COURS_DIR"/slide-"$cours"
     rm -f "$COURS_DIR"/slide-"$cours"
