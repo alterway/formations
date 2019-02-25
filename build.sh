@@ -17,11 +17,12 @@ fi
 
 build-html() {
   mkdir -p output-html
-  ln -s ../images output-html
+  ln -fs ../images output-html
 
   echo $REVEALJSURL | grep -q http
   if [ $? == 1 ]; then
     cp styles/"$THEME".css $REVEALJSURL/css/theme/"$THEME".css
+    cp -r styles/"$THEME" $REVEALJSURL/css/theme/
   fi
 
   for cours in $((jq keys | jq -r '.[]') < $LIST); do

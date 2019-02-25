@@ -9,6 +9,7 @@ phases:
   pre_build:
     commands:
     - aws s3 cp styles/osones.css s3://$BUCKET_CSS_PATH
+    - aws s3 cp styles/osones s3://$BUCKET_CSS_PATH --recursive
   build:
     commands:
       - /bin/bash -x build.sh -l fr
