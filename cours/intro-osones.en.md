@@ -6,7 +6,7 @@
 
 ![Osones logo](images/logo-osones.png){height="50px"}
 
-- Copyright © 2014 - 2018 Osones
+- Copyright © 2014 - 2019 Osones
 - License: [Creative Commons BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.fr)
 - Sources: <https://github.com/Osones/formations/>
 - HTML/PDF: <https://osones.com/formations/>

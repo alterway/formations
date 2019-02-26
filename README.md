@@ -126,7 +126,7 @@ Quelques exemples :
 
 Tous les contenus originaux (Makefile, scripts, fichiers dans `cours/`) sont :
 
-* Copyright © 2014-2018 Osones
+* Copyright © 2014-2019 Osones
 * Distribués sous licence Creative Commons BY-SA 4.0 (<https://creativecommons.org/licenses/by-sa/4.0/>)
 
 ![Creative Commons BY-SA](https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-sa.png)
