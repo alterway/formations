@@ -18,24 +18,27 @@ Auteurs :
 
 HTML et PDF construits automatiquement : <https://osones.com/formations/>
 
-* [Support PDF OpenStack User](https://osones.com/formations/pdf/openstack-user.fr.pdf)
-* [Support PDF OpenStack Admin](https://osones.com/formations/pdf/openstack.fr.pdf)
-* [Support HTML OpenStack User](https://osones.com/formations/openstack-user.fr.html)
-* [Support HTML OpenStack Admin](https://osones.com/formations/openstack.fr.html)
-* [Support HTML Docker](https://osones.com/formations/docker.fr.html)
+* OpenStack User [PDF](https://osones.com/formations/pdf/openstack-user.fr.pdf)/[HTML](https://osones.com/formations/openstack-user.fr.html)
+* OpenStack Ops [PDF](https://osones.com/formations/pdf/openstack-ops.fr.pdf)/[HTML](https://osones.com/formations/openstack-ops.fr.html)
+* Kubernetes User [PDF](https://osones.com/formations/pdf/kubernetes-user.fr.pdf)/[HTML](https://osones.com/formations/kubernetes-user.fr.html)
+* Kubernetes Ops [PDF](https://osones.com/formations/pdf/kubernetes-ops.fr.pdf)/[HTML](https://osones.com/formations/kubernetes-ops.fr.html)
+* Cloud [PDF](https://osones.com/formations/pdf/cloud.fr.pdf)/[HTML](https://osones.com/formations/cloud.fr.html)
+* Docker [PDF](https://osones.com/formations/pdf/docker.fr.pdf)/[HTML](https://osones.com/formations/docker.fr.html)
 
 ## Prérequis
 
-### Option 1 : Utiliser le Makefile
+
+### Option 1 : Utiliser le script build.sh
+
+* Docker : <https://docs.docker.com/install>
+* jq : <https://github.com/stedolan/jq>
+
+### Option 2 : Utiliser le Makefile
 
 * make : <https://www.gnu.org/software/make/>
 * jq : <https://github.com/stedolan/jq>
 * pandoc : <https://pandoc.org>
 * TeX Live : <https://www.tug.org/texlive/>
-
-### Option 2 : Utiliser le script build.sh
-
-* Docker : <https://docs.docker.com/install>
 
 ## Fonctionnement
 
@@ -68,45 +71,60 @@ Les Dockerfiles des images Docker sont disponibles ici :
 Un daemon Docker est donc le seul pré-requis pour le build via `build.sh`
 
 ```
-  USAGE : $0 options
+ USAGE : ./build.sh options
 
-    -o output           Output format (html, pdf or all). If none, all outputs
-                        are built
+    -o output           Output format (html, pdf or all). Default: all
 
-    -t theme            Theme to use, default to osones
+    -t theme            Theme to use. Default: osones
 
     -u revealjsURL      RevealJS URL that need to be use. If you build formation
-                        supports on local environment you should git clone https://github.com/hakimel/reveal.js
-                        and set this variable to your local copy.
+                        supports on local environment you should git
+                        clone https://github.com/hakimel/reveal.js and set
+                        this variable to your local copy.
                         This option is also necessary even if you only want PDF
-                        output (default : https://osones.com/formations/revealjs)
+                        output. Default: https://osones.com/formations/revealjs
 
-    -c course           Courses to build, if not specified all courses are built
+    -c course           Course to build, "all" for build them all !
+
+    -l language         Language in which you want the course to be built. Default: fr
 ```
 
-If you want to build the courses locally, you'll need to :
+#### Theme
 
-- pull the Docker image osones/revealjs-builder
-- pull the Docker image osones/wkhtmltopdf
-- clone https://github.com/hakimel/reveal.js (see `-u` parameter)
+Les thèmes sont stockés dans `styles/`. Un thème est constitué de :
 
-Pour visualiser :
+- un fichier CSS
+- un dossier (nom du thème) contenant les assets (images, font, etc)
 
-- Lire les fichiers HTML dans `cours/output-html/` avec votre navigateur
+#### Reveal.js
+
+Par défaut, nous utilisons une version forkée de reveal.js. Pour utiliser votre
+propre version, vous devez spécifier son chemin avec le paramètre `-u`. Les
+fichiers de votre thème seront copiés dans ce chemin. Si le chemin est distant
+(uptream version par exemple), vous ne pourrez utiliser votre propre thème.
+
+#### Language
+
+Nous supportons le multi langage. Le script `build.sh` est conçu pour
+rebasculer sur le contenu français si le cours n'existe pas dans la langue
+demandée.
+
+#### Exemples
+
+
+```console
+./build.sh -c docker -l fr -o html
+./build.sh -o pdf
+./build.sh -c openstack-user -u ~/reveal.js
+./build.sh -c kubernetes-ops -l en -t customer
+```
+
+- Les fichiers HTML se trouvent dans `output-html/`
 - Les PDF se trouvent dans `output-pdf/`
 
-OU
-
-```
-docker run -d \
-            -p 80:8001 \
-            -v $PWD/images:/revealjs/images \
-            -v $PWD/cours/output-html/$(cours).html:/revealjs/index.html \
-            -v $PWD/cours/output-html/revealjs/css/theme:/revealjs/css/theme \
-            vsense/revealjs
-```
-
-- Les slides sont ensuite accessibles sur http://localhost
+En ayant puller au préalable les deux images Docker et en ayant une copie
+locale de reveal.js (spécifié avec `-u`), les builds se font uniquement en
+local.
 
 ### Makefile
 
@@ -117,10 +135,12 @@ Le build se fait entièrement en local.
 
 Quelques exemples :
 
-    make openstack.pdf
-    make docker-handout.pdf
-    make docker-print.pdf
-    make openstack.html
+```console
+make openstack.pdf
+make docker-handout.pdf
+make docker-print.pdf
+make openstack.html
+```
 
 ## Copyright et licence
 
