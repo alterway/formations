@@ -40,7 +40,7 @@ build-html() {
     # Header2 are only usefull for beamer, they need to be replaced with Header3 for revealjs interpretation
     sed -i 's/^## /### /' "$COURS_DIR"/slide-"$cours"
     echo "Build "$TITLE" "$LANUGAGE" ("$OUTPUT")"
-    docker run -v $PWD:/formations osones/revealjs-builder:"$DOCKER_TAG" \
+    docker run --rm -v $PWD:/formations osones/revealjs-builder:"$DOCKER_TAG" \
       --standalone \
       --template=/formations/templates/template.revealjs \
       --slide-level 3 \
@@ -59,7 +59,7 @@ build-html() {
 build-pdf() {
   mkdir -p output-pdf
   for cours in $((jq keys | jq -r '.[]') < $LIST); do
-    docker run \
+    docker run --rm \
       -v $PWD/output-pdf:/output \
       -v $PWD/output-html/"$cours"."$LANGUAGE".html:/index.html \
       -v $PWD/images:/images osones/wkhtmltopdf:$DOCKER_TAG \
