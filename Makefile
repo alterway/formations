@@ -17,8 +17,8 @@
 #               texlive-extra-utils (pdfnup)
 
 # These vars can be overridden
-author="Team Osones"
-institute="Osones"
+author="Team alter way Cloud Consulting"
+institute="alter way Cloud Consulting"
 date="$$(date +'%d %B %Y')"
 lang=fr
 
@@ -69,7 +69,7 @@ build/%-handout.tex: build/%.md
 %.html: ##### Build cours "%" in html/revealjs, optional argument revealjsurl=<url to revealjs>
 %.html: build/%.md
 	sed 's,^## ,### ,' $< > $<-html # revealjs doesn't support 3 levels
-	pandoc $<-html -t revealjs -f markdown -s -o $@ --slide-level 3 -V theme=osones \
+	pandoc $<-html -t revealjs -f markdown -s -o $@ --slide-level 3 -V theme=awcc \
 		-V revealjs-url=$(revealjsurl) -V navigation=frame -V slideNumber="true" \
 		-V title=$(title) -V institute=$(institute) -V author=$(author) -V date=$(date)
 
