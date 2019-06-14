@@ -2,7 +2,7 @@
 
 ![Build Status](https://codebuild.eu-west-1.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiUkRNdlZtY2JhbVlPb3ZJaDExeXlwT2hjRVhocmRVUGRQRnZtZCsyM0g4RGp2WHZKMzhUWUcxd0xSWVJncUNzRllCTFJBZmwrMTE5Q01iN0d5MEQ2aVZZPSIsIml2UGFyYW1ldGVyU3BlYyI6ImpzWHAzUXJDVUd5MlAxQzQiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=master)
 
-Supports de formation (sous forme de slides) écrits en Français et traduits en Anglais et réalisés par [alter way Cloud Consulting](https://alterway.fr/) pour ses offres de [formation](https://formation.alterway.fr/cloud/).
+Supports de formation (sous forme de slides) écrits en Français et traduits en Anglais et réalisés par [alter way Cloud Consulting](https://alterway.fr/) (ex Osones) pour ses offres de [formation](https://formation.alterway.fr/cloud/).
 
 Sont notamment abordés les sujets suivants : le cloud, sa philosophie, le projet OpenStack, l'utilisation d'OpenStack, le déploiement d'OpenStack, le principe des conteneurs, le projet Docker, l'utilisation de Docker, l'orchestration de conteneurs Docker.
 
