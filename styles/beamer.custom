@@ -1,14 +1,14 @@
 % Colors
 
-\definecolor{oRed}{HTML}{9B1801}
+\definecolor{oBlue}{HTML}{211B55}
 
 \setbeamercolor{osones text}{%
-  fg=oRed,
+  fg=oBlue,
   bg=black!2
 }
 
 \setbeamercolor{alerted text}{%
-  fg=oRed
+  fg=oBlue
 }
 
 \setbeamercolor{palette osones}{%
