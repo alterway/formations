@@ -65,8 +65,8 @@ et de ne pas "encrasser" le système hôte avec des paquets dont l'utilisation e
 
 Les Dockerfiles des images Docker sont disponibles ici :
 
-- [revealjs-builder](https://github.com/Osones/docker-images/tree/master/revealjs-builder)
-- [wkhtmltopdf](https://github.com/Osones/docker-images/tree/master/wkhtmltopdf)
+- [revealjs-builder](https://hub.docker.com/r/osones/revealjs-builder)
+- [wkhtmltopdf](https://hub.docker.com/r/osones/wkhtmltopdf)
 
 Un daemon Docker est donc le seul pré-requis pour le build via `build.sh`
 
@@ -75,7 +75,7 @@ Un daemon Docker est donc le seul pré-requis pour le build via `build.sh`
 
     -o output           Output format (html, pdf or all). Default: all
 
-    -t theme            Theme to use. Default: osones
+    -t theme            Theme to use. Default: awcc
 
     -u revealjsURL      RevealJS URL that need to be use. If you build formation
                         supports on local environment you should git
