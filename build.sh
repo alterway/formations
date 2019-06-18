@@ -49,7 +49,7 @@ build-html() {
       -V revealjs-url="$REVEALJSURL" \
       -V slideNumber=true \
       -V title="$TITLE" \
-      -V institute=Osones \
+      -V institute="alter way Cloud Consulting" \
       -o /formations/output-html/"$cours"."$LANGUAGE".html \
       /formations/"$COURS_DIR"/slide-"$cours"
     rm -f "$COURS_DIR"/slide-"$cours"
@@ -76,7 +76,7 @@ display_help() {
 
     -o output           Output format (html, pdf or all). Default: all
 
-    -t theme            Theme to use. Default: osones
+    -t theme            Theme to use. Default: awcc
 
     -u revealjsURL      RevealJS URL that need to be use. If you build formation
                         supports on local environment you should git
@@ -112,7 +112,7 @@ done
 [[ $REVEALJSURL == "" ]] && REVEALJSURL="https://osones.com/formations/revealjs"
 
 if [[ $THEME == "" ]]; then
-  THEME="osones"
+  THEME="awcc"
 else
   ls styles/"$THEME".css &> /dev/null
   [ $? -eq 2 ] && echo "Theme $THEME doesn't exist" && exit 1

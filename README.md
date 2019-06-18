@@ -1,8 +1,8 @@
-# Supports de formation Osones
+# Supports de formation alter way Cloud Consulting
 
 ![Build Status](https://codebuild.eu-west-1.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiUkRNdlZtY2JhbVlPb3ZJaDExeXlwT2hjRVhocmRVUGRQRnZtZCsyM0g4RGp2WHZKMzhUWUcxd0xSWVJncUNzRllCTFJBZmwrMTE5Q01iN0d5MEQ2aVZZPSIsIml2UGFyYW1ldGVyU3BlYyI6ImpzWHAzUXJDVUd5MlAxQzQiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=master)
 
-Supports de formation (sous forme de slides) écrits en Français et traduits en Anglais et réalisés par [Osones](https://osones.com/) pour ses offres de [formation](https://osones.com/formations.html).
+Supports de formation (sous forme de slides) écrits en Français et traduits en Anglais et réalisés par [alter way Cloud Consulting](https://alterway.fr/) (ex Osones) pour ses offres de [formation](https://formation.alterway.fr/cloud/).
 
 Sont notamment abordés les sujets suivants : le cloud, sa philosophie, le projet OpenStack, l'utilisation d'OpenStack, le déploiement d'OpenStack, le principe des conteneurs, le projet Docker, l'utilisation de Docker, l'orchestration de conteneurs Docker.
 
@@ -10,11 +10,11 @@ Sources : <https://github.com/Osones/formations/>
 
 Auteurs :
 
-* Adrien Cunin <adrien.cunin@osones.com>
-* Pierre Freund <pierre.freund@osones.com>
-* Romain Guichard <romain.guichard@osones.com>
-* Kevin Lefevre <kevin.lefevre@osones.com>
-* Jean-François Taltavull <jft@osones.com>
+* Adrien Cunin <adrien.cunin@alterway.fr>
+* Pierre Freund <pierre.freund@alterway.fr>
+* Romain Guichard <romain.guichard@alterway.fr>
+* Kevin Lefevre <kevin.lefevre@alterway.fr>
+* Jean-François Taltavull <jean-francois.taltavull@alterway.fr>
 
 HTML et PDF construits automatiquement : <https://osones.com/formations/>
 
@@ -146,7 +146,7 @@ make openstack.html
 
 Tous les contenus originaux (Makefile, scripts, fichiers dans `cours/`) sont :
 
-* Copyright © 2014-2019 Osones
+* Copyright © 2014-2019 alter way Cloud Consulting
 * Distribués sous licence Creative Commons BY-SA 4.0 (<https://creativecommons.org/licenses/by-sa/4.0/>)
 
 ![Creative Commons BY-SA](https://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-sa.png)

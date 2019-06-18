@@ -3,13 +3,12 @@ version: 0.1
 phases:
   install:
     commands:
-    - docker pull osones/revealjs-builder:latest
-    - docker pull osones/wkhtmltopdf:latest
+    - docker pull osones/revealjs-builder:stable
+    - docker pull osones/wkhtmltopdf:stable
     - apt update && apt install -y jq
   pre_build:
     commands:
-    - aws s3 cp styles/osones.css s3://$BUCKET_CSS_PATH
-    - aws s3 cp styles/osones s3://$BUCKET_REVEALJS_PATH/css/theme/osones --recursive
+    - for dir in styles/* ; do [ -d "$dir" ] && aws s3 cp styles/"$dir".css s3://$BUCKET_CSS_PATH && aws s3 cp styles/"$dir" s3://$BUCKET_REVEALJS_PATH/css/theme/"$dir" --recursive ; done
   build:
     commands:
       - /bin/bash -x build.sh -l fr
