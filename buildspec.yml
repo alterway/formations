@@ -8,7 +8,7 @@ phases:
     - apt update && apt install -y jq
   pre_build:
     commands:
-    - for dir in styles/* ; do [ -d "$dir" ] && aws s3 cp "$dir".css s3://$BUCKET_CSS_PATH && aws s3 cp "$dir" s3://$BUCKET_REVEALJS_PATH/css/theme/"$(basename $dir)" --recursive ; done
+    - for dir in styles/* ; do if [ -d "$dir" ] ; then aws s3 cp "$dir".css s3://$BUCKET_CSS_PATH && aws s3 cp "$dir" s3://$BUCKET_REVEALJS_PATH/css/theme/"$dir" --recursive ; fi ; done
   build:
     commands:
       - /bin/bash -x build.sh -l fr
