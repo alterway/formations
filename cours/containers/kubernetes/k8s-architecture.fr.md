@@ -7,25 +7,12 @@
 - Faciles à conteneuriser et à packager
 - Peut se déployer uniquement avec des conteneurs sans dépendance d'OS
 
-### Kubernetes : Composants
+### Kubernetes : Composants du Control Plane
 
 - kube-apiserver : API server qui permet la configuration d'objet Kubernetes (Pod, Service, Deployment, etc.)
 - kube-proxy : Permet le forwarding TCP/UDP et le load balancing entre les services et les backend (Pods)
 - kube-scheduler : Implémente les fonctionnalités de scheduling
 - kube-controller-manager : Responsable de l'état du cluster, boucle infinie qui régule l'état du cluster afin d'atteindre un état désiré
-
-### Kubernetes : Composants
-
-- kubelet : Service "agent" fonctionnant sur tous les nœuds et assure le fonctionnement des autres services
-- kubectl : Ligne de commande permettant de piloter un cluster Kubernetes
-
-### Kubernetes : Kubelet
-
-- Service principal de Kubernetes
-- Permet à Kubernetes de s'auto configurer :
-    - Surveille un dossier contenant les *manifests* (fichiers YAML des différents composant de Kubernetes).
-    - Applique les modifications si besoin (upgrade, rollback).
-- Surveille l'état des services du cluster via l'API server (*kube-apiserver*).
 
 
 ### Kubernetes : kube-apiserver
@@ -52,6 +39,19 @@
 - Effectue des opérations pour atteindre un état donné
 - De base dans Kubernetes : replication controller, endpoints controller, namespace controller et serviceaccounts controller
 
+### Kubernetes : Autres composants
+
+- kubelet : Service "agent" fonctionnant sur tous les nœuds et assure le fonctionnement des autres services
+- kubectl : Ligne de commande permettant de piloter un cluster Kubernetes
+
+### Kubernetes : Kubelet
+
+- Service principal de Kubernetes
+- Permet à Kubernetes de s'auto configurer :
+    - Surveille un dossier contenant les *manifests* (fichiers YAML des différents composant de Kubernetes).
+    - Applique les modifications si besoin (upgrade, rollback).
+- Surveille l'état des services du cluster via l'API server (*kube-apiserver*).
+
 ### Kubernetes : kubelet
 
 ```console
@@ -76,7 +76,7 @@ total 16K
 
 ### Kubernetes : Aujourd'hui
 
-- Version 1.11.x : stable en production
+- Version 1.16.x : stable en production
 - Solution complète et une des plus utilisées
 - Éprouvée par Google
 - S'intègre parfaitement à d'autres _Container Runtime Interfaces (CRI)_ comme containerd, cri-o, rktlet, frakti, etc...
