@@ -158,13 +158,33 @@ spec:
 
 ### PodSecurityPolicies
 
-- Nécessite d'être activés spécifiquement
-- Permet de définir ce qui est alloué pour l'éxecution
-- Il faut une PSP par défaut
-- A utiliser dans un contexte multitenant
+- Permet de contrôler les privilèges d'un pod
+- Permet de définir ce qui est autorisé pendant l'exécution du pod
+- A utiliser dans un contexte multi-tenant et quand les pods ne viennent pas
+  d'un tiers de confiance
 - Peut-être combiné avec le RBAC
 - Attention: Activer cette fonctionnalité peut endommager votre environnement
+- Il faut une PSP par défaut
 
+### PodSecurityPolicies
+
+```yaml
+apiVersion: policy/v1beta1
+kind: PodSecurityPolicy
+metadata:
+  name: restricted
+spec:
+  privileged: false
+  allowPrivilegeEscalation: false
+  requiredDropCapabilities:
+    - ALL
+  hostNetwork: false
+  hostIPC: false
+  hostPID: false
+  runAsUser:
+    rule: 'MustRunAsNonRoot'
+  readOnlyRootFilesystem: false
+```
 
 ### Admission Controllers
 
