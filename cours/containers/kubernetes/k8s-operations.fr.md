@@ -1,10 +1,10 @@
 ### Kubectl : Advanced Usage
 
 - Il est possible de mettre à jour un service sans incident grâce ce qui est appelé le _rolling-update_.
-- Avec les _rolling updates_, les resources qu'expose un objet `Service` se mettent à jour progressivement.
+- Avec les _rolling updates_, les ressources qu'expose un objet `Service` se mettent à jour progressivement.
 - Seuls les objets `Deployment`, `DaemonSet` et `StatefulSet` support les _rolling updates_.
 - Les arguments `maxSurge` et `maxUnavailabe` définissent le rythme du _rolling update_.
-- La commande `kubectl rollout` permet de suivre les _rolling updates_ éffectués.
+- La commande `kubectl rollout` permet de suivre les _rolling updates_ effectués.
 
 
 ### Kubectl : Advanced Usage
