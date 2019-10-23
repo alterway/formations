@@ -1,6 +1,66 @@
 # Kubernetes : Installation
 
+### Kubernetes : Minikube
+
+- Outil permettant de démarrer rapidement un cluster mono-node Kubernetes localement
+- Execute Kubernetes dans une machine virtuelle
+- Nécessite des outils de virtualisation (VirtualBox, VMware Fusion, KVM, etc...)
+- Supporte plusieurs systèmes d'exploitation : Linux, Mac OS, Windows
+- Installation : <https://github.com/kubernetes/minikube#Installation>
+
+
+### Kubernetes : Minikube
+
+- Création d'un cluster Kubernetes
+
+```console
+$ minikube get-k8s-versions
+The following Kubernetes versions are available when using the localkube bootstrapper:
+  - v1.16.1
+  - v1.15.5
+  - v1.14.3
+  - v1.9.4
+  - v1.9.0
+```
+
+### Kubernetes : Minikube
+
+```console
+$minikube start --kubernetes-version="v1.16.1"
+Starting local Kubernetes v1.16.1 cluster...
+Starting VM...
+Getting VM IP address...
+[...]
+Connecting to cluster...
+Setting up kubeconfig...
+Starting cluster components...
+Kubectl is now configured to use the cluster.
+Loading cached images from config file.
+```
+
+### Kubernetes : Minikube
+
+- Effectuer un diagnostic basique du cluster
+
+```console
+$ kubectl version
+Client Version: v1.16.1
+Server Version: v1.16.1
+```
+
+
+### Kubernetes : Minikube
+
+```console
+$ kubectl get componentstatuses
+NAME                      STATUS    MESSAGE              ERROR
+controller-manager   Healthy      ok
+scheduler                  Healthy      ok
+etcd-0                       Healthy      {"health": "true"}
+```
+
 ### Installation de Kubernetes
+
 
 - De nombreuses ressources présentes pour le déploiement de Kubernetes dans un environnement de production
 
@@ -13,7 +73,7 @@
     - Assurer que les ports requis soient ouverts : <https://kubernetes.io/docs/setup/independent/install-kubeadm/#check-required-ports>
     - Installer une Container Runtime compatible CRI
 
-### Installation de Kubernetes
+### Kubeadm
 
 - Installer les composants Kubernetes (kubeadm, kubectl, kubelet) : <https://kubernetes.io/docs/setup/independent/install-kubeadm/>
 - Exécuter `kubeadm init` sur le noeud master
@@ -29,9 +89,9 @@ En plus de l'installation de Kubernetes, Kubeadm peut :
 - Générer des certificats utilisateurs signés par Kubernetes
 - Effectuer des upgrades de Kubernetes (`kubeadm upgrade`)
 
-### Installation de Kubernetes
+### Kubernetes managés "as a Service"
 
-- Il existe des solutions managées pour Kubernetes :
+- Il existe des solutions managées pour Kubernetes sur les cloud publics :
     - Azure Kubernetes Service : <https://azure.microsoft.com/en-us/services/kubernetes-service/>
     - Google Kubernetes Engine : <https://cloud.google.com/kubernetes-engine/>
     - Elastic Kubernetes Services: <https://aws.amazon.com/eks/>

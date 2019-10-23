@@ -1,62 +1,3 @@
-### Kubernetes : Minikube
-
-- Outil permettant de démarrer rapidement un cluster mono-node Kubernetes localement
-- Execute Kubernetes dans une machine virtuelle
-- Nécessite des outils de virtualisation (VirtualBox, VMware Fusion, KVM, etc...)
-- Supporte plusieurs systèmes d'exploitation : Linux, Mac OS, Windows
-- Installation : <https://github.com/kubernetes/minikube#Installation>
-
-
-### Kubernetes : Minikube
-
-- Création d'un cluster Kubernetes
-
-```console
-$ minikube get-k8s-versions
-The following Kubernetes versions are available when using the localkube bootstrapper:
-  - v1.10.0
-  - v1.9.4
-  - v1.9.0
-  - v1.8.0
-  - v1.7.5
-  - v1.7.4
-```
-
-### Kubernetes : Minikube
-
-```console
-$minikube start --kubernetes-version="v1.11.1"
-Starting local Kubernetes v1.11.1 cluster...
-Starting VM...
-Getting VM IP address...
-[...]
-Connecting to cluster...
-Setting up kubeconfig...
-Starting cluster components...
-Kubectl is now configured to use the cluster.
-Loading cached images from config file.
-```
-
-### Kubernetes : Minikube
-
-- Effectuer un diagnostic basique du cluster
-
-```console
-$ kubectl version
-Client Version: v1.11.1
-Server Version: v1.11.1
-```
-
-
-### Kubernetes : Minikube
-
-```console
-$ kubectl get componentstatuses
-NAME                      STATUS    MESSAGE              ERROR
-controller-manager   Healthy      ok
-scheduler                  Healthy      ok
-etcd-0                       Healthy      {"health": "true"}
-```
 
 ### Kubernetes : Kubectl
 
@@ -69,6 +10,16 @@ etcd-0                       Healthy      {"health": "true"}
 
 - Fichier `kubeconfig` peut être passé en paramètre de kubectl avec le _flag_ `--kubeconfig`
 
+
+### Kubeconfig
+
+Un seul fichier pour gérer tous ses clusters avec trois informations :
+
+- Serveurs (IP, CA Cert, Nom)
+- Users (Nom, Certificat, Clé)
+- Context, association d'un user et d'un serveur
+
+Stocké par défaut dans ~/.kube/config
 
 ### Kubernetes : Kubectl
 
@@ -228,3 +179,4 @@ $ kubectl proxy
 - Voir la liste des `charts` disponibles sur les répertoire officiel : `helm search`
 - Afficher la liste des `charts` disponibles pour _prometheus_ : `helm search prometheus`
 - Afficher les options disponibles dans un `chart` Helm:  `helm inspect stable/prometheus`
+
