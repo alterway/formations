@@ -6,7 +6,7 @@
 - COE développé par Google, devenu open source en 2014
 - Adapté à tout type d'environnement
 - Devenu populaire en très peu de temps
-- Premier projet de la C.N.C.F
+- Premier projet de la CNCF
 
 ![](images/kubernetes/kubernetes.png){height="100px"}
 
@@ -81,4 +81,10 @@
     - etc
 - Chaque SIG peut avoir des guidelines différentes.
 
+### Kubernetes : KubeCon
 
+La CNCF organise trois KubeCon par an :
+
+- Amérique du Nord (San Diego, Seattle, etc)
+- Europe (Berlin, Barcelone, Amsterdam etc)
+- Chine
