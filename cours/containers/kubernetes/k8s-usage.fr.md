@@ -139,58 +139,6 @@ kubectl get services
 kubectl get svc
 ```
 
-### Kubernetes : ConfigMaps
-
-- Objet Kubernetes permettant stocker séparer les fichiers de configuration
-- Il peut être créé d'un ensemble de valeurs ou d'un fichier resource Kubernetes (YAML ou JSON)
-- Un `ConfigMap` peut sollicité par plusieurs `pods`
-
-
-### Kubernetes : ConfigMaps
-
-```yaml
-apiVersion: v1
-data:
-    redis-config: |
-      maxmemory 2mb
-      maxmemory-policy allkeys-lru
-kind: ConfigMap
-metadata:
-  name: redis-config
-  namespace: default
-```
-
-### Kubernetes : Secrets
-
-- Objet Kubernetes de type `secret` utilisé pour stocker des informations sensibles comme les mots de passe, les _tokens_, les clés SSH...
-- Similaire à un `ConfigMap`, à la seule différence que le contenu des entrées présentes dans le champ `data` sont encodés en base64.
-- Il est possible de directement créer un `Secret` spécifique à l'authentification sur un registre Docker privé.
-- Il est possible de directement créer un `Secret` à partir d'un compte utilisateur et d'un mot de passe.
-
-
-### Kubernetes : Secrets
-
-```console
-$ kubectl create secret docker-registry mydockerhubsecret \
---docker-username="employeeusername" --docker-password="employeepassword" \
---docker-email="employee.email@organization.com"
-```
-
-
-### Kubernets : Secrets
-
-```yaml
-apiVersion: v1
-kind: Pod
-metadata:
-  name: private-pod
-  spec:
-  imagePullSecrets:
-  - name: mydockersecret
-  containers:
-  - image: privateregistry/privateimage:tag
-    name: main
-```
 
 ### Kubernetes : Kubernetes Dashboard
 
