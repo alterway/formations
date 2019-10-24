@@ -1,8 +1,9 @@
+# Kubernetes : Utilisation et déploiement des ressources
 
 ### Kubernetes : Kubectl
 
 - Le seul (ou presque) outil pour interagir avec des clusters Kubernetes
-- Utilise un fichier de configuration pour communiquer avec l'API de Kubernetes
+- Utilise un fichier de configuration (kubeconfig) pour communiquer avec l'API de Kubernetes
 - Le(s) fichier(s) se trouve(nt) par défaut dans `~/.kube/config`
 - Le fichier de config. contient :
     - L'adresse(URI) de l'APIServer
@@ -139,7 +140,7 @@ kubectl replace -f object.yaml
 
 ### Kubernetes : Kubernetes Dashboard
 
-- Pour déployer le Dashboard, éxecuter la commande suivante:
+- Pour déployer le Dashboard, exécuter la commande suivante:
 
 ```console
 $ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
@@ -151,7 +152,7 @@ $ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master
 $ kubectl proxy
 ```
 
-- Now access Dashboard at:
+- L'accès se fait désormais sur :
 
 <http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/>
 
