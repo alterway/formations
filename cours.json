@@ -110,8 +110,8 @@
       "containers/kubernetes/k8s-volumes",
       "containers/kubernetes/k8s-apiobjects",
       "containers/kubernetes/k8s-usage",
-      "containers/kubernetes/k8s-installation",
       "containers/kubernetes/k8s-operations",
+      "containers/kubernetes/k8s-installation",
       "containers/kubernetes/k8s-monitoring",
       "containers/kubernetes/k8s-security",
       "containers/kubernetes/k8s-applications",
@@ -129,6 +129,7 @@
       "containers/kubernetes/k8s-volumes",
       "containers/kubernetes/k8s-apiobjects",
       "containers/kubernetes/k8s-usage",
+      "containers/kubernetes/k8s-operations",
       "containers/kubernetes/k8s-applications",
       "containers/kubernetes/conclusion"
     ]
