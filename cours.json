@@ -138,6 +138,8 @@
     "course_description": "Formation Kubernetes Opérateur",
     "modules": [
       "intro-awcc",
+      "containers/kubernetes/k8s-governance",
+      "containers/kubernetes/k8s-architecture",
       "containers/kubernetes/k8s-installation",
       "containers/kubernetes/k8s-operations",
       "containers/kubernetes/k8s-monitoring",
