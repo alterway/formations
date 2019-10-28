@@ -2,14 +2,32 @@
 
 ### Kubernetes : API Resources
 
+- Namespaces
 - Pods
 - Deployments
 - DaemonSets
-- Services
-- Namespaces
-- Ingress
-- NetworkPolicy
-- Volumes
+- Jobs
+- Cronjobs
+
+### Kubernetes : Namespaces
+
+- Fournissent une séparation logique des ressources par exemple :
+    - Par utilisateurs
+    - Par projet / applications
+    - Autres...
+- Les objets existent uniquement au sein d'un namespace donné
+- Évitent la collision de nom d'objets
+
+
+### Kubernetes : Labels
+
+- La commande `kubectl get pods`, par défaut, ne liste pas les labels. Il est possible de les voir en utilisant `--show-labels`:
+
+```console
+$ kubectl get pods --show-labels
+NAME      READY     STATUS    RESTARTS   AGE       LABELS
+nginx     1/1       Running   0          31s       app=nginx,env=prod
+```
 
 ### Kubernetes : Pod
 
@@ -65,105 +83,6 @@ spec:
         - containerPort: 80
 ```
 
-
-### Kubernetes : Services
-
-- Abstraction des Pods et Replication Controllers, sous forme d'une VIP de service
-- Rendre un ensemble de Pods accessibles depuis l'extérieur
-- Load Balancing entre les Pods d'un même service
-
-### Kubernetes : Services
-
-- Load Balancing : intégration avec des cloud provider :
-    - AWS ELB
-    - GCP
-    - Azure Kubernetes Service
-    - OpenStack
-- `NodePort` : chaque noeud du cluster ouvre un port  statique et redirige le trafic vers le port indiqué
-- `ClusterIP` : IP dans le réseau privé Kubernetes (VIP)
-- `LoadBalancer` :  expose le service à l'externe en utilisant le loadbalancer d'un cloud provider (AWS, Google, Azure)
-- `ExternalIP`: le routage de l'IP publique vers le cluster est manuel
-
-
-
-### Kubernetes : Services
-
-![](images/services.png)
-
-
-### Kubernetes : Services
-
-- Exemple de service (on remarque la sélection sur le label et le mode d'exposition):
-
-```yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: frontend
-  labels:
-    app: guestbook
-    tier: frontend
-spec:
-  type: NodePort
-  ports:
-  - port: 80
-  selector:
-    app: guestbook
-    tier: frontend
-```
-
-### Kubernetes : Services
-
-Il est aussi possible de mapper un service avec un nom de domaine en spécifiant le paramètre `spec.externalName`.
-
-```yaml
-kind: Service
-apiVersion: v1
-metadata:
-  name: my-service
-  namespace: prod
-spec:
-  type: ExternalName
-  externalName: my.database.example.com
-```
-
-
-### Kubernetes: Ingress
-
-- L'objet `Ingress` permet d'exposer un service à l'extérieur d'un cluster Kubernetes
-- Il permet de fournir une URL visible permettant d'accéder un Service Kubernetes
-- Il permet d'avoir des terminations TLS, de faire du _Load Balancing_, etc...
-
-
-### Kubernetes : Ingress
-
-```yaml
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: osones
-spec:
-  rules:
-  - host: blog.osones.com
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: osones-nodeport
-          servicePort: 80
-```
-
-### Kubernetes : Ingress Controller
-
-Pour utiliser un `Ingress`, il faut un Ingress Controller. Il existe plusieurs offres sur le marché :
-
-- Traefik : <https://github.com/containous/traefik>
-- Istio : <https://github.com/istio/istio>
-- Linkerd : <https://github.com/linkerd/linkerd>
-- Contour : <https://www.github.com/heptio/contour/>
-- Nginx Controller : <https://github.com/kubernetes/ingress-nginx>
-
-
 ### Kubernetes : DaemonSet
 
 - Assure que tous les noeuds exécutent une copie du pod sur tous les noeuds du cluster
@@ -173,13 +92,10 @@ Pour utiliser un `Ingress`, il faut un Ingress Controller. Il existe plusieurs o
     - l'exécution de pilotes pour du matériel comme `nvidia-plugin`
     - l'exécution d'agents de supervision comme NewRelic agent, Prometheus node exporter
 
-  NB : kubectl ne peut pas créer de DaemonSet
-
-
 ### Kubernetes : DaemonSet
 
 ```yaml
-apiVersion: apps/v1beta2
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: ssd-monitor
@@ -198,7 +114,6 @@ metadata:
     - name: main
       image: luksa/ssd-monitor
 ```
-
 
 ### Kubernetes : StatefulSet
 
@@ -261,22 +176,58 @@ spec:
     - containerPort: 80
 ```
 
-### Kubernetes : Labels
+### Kubernetes : Job
 
-- La commande `kubectl get pods`, par défaut, ne liste pas les labels. Il est possible de les voir en utilisant `--show-labels`:
+- Crée des pods et s'assurent qu'un certain nombre d'entre eux se terminent avec succès.
+- Peut éxécuter plusieurs pods en parallèle
+- Si un noeud du cluster est en panne, les pods sont reschedulés vers un autre noeud.
 
-```console
-$ kubectl get pods --show-labels
-NAME      READY     STATUS    RESTARTS   AGE       LABELS
-nginx     1/1       Running   0          31s       app=nginx,env=prod
+### Kubernetes : Job
+
+```yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pi
+spec:
+  parallelism: 1
+  completions: 1
+  template:
+    metadata:
+      name: pi
+    spec:
+      containers:
+      - name: pi
+        image: perl
+        command: ["perl",  "-Mbignum=bpi", "-wle", "print bpi(2000)"]
+      restartPolicy: OnFailure
 ```
 
-### Kubernetes : Namespaces
+### Kubernetes: Cron Job
 
-- Fournissent une séparation logique des ressources par exemple :
-    - Par utilisateurs
-    - Par projet / applications
-    - Autres...
-- Les objets existent uniquement au sein d'un namespace donné
-- Évitent la collision de nom d'objets
+- Un CronJob permet de lancer des Jobs de manière planifiée.
+- la programmation des Jobs se définit au format `Cron`
+- le champ `jobTemplate` contient la définition de l'application à lancer comme `Job`.
 
+### Kubernetes : CronJob
+
+```yaml
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+    name: batch-job-every-fifteen-minutes
+spec:
+    schedule: "0,15,30,45 * * * *"
+    jobTemplate:
+        spec:
+            template:
+                metadata:
+                    labels:
+                        app: periodic-batch-job
+                spec:
+                    restartPolicy: OnFailure
+                    containers:
+                    -  name: pi
+                       image: perl
+                       command: ["perl",  "-Mbignum=bpi", "-wle", "print bpi(2000)"]
+```
