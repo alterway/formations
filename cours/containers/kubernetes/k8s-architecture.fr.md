@@ -9,7 +9,7 @@
 
 ### Kubernetes : Composants du Control Plane
 
-- etcd: Base de donnée
+- etcd: Base de données
 - kube-apiserver : API server qui permet la configuration d'objet Kubernetes (Pod, Service, Deployment, etc.)
 - kube-proxy : Permet le forwarding TCP/UDP et le load balancing entre les services et les backend (Pods)
 - kube-scheduler : Implémente les fonctionnalités de scheduling
@@ -17,7 +17,7 @@
 
 ### Kubernetes : etcd
 
-- Base de donnée de type Clé/Valeur (_Key Value Store_)
+- Base de données de type Clé/Valeur (_Key Value Store_)
 - Stock l'état d'un cluster Kubernetes
 - Point sensible (stateful) d'un cluster Kubernetes
 - Projet intégré à la CNCF
@@ -65,7 +65,6 @@ Kubernetes n'implémente pas de solution réseau par défaut, mais s'appuie sur 
 
 - Chaque pods reçoit sa propre adresse IP
 - Les pods peuvent communiquer directement sans NAT
-- Voir chapitre spécifique sur le réseau
 
 ### Kubernetes : Aujourd'hui
 

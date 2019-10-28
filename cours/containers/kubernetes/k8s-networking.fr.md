@@ -18,9 +18,9 @@
 
 ### Kubernetes : Services
 
-- Abstraction des Pods et Replication Controllers, sous forme d'une VIP de service
-- Rendre un ensemble de Pods accessibles depuis l'extérieur
-- Load Balancing entre les Pods d'un même service
+- Abstraction des pods sous forme d'une VIP de service
+- Rendre un ensemble de pods accessibles depuis l'extérieur
+- Load Balancing entre les pods d'un même service
 
 ### Kubernetes : Services
 

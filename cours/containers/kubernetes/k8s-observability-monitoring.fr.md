@@ -2,7 +2,7 @@
 
 ### Sondes : Readiness and Liveness
 
-- Permettent a Kubernetes de sonder l'état d'un pods et d'agir en conséquence
+- Permettent à Kubernetes de sonder l'état d'un pod et d'agir en conséquence
 - 2 type de sonde : Readiness et Liveness
 - 3 manières de sonder :
   - TCP : ping TCP sur un port donné
@@ -19,7 +19,7 @@
 ### Sondes : Liveness
 
 - Gère le redémarrage du conteneur en cas d'incident
-- Un pod avec une liveness probe sans succès est redémarré au bout d'un moment
+- Un pod avec une liveness probe sans succès est redémarré au bout d'un intervalle défini
 - Permet de redémarrer automatiquement les pods "tombés" en erreurs
 
 ### Sondes : Exemple

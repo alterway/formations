@@ -10,7 +10,7 @@
 
 ### Pods resources : CPU
 
-- 1 CPU est globalement équivalent a un core
+- 1 CPU est globalement équivalent à un cœurs
 - L'allocation se fait par fraction de CPU:
   - `1` : 1 vCPU entier
   - `100m` : 0.1 vCPU
