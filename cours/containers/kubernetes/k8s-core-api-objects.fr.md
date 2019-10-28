@@ -18,6 +18,30 @@
 - Les objets existent uniquement au sein d'un namespace donné
 - Évitent la collision de nom d'objets
 
+### Kubernetes : Labels
+
+- Système de clé/valeur
+- Organiser les différents objets de Kubernetes (Pods, RC, Services, etc.) d'une manière cohérente qui reflète la structure de l'application
+- Corréler des éléments de Kubernetes : par exemple un service vers des Pods
+
+### Kubernetes : Labels
+
+- Exemple de label :
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    ports:
+    - containerPort: 80
+```
 
 ### Kubernetes : Labels
 
@@ -147,33 +171,6 @@ spec:
         image: nginx
         ports:
         - containerPort: 80
-```
-
-
-### Kubernetes : Labels
-
-- Système de clé/valeur
-- Organiser les différents objets de Kubernetes (Pods, RC, Services, etc.) d'une manière cohérente qui reflète la structure de l'application
-- Corréler des éléments de Kubernetes : par exemple un service vers des Pods
-
-
-### Kubernetes : Labels
-
-- Exemple de label :
-
-```yaml
-apiVersion: v1
-kind: Pod
-metadata:
-  name: nginx
-  labels:
-    app: nginx
-spec:
-  containers:
-  - name: nginx
-    image: nginx
-    ports:
-    - containerPort: 80
 ```
 
 ### Kubernetes : Job
