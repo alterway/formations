@@ -109,3 +109,19 @@ spec:
     path: "/tmp/data"
 ```
 
+### Kubernetes : CSI
+
+- [Container Storage Interface](https://github.com/container-storage-interface/spec/blob/master/spec.md)
+- Équivalent de CNI mais pour les volumes
+- Avant Kubernetes 1.13, tous les drivers de volumes étaient *in tree*
+- Le but de la séparation est de sortir du code du *core* de Kubernetes
+- GA depuis Kubernetes 1.13
+
+### Kubernetes : CSI
+
+- La plupart des volumes supportés dans Kubernetes supportent maintenant CSI:
+  - [Amazon EBS](https://github.com/kubernetes-sigs/aws-ebs-csi-driver)
+  - [Google PD](https://github.com/kubernetes-sigs/gcp-compute-persistent-disk-csi-driver)
+  - [Cinder](https://github.com/kubernetes/cloud-provider-openstack/tree/master/pkg/csi/cinder)
+  - [GlusterFS](https://github.com/gluster/gluster-csi-driver)
+  - La liste exhaustive est disponible [ici](https://kubernetes-csi.github.io/docs/drivers.html)
