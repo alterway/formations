@@ -10,7 +10,7 @@
 
 ### Pods resources : CPU
 
-- 1 CPU est globalement équivalent à un cœurs
+- 1 CPU est globalement équivalent à un cœur
 - L'allocation se fait par fraction de CPU:
   - `1` : 1 vCPU entier
   - `100m` : 0.1 vCPU
@@ -58,8 +58,8 @@ spec:
 
 ### LimitRanges
 
-- l'objet `LimitRange` permet de définir les valeurs minimum et maximum pour les ressources utilisées par les containers et les pods
-- l'objet `LimitRange` ne s'applique dans un seul `namespace` mais peut être utilisé pour d'autres `namespaces`
+- l'objet `LimitRange` permet de définir les valeurs minimales et maximales des ressources utilisées par les containers et les pods
+- l'objet `LimitRange` s'applique au niveau du `namespace`
 - les limites spécifiées s'appliquent à chaque pod/container créé dans le `namespace`
 - le `LimitRange` ne limite pas le nombre total de ressources disponibles dans le namespace
 

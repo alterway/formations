@@ -18,7 +18,7 @@
 
 ### Kubernetes : Services
 
-- Abstraction des pods sous forme d'une VIP de service
+- Abstraction des pods sous forme d'une IP virtuelle de service
 - Rendre un ensemble de pods accessibles depuis l'extérieur
 - Load Balancing entre les pods d'un même service
 

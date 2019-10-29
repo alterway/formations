@@ -10,15 +10,15 @@
 ### Kubernetes : Composants du Control Plane
 
 - etcd: Base de données
-- kube-apiserver : API server qui permet la configuration d'objet Kubernetes (Pod, Service, Deployment, etc.)
-- kube-proxy : Permet le forwarding TCP/UDP et le load balancing entre les services et les backend (Pods)
+- kube-apiserver : API server qui permet la configuration d'objets Kubernetes (Pod, Service, Deployment, etc.)
+- kube-proxy : Permet le forwarding TCP/UDP et le load balancing entre les services et les backends (Pods)
 - kube-scheduler : Implémente les fonctionnalités de scheduling
 - kube-controller-manager : Responsable de l'état du cluster, boucle infinie qui régule l'état du cluster afin d'atteindre un état désiré
 
 ### Kubernetes : etcd
 
 - Base de données de type Clé/Valeur (_Key Value Store_)
-- Stock l'état d'un cluster Kubernetes
+- Stocke l'état d'un cluster Kubernetes
 - Point sensible (stateful) d'un cluster Kubernetes
 - Projet intégré à la CNCF
 

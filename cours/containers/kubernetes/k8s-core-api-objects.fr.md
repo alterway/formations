@@ -11,7 +11,7 @@
 
 ### Kubernetes : Namespaces
 
-- Fournissent une séparation logique des ressources par exemple :
+- Fournissent une séparation logique des ressources :
     - Par utilisateurs
     - Par projet / applications
     - Autres...
@@ -21,8 +21,8 @@
 ### Kubernetes : Labels
 
 - Système de clé/valeur
-- Organiser les différents objets de Kubernetes (Pods, RC, Services, etc.) d'une manière cohérente qui reflète la structure de l'application
-- Corréler des éléments de Kubernetes : par exemple un service vers des Pods
+- Organisent les différents objets de Kubernetes (Pods, RC, Services, etc.) d'une manière cohérente qui reflète la structure de l'application
+- Corrèlent des éléments de Kubernetes : par exemple un service vers des Pods
 
 ### Kubernetes : Labels
 
