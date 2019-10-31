@@ -105,16 +105,17 @@
     "modules": [
       "intro-awcc",
       "containers/kubernetes/k8s-governance",
-      "containers/kubernetes/k8s-concepts",
       "containers/kubernetes/k8s-architecture",
+      "containers/kubernetes/k8s-core-api-objects",
+      "containers/kubernetes/k8s-networking",
       "containers/kubernetes/k8s-volumes",
-      "containers/kubernetes/k8s-apiobjects",
+      "containers/kubernetes/k8s-workloads-configuration",
+      "containers/kubernetes/k8s-resources-handling",
+      "containers/kubernetes/k8s-observability-monitoring",
       "containers/kubernetes/k8s-usage",
       "containers/kubernetes/k8s-operations",
       "containers/kubernetes/k8s-installation",
-      "containers/kubernetes/k8s-monitoring",
       "containers/kubernetes/k8s-security",
-      "containers/kubernetes/k8s-applications",
       "containers/kubernetes/conclusion"
     ]
   },
@@ -125,12 +126,14 @@
       "intro-awcc",
       "containers/kubernetes/k8s-governance",
       "containers/kubernetes/k8s-architecture",
-      "containers/kubernetes/k8s-concepts",
+      "containers/kubernetes/k8s-core-api-objects",
+      "containers/kubernetes/k8s-networking",
       "containers/kubernetes/k8s-volumes",
-      "containers/kubernetes/k8s-apiobjects",
+      "containers/kubernetes/k8s-workloads-configuration",
+      "containers/kubernetes/k8s-resources-handling",
+      "containers/kubernetes/k8s-observability-monitoring",
       "containers/kubernetes/k8s-usage",
       "containers/kubernetes/k8s-operations",
-      "containers/kubernetes/k8s-applications",
       "containers/kubernetes/conclusion"
     ]
   },
@@ -143,7 +146,6 @@
       "containers/kubernetes/k8s-architecture",
       "containers/kubernetes/k8s-installation",
       "containers/kubernetes/k8s-operations",
-      "containers/kubernetes/k8s-monitoring",
       "containers/kubernetes/k8s-security",
       "containers/kubernetes/conclusion"
     ]

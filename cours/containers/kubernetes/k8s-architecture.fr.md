@@ -9,11 +9,18 @@
 
 ### Kubernetes : Composants du Control Plane
 
-- kube-apiserver : API server qui permet la configuration d'objet Kubernetes (Pod, Service, Deployment, etc.)
-- kube-proxy : Permet le forwarding TCP/UDP et le load balancing entre les services et les backend (Pods)
+- etcd: Base de données
+- kube-apiserver : API server qui permet la configuration d'objets Kubernetes (Pod, Service, Deployment, etc.)
+- kube-proxy : Permet le forwarding TCP/UDP et le load balancing entre les services et les backends (Pods)
 - kube-scheduler : Implémente les fonctionnalités de scheduling
 - kube-controller-manager : Responsable de l'état du cluster, boucle infinie qui régule l'état du cluster afin d'atteindre un état désiré
 
+### Kubernetes : etcd
+
+- Base de données de type Clé/Valeur (_Key Value Store_)
+- Stocke l'état d'un cluster Kubernetes
+- Point sensible (stateful) d'un cluster Kubernetes
+- Projet intégré à la CNCF
 
 ### Kubernetes : kube-apiserver
 
@@ -52,33 +59,17 @@
     - Applique les modifications si besoin (upgrade, rollback).
 - Surveille l'état des services du cluster via l'API server (*kube-apiserver*).
 
-### Kubernetes : kubelet
+### Kubernetes: Network
 
-```console
-root@ubuntu-xenial:~# ls -lh /etc/kubernetes/manifests/
-total 16K
--rw------- 1 root root 2.0K Sep 23 20:04 etcd.yaml
--rw------- 1 root root 3.2K Sep 23 20:04 kube-apiserver.yaml
--rw------- 1 root root 2.5K Sep 23 20:04 kube-controller-manager.yaml
--rw------- 1 root root 1.1K Sep 23 20:04 kube-scheduler.yaml
-```
+Kubernetes n'implémente pas de solution réseau par défaut, mais s'appuie sur des solutions tierces qui implémentent les fonctionnalités suivantes:
 
-### Kubernetes : network-policy-controller
-
-- Implémente l'objet NetworkPolicy
-- Contrôle la communication entre les Pods
-- Externe à Kubernetes et implémenté par la solution de Networking choisie :
-    - Calico : <https://projectcalico.org/>
-    - Flannel : <https://coreos.com/flannel>
-    - Romana : <https://romana.io/>
-    - Weave : <https://www.weave.works/oss/net/>
-    - more :  <https://kubernetes.io/docs/concepts/cluster-administration/networking/#how-to-implement-the-kubernetes-networking-model>
+- Chaque pods reçoit sa propre adresse IP
+- Les pods peuvent communiquer directement sans NAT
 
 ### Kubernetes : Aujourd'hui
 
 - Version 1.16.x : stable en production
 - Solution complète et une des plus utilisées
 - Éprouvée par Google
-- S'intègre parfaitement à d'autres _Container Runtime Interfaces (CRI)_ comme containerd, cri-o, rktlet, frakti, etc...
 
 

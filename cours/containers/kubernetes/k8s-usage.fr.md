@@ -28,18 +28,24 @@ Stocké par défaut dans ~/.kube/config
 
 ```console
 $ kubectl api-resources
-NAME                             SHORTNAMES   APIGROUP                       NAMESPACED   KIND
-bindings                                                         true         Binding
-componentstatuses         cs                            false        ComponentStatus
-configmaps                     cm                          true         ConfigMap
-endpoints                        ep                           true         Endpoints
-events                             ev                           true         Event
-limitranges                     limits                      true         LimitRange
-namespaces                    ns                           false        Namespace
-nodes                              no                          false        Node
-persistentvolumeclaims  pvc                        true         PersistentVolumeClaim
-persistentvolumes           pv                          false        PersistentVolume
-pods                                po                           true         Pod
+NAME                              SHORTNAMES   APIGROUP                             NAMESPACED   KIND
+configmaps                        cm                                                true         ConfigMap
+limitranges                       limits                                            true         LimitRange
+namespaces                        ns                                                false        Namespace
+nodes                             no                                                false        Node
+persistentvolumeclaims            pvc                                               true         PersistentVolumeClaim
+persistentvolumes                 pv                                                false        PersistentVolume
+pods                              po                                                true         Pod
+secrets                                                                             true         Secret
+services                          svc                                               true         Service
+daemonsets                        ds           apps                                 true         DaemonSet
+deployments                       deploy       apps                                 true         Deployment
+replicasets                       rs           apps                                 true         ReplicaSet
+statefulsets                      sts          apps                                 true         StatefulSet
+horizontalpodautoscalers          hpa          autoscaling                          true         HorizontalPodAutoscaler
+cronjobs                          cj           batch                                true         CronJob
+jobs                                           batch                                true         Job
+ingresses                         ing          extensions                           true         Ingress
 ```
 
 ### Kubernetes : Kubectl
