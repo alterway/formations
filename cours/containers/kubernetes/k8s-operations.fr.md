@@ -61,7 +61,9 @@ kubectl set image deployment nginx nginx=nginx:1.15
 
 - Dry run. Afficher les objets de l'API correspondant sans les créer :
 
-`kubectl run nginx --image=nginx --dry-run`
+```console
+kubectl run nginx --image=nginx --dry-run
+```
 
 - Démarrer un container en utiliser une commande différente et des arguments différents :
 

@@ -92,16 +92,16 @@ En plus de l'installation de Kubernetes, Kubeadm peut :
 ### Kubernetes managés "as a Service"
 
 - Il existe des solutions managées pour Kubernetes sur les cloud publics :
+    - AWS Elastic Kubernetes Services: <https://aws.amazon.com/eks/>
     - Azure Kubernetes Service : <https://azure.microsoft.com/en-us/services/kubernetes-service/>
-    - Google Kubernetes Engine : <https://cloud.google.com/kubernetes-engine/>
-    - Elastic Kubernetes Services: <https://aws.amazon.com/eks/>
     - Docker Universal Control Plane : <https://docs.docker.com/ee/ucp/>
+    - Google Kubernetes Engine : <https://cloud.google.com/kubernetes-engine/>
 
 ### Installation de Kubernetes
 
 - Via Ansible : kubespray <https://github.com/kubernetes-sigs/kubespray>
 - Via Terraform : <https://github.com/poseidon/typhoon>
-- Il existe aussi des projets open source basés sur le langage Go :
+- Il existe d'autres projets open source basés sur le langage Go :
     - kube-aws : <https://github.com/kubernetes-incubator/kube-aws>
     - kops : <https://github.com/kubernetes/kops>
 
