@@ -32,7 +32,8 @@ both public and private clouds.```
 -   Mitaka (2016.1), Newton (2016.2)
 -   Ocata (2017.1), Pike (2017.2)
 -   Queens (2018.1), **Rocky** (2018.2)
--   Premier semestre 2019 : Stein
+-   Stein (2019.1), Train (2019.2)
+-   Premier semestre 2020 : Ussuri
 
 ### Quelques soutiens/contributeurs ...
 
