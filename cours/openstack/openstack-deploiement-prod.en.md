@@ -6,24 +6,23 @@
 
 -   Keystone is mandatory
 -   Use of Nova goes with Glance and Neutron
--   Cinder will often be useful
--   Ceilometer and Heat often go together
--   Swift is separate from other components
--   Neutron may be used separately (ex: with oVirt)
+-   Cinder and Swift usefulness depends on storage needs
+-   Swift can be used separately from other components
+-   Heat doesn't cost much
+-   Higher level services need to be evaluated case by case
 
 <https://docs.openstack.org/arch-design/>
 
 ### Think about fundamental choices at the beginning
 
 -   Distribution and deployment method
--   Hypervisor
--   Network: what architecture and what drivers
 -   Update and upgrade policy
+-   Drivers/backends: hypervisor, block storage, etc.
+-   Network: what architecture and what drivers
 
 ### Different installation methods
 
 -   Forget about DevStack for production
--   TripleO is very complex
 -   Manual deployment as seen previously is not recommended by unmaintainable
 -   Packaged and ready to use OpenStack distributions
 -   Classical distributions and configuration management
@@ -35,7 +34,7 @@
 -   Swift: very good *rolling upgrade* support
 -   Other components: test with you data first
 -   Read release notes
--   Cf. CERN blog posts <https://openstack-in-production.blogspot.fr/>
+-   Cf. CERN blog posts <https://techblog.web.cern.ch/techblog/>
 
 ### Stable updates
 
@@ -64,37 +63,28 @@ IaaS High Availability
 
 HA guide: <https://docs.openstack.org/ha-guide/>
 
+Talks by Florian Haas, Hastexo: <https://www.openstack.org/community/speakers/profile/398/florian-haas>
+
 ### High availability of the Neutron L3 agent
 
 -   *Distributed Virtual Router* (DVR)
 -   L3 agent HA (VRRP)
 
-### Production environment concerns
+### APIs concerns
 
--   Uniform URLs for all the APIs: use a reverse proxy
--   Apache/mod\_wsgi to service APIs when possible (Keystone)
--   Quotas usage
--   Plan for the appropriate capacities, in particular for Ceilometer data
--   Monitoring
--   Backup
+-   Uniform URLs for all the APIs:
+    - Use a reverse proxy
+    - Don't forget to update the service catalog
+- Apache/mod\_wsgi to serve APIs when possible (Keystone, etc.)
 
 Operations guide: <https://docs.openstack.org/openstack-ops/content/>
-
-### Quotas usage
-
--   Limit the number of allocable resources
--   Per user or per tenant
--   Support in Nova
--   Support in Cinder
--   Support in Neutron
-
-<https://docs.openstack.org/user-guide-admin/content/cli_set_quotas.html>
 
 ### Networks
 
 -   Management network: administrative network
--   Data network: network for inter instances traffic
+-   Data/instances network: network for inter instances traffic
 -   External network: external network, in the existing network infrastructure
+-   Storage network: network for Cinder/Swift storage
 -   API network: network containing API endpoints
 
 ### Security related concerns
@@ -172,6 +162,13 @@ Security guide: <https://docs.openstack.org/security-guide/>
 -   HP Helion: Ansible custom
 -   etc.
 
+### TripleO
+
+-   OpenStack On OpenStack
+-   Goal: ability to deploy an OpenStack cloud (*overcloud*) from an OpenStack cloud (*undercloud*)
+-   Autoscaling of the cloud itself: deployment of new compute nodes when necessary
+-   Works jointly with Ironic for bare metal deployment
+
 ### Bare metal deployment
 
 -   OpenStack bare metal hosts deployment can be managed with the help of dedicated tools
@@ -179,6 +176,14 @@ Security guide: <https://docs.openstack.org/security-guide/>
 -   Crowbar / OpenCrowbar (initially Dell): uses Chef
 -   eDeploy (eNovance): image based deployment
 -   Ironic through TripleO
+
+### Tempest
+
+-   Test suite of an OpenStack cloud
+-   Makes API calls and checks the result
+-   Used a lot by developers through continuous integration
+-   Deployers can use Tempest to check their cloud's compliance
+-   See also Rally
 
 ### Configuration management
 
@@ -204,7 +209,7 @@ Security guide: <https://docs.openstack.org/security-guide/>
 
 ### Tips in case of error or faulty behavior
 
--   Are we working on the appropriate tenant?
+-   Are we working on the appropriate project?
 -   Is the API responding with an error? (the dashboard may hide some informations)
 -   If going further is required:
     -   Look into logs on thje cloud controller (/var/log/\<composant\>/\*.log)
@@ -237,8 +242,11 @@ Security guide: <https://docs.openstack.org/security-guide/>
 -   API response
 -   Checking OpenStack services and dependencies
 
-### Misc
+### Quotas usage
 
--    Expand Neutron CIDR
--    Nova compute maintenance mode
+-   Limit the number of allocable resources
+-   Per user or per tenant
+-   Support in Nova
+-   Support in Cinder
+-   Support in Neutron
 

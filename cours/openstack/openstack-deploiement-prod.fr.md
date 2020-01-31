@@ -6,24 +6,23 @@
 
 -   Keystone est indispensable
 -   L’utilisation de Nova va de paire avec Glance et Neutron
--   Cinder s’avérera souvent utile
--   Ceilometer et Heat vont souvent ensemble
--   Swift est indépendant des autres composants
--   Neutron peut parfois être utilisé indépendamment (ex : avec oVirt)
+-   Cinder et Swift s'apprécient en fonction des besoins de stockage
+-   Swift peut être utilisé indépendemment des autres composants
+-   Heat coûte peu
+-   Les services plus haut niveau s'évaluent au cas par cas
 
 <https://docs.openstack.org/arch-design/>
 
 ### Penser dès le début aux choix structurants
 
 -   Distribution et méthode de déploiement
--   Hyperviseur
--   Réseau : quelle architecture et quels drivers
 -   Politique de mise à jour
+-   Drivers/backends : hyperviseur, stockage block, etc.
+-   Réseau : quelle architecture et quels drivers
 
 ### Les différentes méthodes d’installation
 
 -   DevStack est à oublier pour la production
--   TripleO est très complexe
 -   Le déploiement à la main comme vu précédemment n’est pas recommandé car peu maintenable
 -   Distributions OpenStack packagées et prêtes à l’emploi
 -   Distributions classiques et gestion de configuration
@@ -35,7 +34,7 @@
 -   Swift : très bonne gestion en mode *rolling upgrade*
 -   Autres composants : tester préalablement avec vos données
 -   Lire les release notes
--   Cf. articles de blog du CERN <https://openstack-in-production.blogspot.fr/>
+-   Cf. articles de blog du CERN <https://techblog.web.cern.ch/techblog/>
 
 ### Mises à jour dans une version stable
 
@@ -64,37 +63,28 @@ Haute disponibilité du IaaS
 
 Guide HA : <https://docs.openstack.org/ha-guide/>
 
+Conférences par Florian Haas, Hastexo : <https://www.openstack.org/community/speakers/profile/398/florian-haas>
+
 ### Haute disponibilité de l’agent L3 de Neutron
 
 -   *Distributed Virtual Router* (DVR)
 -   L3 agent HA (VRRP)
 
-### Considérations pour une environnement de production
+### Considérations APIs
 
--   Des URLs uniformes pour toutes les APIs : utiliser un reverse proxy
--   Apache/mod\_wsgi pour servir les APIs lorsque cela est possible (Keystone)
--   Utilisation des quotas
--   Prévoir les bonnes volumétries, notamment pour les données Ceilometer
--   Monitoring
--   Backup
+-   Des URLs uniformes pour toutes les APIs :
+    - Utiliser un reverse proxy
+    - Mettre à jour le catalogue de services
+-   Apache/mod\_wsgi pour servir les APIs lorsque cela est possible (Keystone, etc.)
 
 Guide Operations : <https://docs.openstack.org/openstack-ops/content/>
-
-### Utilisation des quotas
-
--   Limiter le nombre de ressources allouables
--   Par utilisateur ou par tenant
--   Support dans Nova
--   Support dans Cinder
--   Support dans Neutron
-
-<https://docs.openstack.org/user-guide-admin/content/cli_set_quotas.html>
 
 ### Découpage réseau
 
 -   Management network : réseau d’administration
--   Data network : réseau pour la communication inter instances
+-   Data/instances network : réseau pour la communication inter instances
 -   External network : réseau externe, dans l’infrastructure réseau existante
+-   Storage network : réseau pour le stockage Cinder/Swift
 -   API network : réseau contenant les endpoints API
 
 ### Considérations liées à la sécurité
@@ -172,6 +162,13 @@ Guide sécurité : <https://docs.openstack.org/security-guide/>
 -   HP Helion : Ansible custom
 -   etc.
 
+### TripleO
+
+-   OpenStack On OpenStack
+-   Objectif : pouvoir déployer un cloud OpenStack (*overcloud*) à partir d’un cloud OpenStack (*undercloud*)
+-   Autoscaling du cloud lui-même : déploiement de nouveaux nœuds compute lorsque cela est nécessaire
+-   Fonctionne conjointement avec Ironic pour le déploiement bare-metal
+
 ### Déploiement bare-metal
 
 -   Le déploiement des hôtes physiques OpenStack peut se faire à l’aide d’outils dédiés
@@ -200,11 +197,19 @@ Guide sécurité : <https://docs.openstack.org/security-guide/>
 -   Nécessite la mise en place d’une infrastructure importante
 -   Facilite les mises à jour entre versions majeures
 
+### Test et validation : Tempest
+
+-   Suite de tests d’un cloud OpenStack
+-   Effectue des appels à l’API et vérifie le résultat
+-   Est très utilisé par les développeurs via l’intégration continue
+-   Le déployeur peut utiliser Tempest pour vérifier la bonne conformité de son cloud
+-   Cf. aussi Rally
+
 ## Gérer les problèmes
 
 ### Les réflexes en cas d’erreur ou de comportement erroné
 
--   Travaille-t-on sur le bon tenant ?
+-   Travaille-t-on sur le bon projet ?
 -   Est-ce que l’API renvoie une erreur ? (le dashboard peut cacher certaines informations)
 -   Si nécessaire d’aller plus loin :
     -   Regarder les logs sur le cloud controller (/var/log/\<composant\>/\*.log)
@@ -237,8 +242,11 @@ Guide sécurité : <https://docs.openstack.org/security-guide/>
 -   Réponse des APIs
 -   Vérification des services OpenStack et dépendances
 
-### Divers
+### Utilisation des quotas
 
--   Étendre CIDR Neutron
--   Nova compute maintenance mode
+-   Limiter le nombre de ressources allouables
+-   Par utilisateur ou par projet
+-   Support dans Nova
+-   Support dans Cinder
+-   Support dans Neutron
 

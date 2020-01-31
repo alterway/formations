@@ -4,18 +4,21 @@
 
 - Toutes les fonctionnalités sont accessibles par l’API
 - Les clients (y compris Horizon) utilisent l’API
-- Des crédentials sont nécessaires
-  - API OpenStack : utilisateur + mot de passe + projet (tenant) + domaine
-  - API AWS : access key ID + secret access key
+- Des crédentials sont nécessaires, avec l'API OpenStack :
+  - utilisateur
+  - mot de passe
+  - projet (tenant)
+  - domaine
 
 ### Les APIs OpenStack
 
 - Une API par service OpenStack
-- Chaque API est versionnée, la rétro-compatibilité est assurée
-- Le corps des requêtes et réponses est formatté avec JSON (auparavant XML était supporté aussi)
-- Architecture REST
-- <https://developer.openstack.org/#api>
-- Certains services sont aussi accessibles via une API différente compatible AWS
+  - Versionnée, la rétro-compatibilité est assurée
+  - Le corps des requêtes et réponses est formatté avec JSON
+  - Architecture REST
+- Les ressources gérées sont spécifiques à un projet
+
+<https://developer.openstack.org/#api>
 
 ### Accès aux APIs
 
@@ -31,47 +34,49 @@
 
 ### Clients officiels
 
-- Le projet fournit des clients officiels : python-PROJETclient
-- Bibliothèques Python
+- OpenStack fournit des clients officiels
+  - Historiquement : `python-PROJETclient` (bibliothèque Python et CLI)
+  - Aujourd'hui : `openstackclient` (CLI)
 - Outils CLI
-  - L’authentification se fait en passant les credentials par paramètres ou variables d’environnement
+  - L’authentification se fait en passant les crédentials par paramètres, variables d’environnement ou fichier de configuration
   - L’option `--debug` affiche la communication HTTP
 
 ### OpenStack Client
 
 - Client CLI unifié
-- Commandes du type *openstack \<ressource \>\<action \>*
-- Ou shell interactif
-- Vise à remplacer à terme les clients spécifiques
+- Commandes du type `openstack <ressource> <action>` (shell interactif disponible)
+- Vise à remplacer les clients CLI spécifiques
 - Permet une expérience utilisateur plus homogène
 - Fichier de configuration `clouds.yaml`
 
-<https://docs.openstack.org/python-openstackclient/pike/configuration/index.html#clouds-yaml>
+<https://docs.openstack.org/python-openstackclient/latest/configuration/index.html#configuration-files>
 
 ## Keystone : Authentification, autorisation et catalogue de services
 
 ### Principes
 
-- Annuaire des utilisateurs et des groupes
-- Gère des domaines
-- Liste des projets (tenants)
-- Catalogue de services
-- Gère l’authentification et l’autorisation
-- Fournit un token à l’utilisateur
+Keystone est responsable de l'authentification, l'autorisation et le catalogue de services.
 
-### Authentification et catalogue de service
-
-- Une fois authentifié, récupération d’un jeton (*token*)
-- Récupération du catalogue de services
-- Pour chaque service, un endpoint HTTP (API)
+- L'utilisateur standard s'authentifie auprès de Keystone
+- L'administrateur intéragit régulièrement avec Keystone
 
 ### API
 
-- API v2 (dépréciée) : admin port 35357, utilisateur port 5000
 - API v3 : port 5000
-- Gère *utilisateurs*, *groupes*, *domaines*
-- Les utilisateurs ont des *rôles* sur des *projets* (tenants)
-- Les *services* du catalogue sont associés à des *endpoints*
+- Gère :
+  - **Utilisateurs**, **groupes**
+  - **Projets** (tenants)
+  - **Rôles** (lien entre utilisateur et projet)
+  - **Domaines**
+  - **Services** et **endpoints** (catalogue de services)
+- Fournit :
+  - **Tokens** (jetons d'authentification)
+
+### Catalogue de services
+
+- Pour chaque service, plusieurs endpoints sont possibles en fonction de :
+  - la région
+  - le type d'interface (public, internal, admin)
 
 ### Scénario d’utilisation typique
 
@@ -98,12 +103,13 @@
 
 ### API
 
-Gère :
+Ressources gérées :
 
-- Instances
-- Flavors (types d’instance)
-- Keypairs
-- Indirectement : images, security groups (groupes de sécurité), floating IPs (IPs flottantes)
+- **Instances**
+- **Flavors** (types d’instance)
+- **Keypairs** : ressource propre à l'utilisateur (et non propre au projet)
+
+### Actions sur les instances
 
 - Reboot / shutdown
 - Snapshot
@@ -118,12 +124,11 @@ Gère :
 
 - Registre d'images et de snapshots
 - Propriétés sur les images
-- Est utilisé par Nova pour démarrer des instances
 
 ### API
 
-- API v2 : actuelle
-- API artifacts : future
+- API v2 : version courante, gère images et snapshots
+- API artifacts : version future, plus généraliste
 
 ### Types d’images
 
@@ -145,7 +150,20 @@ L’utilisateur peut définir un certain nombre de propriétés dont certaines s
 - Version de la distribution
 - Espace disque minimum
 - RAM minimum
-- Publique ou non
+
+### Partage des images
+
+- Image publique : accessible à tous les projets
+  - Par défaut, seul l'administrateur peut rendre une image publique
+- Image partagée : accessible à un ou plusieurs autre(s) projet(s)
+
+### Télécharger des images
+
+La plupart des OS fournissent des images régulièrement mises à jour :
+
+- Ubuntu : <https://cloud-images.ubuntu.com/>
+- Debian : <https://cdimage.debian.org/cdimage/openstack/>
+- CentOS : <https://cloud.centos.org/centos/>
 
 ## Neutron : réseau
 
@@ -201,10 +219,9 @@ Outre les fonctions réseau de base niveaux 2 et 3, Neutron peut fournir d’aut
 
 ### Généralités
 
-- Heat est la solution native OpenStack
-- Heat fournit une API de manipulation de *stacks* à partir de *templates*
-- Un template Heat suit le format HOT, basé sur YAML
-- Des alternatives externes à OpenStack existent, comme **Terraform**
+- Heat est la solution native OpenStack, *service* d'orchestration
+- Heat fournit une API de manipulation de **stacks** à partir de **templates**
+- Un template Heat suit le format HOT (*Heat Orchestration Template*), basé sur YAML
 
 ### Un template Heat Orchestration Template (HOT)
 
@@ -229,4 +246,19 @@ Multiples projets en cours de développement
 - Flame (Cloudwatt)
 - HOT builder
 - Merlin
+
+## Horizon : Dashboard web
+
+### Principes
+
+- Fournit une interface web
+- Utilise les APIs existantes pour fournir une interface utilisateur
+- Log in possible sans préciser un projet : Horizon détermine la liste des projets accessible
+
+### Utilisation
+
+- Une interface par projet (possibilité de switcher)
+- Catalogue de services accessible
+- Téléchargement d'un fichier de configuration `clouds.yaml`
+- Une zone “admin” restreinte
 

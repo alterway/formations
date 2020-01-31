@@ -99,14 +99,6 @@
 - Création d'utilisateurs, groupes, domaines
 - Fonctionnalité de bootstrap
 
-### Catalogue de services
-
-- 1 service, n endpoints (1 par région)
-- 1 endpoint, 3 types :
-  - internalURL
-  - adminURL
-  - publicURL
-
 ## Nova : Compute
 
 ### Nova api
@@ -152,8 +144,7 @@
 
 ### Installation
 
-- Paquet glance-api : fournit l’API
-- Paquet glance-registry : démon du registre d’images en tant que tel
+- Paquet APT : glance-api
 
 ## Neutron : Réseau en tant que service
 
@@ -189,6 +180,8 @@ Ces fonctionnalités se basent également sur des plugins
 
 ### Implémentation
 
+- Chaque réseau est un *bridge*
+- Les bridges sont étendus entre les machines via des tunnels (type VXLAN) si nécessaires
 - Neutron tire partie des namespaces réseaux du noyau Linux pour permettre l’IP overlapping
 - Le proxy de metadata est un composant qui permet aux instances isolées dans leur réseau de joindre l’API de metadata fournie par Nova
 
@@ -205,14 +198,15 @@ Ces fonctionnalités se basent également sur des plugins
 ### Principes
 
 - Auparavant nova-volume
-- Attachement via iSCSI par défaut
+- Fournit des volumes
+- Attachement des volumes via iSCSI par défaut
 
 ### Installation
 
 - Paquet cinder-api : fournit l’API
 - Paquet cinder-volume : création et gestion des volumes
 - Paquet cinder-scheduler : distribue les demandes de création de volume
-- Paquet cinder-backup : backup vers un object store
+- Paquet cinder-backup (optionnel) : backup vers un object store
 
 ### Backends
 
@@ -227,7 +221,6 @@ Ces fonctionnalités se basent également sur des plugins
 
 ### Principes
 
-- Utilise les APIs existantes pour fournir une interface utilisateur
 - Horizon est un module Django
 - OpenStack Dashboard est l’implémentation officielle de ce module
 
@@ -238,11 +231,6 @@ Ces fonctionnalités se basent également sur des plugins
 - `local_settings.py`
 - Les services apparaissent dans Horizon s’ils sont répertoriés dans le catalogue de services de Keystone
 
-### Utilisation
-
-- Une zone “admin” restreinte
-- Une interface par tenant
-
 ## Swift : Stockage objet
 
 ### Principes
@@ -250,7 +238,6 @@ Ces fonctionnalités se basent également sur des plugins
 - SDS : *Software Defined Storage*
 - Utilisation de commodity hardware
 - Théorème CAP : on en choisit deux
-- Accès par les APIs
 - Architecture totalement acentrée
 - Pas de base de données centrale
 
@@ -296,60 +283,8 @@ Ces fonctionnalités se basent également sur des plugins
 
 ## Heat : Orchestration des ressources
 
-### Orchestrer son infrastructure avec Heat
+### Architecture
 
-- Équivalent d’Amazon Cloud Formation
-- Orchestrer les ressources compute, storage, network, etc.
-- Doit se coupler avec cloud-init
-- Description de son infrastructure dans un fichier template, format JSON (CFN) ou YAML (HOT)
-
-### Un template HOT
-
-*parameters* - *resources* - *outputs*
-
-```yaml
-heat_template_version: 2013-05-23
-description: Simple template to deploy a single compute instance
-resources:
-my_instance:
-  type: OS::Nova::Server
-  properties:
-  key_name: my_key
-  image: F18-x86_64-cfntools
-  flavor: m1.small
-```
-
-## Quelques autres composants intéressants
-
-### Ironic
-
-- Anciennement Nova bare-metal
-- Permet le déploiement d’instances sur des machines physiques (plutôt que VMs)
-- Repose sur des technologies telles que PXE, TFTP
-
-### Oslo, ou OpenStack common
-
-- Oslo contient le code commun à plusieurs composants d’OpenStack
-- Son utilisation est transparente pour le déployeur
-
-### rootwrap -> privsep
-
-- Wrapper pour l’utilisation de commandes en root
-- Configuration au niveau de chaque composant qui l’utilise
-- Permet d’écrire des filtres sur les commandes
-
-### TripleO
-
-- OpenStack On OpenStack
-- Objectif : pouvoir déployer un cloud OpenStack (*overcloud*) à partir d’un cloud OpenStack (*undercloud*)
-- Autoscaling du cloud lui-même : déploiement de nouveaux nœuds compute lorsque cela est nécessaire
-- Fonctionne conjointement avec Ironic pour le déploiement bare-metal
-
-### Tempest
-
-- Suite de tests d’un cloud OpenStack
-- Effectue des appels à l’API et vérifie le résultat
-- Est très utilisé par les développeurs via l’intégration continue
-- Le déployeur peut utiliser Tempest pour vérifier la bonne conformité de son cloud
-- Cf. aussi Rally
+- heat-api
+- heat-engine
 

@@ -99,14 +99,6 @@
 - Users, groups and domains creation
 - Bootstrap feature
 
-### Services catalog
-
-- 1 service, n endpoints (1 per region)
-- 1 endpoint, 3 types:
-  - internalURL
-  - adminURL
-  - publicURL
-
 ## Nova: Compute
 
 ### Nova api
@@ -152,8 +144,7 @@
 
 ### Install
 
-- Package glance-api: provides the API
-- Package glance-registry: image registry daemon itself
+- APT package: glance-api
 
 ## Neutron: Network as a service
 
@@ -189,6 +180,8 @@ These features are also based on plugins
 
 ### Implementation
 
+- Each network is a *bridge*
+- Bridges are expanded across hosts using tunnels (VXLAN type) if necessary
 - Neutron takes advantage of Linux kernel network namespaces to allow IP overlapping
 - Metadata proxy is a component that allows instances isolated in their network to reach the metadata API provided by Nova
 
@@ -205,14 +198,15 @@ These features are also based on plugins
 ### Principles
 
 - Was nova-volume
-- Attachement through iSCSI by default
+- Provides volumes
+- Volume attachement through iSCSI by default
 
 ### Install
 
 - Package cinder-api: provides the API
 - Package cinder-volume: creation and management of volumes
 - Package cinder-scheduler: scheduling of volume creation requests
-- Package cinder-backup: backup to an object store
+- Package cinder-backup (optional): backup to an object store
 
 ### Backends
 
@@ -227,7 +221,6 @@ These features are also based on plugins
 
 ### Principles
 
-- Uses existing APIs to provide a user interface
 - Horizon is a Django module
 - OpenStack Dashboard is the official implementation of this module
 
@@ -238,11 +231,6 @@ These features are also based on plugins
 - `local_settings.py`
 - Services appear in Horizon if they exist in Keystone service catalog
 
-### Usage
-
-- A restricted "admin" panel
-- Per tenant interface
-
 ## Swift: Object storage
 
 ### Principles
@@ -250,7 +238,6 @@ These features are also based on plugins
 - SDS: *Software Defined Storage*
 - Use of commodity hardware
 - CAP  theorem: choosing two
-- API access
 - Completly decentralized architecture
 - No central database
 
@@ -296,60 +283,8 @@ These features are also based on plugins
 
 ## Heat: Resources orchestration
 
-### Orchestrating infrastructure with Heat
+### Architecture
 
-- Amazon Cloudformation's counterpart
-- Orchestrates compute, storage, network, etc. resources
-- Has to be used with cloud-init
-- Description of infrastructure in a template file, JSON (CFN) or YAML (HOT) format
-
-### Un template HOT
-
-*parameters* - *resources* - *outputs*
-
-```yaml
-heat_template_version: 2013-05-23
-description: Simple template to deploy a single compute instance
-resources:
-my_instance:
-  type: OS::Nova::Server
-  properties:
-  key_name: my_key
-  image: F18-x86_64-cfntools
-  flavor: m1.small
-```
-
-## Some other interesting components
-
-### Ironic
-
-- Formerly Nova bare-metal
-- Enable deploying instances on bare metal machines (rather than VMs)
-- Based upon technologies such as PXE, TFTP
-
-### Oslo, or OpenStack common
-
-- Oslo contains code common to multiple OpenStack components
-- Its usage is transparent for deployers
-
-### rootwrap -> privsep
-
-- Wrapper for using commands as root
-- Configuration for each using component
-- Allows writing command filters
-
-### TripleO
-
-- OpenStack On OpenStack
-- Goal: ability to deploy an OpenStack cloud (*overcloud*) from an OpenStack cloud (*undercloud*)
-- Autoscaling of the cloud itself: deployment of new compute nodes when necessary
-- Works jointly with Ironic for bare metal deployment
-
-### Tempest
-
-- Test suite of an OpenStack cloud
-- Makes API calls and checks the result
-- Used a lot by developers through continuous integration
-- Deployers can use Tempest to check their cloud's compliance
-- See also Rally
+- heat-api
+- heat-engine
 

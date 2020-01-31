@@ -4,18 +4,21 @@
 
 - All the features are available through the API
 - Clients (including Horizon) go through the API
-- Credentials are required
-  - API OpenStack: user + password + project (tenant) + domain
-  - API AWS: access key ID + secret access key
+- Credentials are required, with the OpenStack API:
+  - user
+  - password
+  - project (tenant)
+  - domain
 
 ### OpenStack APIs
 
 - One API per OpenStack service
-- Each API is versioned, backwards compatiblity is guaranteed
-- Body of requests and responses is formatted with JSON (XML used to be supported as well)
-- REST architecture
-- <https://developer.openstack.org/#api>
-- Some services are also available through a different API, compatible with AWS
+  - Versioned, backwards compatiblity is guaranteed
+  - Body of requests and responses is formatted with JSON
+  - REST architecture
+- Managed resources are specific to a project
+
+<https://developer.openstack.org/#api>
 
 ### API access
 
@@ -31,47 +34,49 @@
 
 ### Official clients
 
-- The project provides official clients: python-PROJECTclient
-- Python libraries
+- OpenStack provides official clients
+  - Historically: `python-PROJECTclient` (Python library and CLI)
+  - Today: `openstackclient` (CLI)
 - CLI tools
-  - Authentication is done by passing credentials as parameters or environment variables
+  - Authentication is done by passing credentials as parameters, environment variables or configuration file
   - The `--debug` parameter shows the HTTP connection
 
 ### OpenStack Client
 
 - Unified CLI client
-- *openstack \<resource \>\<action \>* commands
-- Or interactive shell
-- Aims at replacing specific clients eventually
+- *openstack \<resource \>\<action \>* commands (interactive shell available)
+- Aims at replacing specific CLI clients
 - Provides a more homogeneous user experience
 - `clouds.yaml` configuration file
 
-<https://docs.openstack.org/python-openstackclient/pike/configuration/index.html#clouds-yaml>
+<https://docs.openstack.org/python-openstackclient/latest/configuration/index.html#clouds-yaml>
 
 ## Keystone: Authentication, authorization and service catalog
 
 ### Principles
 
-- Users and groups directory
-- Manages domains
-- Lists projects (tenants)
-- Service catalog
-- Manages authentication and authorization
-- Provides a token to the user
+Keystone is responsible for authentication and authorization and service catalog.
 
-### Authentication and service catalog
-
-- Once authenticated, retrieval of a *token*
-- Retrieval of the service catalog
-- For each service, an HTTP endpoint (API)
+- Standard user authenticates against Keystone
+- Admin user often interacts with Keystone
 
 ### API
 
-- API v2 (deprecated): admin port 35357, user port 5000
 - API v3: port 5000
-- Manages *users*, *groups*, *domains*
-- Users have *roles* on *projects* (tenants)
-- *Services* from the catalog are associated to *endpoints*
+- Manages:
+  - **Users**, **groups**
+  - **Projects** (tenants)
+  - **Roles** (link between user and project)
+  - **Domains**
+  - **Services** and **endpoints** (service catalog)
+- Provides:
+  - **Tokens** (authentication tokens)
+
+### Service catalog
+
+- For each service, multiple endpoints are possible depending on:
+  - region
+  - interface type (public, internal, admin)
 
 ### Typical usage scenario
 
@@ -98,12 +103,11 @@
 
 ### API
 
-Manages:
+Managed resources:
 
-- Instances
-- Flavors
-- Keypairs
-- Indirectly: images, security groups, floating IPs
+- **Instances**
+- **Flavors** (instance types)
+- **Keypairs**: resources dedicated to each user (not part of a project)
 
 ### Actions on instances
 
@@ -120,12 +124,11 @@ Manages:
 
 - Image (and snapshot) registry
 - Image properties
-- Is used by Nova to start instances
 
 ### API
 
-- API v2: current
-- API artifacts: future
+- API v2: current version, manages images and snapshots
+- API artifacts: future version, more common
 
 ### Image types
 
@@ -147,7 +150,20 @@ The user can define a number of properties among which some will be used at inst
 - Distribution version
 - Minimum disk space
 - Minimum RAM
-- Public or not
+
+### Image sharing
+
+- Public image: available to all projects
+  - By default, only the admin can make an image public
+- Shared image: available to one or multiple other project(s)
+
+### Downloading images
+
+Most OS provide regularly updated images:
+
+- Ubuntu : <https://cloud-images.ubuntu.com/>
+- Debian : <https://cdimage.debian.org/cdimage/openstack/>
+- CentOS : <https://cloud.centos.org/centos/>
 
 ## Neutron: Network
 
@@ -203,10 +219,9 @@ Beyond the basic L2 and L3 networking features, Neutron may provide other servic
 
 ### Principles
 
-- Heat is the native OpenStack solution
-- Heat provides an API to manage *stacks* from *templates*
-- A Heat template follows the HOT format, based on YAML
-- Alternatives external to OpenStack exist, like **Terraform**
+- Heat is the native OpenStack solution, orchestration *service*
+- Heat provides an API to manage **stacks** from **templates**
+- A Heat template follows the HOT (*Heat Orchestration Template*) format, based on YAML
 
 ### A Heat Orchestration Template (HOT) template
 
@@ -231,4 +246,19 @@ Multiple projects are being developed
 - Flame (Cloudwatt)
 - HOT builder
 - Merlin
+
+## Horizon : web dashboard
+
+### Principles
+
+- Provides a web interface
+- Uses existing APIs to provide a user interface
+- Ability to log in without specifiying a project: Horizon determines the list of available projects
+
+### Usage
+
+- One interface per project (ability to switch)
+- Availability of the service catalog
+- Download of a `clouds.yaml` config file
+- Restricted “admin” area
 
