@@ -4,14 +4,14 @@
 
 - Fournir du stockage persistent aux PODs
 - Fonctionnent de la même façon que les volumes Docker pour les volumes hôte :
-    - EmptyDir ~= volumes docker
-    - HostPath ~= volumes hôte
+  - EmptyDir ~= volumes docker
+  - HostPath ~= volumes hôte
 - Support de multiples backend de stockage :
-    - GCE : PD
-    - AWS : EBS
-    - GlusterFS / NFS
-    - Ceph
-    - iSCSI
+  - GCE : PD
+  - AWS : EBS
+  - GlusterFS / NFS
+  - Ceph
+  - iSCSI
 
 ### Kubernetes : Volumes
 
@@ -24,22 +24,20 @@ metadata:
   name: redis
 spec:
   containers:
-  - name: redis
-    image: redis
-    volumeMounts:
-    - name: redis-persistent-storage
-      mountPath: /data/redis
+    - name: redis
+      image: redis
+      volumeMounts:
+        - name: redis-persistent-storage
+          mountPath: /data/redis
   volumes:
-  - name: redis-persistent-storage
-    emptyDir: {}
+    - name: redis-persistent-storage
+      emptyDir: {}
 ```
-
 
 ### Kubernetes : Storage Class
 
 - Permet de définir les différents types de stockage disponibles
 - Utilisé par les `Persistent Volumes` pour solliciter un espace de stockage au travers des `Persistent Volume Claims`
-
 
 ### Kubernetes : Storage Class
 
@@ -55,13 +53,11 @@ parameters:
   iopsPerGB: "10"
 ```
 
-
 ### Kubernetes : PersistentVolumeClaims
 
 - Ressource utilisée et vue comme une requête pour solliciter du stockage persistant
 - Offre aux PV une variété d'options en fonction du cas d'utilisation
 - Utilisé par les `StatefulSets` pour solliciter du stockage (Utilisaltion du champ `volumeClaimTemplates`)
-
 
 ### Kubernetes : PersistentVolumeClaims
 
@@ -83,7 +79,6 @@ spec:
     matchExpressions:
       - {key: capacity, operator: In, values: [10Gi, 20Gi]}
 ```
-
 
 ### Kubernetes : PersistentVolume
 
@@ -113,8 +108,8 @@ spec:
 
 - [Container Storage Interface](https://github.com/container-storage-interface/spec/blob/master/spec.md)
 - Équivalent de CNI mais pour les volumes
-- Avant Kubernetes 1.13, tous les drivers de volumes étaient *in tree*
-- Le but de la séparation est de sortir du code du *core* de Kubernetes
+- Avant Kubernetes 1.13, tous les drivers de volumes étaient _in tree_
+- Le but de la séparation est de sortir du code du _core_ de Kubernetes
 - GA depuis Kubernetes 1.13
 
 ### Kubernetes : CSI
@@ -125,4 +120,3 @@ spec:
   - [Cinder](https://github.com/kubernetes/cloud-provider-openstack/tree/master/pkg/csi/cinder)
   - [GlusterFS](https://github.com/gluster/gluster-csi-driver)
   - La liste exhaustive est disponible [ici](https://kubernetes-csi.github.io/docs/drivers.html)
-

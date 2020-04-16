@@ -18,7 +18,7 @@ L’objectif est de se familiariser avec les APIs ainsi que les différents outi
 ### Pré-requis
 
 - Base système / linux
-- Concepts 
+- Concepts
 
 ## Programme
 
@@ -32,31 +32,31 @@ L’objectif est de se familiariser avec les APIs ainsi que les différents outi
 ### Concepts et APIs
 
 - Pods
-- Deployments 
-- DaemonSets **
+- Deployments
+- DaemonSets \*\*
 - StatefulSets
 - Services
 - Ingress
-- Jobs **
-- CronJobs **
+- Jobs \*\*
+- CronJobs \*\*
 - Namespaces
 
 ### Stockage et gestion de configuration
 
 - Volumes
   - PV
-  - PVC **
-  - StorageClass **
-- ConfigMaps **
-- Secrets **
+  - PVC \*\*
+  - StorageClass \*\*
+- ConfigMaps \*\*
+- Secrets \*\*
 
 ### Conception d’une application Kubernetes
 
 - Présentation de minikube
 - Commandes communes à Kubectl
 - Création d’un objet Kubernetes
-- Introduction et Utilisation des labels **
-- Rolling updates, rollbacks **
+- Introduction et Utilisation des labels \*\*
+- Rolling updates, rollbacks \*\*
 
 ### Utilisation de Kubernetes
 
@@ -65,14 +65,3 @@ L’objectif est de se familiariser avec les APIs ainsi que les différents outi
 - Gestion des configurations
 - Gestion des volumes
 - Introduction à helm
-
-
-
-
-
-
-
-
-
-
-

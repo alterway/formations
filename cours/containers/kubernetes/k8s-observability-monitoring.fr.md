@@ -12,9 +12,9 @@
 ### Sondes : Readiness
 
 - Gère le trafic à destination du pod
-- Un pod avec une sonde readiness *NotReady* ne reçoit aucun trafic
+- Un pod avec une sonde readiness _NotReady_ ne reçoit aucun trafic
 - Permet d'attendre que le service dans le conteneur soit prêt avant de router du trafic
-- Un pod *Ready* est ensuite enregistrer dans les *endpoints* du service associé
+- Un pod _Ready_ est ensuite enregistrer dans les _endpoints_ du service associé
 
 ### Sondes : Liveness
 
@@ -33,20 +33,18 @@ metadata:
     app: goproxy
 spec:
   containers:
-  - name: goproxy
-    image: k8s.gcr.io/goproxy:0.1
-    ports:
-    - containerPort: 8080
-    readinessProbe:
-      tcpSocket:
-        port: 8080
-      initialDelaySeconds: 5
-      periodSeconds: 10
-    livenessProbe:
-      tcpSocket:
-        port: 8080
-      initialDelaySeconds: 15
-      periodSeconds: 20
+    - name: goproxy
+      image: k8s.gcr.io/goproxy:0.1
+      ports:
+        - containerPort: 8080
+      readinessProbe:
+        tcpSocket:
+          port: 8080
+        initialDelaySeconds: 5
+        periodSeconds: 10
+      livenessProbe:
+        tcpSocket:
+          port: 8080
+        initialDelaySeconds: 15
+        periodSeconds: 20
 ```
-
-

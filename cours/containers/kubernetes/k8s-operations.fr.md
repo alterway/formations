@@ -6,7 +6,6 @@
 - Les arguments `maxSurge` et `maxUnavailabe` définissent le rythme du _rolling update_.
 - La commande `kubectl rollout` permet de suivre les _rolling updates_ effectués.
 
-
 ### Kubectl : Advanced Usage
 
 ```yaml
@@ -56,7 +55,6 @@ kubectl scale --replicas=5 deployment nginx
 kubectl set image deployment nginx nginx=nginx:1.15
 ```
 
-
 ### Kubectl : Advanced Usage
 
 - Dry run. Afficher les objets de l'API correspondant sans les créer :
@@ -99,7 +97,6 @@ kubectl attach my-pod -i
 kubectl port-forward my-svc 6000
 ```
 
-
 ### Kubectl : Logging
 
 - Utiliser `kubectl` pour diagnostiquer les applications et le cluster kubernetes :
@@ -129,4 +126,3 @@ kubectl cordon <NODE_NAME>
 kubectl drain <NDOE_NAME>
 kubectl uncordon <NODE_NAME>
 ```
-

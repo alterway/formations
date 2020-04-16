@@ -3,7 +3,7 @@
 ### Pods resources : request et limits
 
 - Permettent de gérer l'allocation de ressources au sein d'un cluster
-- Par défaut, un pod/container sans request/limits est en *best effort*
+- Par défaut, un pod/container sans request/limits est en _best effort_
 - Request: allocation minimum garantie (réservation)
 - Limit: allocation maximum (limite)
 - Se base sur le CPU et la RAM
@@ -15,14 +15,14 @@
   - `1` : 1 vCPU entier
   - `100m` : 0.1 vCPU
   - `0.5` : 1/2 vCPU
-- Lorsqu'un conteneur atteint la limite CPU, celui ci est *throttled*
+- Lorsqu'un conteneur atteint la limite CPU, celui ci est _throttled_
 
 ### Pods resources : RAM
 
 - L'allocation se fait en unité de RAM:
   - `M` : en base 10
   - `Mi` : en base 2
-- Lorsqu'un conteneur atteint la limite RAM, celui ci est *OOMKilled*
+- Lorsqu'un conteneur atteint la limite RAM, celui ci est _OOMKilled_
 
 ### Pods resources : request et limits
 
@@ -33,27 +33,27 @@ metadata:
   name: frontend
 spec:
   containers:
-  - name: db
-    image: mysql
-    env:
-    - name: MYSQL_ROOT_PASSWORD
-      value: "password"
-    resources:
-      requests:
-        memory: "64Mi"
-        cpu: "250m"
-      limits:
-        memory: "128Mi"
-        cpu: "500m"
-  - name: wp
-    image: wordpress
-    resources:
-      requests:
-        memory: "64Mi"
-        cpu: "250m"
-      limits:
-        memory: "128Mi"
-        cpu: "500m"
+    - name: db
+      image: mysql
+      env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "password"
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
+    - name: wp
+      image: wordpress
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
 ```
 
 ### LimitRanges
@@ -72,11 +72,11 @@ metadata:
   name: limit-example
 spec:
   limits:
-  - default:
-      memory: 512Mi
-    defaultRequest:
-      memory: 256 Mi
-    type: Container
+    - default:
+        memory: 512Mi
+      defaultRequest:
+        memory: 256 Mi
+      type: Container
 ```
 
 ### ResourceQuotas
@@ -99,4 +99,3 @@ spec:
     limits.cpu: 600m
     limits.memory: 500Mi
 ```
-

@@ -8,7 +8,6 @@
 - Supporte plusieurs systèmes d'exploitation : Linux, Mac OS, Windows
 - Installation : <https://github.com/kubernetes/minikube#Installation>
 
-
 ### Kubernetes : Minikube
 
 - Création d'un cluster Kubernetes
@@ -16,18 +15,16 @@
 ```console
 $ minikube get-k8s-versions
 The following Kubernetes versions are available when using the localkube bootstrapper:
-  - v1.16.1
-  - v1.15.5
-  - v1.14.3
-  - v1.9.4
-  - v1.9.0
+  - v1.18.1
+  - v1.17.4
+  - v1.16.8
 ```
 
 ### Kubernetes : Minikube
 
 ```console
-$minikube start --kubernetes-version="v1.16.1"
-Starting local Kubernetes v1.16.1 cluster...
+$minikube start --kubernetes-version="v1.18.0"
+Starting local Kubernetes v1.18.0 cluster...
 Starting VM...
 Getting VM IP address...
 [...]
@@ -48,7 +45,6 @@ Client Version: v1.16.1
 Server Version: v1.16.1
 ```
 
-
 ### Kubernetes : Minikube
 
 ```console
@@ -61,7 +57,6 @@ etcd-0                       Healthy      {"health": "true"}
 
 ### Installation de Kubernetes
 
-
 - De nombreuses ressources présentes pour le déploiement de Kubernetes dans un environnement de production
 
 - Un des outils est [kubeadm](https://github.com/kubernetes/kubeadm) utilisé pour rapidement démarrer un cluster Kubernetes
@@ -69,9 +64,9 @@ etcd-0                       Healthy      {"health": "true"}
 ### Installation de Kubernetes avec Kubeadm
 
 - Certains pré-requis sont nécessaires avant d'installer Kubernetes :
-    - Désactiver le swap
-    - Assurer que les ports requis soient ouverts : <https://kubernetes.io/docs/setup/independent/install-kubeadm/#check-required-ports>
-    - Installer une Container Runtime compatible CRI
+  - Désactiver le swap
+  - Assurer que les ports requis soient ouverts : <https://kubernetes.io/docs/setup/independent/install-kubeadm/#check-required-ports>
+  - Installer une Container Runtime compatible CRI
 
 ### Kubeadm
 
@@ -92,22 +87,21 @@ En plus de l'installation de Kubernetes, Kubeadm peut :
 ### Kubernetes managés "as a Service"
 
 - Il existe des solutions managées pour Kubernetes sur les cloud publics :
-    - AWS Elastic Kubernetes Services: <https://aws.amazon.com/eks/>
-    - Azure Kubernetes Service : <https://azure.microsoft.com/en-us/services/kubernetes-service/>
-    - Docker Universal Control Plane : <https://docs.docker.com/ee/ucp/>
-    - Google Kubernetes Engine : <https://cloud.google.com/kubernetes-engine/>
+  - AWS Elastic Kubernetes Services: <https://aws.amazon.com/eks/>
+  - Azure Kubernetes Service : <https://azure.microsoft.com/en-us/services/kubernetes-service/>
+  - Google Kubernetes Engine : <https://cloud.google.com/kubernetes-engine/>
+  - Scaleway Kapsule: <https://www.scaleway.com/en/kubernetes-kapsule/>
 
 ### Installation de Kubernetes
 
 - Via Ansible : kubespray <https://github.com/kubernetes-sigs/kubespray>
 - Via Terraform : <https://github.com/poseidon/typhoon>
 - Il existe d'autres projets open source basés sur le langage Go :
-    - kube-aws : <https://github.com/kubernetes-incubator/kube-aws>
-    - kops : <https://github.com/kubernetes/kops>
+  - kube-aws : <https://github.com/kubernetes-incubator/kube-aws>
+  - kops : <https://github.com/kubernetes/kops>
 
 ### Introduction à Sonobuoy
 
 - Outil de conformité de clusters Kubernetes
 - Permet de facilement générer des données de diagnostics pour les applications déployées
-- <https://github.com/heptio/sonobuoy/>
-
+- <https://github.com/vmware-tanzu/sonobuoy/>

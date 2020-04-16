@@ -11,9 +11,9 @@
 ```yaml
 apiVersion: v1
 data:
-    redis-config: |
-      maxmemory 2mb
-      maxmemory-policy allkeys-lru
+  redis-config: |
+    maxmemory 2mb
+    maxmemory-policy allkeys-lru
 kind: ConfigMap
 metadata:
   name: redis-config
@@ -31,7 +31,7 @@ spec:
   containers:
     - name: test-container
       image: k8s.gcr.io/busybox
-      command: [ "/bin/sh", "-c", "env" ]
+      command: ["/bin/sh", "-c", "env"]
       env:
         - name: SPECIAL_LEVEL_KEY
           valueFrom:
@@ -57,10 +57,10 @@ spec:
   containers:
     - name: test-container
       image: k8s.gcr.io/busybox
-      command: [ "/bin/sh", "-c", "ls /etc/config/" ]
+      command: ["/bin/sh", "-c", "ls /etc/config/"]
       volumeMounts:
-      - name: config-volume
-        mountPath: /etc/config
+        - name: config-volume
+          mountPath: /etc/config
   volumes:
     - name: config-volume
       configMap:
@@ -82,7 +82,7 @@ spec:
 - S'utilisent de la même façon que les ConfigMap
 - La seule différence est le stockage en base64
 - 3 types de secrets:
-  - `Generic`: valeurs arbitraire comme dans une *ConfigMap*
+  - `Generic`: valeurs arbitraire comme dans une _ConfigMap_
   - `tls`: certificat et clé pour utilisation avec un serveur web
   - `docker-registry`: utilisé en tant que `imagePullSecret` par un pod pour pouvoir pull les images d'une registry privée
 

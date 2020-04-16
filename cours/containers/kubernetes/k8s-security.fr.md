@@ -8,7 +8,6 @@
 - Certificates
 - Token
 
-
 ### RBAC
 
 3 entités sont utilisées :
@@ -17,13 +16,11 @@
 - Resources représentées par les `Deployments`, `Pods`, `Services`, etc...
 - les différentes opérations possibles : `create, list, get, delete, watch, patch`
 
-
 ### Service Accounts
 
 - Objet Kubernetes permettant d'identifier une application s'éxecutant dans un pod
 - Par défaut, un `ServiceAccount` par `namespace`
 - Le `ServiceAccount` est formatté ainsi : `system:serviceaccount:<namespace>:<service_account_name>`
-
 
 ### Service Accounts
 
@@ -31,15 +28,14 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-    name: default
-    namespace: default
+  name: default
+  namespace: default
 ```
 
 ### Role
 
 - L'objet `Role` est un ensemble de règles permettant de définir quelle opération (ou _verbe_) peut être effectuée et sur quelle ressource
 - Le `Role` ne s'applique qu'à un seul `namespace` et les ressources liées à ce `namespace`
-
 
 ### Role
 
@@ -50,9 +46,9 @@ metadata:
   namespace: default
   name: pod-reader
 rules:
-- apiGroups: [""]
-  resources: ["pods"]
-  verbs: ["get", "watch", "list"]
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "watch", "list"]
 ```
 
 ### RoleBinding
@@ -70,9 +66,9 @@ metadata:
   name: read-pods
   namespace: default
 subjects:
-- kind: User
-  name: jane
-  apiGroup: rbac.authorization.k8s.io
+  - kind: User
+    name: jane
+    apiGroup: rbac.authorization.k8s.io
 roleRef:
   kind: Role
   name: pod-reader
@@ -84,7 +80,6 @@ roleRef:
 - L'objet `ClusterRole` est similaire au `Role` à la différence qu'il n'est pas limité à un seul `namespace`
 - Il permet d'accéder à des ressources non limitées à un `namespace` comme les `nodes`
 
-
 ### ClusterRole
 
 ```yaml
@@ -93,9 +88,9 @@ apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: secret-reader
 rules:
-- apiGroups: [""]
-  resources: ["secrets"]
-  verbs: ["get", "watch", "list"]
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get", "watch", "list"]
 ```
 
 ### ClusterRoleBinding
@@ -123,13 +118,11 @@ kubectl auth can-i get pods /
 --as=spesnova@example.com
 ```
 
-
 ### NetworkPolicies
 
 - La ressource `NetworkPolicy` est une spécification permettant de définir comment un ensemble de `pods` communiquent entre eux ou avec d'autres endpoints
 - Le `NetworkPolicy` utilisent les labels pour sélectionner les pods sur lesquels s'appliquent les règles qui définissent le trafic alloué sur les pods sélectionnés
 - Le `NetworkPolicy` est générique et fait partie de l'API Kubernetes. Il est nécessaire que le plugin réseau déployé supporte cette spécification
-
 
 ### NetworkPolicies
 
@@ -138,7 +131,6 @@ kubectl auth can-i get pods /
 - DENY le trafic all non alloué dans un namespace
 - DENY tout le trafic venant d'autres namespaces
 - exemples de Network Policies : <https://github.com/ahmetb/kubernetes-network-policy-recipes>
-
 
 ### NetworkPolicies
 
@@ -182,7 +174,7 @@ spec:
   hostIPC: false
   hostPID: false
   runAsUser:
-    rule: 'MustRunAsNonRoot'
+    rule: "MustRunAsNonRoot"
   readOnlyRootFilesystem: false
 ```
 
@@ -192,7 +184,6 @@ spec:
 - Peut effectuer des modifications si nécessaires
 - Conception personnalisée possible
 
-
 ### Admission Controllers
 
 - `DenyEscalatingExec`
@@ -201,5 +192,3 @@ spec:
 - `PodSecurityPolicy`
 - `SecurityContextDeny`
 - `ServiceAccount`
-
-

@@ -37,7 +37,7 @@
 ### Kubernetes : kube-proxy
 
 - Responsable de la publication de services
-- Utilise *iptables*
+- Utilise _iptables_
 - Route les paquets à destination des PODs et réalise le load balancing TCP/UDP
 
 ### Kubernetes : kube-controller-manager
@@ -55,9 +55,9 @@
 
 - Service principal de Kubernetes
 - Permet à Kubernetes de s'auto configurer :
-    - Surveille un dossier contenant les *manifests* (fichiers YAML des différents composant de Kubernetes).
-    - Applique les modifications si besoin (upgrade, rollback).
-- Surveille l'état des services du cluster via l'API server (*kube-apiserver*).
+  - Surveille un dossier contenant les _manifests_ (fichiers YAML des différents composant de Kubernetes).
+  - Applique les modifications si besoin (upgrade, rollback).
+- Surveille l'état des services du cluster via l'API server (_kube-apiserver_).
 
 ### Kubernetes: Network
 
@@ -68,8 +68,6 @@ Kubernetes n'implémente pas de solution réseau par défaut, mais s'appuie sur 
 
 ### Kubernetes : Aujourd'hui
 
-- Version 1.16.x : stable en production
+- Version 1.18.x : stable en production
 - Solution complète et une des plus utilisées
 - Éprouvée par Google
-
-

@@ -6,11 +6,11 @@
 - Utilise un fichier de configuration (kubeconfig) pour communiquer avec l'API de Kubernetes
 - Le(s) fichier(s) se trouve(nt) par défaut dans `~/.kube/config`
 - Le fichier de config. contient :
-    - L'adresse(URI) de l'APIServer
-    - Les chemins des certificats TLS utilisés pour l'authentification
+
+  - L'adresse(URI) de l'APIServer
+  - Les chemins des certificats TLS utilisés pour l'authentification
 
 - Fichier `kubeconfig` peut être passé en paramètre de kubectl avec le _flag_ `--kubeconfig`
-
 
 ### Kubeconfig
 
@@ -138,11 +138,9 @@ kubectl replace -f object.yaml
 - Permet de gérer les différents objets Kubernetes créés dans le(s) cluster(s).
 - Installé par défaut dans minikube
 
-
 ### Kubernetes : Kubernetes Dashboard
 
 ![](images/kubernetes/ui-dashboard.png)
-
 
 ### Kubernetes : Kubernetes Dashboard
 
@@ -162,7 +160,6 @@ $ kubectl proxy
 
 <http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/>
 
-
 ### Kubernetes : Introduction to Helm
 
 - Une application conçue pour faciliter l'installation et la gestion des applications sur Kubernetes.
@@ -170,14 +167,12 @@ $ kubectl proxy
 - Il est comparable à apt/yum/homebrew.
 - Plusieurs charts existent déjà sur le répertoire officiel : `https://github.com/kubernetes/charts`.
 
-
 ### Kubernetes : Introduction to Helm
 
 - `Tiller` : Serveur Helm. Il interagit avec l'APIServer de Kubernetes pour installer, mettre à jour et supprimer les ressources Kubernetes.
-- `Chart` : Contient toutes les ressources définies et nécessaires pour éxecuter une application ou un service à  l'intérieur de cluster Kubernetes. Un chart est pratiquement un regroupement de ressources Kubernetes pré-configurées.
+- `Chart` : Contient toutes les ressources définies et nécessaires pour éxecuter une application ou un service à l'intérieur de cluster Kubernetes. Un chart est pratiquement un regroupement de ressources Kubernetes pré-configurées.
 - `Release` : Une instance d'un chart helm s'éxécutant dans un cluster Kubernetes.
 - `Repository` : répertoire ou espace (public ou privé) où sont regroupés les `charts`.
-
 
 ### Kubernetes : Introduction to Helm
 
@@ -185,5 +180,4 @@ $ kubectl proxy
 - Deployer tiller : `helm init`
 - Voir la liste des `charts` disponibles sur les répertoire officiel : `helm search`
 - Afficher la liste des `charts` disponibles pour _prometheus_ : `helm search prometheus`
-- Afficher les options disponibles dans un `chart` Helm:  `helm inspect stable/prometheus`
-
+- Afficher les options disponibles dans un `chart` Helm: `helm inspect stable/prometheus`
