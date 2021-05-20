@@ -6,7 +6,7 @@ Supports de formation (sous forme de slides) écrits en Français et traduits en
 
 Sont notamment abordés les sujets suivants : le cloud, sa philosophie, le projet OpenStack, l'utilisation d'OpenStack, le déploiement d'OpenStack, le principe des conteneurs, le projet Docker, l'utilisation de Docker, l'orchestration de conteneurs Docker.
 
-Sources : <https://github.com/Osones/formations/>
+Sources : <https://github.com/alterway/formations/>
 
 Auteurs :
 
@@ -65,8 +65,8 @@ et de ne pas "encrasser" le système hôte avec des paquets dont l'utilisation e
 
 Les Dockerfiles des images Docker sont disponibles ici :
 
-- [revealjs-builder](https://hub.docker.com/r/osones/revealjs-builder)
-- [wkhtmltopdf](https://hub.docker.com/r/osones/wkhtmltopdf)
+- [revealjs-builder](https://hub.docker.com/r/alterway/revealjs-builder)
+- [wkhtmltopdf](https://hub.docker.com/r/alterway/wkhtmltopdf)
 
 Un daemon Docker est donc le seul pré-requis pour le build via `build.sh`
 

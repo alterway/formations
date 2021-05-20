@@ -1,7 +1,7 @@
 # Reprendre b et déployer avec Compose
 
 frontal:
-  image: osones/nginx:centrale
+  image: alterway/nginx:latest
   ports:
     - "80"
     - "443"
@@ -14,7 +14,7 @@ frontal:
     - "/srv/nginx/supervisor-consul:/etc/supervisor-consul"
 
 wordpress:
-  image: osones/wordpress:centrale
+  image: alterway/wordpress:latest
   environment:
     SERVICE_NAME: wordpress
   volumes:
