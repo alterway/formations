@@ -163,27 +163,3 @@ $ kubectl proxy
 <http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/>
 
 
-### Kubernetes : Introduction to Helm
-
-- Une application conçue pour faciliter l'installation et la gestion des applications sur Kubernetes.
-- Il utilise un format de paquetage appelé `Charts`.
-- Il est comparable à apt/yum/homebrew.
-- Plusieurs charts existent déjà sur le répertoire officiel : `https://github.com/kubernetes/charts`.
-
-
-### Kubernetes : Introduction to Helm
-
-- `Tiller` : Serveur Helm. Il interagit avec l'APIServer de Kubernetes pour installer, mettre à jour et supprimer les ressources Kubernetes.
-- `Chart` : Contient toutes les ressources définies et nécessaires pour éxecuter une application ou un service à  l'intérieur de cluster Kubernetes. Un chart est pratiquement un regroupement de ressources Kubernetes pré-configurées.
-- `Release` : Une instance d'un chart helm s'éxécutant dans un cluster Kubernetes.
-- `Repository` : répertoire ou espace (public ou privé) où sont regroupés les `charts`.
-
-
-### Kubernetes : Introduction to Helm
-
-- Installer Helm (sur une distribution Linux):
-- Deployer tiller : `helm init`
-- Voir la liste des `charts` disponibles sur les répertoire officiel : `helm search`
-- Afficher la liste des `charts` disponibles pour _prometheus_ : `helm search prometheus`
-- Afficher les options disponibles dans un `chart` Helm:  `helm inspect stable/prometheus`
-

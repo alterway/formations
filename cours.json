@@ -116,6 +116,7 @@
       "containers/kubernetes/k8s-operations",
       "containers/kubernetes/k8s-installation",
       "containers/kubernetes/k8s-security",
+      "containers/kubernetes/k8s-helm-intro",
       "containers/kubernetes/conclusion"
     ]
   },

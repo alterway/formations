@@ -6,10 +6,11 @@
 - Un ensemble de binaires sans dépendance
 - Faciles à conteneuriser et à packager
 - Peut se déployer uniquement avec des conteneurs sans dépendance d'OS
+  - k3d, kind, minikube docker...
 
 ### Kubernetes : Composants du Control Plane
 
-- etcd: Base de données
+- etcd: magasin de données clé-valeur open source cohérent et distribué
 - kube-apiserver : API server qui permet la configuration d'objets Kubernetes (Pod, Service, Deployment, etc.)
 - kube-proxy : Permet le forwarding TCP/UDP et le load balancing entre les services et les backends (Pods)
 - kube-scheduler : Implémente les fonctionnalités de scheduling
@@ -58,17 +59,25 @@
     - Surveille un dossier contenant les *manifests* (fichiers YAML des différents composant de Kubernetes).
     - Applique les modifications si besoin (upgrade, rollback).
 - Surveille l'état des services du cluster via l'API server (*kube-apiserver*).
+  
+### Kubernetes : Architecture
+
+![Synthèse architecture](images/components-of-kubernetes.svg)
 
 ### Kubernetes: Network
 
 Kubernetes n'implémente pas de solution réseau par défaut, mais s'appuie sur des solutions tierces qui implémentent les fonctionnalités suivantes:
 
 - Chaque pods reçoit sa propre adresse IP
+- Tous les nœuds doivent pouvoir se joindre, sans NAT
 - Les pods peuvent communiquer directement sans NAT
+- Les pods et les nœuds doivent pouvoir se rejoindre, sans NAT
+- Chaque pod est conscient de son adresse IP (pas de NAT)
+- Kubernetes n'impose aucune implémentation particulière
 
 ### Kubernetes : Aujourd'hui
 
-- Version 1.16.x : stable en production
+- Version 1.21.x : stable en production
 - Solution complète et une des plus utilisées
 - Éprouvée par Google
 

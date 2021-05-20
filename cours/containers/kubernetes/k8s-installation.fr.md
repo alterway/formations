@@ -11,22 +11,8 @@
 
 ### Kubernetes : Minikube
 
-- Création d'un cluster Kubernetes
-
 ```console
-$ minikube get-k8s-versions
-The following Kubernetes versions are available when using the localkube bootstrapper:
-  - v1.16.1
-  - v1.15.5
-  - v1.14.3
-  - v1.9.4
-  - v1.9.0
-```
-
-### Kubernetes : Minikube
-
-```console
-$minikube start --kubernetes-version="v1.16.1"
+$minikube start --kubernetes-version="v1.19.7"
 Starting local Kubernetes v1.16.1 cluster...
 Starting VM...
 Getting VM IP address...
@@ -44,8 +30,8 @@ Loading cached images from config file.
 
 ```console
 $ kubectl version
-Client Version: v1.16.1
-Server Version: v1.16.1
+Client Version: v1.19.7
+Server Version: v1.19.7
 ```
 
 
@@ -54,9 +40,9 @@ Server Version: v1.16.1
 ```console
 $ kubectl get componentstatuses
 NAME                      STATUS    MESSAGE              ERROR
-controller-manager   Healthy      ok
+controller-manager         Healthy      ok
 scheduler                  Healthy      ok
-etcd-0                       Healthy      {"health": "true"}
+etcd-0                     Healthy      {"health": "true"}
 ```
 
 ### Installation de Kubernetes
@@ -71,7 +57,7 @@ etcd-0                       Healthy      {"health": "true"}
 - Certains pré-requis sont nécessaires avant d'installer Kubernetes :
     - Désactiver le swap
     - Assurer que les ports requis soient ouverts : <https://kubernetes.io/docs/setup/independent/install-kubeadm/#check-required-ports>
-    - Installer une Container Runtime compatible CRI
+    - Installer une Container Runtime compatible CRI (cointainerd, CRI-O, Docker)
 
 ### Kubeadm
 
@@ -92,10 +78,12 @@ En plus de l'installation de Kubernetes, Kubeadm peut :
 ### Kubernetes managés "as a Service"
 
 - Il existe des solutions managées pour Kubernetes sur les cloud publics :
-    - AWS Elastic Kubernetes Services: <https://aws.amazon.com/eks/>
-    - Azure Kubernetes Service : <https://azure.microsoft.com/en-us/services/kubernetes-service/>
+    - AWS Elastic Kubernetes Services (EKS): <https://aws.amazon.com/eks/>
+    - Azure Kubernetes Service (AKS): <https://azure.microsoft.com/en-us/services/kubernetes-service/>
     - Docker Universal Control Plane : <https://docs.docker.com/ee/ucp/>
     - Google Kubernetes Engine : <https://cloud.google.com/kubernetes-engine/>
+    - Scaleway Kapsule : <https://www.scaleway.com/fr/kubernetes-kapsule/>
+    - Alibaba Container Service for Kubernetes (ACK) <https://www.alibabacloud.com/fr/product/kubernetes>
 
 ### Installation de Kubernetes
 
@@ -109,5 +97,5 @@ En plus de l'installation de Kubernetes, Kubeadm peut :
 
 - Outil de conformité de clusters Kubernetes
 - Permet de facilement générer des données de diagnostics pour les applications déployées
-- <https://github.com/heptio/sonobuoy/>
+- <https://github.com/vmware-tanzu/sonobuoy>
 
