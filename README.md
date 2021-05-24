@@ -1,6 +1,8 @@
 # Supports de formation alter way Cloud Consulting
 
+<!--
 ![Build Status](https://codebuild.eu-west-1.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiUkRNdlZtY2JhbVlPb3ZJaDExeXlwT2hjRVhocmRVUGRQRnZtZCsyM0g4RGp2WHZKMzhUWUcxd0xSWVJncUNzRllCTFJBZmwrMTE5Q01iN0d5MEQ2aVZZPSIsIml2UGFyYW1ldGVyU3BlYyI6ImpzWHAzUXJDVUd5MlAxQzQiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=master)
+-->
 
 Supports de formation (sous forme de slides) écrits en Français et traduits en Anglais et réalisés par [alter way Cloud Consulting](https://alterway.fr/) (ex Osones) pour ses offres de [formation](https://formation.alterway.fr/cloud/).
 
