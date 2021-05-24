@@ -1,4 +1,4 @@
-# Kubernetes : Observabilité et monitoring
+# KUBERNETES : Observabilité et Monitoring
 
 ### Sondes : Readiness and Liveness
 

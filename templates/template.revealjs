@@ -239,7 +239,7 @@ $endif$
           { src: '$revealjs-url$/lib/js/classList.js', condition: function() { return !document.body.classList; } },
           { src: '$revealjs-url$/plugin/zoom-js/zoom.js', async: true },
           { src: '$revealjs-url$/plugin/notes/notes.js', async: true },
-          // { src: '$revealjs-url$/plugin/highlight/highlight.js', async: true },
+          // { src: '$revealjs-url$/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad();}},
           { src: '$revealjs-url$/js/presentable.min.js', async: true, callback: function() { presentable.toc({framework: "revealjs"}); } }
         ]
       });

@@ -1,4 +1,4 @@
-# Kubernetes : Introduction à Helm
+# KUBERNETES : Introduction à Helm
  
 ### kubernetes : Helm CNCF graduation status
 

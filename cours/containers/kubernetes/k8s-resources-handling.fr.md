@@ -1,4 +1,4 @@
-# Kubernetes : Gestion des ressources
+# KUBERNETES : Gestion des Ressources
 
 ### Pods resources : request et limits
 

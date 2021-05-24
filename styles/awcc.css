@@ -27,7 +27,7 @@ body {
 
 .reveal {
   font-family: "Source Sans Pro", sans-serif;
-  font-size: 36px;
+  font-size: 30px;
   font-weight: normal;
   color: #383838; }
 
@@ -38,7 +38,7 @@ body {
 
 .reveal .slides > section,
 .reveal .slides > section > section {
-  line-height: 1.3;
+  line-height: 1.2;
   font-weight: inherit; }
 
 
@@ -204,8 +204,9 @@ section.titleslide h1 {
   display: block;
   padding: 5px;
   overflow: auto;
-  max-height: 400px;
-  word-wrap: normal; }
+  max-height: 500px;
+  word-wrap: normal; 
+  background: #b9b6b6;}
 
 .reveal table {
   margin: auto;

@@ -1,4 +1,4 @@
-# Kubernetes : Projet, gouvernance et communauté
+# KUBERNETES : Projet, Gouvernance et Communauté
 
 
 ### Kubernetes
@@ -83,7 +83,7 @@
 
 ### Kubernetes : KubeCon
 
-La CNCF organise trois KubeCon par an :
+La CNCF organise 3 KubeCon par an :
 
 - Amérique du Nord (San Diego, Seattle, etc)
 - Europe (Berlin, Barcelone, Amsterdam etc)

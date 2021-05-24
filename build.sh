@@ -112,6 +112,9 @@ while getopts ":o:t:u:c:l:h" OPT; do
 done
 
 [[ $REVEALJSURL == "" ]] && REVEALJSURL="https://osones.com/formations/revealjs"
+#[[ $REVEALJSURL == "" ]] && REVEALJSURL="https://reveal.alterway.fr"
+#[[ $REVEALJSURL == "" ]] && REVEALJSURL="http://192.168.1.12:9000"
+#[ $REVEALJSURL == "" ]] && REVEALJSURL="http://10.2.1.35:9000"
 
 if [[ $THEME == "" ]]; then
   THEME="awcc"

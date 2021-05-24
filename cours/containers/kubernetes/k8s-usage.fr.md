@@ -1,4 +1,4 @@
-# Kubernetes : Utilisation et déploiement des ressources
+# KUBERNETES : Utilisation et Déploiement des Ressources
 
 ### Kubernetes : Kubectl
 
@@ -10,7 +10,6 @@
     - Les chemins des certificats TLS utilisés pour l'authentification
 
 - Fichier `kubeconfig` peut être passé en paramètre de kubectl avec le _flag_ `--kubeconfig`
-
 
 ### Kubeconfig
 
@@ -48,7 +47,40 @@ jobs                                           batch                            
 ingresses                         ing          extensions                           true         Ingress
 ```
 
-### Kubernetes : Kubectl
+
+### Kubernetes : Kubectl explain
+
+- Explorer les types et définitions
+
+```console
+kubectl explain type
+```
+
+- Expliquer la définition d'un champs de ressource, ex:
+
+```console
+kubectl explain node.spec
+```
+
+- Boucler sur les définitions
+  
+```console
+kubectl explain node --recursive
+```
+
+### Kubernetes : Type de nom
+
+- Les noms de ressources les plus courants ont 3 formes:
+
+    - singulier (par exemple, node, service, deployment)
+    - pluriel (par exemple, nodes, services, deployments)
+    - court (par exemple no, svc, deploy)
+
+- Certaines ressources n'ont pas de nom court
+
+- Les points de terminaison (endpoints) ont uniquement une forme plurielle
+
+### Kubernetes : Kubectl get
 
 - Afficher les noeuds du cluster :
 
@@ -61,6 +93,31 @@ kubectl get nodes
 ```console
 kubectl get no
 kubectl get nodes
+```
+
+### Kubernetes : Kubectl
+
+- plus d'infos
+
+```console
+kubectl get nodes -o wide
+```
+
+- Sortie yaml / json 
+
+
+```console
+kubectl get nodes -o yaml
+kubectl get nodes -o json
+```
+
+### Kubernetes : Kubectl
+
+- Utiliser `jq`
+  
+```console
+kubectl get nodes -o json |
+        jq ".items[] | {name:.metadata.name} + .status.capacity"
 ```
 
 ### Kubernetes : Kubectl
@@ -97,6 +154,19 @@ kubectl get services
 kubectl get svc
 ```
 
+### Kubernetes : Kubectl describe
+
+- `kubectl describe`a besoin d'un type de ressource et optionnelement un nom de ressource
+- Il est possible de fournir un _prefixe_ de nom de ressource
+
+- ex:
+  
+```console
+ kubectl describe node/node1
+ kubectl describe node node1
+```
+
+
 ### Kubernetes : Création d'objets Kubernetes
 
 - Les objets Kubernetes sont créés sous la forme de fichiers JSON ou YAML et envoyés à l'APIServer
@@ -130,6 +200,7 @@ kubectl delete -f object.yaml
 
 ```console
 kubectl replace -f object.yaml
+kubectl apply -f object.yaml
 ```
 
 ### Kubernetes : Kubernetes Dashboard
@@ -146,10 +217,21 @@ kubectl replace -f object.yaml
 
 ### Kubernetes : Kubernetes Dashboard
 
+- Interface web pour manager les ressources kubernetes
+- Le dashboard requiere une authentification (token ou kubeconfg)
+- Plusieurs alternatives open source existent :
+   - [k9s](https://github.com/derailed/k9s) 
+   - [octant](https://octant.dev/)
+   - [skooner](https://github.com/skooner-k8s/skooner)
+   - [lens](https://k8slens.dev/)
+   - ...
+### Kubernetes : Kubernetes Dashboard
+
 - Pour déployer le Dashboard, exécuter la commande suivante:
 
 ```console
-$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
+$ kubectl apply -f kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.2.0/aio/deploy/recommended.yaml
+
 ```
 
 - Pour accéder au Dashboard, il faut établir une communication entre votre poste et le cluster Kubernetes :
@@ -161,5 +243,4 @@ $ kubectl proxy
 - L'accès se fait désormais sur :
 
 <http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/>
-
 

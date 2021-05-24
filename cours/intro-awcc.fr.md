@@ -1,4 +1,52 @@
-# Concernant ces supports de cours {-}
+
+<style type="text/css">
+
+  .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5 {
+                  text-transform: none;
+  }
+
+  .reveal p {
+    text-align: left;
+  }
+  .reveal ul {
+    display: block;
+  }
+  .reveal ol {
+    display: block;
+  }
+  .reveal code {
+    background: #b9b6b6; 
+  }
+  .reveal pre code {
+     background: #b9b6b6;}
+  }
+
+  div.wrapper {
+		position: relative;
+		clear: both;
+		width: 100%;
+		#border : 1px solid #000000;
+		overflow:auto;
+  }
+ div.left {
+		float: left;
+		width: 49%;
+		background: #ffffff;
+		#border : 1px solid #000006;
+
+		}	
+div.right {
+		float: right;
+		width: 49%;
+		background: #ffffff;
+		#border : 1px solid #000001;
+		}
+		.wrapper p{
+		margin:0px;
+		}
+
+</style>
+# Concernant les supports de cours {-}
 
 ### Supports de cours réalisés par alter way Cloud Consulting
 

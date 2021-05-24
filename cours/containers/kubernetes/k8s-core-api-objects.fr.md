@@ -1,8 +1,9 @@
-# Kubernetes : Concepts et Objets
+# KUBERNETES : Concepts et Objets
 
-### Kubernetes : API Resources
+### Kubernetes : Core API Resources
 
 - Namespaces
+- Labels
 - Pods
 - Deployments
 - DaemonSets
@@ -63,6 +64,11 @@ nginx     1/1       Running   0          31s       app=nginx,env=prod
     - Volumes
 - C'est la plus petite et la plus simple unité dans Kubernetes
 
+
+### Kubernetes : Pod
+
+![pods](images/pods.png)
+
 ### Kubernetes : Pod
 
 - Les Pods sont définis en YAML comme les fichiers `docker-compose` :
@@ -85,6 +91,9 @@ spec:
 - Permet d'assurer le fonctionnement d'un ensemble de Pods
 - Version, Update et Rollback
 - Souvent combiné avec un objet de type *service*
+
+![deployment](images/deployment.png)
+
 
 ### Kubernetes : Deployment
 
@@ -115,6 +124,11 @@ spec:
     - l'exécution d'agents de collection de logs comme `fluentd` ou `logstash`
     - l'exécution de pilotes pour du matériel comme `nvidia-plugin`
     - l'exécution d'agents de supervision comme NewRelic agent, Prometheus node exporter
+  
+
+### Kubernetes : DaemonSet
+
+![daemonset](images/daemonset.png)
 
 ### Kubernetes : DaemonSet
 
@@ -148,6 +162,9 @@ metadata:
 - Supprimer un StatefulSet ne supprime pas le PV associé
 
 
+![statefulset](images/statefulset.png)
+
+
 ### Kubernetes : StatefulSet
 
 ```yaml
@@ -172,12 +189,14 @@ spec:
         ports:
         - containerPort: 80
 ```
-
 ### Kubernetes : Job
 
 - Crée des pods et s'assurent qu'un certain nombre d'entre eux se terminent avec succès.
 - Peut éxécuter plusieurs pods en parallèle
 - Si un noeud du cluster est en panne, les pods sont reschedulés vers un autre noeud.
+  
+
+![job](images/job.png)
 
 ### Kubernetes : Job
 
@@ -200,11 +219,13 @@ spec:
       restartPolicy: OnFailure
 ```
 
-### Kubernetes: Cron Job
+### Kubernetes: CronJob
 
 - Un CronJob permet de lancer des Jobs de manière planifiée.
 - la programmation des Jobs se définit au format `Cron`
 - le champ `jobTemplate` contient la définition de l'application à lancer comme `Job`.
+
+![cronjob](images/cronjob.png)
 
 ### Kubernetes : CronJob
 

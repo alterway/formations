@@ -1,4 +1,4 @@
-# Kubernetes : Gestion de la configuration des applications
+# KUBERNETES : Gestion de la Configuration des Applications
 
 ### Kubernetes : ConfigMaps
 

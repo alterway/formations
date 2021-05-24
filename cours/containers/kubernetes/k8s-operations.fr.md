@@ -1,4 +1,4 @@
-### Kubectl : Advanced Usage
+# KUBECTL : : Usage Avancé
 
 - Il est possible de mettre à jour un service sans incident grâce ce qui est appelé le _rolling-update_.
 - Avec les _rolling updates_, les ressources qu'expose un objet `Service` se mettent à jour progressivement.
@@ -7,7 +7,7 @@
 - La commande `kubectl rollout` permet de suivre les _rolling updates_ effectués.
 
 
-### Kubectl : Advanced Usage
+### Kubectl : Usage avancé
 
 ```yaml
 apiVersion: apps/v1
@@ -35,14 +35,14 @@ spec:
           name: nginx
 ```
 
-### Kubectl : Advanced Usage
+### Kubectl : Usage avancé
 
 ```console
 $ kubectl create -f nginx.yaml --record
 deployment.apps/nginx created
 ```
 
-### Kubectl : Advanced Usage
+### Kubectl : Usage avancé
 
 - Il est possible d'augmenter le nombre de pods avec la commande `kubectl scale` :
 
@@ -57,7 +57,7 @@ kubectl set image deployment nginx nginx=nginx:1.15
 ```
 
 
-### Kubectl : Advanced Usage
+### Kubectl : Usage avancé
 
 - Dry run. Afficher les objets de l'API correspondant sans les créer :
 
@@ -79,7 +79,7 @@ kubectl run pi --schedule="0/5 * * * ?" --image=perl --restart=OnFailure \
 -- perl -Mbignum=bpi -wle 'print bpi(2000)'
 ```
 
-### Kubectl : Advanced Usage
+### Kubectl : Usage avancé
 
 - Se connecter à un container:
 
@@ -99,7 +99,6 @@ kubectl attach my-pod -i
 kubectl port-forward my-svc 6000
 ```
 
-
 ### Kubectl : Logging
 
 - Utiliser `kubectl` pour diagnostiquer les applications et le cluster kubernetes :
@@ -110,6 +109,50 @@ kubectl get events
 kubectl describe node <NODE_NAME>
 kubectl  logs (-f) <POD_NAME>
 ```
+
+
+### Kubectl : Logs 
+
+- Voir les logs containers `kubectl logs`
+- Il est possible de donner un _nom de pod_ ou un _type/nom_
+  par exemple sir on donne un nom de déploiment ou de replica set, les logs correspondront au prmier pod
+- Par défaut les logs affichées sont celles du premier container dans le pod. 
+
+```console
+# exemple :
+kubectl logs deploy/nginx
+```
+
+- Faire un `CTRL-C`pour arrêter la sortie
+### Kubectl : Afficher les logs en temps réel 
+
+`kubectl logs`supporte les options suivantes :
+   - `-f/--follow` pour suivre les affichage des logs en temps réel (comme pour `tail -f`)
+   - `--tail` pour n'afficher que les `n` lignes à partir de la fin de la sortie
+   - `--since` pour n'afficher que les logs à partir d'une certaine date
+   - `--timestamps`affichera le timestamp du message
+
+```console
+# exemple :
+kubectl logs deploy/pingpong --tail 100 --follow --since=5s
+# Affichera toutes les logs depuis 5 secondes et commencera au 100eme messages et continuera l'affichage des nouveaux messages
+```
+
+### Kubectl : Afficher les logs de plusieurs pods
+
+- Lorsque on spécifie un nom de déploiement, seuls les logs d'un seul pod sont affichés
+
+- Pour afficher les logs de plusieurs pod il faudra utiliser un `selecteur` (label)
+
+```console
+kubectl logs -l app=my-app --tail 100 # -f 
+```
+
+### Kubectl : un outil très pratique pour les logs : 
+
+[stern](https://github.com/wercker/stern)
+
+![pod network](images/stern-1.png)
 
 ### Kubectl : Maintenance
 

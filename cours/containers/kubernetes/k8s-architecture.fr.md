@@ -1,4 +1,5 @@
-# Kubernetes : Architecture
+
+# KUBERNETES : Architecture
 
 ### Kubernetes : Composants
 
@@ -8,13 +9,24 @@
 - Peut se déployer uniquement avec des conteneurs sans dépendance d'OS
   - k3d, kind, minikube docker...
 
+### Kubernetes : Les noeuds (Nodes)
+
+- Les noeuds qui executent les conteneurs sont composés de
+  - Un "container Engine" (Docker, CRI-0, containerd...)
+  - Une "kubelet" (node agent)
+  - Un kube-proxy (un composant réseau nécessaire mais pas suffisant)
+- Ancien non des noeuds : **Minions**
+
+
 ### Kubernetes : Composants du Control Plane
 
 - etcd: magasin de données clé-valeur open source cohérent et distribué
 - kube-apiserver : API server qui permet la configuration d'objets Kubernetes (Pod, Service, Deployment, etc.)
-- kube-proxy : Permet le forwarding TCP/UDP et le load balancing entre les services et les backends (Pods)
-- kube-scheduler : Implémente les fonctionnalités de scheduling
-- kube-controller-manager : Responsable de l'état du cluster, boucle infinie qui régule l'état du cluster afin d'atteindre un état désiré
+- core services :
+  - kube-proxy : Permet le forwarding TCP/UDP et le load balancing entre les services et les backends (Pods)
+  - kube-scheduler : Implémente les fonctionnalités de scheduling
+  - kube-controller-manager : Responsable de l'état du cluster, boucle infinie qui régule l'état du cluster afin d'atteindre un état désiré
+- Le control plane est aussi appelé "Master"
 
 ### Kubernetes : etcd
 
@@ -63,6 +75,15 @@
 ### Kubernetes : Architecture
 
 ![Synthèse architecture](images/components-of-kubernetes.svg)
+
+
+### Kubernetes : Architecture détaillée
+
+![Architecture détaillée](images/k8s-arch4-thanks-luxas.png)
+
+### Kubernetes : Cluster Architecture
+
+![Cluster architecture](images/k8s-arch2.png)
 
 ### Kubernetes: Network
 

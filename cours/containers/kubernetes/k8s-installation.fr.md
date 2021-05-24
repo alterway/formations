@@ -1,4 +1,4 @@
-# Kubernetes : Installation
+# KUBERNETES : Installation
 
 ### Kubernetes : Minikube
 
