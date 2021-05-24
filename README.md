@@ -10,13 +10,18 @@ Sources : <https://github.com/alterway/formations/>
 
 Auteurs :
 
-* Adrien Cunin <adrien.cunin@alterway.fr>
-* Pierre Freund <pierre.freund@alterway.fr>
-* Romain Guichard <romain.guichard@alterway.fr>
-* Kevin Lefevre <kevin.lefevre@alterway.fr>
-* Jean-François Taltavull <jean-francois.taltavull@alterway.fr>
+* Adrien Cunin
+* Pierre Freund
+* Romain Guichard
+* Kevin Lefevre
+* Jean-François Taltavull
+  
+* Anita Meliho <anita.meliho@alterway.fr>
+* Mohamed Reda Larbi Youcef <mohamed-reda.larbi-youcef@alterway.fr>
+* Arnaud Meukam <arnaud.meukam@alterway.fr>
+* Hervé Leclerc <herve.leclerc@alterway.fr>
 
-HTML et PDF construits automatiquement : <https://osones.com/formations/>
+HTML et PDF construits automatiquement : <https://alterway.fr/formations/>
 
 * OpenStack User [PDF](https://osones.com/formations/pdf/openstack-user.fr.pdf)/[HTML](https://osones.com/formations/openstack-user.fr.html)
 * OpenStack Ops [PDF](https://osones.com/formations/pdf/openstack-ops.fr.pdf)/[HTML](https://osones.com/formations/openstack-ops.fr.html)
