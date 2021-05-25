@@ -162,7 +162,7 @@ metadata:
 - Supprimer un StatefulSet ne supprime pas le PV associé
 
 
-![statefulset](images/statefulset.png)
+![statefulset](images/statefulset.png =200)
 
 
 ### Kubernetes : StatefulSet
@@ -233,19 +233,24 @@ spec:
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-    name: batch-job-every-fifteen-minutes
+  name: batch-job-every-fifteen-minutes
 spec:
-    schedule: "0,15,30,45 * * * *"
-    jobTemplate:
+  schedule: '0,15,30,45 * * * *'
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: periodic-batch-job
         spec:
-            template:
-                metadata:
-                    labels:
-                        app: periodic-batch-job
-                spec:
-                    restartPolicy: OnFailure
-                    containers:
-                    -  name: pi
-                       image: perl
-                       command: ["perl",  "-Mbignum=bpi", "-wle", "print bpi(2000)"]
+          restartPolicy: OnFailure
+          containers:
+            - name: pi
+              image: perl
+              command:
+                - perl
+                - '-Mbignum=bpi'
+                - '-wle'
+                - print bpi(2000)
+
 ```
