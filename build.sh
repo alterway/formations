@@ -51,7 +51,7 @@ build-html() {
       -V title="$TITLE" \
       -V institute="alter way Cloud Consulting" \
       -o /formations/output-html/"$cours"."$LANGUAGE".html \
-      /formations/"$COURS_DIR"/slide-"$cours" >/dev/null 2>&1 
+      /formations/"$COURS_DIR"/slide-"$cours"
     rm -f "$COURS_DIR"/slide-"$cours"
   done
 }
@@ -61,13 +61,15 @@ build-html() {
 build-pdf() {
   mkdir -p output-pdf
   for cours in $((jq keys | jq -r '.[]') < $LIST); do
+    echo "Generate pdf $cours"
     docker run --rm \
       -v $PWD/output-pdf:/output \
       -v $PWD/output-html/"$cours"."$LANGUAGE".html:/index.html \
       -v $PWD/images:/images alterway/docker-alpine-wkhtmltopdf \
+          -q \
           -O landscape \
           -s A5 \
-          -T 0 -B 0 file:///index.html\?print-pdf /output/"$cours"."$LANGUAGE".pdf >/dev/null 2>&1 
+          -T 0 -B 0 file:///index.html\?print-pdf /output/"$cours"."$LANGUAGE".pdf 
   done
 }
 
@@ -111,10 +113,11 @@ while getopts ":o:t:u:c:l:h" OPT; do
     esac
 done
 
-[[ $REVEALJSURL == "" ]] && REVEALJSURL="https://osones.com/formations/revealjs"
+#[[ $REVEALJSURL == "" ]] && REVEALJSURL="https://osones.com/formations/revealjs"
 #[[ $REVEALJSURL == "" ]] && REVEALJSURL="https://reveal.alterway.fr"
 #[[ $REVEALJSURL == "" ]] && REVEALJSURL="http://192.168.1.12:9000"
 #[ $REVEALJSURL == "" ]] && REVEALJSURL="http://10.2.1.35:9000"
+[[ $REVEALJSURL == "" ]] && REVEALJSURL="https://awformations.s3.eu-west-3.amazonaws.com/formations/revealjs"
 
 if [[ $THEME == "" ]]; then
   THEME="awcc"

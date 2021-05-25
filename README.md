@@ -160,3 +160,4 @@ Tous les contenus originaux (Makefile, scripts, fichiers dans `cours/`) sont :
 
 Les autres fichiers du répertoire `images/` sont soumis à leur copyright et licence respectifs.
 
+awformations.s3-website.eu-west-3.amazonaws.com/html/kubernetes-full.fr.html
