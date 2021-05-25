@@ -27,19 +27,22 @@ body {
 
 .reveal {
   font-family: "Source Sans Pro", sans-serif;
-  font-size: 30px;
+  font-size: 28px;
   font-weight: normal;
-  color: #383838; }
+  color: #383838; 
+}
 
 ::selection {
   color: #fff;
   background: #211b55;
-  text-shadow: none; }
+  text-shadow: none; 
+}
 
 .reveal .slides > section,
 .reveal .slides > section > section {
   line-height: 1.2;
-  font-weight: inherit; }
+  font-weight: inherit; 
+}
 
 
   /***************************************

@@ -225,6 +225,8 @@ kubectl apply -f object.yaml
    - [skooner](https://github.com/skooner-k8s/skooner)
    - [lens](https://k8slens.dev/)
    - ...
+  
+  
 ### Kubernetes : Kubernetes Dashboard
 
 - Pour déployer le Dashboard, exécuter la commande suivante:
