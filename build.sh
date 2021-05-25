@@ -51,7 +51,7 @@ build-html() {
       -V title="$TITLE" \
       -V institute="alter way Cloud Consulting" \
       -o /formations/output-html/"$cours"."$LANGUAGE".html \
-      /formations/"$COURS_DIR"/slide-"$cours"
+      /formations/"$COURS_DIR"/slide-"$cours" >/dev/null 2>&1 
     rm -f "$COURS_DIR"/slide-"$cours"
   done
 }
@@ -67,7 +67,7 @@ build-pdf() {
       -v $PWD/images:/images alterway/docker-alpine-wkhtmltopdf \
           -O landscape \
           -s A5 \
-          -T 0 -B 0 file:///index.html\?print-pdf /output/"$cours"."$LANGUAGE".pdf
+          -T 0 -B 0 file:///index.html\?print-pdf /output/"$cours"."$LANGUAGE".pdf >/dev/null 2>&1 
   done
 }
 
