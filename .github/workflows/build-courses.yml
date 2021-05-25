@@ -4,5 +4,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "🏗️" build assets
-      - run: build.sh
+      - run: echo "🏗️" build french assets
+      - run: bash build.sh -l fr
+      - run: echo "🏗️" build english assets
+      - run: bash build.sh -l en
