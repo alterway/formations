@@ -154,9 +154,71 @@ kubectl get services
 kubectl get svc
 ```
 
+### Kubernetes : Kubectl
+
+- Afficher les ressources d'un `namespace` particulier
+- Utilisable avec la plupart des commandes `kubectl`
+
+```console
+kubectl get pods --namespace=kube-system
+kubectl get pods -n kube-system
+kubectl create -n NNN ...
+kubectl run -n NNN ...
+kubectl delete -n NNN ...
+# ...
+```
+### Kubernetes : Kubectl
+
+- Pour lister des ressources dans tous les namespaces : `--all-namespaces`
+- Depuis kubernetes 1.14 on peut utiliser le flag `-A` en raccourci
+- Il est possible de l'utiliser avec beaucoup de commande kubectl pour manipuler toutes les ressources 
+
+```console
+kubectl get pods --all-namespaces
+# ou
+kubectl get pods -A
+# autres actions
+kubectl delete -A ...
+kubectl label -A ...
+```
+
+### Kubernetes : namespace kube-public 
+
+```console
+kubectl get all -n kube-public
+```
+
+- Le configMap contient les informations données par la commande
+  `kubectl cluster-info`
+
+```console
+kubectl -n kube-public get configmaps
+# voir le contenu du configmap (cm)
+kubectl -n kube-public get configmap cluster-info -o yaml
+# Ce configmap est lisible par tout le monde sans authentification
+curl -k https://{NodeIP}/api/v1/namespaces/kube-public/configmaps/cluster-info
+# Contient le kubeconfig
+```
+
+### Kubernetes : kubeconfig
+
+- Extraire le kubeconfig du configmap `cluster-info`
+
+```console
+curl -sk https://10.96.0.1/api/v1/namespaces/kube-public/configmaps/cluster-info \
+     | jq -r .data.kubeconfig
+```
+
+
+### Kubernetes : namespace kube-node-lease 
+
+- Ce namespace particulier existe depuis la 1.14
+- Il contient un objet `lease`par noeud
+- Ces `leases` permettent d'implémenter une nouvelle méthode pour verifier l'état de santé des noeuds
+- Voir (KEP-0009)[https://github.com/kubernetes/enhancements/blob/master/keps/sig-node/0009-node-heartbeat.md] pour plus d'information
 ### Kubernetes : Kubectl describe
 
-- `kubectl describe`a besoin d'un type de ressource et optionnelement un nom de ressource
+- `kubectl describe` a besoin d'un type de ressource et optionnelement un nom de ressource
 - Il est possible de fournir un _prefixe_ de nom de ressource
 
 - ex:
@@ -170,9 +232,28 @@ kubectl get svc
 ### Kubernetes : Création d'objets Kubernetes
 
 - Les objets Kubernetes sont créés sous la forme de fichiers JSON ou YAML et envoyés à l'APIServer
-- Possible d'utiliser la commande `kubectl run`, mais limitée aux `Deployments` et aux `Jobs`
+- Possible d'utiliser la commande `kubectl run`, mais limitée aux `deployments` et aux `jobs`
 - L'utilisation de fichiers YAML permet de les stocker dans un système de contrôle de version comme git, mercurial, etc...
 - La documentation de référence pour l'API Kubernetes <https://kubernetes.io/docs/reference/#api-reference>
+
+
+### Kubernetes : Créer un pod en ligne de commande
+
+- Cette commande avant la 1.18 créeait un deployement
+- Depuis elle démare un simple `pod`
+
+```console
+kubectl run pingu --image=alpine -- ping 127.1
+```
+
+### Kubernetes : Créer un deploiement en ligne de commande
+
+- kubectl create `deployment` ...
+- Depuis kubernetes 1.19, il est possible de préciser un commande au moment du create
+
+```console
+kubectl create deployment pingu --image=alpine -- ping 127.1
+```
 
 ### Kubernetes : Création d'objets Kubernetes
 
