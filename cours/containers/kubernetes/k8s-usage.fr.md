@@ -216,6 +216,7 @@ curl -sk https://10.96.0.1/api/v1/namespaces/kube-public/configmaps/cluster-info
 - Il contient un objet `lease`par noeud
 - Ces `leases` permettent d'implémenter une nouvelle méthode pour verifier l'état de santé des noeuds
 - Voir (KEP-0009)[https://github.com/kubernetes/enhancements/blob/master/keps/sig-node/0009-node-heartbeat.md] pour plus d'information
+
 ### Kubernetes : Kubectl describe
 
 - `kubectl describe` a besoin d'un type de ressource et optionnelement un nom de ressource
@@ -239,7 +240,7 @@ curl -sk https://10.96.0.1/api/v1/namespaces/kube-public/configmaps/cluster-info
 
 ### Kubernetes : Créer un pod en ligne de commande
 
-- Cette commande avant la 1.18 créeait un deployement
+- Cette commande avant la 1.18 créait un deployement
 - Depuis elle démare un simple `pod`
 
 ```console
@@ -249,7 +250,7 @@ kubectl run pingu --image=alpine -- ping 127.1
 ### Kubernetes : Créer un deploiement en ligne de commande
 
 - kubectl create `deployment` ...
-- Depuis kubernetes 1.19, il est possible de préciser un commande au moment du create
+- Depuis kubernetes 1.19, il est possible de préciser un commande au moment du `create`
 
 ```console
 kubectl create deployment pingu --image=alpine -- ping 127.1

@@ -1,4 +1,4 @@
-# KUBECTL : : Usage Avancé
+# KUBECTL : Usage Avancé
 
 - Il est possible de mettre à jour un service sans incident grâce ce qui est appelé le _rolling-update_.
 - Avec les _rolling updates_, les ressources qu'expose un objet `Service` se mettent à jour progressivement.
@@ -38,8 +38,35 @@ spec:
 ### Kubectl : Usage avancé
 
 ```console
+
+- Certaines commandes qui modifient un déploimement accepte un flag optionnel `--record`
+- Ce flag stocke la ligne de commande dans le déploiement
+- Et est copié aussi dans le `replicaSet` (annotation)
+- Cela permet de suivre quelle commande a créé ou modifié ce `replicatset`
+
 $ kubectl create -f nginx.yaml --record
 deployment.apps/nginx created
+
+# Voir les informations
+kubectl rollout history
+```
+
+### Kubectl : Usage avancé
+
+- Utiliser le flag `--record`
+
+```console
+# déployer l'image worker:v0.2
+kubectl create deployment worker --image=dockercoins/worker:v0.2
+
+# Roll back `worker` vers l'image version 0.1:
+kubectl set image deployment worker worker=dockercoins/worker:v0.1 --record
+
+# Le remettre sur la version 0.2:
+kubectl set image deployment worker worker=dockercoins/worker:v0.2 --record
+
+# Voir l'historique des changement:
+kubectl rollout history deployment worker
 ```
 
 ### Kubectl : Usage avancé
@@ -126,7 +153,7 @@ kubectl logs deploy/nginx
 - Faire un `CTRL-C`pour arrêter la sortie
 ### Kubectl : Afficher les logs en temps réel 
 
-`kubectl logs`supporte les options suivantes :
+`kubectl logs` supporte les options suivantes :
    - `-f/--follow` pour suivre les affichage des logs en temps réel (comme pour `tail -f`)
    - `--tail` pour n'afficher que les `n` lignes à partir de la fin de la sortie
    - `--since` pour n'afficher que les logs à partir d'une certaine date
