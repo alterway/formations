@@ -65,7 +65,7 @@
 
 ### Kubernetes : Services
 
-![](images/services-userspace-overview.svg){width="800"}
+![](images/services-userspace-overview.svg){height="700"}
 
 ### Kubernetes : Services
 
