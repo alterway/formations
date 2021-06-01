@@ -151,6 +151,7 @@ kubectl logs deploy/nginx
 ```
 
 - Faire un `CTRL-C`pour arrêter la sortie
+
 ### Kubectl : Afficher les logs en temps réel 
 
 `kubectl logs` supporte les options suivantes :

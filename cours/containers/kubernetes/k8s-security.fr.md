@@ -168,6 +168,7 @@ spec:
 
 ### PodSecurityPolicies
 
+
 ```yaml
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy

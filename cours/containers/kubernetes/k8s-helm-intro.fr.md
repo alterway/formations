@@ -103,7 +103,7 @@ Vérifions quels référentiels nous avons et ajoutons le référentiel `stable`
 
 - "Installer un chart"  veut dire installer une **release**
 
-- Il faut donner un nom a cette release
+- Il faut donner un nom à cette **Release**
 
   (ou utiliser le flag  `--generate-name` pourque helm le fasse automatiquement pour nous)
 
@@ -127,21 +127,22 @@ Vérifions quels référentiels nous avons et ajoutons le référentiel `stable`
 
 ### Kubernetes : Helm -  Configurer une release
 
-- By default, `stable/nginx` creates a service of type `LoadBalancer`
 
-- We would like to change that to a `NodePort`
+- Par défaut, le chart `stable/nginx` crée un service de type` LoadBalancer`
 
-- We could use `kubectl edit service nginx-nginx`, but ...
+- On veut changer cela en un `NodePort`
 
-  ... our changes would get overwritten next time we update that chart!
+- on peut utiliser `kubectl edit service nginx-nginx`, mais ...
 
-- Instead, we are going to *set a value*
+  ... nos modifications seraient écrasées la prochaine fois qu'on à jour ce Chart !
 
-- Values are parameters that the chart can use to change its behavior
+- On va pour cela définir une valeur pour le type de service
 
-- Values have default values
+- Les valeurs sont des paramètres que le **Chart** peut utiliser pour modifier son comportement
 
-- Each chart is free to define its own values and their defaults
+- Les valeurs ont des valeurs par défaut
+
+- Chaque **Chart** peut de définir ses propres valeurs et leurs valeurs par défaut
 
 ### Kubernetes : Helm - Voir les différentes valeurs
 
@@ -156,17 +157,15 @@ Vérifions quels référentiels nous avons et ajoutons le référentiel `stable`
   helm show values stable/nginx
 ```
 
-The `values` may or may not have useful comments.
+Les `values` n'ont peut être pas de commentaire utiles.
 
-The `readme` may or may not have (accurate) explanations for the values.
+Le fichier `readme` peut ou pas donner des informations sur ces `values`.
 
-(If we're unlucky, there won't be any indication about how to use the values!)
+### Kubernetes : Helm - Changer les valeurs
 
-### Kubernetes : Helm - Chager les valeurs
+- Les valeurs peuvent être définies lors de l'installation d'un Chart ou lors de sa mise à jour
 
-- Values can be set when installing a chart, or when upgrading it
-
-- We are going to update `nginx` to change the type of the service
+- Dans notre exemple on va  mettre à jour `nginx` pour changer le type de service
 
 ```bash
 # Update `nginx`:
@@ -174,26 +173,16 @@ The `readme` may or may not have (accurate) explanations for the values.
   helm upgrade nginx stable/nginx --set service.type=NodePort
 ```
 
-Note that we have to specify the chart that we use (`stable/nginx`),
-even if we just want to update some values.
+### Kubernetes : Helm - Créer un chart  
 
-We can set multiple values. If we want to set many values, we can use `-f`/`--values` and pass a YAML file with all the values.
+- Utilisation de la commande : `helm create myapp` va permettre de créer la structure de répertoire et de fichiers d'un chart "standard"
+- Par défaut ce char déploie un `nginx` en templatisant les `services`, `deployment`, `serviceAccount`, etc...
+- C'est une bonne base pour démarrer
 
-All unspecified values will take the default values defined in the chart.
 
-### Kubernetes : Helm -  Connecting to nginx
+### Kubernetes : Helm - A quoi peut servir d'autre un chart Helm
 
-- Let's check the nginx server that we just installed
-
-- Note: its readiness probe has a 60s delay
-
-  (so it will take 60s after the initial deployment before the service works)
-
-```bash
-# Check the node port allocated to the service:
-  kubectl get service nginx-nginx
-  PORT=$(kubectl get service nginx-nginx -o jsonpath={..nodePort})
-
-# Connect to it, checking the demo app on `/sample/`:
-  curl localhost:$PORT/sample/
-```
+- Outre le fait de déployer des applications, on peut gérer des paramétrages des environnements applicatifs
+- Gérer facilement les Roles / Rolebinding
+- Des paramétrages d'opérateurs
+- ...  
