@@ -146,7 +146,7 @@ Vérifions quels référentiels nous avons et ajoutons le référentiel `stable`
 
 ### Kubernetes : Helm - Voir les différentes valeurs
 
-- Il est possible d'inspecter une release avec  les commandes  `helm show` or `helm inspect`
+- Il est possible d'inspecter une release avec les commandes  `helm show` or `helm inspect`
 
 ```bash
 # Look at the README for nginx:
@@ -157,15 +157,16 @@ Vérifions quels référentiels nous avons et ajoutons le référentiel `stable`
   helm show values stable/nginx
 ```
 
-Les `values` n'ont peut être pas de commentaire utiles.
+Les `values` n'ont peut être pas de commentaires utiles.
 
-Le fichier `readme` peut ou pas donner des informations sur ces `values`.
+Le fichier `readme` peut ou pas, donner des informations sur ces `values`.
 
 ### Kubernetes : Helm - Changer les valeurs
 
 - Les valeurs peuvent être définies lors de l'installation d'un Chart ou lors de sa mise à jour
+    `helm install` `helm upgrade`
 
-- Dans notre exemple on va  mettre à jour `nginx` pour changer le type de service
+- Dans notre exemple, on va  mettre à jour `nginx` pour changer le type de service
 
 ```bash
 # Update `nginx`:
@@ -176,13 +177,13 @@ Le fichier `readme` peut ou pas donner des informations sur ces `values`.
 ### Kubernetes : Helm - Créer un chart  
 
 - Utilisation de la commande : `helm create myapp` va permettre de créer la structure de répertoire et de fichiers d'un chart "standard"
-- Par défaut ce char déploie un `nginx` en templatisant les `services`, `deployment`, `serviceAccount`, etc...
+- Par défaut, ce Chart déploie un `nginx` en templatisant les `services`, `deployment`, `serviceAccount`, etc...
 - C'est une bonne base pour démarrer
 
 
 ### Kubernetes : Helm - A quoi peut servir d'autre un chart Helm
 
-- Outre le fait de déployer des applications, on peut gérer des paramétrages des environnements applicatifs
-- Gérer facilement les Roles / Rolebinding
+- Outre le fait de déployer des applications, on peut gérer d'autres choses avec helm, grace à la puissance du langage de template
+- Gérer facilement les Roles / Rolebinding / ClusterRole / ClusterRoleBinding
 - Des paramétrages d'opérateurs
 - ...  
