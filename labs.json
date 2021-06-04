@@ -1,5 +1,5 @@
 {
-  "labs-kubernetes-full": {
+  "kubernetes-full": {
     "lab_name": "Labs Kubernetes Full",
     "lab_description": "Labs Kubernetes Full",
     "modules": [
@@ -21,7 +21,7 @@
       "k8s/lab-final-cheat"
     ]
   },
-  "labs-kubernetes-user": {
+  "kubernetes-user": {
     "lab_name": "Labs Kubernetes User",
     "lab_description": "Labs Kubernetes User",
     "modules": [
@@ -43,7 +43,7 @@
       "k8s/lab-final-cheat"
     ]
   },
-  "labs-kubernetes-ops": {
+  "kubernetes-ops": {
     "lab_name": "Labs Kubernetes OPS",
     "lab_description": "Labs Kubernetes OPS",
     "modules": [

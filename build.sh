@@ -3,8 +3,8 @@
 COURS_DIR=cours
 IMG_DIR=images
 LIST=cours.json
-LANGUAGE=fr
-FALLBACK_LANGUAGE=fr
+LANGUAGE="fr"
+FALLBACK_LANGUAGE="fr"
 LABS_DIR=labs
 LABS_LIST=labs.json
 
@@ -60,47 +60,26 @@ build-html() {
 
 build-html-labs() {
   mkdir -p output-html
-  ln -fs ../images output-html
-
-  echo $REVEALJSURL | grep -q http
-  if [ $? == 1 ]; then
-    cp styles/"$THEME".css $REVEALJSURL/css/theme/"$THEME".css
-    cp -r styles/"$THEME" $REVEALJSURL/css/theme/
-  fi
-
+  echo $LIST_LABS
   for lab in $((jq keys | jq -r '.[]') < $LIST_LABS); do
-    for module in $(jq -r '.["'"$lab"'"].modules[]' $LIST_LABS); do
-      if [ -f "$LABS_DIR"/"$module"."$LANGUAGE".md ]; then
-        cat $LABS_DIR/"$module"."$LANGUAGE".md >> "$LABS_DIR"/slide-"$lab"
-      elif [ -f "$LABS_DIR"/"$module"."$FALLBACK_LANGUAGE".md ]; then
-        cat "$LABS_DIR"/"$module"."$FALLBACK_LANGUAGE".md >> "$LABS_DIR"/slide-"$lab"
-      else
-        echo "module "$module" doesn't exist in any of the languages"
-      fi
-    done
-    TITLE=$(jq -r '.["'"$lab"'"].lab_name' $LIST_LABS)
-
-    # Header2 are only usefull for beamer, they need to be replaced with Header3 for revealjs interpretation
-    sed -i 's/^## /### /' "$LABS_DIR"/slide-"$lab"
-    echo "Build "$TITLE" "$LANUGAGE" ("$OUTPUT")"
-    docker run --rm -v $PWD:/formations alterway/revealjs-builder:"$DOCKER_TAG" \
-      --standalone \
-      --template=/formations/templates/template.revealjs \
-      --slide-level 3 \
-      -V theme="$THEME" \
-      -V navigation=frame \
-      -V revealjs-url="$REVEALJSURL" \
-      -V slideNumber=true \
-      -V title="$TITLE" \
-      -V institute="alter way Cloud Consulting" \
-      -o /formations/output-html/"$lab"."$LANGUAGE".html \
-      /formations/"$LABS_DIR"/slide-"$lab"
-    rm -f "$LABS_DIR"/slide-"$lab"
+      for module in $(jq -r '.["'"$lab"'"].modules[]' $LIST_LABS); do
+        if [ -f "$LABS_DIR"/"$module"."$LANGUAGE".md ]; then
+          cat $LABS_DIR/"$module"."$LANGUAGE".md >> "$LABS_DIR"/labs-"$lab".md
+        elif [ -f "$LABS_DIR"/"$module"."$FALLBACK_LANGUAGE".md ]; then
+          cat "$LABS_DIR"/"$module"."$FALLBACK_LANGUAGE".md >> "$LABS_DIR"/labs-"$lab".md
+        else
+          echo "module "$module" doesn't exist in any of the languages"
+        fi
+      done
+  
+    docker run --rm \
+        -v $PWD/output-html:/output \
+        -v $PWD/labs:/input \
+          alterway/pandocker-alpine:2.10 \
+           pandoc -t html5 /input/labs-"$lab".md -V mainfont="DejaVu Serif" -s -o /output/labs-"$lab"."$LANGUAGE".html
+    rm -f "$LABS_DIR"/labs-"$lab".md
   done
 }
-
-
-
 
 # madnight/docker-alpine-wkhtmltopdf
 
@@ -124,13 +103,13 @@ mkdir -p output-pdf
   for lab in $((jq keys | jq -r '.[]') < $LIST_LABS); do
     echo "Generate pdf $lab"
     docker run --rm \
-      -v $PWD/output-pdf:/output \
-      -v $PWD/output-html/"$lab"."$LANGUAGE".html:/index.html \
-      -v $PWD/images:/images alterway/docker-alpine-wkhtmltopdf \
+      -v $(pwd)/output-pdf:/output \
+      -v $(pwd)/output-html/labs-"$lab"."$LANGUAGE".html:/index.html \
+      -v $(pwd)/images:/images alterway/docker-alpine-wkhtmltopdf \
           -q \
           -O portrait \
           -s A5 \
-          -T 0 -B 0 file:///index.html\?print-pdf /output/"$lab"."$LANGUAGE".pdf 
+          -T 0 -B 0 file:///index.html\?print-pdf /output/labs-"$lab"."$LANGUAGE".pdf 
   done
 }
 
@@ -161,7 +140,7 @@ EOF
 exit 0
 }
 
-while getopts ":o:t:u:c:l:h" OPT; do
+while getopts ":o:t:u:c:e:l:h" OPT; do
     case $OPT in
         h) display_help ;;
         c) COURSE="$OPTARG";;
@@ -218,7 +197,9 @@ elif [[ $OUTPUT == "html" ]]; then
     build-html-labs
 elif [[ $OUTPUT == "pdf" || $OUTPUT == "all" ]]; then
     build-html
+    build-html-labs
     build-pdf
     build-pdf-labs
 fi
 rm -f cours.json.tmp
+rm -f labs.json.tmp
