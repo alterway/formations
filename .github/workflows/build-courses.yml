@@ -4,8 +4,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "🌀 Build Start"
-      - name: Check out repository code
+      - name: 🌀 Check out repository code
         uses: actions/checkout@v2
       - name: Sync styles with s3
         uses: jakejarvis/s3-sync-action@master

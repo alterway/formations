@@ -1,0 +1,68 @@
+{
+  "labs-kubernetes-full": {
+    "lab_name": "Labs Kubernetes Full",
+    "lab_description": "Labs Kubernetes Full",
+    "modules": [
+      "k8s/installation_kubernetes",
+      "k8s/basics",
+      "k8s/storage",
+      "k8s/resources",
+      "k8s/liveness_probe",
+      "k8s/scheduling",
+      "k8s/secrets",
+      "k8s/rbac",
+      "k8s/rolling_update",
+      "k8s/network-policy",
+      "k8s/monitoring",
+      "k8s/helm",
+      "k8s/logging",
+      "k8s/upgrade",
+      "k8s/lab-final",
+      "k8s/lab-final-cheat"
+    ]
+  },
+  "labs-kubernetes-user": {
+    "lab_name": "Labs Kubernetes User",
+    "lab_description": "Labs Kubernetes User",
+    "modules": [
+      "k8s/installation_kubernetes",
+      "k8s/basics",
+      "k8s/storage",
+      "k8s/resources",
+      "k8s/liveness_probe",
+      "k8s/scheduling",
+      "k8s/secrets",
+      "k8s/rbac",
+      "k8s/rolling_update",
+      "k8s/network-policy",
+      "k8s/monitoring",
+      "k8s/helm",
+      "k8s/logging",
+      "k8s/upgrade",
+      "k8s/lab-final",
+      "k8s/lab-final-cheat"
+    ]
+  },
+  "labs-kubernetes-ops": {
+    "lab_name": "Labs Kubernetes OPS",
+    "lab_description": "Labs Kubernetes OPS",
+    "modules": [
+      "k8s/installation_kubernetes",
+      "k8s/basics",
+      "k8s/storage",
+      "k8s/resources",
+      "k8s/liveness_probe",
+      "k8s/scheduling",
+      "k8s/secrets",
+      "k8s/rbac",
+      "k8s/rolling_update",
+      "k8s/network-policy",
+      "k8s/monitoring",
+      "k8s/helm",
+      "k8s/logging",
+      "k8s/upgrade",
+      "k8s/lab-final",
+      "k8s/lab-final-cheat"
+    ]
+  }
+}
