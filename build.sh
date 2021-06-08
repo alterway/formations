@@ -60,6 +60,7 @@ build-html() {
 
 build-html-labs() {
   mkdir -p output-html
+  ln -fs ../images output-html
   echo $LIST_LABS
   for lab in $((jq keys | jq -r '.[]') < $LIST_LABS); do
       for module in $(jq -r '.["'"$lab"'"].modules[]' $LIST_LABS); do
@@ -76,7 +77,7 @@ build-html-labs() {
         -v $PWD/output-html:/output \
         -v $PWD/labs:/input \
           alterway/pandocker-alpine:2.10 \
-           pandoc -t html5 /input/labs-"$lab".md -V mainfont="DejaVu Serif" -s -o /output/labs-"$lab"."$LANGUAGE".html
+           pandoc -t html5 /input/labs-"$lab".md -V mainfont="DejaVu Serif" -s --highlight-style tango -o /output/labs-"$lab"."$LANGUAGE".html
     rm -f "$LABS_DIR"/labs-"$lab".md
   done
 }

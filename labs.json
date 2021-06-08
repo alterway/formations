@@ -3,6 +3,7 @@
     "lab_name": "Labs Kubernetes Full",
     "lab_description": "Labs Kubernetes Full",
     "modules": [
+      "k8s/intro",
       "k8s/installation_kubernetes",
       "k8s/basics",
       "k8s/storage",
@@ -25,6 +26,7 @@
     "lab_name": "Labs Kubernetes User",
     "lab_description": "Labs Kubernetes User",
     "modules": [
+      "k8s/intro",
       "k8s/installation_kubernetes",
       "k8s/basics",
       "k8s/storage",
@@ -47,6 +49,8 @@
     "lab_name": "Labs Kubernetes OPS",
     "lab_description": "Labs Kubernetes OPS",
     "modules": [
+      "k8s/intro",
+      "k8s/intro",
       "k8s/installation_kubernetes",
       "k8s/basics",
       "k8s/storage",

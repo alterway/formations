@@ -1,24 +1,29 @@
 # Liveness and Readiness probe
 
+
+<hr>
+
 Machine : **master**
 
-```bash
-training@master$ mkdir healthchecking
-training@master$ cd healthchecking
-training@master$ kubectl create namespace healthchecking
-```
+<hr>
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+mkdir healthchecking
+cd healthchecking
+kubectl create namespace healthchecking
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ## Liveness probe, avec un fichier
 
 1. Commencons par créer un ficher yaml décrivant un pod avec une liveness probe.
 
-```bash
-training@master$ touch file-liveness.yaml
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+touch file-liveness.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Avec le contenu yaml suivant :
 
-```yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
 apiVersion: v1
 kind: Pod
 metadata:
@@ -39,21 +44,24 @@ spec:
         - /tmp/healthy
       initialDelaySeconds: 5
       periodSeconds: 5
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 2. Nous allons donc créer ce pod de la façon suivante :
 
-```bash
-training@master$ kubectl apply -f file-liveness.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl apply -f file-liveness.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-pod/file-liveness created
-```
+*pod/file-liveness created*
 
 3. Au bout de quelques secondes, nous pouvons faire un describe sur le pod et observer le resultat suivant :
 
-```bash
-training@master$ kubectl describe pods -n healthchecking file-liveness
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl describe pods -n healthchecking file-liveness
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 ...
 Events:
   Type     Reason     Age               From               Message
@@ -65,7 +73,7 @@ Events:
   Normal   Started    27s               kubelet            Started container liveness
   Warning  Unhealthy  5s (x3 over 15s)  kubelet            Liveness probe failed: cat: can't open '/tmp/healthy': No such file or directory
   Normal   Killing    5s                kubelet            Container liveness failed liveness probe, will be restarted
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 La liveness probe fini donc par echouer comme prevu, etant donne que le fichier /tmp/healthy n'existe plus. On remarque également que Kubernetes kill le conteneur a l'interieur du pod et le recrée.
 
@@ -75,13 +83,13 @@ Nous allons cette fois mettre en place une liveness probe mais avec une requête
 
 1. Commencons par creer un fichier http-liveness.yaml :
 
-```bash
-training@master$ touch http-liveness.yaml
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+touch http-liveness.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Avec le contenu yaml suivant :
 
-```yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
 apiVersion: v1
 kind: Pod
 metadata:
@@ -97,23 +105,27 @@ spec:
         port: 80
       initialDelaySeconds: 3
       periodSeconds: 3
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Cette fois ci, la liveness probe utilise une requête http avec la methode GET sur la racine toute les 3 secondes. La liveness probe échouera selon le code d'érreur de la requête http.
 
 2. Créeons donc ce pod :
 
-```bash
-training@master$ kubectl apply -f http-liveness.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl apply -f http-liveness.yaml
 
-pod/http-liveness created
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+*pod/http-liveness created*
 
 3. Si nous faisons un describe sur le pod, nous devrions voir que tout se passe bien pour l'instant :
 
-```bash
-training@master$ kubectl describe pods -n healthchecking http-liveness
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl describe pods -n healthchecking http-liveness
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 ...
 Events:
   Type    Reason     Age   From               Message
@@ -123,18 +135,18 @@ Events:
   Normal  Pulled     114s  kubelet            Successfully pulled image "nginx" in 3.862745132s
   Normal  Created    114s  kubelet            Created container liveness
   Normal  Started    113s  kubelet            Started container liveness
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 4. Nous allons supprimer la page d'acceuil de nginx dans le conteneur, ce qui entrainera un code d'erreur 400 pour la requete http de la liveness probe :
 
-```bash
-training@master$ kubectl exec -n healthchecking http-liveness rm /usr/share/nginx/html/index.html
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl exec -n healthchecking http-liveness rm /usr/share/nginx/html/index.html
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 5. Au bout de quelques secondes, on devrait voir que la liveness probe echoue et le conteneur est recree :
 
-```bash
-training@master$ kubectl describe pods -n healthchecking http-liveness
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl describe pods -n healthchecking http-liveness
 
 Type     Reason     Age                From               Message
 ----     ------     ----               ----               -------
@@ -146,23 +158,28 @@ Normal   Killing    34s                kubelet            Container liveness fai
 Normal   Created    32s (x2 over 57s)  kubelet            Created container liveness
 Normal   Started    32s (x2 over 57s)  kubelet            Started container liveness
 Normal   Pulled     32s                kubelet            Successfully pulled image "nginx" in 2.031773864s
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 On voit que le conteneur a été tué par Kubernetes étant donné que la liveness probe a echoué.
 
+
+<hr>
+
 ## Readiness Probe
+
+<hr>
 
 Nous allons maintenant voir une autre façon de faire du healthchecking sur un pod : la readiness probe. Elle permet à Kubernetes de savoir lorsque l'application se trouvant dans un pod a bel et bien demarré. Comme la liveness probe, elle fait ca a l'aide de commandes, de requêtes http/tcp, etc.
 
 1. Commençons par créer un fichier file-readiness.yaml :
 
-```bash
-training@master$ touch file-readiness.yaml
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+touch file-readiness.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Avec le contenu yaml suivant :
 
-```yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
 apiVersion: v1
 kind: Pod
 metadata:
@@ -183,23 +200,26 @@ spec:
         - /tmp/healthy
       initialDelaySeconds: 5
       periodSeconds: 5
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Ce pod est un peu similaire à celui de file-liveness dans l'exerice 1. Cette fois ci, le pod attend 30 secondes au démarrage avant de créer un fichier /tmp/healthy. Ce pod contient également une readiness probe verifiant l'existance de ce fichier /tmp/healthy.
 
 2. Créeons donc ce pod :
 
-```bash
-training@master$ kubectl apply -f file-readiness.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl apply -f file-readiness.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-pod/file-readiness created
-```
+*pod/file-readiness created*
 
 3. Si on fait on describe tout de suite après la création du pod, on devrait voir le pod n'est pas encore prêt :
 
-```bash
-training@master$ kubectl describe pods -n healthchecking file-readiness  
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl describe pods -n healthchecking file-readiness  
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 Events:
   Type     Reason     Age               From               Message
   ----     ------     ----              ----               -------
@@ -209,23 +229,29 @@ Events:
   Normal   Created    37s               kubelet            Created container liveness
   Normal   Started    36s               kubelet            Started container liveness
   Warning  Unhealthy  1s (x7 over 31s)  kubelet            Readiness probe failed: cat: can't open '/tmp/healthy': No such file or directory
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 4. Au bout d'environ une minute, on devrait voir le pod entrant dans l'état ready (1/1) :
 
-```bash
-training@master$ kubectl get pods -n healthchecking
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl get pods -n healthchecking
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 
 NAME             READY   STATUS             RESTARTS   AGE
 file-liveness    0/1     CrashLoopBackOff   7          14m
 file-readiness   1/1     Running            0          105s
 http-liveness    1/1     Running            1          6m3s  
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ## Clean up
 
 Nous allons supprimer les ressources créées par cet exercice de la façon suivante :
 
-```bash
-training@master$ kubectl delete -f .
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl delete -f .
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+<hr>

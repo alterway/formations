@@ -1,24 +1,27 @@
 # Stockage
 
-Machine : **master**
 
-```bash
-training@master$ mkdir storage
-training@master$ cd storage
-training@master$ kubectl create namespace storage
-```
+<hr>
+Machine : **master**
+<hr>
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+mkdir storage
+cd storage
+kubectl create namespace storage
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ## PersistentVolume et PersistentVolumeClaim
 
 1. Commençons par définir un persistantvolume :
 
-```bash
-training@master$ touch postgres-pv.yaml
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+touch postgres-pv.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Avec le contenu yaml suivant :
 
-```yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -34,21 +37,24 @@ spec:
     - ReadWriteOnce
   hostPath:
     path: "/mnt/data"
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 2. Nous allons donc créer ce pv :
 
-```bash
-training@master$ kubectl apply -f postgres-pv.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl apply -f postgres-pv.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-persistentvolume/postgres-pv created
-```
+*persistentvolume/postgres-pv created*
 
 3. Nous pouvons récupérer des informations sur ce pv de la façon suivante :
 
-```bash
-training@master$ kubectl describe pv -n storage postgres-pv
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl describe pv -n storage postgres-pv
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 Name:            postgres-pv
 Labels:          type=local
 Annotations:     <none>
@@ -67,17 +73,17 @@ Source:
     Path:          /mnt/data
     HostPathType:  
 Events:            <none>
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 4. Nous allons maintenant définir un persistantvolumeclaim :
 
-```bash
-training@master$ touch postgres-pvc.yaml
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+touch postgres-pvc.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Avec le contenu yaml suivant :
 
-```yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -90,36 +96,39 @@ spec:
   resources:
     requests:
       storage: 3Gi
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 5. Nous allons créer ce pvc :
 
-```bash
-training@master$ kubectl apply -f postgres-pvc.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl apply -f postgres-pvc.yaml
 
-persistentvolumeclaim/postgres-pvc created
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+*persistentvolumeclaim/postgres-pvc created
+*
 6. Nous pouvons maintenant inspecter ce pvc :
 
-```bash
-training@master$ kubectl get pvc -n storage postgres-pvc
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl get pvc -n storage postgres-pvc
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 NAME           STATUS   VOLUME        CAPACITY   ACCESS MODES   STORAGECLASS   AGE
 postgres-pvc   Bound    postgres-pv   10Gi       RWO            manual         14s
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Notre pvc est maintenant **bound** a notre pv.
 
 7. Nous allons maintenant définir un pod utilisant ce pvc :
 
-```bash
-training@master$ touch postgres-with-pvc-pod.yaml
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+touch postgres-with-pvc-pod.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Avec le contenu yaml suivant :
 
-```yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
 apiVersion: v1
 kind: Pod
 metadata:
@@ -139,21 +148,23 @@ spec:
       volumeMounts:
         - mountPath: "/var/lib/postgresql/data"
           name: postgres-volume
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 8. Créeons donc ce pod :
 
-```bash
-training@master$ kubectl apply -f postgres-with-pvc-pod.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl apply -f postgres-with-pvc-pod.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-pod/postgres-with-pvc-pod created
-```
+*pod/postgres-with-pvc-pod created*
 
 9. Inspectons ce pod, nous devrions voir qu'il utilise bien notre pvc :
 
-```bash
-training@master$ kubectl describe pods -n storage postgres-with-pvc-pod
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl describe pods -n storage postgres-with-pvc-pod
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 ...
 Volumes:
   postgres-volume:
@@ -161,18 +172,26 @@ Volumes:
     ClaimName:  postgres-pvc
     ReadOnly:   false
 ...
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+<hr>
 
 ## OpenEBS
 
+<hr>
+
+
 1. Nous allons commencer par installer OpenEBS :
 
-```bash
-training@master$ helm repo add openebs https://openebs.github.io/charts
-training@master$ helm repo update
-training@master$ kubectl create namespace openebs-system
-training@master$ helm install openebs openebs/openebs --namespace openebs-system
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+helm repo add openebs https://openebs.github.io/charts
+helm repo update
+kubectl create namespace openebs-system
+helm install openebs openebs/openebs --namespace openebs-system
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 NAME: openebs
 LAST DEPLOYED: Mon Oct 26 14:20:53 2020
 NAMESPACE: openebs
@@ -183,13 +202,16 @@ NOTES:
 The OpenEBS has been installed. Check its status by running:
 
 ...
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 2. Par défault, OpenEBS cree plusieurs storageclasses, que nous pouvons voir de la façon suivante :
 
-```bash
-training@master$ kubectl describe storageclass openebs-jiva-default
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl describe storageclass openebs-jiva-default
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 Name:            openebs-jiva-default
 IsDefaultClass:  No
 Annotations:     cas.openebs.io/config=- name: ReplicaCount
@@ -215,17 +237,17 @@ MountOptions:          <none>
 ReclaimPolicy:         Delete
 VolumeBindingMode:     Immediate
 Events:                <none>
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 3. Nous allons définir notre propre storage class utilisant openebs :
 
-```bash
-training@master$ touch openebs-custom-sc.yaml
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+touch openebs-custom-sc.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Avec le contenu yaml suivant :
 
-```yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
@@ -240,25 +262,25 @@ metadata:
 provisioner: openebs.io/provisioner-iscsi
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 4. Créeons cette storage class :
 
-```bash
-training@master$ kubectl apply -f openebs-custom-sc.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl apply -f openebs-custom-sc.yaml
 
 storageclass.storage.k8s.io/openebs-custom-sc created
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 5. Nous allons maintenant définir un pvc utilisant la storageclass openebs-jiva-default :
 
-```bash
-training@master$ touch postgres-openebs-pvc.yaml
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+touch postgres-openebs-pvc.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Avec le contenu yaml suivant :
 
-```yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -271,43 +293,54 @@ spec:
   resources:
     requests:
       storage: 3Gi
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 6. Créeons donc ce pvc :
 
-```bash
-training@master$ kubectl apply -f postgres-openebs-pvc.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl apply -f postgres-openebs-pvc.yaml
 
-persistentvolumeclaim/postgres-openebs-pvc created
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*persistentvolumeclaim/postgres-openebs-pvc created*
 
 7. Que nous pouvons inspecter de la façon suivante :
 
-```bash
-training@master$ kubectl get pvc -n storage postgres-openebs-pvc
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl get pvc -n storage postgres-openebs-pvc
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 NAME                   STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS        AGE
 postgres-openebs-pvc   Bound    pvc-2aa4e773-290f-4a6b-839f-789f0e86b75d   3Gi        RWO            openebs-custom-sc   12s
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-8. Nous pouvons également voir qu'un pv a été généré de façon automatique :
+1. Nous pouvons également voir qu'un pv a été généré de façon automatique :
 
-```bash
-training@master$ kubectl get pv -n storage
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl get pv -n storage
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS     CLAIM                          STORAGECLASS          REASON   AGE
 pvc-2aa4e773-290f-4a6b-839f-789f0e86b75d   3Gi        RWO            Delete           Bound      storage/postgres-openebs-pvc   openebs-custom-sc              52s
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+<hr>
 
 ## Clean Up
 
+<hr>
+
 Nous pouvons supprimer les objets générés par cet exercice de la facon suivante :
 
-```bash
-training@master$ kubectl delete -f postgres-openebs-pvc.yaml -f postgres-pv.yaml -f postgres-pvc.yaml -f postgres-with-pvc-pod.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl delete -f postgres-openebs-pvc.yaml -f postgres-pv.yaml -f postgres-pvc.yaml -f postgres-with-pvc-pod.yaml
 
 persistentvolumeclaim "postgres-openebs-pvc" deleted
 persistentvolume "postgres-pv" deleted
 persistentvolumeclaim "postgres-pvc" deleted
 pod "postgres-with-pvc-pod" deleted
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+<hr>

@@ -1,42 +1,53 @@
+
 # Scheduling
 
-Machine : **master**
-
-```bash
-training@master$ mkdir scheduling
-training@master$ cd scheduling
-training@master$ kubectl create namespace scheduling
-```
-
+<hr>
+Machine : master
+<hr>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+mkdir scheduling
+cd scheduling
+kubectl create namespace scheduling
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ## Taints and Tolerations
 
-1. Nous allons commencer par mettre une taint sur le noeud worker :
+1. Nous allons commencer par mettre un **taint** sur les noeuds node1 et node2:
 
-```bash
-training@master$ kubectl taint nodes worker dedicated=experimental:NoSchedule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl taint nodes node1 dedicated=experimental:NoSchedule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-node/worker tainted
-```
+*node/node1 tainted*
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl taint nodes node2 dedicated=experimental:NoSchedule
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*node/node2 tainted*
+
 
 2. Nous pouvons faire un describe sur le noeud pour voir que notre taint a bien été prise en compte :
 
-```bash
-training@master$ kubectl describe node worker
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl describe node node1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 
 CreationTimestamp:  Sun, 01 Nov 2020 09:49:52 +0000
 Taints:             dedicated=experimental:NoSchedule
 Unschedulable:      false
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 3. Essayons de déployer un pod sans toleration :
 
-```bash
-training@master$ touch pod-without-toleration.yaml
-```
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+touch pod-without-toleration.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Avec le contenu yaml suivant :
 
-```yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
 apiVersion: v1
 kind: Pod
 metadata:
@@ -46,36 +57,38 @@ spec:
   containers:
   - name: nginx
     image: nginx
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-4. Créeons donc ce pod :
+4. Créons donc ce pod :
 
-```bash
-training@master$ kubectl apply -f pod-without-toleration.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl apply -f pod-without-toleration.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-pod/pod-without-toleration created
-```
+*pod/pod-without-toleration created*
 
-5. Voyons voir sur quel noeud notre pod a été schedule :
+5. Voyons voir sur quel noeud notre pod a été schedulé :
 
-```bash
-training@master$ kubectl get pods -n scheduling pod-without-toleration -o wide
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl get pods -n scheduling pod-without-toleration -o wide
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 NAME                     READY   STATUS    RESTARTS   AGE   IP       NODE     NOMINATED NODE   READINESS GATES
 pod-without-toleration   0/1     Pending   0          11m   <none>   <none>   <none>           <none>
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Notre pod n'ayant pas de toleration pour la taint que nous avons mis sur le noeud worker, il ne peut pas se trouver dessus.
+Notre pod n’ayant pas de toleration pour la taint que nous avons mis sur les noeuds node1 et node2, il n'a pu être déployé.
 
-6. Définissons maintenant un pod avec un toleration a la taint definie plus haut :
+6. Définissons maintenant un pod avec un toleration avec la taint définie plus haut :
 
-```bash
-training@master$ touch pod-toleration.yaml
-```
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+touch pod-toleration.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Avec le contenu yaml suivant :
 
-```yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
 apiVersion: v1
 kind: Pod
 metadata:
@@ -90,64 +103,84 @@ spec:
     value: "experimental"
     operator: "Equal"
     effect: "NoSchedule"
-```
 
-7. Créeons ce pod :
+  
+7. Créons ce pod :
 
-```bash
-training@master$ kubectl apply -f pod-toleration.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl apply -f pod-toleration.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-pod/pod-toleration created
-```
 
-8. Nous pouvons voir dans quel noeud notre pod a été schedule :
+*pod/pod-toleration created*
 
-```bash
-training@master$ kubectl get pods -n scheduling pod-toleration -o wide
 
+8. Nous pouvons voir sur quel noeud notre pod a été schedulé :
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl get pods -n scheduling pod-toleration -o wide
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 NAME             READY   STATUS    RESTARTS   AGE   IP          NODE     NOMINATED NODE   READINESS GATES
-pod-toleration   1/1     Running   0          49s   10.44.0.1   worker   <none>           <none>
-```
+pod-toleration   1/1     Running   0          49s   10.44.0.1   node1   <none>           <none>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Le pod peut maintenant être schedule sur le noeud worker
+Le pod peut maintenant être schedulé sur le noeud node1
 
-8. Supprimons les objets que créés dans cet exercice :
+9. Supprimons les objets créés dans cet exercice :
 
-```bash
-training@master$ kubectl delete -f pod-toleration.yaml -f pod-without-toleration.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl delete -f pod-toleration.yaml -f pod-without-toleration.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-pod "pod-toleration" deleted
-pod "pod-without-toleration" deleted
+*pod "pod-toleration" deleted*
 
-kubectl taint nodes worker dedicated:NoSchedule-
+*pod "pod-without-toleration" deleted*
 
-node/worker untainted
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl taint nodes node1 dedicated:NoSchedule-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-## NodeSelector
+*node/node1 untainted*
 
-0. Nous allons enlever la taint sur le master pour pouvoir schedule des pods dessus :
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl taint nodes node2 dedicated:NoSchedule-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-```bash
-training@master$ kubectl taint nodes master node-role.kubernetes.io/master:NoSchedule-
+*node/node2 untainted*
 
-node/master untainted
-```
+<hr>
 
-1. Nous allons commencer par mettre un label sur le noeud worker "disk=ssd" :
+**NodeSelector**
 
-```bash
-training@master$ kubectl label nodes worker disk=ssd
 
-node/worker labeled
-```
+1. Nous allons enlever la taint sur le master pour pouvoir scheduler des pods dessus :
 
-2. Nous pouvons faire un describe sur notre noeud worker pour voir que notre label a bien été pris en compte :
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl taint nodes master node-role.kubernetes.io/master:NoSchedule-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-```bash
-training@master$ kubectl describe nodes worker
+*node/master untainted*
 
-Name:               worker
+
+2. Nous allons commencer par mettre un label sur le noeud node2 “disk=ssd” :
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl label nodes node2 disk=ssd
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*node/node2 labeled*
+
+
+3. Nous pouvons faire un describe sur le noeud node2 pour voir que notre label a bien été pris en compte :
+  
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl describe nodes node2
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+Name:               node2
 Roles:              <none>
 Labels:             beta.kubernetes.io/arch=amd64
                     beta.kubernetes.io/os=linux
@@ -155,17 +188,17 @@ Labels:             beta.kubernetes.io/arch=amd64
                     kubernetes.io/arch=amd64
                     kubernetes.io/hostname=worker
                     kubernetes.io/os=linux
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-3. Définissons un pod que l'on va scheduler sur le noeud worker à l'aide du label defini ci dessus :
+4. Définissons un pod que l’on va scheduler sur le noeud node2 à l’aide du label défini ci-dessus :
 
-```bash
-training@master$ touch pod-nodeselector.yaml
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+touch pod-nodeselector.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Avec le contenu yaml suivant :
 
-```yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
 apiVersion: v1
 kind: Pod
 metadata:
@@ -177,46 +210,53 @@ spec:
     image: nginx
   nodeSelector:
     disk: ssd
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-4. Créeons donc ce pod :
+5. Créons donc ce pod :
+   
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl apply -f pod-nodeselector.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-```bash
-training@master$ kubectl apply -f pod-nodeselector.yaml
+*pod/pod-nodeselector created*
 
-pod/pod-nodeselector created
-```
+6. Voyons voir dans quel noeud notre pod a été mis :
 
-5. Voyons voir dans quel noeud notre pod a été mis :
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl get pods -n scheduling pod-nodeselector -o wide
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-```bash
-training@master$ kubectl get pods -n scheduling pod-nodeselector -o wide
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 NAME               READY   STATUS    RESTARTS   AGE   IP          NODE     NOMINATED NODE   READINESS GATES
-pod-nodeselector   1/1     Running   0          17s   10.44.0.1   worker   <none>           <none>
-```
+pod-nodeselector   1/1     Running   0          17s   10.44.0.1   node2   <none>           <none>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Sans surpise, sur le noeud worker.
+*Sans surprise, sur le noeud node2.*
 
-6. Supprimons le pod créé dans cet exercice :
+7. Supprimons le pod créé dans cet exercice :
 
-```bash
-training@master$ kubectl delete -f pod-nodeselector.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl delete -f pod-nodeselector.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-pod "pod-nodeselector" deleted
-```
+*pod "pod-nodeselector" deleted*
+
+<hr> 
 
 ## Node Affinity/AntiAffinity
 
-1. Définissons un pod, avec une nodeAffinity lui imposant d'aller dans un noeud ayant comme label "disk=ssd", autrement dit le noeud worker :
+<hr>
 
-```bash
-training@master$ touch pod-nodeaffinity.yaml
-```
+1. Définissons un pod, avec une nodeAffinity lui imposant d’aller dans un noeud ayant comme label “disk=ssd”, autrement dit le noeud node2 :
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+touch pod-nodeaffinity.yaml
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Avec le contenu yaml suivant :
 
-```yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
 apiVersion: v1
 kind: Pod
 metadata:
@@ -237,38 +277,46 @@ spec:
   containers:
   - name: pod-nodeaffinity
     image: nginx
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-2. Créeons donc ce pod :
+2. Créons donc ce pod :
+  
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl apply -f pod-nodeaffinity.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-```bash
-training@master$ kubectl apply -f pod-nodeaffinity.yaml
+*pod/pod-nodeaffinity created*
 
-pod/pod-nodeaffinity created
-```
 
 3. Voyons voir dans quel noeud ce pod a été mis :
 
-```bash
-training@master$ kubectl get pods -n scheduling pod-nodeaffinity -o wide
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+kubectl get pods -n scheduling pod-nodeaffinity -o wide
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 NAME               READY   STATUS    RESTARTS   AGE   IP          NODE     NOMINATED NODE   READINESS GATES
-pod-nodeaffinity   1/1     Running   0          36s   10.44.0.1   worker   <none>           <none>
-```
+pod-nodeaffinity   1/1     Running   0          36s   10.44.0.1        node2   <none>           <none>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Sans surprise, dans le noeud worker.
+*Sans surprise, dans le noeud node2.*
+
+<hr>
 
 ## Pod Affinity/AntiAffinity
 
-1. Définissons un pod, avec une podAntiAffinity lui imposant d'aller dans un noeud ayant ne comportant pas le pod pod-nodeaffinity :
+<hr>
 
-```bash
-training@master$ touch pod-podantiaffinity.yaml
-```
+1. Définissons un pod, avec une podAntiAffinity lui imposant d’aller dans un noeud ne comportant pas le pod pod-nodeaffinity :
+  
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}  
+touch pod-podantiaffinity.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Avec le contenu yaml suivant :
 
-```yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
 apiVersion: v1
 kind: Pod
 metadata:
@@ -288,38 +336,47 @@ spec:
   containers:
   - name: pod-podantiaffinity
     image: nginx
-```
 
-2. Créeons donc ce pod :
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-```bash
-training@master$ kubectl apply -f pod-podantiaffinity.yaml
 
-pod/pod-podantiaffinity created
-```
+2. Créons donc ce pod :
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl apply -f pod-podantiaffinity.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*pod/pod-podantiaffinity created*
 
 3. Voyons voir dans quel noeud ce pod a été mis :
 
-```bash
-training@master$ kubectl get pods -n scheduling pod-podantiaffinity -o wide
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl get pods -n scheduling pod-podantiaffinity -o wide
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 NAME                  READY   STATUS    RESTARTS   AGE   IP          NODE     NOMINATED NODE   READINESS GATES
 pod-podantiaffinity   1/1     Running   0          14s   10.32.0.4   master   <none>           <none>
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Cette fois-ci, sur le noeud master.
+Cette fois-ci, soit sur le noeud master ou node1.
+
+<hr>
 
 ## NodeName
 
-1. Définissons un pod que l'on va scheduler dans le noeud worker avec la propriété nodename :
+<hr>
 
-```bash
-training@master$ touch pod-nodename.yaml
-```
+1. Définissons un pod que l’on va scheduler dans le noeud master avec la propriété nodename :
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+touch pod-nodename.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Avec le contenu yaml suivant :
 
-```yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
 apiVersion: v1
 kind: Pod
 metadata:
@@ -329,39 +386,46 @@ spec:
   containers:
   - name: nginx
     image: nginx
-  nodeName: worker
-```
+  nodeName: master
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-2. Créeons donc ce pod :
+2. Créons donc ce pod :
+   
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl apply -f pod-nodename.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-```bash
-training@master$ kubectl apply -f pod-nodename.yaml
 
-pod/pod-nodename created
-```
+*pod/pod-nodename created*
 
 3. Regardons dans quel noeud ce pod se trouve :
 
-```bash
-training@master$ kubectl get pods -n scheduling pod-nodename -o wide
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl get pods -n scheduling pod-nodename -o wide
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 NAME           READY   STATUS    RESTARTS   AGE   IP          NODE     NOMINATED NODE   READINESS GATES
-pod-nodename   1/1     Running   0          4s    10.44.0.4   worker   <none>           <none>
-```
+pod-nodename   1/1     Running   0          4s    10.44.0.4       master   <none>           <none>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Sans surprise le noeud worker. :)
+Sans surprise le noeud master. :)
 
 ## Clean Up
 
 Nous pouvons supprimer les ressources générées par cet exercice de la façon suivante :
 
-```bash
-training@master$ kubectl delete -f .
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl delete -f .
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 pod "pod-nodeaffinity" deleted
 pod "pod-nodename" deleted
 pod "pod-podantiaffinity" deleted
 Error from server (NotFound): error when deleting "pod-nodeselector.yaml": pods "pod-nodeselector" not found
 Error from server (NotFound): error when deleting "pod-toleration.yaml": pods "pod-toleration" not found
 Error from server (NotFound): error when deleting "pod-without-toleration.yaml": pods "pod-without-toleration" not found
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+<hr>

@@ -1,44 +1,48 @@
 # Monitoring
 
+<hr>
+
 Machine : **master**
 
-```bash
-training@master$ mkdir monitoring
-training@master$ cd monitoring
-training@master$ kubectl create namespace monitoring
-```
+<hr>
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+mkdir monitoring
+cd monitoring
+kubectl create namespace monitoring
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ## Metric Server
 
 1. Nous allons essayer d'obtenir les metrics pour les noeuds de notre cluster :
 
-```bash
-training@master$ kubectl top node
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl top node
 
 error: Metrics API not available
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ... Sans succès.
 
 2. De meme, si nous souhaitons récupérer les metrics de nos pods, nous obtenons une erreur :
 
-```bash
-training@master$ kubectl top pod
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl top pod
 
 error: Metrics API not available
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Nous avons besoin d'installer un metrics server.
 
 3. Nous allons creer un fichier metrics-server.yaml :
 
-```bash
-training@master$ touch metrics-server.yaml
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+touch metrics-server.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Avec le contenu yaml suivant :
 
-```yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -191,12 +195,12 @@ subjects:
 - kind: ServiceAccount
   name: metrics-server
   namespace: kube-system
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 4. Nous pouvons donc déployer notre metrics-server :
 
-```bash
-training@master$ kubectl apply -f metrics-server.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl apply -f metrics-server.yaml
 
 clusterrole.rbac.authorization.k8s.io/system:aggregated-metrics-reader created
 clusterrolebinding.rbac.authorization.k8s.io/metrics-server:system:auth-delegator created
@@ -208,22 +212,22 @@ deployment.apps/metrics-server created
 service/metrics-server created
 clusterrole.rbac.authorization.k8s.io/system:metrics-server created
 clusterrolebinding.rbac.authorization.k8s.io/system:metrics-server created
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 5. Après environ 1 minute, nous pouvons refaire notre top node :
 
-```bash
-training@master$ kubectl top node
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl top node
 
 NAME     CPU(cores)   CPU%   MEMORY(bytes)   MEMORY%   
 master   180m         9%     1249Mi          15%       
 worker   47m          2%     818Mi           10%
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 6. Nous obtenons bien les consommations CPU/RAM pour chaque noeud. Voyons voir maintenant pour les consommations de ressources par nos pods :
 
-```bash
-training@master$ kubectl top pod -A
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl top pod -A
 
 NAMESPACE     NAME                              CPU(cores)   MEMORY(bytes)   
 kube-system   coredns-f9fd979d6-9kb87           4m           12Mi            
@@ -237,7 +241,7 @@ kube-system   kube-scheduler-master             4m           21Mi
 kube-system   metrics-server-75f98fdbd5-2lp87   1m           12Mi            
 kube-system   weave-net-c4b7d                   2m           58Mi            
 kube-system   weave-net-zfqt6                   2m           62Mi
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Parfait !
 
@@ -247,26 +251,26 @@ Nous allons déployer une stack de monitoring basée sur Prometheus et Grafana v
 
 1. Commencons par creer le fichier values.yaml pour prometheus :
 
-```bash
-training@master$ touch prometheus-values.yaml
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+touch prometheus-values.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Avec le contenu yaml suivant :
 
-```yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
 alertmanager:
   persistentVolume:
     storageClass: "openebs-custom-sc"
 server:
   persistentVolume:
     storageClass: "openebs-custom-sc"
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 2. Nous pouvons donc installer Prometheus via Helm :
 
-```bash
-training@master$ helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-training@master$ helm install prometheus prometheus-community/prometheus --values prometheus-values.yaml --namespace monitoring
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm install prometheus prometheus-community/prometheus --values prometheus-values.yaml --namespace monitoring
 
 NAME: prometheus
 LAST DEPLOYED: Sun Nov  1 16:16:50 2020
@@ -278,43 +282,43 @@ NOTES:
 The Prometheus server can be accessed via port 80 on the following DNS name from within your cluster:
 prometheus-server.monitoring.svc.cluster.local
 ...
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 3. Nous pouvons voir les resources creees de la façon suivante :
 
-```bash
-training@master$ kubectl get all -n monitoring
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl get all -n monitoring
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 4. Nous pouvons également remarquer que deux PV ont ete créés pour les PVC de Prometheus et AlertManager :
 
-```bash
-training@master$ kubectl get pvc -n monitoring
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl get pvc -n monitoring
 
 NAME                      STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS        AGE
 prometheus-alertmanager   Bound    pvc-341a1d92-74b4-4ce4-8ad2-8edaf94025c8   2Gi        RWO            openebs-custom-sc   57s
 prometheus-server         Bound    pvc-d7f3ac24-cb5c-4702-a501-5d8b85bec8e2   8Gi        RWO            openebs-custom-sc   57s
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 5. Nous allons maintenant passer à l'installation de Grafana. Comme pour Prometheus, nous allons créer un fichier values.yaml pour configurer notre installation :
 
-```bash
-training@master$ touch grafana-values.yaml
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+touch grafana-values.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Avec le contenu yaml suivant :
 
-```yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
 persistence:
   enabled: true
   storageClassName: "openebs-custom-sc"
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 5. Nous pouvons donc passer à l'installation de Grafana :
 
-```bash
-training@master$ helm repo add grafana https://grafana.github.io/helm-charts
-training@master$ helm install grafana grafana/grafana --values grafana-values.yaml --namespace monitoring
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+helm repo add grafana https://grafana.github.io/helm-charts
+helm install grafana grafana/grafana --values grafana-values.yaml --namespace monitoring
 
 NAME: grafana
 LAST DEPLOYED: Sun Nov  1 16:26:28 2020
@@ -323,37 +327,37 @@ STATUS: deployed
 REVISION: 1
 NOTES:
 ...
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 6. Nous pouvons voir les ressources creees par Grafana de la façon suivante :
 
-```bash
-training@master$ kubectl get all -n monitoring
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl get all -n monitoring
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 7. Nous allons faire un port-forward pour se connecter à notre serveur Prometheus :
 
-```bash
-training@master$ kubectl --namespace monitoring port-forward --address 0.0.0.0 service/prometheus-server 8080:80
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl --namespace monitoring port-forward --address 0.0.0.0 service/prometheus-server 8080:80
 
 Forwarding from 0.0.0.0:8080 -> 9090
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 8. De même pour Grafana :
 
-```bash
-training@master$ kubectl --namespace monitoring port-forward --address 0.0.0.0 service/grafana 8081:80
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl --namespace monitoring port-forward --address 0.0.0.0 service/grafana 8081:80
 
 Forwarding from 0.0.0.0:8081 -> 3000
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 9. Récuperer le mot de passe admin de Grafana :
 
-```bash
-training@master$ kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
 
 LP7RithkvOulZE1Yhj95obTSuH4e8qUffsuCaBAR
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 10. Dans Grafana, aller dans Configuration -> Data Sources -> Add data source -> Prometheus, et renseinger "prometheus-server" dans URL :
 

@@ -1,286 +1,104 @@
-# Bases
+<br>
+
+# Les Bases
+
+<hr>
 
 Machine : **master**
 
+<hr>
 
 **Namespace**
 
 Aide à résoudre la complexité de l'organisation des objets au sein d'un cluster. Les namespaces permettent de regrouper des objets afin que vous puissiez les filtrer et les contrôler comme une unité. Qu'il s'agisse d'appliquer des politiques de contrôle d'accès personnalisées ou de séparer tous les composants d'un environnement de test, les namespaces sont un concept puissant et flexible pour gérer les objets en tant que groupe.
 
-```bash
-training@master$ mkdir basics
-training@master$ cd basics
-training@master$ kubectl create namespace basics
-```
+En ligne de commande
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+mkdir basics
+cd basics
+kubectl create namespace basics
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Autre méthode
 
 1. Créons un manifeste de namespace avec le contenu yaml suivant :
 
-```yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
 apiVersion: v1
 kind: Namespace
 metadata:
   name: lab
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 2. Appliquons le fichier pour créer le namespace :
 
-`training@master$ kubectl apply -f lab-ns.yaml`
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl apply -f lab-ns.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 3. Vérifions que le namespace lab a bien été créé :
 
-`training@master$ kubectl get namespace`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl get namespace
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+<hr>
 
 ## Lancement du premier pod
 
 **Pod**
 
-1. Creer un pod en CLI :
+Unité d'exécution de base d'une application Kubernetes. Il constitue la plus petite et la plus simple unité dans le modèle d'objets de Kubernetes pouvant être  créer ou déployer. Un Pod représente des process en cours d'exécution dans un cluster.
 
-```bash
-training@master$ kubectl run --image=nginx basic-pod
+Pod
+Unité d'exécution de base d'une application Kubernetes. Il constitue la plus petite et la plus simple unité dans le modèle d'objets de Kubernetes pouvant être  créer ou déployer. Un Pod représente des process en cours d'exécution dans un cluster.
 
-pod/basic-pod created
-```
+1. Créons un manifeste d'un pod avec le contenu yaml suivant :
 
-2. Creer un pod avec un fichier YAML :
-
-```bash
-training@master$ touch basic-pod2.yaml
-```
-
-Avec le contenu yaml suivant :
-
-```yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
 apiVersion: v1
 kind: Pod
 metadata:
-  name: basic-pod2
-  namespace: basics
+  name: lab-pod
+  namespace: lab  
   labels:
-    role: front
-spec:
-  containers:
-  - name: basic-pod2
-    image: nginx
-```
-
-3. Deployons ce pod :
-
-```bash
-training@master$ kubectl apply -f basic-pod2.yaml
-
-pod/basic-pod2 created
-```
-
-## Interagir avec un pod
-
-1. Inspecter le pod basic-pod2 :
-
-```bash
-training@master$ kubectl describe pods -n basics basic-pod2
-
-Name:         basic-pod2
-Namespace:    basics
-Priority:     0
-Node:         worker-0/10.156.0.2
-Start Time:   Tue, 30 Mar 2021 19:21:48 +0000
-Labels:       role=front
-Annotations:  Status:  Running
-...
-```
-
-2. Executer un commande dans un pod :
-
-```bash
-training@master$ kubectl exec -it -n basics basic-pod2 -- bash
-
-root@basic-pod2:/#
-```
-
-# Dry run
-
-1. Recuperer l'Yaml de la creation d'un pod :
-
-```bash
-training@master$ kubectl run nginx --image=nginx --dry-run=client -o yaml
-
-apiVersion: v1
-kind: Pod
-metadata:
-  creationTimestamp: null
-  labels:
-    run: nginx
-  name: nginx
+    app: web
 spec:
   containers:
   - image: nginx
     name: nginx
-    resources: {}
-  dnsPolicy: ClusterFirst
-  restartPolicy: Always
-status: {}
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-## Exposer un pod avec un service
+2. Appliquons le fichier pour créer le pod :
 
-1. Exposer un service en CLI
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl apply -f lab-pod.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-```bash
-training@master$ kubectl expose pod basic-pod2 --port=80 --target-port=80 -n basics
+3. Vérifions que le pod lab-pod a bien été créé :
 
-service/basic-pod2 exposed
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl -n lab get pods
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-3. Creer un service en YAML
 
-```bash
-training@master$ touch basic-service.yaml
-```
+**Deployment**
 
-Avec le contenu yaml suivant :
+Un déploiement Kubernetes est un objet Kubernetes qui fournit des mises à jour déclaratives aux applications. Un déploiement permet de décrire le cycle de vie d'une application, comme les images à utiliser, le nombre de pods qu'il devrait y avoir et la manière dont ils doivent être mis à jour. 
 
-```yaml
+1. Créons un déploiement avec le contenu yaml suivant :
 
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    app: basic-service
-  name: basic-service
-  namespace: basics
-spec:
-  ports:
-  - name: "80"
-    nodePort: 32000
-    port: 80
-    protocol: TCP
-    targetPort: 80
-  selector:
-    role: front
-  type: NodePort
-```
-
-4. Creeons ce service :
-
-```bash
-training@master$ kubectl apply -f basic-service.yaml
-
-service/basic-service created
-```
-
-5. Inspectons ce service :
-
-```bash
-training@master$ kubectl get services -n basics
-
-NAME            TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
-basic-pod2      ClusterIP   10.108.17.23     <none>        80/TCP         37m
-basic-service   NodePort    10.100.198.240   <none>        80:32000/TCP   79s
-
-training@master$ kubectl describe services -n basics basic-service
-
-Name:                     basic-service
-Namespace:                basics
-Labels:                   app=basic-service
-Annotations:              Selector:  role=front
-Type:                     NodePort
-IP:                       10.100.198.240
-Port:                     80  80/TCP
-TargetPort:               80/TCP
-NodePort:                 80  32000/TCP
-Endpoints:                10.32.0.3:80
-Session Affinity:         None
-External Traffic Policy:  Cluster
-Events:                   <none>
-```
-
-6. Testons nos deux services :
-
-```bash
-training@master$ curl CLUSTER_IP_BASIC_POD
-
-<!DOCTYPE html>
-<html>
-<head>
-<title>Welcome to nginx!</title>
-<style>
-    body {
-        width: 35em;
-        margin: 0 auto;
-        font-family: Tahoma, Verdana, Arial, sans-serif;
-    }
-</style>
-</head>
-<body>
-<h1>Welcome to nginx!</h1>
-<p>If you see this page, the nginx web server is successfully installed and
-working. Further configuration is required.</p>
-
-<p>For online documentation and support please refer to
-<a href="http://nginx.org/">nginx.org</a>.<br/>
-Commercial support is available at
-<a href="http://nginx.com/">nginx.com</a>.</p>
-
-<p><em>Thank you for using nginx.</em></p>
-</body>
-</html>
-```
-
-```bash
-training@master$ curl IP_EXTERNE_NODE:32000
-
-<!DOCTYPE html>
-<html>
-<head>
-<title>Welcome to nginx!</title>
-<style>
-    body {
-        width: 35em;
-        margin: 0 auto;
-        font-family: Tahoma, Verdana, Arial, sans-serif;
-    }
-</style>
-</head>
-<body>
-<h1>Welcome to nginx!</h1>
-<p>If you see this page, the nginx web server is successfully installed and
-working. Further configuration is required.</p>
-
-<p>For online documentation and support please refer to
-<a href="http://nginx.org/">nginx.org</a>.<br/>
-Commercial support is available at
-<a href="http://nginx.com/">nginx.com</a>.</p>
-
-<p><em>Thank you for using nginx.</em></p>
-</body>
-</html>
-```
-
-## Lancer un deployment
-
-1. Commençons par créer un simple deployment :
-
-```bash
-training@master$ touch basic-deployment.yaml
-```
-
-Avec le contenu yaml suivant :
-
-```yaml
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: basic-deployment
-  namespace: basics
+  name: lab-deployment
+  namespace: lab
   labels:
     app: httpd
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: httpd
@@ -294,55 +112,65 @@ spec:
         image: httpd:2.4.43
         ports:
         - containerPort: 80
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-2. Créeons donc ce deployment :
+2. Appliquons le fichier pour créer le déploiement :
 
-```bash
-training@master$ kubectl apply -f basic-deployment.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl apply -f lab-deployment.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-deployment.apps/basic-deployment created
-```
+3. Vérifions que le déploiement lab-deployment a bien été créé :
 
-3. Inspectons ce deployment :
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl -n lab get deployment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-```bash
-training@master$ kubectl get deployments -n basics
-NAME               READY   UP-TO-DATE   AVAILABLE   AGE
-basic-deployment   3/3     3            3           37s
+Autres manières de déployer les applications :
 
-training@master$ kubectl get pods -n basics
-NAME                                READY   STATUS    RESTARTS   AGE
-basic-deployment-64b5596cc5-2jttj   1/1     Running   0          47s
-basic-deployment-64b5596cc5-4kzxn   1/1     Running   0          47s
-basic-deployment-64b5596cc5-ljhqp   1/1     Running   0          47s
-basic-pod2                          1/1     Running   0          35m
+A part le type **Deployment**, il existe aussi les **Statefulsets** et les **Daemonsets**. 
 
-training@master$ kubectl describe deployments -n basics basic-deployment
+Les objets StatefulSet sont conçus pour déployer des applications avec état et des applications en cluster qui enregistrent des données sur un espace de stockage persistant . 
 
-Name:                   basic-deployment
-Namespace:              basics
-CreationTimestamp:      Tue, 30 Mar 2021 19:56:48 +0000
-Labels:                 app=httpd
-Annotations:            deployment.kubernetes.io/revision: 1
-Selector:               app=httpd
-Replicas:               3 desired | 3 updated | 3 total | 3 available | 0 unavailable
-...
-```
+Les DaemonSets sont utilisés pour garantir que tous vos nœuds exécutent une copie d'un pod, ce qui vous permet d'exécuter l'application sur chaque nœud. Lorsque vous ajoutez un nouveau nœud au cluster, un pod est créé automatiquement sur le nœud.
 
-4. Mettons a jour ce deployment :
 
-```yaml
-replicas: 4
-```
 
-```bash
-training@master$ kubectl apply -f basic-deployment.yaml
+**Service**
 
-deployment.apps/basic-deployment configured
+Dans Kubernetes, un service est une abstraction qui définit un ensemble logique de pods et une politique permettant d'y accéder (parfois ce modèle est appelé un micro-service). L'ensemble des pods ciblés par un service est généralement déterminé par un "Selector".
 
-training@master$ kubectl get deployments -n basics basic-deployment
+1. Créons un manifeste d'un pod avec le contenu yaml suivant :
 
-NAME               READY   UP-TO-DATE   AVAILABLE   AGE
-basic-deployment   4/4     4            4           5m8s
-```
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-service
+  namespace: lab
+spec:
+  type: NodePort
+  selector:
+    app: web
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+2. Appliquons le fichier pour créer le service :
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl apply -f lab-svc.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+3. Vérifions que le service app-service a bien été créé :
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl -n lab get svc
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+<hr>
+
