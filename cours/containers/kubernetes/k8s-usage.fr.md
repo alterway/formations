@@ -314,7 +314,7 @@ kubectl apply -f object.yaml
 - Pour déployer le Dashboard, exécuter la commande suivante:
 
 ```console
-$ kubectl apply -f kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.2.0/aio/deploy/recommended.yaml
+$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.2.0/aio/deploy/recommended.yaml
 
 ```
 
@@ -326,5 +326,33 @@ $ kubectl proxy
 
 - L'accès se fait désormais sur :
 
-<http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/>
+<http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/>
+
+
+- Authentification par token  :
+
+```console
+
+# Création d'un compte de service admin
+
+$ kubectl create serviceaccount -n kube-system cluster-admin-dashboard-sa
+
+# On donne les droits clusterAdmin a ce compte
+$ kubectl create clusterrolebinding -n kube-system cluster-admin-dashboard-sa \
+  --clusterrole=cluster-admin \
+  --serviceaccount=kube-system:cluster-admin-dashboard-sa
+
+# On récupère le token d'authentification pour ce compte
+$ TOKEN=$(kubectl describe secret -n kube-system $(kubectl get secret -n kube-system | awk '/^cluster-admin-dashboard-sa-token-/{print $1}') | awk '$1=="token:"{print $2}')
+
+$ echo ${TOKEN}
+
+# Méthode alternative 
+
+$ kubectl get secret $(kubectl get serviceaccount cluster-admin-dashboard-sa -o jsonpath="{.secrets[0].name}" -n kube-system) -o jsonpath="{.data.token}" -n kube-system | base64 --decode
+
+```
+
+Il est possible de créer des comptes **sa** avec droits différents ex **view**
+
 

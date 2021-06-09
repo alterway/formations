@@ -1,6 +1,12 @@
 # Lab final
 
 
+<hr>
+
+## A vous de jouer !
+
+<hr>
+
 1/ Créer un namespace nommé **kubeops**
 
 

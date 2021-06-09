@@ -18,7 +18,8 @@ kubectl create namespace monitoring
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl top node
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 error: Metrics API not available
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -28,7 +29,8 @@ error: Metrics API not available
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl top pod
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 error: Metrics API not available
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -201,7 +203,8 @@ subjects:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl apply -f metrics-server.yaml
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 clusterrole.rbac.authorization.k8s.io/system:aggregated-metrics-reader created
 clusterrolebinding.rbac.authorization.k8s.io/metrics-server:system:auth-delegator created
 rolebinding.rbac.authorization.k8s.io/metrics-server-auth-reader created
@@ -218,7 +221,8 @@ clusterrolebinding.rbac.authorization.k8s.io/system:metrics-server created
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl top node
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 NAME     CPU(cores)   CPU%   MEMORY(bytes)   MEMORY%   
 master   180m         9%     1249Mi          15%       
 worker   47m          2%     818Mi           10%
@@ -228,7 +232,8 @@ worker   47m          2%     818Mi           10%
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl top pod -A
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 NAMESPACE     NAME                              CPU(cores)   MEMORY(bytes)   
 kube-system   coredns-f9fd979d6-9kb87           4m           12Mi            
 kube-system   coredns-f9fd979d6-tl95z           3m           12Mi            
@@ -245,7 +250,11 @@ kube-system   weave-net-zfqt6                   2m           62Mi
 
 Parfait !
 
+<hr>
+
 ## Prometheus/Grafana
+
+<hr>
 
 Nous allons déployer une stack de monitoring basée sur Prometheus et Grafana via Helm.
 
@@ -271,7 +280,8 @@ server:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm install prometheus prometheus-community/prometheus --values prometheus-values.yaml --namespace monitoring
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 NAME: prometheus
 LAST DEPLOYED: Sun Nov  1 16:16:50 2020
 NAMESPACE: monitoring
@@ -294,13 +304,14 @@ kubectl get all -n monitoring
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl get pvc -n monitoring
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 NAME                      STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS        AGE
 prometheus-alertmanager   Bound    pvc-341a1d92-74b4-4ce4-8ad2-8edaf94025c8   2Gi        RWO            openebs-custom-sc   57s
 prometheus-server         Bound    pvc-d7f3ac24-cb5c-4702-a501-5d8b85bec8e2   8Gi        RWO            openebs-custom-sc   57s
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-5. Nous allons maintenant passer à l'installation de Grafana. Comme pour Prometheus, nous allons créer un fichier values.yaml pour configurer notre installation :
+1. Nous allons maintenant passer à l'installation de Grafana. Comme pour Prometheus, nous allons créer un fichier values.yaml pour configurer notre installation :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 touch grafana-values.yaml
@@ -319,7 +330,8 @@ persistence:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 helm repo add grafana https://grafana.github.io/helm-charts
 helm install grafana grafana/grafana --values grafana-values.yaml --namespace monitoring
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 NAME: grafana
 LAST DEPLOYED: Sun Nov  1 16:26:28 2020
 NAMESPACE: monitoring
@@ -329,7 +341,7 @@ NOTES:
 ...
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-6. Nous pouvons voir les ressources creees par Grafana de la façon suivante :
+1. Nous pouvons voir les ressources creees par Grafana de la façon suivante :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl get all -n monitoring
@@ -339,36 +351,41 @@ kubectl get all -n monitoring
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl --namespace monitoring port-forward --address 0.0.0.0 service/prometheus-server 8080:80
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 Forwarding from 0.0.0.0:8080 -> 9090
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-8. De même pour Grafana :
+1. De même pour Grafana :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl --namespace monitoring port-forward --address 0.0.0.0 service/grafana 8081:80
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 Forwarding from 0.0.0.0:8081 -> 3000
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-9. Récuperer le mot de passe admin de Grafana :
+1. Récuperer le mot de passe admin de Grafana :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 LP7RithkvOulZE1Yhj95obTSuH4e8qUffsuCaBAR
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-10. Dans Grafana, aller dans Configuration -> Data Sources -> Add data source -> Prometheus, et renseinger "prometheus-server" dans URL :
+1.  Dans Grafana, aller dans Configuration -> Data Sources -> Add data source -> Prometheus, et renseinger "prometheus-server" dans URL :
 
-![](images/grafana2.png)
+![](../images/grafana2.png)
 
 11. Toujours dans Grafana, aller dans "+" -> Import -> Entrer "6417" dans ID -> Choisir le datasource promethus créé ci dessus :
 
-![](images/grafana3.png)
+![](../images/grafana3.png)
 
-![](images/grafana4.png)
+![](../images/grafana4.png)
 
 12. Enjoy :)
 
-![](images/grafana5.png)
+![](../images/grafana5.png)
+
+<hr>

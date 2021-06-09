@@ -12,3 +12,4 @@ ex Osones - <https://cloud-consulting.alterway.fr>
 - HTML/PDF : <https://alterway.fr/formations/>
 
 ![Licence Creative Commons BY-SA 4.0](images/licence.png){height="30px"}
+

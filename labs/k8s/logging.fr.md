@@ -15,7 +15,8 @@ Avec la CLI kubectl, nous pouvons d'ores et déjà récupérer plusieurs logs co
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl cluster-info
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 Kubernetes master is running at https://10.156.0.3:6443
 KubeDNS is running at https://10.156.0.3:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
 Metrics-server is running at https://10.156.0.3:6443/api/v1/namespaces/kube-system/services/https:metrics-server:/proxy
@@ -27,7 +28,8 @@ To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl get events -A
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 LAST SEEN   TYPE      REASON                 OBJECT                                       MESSAGE
 81s         Normal    ExternalProvisioning   persistentvolumeclaim/postgres-openebs-pvc   waiting for a volume to be created, either by external provisioner "openebs.io/provisioner-iscsi" or manually created by system administrator
 89s         Normal    Provisioning           persistentvolumeclaim/postgres-openebs-pvc   External provisioner is provisioning volume for claim "default/postgres-openebs-pvc"
@@ -37,7 +39,8 @@ LAST SEEN   TYPE      REASON                 OBJECT                             
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl run --image nginx test-logs
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 pod/test-logs created
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -45,7 +48,8 @@ pod/test-logs created
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl logs test-logs
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
 /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
 /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
@@ -59,7 +63,8 @@ kubectl logs test-logs
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 sudo cat /var/log/containers/*
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 ...
 {"log":"I1027 12:51:51.629401       1 client.go:360] parsed scheme: \"passthrough\"\n","stream":"stderr","time":"2020-10-27T12:51:51.629623287Z"}
 {"log":"I1027 12:51:51.629456       1 passthrough.go:48] ccResolverWrapper: sending update to cc: {[{https://127.0.0.1:2379  \u003cnil\u003e 0 \u003cnil\u003e}] \u003cnil\u003e \u003cnil\u003e}\n","stream":"stderr","time":"2020-10-27T12:51:51.629671282Z"}
@@ -77,13 +82,18 @@ docker logs ID_CONTENEUR
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl delete pod test-logs
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 pod "test-logs" deleted
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+<hr>
+
 ## Stack Elastic
 
+<hr>
 machine : **master**
+<hr>
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 mkdir eck
@@ -100,7 +110,8 @@ kubectl apply -f https://download.elastic.co/downloads/eck/1.2.1/all-in-one.yaml
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl -n elastic-system logs -f statefulset.apps/elastic-operator
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 ...
 {"log.level":"info","@timestamp":"2020-11-01T17:01:06.426Z","log.logger":"controller-runtime.controller","message":"Starting workers","service.version":"1.2.1-b5316231","service.type":"eck","ecs.version":"1.4.0","controller":"enterprisesearch-controller","worker count":3}
 {"log.level":"info","@timestamp":"2020-11-01T17:01:06.426Z","log.logger":"controller-runtime.controller","message":"Starting workers","service.version":"1.2.1-b5316231","service.type":"eck","ecs.version":"1.4.0","controller":"elasticsearch-controller","worker count":3}
@@ -145,7 +156,8 @@ spec:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl apply -f elasticsearch.yaml
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 elasticsearch.elasticsearch.k8s.elastic.co/elasticsearch created
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -153,7 +165,8 @@ elasticsearch.elasticsearch.k8s.elastic.co/elasticsearch created
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl get elasticsearch elasticsearch
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 NAME            HEALTH   NODES   VERSION   PHASE   AGE
 elasticsearch   green    1       7.9.3     Ready   106s
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -162,7 +175,8 @@ elasticsearch   green    1       7.9.3     Ready   106s
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl get service elasticsearch-es-http
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 NAME                    TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
 elasticsearch-es-http   ClusterIP   10.99.41.114   <none>        9200/TCP   2m24s
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -172,7 +186,8 @@ elasticsearch-es-http   ClusterIP   10.99.41.114   <none>        9200/TCP   2m24
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 PASSWORD=$(kubectl get secret elasticsearch-es-elastic-user -o go-template='{{.data.elastic | base64decode}}')
 curl -u "elastic:$PASSWORD" -k "https://CLUSTER_IP_ELASTICSEARCH:9200"
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 {
   "name" : "elasticsearch-es-default-0",
   "cluster_name" : "elasticsearch",
@@ -218,7 +233,8 @@ spec:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl apply -f kibana.yaml
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 kibana.kibana.k8s.elastic.co/kibana created
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -226,25 +242,28 @@ kibana.kibana.k8s.elastic.co/kibana created
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl get kibana kibana
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 NAME     HEALTH   NODES   VERSION   AGE
 kibana   green    1       7.9.3     2m23s
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-11. De même, un service pour Kibana est créé, nous pouvons le voir de la façon suivante :
+1.  De même, un service pour Kibana est créé, nous pouvons le voir de la façon suivante :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl get service kibana-kb-http
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 NAME             TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
 kibana-kb-http   ClusterIP   10.106.23.116   <none>        5601/TCP   2m45s
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-12. Nous allons récupérer le mot de passe de Kibana :
+1.  Nous allons récupérer le mot de passe de Kibana :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl get secret elasticsearch-es-elastic-user -o=jsonpath='{.data.elastic}' | base64 --decode; echo
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 pb809RTC51EVCd3f19i9UVW5
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -319,7 +338,8 @@ spec:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl apply -f filebeat.yaml
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 beat.beat.k8s.elastic.co/filebeat created
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -327,7 +347,8 @@ beat.beat.k8s.elastic.co/filebeat created
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl get beat
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 NAME       HEALTH   AVAILABLE   EXPECTED   TYPE       VERSION   AGE
 filebeat   green    2           2          filebeat   7.9.2     94s
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -336,25 +357,25 @@ filebeat   green    2           2          filebeat   7.9.2     94s
 
 Creation de l'index pattern :
 
-![](images/elastic3.png)
+![](../images/elastic3.png)
 
 Nom de l'index pattern :
 
-![](images/elastic4.png)
+![](../images/elastic4.png)
 
 Time Field :
 
-![](images/elastic5.png)
+![](../images/elastic5.png)
 
 18. Nous pouvons voir les logs ou bien sur *Discover* ou bien sur *Logs* :
 
 Discover :
 
-![](images/elastic6.png)
+![](../images/elastic6.png)
 
 Logs :
 
-![](images/elastic7.png)
+![](../images/elastic7.png)
 
 ## Clean Up
 
@@ -362,7 +383,8 @@ Pour désinstaller notre stack ELK via ECK :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl delete -f .
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 elasticsearch.elasticsearch.k8s.elastic.co "elasticsearch" deleted
 beat.beat.k8s.elastic.co "filebeat" deleted
 kibana.kibana.k8s.elastic.co "kibana" deleted

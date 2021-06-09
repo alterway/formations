@@ -1,33 +1,33 @@
 Mise a jour d’un cluster
 Pour commencer, il faut mettre à jour kubeadm :
 
-```bash
-training@master$ sudo apt-mark unhold kubeadm
-training@master$ sudo apt-get install kubeadm=1.19.3-00
-training@master$ sudo apt-mark hold kubeadm
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+sudo apt-mark unhold kubeadm
+sudo apt-get install kubeadm=1.20.7-00
+sudo apt-mark hold kubeadm
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Vérifions la version de kubeadm :
 
-```bash
-training@master$ kubeadm version
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubeadm version
 
-kubeadm version: &version.Info{Major:"1", Minor:"19", GitVersion:"v1.19.3", GitCommit:"1e11e4a2108024935ecfcb2912226cedeafd99df", GitTreeState:"clean", BuildDate:"2020-10-14T12:47:53Z", GoVersion:"go1.15.2", Compiler:"gc", Platform:"linux/amd64"}
-```
+kubeadm version: &version.Info{Major:"1", Minor:"19", GitVersion:"v1.20.7", GitCommit:"1e11e4a2108024935ecfcb2912226cedeafd99df", GitTreeState:"clean", BuildDate:"2020-10-14T12:47:53Z", GoVersion:"go1.15.2", Compiler:"gc", Platform:"linux/amd64"}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Nous devons maintenant drain le noeud master afin de pouvoir faire l’upgrade dessus :
 
-`training@master$ kubectl drain master --ignore-daemonsets`
+`kubectl drain master --ignore-daemonsets`
 
 Nous pouvons avoir un aperçu de l’upgrade de la façon suivante :
 
-```bash
-training@master$ sudo kubeadm upgrade plan
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+sudo kubeadm upgrade plan
 
 ...
 Components that must be upgraded manually after you have upgraded the control plane with 'kubeadm upgrade apply':
 COMPONENT   CURRENT        AVAILABLE
-kubelet     2 x v1.18.10   v1.19.11
+kubelet     2 x v1.19.3    v1.20.7
 
 Upgrade to the latest stable version:
 
@@ -45,64 +45,64 @@ You can now apply the upgrade by executing the following command:
 
 _____________________________________________________________________
 ...
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 Nous pouvons maintenant upgrade les composants du cluster :
 
 
-`training@master$ sudo kubeadm upgrade apply v1.20.5`
+`sudo kubeadm upgrade apply v1.20.5`
 
-```bash
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 ...
 [upgrade/successful] SUCCESS! Your cluster was upgraded to "v1.19.11". Enjoy!
 
 [upgrade/kubelet] Now that your control plane is upgraded, please proceed with upgrading your kubelets if you haven't already done so.
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Nous pouvons remettre le noeud master en marche :
 
 
-`training@master$ kubectl uncordon master`
+`kubectl uncordon master`
 
 node/master uncordoned
 
 Nous devons maintenant mettre à jour la kubelet et kubectl :
 
-```bash
-training@master$ sudo apt-mark unhold kubectl kubelet
-training@master$ sudo apt-get install kubectl=1.20.5-00 kubelet=1.20.5-00
-training@master$ sudo apt-mark hold kubectl kubelet
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+sudo apt-mark unhold kubectl kubelet
+sudo apt-get install kubectl=1.20.5-00 kubelet=1.20.5-00
+sudo apt-mark hold kubectl kubelet
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Enfin nous devons redémarrer la kubelet :
 
-```bash
-training@master$ sudo systemctl daemon-reload
-training@master$ sudo systemctl restart kubelet
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+sudo systemctl daemon-reload
+sudo systemctl restart kubelet
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Nous devons maintenant mettre à jour le worker :
 
-```bash
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 training@worker$ sudo apt-mark unhold kubeadm
 training@worker$ sudo apt-get install kubeadm=1.20.5-00
 training@worker$ sudo apt-mark hold kubeadm
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Comme pour le master, nous devons drain le noeud worker :
 
-```bash
-training@master$ kubectl drain worker --ignore-daemonsets
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl drain worker --ignore-daemonsets
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Nous devons maintenant mettre a jour la configuration de notre worker :
 
-```bash
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 training@worker$ sudo kubeadm upgrade node
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-```bash
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 [upgrade] Reading configuration from the cluster...
 [upgrade] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -oyaml'
 [preflight] Running pre-flight checks
@@ -111,43 +111,43 @@ training@worker$ sudo kubeadm upgrade node
 [kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
 [upgrade] The configuration for this node was successfully updated!
 [upgrade] Now you should go ahead and upgrade the kubelet package using your package manager.
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Enfin, comme pour le master nous devons mettre a jour la kubelet et kubectl :
 
-```bash
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 training@worker$ sudo apt-mark unhold kubectl kubelet
 training@worker$ sudo apt-get install kubectl=1.20.5-00 kubelet=1.20.5-00
 training@worker$ sudo apt-mark hold kubectl kubelet
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 En prenant soin de redémarrer la kubelet :
 
-```bash
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 training@worker$ sudo systemctl daemon-reload
 training@worker$ sudo systemctl restart kubelet
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Sans oublier de remettre le noeud en marche :
 
-```bash
-training@master$ kubectl uncordon worker
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl uncordon worker
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Nous pouvons maintenant lister les noeuds :
 
-```bash
-training@master$ kubectl get nodes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl get nodes
 
 NAME     STATUS   ROLES    AGE   VERSION
 master   Ready    master   22m   v1.20.5
 worker   Ready    <none>   21m   v1.19.5
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Et lister les pods pour verifier que tout est fonctionnel :
 
-```bash
-training@master$ kubectl get pods -A
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl get pods -A
 
 NAMESPACE     NAME                             READY   STATUS    RESTARTS   AGE
 kube-system   coredns-f9fd979d6-jhcg9          1/1     Running   0          7m44s
@@ -160,7 +160,7 @@ kube-system   kube-proxy-lkvxn                 1/1     Running   0          13m
 kube-system   kube-scheduler-master            1/1     Running   0          11m
 kube-system   weave-net-t2h8r                  2/2     Running   0          24m
 kube-system   weave-net-zxg6p                  2/2     Running   1          23m
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 **Note** : le CNI doit être mis à jour indépendamment

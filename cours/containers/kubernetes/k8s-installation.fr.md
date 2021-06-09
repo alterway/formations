@@ -63,7 +63,7 @@ etcd-0                     Healthy      {"health": "true"}
 
 - Installer les composants Kubernetes (kubeadm, kubectl, kubelet) : <https://kubernetes.io/docs/setup/independent/install-kubeadm/>
 - Exécuter `kubeadm init` sur le noeud master
-- Exécuter `kubeadm join` sur les autres noeuds (avec le token fournir par la commande `kubeadm init`)
+- Exécuter `kubeadm join` sur les autres noeuds (avec le token fournit par la commande `kubeadm init`)
 - Copier le fichier de configuration généré par `kubeadm init`
 - Installer le plugin Réseau
 

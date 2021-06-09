@@ -4,6 +4,7 @@
 
 - Namespaces
 - Labels
+- Annotations
 - Pods
 - Deployments
 - DaemonSets
@@ -18,12 +19,19 @@
     - Autres...
 - Les objets existent uniquement au sein d'un namespace donné
 - Évitent la collision de nom d'objets
+- Font partie du fqdn du service (DNS) (mon-service.mon-namespace.svc.cluster.local)
 
 ### Kubernetes : Labels
 
 - Système de clé/valeur
 - Organisent les différents objets de Kubernetes (Pods, RC, Services, etc.) d'une manière cohérente qui reflète la structure de l'application
 - Corrèlent des éléments de Kubernetes : par exemple un service vers des Pods
+- Ils contiennent des informations d'identification utilisées par les requêtes qui utilisent un selecteur ou dans les sections de de sélecteurs dans les définitions d'objets
+- Le nom dans clé est limitée à 63 caractères et le suffixe à 253 caractères
+- La valeur ne peut dépasser 63 caractères
+- La valeur doit commencer un aplhanum ou être vide
+- La valeur peut contenir des `~` `.` et `alphanum`
+
 
 ### Kubernetes : Labels
 
@@ -52,6 +60,40 @@ spec:
 $ kubectl get pods --show-labels
 NAME      READY     STATUS    RESTARTS   AGE       LABELS
 nginx     1/1       Running   0          31s       app=nginx,env=prod
+```
+
+### Kubernetes : Annotations
+
+- Système de clé/valeur
+- Ce sont des informations qui ne sont pas utilisées pour l'identification de resources.
+- Les annotations ne sont pas utilisées en interne par kubernetes
+- Elles peuvent être utilisées par des outils externes ou librairies (ex: cert-manager, ingress-controller...)
+- Le nom dans clé est limitée à 63 caractères et le suffixe à 253 caractères
+
+### Kubernetes : Annotations
+
+- exemple d'annotation
+
+```yaml
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: test-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/cluster-issuer: theClusterIssuer
+    kubernetes.io/tls-acme: "true"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /testpath
+        pathType: Prefix
+        backend:
+          service:
+            name: test
+            port:
 ```
 
 ### Kubernetes : Pod
@@ -84,6 +126,74 @@ spec:
     image: nginx
     ports:
     - containerPort: 80
+```
+
+### Kubernetes : Pod
+
+dans les statuts du pod on trouve la notion de phase d'éxécution
+
+- Phases :
+    - Pending: accepté par le cluster, les container ne sont pas initialisé
+    - Running: Au moins un des containers est en cours de démarrage, d'éxécution ou de redémarrage
+    - Succeeded: Tous les containers se sont arrêtés avec un "exit code" à 0 (zéro); Le pod ne sera pas redémarré
+    - Failed: Tous les containers se sont arrêtés et au moins un a un exit code différent de 0
+    - Unknown: L'état du pod ne peut pas être déterminé
+
+
+```console
+$ kubectl get pods -o wide
+```
+
+en sortie :
+
+```console
+NAME                  READY   STATUS    RESTARTS   AGE   IP           NODE      
+xx-79c5968bdc-6lcfq   1/1     Running   0          84m   10.244.0.6   kind-cp   
+yy-ss7nk              1/1     Running   0          84m   10.244.0.5   kind-cp
+
+```
+
+### Kubernetes : Pod
+
+dans les statuts du pod on trouve la notion de Conditions d'état des pods
+
+- Conditions :
+    - PodScheduled: Un nœud a été sélectionné avec succès pour "lancer" le pod, et la planification est terminée.
+    - ContainersReady: Tous les containers sont prêts
+    - Initialized: Les "Init containers sont démarrés"
+    - Ready: Le pod est capable de répondre aux demandes ; par conséquent, il doit être inclus dans le service et les équilibreurs de charge.
+
+```console
+$ kubectl describe pods <POD_NAME>
+```
+
+en sortie
+
+```console
+...
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+...
+```
+
+### Kubernetes : Pod
+
+États des containers (States)
+
+Les containers peuvent avoir seulement 3 états
+
+- États:
+    - Waiting: Les processus requis sont en cours d'éxéction pour un démarrage réussi
+    - Running: Le container est en cours d'éxécution
+    - Terminated: L'exécution du conteneur s'est déroulée et s'est terminée par un succès ou un échec.
+
+
+```console
+$ kubectl get pods <POD_NAME> -o jsonpath='{.status}' | jq
 ```
 
 ### Kubernetes : Deployment

@@ -4,15 +4,15 @@
 ### Kubernetes : Composants
 
 - Kubernetes est écrit en Go, compilé statiquement.
-- Un ensemble de binaires sans dépendance
+- Un ensemble de binaires sans dépendances
 - Faciles à conteneuriser et à packager
 - Peut se déployer uniquement avec des conteneurs sans dépendance d'OS
-  - k3d, kind, minikube docker...
+  - k3d, kind, minikube, docker...
 
 ### Kubernetes : Les noeuds (Nodes)
 
 - Les noeuds qui executent les conteneurs sont composés de
-  - Un "container Engine" (Docker, CRI-0, containerd...)
+  - Un "container Engine" (Docker, CRI-O, containerd...)
   - Une "kubelet" (node agent)
   - Un kube-proxy (un composant réseau nécessaire mais pas suffisant)
 - Ancien non des noeuds : **Minions**
