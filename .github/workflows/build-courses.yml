@@ -4,6 +4,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - run: echo ${{ secrets.AWS_S3_BUCKET }}
+      - run: echo ${{ secrets.AWS_ACCESS_KEY_ID }}
+      - run: echo ${{ secrets.AWS_REGION }}
       - name: 🌀 Check out repository code
         uses: actions/checkout@v2
       - name: Sync styles with s3
