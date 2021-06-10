@@ -60,6 +60,18 @@ spec:
     app: web
 ```
 
+```console
+# déploiement 
+
+kubectl create deployment web --image=nginx
+
+# service
+# par défaut type= ClusterIP
+
+kubectl expose deploy web --port=80 --target-port=8080
+
+```
+
 ### Kubernetes : Services : HeadLess ClusterIP
 
 - `Headless ClusterIP` : 
@@ -90,6 +102,19 @@ spec:
 ```
 
 
+```console
+# déploiement 
+
+kubectl create deployment web --image=nginx
+
+# service
+
+kubectl expose deploy web --port=80 --target-port=8080  --cluster-ip none
+
+```
+
+
+
 ### Kubernetes : Services : NodePort
 
 - `NodePort` : 
@@ -114,12 +139,21 @@ spec:
     targetPort: 80
     protocol: TCP
     name: http
-  - port: 443
-    protocol: TCP
-    name: https
   selector:
     app: my-nginx
 ```
+
+```console
+# déploiement 
+
+kubectl create deployment web --image=nginx
+
+# service
+
+kubectl expose deploy web --type NodePort --protocol TCP --port 80 --target-port 8080
+
+```
+
 
 ### Kubernetes : Services : LoadBalancer
 
@@ -140,11 +174,23 @@ metadata:
 spec:
   ports:
     - port: 9000
-      targetPort:b 1234
+      targetPort: 1234
   selector:
     app: myapp
   type: LoadBalancer
 ```
+
+```console
+# déploiement 
+
+kubectl create deployment web --image=myapp
+
+# service
+
+kubectl expose deploy web --type LoadBalancer --protocol TCP --port 9000 --target-port 1234
+
+```
+
 
 ### Kubernetes : Services : ExternalName
 
