@@ -65,7 +65,6 @@ mychart/
 └── values.yaml
 ```
 
-
 ### Kubernetes : Helm Chart : Mode de fonctionnement
 
 ![](images/helm.png)
