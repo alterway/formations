@@ -160,6 +160,9 @@ ex: my-app.default.svc.cluster.local
 - Il permet de fournir une URL visible permettant d'accéder un Service Kubernetes
 - Il permet d'avoir des terminations TLS, de faire du _Load Balancing_, etc...
 - Ils ont besoin d'un _ingress Controller_ pour fonctionner
+  
+![](images/ingress.png)
+
 
 
 ### Kubernetes : Ingress
