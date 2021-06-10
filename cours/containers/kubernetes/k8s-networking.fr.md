@@ -42,6 +42,8 @@
     - Attribue une adresse IP interne accessible uniquement au sein du cluster, cette adresse est accessible dans le cluster par les pods et les noeuds
     - Expose le service pour les connexions depuis l'intérieur du cluster 
 
+![](images/clusterIP.png)
+
 ### Kubernetes : Services : NodePort
 
 - `NodePort` : 

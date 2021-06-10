@@ -73,14 +73,17 @@ build-html-labs() {
         fi
       done
   
+    OPTIONS="-f markdown+smart --variable fontsize=11pt --variable geometry:"top=2cm, bottom=3cm, left=2cm, right=2cm" --variable geometry:a4paper"
     docker run --rm \
         -v $PWD/output-html:/output \
         -v $PWD/labs:/input \
           alterway/pandocker-alpine:2.10 \
-           pandoc -t html5 /input/labs-"$lab".md -V mainfont="DejaVu Serif" -s --highlight-style tango -o /output/labs-"$lab"."$LANGUAGE".html
+           pandoc -t html5 /input/labs-"$lab".md -V mainfont="DejaVu Serif" -s $OPTIONS --highlight-style tango -o /output/labs-"$lab"."$LANGUAGE".html
     rm -f "$LABS_DIR"/labs-"$lab".md
   done
 }
+
+
 
 # madnight/docker-alpine-wkhtmltopdf
 

@@ -5,3 +5,4 @@ output-pdf/
 build/
 beamer*metropolis.sty
 modules.png
+.DS_Store

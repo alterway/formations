@@ -200,6 +200,7 @@ $ kubectl get pods <POD_NAME> -o jsonpath='{.status}' | jq
 
 - Permet d'assurer le fonctionnement d'un ensemble de Pods
 - Version, Update et Rollback
+- Il est lié avec l'object ReplicaSet qui gère le cycle de vie et la mise à l'échelle des pods
 - Souvent combiné avec un objet de type *service*
 
 ![deployment](images/deployment.png)
