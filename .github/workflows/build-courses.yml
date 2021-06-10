@@ -19,10 +19,10 @@ jobs:
           DEST_DIR: 'formations/revealjs/css/theme'
       - run: echo "🏗️" build french assets
       - run: bash build.sh -l fr
-      - run: echo "🏗️" build english assets
-      - run: bash build.sh -l en
+      #- run: echo "🏗️" build english assets
+      #- run: bash build.sh -l en
       - run: echo "Sync with s3"
-      - name: Sync html with s3
+      - name: 🌀 Sync html with s3
         uses: jakejarvis/s3-sync-action@master
         with:
           args: --acl public-read --follow-symlinks
@@ -34,7 +34,7 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_REGION }} 
           SOURCE_DIR: 'output-html'
           DEST_DIR: 'formations'
-      - name: Sync pdf with s3
+      - name: 🌀 Sync pdf with s3
         uses: jakejarvis/s3-sync-action@master
         with:
           args: --acl public-read --follow-symlinks 
