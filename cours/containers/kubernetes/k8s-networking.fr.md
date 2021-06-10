@@ -52,6 +52,8 @@
     - Expose le service sur un port sur chaque nœud du cluster
     - Pb : le code doit être changé pour accéder au bon n° de port
 
+![](images/nodePort.png)
+
 ### Kubernetes : Services : LoadBalancer
 
 - `LoadBalancer` :  expose le service à l'externe en utilisant le loadbalancer d'un cloud provider (AWS, Google, Azure)
