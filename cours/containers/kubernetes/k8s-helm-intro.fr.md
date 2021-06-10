@@ -44,6 +44,32 @@ A voir :
 - Les charts peuvent être stockés sur des référentiels privés ou publics
 
 
+### Kubernetes : Helm Chart Structure
+
+- Structure par défaut d'un chart
+
+```console
+mychart/
+├── Chart.yaml
+├── charts
+├── templates
+│   ├── NOTES.txt
+│   ├── _helpers.tpl
+│   ├── deployment.yaml
+│   ├── hpa.yaml
+│   ├── ingress.yaml
+│   ├── service.yaml
+│   ├── serviceaccount.yaml
+│   └── tests
+│       └── test-connection.yaml
+└── values.yaml
+```
+
+
+### Kubernetes : Helm Chart : Mode de fonctionnement
+
+![](images/helm.png)
+
 ### Kubernetes : Helm installation premiers pas
 
 - Installer Helm (sur une distribution Linux):

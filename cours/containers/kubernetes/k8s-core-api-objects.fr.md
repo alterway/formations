@@ -273,7 +273,7 @@ metadata:
 - Supprimer un StatefulSet ne supprime pas le PV associé
 
 
-![statefulset](images/statefulset.png){width="300"}
+![statefulset](images/statefulset.png){width="500"}
 
 
 ### Kubernetes : StatefulSet

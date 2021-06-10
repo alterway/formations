@@ -44,7 +44,21 @@
 
 ![](images/clusterIP.png)
 
+### Kubernetes : Services : ClusterIP
 
+```yaml
+apiVersion: v1
+kind: Service
+metadata: 
+  name: the-service
+spec: 
+  ports: 
+    - port: 80
+      protocol: TCP
+      targetPort: 8080
+  selector: 
+    app: web
+```
 
 ### Kubernetes : Services : HeadLess ClusterIP
 
@@ -57,6 +71,24 @@
 ![](images/headlessClusterIP.png)
 
 
+### Kubernetes : Services : HeadLess ClusterIP
+
+```yaml
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-headless-service
+spec:
+  clusterIP: None # <--
+  selector:
+    app: test-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+```
+
 
 ### Kubernetes : Services : NodePort
 
@@ -68,6 +100,27 @@
 
 ![](images/nodePort.png)
 
+### Kubernetes : Services : NodePort
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-nginx
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    targetPort: 80
+    protocol: TCP
+    name: http
+  - port: 443
+    protocol: TCP
+    name: https
+  selector:
+    app: my-nginx
+```
+
 ### Kubernetes : Services : LoadBalancer
 
 - `LoadBalancer` :  expose le service à l'externe en utilisant le loadbalancer d'un cloud provider (AWS, Google, Azure)
@@ -75,39 +128,32 @@
     - Expose le service sur chaque nœud (comme NodePort)
     - Fournit un équilibreur de charge
 
+
+### Kubernetes : Services : LoadBalancer
+
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp
+spec:
+  ports:
+    - port: 9000
+      targetPort:b 1234
+  selector:
+    app: myapp
+  type: LoadBalancer
+```
+
 ### Kubernetes : Services : ExternalName
 
 - `ExternalName`
     - Un alias vers un service externe en dehors du cluster
     - La redirection se produit au niveau DNS, il n'y a aucune proxyfication ou forward
 
-### Kubernetes : Services
 
-![](images/services-userspace-overview.svg){height="700"}
-
-### Kubernetes : Services
-
-- Exemple de service (on remarque la sélection sur le label et le mode d'exposition):
-
-```yaml
-apiVersion: v1
-kind: Service
-metadata:
-  name: frontend
-  labels:
-    app: guestbook
-    tier: frontend
-spec:
-  type: NodePort
-  ports:
-  - port: 80
-  selector:
-    app: guestbook
-    tier: frontend
-```
-
-
-### Kubernetes : Services
+### Kubernetes : Services : ExternalName
 
 Il est aussi possible de mapper un service avec un nom de domaine en spécifiant le paramètre `spec.externalName`.
 
@@ -121,7 +167,6 @@ spec:
   type: ExternalName
   externalName: my.database.example.com
 ```
-
 ### Kubernetes : Services Discovery
 
 - Kubernetes prend en charge 2 modes principaux de "service discovery"
@@ -162,7 +207,6 @@ ex: my-app.default.svc.cluster.local
 - Ils ont besoin d'un _ingress Controller_ pour fonctionner
   
 ![](images/ingress.png)
-
 
 
 ### Kubernetes : Ingress

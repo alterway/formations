@@ -1,6 +1,6 @@
 # KUBERNETES : Observabilité et Monitoring
 
-### Sondes : Readiness and Liveness
+### Sondes : Readiness, Liveness et StartUP
 
 - Permettent à Kubernetes de sonder l'état d'un pod et d'agir en conséquence
 - 3 types de sonde : Readiness, Liveness, StartUp
