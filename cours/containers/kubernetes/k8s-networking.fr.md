@@ -44,6 +44,20 @@
 
 ![](images/clusterIP.png)
 
+
+
+### Kubernetes : Services : HeadLess ClusterIP
+
+- `Headless ClusterIP` : 
+    - Il n'y pas de load balancing
+    - Le service renvoie sur une requête DNS la liste des IP des pods et non pas l'ip du service
+    - Le service donc envoi les requêtes sur les pods même ceux-ci ne fonctionnent pas
+    - C'est donc à l'application de gérer la tolérance de panne et le routing
+
+![](images/headlessClusterIP.png)
+
+
+
 ### Kubernetes : Services : NodePort
 
 - `NodePort` : 
