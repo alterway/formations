@@ -57,7 +57,7 @@ Associer les entrées DNS à l'adresse du LB
 
 - Étape 3: créer des Ingress
 
-L'`Ingress Controlle`r prend ces ressources et configure le LB
+L'`Ingress Controller` prend ces ressources et configure le LB (load balancer)
 
 - Étape 4: Votre Site est prêt à etre utilisé !
 
