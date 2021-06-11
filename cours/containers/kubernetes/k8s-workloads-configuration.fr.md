@@ -4,21 +4,39 @@
 
 - Objet Kubernetes permettant stocker séparer les fichiers de configuration
 - Il peut être créé d'un ensemble de valeurs ou d'un fichier resource Kubernetes (YAML ou JSON)
-- Un `ConfigMap` peut sollicité par plusieurs `pods`
+- Un `ConfigMap` peut être sollicité (utilisé) par plusieurs `pods`
+- Limité à **1MiB** de data
 
 ### Kubernetes : ConfigMaps
 
+- Exemple pour être utilisé comme fichier de configuration
+
 ```yaml
 apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: redis-config
 data:
     redis-config: |
       maxmemory 2mb
       maxmemory-policy allkeys-lru
+```
+
+### Kubernetes : ConfigMaps
+
+- Exemple pour être utilisé dans des variables d'environnements
+- Utilisation de clés valeurs individuelles
+
+```yaml
+apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: redis-config
-  namespace: default
+  name: redis-env
+data:
+   redis_host: redis_svc
+   redis_port: 6349
 ```
+
 
 ### Kubernetes : ConfigMap environnement
 
@@ -33,11 +51,11 @@ spec:
       image: k8s.gcr.io/busybox
       command: [ "/bin/sh", "-c", "env" ]
       env:
-        - name: SPECIAL_LEVEL_KEY
+        - name: REDIS_HOST
           valueFrom:
             configMapKeyRef:
-              name: special-config
-              key: special.how
+              name: redis-env
+              key: redis_host
         - name: LOG_LEVEL
           valueFrom:
             configMapKeyRef:
@@ -59,14 +77,14 @@ spec:
       image: k8s.gcr.io/busybox
       command: [ "/bin/sh", "-c", "ls /etc/config/" ]
       volumeMounts:
-      - name: config-volume
+      - name: redis-conf-volume
         mountPath: /etc/config
   volumes:
-    - name: config-volume
+    - name: redis-conf-volume
       configMap:
         # Provide the name of the ConfigMap containing the files you want
         # to add to the container
-        name: special-config
+        name: redis-config
   restartPolicy: Never
 ```
 
@@ -76,6 +94,7 @@ spec:
 - Similaire à un `ConfigMap`, à la seule différence que le contenu des entrées présentes dans le champ `data` sont encodés en base64.
 - Il est possible de directement créer un `Secret` spécifique à l'authentification sur un registre Docker privé.
 - Il est possible de directement créer un `Secret` à partir d'un compte utilisateur et d'un mot de passe.
+- Limité à **1MiB** de data
 
 ### Kubernets : Secrets
 

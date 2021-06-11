@@ -50,6 +50,7 @@ ingresses                         ing          extensions                       
 
 ### Kubernetes : Kubectl explain
 
+- Le "man pages" de kubernetes
 - Explorer les types et définitions
 
 ```console
@@ -76,9 +77,9 @@ kubectl explain node --recursive
     - pluriel (par exemple, nodes, services, deployments)
     - court (par exemple no, svc, deploy)
 
-- Certaines ressources n'ont pas de nom court
+- Certaines ressources n'ont pas de nom court (clusterroles, clusterrolebindings, roles ...)
 
-- Les points de terminaison (endpoints) ont uniquement une forme plurielle
+- Les points de terminaison (endpoints) ont uniquement une forme plurielle ou courte (ep)
 
 ### Kubernetes : Kubectl get
 
@@ -294,7 +295,7 @@ kubectl apply -f object.yaml
 
 ### Kubernetes : Kubernetes Dashboard
 
-![](images/kubernetes/ui-dashboard.png)
+![](images/kubernetes/dashboard-0.png)
 
 
 ### Kubernetes : Kubernetes Dashboard
@@ -328,6 +329,17 @@ $ kubectl proxy
 
 <http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/>
 
+
+### Kubernetes : Kubernetes Dashboard
+
+```console
+kubectl get secrets -n kubernetes-dashboard
+kubectl describe -n kubernetes-dashboard secret kubernetes-dashboard-token-xxxx
+kubectl describe -n kubernetes-dashboard secret kubernetes-dashboard-token-f68tf | grep "token:" | awk '{print $2}'
+
+```
+
+![](images/kubernetes/dashboard-0.png)
 
 ### Kubernetes : Kubernetes Dashboard
 

@@ -93,9 +93,15 @@ En plus de l'installation de Kubernetes, Kubeadm peut :
     - kube-aws : <https://github.com/kubernetes-incubator/kube-aws>
     - kops : <https://github.com/kubernetes/kops>
 
-### Introduction à Sonobuoy
+### Conformité kubernetes
 
-- Outil de conformité de clusters Kubernetes
-- Permet de facilement générer des données de diagnostics pour les applications déployées
-- <https://github.com/vmware-tanzu/sonobuoy>
+Voici quelques outils permettant de certifier les déploiements des cluster kubernetes en terme de sécurité et de respects des standard
+
+- Sonobuoy 
+    - <https://github.com/vmware-tanzu/sonobuoy>
+- Popeye
+    - <https://github.com/derailed/popeye>
+- kube-score
+    - <https://github.com/zegl/kube-score>
+
 

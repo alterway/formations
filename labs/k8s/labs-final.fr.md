@@ -10,7 +10,6 @@
 1/ Créer un namespace nommé **kubeops**
 
 
-
 2/ Créer un pod avec les caractéristiques suivantes :
 
 Nom : webserver
@@ -22,7 +21,6 @@ Sur quel nœud se trouve votre pod ?
 Connectez-vous au conteneur du pod et vérifiez son OS avec la commande cat /etc/os-release
 
 Vérifiez les logs du pod
-
 
 
 3/ Ajoutez un nouveau conteneur du nom de webwatcher au pod créé précédemment, avec une image : afakharany/watcher:latest.

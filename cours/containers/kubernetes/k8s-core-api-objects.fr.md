@@ -130,14 +130,14 @@ spec:
 
 ### Kubernetes : Pod
 
-dans les statuts du pod on trouve la notion de phase d'éxécution
+Dans les statuts du pod on trouve la notion de phase d'éxécution
 
 - Phases :
-    - Pending: accepté par le cluster, les container ne sont pas initialisé
-    - Running: Au moins un des containers est en cours de démarrage, d'éxécution ou de redémarrage
-    - Succeeded: Tous les containers se sont arrêtés avec un "exit code" à 0 (zéro); Le pod ne sera pas redémarré
-    - Failed: Tous les containers se sont arrêtés et au moins un a un exit code différent de 0
-    - Unknown: L'état du pod ne peut pas être déterminé
+    - `Pending`: accepté par le cluster, les container ne sont pas initialisé
+    - `Running`: Au moins un des containers est en cours de démarrage, d'éxécution ou de redémarrage
+    - `Succeeded`: Tous les containers se sont arrêtés avec un "exit code" à 0 (zéro); Le pod ne sera pas redémarré
+    - `Failed`: Tous les containers se sont arrêtés et au moins un a un exit code différent de 0
+    - `Unknown`: L'état du pod ne peut pas être déterminé
 
 
 ```console
@@ -158,10 +158,10 @@ yy-ss7nk              1/1     Running   0          84m   10.244.0.5   kind-cp
 dans les statuts du pod on trouve la notion de Conditions d'état des pods
 
 - Conditions :
-    - PodScheduled: Un nœud a été sélectionné avec succès pour "lancer" le pod, et la planification est terminée.
-    - ContainersReady: Tous les containers sont prêts
-    - Initialized: Les "Init containers sont démarrés"
-    - Ready: Le pod est capable de répondre aux demandes ; par conséquent, il doit être inclus dans le service et les équilibreurs de charge.
+    - `PodScheduled`: Un nœud a été sélectionné avec succès pour "lancer" le pod, et la planification est terminée.
+    - `ContainersReady`: Tous les containers sont prêts
+    - `Initialized`: Les "Init containers sont démarrés"
+    - `Ready`: Le pod est capable de répondre aux demandes ; par conséquent, il doit être inclus dans le service et les équilibreurs de charge.
 
 ```console
 $ kubectl describe pods <POD_NAME>
@@ -187,9 +187,9 @@ Conditions:
 Les containers peuvent avoir seulement 3 états
 
 - États:
-    - Waiting: Les processus requis sont en cours d'éxéction pour un démarrage réussi
-    - Running: Le container est en cours d'éxécution
-    - Terminated: L'exécution du conteneur s'est déroulée et s'est terminée par un succès ou un échec.
+    - `Waiting`: Les processus requis sont en cours d'éxéction pour un démarrage réussi
+    - `Running`: Le container est en cours d'éxécution
+    - `Terminated`: L'exécution du conteneur s'est déroulée et s'est terminée par un succès ou un échec.
 
 
 ```console

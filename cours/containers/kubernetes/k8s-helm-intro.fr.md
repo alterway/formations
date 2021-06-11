@@ -72,7 +72,10 @@ mychart/
 ### Kubernetes : Helm installation premiers pas
 
 - Installer Helm (sur une distribution Linux):
-- `curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get-helm-3 | bash`
+```console
+curl \
+  https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get-helm-3 | bash
+```
   
 - Voir la liste des `charts` disponibles sur les répertoire officiel : `helm search`
 - Afficher la liste des `charts` disponibles pour _prometheus_ : `helm search prometheus`

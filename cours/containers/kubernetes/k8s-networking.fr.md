@@ -119,6 +119,7 @@ kubectl expose deploy web --port=80 --target-port=8080  --cluster-ip none
 
 - `NodePort` : 
     - chaque noeud du cluster ouvre un port statique (entre 30000-32767 par défaut) et redirige le trafic vers le port indiqué
+    - Un service de type ClusterIP est créé automatiquement lors de la création du Service NodePort
     - Expose le service au trafic externe
     - Expose le service sur un port sur chaque nœud du cluster
     - Pb : le code doit être changé pour accéder au bon n° de port
@@ -231,6 +232,28 @@ spec:
     - Variables d'environment 
         - MY_APP_SERVICE_HOST=`<Cluster IP Address>`
         - MY_APP_SERVICE_PORT=`<Service Port>`
+
+### Kubernetes : Services Discovery
+
+
+- exemple :
+
+```console
+kubectl get svc
+web   ClusterIP   10.96.163.5     <none>        80/TCP     3m56s
+
+kubectl exec web-96d5df5c8-lfmhs env | sort
+WEB_PORT=tcp://10.96.163.5:80
+WEB_PORT_80_TCP=tcp://10.96.163.5:80
+WEB_PORT_80_TCP_ADDR=10.96.163.5
+WEB_PORT_80_TCP_PORT=80
+WEB_PORT_80_TCP_PROTO=tcp
+WEB_SERVICE_HOST=10.96.163.5
+WEB_SERVICE_PORT=80
+
+
+```
+
 
 ### Kubernetes : Services Discovery
 
