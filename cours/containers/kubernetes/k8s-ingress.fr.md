@@ -59,7 +59,8 @@ Associer les entrées DNS à l'adresse du LB
 
 L'`Ingress Controlle`r prend ces ressources et configure le LB
 
-- Étape 4: Votre Site est prêt a etre utilisé !
+- Étape 4: Votre Site est prêt à etre utilisé !
+
 
 ### À quoi ressemble une ressource Ingress?
 
@@ -67,6 +68,7 @@ L'`Ingress Controlle`r prend ces ressources et configure le LB
 Un exemple simple
 
 ```yaml
+
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
@@ -89,3 +91,5 @@ spec:
     - grafana-helaks001.caas.fr
     secretName: grafana-helaks001.caas.fr-tls
 ```
+
+

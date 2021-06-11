@@ -215,3 +215,5 @@ Le fichier `readme` peut ou pas, donner des informations sur ces `values`.
 - Gérer facilement les Roles / Rolebinding / ClusterRole / ClusterRoleBinding
 - Des paramétrages d'opérateurs
 - ...  
+
+

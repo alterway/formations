@@ -339,7 +339,7 @@ kubectl describe -n kubernetes-dashboard secret kubernetes-dashboard-token-f68tf
 
 ```
 
-![](images/kubernetes/dashboard-0.png)
+![](images/kubernetes/dashboard-1.png)
 
 ### Kubernetes : Kubernetes Dashboard
 

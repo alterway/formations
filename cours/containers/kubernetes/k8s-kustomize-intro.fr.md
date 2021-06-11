@@ -1,6 +1,7 @@
+
 # KUBERNETES : Introduction à Kustomize
  
-### kubernetes : kutomize
+### kubernetes : kustomize
 
 - Kustomize permet de transformer des manifests yaml contenant des resources kubernetes
 - Les manifest d'origine restent inchangés et donc utilisable tels quels (`kubectl apply/create/delete -f`)
