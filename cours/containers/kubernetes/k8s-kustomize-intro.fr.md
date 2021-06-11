@@ -3,10 +3,10 @@
  
 ### kubernetes : kustomize
 
-- Kustomize permet de transformer des manifests yaml contenant des resources kubernetes
-- Les manifest d'origine restent inchangés et donc utilisable tels quels (`kubectl apply/create/delete -f`)
+- Kustomize permet de transformer des manifestes yaml contenant des resources kubernetes
+- Les manifestes d'origine restent inchangés et donc utilisables tels quels (`kubectl apply/create/delete -f`)
 - On créé des `kustomizations`
-- Une `kustomizations` peut se voir comme surcouche (ajout ou modification)
+- Une `kustomizations` peut se voir comme une superposition (overlay) (ajout ou modification)
 - Les `kustomizations` sont définies dans un fichier `kustomizations.yaml`
 
 ### kubernetes : kustomizations
@@ -14,7 +14,7 @@
 - Une kustomization peut contenir:
    - d'autres kustomizations
    - des resources kubernetes définies en yaml
-   - des patch de resources kubernetes
+   - des patchs de resources kubernetes
    - des ajouts de `labels`ou `annotations` pour toutes les resources
    - des définitions de `configmaps` ou `secrets`
 
@@ -62,7 +62,7 @@ configMapGenerator:
 <https://kubectl.docs.kubernetes.io/references/kustomize/glossary/>
 
 - `base` : Une `base` est une kustomisation référencée par une autre kustomisation
-- `overlay` : un `overlay`  est une kustomisation qui dépend d'une autre kustomisation
+- `overlay` : un `overlay`  est une kustomization qui dépend d'une autre kustomization
 - `kustomization` : Une `kustomization` peut être à la fois une `base` et un `overlay`
 - `patch` : un `patch` décrit comment modifier une ressource existante
 - `variant` : une `variante` est le résultat, dans un cluster, de l'application d'un `overlay` à une `base`
