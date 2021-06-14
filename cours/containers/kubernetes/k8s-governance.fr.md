@@ -4,7 +4,8 @@
 
 ### Kubernetes
 
-- COE développé par Google, devenu open source en 2014
+- Initialement développé par Google (Borg), devenu open source en 2014
+- 1.0 le 10 Juillet 2015
 - Adapté à tout type d'environnement
 - Devenu populaire en très peu de temps
 - Premier projet de la CNCF
