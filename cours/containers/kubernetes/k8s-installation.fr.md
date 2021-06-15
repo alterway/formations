@@ -57,7 +57,7 @@ etcd-0                     Healthy      {"health": "true"}
 - Certains pré-requis sont nécessaires avant d'installer Kubernetes :
     - Désactiver le swap
     - Assurer que les ports requis soient ouverts : <https://kubernetes.io/docs/setup/independent/install-kubeadm/#check-required-ports>
-    - Installer une Container Runtime compatible CRI (cointainerd, CRI-O, Docker)
+    - Installer une Container Runtime compatible CRI (containerd, CRI-O, Docker)
 
 ### Kubeadm
 

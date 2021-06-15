@@ -357,25 +357,25 @@ filebeat   green    2           2          filebeat   7.9.2     94s
 
 Creation de l'index pattern :
 
-![](../images/elastic3.png)
+![](images/elastic3.png)
 
 Nom de l'index pattern :
 
-![](../images/elastic4.png)
+![](images/elastic4.png)
 
 Time Field :
 
-![](../images/elastic5.png)
+![](images/elastic5.png)
 
 18. Nous pouvons voir les logs ou bien sur *Discover* ou bien sur *Logs* :
 
 Discover :
 
-![](../images/elastic6.png)
+![](images/elastic6.png)
 
 Logs :
 
-![](../images/elastic7.png)
+![](images/elastic7.png)
 
 ## Clean Up
 

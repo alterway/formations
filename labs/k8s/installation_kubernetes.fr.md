@@ -1,9 +1,5 @@
 # Création d'un cluster Kubernetes
 
-<hr>
-
-![certified](../images/certified-kubernetes-color.png){height="30px"}
-
 ## Installation avec Minikube
 
 <hr>

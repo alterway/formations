@@ -23,7 +23,7 @@
 
 ### Kubernetes : Services
 
-- Abstraction des pods sous forme d'une IP virtuelle de service et d'un nom DNS
+- Abstraction des pods sous forme d'une `IP virtuelle` de service et d'un `nom DNS`
 - Rendre un ensemble de pods accessibles depuis l'extérieur
 - Load Balancing entre les pods d'un même service
 
@@ -34,6 +34,7 @@
     - GCP
     - Azure Kubernetes Service
     - OpenStack
+    - ...
 
 ### Kubernetes : Services : ClusterIP
 

@@ -27,7 +27,7 @@
 - Organisent les différents objets de Kubernetes (Pods, RC, Services, etc.) d'une manière cohérente qui reflète la structure de l'application
 - Corrèlent des éléments de Kubernetes : par exemple un service vers des Pods
 - Ils contiennent des informations d'identification utilisées par les requêtes qui utilisent un selecteur ou dans les sections de de sélecteurs dans les définitions d'objets
-- Le nom dans clé est limitée à 63 caractères et le suffixe à 253 caractères
+- Le nom dans la clé est limité à 63 caractères et le suffixe à 253 caractères
 - La valeur ne peut dépasser 63 caractères
 - La valeur doit commencer un aplhanum ou être vide
 - La valeur peut contenir des `~` `.` et `alphanum`
@@ -68,7 +68,7 @@ nginx     1/1       Running   0          31s       app=nginx,env=prod
 - Ce sont des informations qui ne sont pas utilisées pour l'identification de resources.
 - Les annotations ne sont pas utilisées en interne par kubernetes
 - Elles peuvent être utilisées par des outils externes ou librairies (ex: cert-manager, ingress-controller...)
-- Le nom dans clé est limitée à 63 caractères et le suffixe à 253 caractères
+- Le nom dans la clé est limitée à 63 caractères et le suffixe à 253 caractères
 
 ### Kubernetes : Annotations
 

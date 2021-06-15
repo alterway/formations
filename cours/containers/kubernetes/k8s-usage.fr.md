@@ -220,7 +220,7 @@ curl -sk https://10.96.0.1/api/v1/namespaces/kube-public/configmaps/cluster-info
 
 ### Kubernetes : Kubectl describe
 
-- `kubectl describe` a besoin d'un type de ressource et optionnelement un nom de ressource
+- `kubectl describe` a besoin d'un type de ressource et optionnellement un nom de ressource
 - Il est possible de fournir un _prefixe_ de nom de ressource
 
 - ex:
@@ -250,7 +250,7 @@ kubectl run pingu --image=alpine -- ping 127.1
 
 ### Kubernetes : Créer un deploiement en ligne de commande
 
-- kubectl create `deployment` ...
+- `kubectl create deployment` ...
 - Depuis kubernetes 1.19, il est possible de préciser un commande au moment du `create`
 
 ```console
@@ -368,6 +368,6 @@ $ kubectl get secret $(kubectl get serviceaccount cluster-admin-dashboard-sa -o 
 
 ```
 
-Il est possible de créer des comptes **sa** avec droits différents ex **view**
+Il est possible de créer des comptes de service (sa) avec droits différents ex `view`
 
 

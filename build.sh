@@ -61,19 +61,27 @@ build-html() {
 build-html-labs() {
   mkdir -p output-html
   ln -fs ../images output-html
-  echo $LIST_LABS
+  # echo $LIST_LABS
   for lab in $((jq keys | jq -r '.[]') < $LIST_LABS); do
+      x=-1
       for module in $(jq -r '.["'"$lab"'"].modules[]' $LIST_LABS); do
+        ((x++))
         if [ -f "$LABS_DIR"/"$module"."$LANGUAGE".md ]; then
-          cat $LABS_DIR/"$module"."$LANGUAGE".md >> "$LABS_DIR"/labs-"$lab".md
+          cat $LABS_DIR/"$module"."$LANGUAGE".md > "$LABS_DIR"/labs-"$lab".md.tmp
+
         elif [ -f "$LABS_DIR"/"$module"."$FALLBACK_LANGUAGE".md ]; then
-          cat "$LABS_DIR"/"$module"."$FALLBACK_LANGUAGE".md >> "$LABS_DIR"/labs-"$lab".md
+          cat "$LABS_DIR"/"$module"."$FALLBACK_LANGUAGE".md > "$LABS_DIR"/labs-"$lab".md.tmp
         else
           echo "module "$module" doesn't exist in any of the languages"
         fi
+        if [[ "$x" -gt 0 ]]; then
+            sed -i "s/^# /# ${x}: /" "$LABS_DIR"/labs-"$lab".md.tmp
+        fi
+        cat "$LABS_DIR"/labs-"$lab".md.tmp >> "$LABS_DIR"/labs-"$lab".md
+        rm -f "$LABS_DIR"/labs-"$lab".md.tmp
       done
   
-    OPTIONS="-f markdown+smart --variable fontsize=11pt --variable geometry:"top=2cm, bottom=3cm, left=2cm, right=2cm" --variable geometry:a4paper"
+    OPTIONS="-f markdown+smart --variable fontsize=11pt --variable geometry:"top=2cm, bottom=3cm, left=3cm, right=2cm" --variable geometry:a4paper"
     docker run --rm \
         -v $PWD/output-html:/output \
         -v $PWD/labs:/input \
@@ -197,13 +205,13 @@ if [[ ! $OUTPUT =~ html|pdf|all ]]; then
     display_help
     exit 1
 elif [[ $OUTPUT == "html" ]]; then
-    build-html
+    #build-html
     build-html-labs
 elif [[ $OUTPUT == "pdf" || $OUTPUT == "all" ]]; then
-    build-html
+    #build-html
     build-html-labs
-    build-pdf
-    build-pdf-labs
+    #build-pdf
+    #build-pdf-labs
 fi
 rm -f cours.json.tmp
 rm -f labs.json.tmp
