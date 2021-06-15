@@ -376,16 +376,16 @@ LP7RithkvOulZE1Yhj95obTSuH4e8qUffsuCaBAR
 
 1.  Dans Grafana, aller dans Configuration -> Data Sources -> Add data source -> Prometheus, et renseinger "prometheus-server" dans URL :
 
-![](../images/grafana2.png)
+![](images/grafana2.png)
 
 11. Toujours dans Grafana, aller dans "+" -> Import -> Entrer "6417" dans ID -> Choisir le datasource promethus créé ci dessus :
 
-![](../images/grafana3.png)
+![](images/grafana3.png)
 
-![](../images/grafana4.png)
+![](images/grafana4.png)
 
 12. Enjoy :)
 
-![](../images/grafana5.png)
+![](images/grafana5.png)
 
 <hr>
