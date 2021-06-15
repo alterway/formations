@@ -205,13 +205,13 @@ if [[ ! $OUTPUT =~ html|pdf|all ]]; then
     display_help
     exit 1
 elif [[ $OUTPUT == "html" ]]; then
-    #build-html
+    build-html
     build-html-labs
 elif [[ $OUTPUT == "pdf" || $OUTPUT == "all" ]]; then
-    #build-html
+    build-html
     build-html-labs
-    #build-pdf
-    #build-pdf-labs
+    build-pdf
+    build-pdf-labs
 fi
 rm -f cours.json.tmp
 rm -f labs.json.tmp
