@@ -69,78 +69,136 @@ Events:              <none>
 
 ## User
 
-0. Créer un utilisateur unix mario :
+0. Créer un utilisateur unix avec votre trigramme
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-useradd mario -m -s /bin/bash
-cd /home/mario
+TRIG="hel" # Remplacer avec votre trigramme par exemple
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. Commençons par générer une clé privée pour notre utilisateur :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-sudo openssl genrsa -out mario.key 2048
-
-Generating RSA private key, 2048 bit long modulus (2 primes)
-.....................................................................+++++
-.................+++++
-e is 65537 (0x010001)
+sudo useradd ${TRIG} -m -s /bin/bash
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-2. Nous devons également générer un CSR pour notre utilisateur :
+1. Commençons par générer une clé privée un CSR pour notre utilisateur :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-sudo openssl req -new -key mario.key -out mario.csr -subj "/CN=mario"
+sudo openssl req -new -newkey rsa:4096 -nodes -keyout ${TRIG}-kubernetes.key -out ${TRIG}-kubernetes.csr -subj "/CN=${TRIG}/O=devops"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-3. Enfin, nous devons signer le csr avec la CA de Kubernetes :
+2. Encodons en base64 le CSR généré
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-sudo openssl x509 -req \
--in mario.csr \
--CA /etc/kubernetes/pki/ca.crt \
--CAkey /etc/kubernetes/pki/ca.key \
--CAcreateserial \
--out mario.crt -days 500
+cat ${TRIG}-kubernetes.csr | base64 | tr -d '\n' > ${TRIG}.csr
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-4. Nous allons maitenant creer un kubeconfig pour notre utilisateur :
+3. Mettons le csr encodé dans une variable
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-sudo cp /home/training/.kube/config /home/mario/.kube/config
-sudo kubectl config set-credentials mario --client-certificate=/home/mario/mario.crt --client-key=/home/mario/mario.key --kubeconfig .kube/config
-
-ser "mario" set.
-
-sudo kubectl config set-context mario@kubernetes --cluster=kubernetes --user=mario --kubeconfig .kube/config
-
-Context "mario@kubernetes" created.
-
-sudo kubectl config use-context mario@kubernetes --kubeconfig .kube/config
-
-Switched to context "mario@kubernetes".
-
-sudo kubectl config delete-context kubernetes-admin@kubernetes --kubeconfig .kube/config
-
-deleted context kubernetes-admin@kubernetes from .kube/config
+REQUEST=$(cat ${TRIG}.csr)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-5. Un petit chown pour terminer :
+4. Faisons une request de signture pour le csr généré au niveau du cluster
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-sudo chown -R mario:mario /home/mario
+cat << EOF | kubectl apply -f -
+apiVersion: certificates.k8s.io/v1
+kind: CertificateSigningRequest
+metadata:
+  name: ${TRIG}-kubernetes-csr
+spec:
+  groups:
+  - system:authenticated
+  request: $REQUEST
+  signerName: kubernetes.io/kube-apiserver-client
+  usages:
+  - client auth
+EOF
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+5. Vérifions que la request est passée
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl get csr
+# Pending
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+6. Approuvons le certificat
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl certificate approve ${TRIG}-kubernetes-csr
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+7. Vérifions que la request est signée
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl get csr
+# Approved,Issued
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+8. Génération du certificat utilisateur
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl get csr ${TRIG}-kubernetes-csr -o jsonpath='{.status.certificate}' | base64 --decode > ${TRIG}-kubernetes-csr.crt
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+9. Génération de la CA du cluster k8s
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl config view -o jsonpath='{.clusters[0].cluster.certificate-authority-data}' --raw | base64 --decode - > kubernetes-ca.crt
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+10. Création du kubeconfig
+ 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl config set-cluster $(kubectl config view -o jsonpath='{.clusters[0].name}') --server=$(kubectl config view -o jsonpath='{.clusters[0].cluster.server}') --certificate-authority=kubernetes-ca.crt --kubeconfig=${TRIG}-kubernetes-config --embed-certs
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+11. Mise à jour du context
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl config set-credentials ${TRIG} --client-certificate=${TRIG}-kubernetes-csr.crt --client-key=${TRIG}-kubernetes.key --embed-certs --kubeconfig=${TRIG}-kubernetes-config
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+12. Optionnelelment positionnement sur un namespace
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+
+kubectl config set-context ${TRIG} --cluster=$(kubectl config view -o jsonpath='{.clusters[0].name}') --namespace=rbac --user=${TRIG} --kubeconfig=${TRIG}-kubernetes-config
+
+KUBECONFIG=hel-kubernetes-config kubectx hel
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+13. Déplacements
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+
+
+sudo mkdir -p /home/${TRIG}/.kube
+sudo cp ${TRIG}-kubernetes-config /home/${TRIG}/.kube/config
+sudo chown -R ${TRIG}:${TRIG} /home/${TRIG}/.kube
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 6. Testons notre kubeconfig :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-sudo su - mario
+sudo su - ${TRIG}
 
-mario@master$ kubectl get pods
+kubectl get pods
 
-Error from server (Forbidden): pods is forbidden: User "mario" cannot list resource "pods" in API group "" in the namespace "default"
+Error from server (Forbidden): pods is forbidden: User "${TRIG}" cannot list resource "pods" in API group "" in the namespace "default"
 
-mario@master$ exit
+
+#!!!  A faire pour repasser sur ubuntu ou utiliser un autre onglet
+exit
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ## Roles/RoleBinding
@@ -218,7 +276,32 @@ PolicyRule:
   pods       []                 []              [get watch list create update patch]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-5. Nous allons maintenant associer ces roles aux utilisateurs reader et creator. Nous allons donc créer des rolesbindings :  
+
+5. Nous allons associer dans un premier le role pod reader au user ${TRIG} répédemment créé
+   En ligne de commande
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl create rolebinding hel-pod-reader --role=pod-reader --user=hel -n rbac
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+6. Vérifier qu'il n'y a plus d'erreur 
+  
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+# ! En tant que ubuntu 
+kubectl run --image nginx nginx -n rbac
+
+# En tant que hel
+kubectl get po -n rbac
+
+# Essayer de supprimer le pod en tant que hel
+kubectl delete po nginx -n rbac  #! erreur
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+7. Refaire l'exercice avec le role pod-creator
+  
+  ...
+
+8. Nous allons maintenant associer ces roles aux utilisateurs reader et creator. Nous allons donc créer des rolesbindings :  
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 touch read-pods.yaml
@@ -259,7 +342,7 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-6. Créeons donc ces rolesbindings :
+9. Créeons donc ces rolesbindings :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl apply -f read-pods.yaml -f create-pods.yaml
@@ -268,7 +351,7 @@ rolebinding.rbac.authorization.k8s.io/read-pods created
 rolebinding.rbac.authorization.k8s.io/create-pods created
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-7. Nous pouvons consulter ces rolebindings de la façon suivante :
+10. Nous pouvons consulter ces rolebindings de la façon suivante :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl describe rolebindings -n rbac create-pods
@@ -299,7 +382,7 @@ Subjects:
   User  reader
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-8. Nous allons maintenant tenter de créer un pod en tant qu'utilisateur reader :
+11. Nous allons maintenant tenter de créer un pod en tant qu'utilisateur reader :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl run --image nginx test-rbac -n rbac --as reader
@@ -307,7 +390,7 @@ kubectl run --image nginx test-rbac -n rbac --as reader
 Error from server (Forbidden): pods is forbidden: User "reader" cannot create resource "pods" in API group "" in the namespace "rbac"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-9. Essayons maintenant en tant que creator :
+12. Essayons maintenant en tant que creator :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl run --image nginx test-rbac -n rbac --as creator
@@ -315,7 +398,7 @@ kubectl run --image nginx test-rbac -n rbac --as creator
 pod/nginx created
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-10. Maintenant, nous allons essayer de récupérer des informations sur ces pods en tant que unauthorized :
+13. Maintenant, nous allons essayer de récupérer des informations sur ces pods en tant que unauthorized :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl get pods test-rbac -n rbac --as unauthorized
@@ -323,7 +406,7 @@ kubectl get pods test-rbac -n rbac --as unauthorized
 Error from server (Forbidden): pods "test-rbac" is forbidden: User "unauthorized" cannot get resource "pods" in API group "" in the namespace "rbac"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-11. Essayons maintenant en tant que reader :
+14. Essayons maintenant en tant que reader :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl get pods test-rbac -n rbac --as reader
@@ -334,7 +417,7 @@ test-rbac   1/1     Running   0          58s
 
 ## ClusterRoles/ClusteRoleBinding
 
-1. Commençons par créer un secret dans le namespace **default** :
+15. Commençons par créer un secret dans le namespace **default** :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 touch secret-rbac.yaml
@@ -353,7 +436,7 @@ stringData:
   iam: asecret
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-2. Nous allons créer un clusterrole permettant de lire les secrets, quelque soit le namespace dans lequel ils se trouvent :
+16. Nous allons créer un clusterrole permettant de lire les secrets, quelque soit le namespace dans lequel ils se trouvent :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 touch secret-reader.yaml
@@ -372,7 +455,7 @@ rules:
   apiGroups: [""]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-3. Nous allons également créer un clusterrole permettant de récupérer des informations sur les noeuds du cluster :
+17. Nous allons également créer un clusterrole permettant de récupérer des informations sur les noeuds du cluster :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 touch node-reader.yaml
@@ -391,7 +474,7 @@ rules:
   apiGroups: [""]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-4. Créeons maintenant ces clusterroles :
+18. Créeons maintenant ces clusterroles :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl apply -f secret-reader.yaml -f node-reader.yaml -f secret-rbac.yaml
@@ -401,7 +484,7 @@ clusterrole.rbac.authorization.k8s.io/node-reader created
 secret/secret-rbac created
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-5. Nous allons maintenant lier ces clusterroles à l'utilisateur reader. Nous allons donc créer des clusterrole binding :
+19. Nous allons maintenant lier ces clusterroles à l'utilisateur reader. Nous allons donc créer des clusterrole binding :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 touch read-secrets-global.yaml
@@ -440,7 +523,7 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-6. Créeons donc ces clusterrole bindings :
+20. Créeons donc ces clusterrole bindings :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl apply -f read-secrets-global.yaml -f read-nodes-global.yaml
@@ -449,7 +532,7 @@ clusterrolebinding.rbac.authorization.k8s.io/read-secrets-global created
 clusterrolebinding.rbac.authorization.k8s.io/read-nodes-global created
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-7. Essayons maintenant de lire le secret se trouvant dans le namespace default en tant que unauthorized :
+21. Essayons maintenant de lire le secret se trouvant dans le namespace default en tant que unauthorized :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl get secrets secret-rbac --as unauthorized
@@ -457,7 +540,7 @@ kubectl get secrets secret-rbac --as unauthorized
 Error from server (Forbidden): secrets "secret-rbac" is forbidden: User "unauthorized" cannot get resource "secrets" in API group "" in the namespace "default"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-8. Essayons maintenant en tant que reader :
+22. Essayons maintenant en tant que reader :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl get secrets secret-rbac -n default --as reader
@@ -466,7 +549,7 @@ NAME          TYPE     DATA   AGE
 secret-rbac   Opaque   1      10m
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-9. De même, essayons de lister les noeuds en tant que unauthorized :
+23. De même, essayons de lister les noeuds en tant que unauthorized :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl get nodes --as unauthorized
@@ -474,7 +557,7 @@ kubectl get nodes --as unauthorized
 Error from server (Forbidden): nodes is forbidden: User "unauthorized" cannot list resource "nodes" in API group "" at the cluster scope
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-10. Essayons maintenant en tant que reader :
+24. Essayons maintenant en tant que reader :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl get nodes --as reader

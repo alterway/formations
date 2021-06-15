@@ -92,7 +92,6 @@ build-html-labs() {
 }
 
 
-
 # madnight/docker-alpine-wkhtmltopdf
 
 build-pdf() {
@@ -197,7 +196,6 @@ if [[ $LAB != "" ]]; then
 else
   LIST_LABS=labs.json
 fi
-
 
 OUTPUT=${OUTPUT:-all}
 if [[ ! $OUTPUT =~ html|pdf|all ]]; then
