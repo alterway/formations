@@ -6,7 +6,7 @@
     - Definis au niveau pod
 - On le même cycle de vie que le pod
     - Quand le pod est supprimé le volume aussi
-    - Les différents type de volumes sont implémentés comme des puglins
+    - Les différents type de volumes sont implémentés comme des plugins
     - Les comportement sous-jacents dépendent du backend
 - Fonctionnent de la même façon que les volumes Docker pour les volumes hôte :
     - `EmptyDir` ~= volumes docker
@@ -52,7 +52,7 @@
 
 ### Kubernetes : Volumes
 
-- On déclare d'abord le volume et on l'affecte à un service :
+- On déclare d'abord le volume et on l'affecte à un "service" (container) :
 
 ```yaml
 apiVersion: v1

@@ -167,7 +167,7 @@ kubectl config set-credentials ${TRIG} --client-certificate=${TRIG}-kubernetes-c
 
 
 
-12. Optionnelelment positionnement sur un namespace
+12. Optionnellement positionnement sur un namespace
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 
