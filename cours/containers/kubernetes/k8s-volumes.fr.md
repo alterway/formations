@@ -193,7 +193,7 @@ spec:
 - Composant de stockage dans le cluster kubernetes
 - Stockage externe aux noeuds du cluster
 - Cycle de vie d'indépendant du pod qui le consomme
-- Peut être provisionné manuellement par un administrateur ou dynamiquement grâce un `StorageClass`
+- Peut être provisionné **manuellement** par un administrateur ou **dynamiquement** grâce une `StorageClass`
 - Supporte différent mode d'accès
     - RWO - read-write par un noeud unique
     - ROX - read-only par plusieurs noeuds
