@@ -142,7 +142,7 @@ allowVolumeExpansion: true
     - un type d'accès
     - un namespace pour le montage
 - Offre aux PV une variété d'options en fonction du cas d'utilisation
-- Utilisé par les `StatefulSets` pour solliciter du stockage (Utilisaltion du champ `volumeClaimTemplates`)
+- Utilisé par les `StatefulSets` pour solliciter du stockage (Utilisation du champ `volumeClaimTemplates`)
 
 
 ### Kubernetes : PersistentVolumeClaims
