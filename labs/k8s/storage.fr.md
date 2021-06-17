@@ -150,7 +150,7 @@ spec:
           name: postgres-volume
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-8. Créeons donc ce pod :
+8. Créons donc ce pod :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl apply -f postgres-with-pvc-pod.yaml
@@ -204,7 +204,7 @@ The OpenEBS has been installed. Check its status by running:
 ...
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-2. Par défault, OpenEBS cree plusieurs storageclasses, que nous pouvons voir de la façon suivante :
+2. Par défaut, OpenEBS crée plusieurs storageclasses, que nous pouvons voir de la façon suivante :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl describe storageclass openebs-jiva-default
@@ -264,7 +264,7 @@ reclaimPolicy: Delete
 volumeBindingMode: Immediate
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-4. Créeons cette storage class :
+4. Créons cette storage class :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl apply -f openebs-custom-sc.yaml
@@ -295,7 +295,7 @@ spec:
       storage: 3Gi
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-6. Créeons donc ce pvc :
+6. Créons donc ce pvc :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl apply -f postgres-openebs-pvc.yaml
@@ -332,7 +332,7 @@ pvc-2aa4e773-290f-4a6b-839f-789f0e86b75d   3Gi        RWO            Delete     
 
 <hr>
 
-Nous pouvons supprimer les objets générés par cet exercice de la facon suivante :
+Nous pouvons supprimer les objets générés par cet exercice de la façon suivante :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl delete -f postgres-openebs-pvc.yaml -f postgres-pv.yaml -f postgres-pvc.yaml -f postgres-with-pvc-pod.yaml

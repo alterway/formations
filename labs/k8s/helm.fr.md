@@ -33,7 +33,7 @@ helm version
 version.BuildInfo{Version:"v3.3.4", GitCommit:"a61ce5633af99708171414353ed49547cf05013d", GitTreeState:"clean", GoVersion:"go1.14.9"}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-3. Les artifacts Helm sont stockes sur des repositories. Il est nécessaire d'ajouter. Nous allons ajouter le repo **ealenn** contenant le chart **echo-server** :
+3. Les artefacts Helm sont stockes sur des repositories. Il est nécessaire d'ajouter. Nous allons ajouter le repo **ealenn** contenant le chart **echo-server** :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 helm repo add ealenn https://ealenn.github.io/charts

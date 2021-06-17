@@ -1,8 +1,8 @@
-# Depannage
+# Dépannage
 
-## Depannage des composants du cluster
+## Dépannage des composants du cluster
 
-## Depannage de workloads
+## Dépannage de workloads
 
 ### Pod en pending (Volume)
 

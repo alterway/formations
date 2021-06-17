@@ -110,7 +110,7 @@ KUBERNETES_SERVICE_HOST=10.96.0.1
 ...
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Notre secret se trouve bien en tant que variable d'environement dans notre conteneur.
+Notre secret se trouve bien en tant que variable d'environnement dans notre conteneur.
 
 <hr>
 
@@ -210,7 +210,7 @@ kubeseal --version
 kubeseal version: v0.16.0
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-3. Nous allons également installer l'operateur via helm :
+3. Nous allons également installer l'opérateur via helm :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 helm repo add stable https://charts.helm.sh/stable
