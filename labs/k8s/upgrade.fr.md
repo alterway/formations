@@ -24,34 +24,37 @@ Nous pouvons avoir un aperçu de l’upgrade de la façon suivante :
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 sudo kubeadm upgrade plan
 
-...
+_____________________________________________________________________
+
 Components that must be upgraded manually after you have upgraded the control plane with 'kubeadm upgrade apply':
 COMPONENT   CURRENT        AVAILABLE
-kubelet     2 x v1.19.3    v1.20.7
+kubelet     3 x v1.19.11   v1.20.8
 
 Upgrade to the latest stable version:
 
 COMPONENT                 CURRENT    AVAILABLE
-kube-apiserver            v1.18.10   v1.19.11
-kube-controller-manager   v1.18.10   v1.19.11
-kube-scheduler            v1.18.10   v1.19.11
-kube-proxy                v1.18.10   v1.19.11
-CoreDNS                   1.6.7      1.7.0
-etcd                      3.4.3-0    3.4.13-0
+kube-apiserver            v1.19.11   v1.20.8
+kube-controller-manager   v1.19.11   v1.20.8
+kube-scheduler            v1.19.11   v1.20.8
+kube-proxy                v1.19.11   v1.20.8
+CoreDNS                   1.7.0      1.7.0
+etcd                      3.4.13-0   3.4.13-0
 
 You can now apply the upgrade by executing the following command:
 
-    kubeadm upgrade apply v1.19.11
+        kubeadm upgrade apply v1.20.8
+
+Note: Before you can perform this upgrade, you have to update kubeadm to v1.20.8.
 
 _____________________________________________________________________
-...
+
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 Nous pouvons maintenant upgrade les composants du cluster :
 
 
-`sudo kubeadm upgrade apply v1.20.5`
+`sudo kubeadm upgrade apply v1.20.7`
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 ...
@@ -71,7 +74,7 @@ Nous devons maintenant mettre à jour la kubelet et kubectl :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 sudo apt-mark unhold kubectl kubelet
-sudo apt-get install kubectl=1.20.5-00 kubelet=1.20.5-00
+sudo apt-get install kubectl=1.20.7-00 kubelet=1.20.7-00
 sudo apt-mark hold kubectl kubelet
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -82,18 +85,22 @@ sudo systemctl daemon-reload
 sudo systemctl restart kubelet
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Nous devons maintenant mettre à jour le worker :
+Nous devons maintenant mettre à jour les workers :
+
+A faire sur les noeud 1 et 2
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-training@worker$ sudo apt-mark unhold kubeadm
-training@worker$ sudo apt-get install kubeadm=1.20.5-00
-training@worker$ sudo apt-mark hold kubeadm
+training@node1$ sudo apt-mark unhold kubeadm
+training@node1$ sudo apt-get install kubeadm=1.20.7-00
+training@node1$ sudo apt-mark hold kubeadm
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Comme pour le master, nous devons drain le noeud worker :
+Comme pour le master, nous devons drain les noeuds workers :
+
+Répéter les actions pour le noeud 2 noeud par noeud (pas en // )
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-kubectl drain worker --ignore-daemonsets
+kubectl drain node1 --ignore-daemonsets
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Nous devons maintenant mettre a jour la configuration de notre worker :
@@ -117,7 +124,7 @@ Enfin, comme pour le master nous devons mettre a jour la kubelet et kubectl :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 training@worker$ sudo apt-mark unhold kubectl kubelet
-training@worker$ sudo apt-get install kubectl=1.20.5-00 kubelet=1.20.5-00
+training@worker$ sudo apt-get install kubectl=1.20.7-00 kubelet=1.20.7-00
 training@worker$ sudo apt-mark hold kubectl kubelet
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -131,7 +138,7 @@ training@worker$ sudo systemctl restart kubelet
 Sans oublier de remettre le noeud en marche :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-kubectl uncordon worker
+kubectl uncordon node1
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Nous pouvons maintenant lister les noeuds :
