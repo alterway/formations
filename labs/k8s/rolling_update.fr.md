@@ -49,7 +49,7 @@ spec:
         - containerPort: 80
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-2. Créeons donc ce deployment :
+2. Créons donc ce deployment :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl apply -f example-update.yaml --record
@@ -58,7 +58,7 @@ kubectl apply -f example-update.yaml --record
 
 *deployment.apps "example-update" created*
 
-3. Nous pouvons voir le status du rollout de la façon suivante :
+3. Nous pouvons voir le statut du rollout de la façon suivante :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl rollout status deployment -n updating example-update
@@ -83,7 +83,7 @@ kubectl apply -f example-update.yaml --record
 deployment.apps/example-update configured
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-6. Vérifions à nouveau le status de notre rollout :
+6. Vérifions à nouveau le statut de notre rollout :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl rollout status deployment -n updating example-update
@@ -132,7 +132,7 @@ kubectl rollout undo deployment -n updating example-update
 *deployment.apps/example-update rolled back*
 
 
-12. Revérifions le status de notre rollout :
+12. Re-vérifions le statut de notre rollout :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl rollout status deployment -n updating example-update
@@ -299,7 +299,7 @@ spec:
     name: httpd
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-6. Créeons donc ce pod :
+6. Créons donc ce pod :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl apply -f app-v2.yaml

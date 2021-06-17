@@ -14,7 +14,7 @@ kubectl create namespace monitoring
 
 ## Metric Server
 
-1. Nous allons essayer d'obtenir les metrics pour les noeuds de notre cluster :
+1. Nous allons essayer d'obtenir les métriques pour les noeuds de notre cluster :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl top node
@@ -25,7 +25,7 @@ error: Metrics API not available
 
 ... Sans succès.
 
-2. De meme, si nous souhaitons récupérer les metrics de nos pods, nous obtenons une erreur :
+2. De même, si nous souhaitons récupérer les métriques de nos pods, nous obtenons une erreur :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl top pod
@@ -36,7 +36,7 @@ error: Metrics API not available
 
 Nous avons besoin d'installer un metrics server.
 
-3. Nous allons creer un fichier metrics-server.yaml :
+3. Nous allons créer un fichier metrics-server.yaml :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 touch metrics-server.yaml
@@ -258,7 +258,7 @@ Parfait !
 
 Nous allons déployer une stack de monitoring basée sur Prometheus et Grafana via Helm.
 
-1. Commencons par creer le fichier values.yaml pour prometheus :
+1. Commençons par créer le fichier values.yaml pour prometheus :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 touch prometheus-values.yaml
@@ -294,13 +294,13 @@ prometheus-server.monitoring.svc.cluster.local
 ...
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-3. Nous pouvons voir les resources creees de la façon suivante :
+3. Nous pouvons voir les ressources créées de la façon suivante :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl get all -n monitoring
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-4. Nous pouvons également remarquer que deux PV ont ete créés pour les PVC de Prometheus et AlertManager :
+4. Nous pouvons également remarquer que deux PV ont été créés pour les PVC de Prometheus et AlertManager :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl get pvc -n monitoring
@@ -341,7 +341,7 @@ NOTES:
 ...
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. Nous pouvons voir les ressources creees par Grafana de la façon suivante :
+1. Nous pouvons voir les ressources créées par Grafana de la façon suivante :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl get all -n monitoring
@@ -365,7 +365,7 @@ kubectl --namespace monitoring port-forward --address 0.0.0.0 service/grafana 80
 Forwarding from 0.0.0.0:8081 -> 3000
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. Récuperer le mot de passe admin de Grafana :
+1. Récupérer le mot de passe admin de Grafana :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
@@ -374,11 +374,11 @@ kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-pass
 LP7RithkvOulZE1Yhj95obTSuH4e8qUffsuCaBAR
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1.  Dans Grafana, aller dans Configuration -> Data Sources -> Add data source -> Prometheus, et renseinger "prometheus-server" dans URL :
+1.  Dans Grafana, aller dans Configuration -> Data Sources -> Add data source -> Prometheus, et renseigner "prometheus-server" dans URL :
 
 ![](images/grafana2.png)
 
-11. Toujours dans Grafana, aller dans "+" -> Import -> Entrer "6417" dans ID -> Choisir le datasource promethus créé ci dessus :
+11. Toujours dans Grafana, aller dans "+" -> Import -> Entrer "6417" dans ID -> Choisir le datasource prometheus créé ci dessus :
 
 ![](images/grafana3.png)
 

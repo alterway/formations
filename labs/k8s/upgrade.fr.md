@@ -144,7 +144,7 @@ master   Ready    master   22m   v1.20.5
 worker   Ready    <none>   21m   v1.19.5
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Et lister les pods pour verifier que tout est fonctionnel :
+Et lister les pods pour vérifier que tout est fonctionnel :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl get pods -A

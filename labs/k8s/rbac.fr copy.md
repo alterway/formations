@@ -1,6 +1,6 @@
 # Pour l'exercice pour un le rbac / kubeconfig utilisateur /
 
-# Modifier avec votre trigramme 
+# Modifier avec votre tri-gramme 
 TRIG="hel"
 
 

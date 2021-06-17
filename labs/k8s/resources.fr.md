@@ -42,7 +42,7 @@ spec:
         cpu: "500m"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-2. Créeons donc ce pod :
+2. Créons donc ce pod :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl apply -f test-resources.yaml
@@ -82,7 +82,7 @@ Mounts:
 
 <hr>
 
-1. Nous allons donc créer une limit range définissant une limit et une request par défaut pour nos pods :
+1. Nous allons donc créer une limit range définissant une limite et une request par défaut pour nos pods :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 touch mem-limit-range.yaml
@@ -105,7 +105,7 @@ spec:
     type: Container
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-2. Créeons donc cette limitRange :
+2. Créons donc cette limitRange :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl apply -f mem-limit-range.yaml
@@ -114,7 +114,7 @@ kubectl apply -f mem-limit-range.yaml
 limitrange/mem-limit-range created
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. Nous pouvons consulter notre limitRange de la facon suivante :
+1. Nous pouvons consulter notre limitRange de la façon suivante :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl describe -n resources limitrange mem-limit-range
@@ -147,7 +147,7 @@ spec:
     image: redis
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-5. Créeons donc ce pod :
+5. Créons donc ce pod :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl apply -f test2-resources.yaml
@@ -156,7 +156,7 @@ kubectl apply -f test2-resources.yaml
 pod/test2-resources created
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. Faisons maintenant un describe sur ce pod, nous voyons bien que la limit de RAM est a 768Mi et la request est de 256Mi :
+1. Faisons maintenant un describe sur ce pod, nous voyons bien que la limite de RAM est a 768Mi et la request est de 256Mi :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl describe pods -n resources test2-resources
@@ -204,7 +204,7 @@ spec:
     limits.memory: 2Gi
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-2. Créeons cette resource-quota :
+2. Créons cette resource-quota :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl apply -f resource-quota.yaml
@@ -214,7 +214,7 @@ kubectl apply -f resource-quota.yaml
 resourcequota/resource-quota created
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. Nous pouvons consulter notre Resource Quota de la facon suivante :
+1. Nous pouvons consulter notre Resource Quota de la façon suivante :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl describe -n resources resourcequota
@@ -229,7 +229,7 @@ limits.memory    896Mi  2Gi
 requests.memory  384Mi  1Gi
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. Nous allons maintenant définir un pod redis avec une request de 768Mi (Sachant que nous avons deja un pod avec 128Mi de request et un autre avec 256Mi) :
+1. Nous allons maintenant définir un pod redis avec une request de 768Mi (Sachant que nous avons déjà un pod avec 128Mi de request et un autre avec 256Mi) :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 touch test3-resources.yaml
@@ -264,7 +264,7 @@ kubectl apply -f test3-resources.yaml
 Error from server (Forbidden): error when creating "test3-resources.yaml": pods "test3-resources" is forbidden: exceeded quota: resource-quota, requested: requests.memory=768Mi, used: requests.memory=384Mi, limited: requests.memory=1Gi
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-La création échoue donc puisque la request demandée, s'ajoutant aux requests des deux pods existants, est supérieur à celle définie par la resource quota qui est de 1Gi.
+La création échoue puisque la request demandée, s'ajoutant aux requests des deux pods existants, est supérieur à celle définie par la ressource quota qui est de 1Gi.
 
 ## Clean up
 

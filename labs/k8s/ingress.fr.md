@@ -75,7 +75,7 @@ spec:
     name: httpd
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-3. Créeons maintenant ces pods :
+3. Créons maintenant ces pods :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
  kubectl apply -f ingress-nginx-pod.yaml -f ingress-httpd-pod.yaml
@@ -125,7 +125,7 @@ spec:
       targetPort: 80
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-5. Créeons ces services :
+5. Créons ces services :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
  kubectl apply -f ingress-nginx-service.yaml -f ingress-httpd-service.yaml
@@ -168,7 +168,7 @@ spec:
               servicePort: 80
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-7. Créeons maintenant cet ingress :
+7. Créons maintenant cet ingress :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
  kubectl apply -f ingress-with-paths.yaml
@@ -315,7 +315,7 @@ spec:
             path: /
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-12. Creeons cet ingress :
+12. Créons cet ingress :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
  kubectl apply -f ingress-with-hosts.yaml
@@ -325,7 +325,7 @@ Warning: networking.k8s.io/v1beta1 Ingress is deprecated in v1.19+, unavailable 
 ingress.networking.k8s.io/ingress-with-hosts created
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1.  Ajoutons ces deux entrees dans le fichier /etc/hosts :
+1.  Ajoutons ces deux entrées dans le fichier /etc/hosts :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 IP_INGRESS nginx.example.com
@@ -372,7 +372,7 @@ Commercial support is available at
 
 ## Clean Up
 
-Nous pouvons supprimer les ressources generes par cet exercices de la facon suivante :
+Nous pouvons supprimer les ressources générées par cet exercices de la façon suivante :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
  kubectl delete -f .

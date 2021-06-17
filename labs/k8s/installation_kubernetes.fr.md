@@ -49,7 +49,7 @@ minikube start
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-4. Parfait, nous pouvons à tout moment consulter le status de notre cluster minikube :
+4. Parfait, nous pouvons à tout moment consulter le statut de notre cluster minikube :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 minikube status
@@ -71,7 +71,7 @@ minikube start --profile <nom-du-cluster>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-6. Comme tout cluster Kubernetes, nous pouvons le manipuler via kubectl. Lors de l'installation d'un cluster Kubernetes avec minikube, kubectl est automatiquement configuré pour utiliser le cluster généré (Meme si kubectl n'est pas installé durant le bootstrap du cluster). Il nous suffit donc d'installer kubectl :
+6. Comme tout cluster Kubernetes, nous pouvons le manipuler via kubectl. Lors de l'installation d'un cluster Kubernetes avec minikube, kubectl est automatiquement configuré pour utiliser le cluster généré (Même si kubectl n'est pas installé durant le bootstrap du cluster). Il nous suffit donc d'installer kubectl :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
@@ -84,7 +84,7 @@ kubectl version --client
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-7. Nous pouvons lister les pods de la facon suivante :
+7. Nous pouvons lister les pods de la façon suivante :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl get pods -A
@@ -140,7 +140,7 @@ rm -rf ~/.minikube
 Machines : **master**, **node1**, **node2**
 <hr>
 
-Mettre à jour le fichier /etc/hosts en renseignant les ips des trois vms. **Prenez soin de remplacer les adresses ip par celles de vos vms.**
+Mettre à jour le fichier /etc/hosts en renseignant les IP des trois VM. **Prenez soin de remplacer les adresses IP par celles de vos VM.**
 
 exemple :
 
@@ -151,7 +151,7 @@ exemple :
 10.10.4.82 node2
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Le contenu du fichier /etc/host doit être identique sur les trois machines.
+Le contenu du fichier /etc/hosts doit être identique sur les trois machines.
 
 1. Installer et activer Docker
 
@@ -246,7 +246,7 @@ node2   Ready    <none>   1m24s   v1.19.3
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-8. Nous allons deployer un pod redis pour tester l’installation de notre cluster :
+8. Nous allons déployer un pod redis pour tester l’installation de notre cluster :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl run --image redis test-pod

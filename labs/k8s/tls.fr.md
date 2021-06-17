@@ -19,7 +19,7 @@ training@master$ helm repo update
 training@master$ helm install cert-manager jetstack/cert-manager --namespace cert-manager --version v1.0.3 --set installCRDs=true
 ```
 
-2. Nous allons créer un issuer avec cert-manager a partir d'une CA en local :
+2. Nous allons créer un issuer avec cert-manager à partir d'une CA en local :
 
 ```bash
 training@master$ openssl genrsa -des3 -out rootCA.key 4096
@@ -54,7 +54,7 @@ spec:
     secretName: cm-secret-ca
 ```
 
-5. Créeons donc cet Issuer :
+5. Créons donc cet Issuer :
 
 ```bash
 training@master$ kubectl apply -f example-issuer.yaml
@@ -87,7 +87,7 @@ Events:
 ...
 ```
 
-7. Il est également possible de définir des ClusterIssuer. Comme pour les roles, les Issuer sont limités a un seul namespace, tandis que les ClusterIssuer sont utilisables dans tout les namespaces :
+7. Il est également possible de définir des ClusterIssuer. Comme pour les roles, les Issuer sont limités à un seul namespace, tandis que les ClusterIssuer sont utilisables dans tout les namespaces :
 
 ```bash
 training@master$ kubectl create secret generic -n cert-manager cm-secret-ca --from-file=tls.crt=rootCA.crt --from-file=tls.key=rootCA.key
@@ -306,7 +306,7 @@ spec:
     secretName: tls-cert
 ```
 
-4. Créeons ces ressources :
+4. Créons ces ressources :
 
 ```bash
 training@master$ kubectl apply -f tls-pod.yaml -f tls-service.yaml -f tls-ingress.yaml
@@ -317,7 +317,7 @@ Warning: networking.k8s.io/v1beta1 Ingress is deprecated in v1.19+, unavailable 
 ingress.networking.k8s.io/tls-ingress created
 ```
 
-5. Nous pouvons voir qu'un certificat, ainsi qu'un secret ont ete générés :
+5. Nous pouvons voir qu'un certificat, ainsi qu'un secret ont été générés :
 
 ```bash
 training@master$ kubectl get certificates -n tls
@@ -343,7 +343,7 @@ Ajouter tls.example.com avec l'IP du l'ingress controller dans /etc/hosts :
 IP_INGRESS tls.example.com
 ```
 
-Puis tester la connection
+Puis tester la connexion
 
 ```bash
 training@master$ curl --cacert rootCA.crt https://tls.example.com

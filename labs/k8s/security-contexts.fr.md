@@ -33,7 +33,7 @@ spec:
       value: password
 ```
 
-2. Créeons ce pod :
+2. Créons ce pod :
 
 ```bash
 training@master$ kubectl apply -f pod-as-root.yaml
@@ -41,7 +41,7 @@ training@master$ kubectl apply -f pod-as-root.yaml
 pod/pod-as-root created
 ```
 
-3. Exécutons la commande id dans ce contenur pour connaitre l'utilisateur avec lequel le conteneur est exécuté :
+3. Exécutons la commande id dans ce conteneur pour connaître l'utilisateur avec lequel le conteneur est exécuté :
 
 ```bash
 training@master$ kubectl exec -it pod-as-root -n security-contexts -- id
@@ -75,7 +75,7 @@ spec:
     runAsGroup: 999
 ```
 
-5. Créeons ce pod
+5. Créons ce pod
 
 ```bash
 training@master$ kubectl apply -f pod-as-user.yaml
@@ -95,7 +95,7 @@ Le conteneur est donc exécuté en tant que "postgres".
 
 ## Set Capabilities
 
-1. Nous allons definir un pod avec les capabilities par défaut :
+1. Nous allons définir un pod avec les capabilities par défaut :
 
 ```bash
 training@master$ touch pod-default-capabilities.yaml
@@ -118,7 +118,7 @@ spec:
       value: password
 ```
 
-2. Créeons maintenant ce pod :
+2. Créons maintenant ce pod :
 
 ```bash
 training@master$ kubectl apply -f pod-default-capabilities.yaml
@@ -158,7 +158,7 @@ spec:
         drop: ["CHOWN"]
 ```
 
-5. Créeons maintenant ce pod :
+5. Créons maintenant ce pod :
 
 ```bash
 training@master$ kubectl apply -f pod-with-less-capabilities.yaml
@@ -204,7 +204,7 @@ spec:
         localhostProfile: deny-chown-seccomp.json
 ```
 
-2. Definissons également un profile seccomp, deny-chown-seccomp.json (à faire sur les deux machines):
+2. Définissons également un profile seccomp, deny-chown-seccomp.json (à faire sur les deux machines):
 
 ```bash
 training@master$ sudo mkdir /var/lib/kubelet/seccomp
@@ -225,7 +225,7 @@ Avec le contenu JSON suivant :
 }
 ```
 
-3. Créeons maintenant ce pod :
+3. Créons maintenant ce pod :
 
 ```bash
 training@master$ kubectl apply -f pod-with-seccomp.yaml
@@ -268,11 +268,11 @@ initdb: error: could not change permissions of directory "/var/lib/postgresql/da
 fixing permissions on existing directory /var/lib/postgresql/data ...
 ```
 
-Le conteneur a l'interieur de notre pod échoue car il ne peut pas changer les permissions d'un fichier, notre profile seccomp a bien été pris en compte.
+Le conteneur à l'intérieur de notre pod échoue car il ne peut pas changer les permissions d'un fichier, notre profile seccomp a bien été pris en compte.
 
 ## Clean Up
 
-Supprimons les objets generes par cet exercice :
+Supprimons les objets générés par cet exercice :
 
 ```bash
 training@master$ kubectl delete -f .

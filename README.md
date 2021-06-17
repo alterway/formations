@@ -32,7 +32,7 @@ HTML et PDF construits automatiquement : <https://alterway.fr/formations/>
 * Cloud [PDF](https://osones.com/formations/pdf/cloud.fr.pdf)/[HTML](https://osones.com/formations/cloud.fr.html)
 * Docker [PDF](https://osones.com/formations/pdf/docker.fr.pdf)/[HTML](https://osones.com/formations/docker.fr.html)
 
-## Prérequis
+## Pré-requis
 
 
 ### Option 1 : Utiliser le script build.sh
@@ -96,7 +96,7 @@ Un daemon Docker est donc le seul pré-requis pour le build via `build.sh`
     -l language         Language in which you want the course to be built. Default: fr
 ```
 
-#### Theme
+#### Thème
 
 Les thèmes sont stockés dans `styles/`. Un thème est constitué de :
 
@@ -110,7 +110,7 @@ propre version, vous devez spécifier son chemin avec le paramètre `-u`. Les
 fichiers de votre thème seront copiés dans ce chemin. Si le chemin est distant
 (uptream version par exemple), vous ne pourrez utiliser votre propre thème.
 
-#### Language
+#### Langage
 
 Nous supportons le multi langage. Le script `build.sh` est conçu pour
 rebasculer sur le contenu français si le cours n'existe pas dans la langue
@@ -129,7 +129,7 @@ demandée.
 - Les fichiers HTML se trouvent dans `output-html/`
 - Les PDF se trouvent dans `output-pdf/`
 
-En ayant puller au préalable les deux images Docker et en ayant une copie
+En ayant pullé au préalable les deux images Docker et en ayant une copie
 locale de reveal.js (spécifié avec `-u`), les builds se font uniquement en
 local.
 

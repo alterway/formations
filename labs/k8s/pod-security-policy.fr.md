@@ -10,7 +10,7 @@ training@master$ kubectl create namespace psp
 
 ## Admission Controllers
 
-1. Pour voir les admission controller actives par defaut :
+1. Pour voir les admission controller actives par défaut :
 
 ```
 kubectl exec -it -n kube-system kube-apiserver-master-1 -- kube-apiserver -h | grep enable-admission-plugins
@@ -36,7 +36,7 @@ containers:
 
 Notamment la ligne "- --enable-admission-plugins=NodeRestriction". Cette instruction permet d'activer des admissions controllers.
 
-3. Nous allons activer l'admission controller "PodSecurityPolicy", en changeant cette ligne de la facon suivante :
+3. Nous allons activer l'admission controller "PodSecurityPolicy", en changeant cette ligne de la façon suivante :
 
 ```yaml
 - --enable-admission-plugins=NodeRestriction,PodSecurityPolicy
@@ -54,7 +54,7 @@ training@master$ kubectl create serviceaccount -n psp-example fake-user
 training@master$ kubectl create rolebinding -n psp-example fake-editor --clusterrole=edit --serviceaccount=psp-example:fake-user
 ```
 
-2. Definissons la pod security policy suivante, imposant aux contenurs des pods a etre executes en tant que non root :
+2. Définissons la pod security policy suivante, imposant aux conteneurs des pods a être exécutés en tant que non root :
 
 ```bash
 training@master$ touch non-root-pods.yaml
@@ -72,13 +72,13 @@ spec:
     rule: 'MustRunAsNonRoot'
 ```
 
-3. Nous allons donc creer cet psp :
+3. Nous allons donc créer cet psp :
 
 ```bash
 kubectl apply -f non-root-pods.yaml
 ```
 
-4. Definissons maintenant un pod s'executant en tant que root :
+4. Définissons maintenant un pod s'exécutant en tant que root :
 
 ```bash
 touch postgres-as-root.yaml
@@ -98,7 +98,7 @@ spec:
       image: postgres
 ```
 
-5. Essayons d'executer ce pod :
+5. Essayons d'exécuter ce pod :
 
 ```bash
 kubectl apply -f postgres-as-root.yaml
@@ -127,7 +127,7 @@ spec:
         runAsGroup: 999
 ```
 
-7. Essayons de creer ce pod :
+7. Essayons de créer ce pod :
 
 ```bash
 kubectl apply -f postgres-as-user.yaml
@@ -135,7 +135,7 @@ kubectl apply -f postgres-as-user.yaml
 
 ## Clean Up
 
-Supprimons les ressources generees par cet exercice :
+Supprimons les ressources générées par cet exercice :
 
 ```bash
 kubectl delete -f .
