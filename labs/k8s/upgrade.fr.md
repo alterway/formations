@@ -1,4 +1,11 @@
-Mise a jour d’un cluster
+#  Mise a jour d’un cluster
+
+<hr>
+Machine : **master**, **node1**, **node2**
+<hr>
+
+
+
 Pour commencer, il faut mettre à jour kubeadm :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
