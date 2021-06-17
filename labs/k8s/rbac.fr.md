@@ -32,7 +32,7 @@ metadata:
   namespace: rbac
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-2. Créeons ce services account :
+2. Créons ce services account :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl apply -f example-serviceaccount.yaml
@@ -69,7 +69,7 @@ Events:              <none>
 
 ## User
 
-0. Créer un utilisateur unix avec votre trigramme
+0. Créer un utilisateur unix avec votre tri-gramme
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 TRIG="hel" # Remplacer avec votre trigramme par exemple
@@ -98,7 +98,7 @@ cat ${TRIG}-kubernetes.csr | base64 | tr -d '\n' > ${TRIG}.csr
 REQUEST=$(cat ${TRIG}.csr)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-4. Faisons une request de signture pour le csr généré au niveau du cluster
+4. Faisons une request de signature pour le csr généré au niveau du cluster
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 cat << EOF | kubectl apply -f -
@@ -167,7 +167,7 @@ kubectl config set-credentials ${TRIG} --client-certificate=${TRIG}-kubernetes-c
 
 
 
-12. Optionnellement positionnement sur un namespace
+12. Optionnelle-ment positionnement sur un namespace
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 
@@ -203,7 +203,7 @@ exit
 
 ## Roles/RoleBinding
 
-1. Commençons par créer un role pod-reader permettant de lire les pods sur le namespace rbac. Nous allons donc créer un fichier pod-reader.yaml
+1. Commençons par créer un rôle pod-reader permettant de lire les pods sur le namespace rbac. Nous allons donc créer un fichier pod-reader.yaml
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 touch pod-reader.yaml
@@ -223,7 +223,7 @@ rules:
   verbs: ["get", "watch", "list"]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-2. Nous allons maintenant créer un role similaire, mais contenant cette fois ci des droits de création et de mise à jour, en plus des droits de lecture :
+2. Nous allons maintenant créer un rôle similaire, mais contenant cette fois ci des droits de création et de mise à jour, en plus des droits de lecture :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 touch pod-creator.yaml
@@ -243,7 +243,7 @@ rules:
   verbs: ["get", "watch", "list", "create", "update", "patch"]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-3. Créeons donc ces roles :
+3. Créons donc ces rôles :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl apply -f pod-reader.yaml -f pod-creator.yaml
@@ -252,7 +252,7 @@ role.rbac.authorization.k8s.io/pod-reader created
 role.rbac.authorization.k8s.io/pod-creator created
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-4. Nous pouvons consulter ces roles de la façon suivante :
+4. Nous pouvons consulter ces rôles de la façon suivante :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl describe roles -n rbac pod-reader
@@ -277,7 +277,7 @@ PolicyRule:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-5. Nous allons associer dans un premier le role pod reader au user ${TRIG} répédemment créé
+5. Nous allons associer dans un premier le rôle pod reader au user ${TRIG} précédemment créé
    En ligne de commande
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
@@ -297,11 +297,11 @@ kubectl get po -n rbac
 kubectl delete po nginx -n rbac  #! erreur
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-7. Refaire l'exercice avec le role pod-creator
+7. Refaire l'exercice avec le rôle pod-creator
   
   ...
 
-8. Nous allons maintenant associer ces roles aux utilisateurs reader et creator. Nous allons donc créer des rolesbindings :  
+8. Nous allons maintenant associer ces rôles aux utilisateurs reader et creator. Nous allons donc créer des rolesbindings :  
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 touch read-pods.yaml
@@ -342,7 +342,7 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-9. Créeons donc ces rolesbindings :
+9. Créons donc ces rolesbindings :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl apply -f read-pods.yaml -f create-pods.yaml
@@ -474,7 +474,7 @@ rules:
   apiGroups: [""]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-18. Créeons maintenant ces clusterroles :
+18. Créons maintenant ces clusterroles :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl apply -f secret-reader.yaml -f node-reader.yaml -f secret-rbac.yaml
@@ -491,7 +491,7 @@ touch read-secrets-global.yaml
 touch read-nodes-global.yaml
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Avec respcetivement les contenus yaml suivants :
+Avec respectivement les contenus yaml suivants :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
 apiVersion: rbac.authorization.k8s.io/v1
@@ -523,7 +523,7 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-20. Créeons donc ces clusterrole bindings :
+20. Créons donc ces clusterrole bindings :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl apply -f read-secrets-global.yaml -f read-nodes-global.yaml

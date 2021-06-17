@@ -15,7 +15,7 @@ kubectl create namespace healthchecking
 
 ## Liveness probe, avec un fichier
 
-1. Commencons par créer un ficher yaml décrivant un pod avec une liveness probe.
+1. Commençons par créer un ficher yaml décrivant un pod avec une liveness probe.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 touch file-liveness.yaml
@@ -54,7 +54,7 @@ kubectl apply -f file-liveness.yaml
 
 *pod/file-liveness created*
 
-3. Au bout de quelques secondes, nous pouvons faire un describe sur le pod et observer le resultat suivant :
+3. Au bout de quelques secondes, nous pouvons faire un describe sur le pod et observer le résultat suivant :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl describe pods -n healthchecking file-liveness
@@ -75,13 +75,13 @@ Events:
   Normal   Killing    5s                kubelet            Container liveness failed liveness probe, will be restarted
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-La liveness probe fini donc par echouer comme prevu, etant donne que le fichier /tmp/healthy n'existe plus. On remarque également que Kubernetes kill le conteneur a l'interieur du pod et le recrée.
+La liveness probe fini donc par échouer comme prévu, étant donne que le fichier /tmp/healthy n'existe plus. On remarque également que Kubernetes kill le conteneur a l'intérieur du pod et le recrée.
 
-## Liveness probe, avec une requete http
+## Liveness probe, avec une requête http
 
 Nous allons cette fois mettre en place une liveness probe mais avec une requête http exécutée périodiquement.
 
-1. Commencons par creer un fichier http-liveness.yaml :
+1. Commençons par créer un fichier http-liveness.yaml :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 touch http-liveness.yaml
@@ -107,9 +107,9 @@ spec:
       periodSeconds: 3
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Cette fois ci, la liveness probe utilise une requête http avec la methode GET sur la racine toute les 3 secondes. La liveness probe échouera selon le code d'érreur de la requête http.
+Cette fois ci, la liveness probe utilise une requête http avec la méthode GET sur la racine toute les 3 secondes. La liveness probe échouera selon le code d'erreur de la requête http.
 
-2. Créeons donc ce pod :
+2. Créons donc ce pod :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl apply -f http-liveness.yaml
@@ -137,13 +137,13 @@ Events:
   Normal  Started    113s  kubelet            Started container liveness
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-4. Nous allons supprimer la page d'acceuil de nginx dans le conteneur, ce qui entrainera un code d'erreur 400 pour la requete http de la liveness probe :
+4. Nous allons supprimer la page d'accueil de nginx dans le conteneur, ce qui entraînera un code d'erreur 400 pour la requête http de la liveness probe :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl exec -n healthchecking http-liveness rm /usr/share/nginx/html/index.html
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-5. Au bout de quelques secondes, on devrait voir que la liveness probe echoue et le conteneur est recree :
+5. Au bout de quelques secondes, on devrait voir que la liveness probe échoue et le conteneur est recréé :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl describe pods -n healthchecking http-liveness
@@ -160,7 +160,7 @@ Normal   Started    32s (x2 over 57s)  kubelet            Started container live
 Normal   Pulled     32s                kubelet            Successfully pulled image "nginx" in 2.031773864s
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-On voit que le conteneur a été tué par Kubernetes étant donné que la liveness probe a echoué.
+On voit que le conteneur a été tué par Kubernetes étant donné que la liveness probe a échoué.
 
 
 <hr>
@@ -169,7 +169,7 @@ On voit que le conteneur a été tué par Kubernetes étant donné que la livene
 
 <hr>
 
-Nous allons maintenant voir une autre façon de faire du healthchecking sur un pod : la readiness probe. Elle permet à Kubernetes de savoir lorsque l'application se trouvant dans un pod a bel et bien demarré. Comme la liveness probe, elle fait ca a l'aide de commandes, de requêtes http/tcp, etc.
+Nous allons maintenant voir une autre façon de faire du healthchecking sur un pod : la readiness probe. Elle permet à Kubernetes de savoir lorsque l'application se trouvant dans un pod a bel et bien démarré. Comme la liveness probe, elle fait ça a l'aide de commandes, de requêtes http/tcp, etc.
 
 1. Commençons par créer un fichier file-readiness.yaml :
 
@@ -202,9 +202,9 @@ spec:
       periodSeconds: 5
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Ce pod est un peu similaire à celui de file-liveness dans l'exerice 1. Cette fois ci, le pod attend 30 secondes au démarrage avant de créer un fichier /tmp/healthy. Ce pod contient également une readiness probe verifiant l'existance de ce fichier /tmp/healthy.
+Ce pod est un peu similaire à celui de file-liveness dans l'exercice 1. Cette fois ci, le pod attend 30 secondes au démarrage avant de créer un fichier /tmp/healthy. Ce pod contient également une readiness probe vérifiant l'existence de ce fichier /tmp/healthy.
 
-2. Créeons donc ce pod :
+2. Créons donc ce pod :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl apply -f file-readiness.yaml

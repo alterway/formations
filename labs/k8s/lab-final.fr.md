@@ -98,12 +98,12 @@
 
     - Générez un certificat pour un utilisateur du nom de dev. Ajoutez les informations d'identification de l'utilisateur dev à notre fichier kubeconfig. Puis vérifiez si dev a le droit de lister les pods en mettant la commande : `kubectl --user=dev get pods`
 
-    - Créez un Role qui autorise à lister les pods puis liez le Role à l’utilisateur dev. Vérifiez à présent si dev peut lister les pods.
+    - Créez un rôle qui autorise à lister les pods puis liez le rôle à l’utilisateur dev. Vérifiez à présent si dev peut lister les pods.
 
-    - Vous remarquerez que dev est limité au namespace dans lequel le Role a été créé. Vous décidez de lui permettre de lister les pods de tous les namespaces. Mettez en place une solution appropriée.
+    - Vous remarquerez que dev est limité au namespace dans lequel le rôle a été créé. Vous décidez de lui permettre de lister les pods de tous les namespaces. Mettez en place une solution appropriée.
 
 
-14. Créez un pod static avec une image redis. Rajoutez un request de 100Mi RAM et 100m CPU puis une limite à 200Mi RAM et 150m CPU
+14. Créez un pod statique avec une image redis. Rajoutez un request de 100Mi RAM et 100m CPU puis une limite à 200Mi RAM et 150m CPU
 
 
 

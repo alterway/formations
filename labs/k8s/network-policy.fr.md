@@ -216,7 +216,7 @@ spec:
       port: 80
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-5. Créeons cette Network Policy :
+5. Créons cette Network Policy :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl apply -f ingress-network-policy.yaml
@@ -290,7 +290,7 @@ curl: (7) Failed to connect to dest-service port 80: Connection timed out
 command terminated with exit code 7
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-8. Nous allons maintenant définir une network policy mais en egress, authorisant dest à faire une requête à source1 mais pas à source 2 :
+8. Nous allons maintenant définir une network policy mais en egress, autorisant dest à faire une requête à source1 mais pas à source 2 :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 touch egress-network-policy.yaml
@@ -313,7 +313,7 @@ spec:
   egress: []
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-9. Créeons donc cette network policy :
+9. Créons donc cette network policy :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl apply -f egress-network-policy.yaml
@@ -368,7 +368,7 @@ kubectl apply -f egress-network-policy.yaml
 *networkpolicy.networking.k8s.io/egress-network-policy configured*
 
 
-13. Nous pouvons reessayer le test de connexion :
+13. Nous pouvons réessayer le test de connexion :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl exec -n network-policies -it dest-pod -- curl source2-service

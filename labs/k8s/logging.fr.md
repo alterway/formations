@@ -24,7 +24,7 @@ Metrics-server is running at https://10.156.0.3:6443/api/v1/namespaces/kube-syst
 To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-2. Nous pouvons egalement voir tout les évenements qui ont eu lieu dans le cluster. Un évenement peut désigner le rescheduling d'un pod, la mise à jour d'un deployment, la création d'un PV ou binding d'un PVC à un PV. Nous pouvons avoir toute ces infos de la façon suivante :
+2. Nous pouvons également voir tout les évènements qui ont eu lieu dans le cluster. Un évènement peut désigner le rescheduling d'un pod, la mise à jour d'un deployment, la création d'un PV ou binding d'un PVC à un PV. Nous pouvons avoir toute ces infos de la façon suivante :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl get events -A
@@ -44,7 +44,7 @@ kubectl run --image nginx test-logs
 pod/test-logs created
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-4. Nous pouvons récupérer les logs de ce pod de la facon suivante :
+4. Nous pouvons récupérer les logs de ce pod de la façon suivante :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl logs test-logs
@@ -71,7 +71,7 @@ sudo cat /var/log/containers/*
 {"log":"I1027 12:51:51.629471       1 clientconn.go:948] ClientConn switching balancer to \"pick_first\"\n","stream":"stderr","time":"2020-10-27T12:51:51.62968064Z"}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-6. Enfin une dernière façon de regarder les logs des differents conteneurs peuplant notre cluster kubernetes est d'utiliser tout simplement Docker :
+6. Enfin une dernière façon de regarder les logs des différents conteneurs peuplant notre cluster kubernetes est d'utiliser tout simplement Docker :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 docker ps -a
@@ -171,7 +171,7 @@ NAME            HEALTH   NODES   VERSION   PHASE   AGE
 elasticsearch   green    1       7.9.3     Ready   106s
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-6. Un service exposant notre elasticsearch est créé lors du deploiement, nous pouvons le voir de la façon suivante :
+6. Un service exposant notre elasticsearch est créé lors du déploiement, nous pouvons le voir de la façon suivante :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl get service elasticsearch-es-http
@@ -209,7 +209,7 @@ curl -u "elastic:$PASSWORD" -k "https://CLUSTER_IP_ELASTICSEARCH:9200"
 
 Parfait !
 
-8. Nous allons maintenant passer à l'installation de Kibana. De la même maniere, nous allons définir un fichier kibana.yaml permettant de deployer notre kibana :
+8. Nous allons maintenant passer à l'installation de Kibana. De la même manière, nous allons définir un fichier kibana.yaml permettant de déployer notre kibana :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 touch kibana.yaml
@@ -238,7 +238,7 @@ kubectl apply -f kibana.yaml
 kibana.kibana.k8s.elastic.co/kibana created
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-10. De la même maniere qu'elasticsearch, nous pouvons voir l'état de notre Kibana de la façon suivante :
+10. De la même manière qu'elasticsearch, nous pouvons voir l'état de notre Kibana de la façon suivante :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl get kibana kibana
@@ -273,7 +273,7 @@ pb809RTC51EVCd3f19i9UVW5
 kubectl port-forward --address 0.0.0.0 service/kibana-kb-http 5601
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Notre Kibana est donc installé ! Vous pouvez y'acceder à l'aide de l'URL suivante : https://MASTER_EXTERNAL_IP:5601
+Notre Kibana est donc installé ! Vous pouvez y'accéder à l'aide de l'URL suivante : https://MASTER_EXTERNAL_IP:5601
 
 Page d'authentification :
 
@@ -355,7 +355,7 @@ filebeat   green    2           2          filebeat   7.9.2     94s
 
 17. Nous pouvons créer un index pattern en allant sur Discover -> Create index pattern -> Mettre "filebeat-*" en index pattern name -> Mettre @timestamp en time field :
 
-Creation de l'index pattern :
+Création de l'index pattern :
 
 ![](images/elastic3.png)
 
