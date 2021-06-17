@@ -243,7 +243,7 @@ spec:
 kubectl get svc
 web   ClusterIP   10.96.163.5     <none>        80/TCP     3m56s
 
-kubectl exec web-96d5df5c8-lfmhs env | sort
+kubectl exec web-96d5df5c8-lfmhs -- env | sort
 WEB_PORT=tcp://10.96.163.5:80
 WEB_PORT_80_TCP=tcp://10.96.163.5:80
 WEB_PORT_80_TCP_ADDR=10.96.163.5

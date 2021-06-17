@@ -141,8 +141,8 @@ service/source2-service created
 3. Essayons de faire une requête depuis les pods source1 et source2 vers dest :
 
 ```bash
-training@master$ kubectl exec -n network-policies -it source1-pod curl dest-service
-training@master$ kubectl exec -n network-policies -it source2-pod curl dest-service
+training@master$ kubectl exec -n network-policies -it source1-pod -- curl dest-service
+training@master$ kubectl exec -n network-policies -it source2-pod -- curl dest-service
 
 <!DOCTYPE html>
 <html>

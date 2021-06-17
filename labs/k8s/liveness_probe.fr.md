@@ -140,7 +140,7 @@ Events:
 4. Nous allons supprimer la page d'accueil de nginx dans le conteneur, ce qui entraînera un code d'erreur 400 pour la requête http de la liveness probe :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-kubectl exec -n healthchecking http-liveness rm /usr/share/nginx/html/index.html
+kubectl exec -n healthchecking http-liveness -- rm /usr/share/nginx/html/index.html
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 5. Au bout de quelques secondes, on devrait voir que la liveness probe échoue et le conteneur est recréé :
