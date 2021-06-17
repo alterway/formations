@@ -110,10 +110,10 @@ Répéter les actions pour le noeud 2 noeud par noeud (pas en // )
 kubectl drain node1 --ignore-daemonsets
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Nous devons maintenant mettre a jour la configuration de notre worker :
+Nous devons maintenant mettre a jour la configuration de notre node1 :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-training@worker$ sudo kubeadm upgrade node
+training@node1$ sudo kubeadm upgrade node
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
@@ -130,16 +130,16 @@ training@worker$ sudo kubeadm upgrade node
 Enfin, comme pour le master nous devons mettre a jour la kubelet et kubectl :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-training@worker$ sudo apt-mark unhold kubectl kubelet
-training@worker$ sudo apt-get install kubectl=1.20.7-00 kubelet=1.20.7-00
-training@worker$ sudo apt-mark hold kubectl kubelet
+training@node1$ sudo apt-mark unhold kubectl kubelet
+training@node1$ sudo apt-get install kubectl=1.20.7-00 kubelet=1.20.7-00
+training@node1$ sudo apt-mark hold kubectl kubelet
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 En prenant soin de redémarrer la kubelet :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-training@worker$ sudo systemctl daemon-reload
-training@worker$ sudo systemctl restart kubelet
+training@node1$ sudo systemctl daemon-reload
+training@node1$ sudo systemctl restart kubelet
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Sans oublier de remettre le noeud en marche :
@@ -155,7 +155,7 @@ kubectl get nodes
 
 NAME     STATUS   ROLES    AGE   VERSION
 master   Ready    master   22m   v1.20.5
-worker   Ready    <none>   21m   v1.19.5
+node1   Ready    <none>   21m   v1.19.5
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Et lister les pods pour vérifier que tout est fonctionnel :
