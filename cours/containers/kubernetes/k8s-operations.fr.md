@@ -142,7 +142,7 @@ kubectl  logs (-f) <POD_NAME>
 
 - Voir les logs containers `kubectl logs`
 - Il est possible de donner un _nom de pod_ ou un _type/nom_
-  par exemple sir on donne un nom de déploiment ou de replica set, les logs correspondront au prmier pod
+  par exemple si l'on donne un nom de déploiement ou de replica set, les logs correspondront au premier pod
 - Par défaut les logs affichées sont celles du premier container dans le pod. 
 
 ```console

@@ -11,7 +11,7 @@
 
 ### Kubernetes : Les noeuds (Nodes)
 
-- Les noeuds qui executent les conteneurs sont composés de
+- Les noeuds qui exécutent les conteneurs sont composés de
   - Un "container Engine" (Docker, CRI-O, containerd...)
   - Une "kubelet" (node agent)
   - Un kube-proxy (un composant réseau nécessaire mais pas suffisant)

@@ -1,4 +1,4 @@
-# KUBERNETES : Securité et Controle d'Accès
+# KUBERNETES : Sécurité et Contrôle d'accès
 
 ### Authentication & Autorisation
 
@@ -14,13 +14,13 @@
 3 entités sont utilisées :
 
 - Utilisateurs représentés par les `Users` ou les `ServiceAccounts`
-- Resources représentées par les `Deployments`, `Pods`, `Services`, etc...
+- Ressources représentées par les `Deployments`, `Pods`, `Services`, etc...
 - les différentes opérations possibles : `create, list, get, delete, watch, patch`
 
 
 ### Service Accounts
 
-- Objet Kubernetes permettant d'identifier une application s'éxecutant dans un pod
+- Objet Kubernetes permettant d'identifier une application s'exécutant dans un pod
 - Par défaut, un `ServiceAccount` par `namespace`
 - Le `ServiceAccount` est formatté ainsi : `system:serviceaccount:<namespace>:<service_account_name>`
 
@@ -142,7 +142,7 @@ kubectl auth can-i get pods /
 
 ### NetworkPolicies
 
-- Exemple de `NetworkPolicy` permettant de blocker le trafic entrant :
+- Exemple de `NetworkPolicy` permettant de bloquer le trafic entrant :
 
 ```yaml
 kind: NetworkPolicy

@@ -36,7 +36,7 @@ A voir :
 
 - Un `Chart` est une archive contenant des bundles YAML modélisés. Un chart est pratiquement un regroupement de ressources Kubernetes pré-configurées.
 
-- `Release` : Une instance d'un chart helm s'éxécutant dans un cluster Kubernetes.
+- `Release` : Une instance d'un chart helm s'exécutant dans un cluster Kubernetes.
 - `Repository` : répertoire ou espace (public ou privé) où sont regroupés les `charts`.
   
 - Les charts sont versionnés
@@ -133,7 +133,7 @@ Vérifions quels référentiels nous avons et ajoutons le référentiel `stable`
 
 - Il faut donner un nom à cette **Release**
 
-  (ou utiliser le flag  `--generate-name` pourque helm le fasse automatiquement pour nous)
+  (ou utiliser le flag  `--generate-name` pour que helm le fasse automatiquement pour nous)
 
 ```bash
 # Installer le chart nginx :
@@ -143,9 +143,9 @@ Vérifions quels référentiels nous avons et ajoutons le référentiel `stable`
   helm list
 ```
 
-### Kubernetes : Helm - Voir les resources d'une release
+### Kubernetes : Helm - Voir les ressources d'une release
 
-- Il est possible d'utiliser un selecteur (label)
+- Il est possible d'utiliser un sélecteur (label)
 
 ```bash
 # Lister toutes les resources créées dans une release
@@ -211,7 +211,7 @@ Le fichier `readme` peut ou pas, donner des informations sur ces `values`.
 
 ### Kubernetes : Helm - A quoi peut servir d'autre un chart Helm
 
-- Outre le fait de déployer des applications, on peut gérer d'autres choses avec helm, grace à la puissance du langage de template
+- Outre le fait de déployer des applications, on peut gérer d'autres choses avec helm, grâce à la puissance du langage de template
 - Gérer facilement les Roles / Rolebinding / ClusterRole / ClusterRoleBinding
 - Des paramétrages d'opérateurs
 - ...  

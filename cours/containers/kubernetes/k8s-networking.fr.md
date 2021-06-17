@@ -77,9 +77,9 @@ kubectl expose deploy web --port=80 --target-port=8080
 
 - `Headless ClusterIP` : 
     - Il n'y pas de load balancing
-    - Le service renvoie sur une requête DNS la liste des IP des pods et non pas l'ip du service
+    - Le service renvoie sur une requête DNS la liste des IP des pods et non pas l'IP du service
     - Le service donc envoi les requêtes sur les pods même ceux-ci ne fonctionnent pas
-    - C'est donc à l'application de gérer la tolérance de panne et le routing
+    - C'est donc à l'application de gérer la tolérance de panne et le routage
 
 ![](images/headlessClusterIP.png)
 
@@ -162,7 +162,7 @@ kubectl expose deploy web --type NodePort --protocol TCP --port 80 --target-port
 - `LoadBalancer` :  expose le service à l'externe en utilisant le loadbalancer d'un cloud provider (AWS, Google, Azure)
     - Expose des services au trafic externe
     - Expose le service sur chaque nœud (comme NodePort)
-    - Fournit un équilibreur de charge
+    - Fournit un répartiteur de charge
 
 
 ### Kubernetes : Services : LoadBalancer
@@ -230,7 +230,7 @@ spec:
 
 - Exemple
     - Active service : my-app
-    - Variables d'environment 
+    - Variables d'environnement 
         - MY_APP_SERVICE_HOST=`<Cluster IP Address>`
         - MY_APP_SERVICE_PORT=`<Service Port>`
 

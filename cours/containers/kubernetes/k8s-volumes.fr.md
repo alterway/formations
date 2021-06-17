@@ -3,7 +3,7 @@
 ### Kubernetes : Volumes
 
 - Fournir du stockage persistent aux PODs
-    - Definis au niveau pod
+    - Défini au niveau pod
 - On le même cycle de vie que le pod
     - Quand le pod est supprimé le volume aussi
     - Les différents type de volumes sont implémentés comme des plugins

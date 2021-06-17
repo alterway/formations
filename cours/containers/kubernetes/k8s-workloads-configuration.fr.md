@@ -3,7 +3,7 @@
 ### Kubernetes : ConfigMaps
 
 - Objet Kubernetes permettant stocker séparer les fichiers de configuration
-- Il peut être créé d'un ensemble de valeurs ou d'un fichier resource Kubernetes (YAML ou JSON)
+- Il peut être créé d'un ensemble de valeurs ou d'un fichier ressource Kubernetes (YAML ou JSON)
 - Un `ConfigMap` peut être sollicité (utilisé) par plusieurs `pods`
 - Limité à **1MiB** de data
 

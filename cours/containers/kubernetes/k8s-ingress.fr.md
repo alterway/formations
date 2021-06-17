@@ -6,7 +6,7 @@
 
 - Les services peuvent être exposés au monde extérieur:
     - avec le type NodePort (sur un port> 30000)
-    - avec le type LoadBalancer (allocation d'un équilibreur de charge externe)
+    - avec le type LoadBalancer (allocation d'un répartiteur de charge externe)
 
 - Qu'en est-il des services HTTP?
 
@@ -46,7 +46,7 @@ Les services `LoadBalancer` sont bien, mais:
 
 - Étape 1: déployer un `Ingress Controller`
 
-Ingress Controller = équilibreur de charge + boucle de contrôle
+Ingress Controller = répartiteur de charge + boucle de contrôle
 
 La boucle de contrôle surveille les Objects `Ingress` et configure le LB en conséquence
 
@@ -59,7 +59,7 @@ Associer les entrées DNS à l'adresse du LB
 
 L'`Ingress Controller` prend ces ressources et configure le LB (load balancer)
 
-- Étape 4: Votre Site est prêt à etre utilisé !
+- Étape 4: Votre Site est prêt à être utilisé !
 
 
 ### À quoi ressemble une ressource Ingress?
