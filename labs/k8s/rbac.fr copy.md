@@ -8,7 +8,7 @@ TRIG="hel"
 
 openssl req -new -newkey rsa:4096 -nodes -keyout ${TRIG}-kubernetes.key -out ${TRIG}-kubernetes.csr -subj "/CN=${TRIG}/O=devops"
 
-cat ${TRIG}-kubernetes.csr | base64 | tr -d '\n' > ${TRIG}.csr
+base64 ${TRIG}-kubernetes.csr | tr -d '\n' > ${TRIG}.csr
 
 
 REQUEST=$(cat ${TRIG}.csr)
