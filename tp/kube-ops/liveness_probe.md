@@ -128,7 +128,7 @@ Events:
 4. Nous allons supprimer la page d'acceuil de nginx dans le conteneur, ce qui entrainera un code d'erreur 400 pour la requete http de la liveness probe :
 
 ```bash
-training@master$ kubectl exec -n healthchecking http-liveness rm /usr/share/nginx/html/index.html
+training@master$ kubectl exec -n healthchecking http-liveness -- rm /usr/share/nginx/html/index.html
 ```
 
 5. Au bout de quelques secondes, on devrait voir que la liveness probe echoue et le conteneur est recree :

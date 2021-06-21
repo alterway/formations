@@ -97,7 +97,7 @@ Mounts:
 6. Vérifions que le secret est bien utilisé dans notre pod :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-kubectl exec -it -n secrets pod-with-secret printenv
+kubectl exec -it -n secrets pod-with-secret -- printenv
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
