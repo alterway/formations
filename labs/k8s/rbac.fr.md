@@ -89,7 +89,7 @@ sudo openssl req -new -newkey rsa:4096 -nodes -keyout ${TRIG}-kubernetes.key -ou
 2. Encodons en base64 le CSR généré
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-cat ${TRIG}-kubernetes.csr | base64 | tr -d '\n' > ${TRIG}.csr
+base64 ${TRIG}-kubernetes.csr | tr -d '\n' > ${TRIG}.csr
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 3. Mettons le csr encodé dans une variable
