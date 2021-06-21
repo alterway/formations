@@ -26,7 +26,7 @@
 - Système de clé/valeur
 - Organisent les différents objets de Kubernetes (Pods, RC, Services, etc.) d'une manière cohérente qui reflète la structure de l'application
 - Corrèlent des éléments de Kubernetes : par exemple un service vers des Pods
-- Ils contiennent des informations d'identification utilisées par les requêtes qui utilisent un selecteur ou dans les sections de de sélecteurs dans les définitions d'objets
+- Ils contiennent des informations d'identification utilisées par les requêtes qui utilisent un sélecteur ou dans les sections de sélecteurs dans les définitions d'objets
 - Le nom dans la clé est limité à 63 caractères et le suffixe à 253 caractères
 - La valeur ne peut dépasser 63 caractères
 - La valeur doit commencer un aplhanum ou être vide
@@ -65,7 +65,7 @@ nginx     1/1       Running   0          31s       app=nginx,env=prod
 ### Kubernetes : Annotations
 
 - Système de clé/valeur
-- Ce sont des informations qui ne sont pas utilisées pour l'identification de resources.
+- Ce sont des informations qui ne sont pas utilisées pour l'identification de ressources.
 - Les annotations ne sont pas utilisées en interne par kubernetes
 - Elles peuvent être utilisées par des outils externes ou librairies (ex: cert-manager, ingress-controller...)
 - Le nom dans la clé est limitée à 63 caractères et le suffixe à 253 caractères
@@ -130,11 +130,11 @@ spec:
 
 ### Kubernetes : Pod
 
-Dans les statuts du pod on trouve la notion de phase d'éxécution
+Dans les statuts du pod on trouve la notion de phase d'exécution
 
 - Phases :
     - `Pending`: accepté par le cluster, les container ne sont pas initialisé
-    - `Running`: Au moins un des containers est en cours de démarrage, d'éxécution ou de redémarrage
+    - `Running`: Au moins un des containers est en cours de démarrage, d'exécution ou de redémarrage
     - `Succeeded`: Tous les containers se sont arrêtés avec un "exit code" à 0 (zéro); Le pod ne sera pas redémarré
     - `Failed`: Tous les containers se sont arrêtés et au moins un a un exit code différent de 0
     - `Unknown`: L'état du pod ne peut pas être déterminé
@@ -161,7 +161,7 @@ dans les statuts du pod on trouve la notion de Conditions d'état des pods
     - `PodScheduled`: Un nœud a été sélectionné avec succès pour "lancer" le pod, et la planification est terminée.
     - `ContainersReady`: Tous les containers sont prêts
     - `Initialized`: Les "Init containers sont démarrés"
-    - `Ready`: Le pod est capable de répondre aux demandes ; par conséquent, il doit être inclus dans le service et les équilibreurs de charge.
+    - `Ready`: Le pod est capable de répondre aux demandes ; par conséquent, il doit être inclus dans le service et les répartiteurs de charge.
 
 ```console
 $ kubectl describe pods <POD_NAME>
@@ -187,8 +187,8 @@ Conditions:
 Les containers peuvent avoir seulement 3 états
 
 - États:
-    - `Waiting`: Les processus requis sont en cours d'éxéction pour un démarrage réussi
-    - `Running`: Le container est en cours d'éxécution
+    - `Waiting`: Les processus requis sont en cours d'exécution pour un démarrage réussi
+    - `Running`: Le container est en cours d'exécution
     - `Terminated`: L'exécution du conteneur s'est déroulée et s'est terminée par un succès ou un échec.
 
 
@@ -303,7 +303,7 @@ spec:
 ### Kubernetes : Job
 
 - Crée des pods et s'assurent qu'un certain nombre d'entre eux se terminent avec succès.
-- Peut éxécuter plusieurs pods en parallèle
+- Peut exécuter plusieurs pods en parallèle
 - Si un noeud du cluster est en panne, les pods sont reschedulés vers un autre noeud.
   
 

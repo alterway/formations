@@ -215,13 +215,13 @@ curl -sk https://10.96.0.1/api/v1/namespaces/kube-public/configmaps/cluster-info
 
 - Ce namespace particulier existe depuis la 1.14
 - Il contient un objet `lease`par noeud
-- Ces `leases` permettent d'implémenter une nouvelle méthode pour verifier l'état de santé des noeuds
+- Ces `leases` permettent d'implémenter une nouvelle méthode pour vérifier l'état de santé des noeuds
 - Voir (KEP-0009)[https://github.com/kubernetes/enhancements/blob/master/keps/sig-node/0009-node-heartbeat.md] pour plus d'information
 
 ### Kubernetes : Kubectl describe
 
-- `kubectl describe` a besoin d'un type de ressource et optionnellement un nom de ressource
-- Il est possible de fournir un _prefixe_ de nom de ressource
+- `kubectl describe` a besoin d'un type de ressource et optionnelle-ment un nom de ressource
+- Il est possible de fournir un _préfixe_ de nom de ressource
 
 - ex:
   
@@ -242,13 +242,13 @@ curl -sk https://10.96.0.1/api/v1/namespaces/kube-public/configmaps/cluster-info
 ### Kubernetes : Créer un pod en ligne de commande
 
 - Cette commande avant la 1.18 créait un deployement
-- Depuis elle démare un simple `pod`
+- Depuis elle démarre un simple `pod`
 
 ```console
 kubectl run pingu --image=alpine -- ping 127.1
 ```
 
-### Kubernetes : Créer un deploiement en ligne de commande
+### Kubernetes : Créer un déploiement en ligne de commande
 
 - `kubectl create deployment` ...
 - Depuis kubernetes 1.19, il est possible de préciser un commande au moment du `create`
@@ -301,7 +301,7 @@ kubectl apply -f object.yaml
 ### Kubernetes : Kubernetes Dashboard
 
 - Interface web pour manager les ressources kubernetes
-- Le dashboard requiere une authentification (token ou kubeconfg)
+- Le dashboard requière une authentification (token ou kubeconfg)
 - Plusieurs alternatives open source existent :
    - [k9s](https://github.com/derailed/k9s) 
    - [octant](https://octant.dev/)

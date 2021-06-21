@@ -3,7 +3,7 @@
  
 ### kubernetes : kustomize
 
-- Kustomize permet de transformer des manifestes yaml contenant des resources kubernetes
+- Kustomize permet de transformer des manifestes yaml contenant des ressources kubernetes
 - Les manifestes d'origine restent inchangés et donc utilisables tels quels (`kubectl apply/create/delete -f`)
 - On créé des `kustomizations`
 - Une `kustomizations` peut se voir comme une superposition (overlay) (ajout ou modification)
@@ -13,9 +13,9 @@
 
 - Une kustomization peut contenir:
    - d'autres kustomizations
-   - des resources kubernetes définies en yaml
-   - des patchs de resources kubernetes
-   - des ajouts de `labels`ou `annotations` pour toutes les resources
+   - des ressources kubernetes définies en yaml
+   - des patchs de ressources kubernetes
+   - des ajouts de `labels`ou `annotations` pour toutes les ressources
    - des définitions de `configmaps` ou `secrets`
 
 ### kubernetes : kustomizations : exemple 1

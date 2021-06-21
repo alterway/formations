@@ -20,7 +20,7 @@
 ![](images/kubernetes/cncf.png){height="100px"}
 
 
-### CNCF : Prérequis
+### CNCF : Pré-requis
 
 - Distribuer sous forme de conteneurs
 - Gestion dynamique de la configuration
@@ -59,7 +59,7 @@
     - Pull Requests <https://github.com/kubernetes/kubernetes/pulls>
     - Releases : <https://github.com/kubernetes/kubernetes/releases>
 - Projets en incubation :
-    - <https://github.com/kubernetes-incubator/> (Deprécié)
+    - <https://github.com/kubernetes-incubator/> (Déprécié)
     - <https://github.com/kubernetes-sigs/>
 
 ### Kubernetes : Cycle de développement

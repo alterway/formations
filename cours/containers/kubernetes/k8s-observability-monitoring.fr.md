@@ -24,7 +24,7 @@
 
 ### Sondes : Startup
 
-- Disponible en beta à partir de la version 1.18
+- Disponible en bêta à partir de la version 1.18
 - Utiles pour les applications qui ont un démarrage lent
 - Permet de ne pas augmenter les `initialDelaySeconds` des Readiness et Liveness
 - Elle sert à savoir quand l'application est prête
