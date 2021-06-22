@@ -2,7 +2,7 @@
 
 ### _Taints_ et _Tolerations_
 
-Un nœud avec un taint empêche l'exécution sur lui-même des pods qui ne tolèrent pas ce "taint"
+Un nœud avec un taint empêche l'exécution sur lui-même des pods qui ne tolèrent pas ce _taint_
 
 - Les _taints_ et _tolerations_ fonctionnent ensemble
 - Les _taints_ sont appliqués aux nœuds
@@ -15,7 +15,7 @@ Un nœud avec un taint empêche l'exécution sur lui-même des pods qui ne tolè
 
 Ce champ peut avoir 3 valeurs : `NoSchedule`, `PreferNoSchedule`, `NoExecute`
 
-- NoSchedule : Contrainte forte, seuls les pods supportant le "taint" pourront s'exécuter sur le nœud.
+- NoSchedule : Contrainte forte, seuls les pods supportant le _taint_ pourront s'exécuter sur le nœud.
 - PreferNoSchedule: Contrainte faible, le scheduler de kubernetes **évitera** de placer un pod qui ne tolère pas ce taint sur le nœud, mais pourra le faire si besoin
 - NoExecute : Contrainte forte, les pods seront expulsés du nœud / ne pourront pas s'exécuter sur le nœuds
 
@@ -47,14 +47,14 @@ En ligne de commande
 
 ### _Taints_ et _Tolerations_ : Utilisation des _tolerations_
 
-- Les _tolerations_ peuvent être décrite au niveau des pods ou au niveau des templates de pods dans les replicaset, daemonset, statefulset et deployment.
+- Les _tolerations_ peuvent être décrites au niveau des pods ou au niveau des templates de pods dans les replicaset, daemonset, statefulset et deployment.
 
-- Ces _tolerations_ permettront aux pods de s'exécuter sur les nœuds qui ont le "taint" en correspondance.
+- Ces _tolerations_ permettront aux pods de s'exécuter sur les nœuds qui ont le _taint_ correspondant.
 
 
 ### _Taints_ et _Tolerations_ : Exemples 
 
-- Quand il n'y a pas de values dans le taint
+- Quand il n'y a pas de valeur (_value_) dans le taint
 
 ```yaml
 apiVersion: v1
@@ -69,7 +69,7 @@ spec:
 
 ### _Taints_ et _Tolerations_ : Exemples (suite)
 
-- Quand il y a une values
+- Quand il y a une valeur (_value_)
 
 ```yaml
 apiVersion: v1
@@ -87,7 +87,7 @@ spec:
 
 ### _Taints_ et _Tolerations_ : Cas particulier
 
-Une clé vide avec un opérateur Exist fera en sorte que le pod s'exécutera sur tous les nœuds quelques soit leurs "taint"
+Une clé vide avec un opérateur _Exist_ fera en sorte que le pod s'exécutera sur tous les nœuds quelque soit leurs _taints_
 
 exemple :
 
@@ -132,12 +132,12 @@ spec:
 Ce système permet de gérer très finement les règles de placement des pods en regard de la simplicité du nodeSelector
 
 - Le langage permettant d'exprimer les affinités / anti-affinités est riche de possibilités
-- Possibilité de d'écrire des préférences `soft` ou `hard`  (pod déployé malgré tout)
+- Possibilité de d'écrire des préférences `soft` (pod déployé malgré tout) ou `hard` (pod déployé uniquement si les règles sont respectées)
 - Contraintes dépendantes de labels présents dans d'autres pods
 
 ### Node Affinity
 
-- Égal conceptuellement au nodeSelector, mais avec la possibilité de faire du **soft** (should) ou **hard** (must)
+- Égal conceptuellement au _nodeSelector_, mais avec la possibilité de faire du **soft** (should) ou **hard** (must)
 - Soft : `preferredDuringSchedulingIgnoredDuringExecution`
 - Hard :  `requiredDuringSchedulingIgnoredDuringExecution`
 
@@ -171,7 +171,7 @@ spec:
 ```
 
 
-### Autre exemple
+### Un autre exemple
 
 ```yaml
 ...
