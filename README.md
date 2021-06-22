@@ -22,6 +22,7 @@ Auteurs :
 * Mohamed Reda Larbi Youcef <mohamed-reda.larbi-youcef@alterway.fr>
 * Arnaud Meukam <arnaud.meukam@alterway.fr>
 * Hervé Leclerc <herve.leclerc@alterway.fr>
+* David Guglielmi <david.guglielmi@alterway.fr>
 
 HTML et PDF construits automatiquement : <https://alterway.fr/formations/>
 
