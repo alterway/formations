@@ -1,32 +1,32 @@
-# KUBERNETES : Gestion des placements des pods
+# KUBERNETES : Gestion des placements de pods
 
-### "Taints" et "Tolerations"
+### _Taints_ et _Tolerations_
 
-Un noeud avec un taint empeche l'execution sur lui-même des pods qui ne tolèrent pas ce "taint"
+Un nœud avec un taint empêche l'exécution sur lui-même des pods qui ne tolèrent pas ce "taint"
 
-- Les "taints" et "tolerations" fonctionnent ensemble
-- Les "taints" sont appliqués aux noeuds
-- Les "tolerations" sont décrites aux niveau des pods
-- On peut mettre plusieurs "taints" sur un noeuds (il faudra que le pod tolère tous ces taints)
-- Les taints sont définis ainsi : `key=value:Effect`
+- Les _taints_ et _tolerations_ fonctionnent ensemble
+- Les _taints_ sont appliqués aux nœuds
+- Les _tolerations_ sont décrites aux niveau des pods
+- On peut mettre plusieurs _taints_ sur un nœuds (il faudra que le pod tolère tous ces _taints_)
+- Les _taints_ sont définis ainsi : `key=value:Effect`
 
 
-### "Taints" et "Tolerations" : Champ "Effect"
+### _Taints_ et _Tolerations_ : Champ "Effect"
 
 Ce champ peut avoir 3 valeurs : `NoSchedule`, `PreferNoSchedule`, `NoExecute`
 
-- NoSchedule : Contrainte forte, seuls les pods supportant le "taint" pourront s'éxécuter sur le noeud.
-- PreferNoSchedule: Contrainte faible, le scheduler de kubernetes **évitera** de placer un pod qui ne tolère pas ce taint sur le noeud, mais pourra le faire si besoin
-- NoExecute : Contrainte forte, les pods seront expulsés du noeud / ne pourront pas s'exécuter sur le noeuds
+- NoSchedule : Contrainte forte, seuls les pods supportant le "taint" pourront s'exécuter sur le nœud.
+- PreferNoSchedule: Contrainte faible, le scheduler de kubernetes **évitera** de placer un pod qui ne tolère pas ce taint sur le nœud, mais pourra le faire si besoin
+- NoExecute : Contrainte forte, les pods seront expulsés du nœud / ne pourront pas s'exécuter sur le nœuds
 
 
-### "Taints" et "Tolerations" : Operateur
+### _Taints_ et _Tolerations_ : Operateur
 
 - Par valeur par défaut est `Equal` (`key=value:Effect`)
 - Mais peut avoir aussi comme valeur `Exist` (`keyExist:Effect`) 
 
 
-### "Taints" et "Tolerations" : Utilisation des "taints"
+### _Taints_ et _Tolerations_ : Utilisation des _taints_
 
 En ligne de commande
 
@@ -40,19 +40,19 @@ En ligne de commande
     - `kubectl taint node node1 node-role.kubernetes.io/master-`
     - `kubectl taint node node2 test:NoSchedule-`
 
-- Lister les tains d'un noeud
+- Lister les tains d'un nœud
     - `kubectl get nodes THENODE -o jsonpath="{.spec.taints}"`
     - `[{"effect":"NoSchedule","key":"node-role.kubernetes.io/master"}]`
 
 
-### "Taints" et "Tolerations" : Utilisation des "tolerations"
+### _Taints_ et _Tolerations_ : Utilisation des _tolerations_
 
-- Les "tolerations" peuvent être décrite au niveau des pods ou au niveau des templates de pods danns les replicaset, daemonset, statefulset et deployment.
+- Les _tolerations_ peuvent être décrite au niveau des pods ou au niveau des templates de pods dans les replicaset, daemonset, statefulset et deployment.
 
-- Ces "tolerations" permettront aux pods de s'éxécuter sur les noeuds qui ont le "taint" en correspondance.
+- Ces _tolerations_ permettront aux pods de s'exécuter sur les nœuds qui ont le "taint" en correspondance.
 
 
-### "Taints" et "Tolerations" : Exemples 
+### _Taints_ et _Tolerations_ : Exemples 
 
 - Quand il n'y a pas de values dans le taint
 
@@ -67,7 +67,7 @@ spec:
       effect: NoSchedule
 ```
 
-### "Taints" et "Tolerations" : Exemples (suite)
+### _Taints_ et _Tolerations_ : Exemples (suite)
 
 - Quand il y a une values
 
@@ -85,9 +85,9 @@ spec:
 ```
 
 
-### "Taints" et "Tolerations" : Cas particuliers
+### _Taints_ et _Tolerations_ : Cas particulier
 
-Une clé vide avec un opérateur Exist fera en sorte que le pod s'excutera sur tous les noeuds quelques soit leurs "taint"
+Une clé vide avec un opérateur Exist fera en sorte que le pod s'exécutera sur tous les nœuds quelques soit leurs "taint"
 
 exemple :
 
@@ -100,11 +100,11 @@ tolerations:
 ### nodeSelector
 
 - Champs clé valeur au niveau des podSpecs
-- Pour que le pod puisse s'éxécuter il faut que le noeuds est l'ensemble des labels correspondants
+- Pour que le pod puisse s'exécuter il faut que le nœud ait l'ensemble des labels correspondants
   
 Exemples 
 
-- Pose du label sur un noeud
+- Pose du label sur un nœud
     - `kubectl label nodes <node-name> <label-key>=<label-value>`
     - ex: `kubectl label nodes node1 disktype=ssd`
 
@@ -132,7 +132,7 @@ spec:
 Ce système permet de gérer très finement les règles de placement des pods en regard de la simplicité du nodeSelector
 
 - Le langage permettant d'exprimer les affinités / anti-affinités est riche de possibilités
-- Possibilité de d'écrire des préférences soft ou hard  (pod déployé malgré tout)
+- Possibilité de d'écrire des préférences `soft` ou `hard`  (pod déployé malgré tout)
 - Contraintes dépendantes de labels présents dans d'autres pods
 
 ### Node Affinity
@@ -184,6 +184,7 @@ spec:
                 operator: In
                 values:
                 - ssd
+...
 ```
 
 ### Pod Affinity
@@ -209,9 +210,10 @@ spec:
       - name: redis-server
         image: redis:3.2-alpine
 ...
+
 ```
 
-### Pod anti-Affinity`
+### Pod anti-Affinity
 
 ```yaml
 ...
