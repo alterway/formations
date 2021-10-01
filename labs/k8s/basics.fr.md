@@ -52,7 +52,7 @@ kubectl get namespace
 Unité d'exécution de base d'une application Kubernetes. Il constitue la plus petite et la plus simple unité dans le modèle d'objets de Kubernetes pouvant être  créer ou déployer. Un Pod représente des process en cours d'exécution dans un cluster.
 
 Pod
-Unité d'exécution de base d'une application Kubernetes. Il constitue la plus petite et la plus simple unité dans le modèle d'objets de Kubernetes pouvant être  créer ou déployer. Un Pod représente des process en cours d'exécution dans un cluster.
+Unité d'exécution de base d'une application Kubernetes. Il constitue la plus petite et la plus simple unité dans le modèle d'objets de Kubernetes pouvant être créer ou déployer. Un Pod représente des process en cours d'exécution dans un cluster.
 
 1. Créons un manifeste d'un pod avec le contenu yaml suivant :
 

@@ -109,17 +109,23 @@
       "containers/kubernetes/k8s-installation",
       "containers/kubernetes/k8s-usage",
       "containers/kubernetes/k8s-core-api-objects",
+      "containers/kubernetes/k8s-imperative-declarative-commands",
       "containers/kubernetes/k8s-networking",
       "containers/kubernetes/k8s-volumes",
       "containers/kubernetes/k8s-workloads-configuration",
       "containers/kubernetes/k8s-resources-handling",
       "containers/kubernetes/k8s-observability-monitoring",
       "containers/kubernetes/k8s-scheduling",
+      "containers/kubernetes/k8s-logging-monitoring",
       "containers/kubernetes/k8s-operations",
+      "containers/kubernetes/k8s-maintenance",
       "containers/kubernetes/k8s-security",
       "containers/kubernetes/k8s-helm-intro",
       "containers/kubernetes/k8s-kustomize-intro",
       "containers/kubernetes/k8s-ingress",
+      "containers/kubernetes/k8s-maintenance",
+      "containers/kubernetes/k8s-troubleshouting",
+      "containers/kubernetes/k8s-certification",
       "containers/kubernetes/conclusion"
     ]
   },
@@ -166,3 +172,4 @@
     ]
   }
 }
+

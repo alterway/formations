@@ -61,7 +61,7 @@
 
 ### Kubernetes : Autres composants
 
-- kubelet : Service "agent" fonctionnant sur tous les nœuds et assure le fonctionnement des autres services
+- kubelet : Service "agent" fonctionnant sur tous les nœuds et assurant le fonctionnement des autres services
 - kubectl : Ligne de commande permettant de piloter un cluster Kubernetes
 
 ### Kubernetes : Kubelet
@@ -98,7 +98,7 @@ Kubernetes n'implémente pas de solution réseau par défaut, mais s'appuie sur 
 
 ### Kubernetes : Aujourd'hui
 
-- Version 1.21.x : stable en production
+- Version 1.22.x : stable en production
 - Solution complète et une des plus utilisées
 - Éprouvée par Google
 

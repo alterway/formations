@@ -77,7 +77,7 @@ curl \
   https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get-helm-3 | bash
 ```
   
-- Voir la liste des `charts` disponibles sur les répertoire officiel : `helm search`
+- Voir la liste des `charts` disponibles sur les répertoires officiels : `helm search`
 - Afficher la liste des `charts` disponibles pour _prometheus_ : `helm search prometheus`
 - Afficher les options disponibles dans un `chart` Helm:  `helm inspect stable/prometheus`
 
@@ -162,7 +162,7 @@ Vérifions quels référentiels nous avons et ajoutons le référentiel `stable`
 
 - on peut utiliser `kubectl edit service nginx-nginx`, mais ...
 
-  ... nos modifications seraient écrasées la prochaine fois qu'on à jour ce Chart !
+  ... nos modifications seraient écrasées la prochaine fois qu'on met à jour ce Chart !
 
 - On va pour cela définir une valeur pour le type de service
 
@@ -205,11 +205,11 @@ Le fichier `readme` peut ou pas, donner des informations sur ces `values`.
 ### Kubernetes : Helm - Créer un chart  
 
 - Utilisation de la commande : `helm create myapp` va permettre de créer la structure de répertoire et de fichiers d'un chart "standard"
-- Par défaut, ce Chart déploie un `nginx` en templatisant les `services`, `deployment`, `serviceAccount`, etc...
+- Par défaut, ce Chart déploie un `nginx` en templétisant les `services`, `deployment`, `serviceAccount`, etc...
 - C'est une bonne base pour démarrer
 
 
-### Kubernetes : Helm - A quoi peut servir d'autre un chart Helm
+### Kubernetes : Helm - A quoi d'autre peut servir un chart Helm
 
 - Outre le fait de déployer des applications, on peut gérer d'autres choses avec helm, grâce à la puissance du langage de template
 - Gérer facilement les Roles / Rolebinding / ClusterRole / ClusterRoleBinding

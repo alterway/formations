@@ -165,6 +165,7 @@ spec:
 - Peut-être combiné avec le RBAC
 - Attention: Activer cette fonctionnalité peut endommager votre environnement
 - Il faut une PSP par défaut
+- obsolète depuis la version 1.21 de Kubernetes
 
 ### PodSecurityPolicies
 

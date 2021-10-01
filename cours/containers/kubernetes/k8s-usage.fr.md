@@ -368,6 +368,6 @@ $ kubectl get secret $(kubectl get serviceaccount cluster-admin-dashboard-sa -o 
 
 ```
 
-Il est possible de créer des comptes de service (sa) avec droits différents ex `view`
+Il est possible de créer des comptes de service (sa) avec droits différents ex  `view`
 
 

@@ -10,6 +10,7 @@
 - DaemonSets
 - Jobs
 - Cronjobs
+- Services
 
 ### Kubernetes : Namespaces
 
