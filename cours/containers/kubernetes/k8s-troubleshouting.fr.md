@@ -4,6 +4,7 @@
 
 - Vérifier l'état des pods 
 
+```console
     $ kubectl get pods
     NAME                           READY   STATUS           RESTARTS   AGE
     nginx-deploy-8fd84bbd6-b8d48   1/1     Running             0          45d
@@ -12,7 +13,7 @@
     mysql-database                 0/1     CrashLoopBackOff    1          18s
     mysql-database1                0/1     ImagePullBackOff    0          6s
     web-deploy-654fb8bb79-24nvd    0/1     Pending             0          2s
-
+```
     si l'état de votre pod n'est pas "Running", vous devrez suivre quelques étapes de débogage
 
 
@@ -22,6 +23,7 @@
 
     Faites une description sur le pod et regardez la section "Events". Vous remarquerez peut-être un warning "Back-off restarting failed"
 
+```console
     $ kubectl describe pods mysql-database 
     Events:
     Type     Reason     Age                  From                                                 Message
@@ -32,19 +34,20 @@
     Normal   Started    75s (x4 over 2m2s)   kubelet, gke-certif-test-default-pool-27dfc050-9bww  Started container mysql
     Warning  BackOff    46s (x8 over 2m1s)   kubelet, gke-certif-test-default-pool-27dfc050-9bww  Back-off restarting failed container
     Normal   Pulling    32s (x5 over 2m17s)  kubelet, gke-certif-test-default-pool-27dfc050-9bww  Pulling image "mysql"
-
+```
 
 ### Pods troubleshooting
 
     Vous pouvez connaître la raison de l'échec en vérifiant les logs des conteneurs de votre pod
 
+```console
     $ kubectl logs mysql-database --container=mysql
     2020-03-06 10:07:26+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 8.0.19-1debian10 started.
     2020-03-06 10:07:26+00:00 [Note] [Entrypoint]: Switching to dedicated user 'mysql'
     2020-03-06 10:07:26+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 8.0.19-1debian10 started.
     2020-03-06 10:07:26+00:00 [ERROR] [Entrypoint]: Database is uninitialized and password option is not specified
         You need to specify one of MYSQL_ROOT_PASSWORD, MYSQL_ALLOW_EMPTY_PASSWORD and MYSQL_RANDOM_ROOT_PASSWORD
-
+```
 
 ### Pods troubleshooting
 
@@ -52,6 +55,7 @@
 
     Faites une description sur le pod et regardez la section "Events". Vous pouvez remarquer l'erreur "ErrImagePull". Cela signifie que vous avez mis une mauvaise image de docker ou que vous avez une mauvaise autorisation d'accès au registre
 
+```console
     $ kubectl describe pods mysql-database1 
         Events:
     Type     Reason          Age                 From                                                 Message
@@ -63,7 +67,7 @@
     Normal   Pulling         16s (x4 over 104s)  kubelet, gke-certif-test-default-pool-27dfc050-9bww  Pulling image "mysql:dert12"
     Warning  Failed          15s (x4 over 104s)  kubelet, gke-certif-test-default-pool-27dfc050-9bww  Failed to pull image "mysql:dert12": rpc error: code = Unknown desc = Error response from daemon: manifest for mysql:dert12 not found: manifest unknown: manifest unknown
     Warning  Failed          15s (x4 over 104s)  kubelet, gke-certif-test-default-pool-27dfc050-9bww  Error: ErrImagePull
-
+```
 
 ### Pods troubleshooting
 
@@ -71,6 +75,7 @@
 
     Faites une description sur le pod et regardez la section "Events". Notez que le scheduler n'a pas de nœud dans lequel placer votre pod en raison d'une ressource insuffisante. Vous pouvez augmenter votre CPU ou votre mémoire (selon le message d'avertissement), cela peut se produire en ajoutant de nouveaux nœuds ou en diminuant le nombre de réplicas du déploiement    
 
+```console
     $ kubectl describe pods web-deploy-654fb8bb79-24nvd
         Events:
     Type     Reason             Age                From                Message
@@ -78,7 +83,7 @@
     Warning  FailedScheduling   90s (x2 over 95s)  default-scheduler   0/2 nodes are available: 2 Insufficient cpu.
     Normal   NotTriggerScaleUp  65s                cluster-autoscaler  pod didn't trigger scale-up (it wouldn't fit if a new node is added): 1 max node group size reached
     Warning  FailedScheduling   20s                default-scheduler   0/6 nodes are available: 6 Insufficient cpu.
-
+```
 
 ### Pods troubleshooting
 
@@ -94,50 +99,61 @@
 ### Pods troubleshooting
 
 - Commandes utiles
-    
+
+```console    
     $ kubectl get pods
     $ kubectl describe pods pod-name
     $ kubectl logs pod-name --container=pods-containers-name
     $ kubectl logs --previous pod-name --container=pods-containers-name
     $ kubectl exec -it pod-name -- bash
-
+```
 
 ### Service troubleshooting
 
+```console
    $ kubectl get services 
     NAME          TYPE           CLUSTER-IP    EXTERNAL-IP   PORT(S)        AGE
     kubernetes    ClusterIP      10.16.0.1     <none>        443/TCP        46d
     web-service   LoadBalancer   10.16.7.129   34.68.167.93  80:30250/TCP   9m54s
+```
 
    Il existe plusieurs problèmes courants qui peuvent empêcher les services de fonctionner correctement. Tout d'abord, vérifiez qu'il existe des endpoints pour le service. Pour chaque objet Service, l'API server met à disposition une ressource endpoint.
-    
+
+```console    
    $ kubectl get endpoints web-service
     NAME          ENDPOINTS                                  AGE
     web-service   10.12.0.27:80,10.12.0.28:80,10.12.0.4:80   11m
- 
+```
+
    Assurez-vous que les endpoints correspondent au nombre de conteneurs que vous pensez être membres de votre service. Dans ce scénario, le service Web sert un déploiement Web avec 3 réplicas de pods.
 
+```console
    $ kubectl get deployments
     NAME             READY   UP-TO-DATE   AVAILABLE   AGE
     web-deployment   3/3     3            3           4h43m 
+```
 
 
 ### Service troubleshooting
 
     au cas où les endpoints du service sont manquants, vérifiez le sélecteur du service
 
+```console
     ...
     spec:
       - selector:
           run: web-deployment
-    
+```
+
     Ce sélecteur doit correspondre aux labels des pods sinon le service ne pourra pas exposer les pods
 
+```console
     $ kubectl get pods --show-labels
     NAME                              READY   STATUS    RESTARTS   AGE     LABELS
     web-deployment-654fb8bb79-6n9q2   1/1     Running   0          4h53m   run=web-deployment
     web-deployment-654fb8bb79-ljnhw   1/1     Running   0          15m     run=web-deployment
     web-deployment-654fb8bb79-vpcwb   1/1     Running   0          15m     run=web-deployment
+```
 
     Si la liste des pods correspond aux attentes, mais que les endpoints sont toujours vides, il est possible que les bons ports ne soient pas exposés. Si le service a un containerPort spécifié, mais que les pods sélectionnés n'ont pas ce port répertorié, ils ne seront pas ajoutés à la liste des endpoints.
 
@@ -148,24 +164,28 @@
 
 - Vérifier l'état des composants du Controlplane  
 
+```console
     $ kubectl get componentstatus
     NAME                 STATUS    MESSAGE   ERROR
     controller-manager   Healthy   ok        
     scheduler            Healthy   ok 
-    
+```
+
 - Vérifier l'état des nœuds  
 
+```console
     $ kubectl get nodes 
     NAME       STATUS   ROLES   AGE   VERSION
     worker-1   Ready    worker   8d   v1.21.0
     worker-2   Ready    worker   8d   v1.21.0
     master-1   Ready    master   8d   v1.21.0
-
+```
 
 ### Control Plane troubleshooting
 
 - Vérifier les pods du Controlplane 
 
+```console
     $ kubectl get pods -n kube-systems 
     NAME                           READY    STATUS   RESTARTS   AGE
     coredns-78fcdf6894-5dntv       1/1      Running  0          1h
@@ -178,12 +198,13 @@
     kube-scheduler-master          1/1      Running  0          1h
     weave-net-7kd52                2/2      Running  1          1h
     weave-net-jtl5m                2/2      Running  1          1h
-
+```
 
 ### Control Plane troubleshooting
 
 - Vérifier les services du Controlplane
 
+```console
     $ service kube-apiserver status
     ● kube-apiserver.service - Kubernetes API Server
     Loaded: loaded (/etc/systemd/system/kube-apiserver.service; enabled; vendor preset: enabled)
@@ -191,6 +212,7 @@
     Docs: https://github.com/kubernetes/kubernetes
     Main PID: 15767 (kube-apiserver)
     Tasks: 13 (limit: 2362)
+````
 
     répétez le même process pour les autres services tels que:  kube-controller-manager, kube-scheduler, kubelet,  kube-proxy 
 
@@ -199,6 +221,7 @@
 
 - Vérifier les logs de service
 
+```console
     $ kubectl logs kube-apiserver-master -n kube-system
     I0401 13:45:38.190735 1 server.go:703] external host was not specified, using 172.17.0.117
     I0401 13:45:38.194290 1 server.go:145] Version: v1.11.3
@@ -214,17 +237,20 @@
     W0401 13:45:40.900380 1 genericapiserver.go:319] Skipping API batch/v2alpha1 because it has no resources.
     W0401 13:45:41.370677 1 genericapiserver.go:319] Skipping API rbac.authorization.k8s.io/v1alpha1 because it has no resources.
     W0401 13:45:41.381736 1 genericapiserver.go:319] Skipping API scheduling.k8s.io/v1alpha1 because it has no resources.
-
+```
 
 ### Node troubleshooting
 
 - Vérifier l'état du nœud
 
+```console
     $ kubectl get nodes
     NAME       STATUS   ROLES   AGE   VERSION
     worker-1   Ready    <none>   8d   v1.21.0
     worker-2   NotReady <none>   8d   v1.21.0
+````
 
+```console
     $ kubectl describe node worker-1
     ...
     Conditions:
@@ -235,10 +261,11 @@
         DiskPressure   False    Mon, 01 Apr 2019 14:30:33 +0000 KubeletHasNoDiskPressure    kubelet has no disk pressure
         PIDPressure    False    Mon, 01 Apr 2019 14:30:33 +0000 KubeletHasSufficientPID     kubelet has sufficient PID available
         Ready          True     Mon, 01 Apr 2019 14:30:33 +0000 KubeletReady                kubelet is posting ready status. AppArmor enabled
-
+```
 
 ### Node troubleshooting
 
+```console
     $ kubectl describe node worker-2
     Conditions:
         Type           Status    LastHeartbeatTime               Reason                   Message
@@ -248,13 +275,14 @@
         DiskPressure   Unknown   Mon, 01 Apr 2019 14:20:20 +0000 NodeStatusUnknown        Kubelet stopped posting node status.
         PIDPressure    False     Mon, 01 Apr 2019 14:20:20 +0000 KubeletHasSufficientPID  kubelet has sufficient PID available
         Ready          Unknown   Mon, 01 Apr 2019 14:20:20 +0000 NodeStatusUnknown        Kubelet stopped posting node status.  
-
+```
 
 ### Node troubleshooting
 
 - Vérifier les certificats
 
-    $ openssl x509 -in /var/lib/kubelet/worker-1.crt -text
+```console
+   $ openssl x509 -in /var/lib/kubelet/worker-1.crt -text
     Certificate:
         Data:
             Version: 3 (0x2)
@@ -273,3 +301,4 @@
                 00:b4:28:0c:60:71:41:06:14:46:d9:97:58:2d:fe:
                 a9:c7:6d:51:cd:1c:98:b9:5e:e6:e4:02:d3:e3:71:
                 ...
+```
