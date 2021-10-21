@@ -1,6 +1,6 @@
-# KUBERNETES : logging and monitoring
+# KUBERNETES : logging et monitoring
 
-### Cluster monitoring
+### Monitoring du cluster
 
 - Le monitoring est nécessaire pour connaitre l'utilisation des ressources du cluster (CPU, RAM, Stockage, etc)
 - Kubernetes n'intègre pas nativement de solution de monitoring
@@ -8,14 +8,14 @@
 - Et des solutions propriétaires: Datadog, Dynatrace
 
 
-### Cluster monitoring
+### Monitoring du cluster
 
 - Il est recommandé d'avoir un server de métrique sur chaque cluster
 - Les métriques sont récupérés, stockés et peuvent être consultés suivant la solution de monitoring utilisée.
 - Un composant du Kubelet appelé cAdvisor récupère les métriques des pods sur chaque noeud
 
 
-### Cluster monitoring
+### Monitoring du cluster
 
 - Les performances des pods et des noeuds peuvent être affichées avec la commande `kubectl top pods`et `kubectl top nodes`
 

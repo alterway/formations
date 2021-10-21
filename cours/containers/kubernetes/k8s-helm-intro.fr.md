@@ -1,6 +1,6 @@
 # KUBERNETES : Introduction à Helm
  
-### kubernetes : Helm CNCF graduation status
+### kubernetes : Helm admission à la CNCF
 
 - Le 30 avril 2020, Helm était le 10e projet à être *diplômé* (graduate) au sein de la CNCF
 
@@ -28,7 +28,7 @@ A voir :
 - Cela permet d'installer par ex. 10 instances de MongoDB
   (avec des versions et configurations potentiellement différentes)  
 
-### Kubernetes : Helm concepts
+### Kubernetes : Conceptes de Helm 
 
 - `helm` est un outil CLI
 
@@ -44,7 +44,7 @@ A voir :
 - Les charts peuvent être stockés sur des référentiels privés ou publics
 
 
-### Kubernetes : Helm Chart Structure
+### Kubernetes : Structure d'un Helm Chart 
 
 - Structure par défaut d'un chart
 
@@ -171,6 +171,7 @@ Vérifions quels référentiels nous avons et ajoutons le référentiel `stable`
 - Les valeurs ont des valeurs par défaut
 
 - Chaque **Chart** peut de définir ses propres valeurs et leurs valeurs par défaut
+
 
 ### Kubernetes : Helm - Voir les différentes valeurs
 

@@ -188,7 +188,7 @@ Volumes:
 helm repo add openebs https://openebs.github.io/charts
 helm repo update
 kubectl create namespace openebs-system
-helm install openebs openebs/openebs --namespace openebs-system
+helm install openebs openebs/openebs --namespace openebs-system --set jiva.enabled=true
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
@@ -207,7 +207,7 @@ The OpenEBS has been installed. Check its status by running:
 2. Par défaut, OpenEBS crée plusieurs storageclasses, que nous pouvons voir de la façon suivante :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-kubectl describe storageclass openebs-jiva-default
+kubectl describe storageclass openebs-jiva-csi-default
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 

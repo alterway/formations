@@ -20,6 +20,7 @@
       "k8s/kustomize",
       "k8s/logging",
       "k8s/upgrade",
+      "k8s/etcd",
       "k8s/lab-final",
       "k8s/lab-final-cheat"
     ]
@@ -69,6 +70,7 @@
       "k8s/kustomize",
       "k8s/logging",
       "k8s/upgrade",
+      "k8s/etcd",
       "k8s/lab-final",
       "k8s/lab-final-cheat"
     ]

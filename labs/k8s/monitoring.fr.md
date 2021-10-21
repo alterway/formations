@@ -86,7 +86,7 @@ subjects:
   name: metrics-server
   namespace: kube-system
 ---
-apiVersion: apiregistration.k8s.io/v1beta1
+apiVersion: apiregistration.k8s.io/v1
 kind: APIService
 metadata:
   name: v1beta1.metrics.k8s.io
@@ -208,8 +208,8 @@ kubectl apply -f metrics-server.yaml
 clusterrole.rbac.authorization.k8s.io/system:aggregated-metrics-reader created
 clusterrolebinding.rbac.authorization.k8s.io/metrics-server:system:auth-delegator created
 rolebinding.rbac.authorization.k8s.io/metrics-server-auth-reader created
-Warning: apiregistration.k8s.io/v1beta1 APIService is deprecated in v1.19+, unavailable in v1.22+; use apiregistration.k8s.io/v1 APIService
-apiservice.apiregistration.k8s.io/v1beta1.metrics.k8s.io created
+Warning: apiregistration.k8s.io/v1 APIService is deprecated in v1.19+, unavailable in v1.22+; use apiregistration.k8s.io/v1 APIService
+apiservice.apiregistration.k8s.io/v1.metrics.k8s.io created
 serviceaccount/metrics-server created
 deployment.apps/metrics-server created
 service/metrics-server created

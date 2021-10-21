@@ -1,6 +1,6 @@
 # KUBERNETES : Troubleshouting
 
-### Pods troubleshooting
+### Troubleshooting des Pods 
 
 - Vérifier l'état des pods 
 
@@ -17,7 +17,7 @@
     si l'état de votre pod n'est pas "Running", vous devrez suivre quelques étapes de débogage
 
 
-### Pods troubleshooting
+### Troubleshooting des Pods 
   
 - L'état de votre pod est en "CrashLoopBackOff"   
 
@@ -36,7 +36,7 @@
     Normal   Pulling    32s (x5 over 2m17s)  kubelet, gke-certif-test-default-pool-27dfc050-9bww  Pulling image "mysql"
 ```
 
-### Pods troubleshooting
+### Troubleshooting des Pods 
 
     Vous pouvez connaître la raison de l'échec en vérifiant les logs des conteneurs de votre pod
 
@@ -49,7 +49,7 @@
         You need to specify one of MYSQL_ROOT_PASSWORD, MYSQL_ALLOW_EMPTY_PASSWORD and MYSQL_RANDOM_ROOT_PASSWORD
 ```
 
-### Pods troubleshooting
+### Troubleshooting des Pods 
 
 - L'état de votre pod est en "ImagePullBackOff" 
 
@@ -69,7 +69,7 @@
     Warning  Failed          15s (x4 over 104s)  kubelet, gke-certif-test-default-pool-27dfc050-9bww  Error: ErrImagePull
 ```
 
-### Pods troubleshooting
+### Troubleshooting des Pods 
 
 - L'état de votre pod est en "Pending" 
 
@@ -85,7 +85,7 @@
     Warning  FailedScheduling   20s                default-scheduler   0/6 nodes are available: 6 Insufficient cpu.
 ```
 
-### Pods troubleshooting
+### Troubleshooting des Pods 
 
 - L'état de votre pod est en "waiting" 
 
@@ -96,7 +96,7 @@
          - Exécutez un docker pull <image> manuel sur votre machine pour voir si l'image peut être extraite.
 
 
-### Pods troubleshooting
+### Troubleshooting des Pods 
 
 - Commandes utiles
 
@@ -108,7 +108,7 @@
     $ kubectl exec -it pod-name -- bash
 ```
 
-### Service troubleshooting
+### Troubleshooting des Services 
 
 ```console
    $ kubectl get services 
@@ -134,7 +134,7 @@
 ```
 
 
-### Service troubleshooting
+### Troubleshooting des Services
 
     au cas où les endpoints du service sont manquants, vérifiez le sélecteur du service
 
@@ -160,7 +160,7 @@
     Vérifiez que le containerPort du pod correspond au targetPort du service
 
 
-### Control Plane troubleshooting
+### Troubleshooting du Control Plane 
 
 - Vérifier l'état des composants du Controlplane  
 
@@ -181,7 +181,7 @@
     master-1   Ready    master   8d   v1.21.0
 ```
 
-### Control Plane troubleshooting
+### Troubleshooting du Control Plane 
 
 - Vérifier les pods du Controlplane 
 
@@ -200,7 +200,7 @@
     weave-net-jtl5m                2/2      Running  1          1h
 ```
 
-### Control Plane troubleshooting
+### Troubleshooting du Control Plane 
 
 - Vérifier les services du Controlplane
 
@@ -239,7 +239,7 @@
     W0401 13:45:41.381736 1 genericapiserver.go:319] Skipping API scheduling.k8s.io/v1alpha1 because it has no resources.
 ```
 
-### Node troubleshooting
+### Troubleshooting des noeuds
 
 - Vérifier l'état du nœud
 
@@ -263,7 +263,7 @@
         Ready          True     Mon, 01 Apr 2019 14:30:33 +0000 KubeletReady                kubelet is posting ready status. AppArmor enabled
 ```
 
-### Node troubleshooting
+### Troubleshooting des noeuds
 
 ```console
     $ kubectl describe node worker-2
@@ -277,7 +277,7 @@
         Ready          Unknown   Mon, 01 Apr 2019 14:20:20 +0000 NodeStatusUnknown        Kubelet stopped posting node status.  
 ```
 
-### Node troubleshooting
+### Troubleshooting des noeuds
 
 - Vérifier les certificats
 

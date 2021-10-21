@@ -1,18 +1,18 @@
-# KUBERNETES : Clusters maintenance
+# KUBERNETES : Maintenance du Cluster
 
-### OS upgrade
+### Upgrade du OS
 
 - Le retrait d'un noeud du cluster peut survenir suite à une panne ou pour des fins de maintenance comme des opérations de mise à jour, ou d'application de correctifs de sécurité.
 - La commande `kubectl drain` permet de vider un noeud des pods qu'il héberge vers un autre noeud, puis de marquer le noeud "not schedulable". Ainsi au cours de l'opération de maintenance, aucun pod ne peut lui être affecté.
 
 
-### OS upgrade
+### Upgrade du OS
 
 - Avec `kubectl uncordon`, le noeud est remis dans le cluster et peut à nouveau héberger des pods.
 - La commande `kubectl cordon` marque uniquement le noeud "not schedulable" tout en conservant les pods qu'il héberge. Il s'assure simplement que de nouveaux pods ne lui soient pas affectés.
 
 
-### OS upgrade
+### Upgrade du OS
 
 - Il est important de mettre à jour la version de kubernetes afin de bénéficier de nouvelles fonctinnalités. 
 - Ce process s'effectue par la mise à jour des composants du control plane
@@ -21,7 +21,7 @@
 - Un upgrade de Kubeadm met à jour les composants du control plane sauf le kubelet. Il est nécessaire de le mettre à jour séparément pour un passage à niveau complet.
 
 
-### OS upgrade
+### Upgrade du OS
 
 - Voici les étapes à suivre pour une mise à niveau d'un cluster avec Kubeadm: 
 - La commande `kubeadm upgrade plan` fournit les informations sur la version actuelle de kubeadm installée, la version du cluster et la dernière version stable de Kubernetes disponible 
@@ -34,7 +34,7 @@
  kubectl uncordon node1
  ```
 
-### ETCD backup and restore
+### ETCD sauvegarde et restauration
 
 - Il est recommandé de faire des sauvegardes régulières de la base de données ETCD. Une restauration peut être nécessaire après un désastre ou une maintenance.
 - `etcdctl` est un client en ligne de commande du service ETCD
