@@ -9,9 +9,9 @@
 - Prépare le répertoire pour l’utilisation de Terraform
 
 - Elle permets :
-  * D’initialiser les backends 
-  * D’installer les modules
-  * D’installer les plugins
+    - D’initialiser les backends 
+    - D’installer les modules
+    - D’installer les plugins
 
 - **Bonne pratique** : l’exécuter souvent
 

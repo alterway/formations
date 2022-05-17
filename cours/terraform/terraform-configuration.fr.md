@@ -26,7 +26,7 @@ Une **configuration** Terraform est un fichier texte qui contient les définitio
   - provisioner et connection
 
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 
 resource "aws_instance" "web" {
   ami           = "ami-a1b2c3d4"
@@ -60,7 +60,17 @@ resource "aws_instance" "web" {
 - Aller sur la console AWS et vérifier que la ressource est créée 
 
 
+
+### Commentaires
+
+Une ligne : `# or //`
+Multiple ligne : `/* ... */`
+
+
 ### Variables d’entrée (1)
+
+12 factor app:
+  Il doit y avoir une séparation stricte entre la configuration et le code
 
 - Paramètres pour personnaliser le code source
 
@@ -81,6 +91,157 @@ resource "aws_instance" "web" {
   - map/object : {name = "Mabel", age = 52}
   - set
 
+### Variables d’entrée (3)
+
+dans fichier tf :
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+
+variable "rg_name" {
+  type        = string
+  description = "Resource Group Name - Must be unique in a subscription"
+  default     = "a-terraform-training-01"
+}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Command line
+
+```bash
+terraform plan/apply -var rg_name=a-terraform-training-03
+```
+
+Fichier de variables:
+
+- Automatiques
+    - terraform.tfvars
+    - *.auto.tfvars
+ 
+- Fichiers
+```bash
+terraform apply -auto-approve -var-file=file-var.tfvars
+```
+
+- environment variables
+  
+```bash
+TF_VAR_<var-name>="a-value" terraform plan
+eg.TF_VAR_rg_name="a-terraform-training-10" terraform plan
+```bash
+
+### Variables ordre de lecture
+
+1. dans tf file
+2. env var
+3. terraform.tfvars
+4. *.auto.tfvars
+5. cmd line file vars (-var-file)
+6. cmd line file var (-var)
+```
+
+### Variables : string par défaut
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+variable "rg_name" {
+ type        = string
+ description = "Resource Group Name"
+ default     = "a-terraform-training-01"
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+est également équivalent à
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+variable "rg_name" {
+ description = "Resource Group Name"
+ default     = "a-terraform-training-01"
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+### Variables : string heredoc
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+variable "app_description" {
+ type        = string
+ description = "application description"
+ default     = <<EOT
+Welcome !
+Application version is %%app_version
+EOT
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+### Variables : number
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+variable "the_counter" {
+ type        = number
+ description = "# iteration"
+ default     = 4
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+### Variables : bool
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+variable "trueOrFalse" {
+ type        = bool
+ description = "true or false"
+ default     = true
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+### Variables : list
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+variable "eu_locations" {
+ type        = list
+ description = "location list"
+ default     = ["westeurope","northeurope"]
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+### Variables : map
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+variable "hel" {
+ type        = map
+ description = "hel person"
+ default     = {
+   surname = "Hervé"
+   name    = "Leclerc"
+   role    = "CTO"
+  }
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+### Variables : object
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+variable "whoishel" {
+type        = object ({
+  surname = string
+  name    = string
+  kids    = number
+  skills  = list (string)
+  }
+)
+description = "who is hel"
+default     = {
+  surname = "Hervé"
+  name    = "Leclerc"
+  kids    = 3
+  skills  = [
+              "kubernetes",
+              "docker",
+              "terraform"
+            ]
+}
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 ### Variables - Exercice
 
@@ -93,6 +254,63 @@ resource "aws_instance" "web" {
   - l’instance type
   - tag Name
 
+
+### Meta-arguments
+
+- depends_on :
+    - Dépendance Explicite vs Dépendance Implicite
+    - depends_on = [“resource list”]
+    - eg. depends_on = [ "azurerm_network_interface.nic1", "azurerm_managed_disk.dd1" ]
+
+
+- count :
+    - loop  count.index
+
+Utile pour créer une simple condition if then avec count = var.something si quelque-chose = 0 la ressource ne sera pas créée/modifiée
+
+
+- for_each :
+    - loop on a list or map
+chaque instance de for_each a un identifiant unique lors de la création ou de la modification de la configuration
+
+
+- lifecycle :
+    - Sur n'importe quel bloc
+    - 3 arguments :
+        - create_before_destroy (par défaut terraform détruire puis crée)
+        - prevent_destroy (terraform lancera une erreur si une ressource est détruite !! impossible d'utiliser terraform destroy)
+        - ignore_changes (si quelque chose est modifié en externe, terraform ne modifiera pas la ressource)
+
+### Meta-arguments Exemple
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+
+resource "azurerm_resource_group" "rg_1" {
+ name     = var.rg_01
+ location = var.location
+ tags     = var.tags
+ lifecycle  {
+   create_before_destroy = true
+ }
+}
+resource "azurerm_resource_group" "rg_2" {
+ name     = var.rg_02
+ location = var.location
+ tags     = var.tags
+ lifecycle  {
+   prevent_destroy = true
+ }
+}
+resource "azurerm_resource_group" "rg_3" {
+ name     = var.rg_03
+ location = var.location
+ tags     = var.tags
+ lifecycle  {
+   ignore_changes = [ tags,]
+ }
+}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
 ### Outputs
 
@@ -138,7 +356,22 @@ locals {
   resilient = true
 }
 
+locals {
+  # Common tags to be assigned to all resources
+  common_tags = {
+    Service = local.service_name
+    Owner   = local.owner
+  }
+}
+
+locals {
+  # Ids for multiple sets of EC2 instances, merged together
+  instance_ids = concat(aws_instance.blue.*.id, aws_instance.green.*.id)
+}
+
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 
 
 ### Fonctions intégrées (built-in)
@@ -148,15 +381,15 @@ locals {
 - Il n’est pas possible de créer ses propres fonctions
 
 - Familles de fonction 
-  * Numérique 
-  * Chaîne de caractères
-  * Collection
-  * Encodage 
-  * Système de fichier
-  * Date et heure
-  * Hachage et chiffrement 
-  * Réseau
-  * Conversion de types 
+    -  Numérique 
+    -  Chaîne de caractères
+    -  Collection
+    -  Encodage 
+    -  Système de fichier
+    -  Date et heure
+    -  Hachage et chiffrement 
+    -  Réseau
+    -  Conversion de types 
   
 ### Dynamic block
 

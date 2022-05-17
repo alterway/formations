@@ -15,14 +15,14 @@
 ### Qu’est-ce qu’un backend ?
 
 - Un backend sert à définir :
-  * Où les opérations sont effectuées 
-  * Où les fichiers d’état sont stockés
+    -  Où les opérations sont effectuées 
+    -  Où les fichiers d’état sont stockés
 
 - Une opération est une requête API pour créer, lire, mettre à jour ou supprimer une ressource
 
 - Deux types de backends 
-  * Local 
-  * Distant
+    -  Local 
+    -  Distant
 
 ### Backend local
 
@@ -43,10 +43,10 @@
 - Facilite le travail en équipe
 
 - Exemples de backend distants :
-  * Etcd
-  * Consul
-  * HTTP
-  * S3
+    -  Etcd
+    -  Consul
+    -  HTTP
+    -  S3
 
 ### State locking (Verrouillage d’état)
 
