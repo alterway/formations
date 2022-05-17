@@ -1,4 +1,4 @@
-# Formation Terraform - Introduction
+# Introduction
 
 ### Qu’est-ce que l’Infrastructure as code (IaC) ?
 
@@ -52,6 +52,10 @@
 - Terraform peut faire du `dry-run` (**plan** vs **apply**)
 - Terraform peut gérer tout type de resources qui a une api
   
+
+### Impératif vs Déclaratif
+
+![](images/terraform/declaratif-imperatif.png){height="600px"}
 
 ### Installer Terraform CLI
 

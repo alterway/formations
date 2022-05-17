@@ -354,7 +354,7 @@ resource "azurerm_resource_group" "rg_3" {
 - Permet d’éviter la répétition 
 
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 
 locals {
   service_name  = "redis"
@@ -402,7 +402,6 @@ locals {
 
 - Fonctionne comme une boucle `for`
 
-
 ### Graphe des ressources
 
 - Graphe des dépendances
@@ -413,7 +412,7 @@ locals {
 
 - Utilisé par Terraform pour : gérer les dépendances entre les ressources, la gestion du fichier d’état…
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 
 terrafomrm graph
 
@@ -421,8 +420,6 @@ terraform graph | dot -Tsvg > graph.svg
 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
 
 ### Modules
 

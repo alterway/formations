@@ -1,4 +1,4 @@
-# Formation Terraform - Les états et les backends
+# Les états et les backends
 
 ### Qu’est-ce que le fichier d’état ?
 

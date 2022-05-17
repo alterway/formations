@@ -1,4 +1,4 @@
-# Formation Terraform - Architecture et Concepts
+# Architecture et Concepts
 
 ### Terraform Core
 

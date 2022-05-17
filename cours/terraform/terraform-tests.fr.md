@@ -1,6 +1,6 @@
 
 
-# Terraform - Tests
+# Terraform Tests
 
 ### tfsec
 
