@@ -55,7 +55,7 @@
 
 ### Impératif vs Déclaratif
 
-![](images/terraform/declaratif-imperatif.png){height="600px"}
+![](images/terraform/declaratif-imperatif.png){height="620px"}
 
 ### Installer Terraform CLI
 
