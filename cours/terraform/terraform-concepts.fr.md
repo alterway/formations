@@ -16,7 +16,7 @@
 
 - Binaire Go invoqué par Terraform Core
 
-- Communication avec les API des fournisseurs de services 
+- Communication avec les API des fournisseurs de services  (ex: AWS, GCP, Azure, Docker, K8s, etc.)
 
 - Possibilité d’en utiliser plusieurs
 

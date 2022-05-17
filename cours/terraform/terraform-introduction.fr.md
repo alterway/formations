@@ -41,6 +41,18 @@
 - Gère tout type de ressources : stockage, réseau, entrées DNS, Vms, PaaS...
 
 
+### Quelques faits 
+
+- (2022) ~2098 providers (35 Officiels, 206 Vérifiés, 1857 Communautaires )
+- Terraform utilise un DSL spécifique : `HCL` (HashiCorp Configuration Language)
+- Terraform est outils orienté plugin
+- Terraform a un support natif pour les `modules`et les `remote states`
+- Terraform fournit une abstraction dehaut niveau de l'infrastructure au travers des `resources`
+- Terraform peut géré du **IAAS**, **PAAS**, **SAAS**
+- Terraform peut faire du `dry-run` (**plan** vs **apply**)
+- Terraform peut gérer tout type de resources qui a une api
+  
+
 ### Installer Terraform CLI
 
 - Ouvrir le lien https://learn.hashicorp.com/tutorials/terraform/install-cli 

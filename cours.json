@@ -182,7 +182,8 @@
       "terraform/terraform-workflow",
       "terraform/terraform-state-backend",
       "terraform/terraform-commandes-base",
-      "terraform/terraform-configuration"
+      "terraform/terraform-configuration",
+      "terraform/terraform-provisioners"
     ]
   }
 }
