@@ -22,9 +22,9 @@
 ### Cycle de vie de  l’Infrastructure
 
 - T0 :
-  - Configuration & Initialisation
+    - Configuration & Initialisation
 - T1 :
-  - Application de configuration Post Initialisation
+    - Application de configuration Post Initialisation
 
 ### Terraform Késaco ?
 
@@ -43,7 +43,7 @@
 
 ### Quelques faits 
 
-- (2022) ~2098 providers (35 Officiels, 206 Vérifiés, 1857 Communautaires )
+- En 2022 :  ~2098 providers (35 Officiels, 206 Vérifiés, 1857 Communautaires )
 - Terraform utilise un DSL spécifique : `HCL` (HashiCorp Configuration Language)
 - Terraform est outils orienté plugin
 - Terraform a un support natif pour les `modules`et les `remote states`

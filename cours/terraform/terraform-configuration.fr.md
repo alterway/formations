@@ -18,13 +18,15 @@ Une **configuration** Terraform est un fichier texte qui contient les définitio
 - Chaque ressource décrit un ou plusieurs éléments d’infrastructure
 
 - Plusieurs méta-arguments
-  - count
-  - depends_on
-  - for_each
-  - provider
-  - lifecycle
-  - provisioner et connection
+    - count
+    - depends_on
+    - for_each
+    - provider
+    - lifecycle
+    - provisioner et connection
 
+
+### Resources :Exemple
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 
@@ -63,8 +65,10 @@ resource "aws_instance" "web" {
 
 ### Commentaires
 
-Une ligne : `# or //`
-Multiple ligne : `/* ... */`
+Une ligne : `# or //` 
+
+
+Multiple ligne : `/* ... */` 
 
 
 ### Variables d’entrée (1)
@@ -75,8 +79,8 @@ Multiple ligne : `/* ... */`
 - Paramètres pour personnaliser le code source
 
 - Définition des valeurs à l’aide :
-  - Des options CLI
-  - Des variables d’environnement
+    - Des options CLI
+    - Des variables d’environnement
 
 - Possibilité de définir des règles de validation personnalisées 
 
@@ -84,12 +88,12 @@ Multiple ligne : `/* ... */`
 ### Variables d’entrée (2)
 
 - Types :
-  - string
-  - number
-  - bool
-  - list/tuple : ["us-west-1a", "us-west-1c"]
-  - map/object : {name = "Mabel", age = 52}
-  - set
+    - string
+    - number
+    - bool
+    - list/tuple : ["us-west-1a", "us-west-1c"]
+    - map/object : {name = "Mabel", age = 52}
+    - set
 
 ### Variables d’entrée (3)
 
@@ -110,6 +114,7 @@ Command line
 ```bash
 terraform plan/apply -var rg_name=a-terraform-training-03
 ```
+### Variables d’entrée (4)
 
 Fichier de variables:
 
@@ -118,6 +123,7 @@ Fichier de variables:
     - *.auto.tfvars
  
 - Fichiers
+  
 ```bash
 terraform apply -auto-approve -var-file=file-var.tfvars
 ```
@@ -127,7 +133,7 @@ terraform apply -auto-approve -var-file=file-var.tfvars
 ```bash
 TF_VAR_<var-name>="a-value" terraform plan
 eg.TF_VAR_rg_name="a-terraform-training-10" terraform plan
-```bash
+```
 
 ### Variables ordre de lecture
 
@@ -137,7 +143,6 @@ eg.TF_VAR_rg_name="a-terraform-training-10" terraform plan
 4. *.auto.tfvars
 5. cmd line file vars (-var-file)
 6. cmd line file var (-var)
-```
 
 ### Variables : string par défaut
 
@@ -250,9 +255,9 @@ default     = {
 - Créer le fichier formation.tfvars
 
 - Variabiliser :
-  - la région
-  - l’instance type
-  - tag Name
+    - la région
+    - l’instance type
+    - tag Name
 
 
 ### Meta-arguments

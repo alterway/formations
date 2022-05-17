@@ -183,7 +183,10 @@
       "terraform/terraform-state-backend",
       "terraform/terraform-commandes-base",
       "terraform/terraform-configuration",
-      "terraform/terraform-provisioners"
+      "terraform/terraform-provisioners",
+      "terraform/terraform-autres-commandes",
+      "terraform/terraform-modules",
+      "terraform/terraform-tests"
     ]
   }
 }
