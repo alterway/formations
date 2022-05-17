@@ -170,6 +170,16 @@
       "aws/networking",
       "aws/conclusion"
     ]
+  },
+  "terraform": {
+    "course_name": "Terraform",
+    "course_description": "Formation Terraform",
+    "modules": [
+      "intro-awcc",
+      "terraform/terraform-introduction",
+      "terraform/terraform-concepts",
+      "terraform/terraform-init-projet"
+    ]
   }
 }
 
