@@ -178,7 +178,11 @@
       "intro-awcc",
       "terraform/terraform-introduction",
       "terraform/terraform-concepts",
-      "terraform/terraform-init-projet"
+      "terraform/terraform-init-projet",
+      "terraform/terraform-workflow",
+      "terraform/terraform-state-backend",
+      "terraform/terraform-commandes-base",
+      "terraform/terraform-configuration"
     ]
   }
 }
