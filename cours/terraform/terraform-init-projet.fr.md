@@ -5,8 +5,10 @@
 ### Initialiser le projet Terraform
 
 - Créer le fichier providers.tf
-  
-```hcl
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.hcl .numberLines}
 terraform {
   required_version = ">=1.0.1"
   
@@ -31,5 +33,5 @@ provider "aws" {
     iam = "http://192.168.64.11:31566"
   }
 }
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
