@@ -17,7 +17,7 @@
 
 ### Monitoring du cluster
 
-- Les performances des pods et des noeuds peuvent être affichées avec la commande `kubectl top pods`et `kubectl top nodes`
+- Les performances des pods et des noeuds peuvent être affichées avec la commande `kubectl top pods` et `kubectl top nodes`
 
 ```console
 $ kubectl top nodes
@@ -58,3 +58,5 @@ info: serving app on http://0.0.0.0:3333
 [bugsnag] Bugsnag.start() was called more than once. Ignoring.
 [bugsnag] Bugsnag.start() was called more than once. Ignoring.
 ```
+
+
