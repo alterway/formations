@@ -9,9 +9,9 @@
 - Prépare le répertoire pour l’utilisation de Terraform
 
 - Elle permets :
-  - D’initialiser les backends 
-  - D’installer les modules
-  - D’installer les plugins
+  * D’initialiser les backends 
+  * D’installer les modules
+  * D’installer les plugins
 
 - **Bonne pratique** : l’exécuter souvent
 
@@ -37,4 +37,17 @@
 terraform init
 # Voir les fichiers / répertoires créés dans le répertoire courant
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+```bash
+
+.terraform
+└── providers
+    └── registry.terraform.io
+        └── hashicorp
+            └── aws
+                └── 4.14.0
+                    └── darwin_amd64
+                        └── terraform-provider-aws_v4.14.0_x5
+
+```
 

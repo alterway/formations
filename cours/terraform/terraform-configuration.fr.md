@@ -148,15 +148,15 @@ locals {
 - Il n’est pas possible de créer ses propres fonctions
 
 - Familles de fonction 
-  - Numérique 
-  - Chaîne de caractères
-  - Collection
-  - Encodage 
-  - Système de fichier
-  - Date et heure
-  - Hachage et chiffrement 
-  - Réseau
-  - Conversion de types 
+  * Numérique 
+  * Chaîne de caractères
+  * Collection
+  * Encodage 
+  * Système de fichier
+  * Date et heure
+  * Hachage et chiffrement 
+  * Réseau
+  * Conversion de types 
   
 ### Dynamic block
 
