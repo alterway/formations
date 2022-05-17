@@ -214,7 +214,7 @@
     Tasks: 13 (limit: 2362)
 ````
 
-    répétez le même process pour les autres services tels que:  kube-controller-manager, kube-scheduler, kubelet,  kube-proxy 
+    Répétez le même process pour les autres services tels que:  kube-controller-manager, kube-scheduler, kubelet,  kube-proxy 
 
 
 ### Control Plane troubleshooting
@@ -223,6 +223,7 @@
 
 ```console
     $ kubectl logs kube-apiserver-master -n kube-system
+
     I0401 13:45:38.190735 1 server.go:703] external host was not specified, using 172.17.0.117
     I0401 13:45:38.194290 1 server.go:145] Version: v1.11.3
     I0401 13:45:38.819705 1 plugins.go:158] Loaded 8 mutating admission controller(s) successfully in the following order:
@@ -279,7 +280,8 @@
 
 ### Troubleshooting des noeuds
 
-- Vérifier les certificats
+- Vérifier les certificats :
+  
 
 ```console
    $ openssl x509 -in /var/lib/kubelet/worker-1.crt -text

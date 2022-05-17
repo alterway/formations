@@ -17,10 +17,9 @@ Auteurs :
 * Romain Guichard
 * Kevin Lefevre
 * Jean-François Taltavull
-  
-* Anita Meliho <anita.meliho@alterway.fr>
+* Anita Meliho
+* Arnaud Meukam
 * Mohamed Reda Larbi Youcef <mohamed-reda.larbi-youcef@alterway.fr>
-* Arnaud Meukam <arnaud.meukam@alterway.fr>
 * Hervé Leclerc <herve.leclerc@alterway.fr>
 * David Guglielmi <david.guglielmi@alterway.fr>
 
