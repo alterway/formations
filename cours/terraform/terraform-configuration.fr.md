@@ -256,7 +256,7 @@ eg.TF_VAR_rg_name="a-terraform-training-10" terraform plan
 5. cmd line file vars (-var-file)
 6. cmd line file var (-var)
 
-### Variables : string par défaut
+### Variables : `string` par défaut
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 variable "rg_name" {
@@ -275,7 +275,7 @@ variable "rg_name" {
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-### Variables : string heredoc
+### Variables : `string` `heredoc`
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 variable "app_description" {
@@ -289,7 +289,7 @@ EOT
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-### Variables : number
+### Variables : `number`
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 variable "the_counter" {
@@ -300,7 +300,7 @@ variable "the_counter" {
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-### Variables : bool
+### Variables : `bool`
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 variable "trueOrFalse" {
@@ -310,7 +310,7 @@ variable "trueOrFalse" {
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-### Variables : list
+### Variables : `list`
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 variable "eu_locations" {
@@ -320,7 +320,7 @@ variable "eu_locations" {
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-### Variables : map
+### Variables : `map`
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 variable "hel" {
@@ -334,7 +334,7 @@ variable "hel" {
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-### Variables : object
+### Variables : `object`
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 variable "whoishel" {

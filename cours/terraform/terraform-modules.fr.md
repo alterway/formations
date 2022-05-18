@@ -52,13 +52,13 @@ module "rancher" {
 ![](images/terraform/non-merci-trop-occupes.png){height="250px"}
 
 
-- (https://github.com/terraform-aws-modules)
+- [https://github.com/terraform-aws-modules](https://github.com/terraform-aws-modules)
   
-- (https://github.com/terraform-azurerm-modules)
+- [https://github.com/terraform-azurerm-modules](https://github.com/terraform-azurerm-modules)
   
-- (https://github.com/google-terraform-modules)
+- [https://github.com/google-terraform-modules](https://github.com/google-terraform-modules)
   
-- (https://github.com/terraform-alicloud-modules)
+- [https://github.com/terraform-alicloud-modules](https://github.com/terraform-alicloud-modules)
     
 
 ### Modules - Exercice
