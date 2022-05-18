@@ -26,7 +26,7 @@
 
 - Exécute les commandes et les scripts
 
-- Listes des différents providers disponibles https://registry.terraform.io/browse/providers  
+- Listes des différents providers disponibles : [ https://registry.terraform.io/browse/providers](https://registry.terraform.io/browse/providers) 
 
 
 ### Terraform Core & Terraform plugins

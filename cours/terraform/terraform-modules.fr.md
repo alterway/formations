@@ -27,6 +27,40 @@
     - Terraform Enterprise private module registries 
     - URLs HTTP
 
+
+
+### Modules invocation
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+module "service_foo" {
+  source = "/modules/microservice"
+  image_id = "ami-12345"
+  num_instances = 3
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+
+module "rancher" {
+    source = "https://github.com/objectpartners/tf-modules//rancher/server-standalone-elb-db&ref=9b2e590"
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+### Sources
+
+![](images/terraform/non-merci-trop-occupes.png)
+
+
+- (https://github.com/terraform-aws-modules)
+  
+- (https://github.com/terraform-azurerm-modules)
+  
+- (https://github.com/google-terraform-modules)
+  
+- (https://github.com/terraform-alicloud-modules)
+    
+
 ### Modules - Exercice
 
 - Créer un dossier modules/ec2
@@ -36,3 +70,4 @@
 - Transférer la configuration du fichier main.tf dans le module
 
 - Appeler ce nouveau module créé dans main.tf
+

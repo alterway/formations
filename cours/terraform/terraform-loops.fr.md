@@ -279,9 +279,177 @@ output "security_groups" {
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-### For In Loop Basics
+### For In Loop Basics (1)
 
 
+Pour faire de la manipulation de données
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+# List to List
+locals {
+  list = ["a","b","c"]
+}
+output "list" {
+  value = [for s in local.list : upper(s)]
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+# Map to list
+locals {
+  list = {a = 1, b = 2, c = 3}
+}
+output "result1" {
+  value = [for k,v in local.list : "${k}-${v}" ]
+}
+output "result2" {
+  value = [for k in local.list : k ]
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+### For In Loop Basics (2)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+# List to Map
+locals {
+  list = ["a","b","c"]
+}
+output "result" {
+  value = {for i in local.list : i => i }
+}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+# Map to Map
+locals {
+  list = {a = 1, b = 2, c = 3}
+}
+output "result" {
+  value = {for k,v in local.list : k => v }
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+### For In Loop Basics (3)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+# Filtrer une liste de nombre
+
+locals {
+  list = [1,2,3,4,5]
+}
+output "list" {
+  value = [for i in local.list : i if i < 3]
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+# Filtrer une Map non consistente
+
+locals {
+  list = [
+    {a = 1, b = 5},
+    {a = 2},
+    {a = 3},
+    {a = 4, b = 8},
+  ]
+}
+output "list" {
+  value = [for m in local.list : m if contains(keys(m), "b") ]
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+### For In Loop Basics (4)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+variable "hero_thousand_faces" {
+  description = "map"
+  type        = map(string)
+  default     = {
+    neo      = "hero"
+    trinity  = "love interest"
+    morpheus = "mentor"
+  }
+}
+output "bios" {
+  value = [for name, role in var.hero_thousand_faces : "${name} is the ${role}"]
+}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+locals {
+  minions = [{
+    name: "bob"
+  },{
+    name: "kevin",
+  },{
+    name: "stuart"
+  }]
+}
+output "minions" {
+  value = local.minions[*].name
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+### For In Loop Basics (5)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+# Filter Map Elements
+locals {
+  list = [
+    {a = 1, b = 5},
+    {a = 2, b = 6},
+    {a = 3, b = 7},
+    {a = 4, b = 8},
+  ]
+}
+output "list" {
+  value = [for m in local.list : values(m) if m.b > 6 ]
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+locals {
+  list = [
+    "mr bob",
+    "mr kevin",
+    "mr stuart",
+    "ms anna",
+    "ms april",
+    "ms mia",
+  ]
+}
+output "list" {
+  value = {for s in local.list : substr(s, 0, 2) => s...}
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+### Lookups, Keys, Contains
+
+lookup récupère la valeur d'un seul élément d'une Map, en fonction de sa clé. Si la clé donnée n'existe pas, la valeur par défaut donnée est renvoyée à la place.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+locals {
+  list = [{a = 1}, {b = 2}, {a = 3}]
+}
+output "list" {
+  value = [for m in local.list : m if lookup(m, "a", null) != null ]
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+locals {
+  list = [{a = 1}, {b = 2}, {a = 3}]
+}
+output "list" {
+  value = [for m in local.list2 : m if contains(keys(m), "a") ]
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
