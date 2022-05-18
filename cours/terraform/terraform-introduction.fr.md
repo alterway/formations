@@ -50,7 +50,7 @@
 - En 2022 :  ~2098 providers (35 Officiels, 206 Vérifiés, 1857 Communautaires )
 - Terraform utilise un DSL spécifique : `HCL` (HashiCorp Configuration Language)
 - Terraform est outils orienté plugin
-- Terraform a un support natif pour les `modules`et les `remote states`
+- Terraform a un support natif pour les `modules` et les `remote states`
 - Terraform fournit une abstraction dehaut niveau de l'infrastructure au travers des `resources`
 - Terraform peut géré du **IAAS**, **PAAS**, **SAAS**
 - Terraform peut faire du `dry-run` (`plan` vs `apply`)
@@ -59,7 +59,7 @@
 
 ### Impératif vs Déclaratif
 
-![](images/terraform/declaratif-imperatif.png){height="620px"}
+![](images/terraform/declaratif-imperatif.png){height="580px"}
 
 ### Installer Terraform CLI
 

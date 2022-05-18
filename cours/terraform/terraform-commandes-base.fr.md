@@ -2,13 +2,13 @@
 
 # Les commandes de base
 
-### terraform init
+### terraform `init`
 
 - À exécuter avant toute autre commande ou après l’ajout de nouvelles ressources
 
 - Prépare le répertoire pour l’utilisation de Terraform
 
-- Elle permets :
+- Elle permet :
     - D’initialiser les backends 
     - D’installer les modules
     - D’installer les plugins

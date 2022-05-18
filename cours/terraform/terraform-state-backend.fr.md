@@ -4,12 +4,43 @@
 
 
 - Utilisé par Terraform pour y stocker l’état de l’infrastructure et de la configuration qu’il gère
-
 - Stocké par défaut dans un fichier local `terraform.tfstate`
-
 - Pour être stocké à distance
-
 - Utile pour créer des plans et apporter des modifications à l’infrastructure
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+{
+  "version": 4,
+  "terraform_version": "1.1.9",
+  "serial": 56,
+  "lineage": "0b723a72-0399-a30e-7933-514a923eed6f",
+  "outputs": {},
+  "resources": [
+    {
+      "mode": "managed",
+      "type": "aws_dynamodb_table",
+      "name": "main",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": []
+    },
+    {
+      "mode": "managed",
+      "type": "aws_iam_instance_profile",
+      "name": "ec2_profile",
+      "provider": "provider[\"registry.terraform.io/hashicorp/aws\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "arn": "arn:aws:iam::000000000000:instance-profile/ec2_profile",
+            "create_date": "2022-05-17T17:14:27Z",
+            "id": "ec2_profile",
+            "name": "ec2_profile",
+            "name_prefix": null,
+            "path": "/",
+...
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 
 ### Qu’est-ce qu’un backend ?
