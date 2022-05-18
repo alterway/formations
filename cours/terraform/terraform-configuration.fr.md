@@ -524,7 +524,7 @@ locals {
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 
-terrafomrm graph
+terraform graph
 
 terraform graph | dot -Tsvg > graph.svg
 

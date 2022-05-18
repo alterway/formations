@@ -32,7 +32,7 @@
 
 
 
-- Outil d’IaC **open** **source** publié par [HashiCorp*](https://www.hashicorp.com/products/terraform)
+- Outil d’IaC **open** **source** publié par [HashiCorp](https://www.hashicorp.com/products/terraform)
 
 - Utilisé pour gérer les infrastructures grâce à la **configuration** **déclarative**
 

@@ -49,7 +49,7 @@ module "rancher" {
 
 ### Sources
 
-![](images/terraform/non-merci-trop-occupes.png)
+![](images/terraform/non-merci-trop-occupes.png){height="150px"}
 
 
 - (https://github.com/terraform-aws-modules)

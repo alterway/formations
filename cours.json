@@ -188,7 +188,8 @@
       "terraform/terraform-provisioners",
       "terraform/terraform-autres-commandes",
       "terraform/terraform-modules",
-      "terraform/terraform-tests"
+      "terraform/terraform-tests",
+      "terraform/conclusion"
     ]
   }
 }
