@@ -2,7 +2,7 @@
 
 # Autres Commandes utiles
 
-### terraform validate
+### terraform `validate`
 
 - Validation statique de la configuration
 
@@ -26,7 +26,7 @@
 - Décommenter la ligne précédemment commentée 
 
 
-### terraform fmt
+### terraform `fmt`
 
 
 - Formate les fichiers de configuration
@@ -37,7 +37,7 @@
 **Objectif** : améliorer la lisibilité 
 
 
-### terraform import
+### terraform `import`
 
 - Sert à importer des ressources existantes dans l’état Terraform
 
@@ -74,7 +74,7 @@
 - Supprimer la dernière ligne ajoute au fichier .env
 
 
-### terraform workspace
+### terraform `workspace`
 
 - Les données stockées dans un backend appartiennent à un workspace
 
@@ -83,7 +83,7 @@
 - Possibilité d’avoir plusieurs backends 
 
 
-### terraform state
+### terraform `state`
 
 - Commande utilisée pour gérer l’état Terraform
 
@@ -99,12 +99,12 @@ Exécuter les commandes suivantes :
 `terraform state show aws_instance.web`
 
 
-### terraform show
+### terraform `show`
 
 - Affiche l’état de manière lisible pour un humain
 
 
-### terraform destroy
+### terraform `destroy`
 
 - Détruit toutes les ressources gérées par Terraform
 

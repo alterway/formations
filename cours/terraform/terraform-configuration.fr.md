@@ -535,7 +535,15 @@ terraform graph | dot -Tsvg > graph.svg
 
 Un module est un "conteneur" pour plusieurs ressources qui sont utilisées ensemble
 
+Un chapitre est entièrement consacré aux un modules
+
 
 ### Interpolation
 
 Une syntaxe terraform spécifique pour référencer les attributs ou les arguments d'autres ressources (ou de soi-même)
+
+Une séquence `${ ... }` est une interpolation, qui évalue l'expression donnée entre les marqueurs, convertit le résultat en une chaîne si nécessaire, puis l'insère dans la chaîne finale :
+
+```bash
+"Hello, ${var.name}!"
+```
