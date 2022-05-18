@@ -26,15 +26,19 @@
 - T1 :
     - Application de configuration Post Initialisation
 
-### Terraform Késaco ?
+### Terraform
 
-- Outil d’IaC **open** **source** publié par **HashiCorp**
+![](images/terraform/terraform_logo.svg.png){height="123px"}
+
+
+
+- Outil d’IaC **open** **source** publié par [HashiCorp*](https://www.hashicorp.com/products/terraform)
 
 - Utilisé pour gérer les infrastructures grâce à la **configuration** **déclarative**
 
 - Cloud agnostic (Amazon, Google, Azure, ...) (Via des providers)
 
-- Utilise le langage **HCL**
+- Utilise le langage [HCL](https://www.terraform.io/language)
 
 - Permet de bénéficier des avantages de l’IaC
 
@@ -49,7 +53,7 @@
 - Terraform a un support natif pour les `modules`et les `remote states`
 - Terraform fournit une abstraction dehaut niveau de l'infrastructure au travers des `resources`
 - Terraform peut géré du **IAAS**, **PAAS**, **SAAS**
-- Terraform peut faire du `dry-run` (**plan** vs **apply**)
+- Terraform peut faire du `dry-run` (`plan` vs `apply`)
 - Terraform peut gérer tout type de resources qui a une api
   
 
@@ -59,7 +63,7 @@
 
 ### Installer Terraform CLI
 
-- Ouvrir le lien https://learn.hashicorp.com/tutorials/terraform/install-cli 
+- Ouvrir le lien [https://learn.hashicorp.com/tutorials/terraform/install-cli](https://learn.hashicorp.com/tutorials/terraform/install-cli)
 
 - Suivre les instructions pour installer Terraform CLI selon le système d’exploitation
 

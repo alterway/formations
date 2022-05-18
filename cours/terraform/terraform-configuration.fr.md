@@ -38,11 +38,102 @@ resource "aws_instance" "web" {
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-### Data Sources
+### Data Sources (1)
 
 - Permettent à Terraform d’utiliser des informations qu’il n’a pas définies
 
 - Chaque provider Terraform peut offrir ses propres data sources
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+variable "vpc_id" {}
+
+data "aws_vpc" "selected" {
+  id = var.vpc_id
+}
+
+resource "aws_subnet" "example" {
+  vpc_id            = data.aws_vpc.selected.id
+  availability_zone = "us-west-2a"
+  cidr_block        = cidrsubnet(data.aws_vpc.selected.cidr_block, 4, 1)
+}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+
+data "github_repository_pull_requests" "pull_requests" {
+  base_repository = "example-repository"
+  base_ref        = "main"
+  state           = "open"
+}
+
+module “preview-environment” {
+  for_each        = data.github_repository_pull_requests.pull_requests.results
+  name            = each.value.title
+  commit_sha      = each.value.head_sha
+  // ...
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+### Data Sources : Filtrer les data sources avec filter (1)
+
+Les filtres permettent de faire le tri et de récupérer les informations nécessaires, utiles pour les données externes.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+
+data "aws_ami" "example" {
+  executable_users = ["self"]
+  most_recent      = true
+  name_regex       = "^myami-\\d{3}"
+  owners           = ["self"]
+
+  filter {
+    name   = "name"
+    values = ["myami-*"]
+  }
+
+  filter {
+    name   = "root-device-type"
+    values = ["ebs"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+### Data Sources : Filtrer les data sources avec filter (2)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+
+data "aws_ami" "ubuntu" {
+  most_recent = true
+  owners      = ["099720109477"] # Canonical
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  filter {
+    name   = "architecture"
+    values = ["x86_64"]
+  }
+
+  filter {
+    name   = "image-type"
+    values = ["machine"]
+  }
+
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*"]
+  }
+}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 ### Créer une configuration - Exercice
@@ -68,8 +159,29 @@ resource "aws_instance" "web" {
 Une ligne : `# or //` 
 
 
-Multiple ligne : `/* ... */` 
+Multiple ligne : `/* ... */`
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+
+/*
+ This module creates a new AWS instance.
+ If a VPC ID is not specified, a default VPC will be created.
+...
+*/
+
+locals {
+  # Common tags to be assigned to all resources
+  common_tags = {
+    Service = local.service_name
+    Owner   = local.owner
+  }
+}
+resource "aws_instance" "example" {
+  # ...
+
+  tags = local.common_tags
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ### Variables d’entrée (1)
 
@@ -226,15 +338,15 @@ variable "hel" {
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 variable "whoishel" {
-type        = object ({
-  surname = string
-  name    = string
-  kids    = number
-  skills  = list (string)
+  type        = object ({
+    surname = string
+    name    = string
+    kids    = number
+    skills  = list (string)
   }
-)
-description = "who is hel"
-default     = {
+ )
+ description = "who is hel"
+ default     = {
   surname = "Hervé"
   name    = "Leclerc"
   kids    = 3
@@ -243,7 +355,7 @@ default     = {
               "docker",
               "terraform"
             ]
-}
+  }
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -262,24 +374,24 @@ default     = {
 
 ### Meta-arguments
 
-- depends_on :
+- `depends_on` :
     - Dépendance Explicite vs Dépendance Implicite
     - depends_on = [“resource list”]
     - eg. depends_on = [ "azurerm_network_interface.nic1", "azurerm_managed_disk.dd1" ]
 
 
-- count :
+- `count` :
     - loop  count.index
 
 Utile pour créer une simple condition if then avec count = var.something si quelque-chose = 0 la ressource ne sera pas créée/modifiée
 
 
-- for_each :
+- `for_each` :
     - loop on a list or map
 chaque instance de for_each a un identifiant unique lors de la création ou de la modification de la configuration
 
 
-- lifecycle :
+- `lifecycle` :
     - Sur n'importe quel bloc
     - 3 arguments :
         - create_before_destroy (par défaut terraform détruire puis crée)
@@ -375,8 +487,6 @@ locals {
 }
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
 
 
 ### Fonctions intégrées (built-in)
