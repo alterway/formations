@@ -78,10 +78,9 @@ terraform.rc
 
 ### Plus de bonnes pratiques
 
-![](images/terraform/best-practices.jpeg){height="400x"}
+![](images/terraform/best-practices.jpeg){height="250x"}
 
 [https://git.alterway.fr/dt/terraform/best-practices](https://git.alterway.fr/dt/terraform/best-practices)
-
 
 
 ### Modules invocation
