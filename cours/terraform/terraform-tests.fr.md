@@ -63,7 +63,8 @@
 
 ### Terraform compliance (1)
 
-![](images/terraform/compliance3.png){height="500px"}
+![](images/terraform/compliance3.png)
+
 ### Terraform compliance (2)
 
 ![](images/terraform/compliance1.png){height="500px"}
@@ -71,3 +72,4 @@
 ### Terraform compliance (3)
 
 ![](images/terraform/compliance2.png){height="500px"}
+

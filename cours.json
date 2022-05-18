@@ -190,7 +190,7 @@
       "terraform/terraform-modules",
       "terraform/terraform-best-practices",
       "terraform/terraform-tests",
-      "terraform/conclusion"
+      "terraform/terraform-conclusion"
     ]
   }
 }
