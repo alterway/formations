@@ -29,8 +29,12 @@
 
 - Intègre 400 polices qui suivent les bonnes pratiques de sécurité et de conformité 
 
-- https://github.com/bridgecrewio/checkov 
+- [https://github.com/bridgecrewio/checkov ](https://github.com/bridgecrewio/checkov)
 
+
+### checkov
+
+![](images/terraform/checkov.png){height="500px"}
 
 ### terratest
 
@@ -56,3 +60,14 @@
 
 - Behavior Driven Development (BDD)
 
+
+### Terraform compliance (1)
+
+![](images/terraform/compliance3.png){height="500px"}
+### Terraform compliance (2)
+
+![](images/terraform/compliance1.png){height="500px"}
+
+### Terraform compliance (3)
+
+![](images/terraform/compliance2.png){height="500px"}

@@ -78,7 +78,7 @@ terraform.rc
 
 ### Plus de bonnes pratiques
 
-![](images/terraform/best-practices.jpeg){height="250x"}
+![](images/terraform/best-practices.jpeg){height="300px"}
 
 [https://git.alterway.fr/dt/terraform/best-practices](https://git.alterway.fr/dt/terraform/best-practices)
 
@@ -106,13 +106,13 @@ module "rancher" {
 ![](images/terraform/non-merci-trop-occupes.png){height="200px"}
 
 
-- (https://github.com/terraform-aws-modules)
+- [https://github.com/terraform-aws-modules](https://github.com/terraform-aws-modules)
   
-- (https://github.com/terraform-azurerm-modules)
+- [https://github.com/terraform-azurerm-modules](https://github.com/terraform-azurerm-modules)
   
-- (https://github.com/google-terraform-modules)
+- [https://github.com/google-terraform-modules](https://github.com/google-terraform-modules)
   
-- (https://github.com/terraform-alicloud-modules)
+- [https://github.com/terraform-alicloud-modules](https://github.com/terraform-alicloud-modules)
     
 
 ### Modules - Exercice

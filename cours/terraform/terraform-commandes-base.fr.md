@@ -16,7 +16,7 @@
 - **Bonne pratique** : l’exécuter souvent
 
 
-### terraform plan
+### terraform `plan`
 
 - Génère un plan d’exécution
 
@@ -27,7 +27,7 @@
 - Affiche les changements qui vont intervenir
 
 
-### terraform apply
+### terraform `apply`
 
 - Exécute les changements proposés par le plan 
 
@@ -50,4 +50,9 @@ terraform init
                         └── terraform-provider-aws_v4.14.0_x5
 
 ```
+
+### terraform `destroy`
+
+- Supprime les ressources définies dans le plan
+
 

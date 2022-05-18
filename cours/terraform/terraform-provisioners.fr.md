@@ -49,7 +49,6 @@ resource "aws_instance" "web" {
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
--
 ### file provisioner
 
 - Le provisioner file est utilisé pour copier des fichiers ou des répertoires de la machine exécutant Terraform vers la ressource nouvellement créée.
