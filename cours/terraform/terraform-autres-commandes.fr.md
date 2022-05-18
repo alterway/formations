@@ -65,13 +65,13 @@
 
 - Dans formation.tfvars, modifier la valeur de l’instance_type
 
-- Dans le fichier .env, ajouter :  export TF_LOG_PROVIDER=TRACE et lancer un terraform plan
+- Dans le fichier .env, ajouter :  `export TF_LOG_PROVIDER=TRACE` et lancer un terraform plan
 
-- Répéter l’opération en modifiant la valeur de TF_LOG_PROVIDER à DEBUG, INFO, WARN et ERROR
+- Répéter l’opération en modifiant la valeur de `TF_LOG_PROVIDER` à `DEBUG`, `INFO`, `WARN` et `ERROR`
 
 - Remettre la valeur de l’instance_type dans le fichier formation.tfvars
 
-- Supprimer la dernière ligne ajoute au fichier .env
+- Supprimer la dernière ligne ajoute au fichier `.env`
 
 
 ### terraform `workspace`
