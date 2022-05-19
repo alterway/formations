@@ -489,7 +489,7 @@ locals {
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-### Fonctions intégrées (built-in)
+### Fonctions intégrées (built-in) (1)
 
 - Terraform inclut un nombre de fonctions intégrées
 
@@ -505,6 +505,36 @@ locals {
     -  Hachage et chiffrement 
     -  Réseau
     -  Conversion de types 
+
+
+### Fonctions intégrées (built-in) (2) : Quelques exemples
+
+- numeric
+    - abs, ceil, floor, log, max, min, parseint, pow, signum
+- string
+    - chomp, format, formatlist, indent, join, lower, regex, regexall, replace
+    - split, strrev, substr, title, trim, trimprefix, trimsuffix, trimspace, upper
+- collection
+    - chunklist, coalesce, coalescelist, compact, concat, contains, distinct, element, flatten
+    - index, keys, length, list, lookup, map, matchkeys, merge, range reverse, setintersection
+    - setproduct, setsubtract, setunion, slice, sort, sum, transpose, values, zipmap
+- encoding
+    - base64decode, base64encode, base64gzip, csvdecode, jsondecode, jsonencode
+    - urlencode, yamldecode, yamlencode
+- filesystem
+    - abspath, dirname, pathexpand, basename, file, fileexists, fileset, filebase64, templatefile
+- date and time
+    - formatdate, timeadd, timestamp
+- hash and crypto
+    - base64sha256,base64sha512, bcrypt, filebase64sha256, filebase64sha512, filemd5, filesha1, filesha256
+    - filesha512, md5, rsadecrypt, sha1, sha256, sha512, uuid, uuidv5
+- ip network
+    - cidrhost, cidrnetmask, cidrsubnet, cidrsubnets
+
+- type conversion
+    - can, tobool, tolist, tomap, tonumber, toset, tostring, try
+
+
   
 ### Dynamic block
 
@@ -547,3 +577,4 @@ Une séquence `${ ... }` est une interpolation, qui évalue l'expression donnée
 ```bash
 "Hello, ${var.name}!"
 ```
+
