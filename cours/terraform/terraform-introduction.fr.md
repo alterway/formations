@@ -79,12 +79,12 @@
 
 ### Procedural vs Déclaratif
 
-| Procedural | Déclaratif     |
-|------------|----------------|
-| Chef       | Salstack       |
-| Ansible    | Terraform      |
-|            | CloudFormation |
-| Pulumi     | Pulumi         |
+| Procedural |       | Déclaratif     |
+|------------|-------|----------------|
+| Chef       |       | Salstack       |
+| Ansible    |       | Terraform      |
+| Pulumi     |       | CloudFormation |
+|            |       | Pulumi         |
 
 
 

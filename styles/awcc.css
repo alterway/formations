@@ -226,6 +226,9 @@ section.titleslide h1 {
 .reveal table th {
   font-weight: bold; }
 
+  .reveal table th {
+    background: #7a7fa0; }
+
 .reveal table th,
 .reveal table td {
   text-align: left;
