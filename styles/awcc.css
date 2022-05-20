@@ -217,9 +217,11 @@ section.titleslide h1 {
   background: #b9b6b6;}
 
 .reveal table {
+  border: 1px solid #cbcbcb;
   margin: auto;
   border-collapse: collapse;
   border-spacing: 0; }
+  
 
 .reveal table th {
   font-weight: bold; }
@@ -227,8 +229,9 @@ section.titleslide h1 {
 .reveal table th,
 .reveal table td {
   text-align: left;
+  border-top: 1px solid #cbcbcb;
   padding: 0.2em 0.5em 0.2em 0.5em;
-  border-bottom: 1px solid; }
+  border-bottom: 1px solid #cbcbcb; }
 
 .reveal table th[align="center"],
 .reveal table td[align="center"] {
@@ -240,6 +243,10 @@ section.titleslide h1 {
 
 .reveal table tr:last-child td {
   border-bottom: none; }
+
+.reveal table tr:nth-child(even){
+  background: #dedede;
+}
 
 .reveal sup {
   vertical-align: super; }
