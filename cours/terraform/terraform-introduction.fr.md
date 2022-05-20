@@ -89,6 +89,7 @@
 
 
 Pulumi : Interface imperative avec un moteur declaratif
+Terraform : Idem via CDKTF
 
 ### Impératif vs Déclaratif
 
