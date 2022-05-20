@@ -32,6 +32,7 @@
 ### Modules invocation
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+# Path based
 module "service_foo" {
   source = "/modules/microservice"
   image_id = "ami-12345"
@@ -41,9 +42,18 @@ module "service_foo" {
 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+# Terraform registry
+module "consul" {
+  source = "hashicorp/consul/aws"
+  version = "0.1.0"
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+# Public / private module registry
 module "rancher" {
-    source = "https://github.com/objectpartners/tf-modules//rancher/server-standalone-elb-db&ref=9b2e590"
+    source = "https://github.com/objectpartners/tf-modules/rancher/server-standalone-elb-db&ref=9b2e590"
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

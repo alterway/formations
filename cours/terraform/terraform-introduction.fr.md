@@ -88,7 +88,8 @@
 
 
 
-Pulumi : Interface imperative avec un moteur déclaratif
+Pulumi : Interface imperative avec un moteur déclaratif 
+
 Terraform : Idem via CDKTF : Interface imperative avec un moteur déclaratif
 
 ### Impératif vs Déclaratif
