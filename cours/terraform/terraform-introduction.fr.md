@@ -8,6 +8,25 @@
 
 - **Objectif** : automatiser la gestion de l’infrastructure
 
+
+### Quelques outils permettant de faire du IaC
+
+- Chef 
+    
+- Puppet 
+   
+- Ansible 
+   
+- SaltStack 
+   
+- CloudFormation 
+   
+- Terraform 
+  
+- Pulumi
+
+
+
 ### Avantages principaux de l’IaC
 
 - Versionning 
@@ -19,7 +38,7 @@
 - Prédictibilité
 - Intégration aux outils de CI/CD
 
-### Cycle de vie de  l’Infrastructure
+### Cycle de vie de l’Infrastructure
 
 - T0 :
     - Configuration & Initialisation
@@ -56,6 +75,20 @@
 - Terraform peut faire du `dry-run` (`plan` vs `apply`)
 - Terraform peut gérer tout type de resources qui a une api
   
+
+
+### Procedural vs Déclaratif
+
+| Procedural | Déclaratif     |
+|------------|----------------|
+| Chef       | Salstack       |
+| Ansible    | Terraform      |
+|            | CloudFormation |
+| Pulumi     | Pulumi         |
+
+
+
+Pulumi : Interface imperative avec un moteur declaratif
 
 ### Impératif vs Déclaratif
 
