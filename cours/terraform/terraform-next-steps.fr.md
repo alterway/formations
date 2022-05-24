@@ -66,3 +66,17 @@ app.synth()
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
+### Importer des ressources dans Terraform
+
+
+1. terraform import [https://www.terraform.io/cli/import](https://www.terraform.io/cli/import)
+2. terraformer: multi providers [https://github.com/GoogleCloudPlatform/terraformer](https://github.com/GoogleCloudPlatform/terraformer)
+3. aztfy: spécialisé Azure [https://github.com/Azure/aztfy](https://github.com/Azure/aztfy)
+
+
+Exemples:  
+
+- `terraformer import azure -R awh-terraform-import-labs -o export  --resources="*"`
+  
+- `aztfy -o terraform awh-terraform-import-labs`
+
