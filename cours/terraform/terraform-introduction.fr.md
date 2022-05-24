@@ -26,6 +26,10 @@
 - Pulumi
 
 
+### Timeline des Iac par rapport au techno cloud
+
+
+![](images/terraform/aic-actors.png){height="580px"}
 
 ### Avantages principaux de l’IaC
 
@@ -40,10 +44,16 @@
 
 ### Cycle de vie de l’Infrastructure
 
-- T0 :
-    - Configuration & Initialisation
-- T1 :
-    - Application de configuration Post Initialisation
+- T0 : Phase de Setup 
+      - Provisionner l’infrastructure
+      - Configurer l'infrastructure
+      - Installation initiale des logiciels
+      - Configuration initiale des logiciels
+- T1 : Phase de maintenance Post Initialisation
+      - Ajustement de l'infrastructure
+      - Suppression ou ajout de composants
+      - Mise à jour des logiciels
+      - Reconfiguration des logiciels
 
 ### Terraform
 
@@ -66,14 +76,21 @@
 
 ### Quelques faits 
 
-- En 2022 :  ~2098 providers (35 Officiels, 206 Vérifiés, 1857 Communautaires )
-- Terraform utilise un DSL spécifique : `HCL` (HashiCorp Configuration Language)
-- Terraform est outils orienté plugin
-- Terraform a un support natif pour les `modules` et les `remote states`
-- Terraform fournit une abstraction dehaut niveau de l'infrastructure au travers des `resources`
-- Terraform peut géré du **IAAS**, **PAAS**, **SAAS**
-- Terraform peut faire du `dry-run` (`plan` vs `apply`)
-- Terraform peut gérer tout type de resources qui a une api
+- En 2022 :  ~2098 providers (35 Officiels, 206 Vérifiés, 1857 Communautaires ) 
+    
+- Terraform utilise un DSL spécifique : `HCL` (HashiCorp Configuration Language) 
+   
+- Terraform est outils orienté plugin 
+   
+- Terraform a un support natif pour les `modules` et les `remote states` 
+   
+- Terraform fournit une abstraction dehaut niveau de l'infrastructure au travers des `resources` 
+  
+- Terraform peut géré du **IAAS**, **PAAS**, **SAAS** 
+  
+- Terraform peut faire du `dry-run` (`plan` vs `apply`) 
+  
+- Terraform peut gérer tout type de resources qui a une api 
   
 
 
