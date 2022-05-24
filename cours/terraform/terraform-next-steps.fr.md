@@ -12,7 +12,7 @@ Cela donne accès à l'ensemble de l'écosystème Terraform sans apprendre le la
 Support actuel : TypeScript, Python, Java, C#, and Go (experimentale).
 
 
-![]([cdktf](images/terraform/cdktf.png)){height="300px"}
+![](images/terraform/cdktf.png){height="300px"}
 
 
 Pour démarrer : [https://learn.hashicorp.com/tutorials/terraform/cdktf-install?in=terraform/cdktf](https://learn.hashicorp.com/tutorials/terraform/cdktf-install?in=terraform/cdktf)
