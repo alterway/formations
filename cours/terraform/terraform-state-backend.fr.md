@@ -63,7 +63,8 @@
 
 - Le fichier d’état est stocké dans un fichier texte dans le répertoire courant 
 
-- **À proscrire en production**
+
+🔴 **À proscrire en production**
 
 ### Backend distant (1)
 
@@ -118,7 +119,7 @@ terraform {
 
 - Possibilité de désactiver le verrouillage (**non recommandé**) 
 
-- Tous les backends ne prennent pas en compte le verrouillage du fichier d’état
+🔴 Tous les backends ne prennent pas en compte le verrouillage du fichier d’état
 
 
 ### Gestion des secrets dans le fichier d’état

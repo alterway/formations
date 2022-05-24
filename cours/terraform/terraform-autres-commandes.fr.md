@@ -12,7 +12,7 @@
 
 - Bonne pratique : exécuter cette commande automatiquement dans les systèmes de CI/CD
 
-- Ne peut être exécutée sans initialisation
+🔴 Ne peut être exécutée sans initialisation
 
 
 ### terraform validate - Exercice
@@ -34,7 +34,7 @@
 - Applique certaines conventions de style Terraform https://www.terraform.io/docs/language/syntax/style.html 
 
 
-**Objectif** : améliorer la lisibilité 
+🟢  **Objectif** : Améliorer la lisibilité 
 
 
 ### terraform `import`
@@ -42,6 +42,8 @@
 - Sert à importer des ressources existantes dans l’état Terraform
 
 - Après l’import, Terraform peut les manager
+
+🟠 Il faut saisir tous les paramètres nécessaires pour la ressource. Tester avec un `terraform plan` jusquà obtenir un plan qui ne contient pas de changement.
 
 
 ### Verbosité des logs

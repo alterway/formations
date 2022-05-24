@@ -13,7 +13,7 @@
     - D’installer les modules
     - D’installer les plugins
 
-- **Bonne pratique** : l’exécuter souvent
+🟢 **Bonne pratique** : l’exécuter souvent
 
 
 ### terraform `plan`

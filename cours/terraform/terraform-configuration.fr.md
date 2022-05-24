@@ -4,7 +4,9 @@
 
 ### Qu'est-ce que c'est ?
 
-Une **configuration** Terraform est un fichier texte qui contient les définitions des **ressources** d'infrastructure. Il est possible d'écrire des configurations Terraform au format HCL (avec l'extension .tf) ou au format JSON (avec l'extension .tf.json).
+Une **configuration** Terraform est un fichier texte qui contient les définitions des **ressources** d'infrastructure.  
+
+Il est possible d'écrire des configurations Terraform au format `HCL` (avec l'extension .tf) ou au format `JSON` (avec l'extension .tf.json).
 
 ### resources
 
@@ -133,6 +135,19 @@ data "aws_ami" "ubuntu" {
   }
 }
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+### Data Sources : Filtrer les data sources avec filter (3)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+
+data "aws_ec2_transit_gateway" "tgw" {
+  filter {
+    name   = "tag:Name"
+    values = ["wahlnetwork-tgw-prod"]
+  }
+}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -382,9 +397,11 @@ variable "whoishel" {
 
 - `count` :
     - loop  count.index
+    - Utile pour créer une simple condition if then avec count = var.something si quelque-chose = 0 la ressource ne sera pas créée/modifiée
 
-Utile pour créer une simple condition if then avec count = var.something si quelque-chose = 0 la ressource ne sera pas créée/modifiée
-
+- `provider`
+    - Spécifie le fournisseur à utiliser pour une ressource. 
+    - Ceci est utile lorsque on utilise plusieurs fournisseurs, ce qui est généralement utilisé lorsque on crée des ressources multirégionales. Pour différencier ces fournisseurs, vous utilisez un champ d'alias.
 
 - `for_each` :
     - loop on a list or map
@@ -394,11 +411,11 @@ chaque instance de for_each a un identifiant unique lors de la création ou de l
 - `lifecycle` :
     - Sur n'importe quel bloc
     - 3 arguments :
-        - create_before_destroy (par défaut terraform détruire puis crée)
-        - prevent_destroy (terraform lancera une erreur si une ressource est détruite !! impossible d'utiliser terraform destroy)
-        - ignore_changes (si quelque chose est modifié en externe, terraform ne modifiera pas la ressource)
+        - `create_before_destroy` (par défaut terraform détruire puis crée)
+        - `prevent_destroy` (terraform lancera une erreur si une ressource est détruite !! impossible d'utiliser terraform destroy)
+        - `ignore_changes` (si quelque chose est modifié en externe, terraform ne modifiera pas la ressource)
 
-### Meta-arguments Exemple
+### Meta-arguments Exemple (1)
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 
@@ -428,6 +445,31 @@ resource "azurerm_resource_group" "rg_3" {
 }
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+
+### Meta-arguments Exemple (2)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+
+## Default Provider
+provider "google" {
+  region = "us-central1"
+}
+
+## Another Provider
+provider "google" {
+  alias  = "europe"
+  region = "europe-west1"
+}
+
+## Referencing the other provider
+resource "google_compute_instance" "example" {
+  provider = google.europe
+}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+
 
 ### Outputs
 

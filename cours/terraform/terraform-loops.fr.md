@@ -2,10 +2,10 @@
 
 # Les Loops
 
-### Loops avec Count et For Each
+### Loops avec `count` et `for_each`
 
 
-### 1
+### count (1) 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 
 resource "null_resource" "simple" {
@@ -18,7 +18,7 @@ output "simple" {
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-### 2
+### count (2)
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 
@@ -35,10 +35,31 @@ output "names" {
   value = null_resource.names
 }
 
-
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-### 3 
+
+### count (3)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+
+variable "user_names" {
+ description = "Matrix name"
+ type        = list(string)
+ default     = ["neo", "trinity", "morpheus"]
+}
+
+resource "null_resource" "for" {
+ # Changes to any instance of the cluster requires re-provisioning
+ triggers = {always_run = "${timestamp()}"}
+ count = length(var.user_names)
+ provisioner "local-exec" {
+   command = "echo SON NOM EST = ${var.user_names[count.index]}"
+ }
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+### for_each (1)
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 locals {
@@ -61,6 +82,62 @@ output "heights" {
 }
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+### for_each (2)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+
+variable "car" {
+ description = "Cars name"
+ type        = list(string)
+ default     = ["bmw", "mercedes", "maserati"]
+}
+
+resource "null_resource" "each" {
+ # Changes to any instance of the cluster requires re-provisioning
+ triggers = {always_run = "${timestamp()}"}
+ for_each = toset(var.car)
+ provisioner "local-exec" {
+   command = "echo LA VOITURE EST = ${each.value}"
+ }
+}
+
+output "all_cars" {
+ value = null_resource.each
+}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+### for_each (3)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+ariable "names" {
+ description = "A list of names"
+ type        = list(string)
+ default     = ["neo", "trinity", "morpheus"]
+}
+output "upper_names" {
+ value = [for name in var.names : upper(name)]
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+variable "hero_thousand_faces" {
+ description = "map"
+ type        = map(string)
+ default     = {
+   neo      = "hero"
+   trinity  = "love interest"
+   morpheus = "mentor"
+ }
+}
+output "bios" {
+ value = [for name, role in var.hero_thousand_faces : "${name} is the ${role}"]
+}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 
 ### Loops avec Blocs Dynamiques (1)

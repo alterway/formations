@@ -1,6 +1,6 @@
 
 
-# Les Conditons
+# Les Conditions
 
 ### Exemples ternaires
 

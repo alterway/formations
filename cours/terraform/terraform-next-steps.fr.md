@@ -12,7 +12,7 @@ Cela donne accès à l'ensemble de l'écosystème Terraform sans apprendre le la
 Support actuel : TypeScript, Python, Java, C#, and Go (experimentale).
 
 
-![]([images/terraform/tfsec.png](https://mktg-content-api-hashicorp.vercel.app/api/assets?product=terraform-cdk&version=v0.10.4&asset=website%2Fdocs%2Fcdktf%2Fterraform-platform.png)){height="300px"}
+![]([cdktf](images/terraform/cdktf.png)){height="300px"}
 
 
 Pour démarrer : [https://learn.hashicorp.com/tutorials/terraform/cdktf-install?in=terraform/cdktf](https://learn.hashicorp.com/tutorials/terraform/cdktf-install?in=terraform/cdktf)
@@ -76,7 +76,13 @@ app.synth()
 
 Exemples:  
 
-- `terraformer import azure -R awh-terraform-import-labs -o export  --resources="*"`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+# terraformer
+terraformer import azure -R awh-terraform-import-labs -o export  --resources="*"
   
-- `aztfy -o terraform awh-terraform-import-labs`
+
+# aztfy
+aztfy -o terraform awh-terraform-import-labs
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
 
