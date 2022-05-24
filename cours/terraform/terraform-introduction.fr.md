@@ -6,7 +6,7 @@
 
 - Appliquer les bonnes pratiques du développement dans la gestion de l’infrastructure (tests, revues de code…)
 
-- **Objectif** : automatiser la gestion de l’infrastructure
+🟢 **Objectif** : automatiser la gestion de l’infrastructure
 
 
 ### Quelques outils permettant de faire du IaC
@@ -26,10 +26,10 @@
 - Pulumi
 
 
-### Timeline des Iac par rapport au techno cloud
+### Timeline des différents outils de IaC par rapport aux technos cloud
 
 
-![](images/terraform/aic-actors.png){height="580px"}
+![](images/terraform/iac-actors.png){height="580px"}
 
 ### Avantages principaux de l’IaC
 
