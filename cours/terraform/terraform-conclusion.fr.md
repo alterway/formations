@@ -9,3 +9,5 @@
 
 <h1>A vous de Jouer !</h1>
 
+
+![](images/terraform/terra.jpeg){height="150px"}
