@@ -523,6 +523,15 @@ output "instance_ip_addr" {
 
 ### Valeurs locales 
 
+Quelle est la différence entre les **variables** et les **locals** dans Terraform
+
+Variable : si vous souhaitez transmettre une valeur à Terraform depuis l'extérieur, utilisez des **variables**.
+
+Variables locales : Elles sont internes au fichier Terraform. on ne peut pas les passer depuis l'extérieur.
+
+
+Que peut on faire avec variables locales ?
+
 - Assigne un nom à une expression 
 
 - Réutilisable dans la configuration
