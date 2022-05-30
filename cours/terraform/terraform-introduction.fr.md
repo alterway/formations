@@ -96,7 +96,7 @@
 ### Outils de Programmation Procedural versus Déclaratifs
 
 - Déclaratif
-    - J'énnonce ce **que** je veux obtenir
+    - J'énonce ce **que** je veux obtenir
   
 - Procédural
     - J'énonce **comment** faire pour obtenir ce que je veux

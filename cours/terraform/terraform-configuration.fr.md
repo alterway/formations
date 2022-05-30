@@ -611,7 +611,6 @@ resource "aws_s3_bucket" "default" {
 ### Dynamic block
 
 - Utilisé pour construire dynamiquement des blocs imbriqués reproductibles
-
 - Fonctionne comme une boucle `for`
 
 Pour faire des blocs dynamiques il faut :

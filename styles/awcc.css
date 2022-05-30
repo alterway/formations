@@ -27,7 +27,7 @@ body {
 
 .reveal {
   font-family: "Source Sans Pro", sans-serif;
-  font-size: 22px;
+  font-size: 18px;
   font-weight: normal;
   color: #383838; 
 }
@@ -196,7 +196,7 @@ section.titleslide h1 {
   display: block;
   position: relative;
   width: 90%;
-  margin: 20px auto;
+  margin: 15px auto;
   text-align: left;
   font-size: 0.55em;
   font-family: monospace;
