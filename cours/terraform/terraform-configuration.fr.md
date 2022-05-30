@@ -42,9 +42,9 @@ resource "aws_instance" "web" {
 
 ### Data Sources (1)
 
-- Permettent à Terraform d’utiliser des informations qu’il n’a pas définies
+- Permettent à Terraform d’utiliser des informations qu’il n’a pas définit
 
-- Chaque provider Terraform peut offrir ses propres data sources
+- 🤔 Chaque provider Terraform peut offrir ses propres data sources
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 variable "vpc_id" {}
@@ -77,7 +77,9 @@ module “preview-environment” {
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-### Data Sources : Filtrer les data sources avec filter (1)
+### Data Sources : Filtrer les data sources avec `filter` (1)
+
+AWS : 
 
 Les filtres permettent de faire le tri et de récupérer les informations nécessaires, utiles pour les données externes.
 
@@ -106,7 +108,7 @@ data "aws_ami" "example" {
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-### Data Sources : Filtrer les data sources avec filter (2)
+### Data Sources : Filtrer les data sources avec `filter` (2)
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 
@@ -138,7 +140,7 @@ data "aws_ami" "ubuntu" {
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-### Data Sources : Filtrer les data sources avec filter (3)
+### Data Sources : Filtrer les data sources avec `filter` (3)
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 
@@ -165,7 +167,7 @@ data "aws_ec2_transit_gateway" "tgw" {
 
 - Voir le nouveau fichier créé `terraform.tfstate`
 
-- Aller sur la console AWS et vérifier que la ressource est créée 
+- Aller sur la console AWS ou Azure et vérifier que la ressource est créée 
 
 
 
@@ -201,7 +203,7 @@ resource "aws_instance" "example" {
 ### Variables d’entrée (1)
 
 12 factor app:
-  Il doit y avoir une séparation stricte entre la configuration et le code
+  Il doit y avoir une séparation stricte entre la `configuration` et le `code`
 
 - Paramètres pour personnaliser le code source
 
@@ -218,9 +220,9 @@ resource "aws_instance" "example" {
     - string
     - number
     - bool
-    - list/tuple : ["us-west-1a", "us-west-1c"]
+    - list/tuple : ["us-west-1a", "us-west-1c"] , ["c", "b", "b"])
     - map/object : {name = "Mabel", age = 52}
-    - set
+    - set : ["c", "b"]  (Pas de duplication possible de valeurs) (fonction `toset()`)
 
 ### Variables d’entrée (3)
 
@@ -249,23 +251,25 @@ Fichier de variables:
     - terraform.tfvars
     - *.auto.tfvars
  
+
 - Fichiers
   
 ```bash
 terraform apply -auto-approve -var-file=file-var.tfvars
 ```
 
-- environment variables
+- Variables d'environment
   
 ```bash
 TF_VAR_<var-name>="a-value" terraform plan
-eg.TF_VAR_rg_name="a-terraform-training-10" terraform plan
+# eg.
+TF_VAR_rg_name="a-terraform-training-10" terraform plan
 ```
 
 ### Variables ordre de lecture
 
-1. dans tf file
-2. env var
+1. dans le fichier `tf`
+2. Variables d'environnement
 3. terraform.tfvars
 4. *.auto.tfvars
 5. cmd line file vars (-var-file)
@@ -499,7 +503,7 @@ resource "google_compute_instance" "example" {
 - Quelle commande affiche la valeur de l’output 
 
 
-### Valeur locale
+### Valeurs locales 
 
 - Assigne un nom à une expression 
 
@@ -529,6 +533,32 @@ locals {
 }
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+### Valeurs locales exemples
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+
+variable "project_name" {
+  type = string
+}
+variable "environment" {
+  type = string
+}
+locals {
+  name-prefix = "${var.project_name}-${var.environment}"
+}
+resource "aws_s3_bucket" "default" {
+  bucket = "${local.name-prefix}-bucket"
+  acl    = "private"
+
+  tags = {
+    Name = "${local.name-prefix}-bucket"
+  }
+}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 
 ### Fonctions intégrées (built-in) (1)
@@ -584,6 +614,51 @@ locals {
 
 - Fonctionne comme une boucle `for`
 
+Pour faire des blocs dynamiques il faut :
+
+```bash
+Des "Collections"            :  list, map, set
+Des "Iterator" (optionnel)   :  variable temporaire qui représente un élément de la collection
+Un "Content"                 :  Un bloc sur lequel on itère
+```
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+resource "aws_security_group" "example" {
+  name = "example" # can use expressions here
+
+  dynamic "ingress" {
+    for_each = var.service_ports
+    content {
+      from_port = ingress.value
+      to_port   = ingress.value
+      protocol  = "tcp"
+    }
+  }
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+
+resource "aws_security_group" "example" {
+  name = "example" # can use expressions here
+
+  dynamic "ingress" {
+    for_each = var.service_ports
+    iterator = "service_port"
+    content {
+      from_port = service_port.value
+      to_port   = service_port.value
+      protocol  = "tcp"
+    }
+  }
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- (Voir les exemples dans le chapitre `loops`)
+
+
+
 ### Graphe des ressources
 
 - Graphe des dépendances
@@ -603,11 +678,26 @@ terraform graph | dot -Tsvg > graph.svg
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+
+![](images/terraform/graph.png){height="200px"}
+
+
+
 ### Modules
 
 Un module est un "conteneur" pour plusieurs ressources qui sont utilisées ensemble
 
 Un chapitre est entièrement consacré aux un modules
+
+![](images/terraform/terraform-module-structure.webp){height="500px"}
+
+
+Avantanges des modules : 
+
+- Organisation des configurations : facilite la compréhension des configurations
+- Encapsulation : Permet de masquer l'implémentationb interne de l'infrastructure et de se prévenir de changement non voulus 
+- Ré-utilisation : Permet de créer des modules qui sont utilisés dans plusieurs configurations
+- Consistence : Permet de gérer facilement plusieurs environnements (staging, production, dev…)
 
 
 ### Interpolation

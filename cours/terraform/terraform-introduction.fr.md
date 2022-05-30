@@ -93,6 +93,24 @@
 - Terraform peut gérer tout type de resources qui a une api 
   
 
+### Outils de Programmation Procedural versus Déclaratifs
+
+- Déclaratif
+    - J'énnonce ce **que** je veux obtenir
+  
+- Procédural
+    - J'énonce **comment** faire pour obtenir ce que je veux
+
+
+Exemple :
+
+- Déclaratif :
+    - Je veux une fusée avec 3 étages
+
+- Procédural
+    -  1. Mettre en place le premier étage sur le sol
+    -  2. Mettre le deuxième étage sur le premier étage
+    -  3. Mettre le troisième étage sur le deuxième étage
 
 ### Procedural vs Déclaratif
 
@@ -105,9 +123,9 @@
 
 
 
-- Pulumi : Interface imperative avec un moteur déclaratif 
+- Pulumi : Interface impérative avec un moteur déclaratif 
 
-- Terraform : Idem via CDKTF : Interface imperative avec un moteur déclaratif
+- Terraform : Idem via **CDKTF** : Interface impérative avec un moteur déclaratif
 
 ### Impératif vs Déclaratif
 
@@ -123,7 +141,7 @@
 
 ```console 
 terraform version
-Terraform v1.1.9
+Terraform v1.2.1
 on darwin_amd64
 ```
 

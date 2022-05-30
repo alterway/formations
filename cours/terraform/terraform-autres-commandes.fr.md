@@ -37,6 +37,22 @@
 🟢  **Objectif** : Améliorer la lisibilité 
 
 
+Configuration VSCode 
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.json}
+
+"terraform-ls.terraformExecPath": "/usr/local/bin/terraform",
+  "[terraform]": {
+    "editor.defaultFormatter": "hashicorp.terraform",
+    "editor.formatOnSave": true
+  },
+  "terraform-ls.experimentalFeatures": {
+    "validateOnSave": true
+  }
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 ### terraform `import`
 
 - Sert à importer des ressources existantes dans l’état Terraform

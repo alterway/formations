@@ -4,8 +4,14 @@
 
 ### Initialiser le projet Terraform
 
-- Créer le fichier providers.tf
 
+Les fichiers ayant l'extension `.tf` ou `tf.json` sont considérés comme des **fichiers de configuration** et donc traités par Terraform.
+
+- `Terraform` s'execute toujours dans un contexte de `single root module`. 
+- Une configuration complète est donc constituée d'un `root module` et de plusieurs `child modules`. 
+
+
+- Créer le fichier providers.tf :
 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}

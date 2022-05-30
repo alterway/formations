@@ -232,7 +232,7 @@ output "map" {
 
 ### Nested Loops (1)
 
-Tout st dans la structure des données
+Tout est dans la structure des données
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 
