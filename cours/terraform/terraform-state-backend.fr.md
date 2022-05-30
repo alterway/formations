@@ -128,11 +128,12 @@ terraform {
 ### Gestion des secrets dans le fichier d’état
 
 
-- Cas du fichier d’état local :
-    - Données stockées dans des fichiers JSON en texte brut
+- Cas du fichier d’état local : 
+    - Données stockées dans des fichiers JSON en texte brut 
+    
 
 - Cas fichier d’état distant :
-    - L’état n’est conservé en mémoire que lorsqu’il est utilisé par Terraform
-    - Possibilité de chiffrement sur le répertoire distant selon le backend utilisé
+    - L’état n’est conservé en mémoire que lorsqu’il est utilisé par Terraform 
+    - Possibilité de chiffrement sur le répertoire distant selon le backend utilisé 
 
 

@@ -92,6 +92,7 @@ Configuration VSCode
 - Supprimer la dernière ligne ajoute au fichier `.env`
 
 
+
 ### terraform `workspace`
 
 - Les données stockées dans un backend appartiennent à un workspace
@@ -117,10 +118,47 @@ Exécuter les commandes suivantes :
 `terraform state show aws_instance.web`
 
 
+### terraform `taint` `untaint`
+
+La commande `terraform taint` permet de marquer manuellement une ressource comme étant "à problème", ce qui signifie qu'elle sera détruite et recréée lors de la prochaine application de terraform. 
+
+`terraform untaint` permet de supprimer cette condition "à problème" de la ressource.
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+$ terraform state list
+
+azurerm_network_interface.nic
+azurerm_network_security_group.nsg
+azurerm_public_ip.pip
+azurerm_resource_group.demo-rg
+azurerm_subnet.demo-subnet
+azurerm_virtual_machine_extension.ext
+azurerm_virtual_network.demo-vnet
+azurerm_windows_virtual_machine.vm
+
+
+$ terraform taint azurerm_windows_virtual_machine.myvm
+
+Resource instance azurerm_windows_virtual_machine.myvm has been marked as tainted.
+
+ # azurerm_windows_virtual_machine.vm is tainted, so must be replaced
+-/+ resource "azurerm_windows_virtual_machine" "myvm" {
+      ~ computer_name              = "demo-mytestvm" -> (known after apply)
+      - encryption_at_host_enabled = false -> null
+...
+Plan: 2 to add, 0 to change, 2 to destroy.
+
+$ terraform untaint azurerm_windows_virtual_machine.myvm
+
+Resource instance azurerm_windows_virtual_machine.myvm has been successfully untainted.
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 ### terraform `show`
 
 - Affiche l’état de manière lisible pour un humain
-
 
 ### terraform `destroy`
 

@@ -688,7 +688,7 @@ Un module est un "conteneur" pour plusieurs ressources qui sont utilisées ensem
 
 Un chapitre est entièrement consacré aux un modules
 
-![](images/terraform/terraform-module-structure.webp){height="500px"}
+![](images/terraform/terraform-module-structure.webp){height="300px"}
 
 
 Avantanges des modules : 
