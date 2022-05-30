@@ -49,6 +49,8 @@
       - Configurer l'infrastructure
       - Installation initiale des logiciels
       - Configuration initiale des logiciels
+  
+   
 - T1 : Phase de maintenance Post Initialisation
       - Ajustement de l'infrastructure
       - Suppression ou ajout de composants
@@ -86,17 +88,18 @@
    
 - Terraform fournit une abstraction dehaut niveau de l'infrastructure au travers des `resources` 
   
-- Terraform peut géré du **IAAS**, **PAAS**, **SAAS** 
+- Terraform peut gérer du **IAAS**, **PAAS**, **SAAS** 
   
 - Terraform peut faire du `dry-run` (`plan` vs `apply`) 
   
 - Terraform peut gérer tout type de resources qui a une api 
   
 
-### Outils de Programmation Procedural versus Déclaratifs
+### Outils de Programmation Procedurale versus Déclarative
 
 - Déclaratif
     - J'énonce ce **que** je veux obtenir
+  
   
 - Procédural
     - J'énonce **comment** faire pour obtenir ce que je veux

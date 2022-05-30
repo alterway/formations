@@ -75,7 +75,7 @@
 
 
 
-### Terraform tests (All In One) (1)
+### Terraform tests (All In One) 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 image:
@@ -131,13 +131,6 @@ validate:checkov:
   script:
     - checkov -d .
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-### Terraform tests (All In One) (2)
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
-
 validate:tfsec:
   image:
     name: liamg/tfsec
@@ -178,12 +171,6 @@ compliance:terraform:
     - terraform show -json $PLAN > $PLAN.out.json
     - terraform-compliance -f features -p $PLAN.out.json
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-### Terraform tests (All In One) (3)
-
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 apply:
   stage: deploy
   environment:

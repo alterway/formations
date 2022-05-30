@@ -220,9 +220,9 @@ resource "aws_instance" "example" {
     - string
     - number
     - bool
-    - list/tuple : ["us-west-1a", "us-west-1c"] , ["c", "b", "b"])
-    - map/object : {name = "Mabel", age = 52}
-    - set : ["c", "b"]  (Pas de duplication possible de valeurs) (fonction `toset()`)
+    - list/tuple : `["us-west-1a", "us-west-1c"]` -  `["c", "b", "b"]`
+    - map/object : `{name = "Mabel", age = 52}`
+    - set : `["c", "b"]`  (Pas de duplication possible de valeurs) (fonction `toset()`)
 
 ### Variables d’entrée (3)
 
@@ -240,31 +240,34 @@ variable "rg_name" {
 
 Command line
 
-```bash
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 terraform plan/apply -var rg_name=a-terraform-training-03
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
 ### Variables d’entrée (4)
 
 Fichier de variables:
 
 - Automatiques
-    - terraform.tfvars
-    - *.auto.tfvars
+    - `terraform.tfvars`
+    - `*.auto.tfvars`
  
 
 - Fichiers
   
-```bash
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 terraform apply -auto-approve -var-file=file-var.tfvars
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - Variables d'environment
   
-```bash
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 TF_VAR_<var-name>="a-value" terraform plan
 # eg.
 TF_VAR_rg_name="a-terraform-training-10" terraform plan
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ### Variables ordre de lecture
 
@@ -484,6 +487,21 @@ resource "google_compute_instance" "example" {
 - Utile pour afficher certaines valeurs dans la sortie CLI après avoir exécuté terraform apply
 
 - Dans le cas de backend distant, les outputs du module racine sont accessibles par d'autres configurations via une source de données terraform_remote_state
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+## Output variable which will store the arn of instance 
+## and display after terraform apply command.
+output "ec2_arn" {
+  ## Value depends on resource name and type (same as that of main.tf)
+  value = aws_instance.my-machine.arn
+}
+## Output variable which will store instance public IP 
+## and display after terraform apply command 
+output "instance_ip_addr" {
+  value       = aws_instance.my-machine.public_ip
+  description = "The public IP address of the main server instance."
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 ### Outputs - Exercice 
