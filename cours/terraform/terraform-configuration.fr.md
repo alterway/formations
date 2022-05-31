@@ -453,8 +453,8 @@ variable "whoishel" {
     - Ceci est utile lorsque on utilise plusieurs fournisseurs, ce qui est généralement utilisé lorsque on crée des ressources multirégionales. Pour différencier ces fournisseurs, vous utilisez un champ d'alias.
 
 - `for_each` :
-    - loop on a list or map
-chaque instance de for_each a un identifiant unique lors de la création ou de la modification de la configuration
+    - loop sur une liste ou map
+        - chaque instance de for_each a un identifiant unique lors de la création ou de la modification de la configuration
 
 
 - `lifecycle` :
