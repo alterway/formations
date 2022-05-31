@@ -736,3 +736,12 @@ Une séquence `${ ... }` est une interpolation, qui évalue l'expression donnée
 "Hello, ${var.name}!"
 ```
 
+Un peu plus complexe avec des directives `%{if <BOOL>}/%{else}/%{endif}` :
+
+```bash
+
+```bash
+"Hello, %{ if var.name != "" }${var.name}%{ else }unnamed%{ endif }!"
+```
+
+
