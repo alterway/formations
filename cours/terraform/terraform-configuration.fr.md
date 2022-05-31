@@ -278,6 +278,48 @@ TF_VAR_rg_name="a-terraform-training-10" terraform plan
 5. cmd line file vars (-var-file)
 6. cmd line file var (-var)
 
+
+
+### Exemple de fichier de variables en fichier
+
+Simples 
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+number_of_servers = 10
+prefix = "dev"
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Maps, Objects etc
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+# fichier project.auto.tfvars
+project_data = {
+    drupal-test = {
+      harbor_public                  = "false"
+      harbor_vulnerability_scanning  = "true"
+      harbor_enable_content_trust    = "false"
+      gitlab_visibility_level        = "internal"
+      gitlab_namespace_id            = 27
+    },
+}
+
+# Déclaration de la la variable 
+
+variable "project_data" {
+  type = map(object({
+    harbor_public                 = string
+    harbor_vulnerability_scanning = string
+    harbor_enable_content_trust   = string
+    gitlab_visibility_level       = string
+    gitlab_namespace_id           = number
+
+  }))
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
 ### Variables : `string` par défaut
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
