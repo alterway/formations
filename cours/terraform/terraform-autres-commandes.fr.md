@@ -160,10 +160,6 @@ Resource instance azurerm_windows_virtual_machine.myvm has been successfully unt
 
 - Affiche l’état de manière lisible pour un humain
 
-### terraform `destroy`
-
-- Détruit toutes les ressources gérées par Terraform
-
-- Utile surtout pour les environnements éphémères 
+![](images/terraform/terraform-show.png){height="350px"}
 
 

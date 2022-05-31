@@ -64,7 +64,9 @@ terraform init
 
 ### terraform `destroy` (1)
 
-- Supprime les ressources définies dans le plan
+- Supprime les ressources définies dans le plan (gérées par terraform)
+
+- Utile surtout pour les environnements éphémères 
 
 
 ![](images/terraform/terraform-destroy-1.png){height="300px"}
