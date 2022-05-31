@@ -15,6 +15,8 @@
 
 🟢 **Bonne pratique** : l’exécuter souvent
 
+![](images/terraform/terraform-init.png){height="300px"}
+
 
 ### terraform `plan`
 
@@ -26,13 +28,22 @@
 
 - Affiche les changements qui vont intervenir
 
+![](images/terraform/terraform-plan.png){height="300px"}
 
-### terraform `apply`
+
+### terraform `apply` (1)
 
 - Exécute les changements proposés par le plan 
 
+![](images/terraform/terraform-apply-1.png){height="300px"}
 
 
+### terraform `apply` (2)
+
+![](images/terraform/terraform-apply-2.png){height="300px"}
+
+
+### Fichiers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 terraform init
 # Voir les fichiers / répertoires créés dans le répertoire courant
@@ -51,8 +62,17 @@ terraform init
 
 ```
 
-### terraform `destroy`
+### terraform `destroy` (1)
 
 - Supprime les ressources définies dans le plan
+
+
+![](images/terraform/terraform-destroy-1.png){height="300px"}
+
+
+
+### terraform `destroy` (2)
+
+![](images/terraform/terraform-destroy-2.png){height="300px"}
 
 
