@@ -552,7 +552,7 @@ output "instance_ip_addr" {
 
 - Créer l’ouput “public_dns” 
 
-- Exposer la valeur de l’attribut public_dns
+- Exposer la valeur de l’attribut public_dns 
 
 - Exécuter la commande : terraform init
 
