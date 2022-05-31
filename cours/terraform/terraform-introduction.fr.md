@@ -97,7 +97,7 @@
    
 - Terraform a un support natif pour les `modules` et les `remote states` 
    
-- Terraform fournit une abstraction dehaut niveau de l'infrastructure au travers des `resources` 
+- Terraform fournit une abstraction de haut niveau de l'infrastructure au travers des `resources` 
   
 - Terraform peut gérer du **IAAS**, **PAAS**, **SAAS** 
   

@@ -10,7 +10,7 @@
 
 - Gère les **fichiers** **d’état** des ressources (states)
 
-- Construit le **graphe** des ressources
+- Construit le **graphe** des ressources (Dépendances entre les ressources)
 
 ### Terraform Provider
 

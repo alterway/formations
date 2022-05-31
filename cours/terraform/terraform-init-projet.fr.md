@@ -11,7 +11,7 @@ Les fichiers ayant l'extension `.tf` ou `tf.json` sont considérés comme des **
 - Une configuration complète est donc constituée d'un `root module` et de plusieurs `child modules`. 
 
 
-- Créer le fichier `providers.tf` :
+- Fichier `providers.tf` :
 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
