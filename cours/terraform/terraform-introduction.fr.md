@@ -11,20 +11,23 @@
 
 ### Quelques outils permettant de faire du IaC
 
-- Chef 
-    
-- Puppet 
-   
-- Ansible 
-   
-- SaltStack 
-   
-- CloudFormation 
-   
-- Terraform 
-  
-- Pulumi
+- [CFEngine](https://cfengine.com/) (l'ancêtre : 1993)
 
+- [Chef](https://www.chef.io/) 
+    
+- [Puppet](https://puppet.com/) 
+   
+- [Ansible](https://www.ansible.com/) 
+   
+- [SaltStack](https://saltproject.io/) 
+   
+- [CloudFormation](https://aws.amazon.com/cloudformation/) 
+   
+- [Terraform](https://www.terraform.io/) 
+  
+- [Pulumi](https://www.pulumi.com/)
+
+- Sur Windows : [Otter](https://inedo.com/otter)
 
 ### Timeline des différents outils de IaC par rapport aux technos cloud
 
@@ -34,28 +37,36 @@
 ### Avantages principaux de l’IaC
 
 - Versionning 
+   
 - Réutilisabilité
+   
 - Reproductibilité
+  
 - Automatisation
+  
 - Gain de temps
+  
 - Idempotence
+  
 - Prédictibilité
+  
 - Intégration aux outils de CI/CD
+  
 
 ### Cycle de vie de l’Infrastructure
 
 - T0 : Phase de Setup 
-      - Provisionner l’infrastructure
-      - Configurer l'infrastructure
-      - Installation initiale des logiciels
-      - Configuration initiale des logiciels
+      - Provisionner l’infrastructure 
+      - Configurer l'infrastructure 
+      - Installation initiale des logiciels 
+      - Configuration initiale des logiciels 
   
    
-- T1 : Phase de maintenance Post Initialisation
-      - Ajustement de l'infrastructure
-      - Suppression ou ajout de composants
-      - Mise à jour des logiciels
-      - Reconfiguration des logiciels
+- T1 : Phase de maintenance Post Initialisation 
+      - Ajustement de l'infrastructure 
+      - Suppression ou ajout de composants 
+      - Mise à jour des logiciels 
+      - Reconfiguration des logiciels 
 
 ### Terraform
 
@@ -65,7 +76,7 @@
 
 - Outil d’IaC **open** **source** publié par [HashiCorp](https://www.hashicorp.com/products/terraform)
 
-- Utilisé pour gérer les infrastructures grâce à la **configuration** **déclarative**
+- Utilisé pour gérer les infrastructures grâce à des **configurations** **déclaratives**
 
 - Cloud agnostic (Amazon, Google, Azure, ...) (Via des providers)
 
@@ -119,9 +130,10 @@ Exemple :
 
 | Procedural |       | Déclaratif     |
 |------------|-------|----------------|
-| Chef       |       | Salstack       |
-| Ansible    |       | Terraform      |
-| Pulumi     |       | CloudFormation |
+| Chef       |       | CFEngine       |
+| Ansible    |       | Salstack       |
+| Pulumi     |       | Terraform      |
+|            |       | CloudFormation |
 |            |       | Pulumi         |
 
 

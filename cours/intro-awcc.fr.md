@@ -2,7 +2,7 @@
 
 ### Supports de cours réalisés par alter way Cloud Consulting
 
-ex Osones - <https://cloud-consulting.alterway.fr>
+<https://cloud-consulting.alterway.fr>
 
 ![](images/logo-awcc.jpg){height="100px"}
 
