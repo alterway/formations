@@ -172,8 +172,8 @@
     ]
   },
   "terraform": {
-    "course_name": "Terraform",
-    "course_description": "Formation Terraform",
+    "course_name": "Terraform - Fondamentaux",
+    "course_description": "Formation Terraform - les bases",
     "modules": [
       "intro-awcc",
       "terraform/terraform-introduction",
