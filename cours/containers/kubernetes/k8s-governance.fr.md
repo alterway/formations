@@ -55,7 +55,7 @@
 - Stack Overflow : <https://stackoverflow.com/questions/tagged/kubernetes>
 - Serverfault <https://stackoverflow.com/questions/tagged/kubernetes>
 
-### Kubernetes : Projet
+### Kubernetes : Projet (suite)
 
 - Hébergé sur Github : <https://github.com/kubernetes/kubernetes> :
     - Issues : <https://github.com/kubernetes/kubernetes/issues>
