@@ -148,6 +148,7 @@ spec:
       volumeMounts:
         - mountPath: "/var/lib/postgresql/data"
           name: postgres-volume
+          subPath: pgdata
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 8. Créons donc ce pod :
@@ -177,105 +178,77 @@ Volumes:
 
 <hr>
 
-## OpenEBS
+## Longhorn (rancher)
 
 <hr>
 
 
-1. Nous allons commencer par installer OpenEBS :
+1. Nous allons commencer par installer longhorn :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-helm repo add openebs https://openebs.github.io/charts
+helm repo add longhorn https://charts.longhorn.io
 helm repo update
-kubectl create namespace openebs-system
-helm install openebs openebs/openebs --namespace openebs-system --set jiva.enabled=true
+helm install longhorn longhorn/longhorn --namespace longhorn-system --create-namespace
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
-NAME: openebs
-LAST DEPLOYED: Mon Oct 26 14:20:53 2020
-NAMESPACE: openebs
+NAME: longhorn
+LAST DEPLOYED: Fri Jul  1 11:45:19 2022
+NAMESPACE: longhorn-system
 STATUS: deployed
 REVISION: 1
 TEST SUITE: None
 NOTES:
-The OpenEBS has been installed. Check its status by running:
+Longhorn is now installed on the cluster!
+
+Please wait a few minutes for other Longhorn components such as CSI deployments, Engine Images, and Instance Managers to be initialized.
+
+Visit our documentation at https://longhorn.io/docs/
 
 ...
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-2. Par défaut, OpenEBS crée plusieurs storageclasses, que nous pouvons voir de la façon suivante :
+2. Par défaut, lonhorn une classe de stockage (storageclasses) , que nous pouvons voir de la façon suivante :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-kubectl describe storageclass openebs-jiva-csi-default
+kubectl describe storageclass longhorn
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
-Name:            openebs-jiva-default
-IsDefaultClass:  No
-Annotations:     cas.openebs.io/config=- name: ReplicaCount
-  value: "3"
-- name: StoragePool
-  value: default
-#- name: TargetResourceLimits
-#  value: |-
-#      memory: 1Gi
-#      cpu: 100m
-#- name: AuxResourceLimits
-#  value: |-
-#      memory: 0.5Gi
-#      cpu: 50m
-#- name: ReplicaResourceLimits
-#  value: |-
-#      memory: 2Gi
-,openebs.io/cas-type=jiva
-Provisioner:           openebs.io/provisioner-iscsi
-Parameters:            <none>
-AllowVolumeExpansion:  <unset>
+Name:            longhorn
+IsDefaultClass:  Yes
+Annotations:     longhorn.io/last-applied-configmap=kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: longhorn
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+provisioner: driver.longhorn.io
+allowVolumeExpansion: true
+reclaimPolicy: "Delete"
+volumeBindingMode: Immediate
+parameters:
+  numberOfReplicas: "3"
+  staleReplicaTimeout: "30"
+  fromBackup: ""
+  fsType: "ext4"
+  dataLocality: "disabled"
+,storageclass.kubernetes.io/is-default-class=true
+Provisioner:           driver.longhorn.io
+Parameters:            dataLocality=disabled,fromBackup=,fsType=ext4,numberOfReplicas=3,staleReplicaTimeout=30
+AllowVolumeExpansion:  True
 MountOptions:          <none>
 ReclaimPolicy:         Delete
 VolumeBindingMode:     Immediate
 Events:                <none>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-3. Nous allons définir notre propre storage class utilisant openebs :
+
+3. Nous allons maintenant définir un pvc utilisant la storageclass longhorn :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-touch openebs-custom-sc.yaml
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Avec le contenu yaml suivant :
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  annotations:
-    cas.openebs.io/config: |
-      - name: ReplicaCount
-        value: "1"
-      - name: StoragePool
-        value: default
-    openebs.io/cas-type: jiva
-  name: openebs-custom-sc
-provisioner: openebs.io/provisioner-iscsi
-reclaimPolicy: Delete
-volumeBindingMode: Immediate
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-4. Créons cette storage class :
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-kubectl apply -f openebs-custom-sc.yaml
-
-storageclass.storage.k8s.io/openebs-custom-sc created
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-5. Nous allons maintenant définir un pvc utilisant la storageclass openebs-jiva-default :
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-touch postgres-openebs-pvc.yaml
+touch postgres-longhon-pvc.yaml
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Avec le contenu yaml suivant :
@@ -284,10 +257,10 @@ Avec le contenu yaml suivant :
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: postgres-openebs-pvc
+  name: postgres-longhorn-pvc
   namespace: storage
 spec:
-  storageClassName: openebs-custom-sc
+  storageClassName: longhorn
   accessModes:
     - ReadWriteOnce
   resources:
@@ -295,27 +268,27 @@ spec:
       storage: 3Gi
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-6. Créons donc ce pvc :
+4. Créons donc ce pvc :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-kubectl apply -f postgres-openebs-pvc.yaml
+kubectl apply -f postgres-longhorn-pvc.yaml
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 *persistentvolumeclaim/postgres-openebs-pvc created*
 
-7. Que nous pouvons inspecter de la façon suivante :
+5. Que nous pouvons inspecter de la façon suivante :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-kubectl get pvc -n storage postgres-openebs-pvc
+kubectl get pvc -n storage postgres-longhorn-pvc
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 NAME                   STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS        AGE
-postgres-openebs-pvc   Bound    pvc-2aa4e773-290f-4a6b-839f-789f0e86b75d   3Gi        RWO            openebs-custom-sc   12s
+postgres-longhorn-pvc   Bound    pvc-69b06a24-90e3-4ad9-8a25-5d7f4d216616   3Gi        RWO            longhorn       32s
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. Nous pouvons également voir qu'un pv a été généré de façon automatique :
+6. Nous pouvons également voir qu'un pv a été généré de façon automatique :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl get pv -n storage
@@ -323,7 +296,56 @@ kubectl get pv -n storage
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS     CLAIM                          STORAGECLASS          REASON   AGE
-pvc-2aa4e773-290f-4a6b-839f-789f0e86b75d   3Gi        RWO            Delete           Bound      storage/postgres-openebs-pvc   openebs-custom-sc              52s
+pvc-69b06a24-90e3-4ad9-8a25-5d7f4d216616   3Gi        RWO            Delete           Bound    storage/postgres-longhorn-pvc   longhorn                73s
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+7. Utilisation de ce pvc 
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+touch postgres-with-longhorn-pvc-pod.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Avec le contenu yaml suivant :
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
+apiVersion: v1
+kind: Pod
+metadata:
+  name: postgres-with-longhorn-pvc-pod
+  namespace: storage
+spec:
+  volumes:
+    - name: postgres-volume
+      persistentVolumeClaim:
+        claimName: postgres-longhorn-pvc
+  containers:
+    - name: postgres-with-pvc
+      image: postgres
+      env:
+      - name: POSTGRES_PASSWORD
+        value: password
+      volumeMounts:
+        - mountPath: "/var/lib/postgresql/data"
+          name: postgres-volume
+          subPath: pgdata
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+8. Créons donc ce pod :
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl apply -f postgres-with-longhorn-pvc-pod.yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*pod/postgres-with-longhorn-pvc-pod created*
+
+9. Inspectons ce pod, nous devrions voir qu'il utilise bien notre pvc :
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
+kubectl describe pods -n storage postgres-with-longhorn-pvc-pod
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 <hr>
@@ -335,12 +357,13 @@ pvc-2aa4e773-290f-4a6b-839f-789f0e86b75d   3Gi        RWO            Delete     
 Nous pouvons supprimer les objets générés par cet exercice de la façon suivante :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-kubectl delete -f postgres-openebs-pvc.yaml -f postgres-pv.yaml -f postgres-pvc.yaml -f postgres-with-pvc-pod.yaml
+kubectl delete -f postgres-longhorn-pvc.yaml -f postgres-pv.yaml -f postgres-pvc.yaml -f postgres-with-pvc-pod.yaml -f postgres-with-longhorn-pvc-pod.yaml
 
 persistentvolumeclaim "postgres-openebs-pvc" deleted
 persistentvolume "postgres-pv" deleted
 persistentvolumeclaim "postgres-pvc" deleted
 pod "postgres-with-pvc-pod" deleted
+pod "postgres-with-longhorn-pvc-pod" deleted
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 <hr>
