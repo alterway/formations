@@ -2,7 +2,9 @@
 # KUBERNETES : Projet, Gouvernance et Communauté {-}
 
 
-### Kubernetes
+###  
+
+![](images/kubernetes/kubernetes.png){height="100px"}
 
 - Initialement développé par Google (Borg), devenu open source en 2014
 - 1.0 le 10 Juillet 2015
@@ -10,7 +12,8 @@
 - Devenu populaire en très peu de temps
 - Premier projet de la CNCF
 
-![](images/kubernetes/kubernetes.png){height="100px"}
+![](images/kubernetes/story-of-kubernetes.png){height="200px"}
+
 
 
 ### CNCF

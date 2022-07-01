@@ -9,7 +9,7 @@
 - Copyright © 2014 - 2022 alter way Cloud Consulting
 - Licence : [Creative Commons BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.fr)
 - Sources : <https://github.com/alterway/formations/>
-- HTML/PDF : <https://alterway.fr/formations/>
+- PDF : <https://alterway.fr/formations/pdf>
 
 ![Licence Creative Commons BY-SA 4.0](images/licence.png){height="30px"}
 
