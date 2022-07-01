@@ -77,6 +77,13 @@ app.synth()
 Exemples:  
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+
+# terraform import
+
+terraform import azurerm_resource_group.importrg \
+/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hel-training-terraform-tobe-imported
+
+
 # terraformer
 terraformer import azure -R awh-terraform-import-labs -o export  --resources="*"
   

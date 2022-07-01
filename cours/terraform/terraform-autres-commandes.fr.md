@@ -163,3 +163,8 @@ Resource instance azurerm_windows_virtual_machine.myvm has been successfully unt
 ![](images/terraform/terraform-show.png){height="350px"}
 
 
+### terraform `refresh`
+
+Terraform intérroge toutes les resources distantes présentes dans le fichier d'état et le synchronise avec les valeurs des attributs distants. Cette commande ne modifie par les valeurs des attributs distants seul le fichier d'état est modifié (tfstate).
+
+Attention cette commande a été déclarée comme obsolète et sera supprimée dans une future version de terraform car elle n'est pas sûre.
