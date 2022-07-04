@@ -58,7 +58,7 @@ Sans le `kube-apiserver` le cluster ne sert à rien. De plus, il est **LE SEUL**
     - Intéragit avec le kube-scheduler, le controller-manager, le kubelet, etc... 
     - C'est une API donc utilisable via des composants externes (kubectl, curl, lens, ...)
 
-### Kubernetes : kube-scheduler
+### Kubernetes : `kube-scheduler`
 
 Le kube-scheduler est le composant responsable d'assigner les pods aux nœuds "worker" du cluster. Il choisit alors selon les contraintes qui lui sont imposées un nœud sur lequel les pods peuvent être démarrés et exécutés.
 
@@ -67,7 +67,7 @@ Le kube-scheduler est le composant responsable d'assigner les pods aux nœuds "w
 - En fonction de règles explicites (règles d'affinité et anti-affinité, labels, etc.)
 
 
-### Kubernetes : kube-controller-manager
+### Kubernetes : `kube-controller-manager`
 
 Le kube-controller-manager exécute et fait tourner les processus de contrôle du cluster.
 
@@ -80,7 +80,7 @@ Le kube-controller-manager exécute et fait tourner les processus de contrôle d
     - Endpoints Controller : fait en sorte de joindre correctement les services et les pods 
     - Service Account & Token Controllers : Gestion des comptes et des tokens d'accès à l'API pour l'accès aux `namespaces` Kubernetes
 
-### Kubernetes : kube-proxy
+### Kubernetes : `kube-proxy`
 
 Le kube-proxy maintient les règles réseau sur les nœuds. Ces règles permettent la communication vers les pods depuis l'intérieur ou l'extérieur de votre cluster.
 

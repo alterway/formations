@@ -219,7 +219,7 @@ spec:
     volumes:
     - name: mywebsite
       persistentVolumeClaim:
-        claimName: myclaim```
+        claimName: myclaim
 ```
 
 ### Kubernetes : PersistentVolume
