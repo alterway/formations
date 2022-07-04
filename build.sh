@@ -84,8 +84,8 @@ build-html-labs() {
     OPTIONS="-f markdown+smart --variable fontsize=11pt --variable geometry:"top=2cm, bottom=3cm, left=3cm, right=2cm" --variable geometry:a4paper"
     #STYLE="html5"
     #STYLE="slidy"
-    STYLE="slideous"
-    #STYLE="beamer"
+    #STYLE="slideous"
+    STYLE="beamer"
     docker run --rm \
         -v "${PWD}"/output-html:/output \
         -v "${PWD}"/labs:/input \
