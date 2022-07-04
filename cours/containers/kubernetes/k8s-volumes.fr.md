@@ -50,6 +50,7 @@
 </div>
 </div>
 
+
 ### Kubernetes : Volumes
 
 - On déclare d'abord le volume et on l'affecte à un "service" (container) :
@@ -94,10 +95,24 @@ spec:
 ```
 
 
+### Type de stockage
+
+- Persistent Volume (PV)— Représentation de bas niveau d'un volume de stockage.
+- Persistent Volume Claim (PVC)— binding entre un Pod et un Persistent Volume (PV).
+- Storage Class — Permet de provionner dynamiquement d'un Persistent Volumes (PV).
+
+
+![](images/kubernetes/storage.png){height="300px"}
+
+
+
 ### Kubernetes : Storage Class
 
 - Permet de définir les différents types de stockage disponibles
+- StorageClass permet le provisionnement dynamique des volumes persistants, lorsque PVC le réclame.
 - Utilisé par les `Persistent Volumes` pour solliciter un espace de stockage au travers des `Persistent Volume Claims`
+- StorageClass utilise des provisionneurs spécifiques à la plate-forme de stockage ou au fournisseur de cloud pour donner à Kubernetes l'accès au stockage physique.
+- Chaque backend de stockage a son propre provisionneur. Le backend de stockage est défini dans le composant StorageClass via l'attribut provisioner.
 
 
 ### Kubernetes : Storage Class
@@ -135,14 +150,33 @@ volumeBindingMode: Immediate
 allowVolumeExpansion: true
 ```
 
+### Kubernetes : Storage Class
+Autre exemple 
+
+```yaml
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+  name: local-path
+provisioner: rancher.io/local-path
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+```
+
 ### Kubernetes : PersistentVolumeClaims
 
+- Le PVC est un binding entre un pod et un PV. Le pod demande le volume via le PVC.
 - Ressource utilisée et vue comme une requête utilisateur pour solliciter du stockage persistant en définissant :
     - une quantité de stockage
     - un type d'accès
     - un namespace pour le montage
 - Offre aux PV une variété d'options en fonction du cas d'utilisation
+- Kubernetes recherche un PV qui répond aux critères définis dans le PVC, et s'il y en a un, il fait correspondre la demande au PV.
 - Utilisé par les `StatefulSets` pour solliciter du stockage (Utilisation du champ `volumeClaimTemplates`)
+- Le PVC doit se trouver dans le même namespace que le pod. Pour chaque pod, un PVC effectue une demande de stockage dans un namespace.
+- Les "Claim"" peuvent demander une taille et des modes d'accès spécifiques (par exemple, elles peuvent être montées ReadWriteOnce, ReadOnlyMany ou ReadWriteMany).
 
 
 ### Kubernetes : PersistentVolumeClaims
@@ -215,6 +249,14 @@ spec:
   hostPath:
     path: "/tmp/data"
 ```
+
+
+### Reclaim Policy
+
+- Les PV qui sont créés dynamiquement par une `StorageClass` auront la politique de récupération spécifiée dans le champ `reclaimPolicy` de la classe, qui peut être `Delete` ou `Retain`.
+- Si aucun `reclaimPolicy` n'est spécifié lors de la création d'un objet `StorageClass`, il sera par défaut `delete`.
+- Les PV qui sont créés manuellement et gérés via une `StorageClass` auront la politique de récupération qui leur a été attribuée lors de la création.
+- La stratégie de récupération s'applique aux volumes persistants et non à la classe de stockage elle-même. Les PV et les PVC créés à l'aide de cette `StorageClass` hériteront de la stratégie de récupération définie dans `StorageClass`.
 
 ### Kubernetes : CSI
 

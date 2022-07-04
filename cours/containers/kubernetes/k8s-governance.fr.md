@@ -12,7 +12,7 @@
 - Devenu populaire en très peu de temps
 - Premier projet de la CNCF
 
-![](images/kubernetes/story-of-kubernetes.png){height="200px"}
+![](images/kubernetes/story-of-kubernetes.png){height="300px"}
 
 
 

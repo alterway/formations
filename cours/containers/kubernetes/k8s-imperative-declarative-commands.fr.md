@@ -28,7 +28,7 @@ kubectl run nginx --image=nginx
 kubectl run nginx --image=nginx --dry-run=client -o yaml
 ```
 
-- Générer un déploiement avec 4 répliques: 
+- Générer un déploiement avec 4 réplicas: 
 
 ```console
 kubectl create deployment nginx --image=nginx --replicas=4
@@ -48,24 +48,24 @@ kubectl scale deployment nginx --replicas=4
 kubectl create deployment nginx --image=nginx --dry-run=client -o yaml > nginx-deployment.yaml
 ```
 
-- Ensuite mettre à jour le fichier YAML avec les répliques ou tout autre champ avant de créer le déploiement.
+- Ensuite mettre à jour le fichier YAML avec les réplicas ou tout autre champ avant de créer le déploiement.
 
 
 ### La méthode impérative
 
-- Créez un service nommé redis-service de type ClusterIP pour exposer le pod redis sur le port 6379: 
+- Créer un service nommé redis-service de type ClusterIP pour exposer le pod redis sur le port 6379: 
   
 ```console
 kubectl expose pod redis --port=6379 --name redis-service --dry-run=client -o yaml
 ```
 
-- Créez un service nommé nginx de type NodePort pour exposer le port 80 du pod nginx sur le port 30080 des nœuds: 
+- Créer un service nommé nginx de type NodePort pour exposer le port 80 du pod nginx sur le port 30080 des nœuds: 
   
 ```console
 kubectl expose pod nginx --type=NodePort --port=80 --name=nginx-service --dry-run=client -o yaml
 ```
 
-- Ceci utilisera automatiquement les labels du pod comme sélecteurs, sans possibilité de spécifier le port du nœud. Avec le fichier généré, ajoutez le port de nœud manuellement avant de créer le service avec le pod. 
+- Cela utilisera automatiquement les labels du pod comme sélecteurs, sans possibilité de spécifier le port du nœud. Avec le fichier généré, ajoutez le port de nœud manuellement avant de créer le service avec le pod. 
 - Ou:
   
 ```console
@@ -73,3 +73,5 @@ kubectl create service nodeport nginx --tcp=80:80 --node-port=30080 --dry-run=cl
 ```
 
 Ceci n'utilisera pas les labels des pods comme sélecteurs. 
+
+

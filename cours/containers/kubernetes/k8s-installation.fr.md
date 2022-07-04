@@ -1,6 +1,6 @@
 # KUBERNETES : Installation
 
-### Kubernetes : Minikube
+### Kubernetes Local : Minikube (1)
 
 - Outil permettant de démarrer rapidement un cluster mono-node Kubernetes localement
 - Execute Kubernetes dans une machine virtuelle
@@ -9,11 +9,11 @@
 - Installation : <https://github.com/kubernetes/minikube#Installation>
 
 
-### Kubernetes : Minikube
+### Kubernetes Local : Minikube (2)
 
 ```console
-$minikube start --kubernetes-version="v1.19.7"
-Starting local Kubernetes v1.16.1 cluster...
+$minikube start --kubernetes-version="v1.20.1"
+Starting local Kubernetes v1.20.1 cluster...
 Starting VM...
 Getting VM IP address...
 [...]
@@ -24,18 +24,18 @@ Kubectl is now configured to use the cluster.
 Loading cached images from config file.
 ```
 
-### Kubernetes : Minikube
+### Kubernetes Local : Minikube (3)
 
 - Effectuer un diagnostic basique du cluster
 
 ```console
 $ kubectl version
-Client Version: v1.19.7
-Server Version: v1.19.7
+Client Version: v1.20.7
+Server Version: v1.21.7
 ```
 
 
-### Kubernetes : Minikube
+### Kubernetes Local : Minikube (4)
 
 ```console
 $ kubectl get componentstatuses
@@ -50,26 +50,28 @@ etcd-0                     Healthy      {"health": "true"}
 
 - De nombreuses ressources présentes pour le déploiement de Kubernetes dans un environnement de production
 
-- Un des outils est [kubeadm](https://github.com/kubernetes/kubeadm) utilisé pour rapidement démarrer un cluster Kubernetes
+- Un des outils est [kubeadm](https://github.com/kubernetes/kubeadm) utilisé pour rapidement démarrer / configurer un cluster Kubernetes
 
-### Installation de Kubernetes avec Kubeadm
+### Installation de Kubernetes avec kubeadm
 
 - Certains pré-requis sont nécessaires avant d'installer Kubernetes :
-    - Désactiver le swap
+    - Désactiver le swap (Support **alpha** depuis la 1.22)
     - Assurer que les ports requis soient ouverts : <https://kubernetes.io/docs/setup/independent/install-kubeadm/#check-required-ports>
     - Installer une Container Runtime compatible CRI (containerd, CRI-O, Docker)
 
-### Kubeadm
+### kubeadm (1)
 
 - Installer les composants Kubernetes (kubeadm, kubectl, kubelet) : <https://kubernetes.io/docs/setup/independent/install-kubeadm/>
-- Exécuter `kubeadm init` sur le noeud master
-- Exécuter `kubeadm join` sur les autres noeuds (avec le token fournit par la commande `kubeadm init`)
+- Exécuter : 
+     - `kubeadm init` sur le noeud master
+     - `kubeadm join` sur les autres noeuds (avec le token fournit par la commande `kubeadm init`)
 - Copier le fichier de configuration généré par `kubeadm init`
 - Installer le plugin Réseau
+- Optionnellement:  Tester le dploiement d'un pod
 
-### Kubeadm
+### kubeadm (2)
 
-En plus de l'installation de Kubernetes, Kubeadm peut :
+En plus de l'installation de Kubernetes, kubeadm peut :
 
 - Renouveler les certificats du Control Plane
 - Générer des certificats utilisateurs signés par Kubernetes
@@ -87,11 +89,13 @@ En plus de l'installation de Kubernetes, Kubeadm peut :
 
 ### Installation de Kubernetes
 
-- Via Ansible : kubespray <https://github.com/kubernetes-sigs/kubespray>
+- Via Ansible : `kubespray` <https://github.com/kubernetes-sigs/kubespray>
 - Via Terraform : <https://github.com/poseidon/typhoon>
 - Il existe d'autres projets open source basés sur le langage Go :
     - kube-aws : <https://github.com/kubernetes-incubator/kube-aws>
     - kops : <https://github.com/kubernetes/kops>
+    - rancher : <https://rancher.com/docs/rancher/v2.5/en/>
+    - tanzu : <https://github.com/vmware-tanzu>
 
 ### Conformité kubernetes
 
@@ -103,5 +107,6 @@ Voici quelques outils permettant de certifier les déploiements des cluster kube
     - <https://github.com/derailed/popeye>
 - kube-score
     - <https://github.com/zegl/kube-score>
-
+- kube-bench
+    - <https://github.com/aquasecurity/kube-bench>
 

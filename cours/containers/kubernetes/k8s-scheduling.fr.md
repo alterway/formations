@@ -2,7 +2,6 @@
 
 ### Scheduling manuel
 
-
 ### _Taints_ et _Tolerations_
 
 Un nœud avec un taint empêche l'exécution sur lui-même des pods qui ne tolèrent pas ce _taint_

@@ -37,12 +37,12 @@ spec:
 
 ### Kubectl : Usage avancé
 
-```console
-
 - Certaines commandes qui modifient un déploimement accepte un flag optionnel `--record`
 - Ce flag stocke la ligne de commande dans le déploiement
 - Et est copié aussi dans le `replicaSet` (annotation)
 - Cela permet de suivre quelle commande a créé ou modifié ce `replicatset`
+
+```console
 
 $ kubectl create -f nginx.yaml --record
 deployment.apps/nginx created
@@ -201,3 +201,58 @@ kubectl drain <NDOE_NAME>
 kubectl uncordon <NODE_NAME>
 ```
 
+### Kubectl : Contexts
+
+- Dans le cas ou votre kubeconfig comporte plusieurs clusters
+
+```console
+
+# lister les contextes
+kubectl config get-contexts
+
+# Se déplacer dans un contexte 
+kubectl config use-context <nom-du-contexte>
+
+
+# ou
+
+alias kubectx='kubectl config use-context '
+
+# ex: kubectx <nom-du-cluster>
+
+```
+
+### Kubectl : Se déplacer dans un NS de manière permanente
+
+Évite de toujours préciser le flag `-n`
+
+```console
+
+kubectl get ns
+
+kubectl config set-context --current --namespace <nom-du-namespace>
+
+# ou
+
+alias kubens='kubectl config set-context --current --namespace '
+
+# ex: kubens kube-system 
+
+```
+
+### Kubectl : Installer des plugins 
+
+`krew` est un manager de plugins pour `kubectl`
+
+installation de krew (<https://krew.sigs.k8s.io/docs/user-guide/setup/install/>)
+
+
+```console
+
+kubectl krew install example
+
+kubectl example deploy
+
+```
+
+Liste des plugins : <https://krew.sigs.k8s.io/plugins/>

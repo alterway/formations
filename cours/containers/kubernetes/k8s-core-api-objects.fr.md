@@ -63,6 +63,16 @@ NAME      READY     STATUS    RESTARTS   AGE       LABELS
 nginx     1/1       Running   0          31s       app=nginx,env=prod
 ```
 
+
+- Lister des ressources par l'utilisation de labels
+
+```console
+
+kubectl get po -A -l k8s-app=kube-dns
+kubectl get po -A -l k8s-app=kube-dns -l pod-template-hash=6d4b75cb6d
+
+```
+
 ### Kubernetes : Annotations
 
 - Système de clé/valeur
@@ -200,9 +210,9 @@ $ kubectl get pods <POD_NAME> -o jsonpath='{.status}' | jq
 ### Kubernetes : Deployment
 
 - Permet d'assurer le fonctionnement d'un ensemble de Pods
-- Version, Update et Rollback
+- Gère les Version, Update et Rollback
 - Il est lié avec l'object ReplicaSet qui gère le cycle de vie et la mise à l'échelle des pods
-- Souvent combiné avec un objet de type *service*
+- Souvent combiné avec un objet de type **service**
 
 ![deployment](images/deployment.png)
 
@@ -270,7 +280,7 @@ metadata:
 
 ### Kubernetes : StatefulSet
 
-- Similaire au `Deployment`
+- Similaire au `Deployment` mais les noms des composants sont prédictibles
 - Les pods possèdent des identifiants uniques.
 - Chaque replica de pod est créé par ordre d'index
 - Nécessite un `Persistent Volume` et un `Storage Class`.
@@ -304,6 +314,106 @@ spec:
         ports:
         - containerPort: 80
 ```
+
+```console
+kubectl get po
+NAME    READY   STATUS              RESTARTS   AGE
+web-0   0/1     ContainerCreating   0          3s
+❯ kubectl get po
+NAME    READY   STATUS              RESTARTS   AGE
+web-0   1/1     Running             0          9s
+web-1   0/1     ContainerCreating   0          1s
+❯ kubectl get po
+NAME    READY   STATUS              RESTARTS   AGE
+web-0   1/1     Running             0          12s
+web-1   1/1     Running             0          4s
+web-2   0/1     ContainerCreating   0          2s
+❯ kubectl get po
+NAME    READY   STATUS    RESTARTS   AGE
+web-0   1/1     Running   0          15s
+web-1   1/1     Running   0          7s
+web-2   1/1     Running   0          5s
+```
+
+### Kubernetes : StatefulSet avancé
+
+```yaml
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql
+  labels:
+    app: mysql
+    app.kubernetes.io/name: mysql
+data:
+  primary.cnf: |
+    [mysqld]
+    log-bin    
+  replica.cnf: |
+    [mysqld]
+    super-read-only    
+
+---
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+      app.kubernetes.io/name: mysql
+  serviceName: mysql
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: mysql
+        app.kubernetes.io/name: mysql
+    spec:
+      initContainers:
+      - name: init-mysql
+        image: mysql:5.7
+        command:
+        - bash
+        - "-c"
+        - |
+          set -ex
+          [[ `hostname` =~ -([0-9]+)$ ]] || exit 1
+          ordinal=${BASH_REMATCH[1]}
+          echo [mysqld] > /mnt/conf.d/server-id.cnf
+          echo server-id=$((100 + $ordinal)) >> /mnt/conf.d/server-id.cnf
+          if [[ $ordinal -eq 0 ]]; then
+            cp /mnt/config-map/primary.cnf /mnt/conf.d/
+          else
+            cp /mnt/config-map/replica.cnf /mnt/conf.d/
+          fi          
+        ....
+      - name: clone-mysql
+        image: gcr.io/google-samples/xtrabackup:1.0
+        command:
+        - bash
+        - "-c"
+        - |
+          set -ex
+          [[ -d /var/lib/mysql/mysql ]] && exit 0
+          # Skip the clone on primary (ordinal index 0).
+          [[ `hostname` =~ -([0-9]+)$ ]] || exit 1
+          ordinal=${BASH_REMATCH[1]}
+          [[ $ordinal -eq 0 ]] && exit 0
+          ncat --recv-only mysql-$(($ordinal-1)).mysql 3307 | xbstream -x -C /var/lib/mysql
+        ...
+      containers:
+      - name: mysql
+        image: mysql:5.7
+        env:
+        - name: MYSQL_ALLOW_EMPTY_PASSWORD
+          value: "1"
+        ...
+```
+
 ### Kubernetes : Job
 
 - Crée des pods et s'assurent qu'un certain nombre d'entre eux se terminent avec succès.

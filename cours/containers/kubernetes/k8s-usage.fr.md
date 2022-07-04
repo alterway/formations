@@ -1,6 +1,6 @@
 # KUBERNETES : Utilisation et Déploiement des Ressources
 
-### Kubernetes : Kubectl
+### Kubernetes : `kubectl`
 
 - Le seul (ou presque) outil pour interagir avec des clusters Kubernetes
 - Utilise un fichier de configuration (kubeconfig) pour communiquer avec l'API de Kubernetes
@@ -10,6 +10,11 @@
     - Les chemins des certificats TLS utilisés pour l'authentification
 
 - Fichier `kubeconfig` peut être passé en paramètre de kubectl avec le _flag_ `--kubeconfig`
+    . `kubectl --kubeconfig=/opt/k8s/config get po`
+
+
+- Fichier `kubeconfig` peut être passé en paramètre de kubectl avec la variable d'nvironnement `KUBECONFIG`
+    . `KUBECONFIG=/opt/k8s/config kubectl get pods`
 
 ### Kubeconfig
 
@@ -18,6 +23,35 @@ Un seul fichier pour gérer tous ses clusters avec trois informations :
 - Serveurs (IP, CA Cert, Nom)
 - Users (Nom, Certificat, Clé)
 - Context, association d'un user et d'un serveur
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
+
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FU..
+    server: https://akshlprod001-e419e3f0.hcp.northeurope.azmk8s.io:443
+  name: aks-hl-prod-001
+contexts:
+- context:
+    cluster: aks-hl-prod-001
+    namespace: velero
+    user: clusterUser_rg-hl-prod-001_aks-hl-prod-001
+  name: aks-hl-prod-001
+current-context: aks-hl-prod-001
+kind: Config
+preferences: {}
+users:
+- name: clusterUser_rg-hl-prod-001_aks-hl-prod-001
+  user:
+    client-certificate-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0t..
+    client-key-data: LS0tLS1CRUdJTiBSU0Eg..
+    token: 0ad033b165e2f7a4f705ca6defef8555ff501345e2324cf337b68820d85dc65bae39c47bb58ad913b0385a0d7eb5df6e872dbd1fe62fd34ca6e4ed58b2e8a733
+
+```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 Stocké par défaut dans ~/.kube/config
 
@@ -48,7 +82,7 @@ ingresses                         ing          extensions                       
 ```
 
 
-### Kubernetes : Kubectl explain
+### Kubernetes : `kubectl explain`
 
 - Le "man pages" de kubernetes
 - Explorer les types et définitions
@@ -69,7 +103,7 @@ kubectl explain node.spec
 kubectl explain node --recursive
 ```
 
-### Kubernetes : Type de nom
+### Kubernetes : `Kind`
 
 - Les noms de ressources les plus courants ont 3 formes:
 
@@ -81,7 +115,7 @@ kubectl explain node --recursive
 
 - Les points de terminaison (endpoints) ont uniquement une forme plurielle ou courte (ep)
 
-### Kubernetes : Kubectl get
+### Kubernetes : `kubectl get`
 
 - Afficher les noeuds du cluster :
 
@@ -96,7 +130,7 @@ kubectl get no
 kubectl get nodes
 ```
 
-### Kubernetes : Kubectl
+### Kubernetes : `kubectl`
 
 - plus d'infos
 
@@ -112,7 +146,23 @@ kubectl get nodes -o yaml
 kubectl get nodes -o json
 ```
 
-### Kubernetes : Kubectl
+
+- Utiliser JSONPath
+
+    - Plus d'infos : https://kubernetes.io/docs/reference/kubectl/jsonpath/
+
+```console 
+
+kubectl get pods -o=jsonpath='{@}'
+kubectl get pods -o=jsonpath='{.items[0]}'
+
+kubectl get pods  \
+  --output=jsonpath='{.items[0].metadata.name}'
+
+```
+
+
+### Kubernetes : `kubectl`
 
 - Utiliser `jq`
   
@@ -121,7 +171,23 @@ kubectl get nodes -o json |
         jq ".items[] | {name:.metadata.name} + .status.capacity"
 ```
 
-### Kubernetes : Kubectl
+
+
+⚠ : Il faut utiliser `jq` quand on a besoin de `regexp` car JSONPath ne les supporte pas.
+
+ex: 
+
+```console
+
+# KO :
+kubectl get pods -o jsonpath='{.items[?(@.metadata.name=~/^test$/)].metadata.name}'
+
+# OK :
+kubectl get pods -o json | jq -r '.items[] | select(.metadata.name | test("test-")).spec.containers[].image'
+
+```
+
+### Kubernetes : `kubectl`
 
 - Afficher les _namespaces_
 
@@ -137,7 +203,7 @@ kubectl get namespaces
 kubectl -n kube-system get pods
 ```
 
-### Kubernetes : Kubectl
+### Kubernetes : `kubectl`
 
 - Afficher les pods (pour le namespace _default_)
 
@@ -146,7 +212,7 @@ kubectl get pods
 kubectl get pod
 ```
 
-### Kubernetes : Kubectl
+### Kubernetes : `kubectl`
 
 - Afficher les services (pour le _namespace_ `default`):
 
@@ -155,7 +221,7 @@ kubectl get services
 kubectl get svc
 ```
 
-### Kubernetes : Kubectl
+### Kubernetes : `kubectl`
 
 - Afficher les ressources d'un `namespace` particulier
 - Utilisable avec la plupart des commandes `kubectl`
@@ -168,7 +234,7 @@ kubectl run -n NNN ...
 kubectl delete -n NNN ...
 # ...
 ```
-### Kubernetes : Kubectl
+### Kubernetes : `kubectl`
 
 - Pour lister des ressources dans tous les namespaces : `--all-namespaces`
 - Depuis kubernetes 1.14 on peut utiliser le flag `-A` en raccourci
@@ -183,7 +249,7 @@ kubectl delete -A ...
 kubectl label -A ...
 ```
 
-### Kubernetes : namespace kube-public 
+### Kubernetes : namespace `kube-public` 
 
 ```console
 kubectl get all -n kube-public
@@ -206,19 +272,19 @@ curl -k https://{NodeIP}/api/v1/namespaces/kube-public/configmaps/cluster-info
 - Extraire le kubeconfig du configmap `cluster-info`
 
 ```console
-curl -sk https://10.96.0.1/api/v1/namespaces/kube-public/configmaps/cluster-info \
+curl -sk https://<IP PRIV>/api/v1/namespaces/kube-public/configmaps/cluster-info \
      | jq -r .data.kubeconfig
 ```
 
 
-### Kubernetes : namespace kube-node-lease 
+### Kubernetes : namespace `kube-node-lease` 
 
 - Ce namespace particulier existe depuis la 1.14
 - Il contient un objet `lease`par noeud
 - Ces `leases` permettent d'implémenter une nouvelle méthode pour vérifier l'état de santé des noeuds
 - Voir (KEP-0009)[https://github.com/kubernetes/enhancements/blob/master/keps/sig-node/0009-node-heartbeat.md] pour plus d'information
 
-### Kubernetes : Kubectl describe
+### Kubernetes : `kubectl describe`
 
 - `kubectl describe` a besoin d'un type de ressource et optionnelle-ment un nom de ressource
 - Il est possible de fournir un _préfixe_ de nom de ressource
@@ -241,21 +307,25 @@ curl -sk https://10.96.0.1/api/v1/namespaces/kube-public/configmaps/cluster-info
 
 ### Kubernetes : Créer un pod en ligne de commande
 
-- Cette commande avant la 1.18 créait un deployement
+- Cette commande avant la 1.18 créait un `deployement`
 - Depuis elle démarre un simple `pod`
 
 ```console
 kubectl run pingu --image=alpine -- ping 127.1
 ```
 
+⚠ : Notez le `--`entre le nom de l'image et la commande à lancer
+
 ### Kubernetes : Créer un déploiement en ligne de commande
 
 - `kubectl create deployment` ...
-- Depuis kubernetes 1.19, il est possible de préciser un commande au moment du `create`
+- Depuis kubernetes 1.19, il est possible de préciser une commande au moment du `create`
 
 ```console
 kubectl create deployment pingu --image=alpine -- ping 127.1
 ```
+
+⚠ : Notez le `--`entre le nom de l'image et la commande à lancer
 
 ### Kubernetes : Création d'objets Kubernetes
 
@@ -286,6 +356,9 @@ kubectl replace -f object.yaml
 kubectl apply -f object.yaml
 ```
 
+
+⚠ : Il est possible d'utiliser `apply` pour créer des resources.  
+
 ### Kubernetes : Kubernetes Dashboard
 
 - Interface graphique web pour les clusters Kubernetes
@@ -295,7 +368,7 @@ kubectl apply -f object.yaml
 
 ### Kubernetes : Kubernetes Dashboard
 
-![](images/kubernetes/dashboard-0.png)
+![](images/kubernetes/dashboard-0.png){height="500px"}
 
 
 ### Kubernetes : Kubernetes Dashboard
@@ -368,6 +441,6 @@ $ kubectl get secret $(kubectl get serviceaccount cluster-admin-dashboard-sa -o 
 
 ```
 
-Il est possible de créer des comptes de service (sa) avec droits différents ex  `view`
+Il est possible de créer des comptes de service (sa) avec droits différents ex :  `view`
 
 
