@@ -583,3 +583,7 @@ clusterrolebinding.rbac.authorization.k8s.io "read-secrets-global" deleted
 secret "secret-rbac" deleted
 clusterrole.rbac.authorization.k8s.io "secret-reader" deleted
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+<hr>
+

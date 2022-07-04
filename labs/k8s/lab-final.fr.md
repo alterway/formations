@@ -109,3 +109,5 @@
 
 15. Installez le helm chart de wordress disponible sur ce lien. Modifier le type de service par défaut définit dans le fichier values.yaml en NodePort.
 
+
+<hr>

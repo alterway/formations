@@ -178,3 +178,6 @@ kube-system   weave-net-zxg6p                  2/2     Running   1          23m
 
 
 **Note** : le CNI doit être mis à jour indépendamment
+
+
+<hr>

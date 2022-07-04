@@ -382,3 +382,5 @@ Nous pouvons supprimer les ressources générés par cet exercices de la façon 
 ```bash
 training@master$ kubectl delete -f .
 ```
+
+<hr>

@@ -277,3 +277,5 @@ Supprimons les objets générés par cet exercice :
 ```bash
 training@master$ kubectl delete -f .
 ```
+
+<hr>

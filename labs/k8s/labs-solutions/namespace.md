@@ -1,4 +1,3 @@
-
 # Namespace
 
 
@@ -14,3 +13,6 @@ kind: Namespace
 metadata:
   name: kubeops
 ```
+
+
+<hr>

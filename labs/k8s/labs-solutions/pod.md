@@ -1,4 +1,3 @@
-
 # Pods
 
 
@@ -74,3 +73,5 @@ kubectl exec webserver -c webwatcher -- cat /etc/hosts
 
 
 
+
+<hr>

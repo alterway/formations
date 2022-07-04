@@ -204,3 +204,7 @@ kubectl apply -k k8s/overlays/prod
 
 kubectl get  all -l caas.fr/environment=prod
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+<hr>

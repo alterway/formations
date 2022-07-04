@@ -41,3 +41,8 @@ kubectl config set-credentials ${TRIG} --client-certificate=${TRIG}-kubernetes-c
 # Stick to NS
 #(Optionnel)
 kubectl config set-context ${TRIG} --cluster=$(kubectl config view -o jsonpath='{.clusters[0].name}') --namespace=lab --user=${TRIG} --kubeconfig=${TRIG}-kubernetes-config
+
+
+
+
+<hr>

@@ -63,3 +63,5 @@ kubectl rollout undo deployment nginx-deployment
 kubectl rollout status deployment nginx-deployment
 kubectl describe deploy nginx-deployment
 ```
+
+<hr>

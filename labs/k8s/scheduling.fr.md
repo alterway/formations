@@ -432,3 +432,4 @@ Error from server (NotFound): error when deleting "pod-without-toleration.yaml":
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 <hr>
+

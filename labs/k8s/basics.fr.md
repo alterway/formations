@@ -1,5 +1,3 @@
-<br>
-
 # Les Bases
 
 <hr>

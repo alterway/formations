@@ -140,3 +140,5 @@ Supprimons les ressources générées par cet exercice :
 ```bash
 kubectl delete -f .
 ```
+
+<hr>

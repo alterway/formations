@@ -25,3 +25,6 @@ spec:
     app: nginx-deployment
   type: NodePort
 ```
+
+
+<hr>

@@ -51,3 +51,6 @@ L’examen (3h) est présenté sous la forme de 24 questions à réaliser lors d
 21. Nous souhaitons déployer une base de données mysql sur le cluster dans le namespace awcc. Créez premièrement un secret nommé « mysql-secret ». Il définira la valeur du mot de passe root de mysql comme suit : MYSQL_ROOT_PASSWORD=test. Créez ensuite un déploiement «mysql-database» avec 1 replica comprenant un conteneur nommé « database » avec la dernière version de Mysql, et recevant comme variable d’environnement le secret « mysql-secret ».
 
 22. Lancer un pod nommé "revisionconfigmap" comprenant un conteneur nommé "revisionconfigmap" dans le namespace awcc avec la dernière image Ubuntu disponible. Ajouter un fichier de configuration sous la forme d'un configmap dans /etc/toto nommé ma.conf avec le contenu suivant : "hello = true"
+
+
+<hr>
