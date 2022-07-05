@@ -248,7 +248,7 @@ Events:                <none>
 3. Nous allons maintenant définir un pvc utilisant la storageclass longhorn :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-touch postgres-longhon-pvc.yaml
+touch postgres-longhorn-pvc.yaml
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Avec le contenu yaml suivant :
