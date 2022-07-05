@@ -33,8 +33,8 @@ kind: ConfigMap
 metadata:
   name: redis-env
 data:
-   redis_host: redis_svc
-   redis_port: 6349
+   redis_host: "redis_svc"
+   redis_port: "6349"
 ```
 
 
@@ -86,6 +86,28 @@ spec:
         # to add to the container
         name: redis-config
   restartPolicy: Never
+```
+
+
+### Autres solution pour créer des ConfigMaps
+
+- En utilisant le contenu complet d'un répertoire
+
+```console
+kubectl create configmap my-config --from-file=./my/dir/path/
+```
+
+- En utilisant le contenu d'un fichier d'un répertoire
+
+```console
+kubectl create configmap my-config --from-literal=key1=value1 --from-literal=key2=value2
+```
+
+- En utilisant des clés valeurs
+
+
+```console
+kubectl create configmap my-config --from-literal=key1=value1 --from-literal=key2=value2
 ```
 
 ### Kubernetes : Secrets
