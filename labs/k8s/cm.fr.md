@@ -167,7 +167,7 @@ spec:
         items:
         - key: valeurs.json
           path: keys
-restartPolicy: Never
+  restartPolicy: Never
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
