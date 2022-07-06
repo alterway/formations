@@ -106,7 +106,7 @@ spec:
     value: "experimental"
     operator: "Equal"
     effect: "NoSchedule"
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   
 7. Créons ce pod :
 
