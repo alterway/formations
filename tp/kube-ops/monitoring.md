@@ -256,10 +256,10 @@ Avec le contenu yaml suivant :
 ```yaml
 alertmanager:
   persistentVolume:
-    storageClass: "openebs-custom-sc"
+    storageClass: "longhorn"
 server:
   persistentVolume:
-    storageClass: "openebs-custom-sc"
+    storageClass: "longhorn"
 ```
 
 2. Nous pouvons donc installer Prometheus via Helm :
@@ -292,8 +292,8 @@ training@master$ kubectl get all -n monitoring
 training@master$ kubectl get pvc -n monitoring
 
 NAME                      STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS        AGE
-prometheus-alertmanager   Bound    pvc-341a1d92-74b4-4ce4-8ad2-8edaf94025c8   2Gi        RWO            openebs-custom-sc   57s
-prometheus-server         Bound    pvc-d7f3ac24-cb5c-4702-a501-5d8b85bec8e2   8Gi        RWO            openebs-custom-sc   57s
+prometheus-alertmanager   Bound    pvc-341a1d92-74b4-4ce4-8ad2-8edaf94025c8   2Gi        RWO            longhorn   57s
+prometheus-server         Bound    pvc-d7f3ac24-cb5c-4702-a501-5d8b85bec8e2   8Gi        RWO            longhorn   57s
 ```
 
 5. Nous allons maintenant passer à l'installation de Grafana. Comme pour Prometheus, nous allons créer un fichier values.yaml pour configurer notre installation :
@@ -307,7 +307,7 @@ Avec le contenu yaml suivant :
 ```yaml
 persistence:
   enabled: true
-  storageClassName: "openebs-custom-sc"
+  storageClassName: "longhorn"
 ```
 
 5. Nous pouvons donc passer à l'installation de Grafana :

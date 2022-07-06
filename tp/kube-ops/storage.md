@@ -220,7 +220,7 @@ Events:                <none>
 3. Nous allons définir notre propre storage class utilisant openebs :
 
 ```bash
-training@master$ touch openebs-custom-sc.yaml
+training@master$ touch longhorn.yaml
 ```
 
 Avec le contenu yaml suivant :
@@ -236,7 +236,7 @@ metadata:
       - name: StoragePool
         value: default
     openebs.io/cas-type: jiva
-  name: openebs-custom-sc
+  name: longhorn
 provisioner: openebs.io/provisioner-iscsi
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
@@ -245,9 +245,9 @@ volumeBindingMode: Immediate
 4. Créeons cette storage class :
 
 ```bash
-training@master$ kubectl apply -f openebs-custom-sc.yaml
+training@master$ kubectl apply -f longhorn.yaml
 
-storageclass.storage.k8s.io/openebs-custom-sc created
+storageclass.storage.k8s.io/longhorn created
 ```
 
 5. Nous allons maintenant définir un pvc utilisant la storageclass openebs-jiva-default :
@@ -265,7 +265,7 @@ metadata:
   name: postgres-openebs-pvc
   namespace: storage
 spec:
-  storageClassName: openebs-custom-sc
+  storageClassName: longhorn
   accessModes:
     - ReadWriteOnce
   resources:
@@ -287,7 +287,7 @@ persistentvolumeclaim/postgres-openebs-pvc created
 training@master$ kubectl get pvc -n storage postgres-openebs-pvc
 
 NAME                   STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS        AGE
-postgres-openebs-pvc   Bound    pvc-2aa4e773-290f-4a6b-839f-789f0e86b75d   3Gi        RWO            openebs-custom-sc   12s
+postgres-openebs-pvc   Bound    pvc-2aa4e773-290f-4a6b-839f-789f0e86b75d   3Gi        RWO            longhorn   12s
 ```
 
 8. Nous pouvons également voir qu'un pv a été généré de façon automatique :
@@ -296,7 +296,7 @@ postgres-openebs-pvc   Bound    pvc-2aa4e773-290f-4a6b-839f-789f0e86b75d   3Gi  
 training@master$ kubectl get pv -n storage
 
 NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS     CLAIM                          STORAGECLASS          REASON   AGE
-pvc-2aa4e773-290f-4a6b-839f-789f0e86b75d   3Gi        RWO            Delete           Bound      storage/postgres-openebs-pvc   openebs-custom-sc              52s
+pvc-2aa4e773-290f-4a6b-839f-789f0e86b75d   3Gi        RWO            Delete           Bound      storage/postgres-openebs-pvc   longhorn              52s
 ```
 
 ## Clean Up

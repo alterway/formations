@@ -144,7 +144,7 @@ spec:
         resources:
           requests:
             storage: 5Gi
-        storageClassName: openebs-custom-sc
+        storageClassName: longhorn
     config:
       node.master: true
       node.data: true
