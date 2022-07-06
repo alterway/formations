@@ -1,7 +1,14 @@
 # ConfigMaps
 
 
-### All in One
+
+<hr>
+
+Machine : **master**
+
+<hr>
+
+## All in One
 
 
 1. Commençons par définir un manifest :
