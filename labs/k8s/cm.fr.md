@@ -82,7 +82,7 @@ spec:
   containers:
     - name: test-container
       image: k8s.gcr.io/busybox
-      command: [ "/bin/sh", "-c", "cat /etc/config/" ]
+      command: [ "/bin/sh", "-c", "cat /etc/config/redis-config" ]
       volumeMounts:
       - name: redis-conf-volume
         mountPath: /etc/config
