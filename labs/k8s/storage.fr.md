@@ -366,13 +366,14 @@ pod "postgres-with-pvc-pod" deleted
 pod "postgres-with-longhorn-pvc-pod" deleted
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-<hr>
 
-## Clean Up
 
 <hr>
 
-ConfigMaps
+## ConfigMaps
+
+
+<hr>
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
 apiVersion: v1
