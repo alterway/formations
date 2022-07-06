@@ -16,10 +16,35 @@ Machine : **master**
 
 1. Commençons par installer l'ingress controller Nginx via Helm :
 
+
+- creer un fichier values.yaml avec les valeurs suivantes :
+
+en modifiant IP-PUB-MASTER et IP-PRIV-MASTER par vos valeurs
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
+controller:
+  hostNetwork: true
+  hostPort:
+    enabled: true
+    ports:
+      http: 80
+      https: 443
+  service:
+    enabled: true
+    externalIPs:
+      - IP-PUB-MASTER
+      - IP-PRIV-MASTER
+    type: NodePort
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- Déployer le chart Helm
+
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
  kubectl create namespace ingress-nginx
  helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
- helm install ingress-nginx ingress-nginx/ingress-nginx --namespace ingress-nginx
+ # helm install ingress-nginx ingress-nginx/ingress-nginx --namespace ingress-nginx
+
+ helm upgrade --install ingress-nginx ingress-nginx/ingress-nginx --namespace ingress-nginx --create-namespace -f values.yaml
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
@@ -144,7 +169,7 @@ service/ingress-httpd-service created
 Avec le contenu yaml suivant
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
@@ -159,13 +184,17 @@ spec:
           - path: /nginx
             pathType: Prefix
             backend:
-              serviceName: ingress-nginx-service
-              servicePort: 80
+              service:
+                name: ingress-nginx-service
+                port:
+                  number: 80
           - path: /httpd
             pathType: Prefix
             backend:
-              serviceName: ingress-httpd-service
-              servicePort: 80
+              service:
+                 name: ingress-httpd-service
+                 port:
+                   number: 80
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 7. Créons maintenant cet ingress :
@@ -303,16 +332,24 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: ingress-nginx-service
-              servicePort: 80
+            pathType: Prefix
+              service:
+                name: ingress-nginx-service
+                port: 
+                  number: 80
             path: /
+            pathType: Prefix
     - host: httpd.example.com
       http:
         paths:
           - backend:
-              serviceName: ingress-httpd-service
-              servicePort: 80
+            pathType: Prefix
+              service:
+                name: ingress-httpd-service
+                port: 
+                  number: 80
             path: /
+            pathType: Prefix
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 12. Créons cet ingress :
