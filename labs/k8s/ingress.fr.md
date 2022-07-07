@@ -319,7 +319,7 @@ Commercial support is available at
 Avec le contenu yaml suivant :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
@@ -332,10 +332,9 @@ spec:
       http:
         paths:
           - backend:
-            pathType: Prefix
               service:
                 name: ingress-nginx-service
-                port: 
+                port:
                   number: 80
             path: /
             pathType: Prefix
@@ -343,10 +342,9 @@ spec:
       http:
         paths:
           - backend:
-            pathType: Prefix
               service:
                 name: ingress-httpd-service
-                port: 
+                port:
                   number: 80
             path: /
             pathType: Prefix
