@@ -10,7 +10,7 @@ Pour commencer, il faut mettre à jour kubeadm :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 sudo apt-mark unhold kubeadm
-sudo apt-get install kubeadm=1.20.7-00
+sudo apt-get install kubeadm=1.21.14-0
 sudo apt-mark hold kubeadm
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -19,7 +19,7 @@ Vérifions la version de kubeadm :
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubeadm version
 
-kubeadm version: &version.Info{Major:"1", Minor:"19", GitVersion:"v1.20.7", GitCommit:"1e11e4a2108024935ecfcb2912226cedeafd99df", GitTreeState:"clean", BuildDate:"2020-10-14T12:47:53Z", GoVersion:"go1.15.2", Compiler:"gc", Platform:"linux/amd64"}
+kubeadm version: &version.Info{Major:"1", Minor:"19", GitVersion:"v1.21.14", ...}
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Nous devons maintenant drain le noeud master afin de pouvoir faire l’upgrade dessus :
@@ -35,23 +35,23 @@ _____________________________________________________________________
 
 Components that must be upgraded manually after you have upgraded the control plane with 'kubeadm upgrade apply':
 COMPONENT   CURRENT        AVAILABLE
-kubelet     3 x v1.19.11   v1.20.8
+kubelet     3 x v1.21.14     v1.21.14
 
 Upgrade to the latest stable version:
 
 COMPONENT                 CURRENT    AVAILABLE
-kube-apiserver            v1.19.11   v1.20.8
-kube-controller-manager   v1.19.11   v1.20.8
-kube-scheduler            v1.19.11   v1.20.8
-kube-proxy                v1.19.11   v1.20.8
+kube-apiserver            v1.21.14   v1.21.14
+kube-controller-manager   v1.21.14   v1.21.14
+kube-scheduler            v1.21.14   v1.21.14
+kube-proxy                v1.21.14   v1.21.14
 CoreDNS                   1.7.0      1.7.0
 etcd                      3.4.13-0   3.4.13-0
 
 You can now apply the upgrade by executing the following command:
 
-        kubeadm upgrade apply v1.20.8
+        kubeadm upgrade apply v1.21.14
 
-Note: Before you can perform this upgrade, you have to update kubeadm to v1.20.8.
+Note: Before you can perform this upgrade, you have to update kubeadm to v1.21.14.
 
 _____________________________________________________________________
 
@@ -61,11 +61,11 @@ _____________________________________________________________________
 Nous pouvons maintenant upgrade les composants du cluster :
 
 
-`sudo kubeadm upgrade apply v1.20.7`
+`sudo kubeadm upgrade apply v1.21.14`
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 ...
-[upgrade/successful] SUCCESS! Your cluster was upgraded to "v1.19.11". Enjoy!
+[upgrade/successful] SUCCESS! Your cluster was upgraded to "v1.21.14". Enjoy!
 
 [upgrade/kubelet] Now that your control plane is upgraded, please proceed with upgrading your kubelets if you haven't already done so.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -81,7 +81,7 @@ Nous devons maintenant mettre à jour la kubelet et kubectl :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 sudo apt-mark unhold kubectl kubelet
-sudo apt-get install kubectl=1.20.7-00 kubelet=1.20.7-00
+sudo apt-get install kubectl=1.21.14-00 kubelet=1.21.14-00
 sudo apt-mark hold kubectl kubelet
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -98,7 +98,7 @@ A faire sur les noeud 1 et 2
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 training@node1$ sudo apt-mark unhold kubeadm
-training@node1$ sudo apt-get install kubeadm=1.20.7-00
+training@node1$ sudo apt-get install kubeadm=1.21.14-00
 training@node1$ sudo apt-mark hold kubeadm
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -131,7 +131,7 @@ Enfin, comme pour le master nous devons mettre a jour la kubelet et kubectl :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 training@node1$ sudo apt-mark unhold kubectl kubelet
-training@node1$ sudo apt-get install kubectl=1.20.7-00 kubelet=1.20.7-00
+training@node1$ sudo apt-get install kubectl=1.21.14-00 kubelet=1.21.14-00
 training@node1$ sudo apt-mark hold kubectl kubelet
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -154,8 +154,8 @@ Nous pouvons maintenant lister les noeuds :
 kubectl get nodes
 
 NAME     STATUS   ROLES    AGE   VERSION
-master   Ready    master   22m   v1.20.5
-node1   Ready    <none>   21m   v1.19.5
+master   Ready    master   22m   v1.21.14
+node1   Ready     <none>   21m    v1.20.7
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Et lister les pods pour vérifier que tout est fonctionnel :
