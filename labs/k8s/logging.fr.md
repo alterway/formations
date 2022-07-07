@@ -298,7 +298,7 @@ metadata:
   name: filebeat
 spec:
   type: filebeat
-  version: 7.9.2
+  version: 7.9.3
   elasticsearchRef:
     name: elasticsearch
   config:
