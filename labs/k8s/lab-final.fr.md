@@ -110,4 +110,86 @@
 15. Installez le helm chart de wordress disponible sur ce lien. Modifier le type de service par défaut définit dans le fichier values.yaml en NodePort.
 
 
+
+16. TroubleShooting : Faire en sorte que l'application fonctionne correctement et puisse afficher une page web avec le calcul de Pi. Corrigez toutes les erreurs dans le `deployment`et les `service`
+
+```yaml
+# BUT : faire fonctionner l'application sur curl http://QuelqueChose:8020 
+ 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pi-web
+  labels:
+    k8s.alterwaylabs.fr: troubleshooting
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: pi-web
+  template:
+    metadata:
+      labels:
+        app: pi-web-app
+    spec:
+      containers:
+        - image: kiamol/ch05-pi-app
+          command: ["donet", "Pi.Web.dll", "-m", "web"]
+          name: web
+          ports:
+            - containerPort: 80
+              name: http
+          resources:
+            limits:
+              cpu: "32"
+              memory: "128Gi"
+          readinessProbe:
+            tcpSocket:
+              port: 8020
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /healthy
+              port: 80
+            periodSeconds: 30
+            failureThreshold: 1
+ 
+ 
+---
+ 
+apiVersion: v1
+kind: Service
+metadata:
+  name: pi-np
+  labels:
+    k8s.alterwaylabs.fr: troubleshooting
+spec:
+  selector:
+    app: pi-web-pod
+  ports:
+    - name: http
+      port: 8020
+      targetPort: app
+      nodePort: 8020
+  type: NodePort
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: pi-lb
+  labels:
+    k8s.alterwaylabs.fr: troubleshooting
+spec:
+  selector:
+    app: pi-web-pod
+  ports:
+    - name: http
+      port: 8020
+      targetPort: app
+  type: ClusterIP
+```
+
 <hr>
