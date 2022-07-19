@@ -14,25 +14,25 @@ kubectl create namespace scheduling
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ## Taints and Tolerations
 
-1. Nous allons commencer par mettre un **taint** sur les noeuds node1 et node2:
+1. Nous allons commencer par mettre un **taint** sur les noeuds worker-0 et worker-1:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-kubectl taint nodes node1 dedicated=experimental:NoSchedule
+kubectl taint nodes worker-0 dedicated=experimental:NoSchedule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-*node/node1 tainted*
+*node/worker-0 tainted*
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-kubectl taint nodes node2 dedicated=experimental:NoSchedule
+kubectl taint nodes worker-1 dedicated=experimental:NoSchedule
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-*node/node2 tainted*
+*node/worker-1 tainted*
 
 
 2. Nous pouvons faire un describe sur le noeud pour voir que notre taint a bien été prise en compte :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-kubectl describe node node1
+kubectl describe node worker-0
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
@@ -82,7 +82,7 @@ NAME                     READY   STATUS    RESTARTS   AGE   IP       NODE     NO
 pod-without-toleration   0/1     Pending   0          11m   <none>   <none>   <none>           <none>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Notre pod n’ayant pas de toleration pour la taint que nous avons mis sur les noeuds node1 et node2, il n'a pu être déployé.
+Notre pod n’ayant pas de toleration pour la taint que nous avons mis sur les noeuds worker-0 et worker-1, il n'a pu être déployé.
 
 6. Définissons maintenant un pod avec un toleration avec la taint définie plus haut :
 
@@ -126,10 +126,10 @@ kubectl get pods -n scheduling pod-toleration -o wide
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 NAME             READY   STATUS    RESTARTS   AGE   IP          NODE     NOMINATED NODE   READINESS GATES
-pod-toleration   1/1     Running   0          49s   10.44.0.1   node1   <none>           <none>
+pod-toleration   1/1     Running   0          49s   10.44.0.1   worker-0   <none>           <none>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Le pod peut maintenant être schedulé sur le noeud node1
+Le pod peut maintenant être schedulé sur le noeud worker-0
 
 9. Supprimons les objets créés dans cet exercice :
 
@@ -142,16 +142,16 @@ kubectl delete -f pod-toleration.yaml -f pod-without-toleration.yaml
 *pod "pod-without-toleration" deleted*
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-kubectl taint nodes node1 dedicated:NoSchedule-
+kubectl taint nodes worker-0 dedicated:NoSchedule-
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-*node/node1 untainted*
+*node/worker-0 untainted*
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-kubectl taint nodes node2 dedicated:NoSchedule-
+kubectl taint nodes worker-1 dedicated:NoSchedule-
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-*node/node2 untainted*
+*node/worker-1 untainted*
 
 <hr>
 
@@ -167,23 +167,23 @@ kubectl taint nodes master node-role.kubernetes.io/master:NoSchedule-
 *node/master untainted*
 
 
-2. Nous allons commencer par mettre un label sur le noeud node2 “disk=ssd” :
+2. Nous allons commencer par mettre un label sur le noeud worker-1 “disk=ssd” :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-kubectl label nodes node2 disk=ssd
+kubectl label nodes worker-1 disk=ssd
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-*node/node2 labeled*
+*node/worker-1 labeled*
 
 
-3. Nous pouvons faire un describe sur le noeud node2 pour voir que notre label a bien été pris en compte :
+3. Nous pouvons faire un describe sur le noeud worker-1 pour voir que notre label a bien été pris en compte :
   
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-kubectl describe nodes node2
+kubectl describe nodes worker-1
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
-Name:               node2
+Name:               worker-1
 Roles:              <none>
 Labels:             beta.kubernetes.io/arch=amd64
                     beta.kubernetes.io/os=linux
@@ -193,7 +193,7 @@ Labels:             beta.kubernetes.io/arch=amd64
                     kubernetes.io/os=linux
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-4. Définissons un pod que l’on va scheduler sur le noeud node2 à l’aide du label défini ci-dessus :
+4. Définissons un pod que l’on va scheduler sur le noeud worker-1 à l’aide du label défini ci-dessus :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 touch pod-nodeselector.yaml
@@ -231,10 +231,10 @@ kubectl get pods -n scheduling pod-nodeselector -o wide
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 NAME               READY   STATUS    RESTARTS   AGE   IP          NODE     NOMINATED NODE   READINESS GATES
-pod-nodeselector   1/1     Running   0          17s   10.44.0.1   node2   <none>           <none>
+pod-nodeselector   1/1     Running   0          17s   10.44.0.1   worker-1   <none>           <none>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-*Sans surprise, sur le noeud node2.*
+*Sans surprise, sur le noeud worker-1.*
 
 7. Supprimons le pod créé dans cet exercice :
 
@@ -250,7 +250,7 @@ kubectl delete -f pod-nodeselector.yaml
 
 <hr>
 
-1. Définissons un pod, avec une nodeAffinity lui imposant d’aller dans un noeud ayant comme label “disk=ssd”, autrement dit le noeud node2 :
+1. Définissons un pod, avec une nodeAffinity lui imposant d’aller dans un noeud ayant comme label “disk=ssd”, autrement dit le noeud worker-1 :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 touch pod-nodeaffinity.yaml
@@ -300,10 +300,10 @@ kubectl get pods -n scheduling pod-nodeaffinity -o wide
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 NAME               READY   STATUS    RESTARTS   AGE   IP          NODE     NOMINATED NODE   READINESS GATES
-pod-nodeaffinity   1/1     Running   0          36s   10.44.0.1        node2   <none>           <none>
+pod-nodeaffinity   1/1     Running   0          36s   10.44.0.1        worker-1   <none>           <none>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-*Sans surprise, dans le noeud node2.*
+*Sans surprise, dans le noeud worker-1.*
 
 <hr>
 
@@ -363,7 +363,7 @@ NAME                  READY   STATUS    RESTARTS   AGE   IP          NODE     NO
 pod-podantiaffinity   1/1     Running   0          14s   10.32.0.4   master   <none>           <none>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Cette fois-ci, soit sur le noeud master ou node1.
+Cette fois-ci, soit sur le noeud master ou worker-0.
 
 <hr>
 

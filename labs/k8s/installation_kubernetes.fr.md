@@ -137,7 +137,7 @@ rm -rf ~/.minikube
 ## Installation avec Kubeadm
 
 <hr>
-Machines : **master**, **node1**, **node2**
+Machines : **master**, **worker-0**, **worker-1**
 <hr>
 
 Mettre à jour le fichier /etc/hosts en renseignant les IP des trois VM. **Prenez soin de remplacer les adresses IP par celles de vos VM.**
@@ -147,8 +147,8 @@ exemple :
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 # /etc/hosts file
 10.10.4.80 master
-10.10.4.81 node1
-10.10.4.82 node2
+10.10.4.81 worker-0
+10.10.4.82 worker-1
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Le contenu du fichier /etc/hosts doit être identique sur les trois machines.
@@ -217,7 +217,7 @@ kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl versio
 
 
 
-6. Nous allons maintenant ajouter les deux noeuds worker à notre cluster. Pour ce faire, nous allons utiliser la commande suivante sur les noeuds worker node1 et node2:
+6. Nous allons maintenant ajouter les deux noeuds worker à notre cluster. Pour ce faire, nous allons utiliser la commande suivante sur les noeuds worker worker-0 et worker-1:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 training@worker$ sudo kubeadm join INTERNAL_MASTER_IP:6443 --token TOKEN --discovery-token-ca-cert-hash DISC_TOKEN --node-name worker 
@@ -241,8 +241,8 @@ kubectl get nodes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 NAME     STATUS   ROLES    AGE     VERSION
 master   Ready    master   25m     v1.19.3
-node1   Ready    <none>   2m24s   v1.19.3
-node2   Ready    <none>   1m24s   v1.19.3
+worker-0   Ready    <none>   2m24s   v1.19.3
+worker-1   Ready    <none>   1m24s   v1.19.3
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 

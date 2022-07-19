@@ -86,7 +86,7 @@ kubectl taint node master node-role.kubernetes.io/master="":NoSchedule
 ```bash
 
 kubectl label node master node-exporter=true
-kubectl label node node1 node-exporter=true
+kubectl label node worker-0 node-exporter=true
 
 ```
 

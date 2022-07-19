@@ -58,7 +58,7 @@
 
 
 
-10. Le Daemonset précédemment créé est présent sur tous les nœuds du cluster. Nous ne souhaitons plus qu’il tourne sur le nœud node2. Trouvez la bonne stratégie pour que prometheus-daemonset ne soit présent que sur le node1 et le master
+10. Le Daemonset précédemment créé est présent sur tous les nœuds du cluster. Nous ne souhaitons plus qu’il tourne sur le nœud worker-1. Trouvez la bonne stratégie pour que prometheus-daemonset ne soit présent que sur le worker-0 et le master
 
 
 

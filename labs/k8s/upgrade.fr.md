@@ -1,7 +1,7 @@
 #  Mise a jour d’un cluster
 
 <hr>
-Machine : **master**, **node1**, **node2**
+Machine : **master**, **worker-0**, **worker-1**
 <hr>
 
 
@@ -97,9 +97,9 @@ Nous devons maintenant mettre à jour les workers :
 A faire sur les noeud 1 et 2
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-training@node1$ sudo apt-mark unhold kubeadm
-training@node1$ sudo apt-get install kubeadm=1.21.14-00
-training@node1$ sudo apt-mark hold kubeadm
+training@worker-0$ sudo apt-mark unhold kubeadm
+training@worker-0$ sudo apt-get install kubeadm=1.21.14-00
+training@worker-0$ sudo apt-mark hold kubeadm
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Comme pour le master, nous devons drain les noeuds workers :
@@ -107,13 +107,13 @@ Comme pour le master, nous devons drain les noeuds workers :
 Répéter les actions pour le noeud 2 noeud par noeud (pas en // )
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-kubectl drain node1 --ignore-daemonsets
+kubectl drain worker-0 --ignore-daemonsets
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Nous devons maintenant mettre a jour la configuration de notre node1 :
+Nous devons maintenant mettre a jour la configuration de notre worker-0 :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-training@node1$ sudo kubeadm upgrade node
+training@worker-0$ sudo kubeadm upgrade node
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
@@ -130,22 +130,22 @@ training@node1$ sudo kubeadm upgrade node
 Enfin, comme pour le master nous devons mettre a jour la kubelet et kubectl :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-training@node1$ sudo apt-mark unhold kubectl kubelet
-training@node1$ sudo apt-get install kubectl=1.21.14-00 kubelet=1.21.14-00
-training@node1$ sudo apt-mark hold kubectl kubelet
+training@worker-0$ sudo apt-mark unhold kubectl kubelet
+training@worker-0$ sudo apt-get install kubectl=1.21.14-00 kubelet=1.21.14-00
+training@worker-0$ sudo apt-mark hold kubectl kubelet
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 En prenant soin de redémarrer la kubelet :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-training@node1$ sudo systemctl daemon-reload
-training@node1$ sudo systemctl restart kubelet
+training@worker-0$ sudo systemctl daemon-reload
+training@worker-0$ sudo systemctl restart kubelet
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Sans oublier de remettre le noeud en marche :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-kubectl uncordon node1
+kubectl uncordon worker-0
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Nous pouvons maintenant lister les noeuds :
@@ -155,7 +155,7 @@ kubectl get nodes
 
 NAME     STATUS   ROLES    AGE   VERSION
 master   Ready    master   22m   v1.21.14
-node1   Ready     <none>   21m    v1.20.7
+worker-0   Ready     <none>   21m    v1.20.7
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Et lister les pods pour vérifier que tout est fonctionnel :
