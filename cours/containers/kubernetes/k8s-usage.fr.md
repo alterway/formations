@@ -291,8 +291,8 @@ curl -sk https://<IP PRIV>/api/v1/namespaces/kube-public/configmaps/cluster-info
 - ex:
   
 ```console
- kubectl describe node/node1
- kubectl describe node node1
+ kubectl describe node/worker-0
+ kubectl describe node worker-0
 ```
 
 

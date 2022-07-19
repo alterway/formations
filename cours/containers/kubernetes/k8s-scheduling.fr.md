@@ -34,13 +34,13 @@ En ligne de commande
 
 - Ajouter un taint
     - `kubectl taint nodes THENODE special=true:NoExecute`
-    - `kubectl taint node node1 node-role.kubernetes.io/master="":NoSchedule`
-    - `kubectl taint node node2 test:NoSchedule`
+    - `kubectl taint node worker-0 node-role.kubernetes.io/master="":NoSchedule`
+    - `kubectl taint node worker-2 test:NoSchedule`
 
 - Supprimer un taint
     - `kubectl taint nodes THENODE special=true:NoExecute-`
-    - `kubectl taint node node1 node-role.kubernetes.io/master-`
-    - `kubectl taint node node2 test:NoSchedule-`
+    - `kubectl taint node worker-0 node-role.kubernetes.io/master-`
+    - `kubectl taint node worker-2 test:NoSchedule-`
 
 - Lister les tains d'un nœud
     - `kubectl get nodes THENODE -o jsonpath="{.spec.taints}"`
@@ -108,7 +108,7 @@ Exemples
 
 - Pose du label sur un nœud
     - `kubectl label nodes <node-name> <label-key>=<label-value>`
-    - ex: `kubectl label nodes node1 disktype=ssd`
+    - ex: `kubectl label nodes worker-0 disktype=ssd`
 
 - Utilisation dans un pod
 
