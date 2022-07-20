@@ -10,7 +10,7 @@ kubectl create namespace resources
 
 <hr>
 
-## Limit/Request for a pod
+## Limits/Requests for a pod
 
 <hr>
 

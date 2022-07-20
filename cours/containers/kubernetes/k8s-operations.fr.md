@@ -256,3 +256,8 @@ kubectl example deploy
 ```
 
 Liste des plugins : <https://krew.sigs.k8s.io/plugins/>
+
+
+----
+
+

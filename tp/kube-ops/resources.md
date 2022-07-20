@@ -8,7 +8,7 @@ training@master$ cd resources
 training@master$ kubectl create namespace resources
 ```
 
-## Limit/Request for a pod
+## Limits/Requests for a pod
 
 1. Nous allons commencer par créer un pod qui réclame des ressources et qui a une limite de ressources également :
 

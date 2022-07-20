@@ -1,6 +1,6 @@
 # KUBERNETES : Gestion des Ressources
 
-### Pods resources : request et limits
+### Pods resources : requests et limits
 
 - Permettent de gérer l'allocation de ressources au sein d'un cluster
 - Par défaut, un pod/container sans request/limits est en *best effort*
@@ -24,7 +24,7 @@
   - `Mi` : en base 2
 - Lorsqu'un conteneur atteint la limite RAM, celui ci est *OOMKilled*
 
-### Pods resources : request et limits
+### Pods resources : requests et limits
 
 ```yaml
 apiVersion: v1

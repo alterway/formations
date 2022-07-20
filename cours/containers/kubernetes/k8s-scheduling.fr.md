@@ -2,7 +2,7 @@
 
 ### Scheduling manuel
 
-### _Taints_ et _Tolerations_
+### Taints et Tolerations
 
 Un nœud avec un taint empêche l'exécution sur lui-même des pods qui ne tolèrent pas ce _taint_
 
@@ -13,7 +13,7 @@ Un nœud avec un taint empêche l'exécution sur lui-même des pods qui ne tolè
 - Les _taints_ sont définis ainsi : `key=value:Effect`
 
 
-### _Taints_ et _Tolerations_ : Champ "Effect"
+### Taints et Tolerations : Champ "Effect"
 
 Ce champ peut avoir 3 valeurs : `NoSchedule`, `PreferNoSchedule`, `NoExecute`
 
@@ -22,13 +22,13 @@ Ce champ peut avoir 3 valeurs : `NoSchedule`, `PreferNoSchedule`, `NoExecute`
 - NoExecute : Contrainte forte, les pods seront expulsés du nœud / ne pourront pas s'exécuter sur le nœuds
 
 
-### _Taints_ et _Tolerations_ : Operateur
+### Taints et Tolerations : Operateur
 
 - Par valeur par défaut est `Equal` (`key=value:Effect`)
 - Mais peut avoir aussi comme valeur `Exist` (`keyExist:Effect`) 
 
 
-### _Taints_ et _Tolerations_ : Utilisation des _taints_
+### Taints et Tolerations : Utilisation des _taints_
 
 En ligne de commande
 
@@ -47,14 +47,14 @@ En ligne de commande
     - `[{"effect":"NoSchedule","key":"node-role.kubernetes.io/master"}]`
 
 
-### _Taints_ et _Tolerations_ : Utilisation des _tolerations_
+### Taints et Tolerations : Utilisation des _tolerations_
 
 - Les _tolerations_ peuvent être décrites au niveau des pods ou au niveau des templates de pods dans les replicaset, daemonset, statefulset et deployment.
 
 - Ces _tolerations_ permettront aux pods de s'exécuter sur les nœuds qui ont le _taint_ correspondant.
 
 
-### _Taints_ et _Tolerations_ : Exemples 
+### Taints et Tolerations : Exemples 
 
 - Quand il n'y a pas de valeur (_value_) dans le taint
 
@@ -69,7 +69,7 @@ spec:
       effect: NoSchedule
 ```
 
-### _Taints_ et _Tolerations_ : Exemples (suite)
+### Taints et Tolerations : Exemples (suite)
 
 - Quand il y a une valeur (_value_)
 
@@ -87,7 +87,7 @@ spec:
 ```
 
 
-### _Taints_ et _Tolerations_ : Cas particulier
+### Taints et Tolerations : Cas particulier
 
 Une clé vide avec un opérateur _Exist_ fera en sorte que le pod s'exécutera sur tous les nœuds quelque soit leurs _taints_
 
