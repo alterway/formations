@@ -23,7 +23,7 @@ en modifiant IP-PUB-MASTER et IP-PRIV-MASTER par vos valeurs
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
 controller:
-  hostNetwork: true
+  hostNetwork: false
   hostPort:
     enabled: true
     ports:
