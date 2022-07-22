@@ -1,6 +1,5 @@
 # Lab final
 
-
 <hr>
 
 ## A vous de jouer !

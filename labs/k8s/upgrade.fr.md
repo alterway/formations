@@ -5,7 +5,6 @@ Machine : **master**, **worker-0**, **worker-1**
 <hr>
 
 
-
 Pour commencer, il faut mettre à jour kubeadm :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
@@ -106,6 +105,8 @@ Comme pour le master, nous devons drain les noeuds workers :
 
 Répéter les actions pour le noeud 2 noeud par noeud (pas en // )
 
+
+Sur le <font color=red><b>master</b></font>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl drain worker-0 --ignore-daemonsets
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

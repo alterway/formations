@@ -12,7 +12,6 @@ sed -E 's#^(.*)\$.*\$(.*)#build/\1.md: $(addsuffix .fr.md, $(addprefix cours/, \
 echo >> build/Makefile
  
 echo -n 'all=' >> build/Makefile
- 
 for i in `cut -d '$' -f1 build/cours.list`; do echo -n "$i " >> build/Makefile; done
  
 echo >> build/Makefile
@@ -20,16 +19,16 @@ echo >> build/Makefile
 for i in `cut -d '$' -f1 build/cours.list`; do echo "$i: $i.html $i.pdf $i-handout.pdf $i-print.pdf" >> build/Makefile; done
  
 
-# Make data base, printed on Thu Jul 21 08:41:51 2022
+# Make data base, printed on Fri Jul 22 14:21:24 2022
 
 # Variables
 
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
- 
 # automatic
 ?F = $(notdir $?)
 # environment
+ 
 ELECTRON_NO_ATTACH_CONSOLE = 1
 # environment
 VSCODE_LOG_NATIVE = false
@@ -62,7 +61,7 @@ __CFBundleIdentifier = com.microsoft.VSCode
 # environment
 P9K_SSH = 0
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/h2/12qsmrms09b5d8_g44gl87zm0000gn/T/vscode-ipc-454b6214-3331-42a2-885d-6e7869f1a3f5.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/h2/12qsmrms09b5d8_g44gl87zm0000gn/T/vscode-ipc-69248c1f-59d3-4f4c-b0b0-0680abe11ec9.sock
 # environment
 VSCODE_CWD = /Users/hleclerc/dev/projects/formations/formations-aw/labs
 # environment
@@ -245,6 +244,7 @@ institute = "alter way Cloud Consulting"
 
 %: %.html %.pdf %-handout.pdf %-print.pdf
 
+ 
 build/%.tex: build/%.md
 #  commands to execute (from `Makefile', line 62):
 	pandoc $< -t beamer -f markdown -s -o $@ --slide-level 3 -V theme=metropolis -H styles/beamer.custom \
@@ -252,7 +252,6 @@ build/%.tex: build/%.md
 	
 
 build/%-handout.tex: build/%.md
- 
 #  commands to execute (from `Makefile', line 66):
 	pandoc $< -t beamer -f markdown -s -o $@ --slide-level 3 -V theme=metropolis -H styles/beamer.custom -V handout \
 	-V title=$(title) -V institute=$(institute) -V author=$(author) -V date=$(date)
@@ -317,7 +316,7 @@ all-pdf:
 
 build/cours.list: cours.json
 #  Implicit rule search has not been done.
-#  Last modified 2022-07-21 08:41:51
+#  Last modified 2022-07-22 14:21:24
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -354,7 +353,7 @@ build/Makefile: build/cours.list
 #  A default, MAKEFILES, or -include/sinclude makefile.
 #  Implicit rule search has not been done.
 #  Implicit/static pattern stem: `'
-#  Last modified 2022-07-21 08:41:51
+#  Last modified 2022-07-22 14:21:24
 #  File has been updated.
 #  Successfully updated.
 # automatic
@@ -434,7 +433,7 @@ all-html:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4072 / max = 4072 / min = 4072 / avg = 4072
 
-# Finished Make data base on Thu Jul 21 08:41:51 2022
+# Finished Make data base on Fri Jul 22 14:21:24 2022
 
  
 # GNU Make 3.81
@@ -446,16 +445,16 @@ all-html:
 # This program built for i386-apple-darwin11.3.0
  
 
-# Make data base, printed on Thu Jul 21 08:41:51 2022
+# Make data base, printed on Fri Jul 22 14:21:24 2022
 
 # Variables
 
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
+ 
 ?F = $(notdir $?)
 # environment
- 
 ELECTRON_NO_ATTACH_CONSOLE = 1
 # environment
 VSCODE_LOG_NATIVE = false
@@ -488,7 +487,7 @@ __CFBundleIdentifier = com.microsoft.VSCode
 # environment
 P9K_SSH = 0
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/h2/12qsmrms09b5d8_g44gl87zm0000gn/T/vscode-ipc-454b6214-3331-42a2-885d-6e7869f1a3f5.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/h2/12qsmrms09b5d8_g44gl87zm0000gn/T/vscode-ipc-69248c1f-59d3-4f4c-b0b0-0680abe11ec9.sock
 # environment
 VSCODE_CWD = /Users/hleclerc/dev/projects/formations/formations-aw/labs
 # environment
@@ -600,6 +599,7 @@ NVM_DIR = /Users/hleclerc/.nvm
 # environment
 XPC_SERVICE_NAME = application.com.microsoft.VSCode.1644698.1644704.7BE162F8-646E-482A-92D5-9BBC19702EAF
 # environment
+ 
 LC_TERMINAL_VERSION = 3.4.16
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
@@ -639,7 +639,6 @@ _CE_M =
 cours = cours.json
 # environment
 MAKELEVEL := 0
- 
 # environment
 CONDA_PREFIX = /opt/homebrew/anaconda3
 # environment
@@ -748,7 +747,7 @@ all-pdf:
 
 build/cours.list: cours.json
 #  Implicit rule search has not been done.
-#  Last modified 2022-07-21 08:41:51
+#  Last modified 2022-07-22 14:21:24
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -784,7 +783,7 @@ help:
 build/Makefile: build/cours.list
 #  A default, MAKEFILES, or -include/sinclude makefile.
 #  Implicit rule search has not been done.
-#  Last modified 2022-07-21 08:41:51
+#  Last modified 2022-07-22 14:21:24
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -816,6 +815,7 @@ clean:
 # Not a target:
 cours.json:
 #  Implicit rule search has been done.
+ 
 #  Last modified 2022-05-31 08:55:21
 #  File has been updated.
 #  Successfully updated.
@@ -848,6 +848,6 @@ all-html:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4072 / max = 4072 / min = 4072 / avg = 4072
 
-# Finished Make data base on Thu Jul 21 08:41:51 2022
+# Finished Make data base on Fri Jul 22 14:21:24 2022
 
  

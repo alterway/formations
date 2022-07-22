@@ -1,36 +1,35 @@
 <hr>
 # Solutions pour le lab
-
 <hr>
 
 Troubleshooting Deployments
 
-Fixes:
+Fix:
 
-Edited the labels in the Pod spec to match the Deployment selector.
+**Deployments**
 
-Set the replica count to 1. 0 is perfectly valid, you may want to save compute power when an app's not in use, but it's not a great default :)
+- Labels dans les spec du pod pour le rattachement au deploy
 
-Reduced resource requests. Large numbers are valid, but if there are no nodes in the cluster which can provide the power, the Pod stays pending.
+- Replicas à 0 >> 1
 
-Fixed the image name. ErrImagePull tells you the image name is incorrect or your Pod doesn't have permission to pull a private image.
+- Limits / Requests trop élévée
 
-Fix typo in the container command. RunContainerError tells you Kubernetes can't get the container running - you'll see the error in the Pod logs or description, depending on the failure.
+- Nom de l'image >> aller voir sur le hub docker
 
-Fix readiness probe. It's set to check a TCP socket is listening, but it's using the wrong port. 8020 is the Service port, the app in the container uses port 80.
+- Command au niveau de conteneur avec typo
 
-Fix liveness probe. It's set to check an HTTP endpoint, but /healthy doesn't exist - a 404 response means a failed probe.
+- Readiness probe mauvais port
 
-Troubleshooting Services
+- Liveness /healthy >> /health
 
-Fixes:
 
-Fixed the target port for the NodePort Service, 8020 is not valid.
+**Services**
 
-Edited the Service selector to match the labels in the Pod spec. If there are no endpoints, that means there are no matching Pods.
+- target port 8020 invalide
 
-Fixed the target port name in the Service spec to match the container spec. Using names instead of port numbers is more flexible, but if the names don't match you won't see an error - just an empty endpoint list.
+- Service pod selector invalide
 
+- Service port name invalide
 
 
 
