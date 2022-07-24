@@ -405,6 +405,11 @@ Commercial support is available at
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
+<hr>
+
+Machine : **master**
+
+<hr>
 
 ## Canary Deployment
 
@@ -414,7 +419,7 @@ Le **NGINX Ingress Controller**  prend en charge les politiques de répartition 
 
 Le **NGINX Ingress Controller** utilise les annotations suivantes pour activer les déploiements Canary :
 
-```yaml
+```
 - nginx.ingress.kubernetes.io/canary-by-header
 
 - nginx.ingress.kubernetes.io/canary-by-header-value
@@ -428,11 +433,11 @@ Le **NGINX Ingress Controller** utilise les annotations suivantes pour activer l
 
 Les règles s'appliquent dans cet ordre :
 
-- canary-by-header
+- canary-by-header 
 
-- canary-by-cookie
+- canary-by-cookie 
 
-- canary-weight
+- canary-weight 
 
 Les déploiements Canary nécessitent que vous créiez deux entrées : une pour le trafic normal et une pour le trafic alternatif. Sachez que vous ne pouvez appliquer qu'une seule entrée Canary.
 
@@ -443,11 +448,11 @@ Vous activez une règle de répartition du trafic particulière en définissant 
 
 Exemple : 
 
-1. Déployer les applications et services suivant
+1. Déployer les applications et services suivants
 
 - Application V1 :
 
-```yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
 
 apiVersion: v1
 kind: Service
@@ -491,11 +496,11 @@ spec:
               protocol: TCP
               containerPort: 80
 
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
 - Application V2 :
 
-```yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
 apiVersion: v1
 kind: Service
 metadata:
@@ -538,11 +543,11 @@ spec:
               protocol: TCP
               containerPort: 80
 
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
 2. Déployer l'ingress de l'application v1
 
-```yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -564,14 +569,14 @@ spec:
                 port:
                   number: 80
 
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
 3. Vérifiez qu'il fonctionne
 
-```bash
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 curl -H "Host: canary.example.com" http://<IP_ADDRESS>:<PORT>/echo
 
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 4. Vous devriez avoir la réponse suivante
 
 **echo-v2**
@@ -580,7 +585,7 @@ curl -H "Host: canary.example.com" http://<IP_ADDRESS>:<PORT>/echo
 
 Deployez l'ingress suivant :
 
-```yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -605,33 +610,35 @@ spec:
                 port:
                   number: 80
 
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
 6. Faire les test suivants
 
-```bash
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 curl   -H "Host: canary.example.com" -H "Region: us" http://<IP_ADDRESS>:<PORT>/echo
 curl   -H "Host: canary.example.com" -H "Region: de" http://<IP_ADDRESS>:<PORT>/echo
 curl   -H "Host: canary.example.com"                 http://<IP_ADDRESS>:<PORT>/echo
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
 7. Résultats
 
-**echo-v2**
-**echo-v1**
+**echo-v2**  
+
+**echo-v1**  
+
 **echo-v1**
 
 8. Supprimer l'ingress ingress-echo-canary-header
 
-```bash
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl delete ingress ingress-echo-canary-header
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
 9. Test : Par cookie
 
 Déployez l'ingress suivant :
 
-```yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -655,34 +662,37 @@ spec:
                 port:
                   number: 80
 
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
 10. Faire les test suivants
 
-```bash
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 curl -s --cookie "my-cookie=always"  -H "Host: canary.example.com"     http://<IP_ADDRESS>:<PORT>/echo
 curl -s --cookie "other-cookie=always"  -H "Host: canary.example.com"  http://<IP_ADDRESS>:<PORT>/echo
 curl   -H "Host: canary.example.com"                                   http://<IP_ADDRESS>:<PORT>/echo
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
 11. Résultats
 
-**echo-v2**
-**echo-v1**
-**echo-v1**
+**echo-v2**  
+
+**echo-v1**  
+
+**echo-v1**  
+
 
 12. Supprimer l'ingress ingress-echo-canary-cookie
 
-```bash
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl delete ingress ingress-echo-canary-cookie
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
 
 13. Test : Par poids
 
 Déployez l'ingress suivant :
 
-```yaml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -707,22 +717,27 @@ spec:
                 port:
                   number: 80
 
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
 14. faire les tests suivants
 
-```bash
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 
 # 6 fois : 
 curl   -H "Host: canary.example.com"  http://<IP_ADDRESS>:<PORT>/echo
 
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
 15. Vérifiez bien que vous avez une répartition de 50% entre echo-v1 et echo-v2
 
-16. Utilisez en l'adaptant (url) le fichier: script.js
+16. Installer k6: https://k6.io/docs/getting-started/installation/
 
-```javascript
+
+Utilisez en l'adaptant (url) le fichier: script.js
+
+Modifiez `http://localhost/echo` par `http://ip-pub-loadbalancer/echo`
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ javascript
 
 import http from 'k6/http';
 import {check, sleep} from 'k6';
@@ -776,7 +791,7 @@ export default function () {
 }
 
 
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
 et lancez le de la manière suivante 
 
