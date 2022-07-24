@@ -258,41 +258,26 @@ Parfait !
 
 Nous allons déployer une stack de monitoring basée sur Prometheus et Grafana via Helm.
 
-1. Commençons par créer le fichier values.yaml pour prometheus :
+1. Commençons par créer le fichier values.yaml pour le chart :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-touch prometheus-values.yaml
+touch kube-prometheus-stack.yaml
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Avec le contenu yaml suivant :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
-alertmanager:
-  persistentVolume:
-    storageClass: "longhorn"
-server:
-  persistentVolume:
-    storageClass: "longhorn"
+grafana:
+   adminPassword: prom-passw0rd
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-2. Nous pouvons donc installer Prometheus via Helm :
+2. Nous pouvons donc installer la stack prometheus via Helm :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-helm install prometheus prometheus-community/prometheus --values prometheus-values.yaml --namespace monitoring
+helm upgrade --install prometheus prometheus-community/kube-prometheus-stack --values kube-prometheus-stack.yaml --namespace monitoring --create-namespace
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
-NAME: prometheus
-LAST DEPLOYED: Sun Nov  1 16:16:50 2020
-NAMESPACE: monitoring
-STATUS: deployed
-REVISION: 1
-TEST SUITE: None
-NOTES:
-The Prometheus server can be accessed via port 80 on the following DNS name from within your cluster:
-prometheus-server.monitoring.svc.cluster.local
-...
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 3. Nous pouvons voir les ressources créées de la façon suivante :
 
@@ -300,93 +285,27 @@ prometheus-server.monitoring.svc.cluster.local
 kubectl get all -n monitoring
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-4. Nous pouvons également remarquer que deux PV ont été créés pour les PVC de Prometheus et AlertManager :
+
+4. Nous allons faire un port-forward pour se connecter à notre serveur Prometheus :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-kubectl get pvc -n monitoring
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
-NAME                      STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS        AGE
-prometheus-alertmanager   Bound    pvc-341a1d92-74b4-4ce4-8ad2-8edaf94025c8   2Gi        RWO            longhorn   57s
-prometheus-server         Bound    pvc-d7f3ac24-cb5c-4702-a501-5d8b85bec8e2   8Gi        RWO            longhorn   57s
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-1. Nous allons maintenant passer à l'installation de Grafana. Comme pour Prometheus, nous allons créer un fichier values.yaml pour configurer notre installation :
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-touch grafana-values.yaml
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Avec le contenu yaml suivant :
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
-persistence:
-  enabled: true
-  storageClassName: "longhorn"
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-5. Nous pouvons donc passer à l'installation de Grafana :
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-helm repo add grafana https://grafana.github.io/helm-charts
-helm install grafana grafana/grafana --values grafana-values.yaml --namespace monitoring
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
-NAME: grafana
-LAST DEPLOYED: Sun Nov  1 16:26:28 2020
-NAMESPACE: monitoring
-STATUS: deployed
-REVISION: 1
-NOTES:
-...
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-1. Nous pouvons voir les ressources créées par Grafana de la façon suivante :
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-kubectl get all -n monitoring
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-7. Nous allons faire un port-forward pour se connecter à notre serveur Prometheus :
-
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-kubectl --namespace monitoring port-forward --address 0.0.0.0 service/prometheus-server 8080:80
+kubectl --namespace monitoring port-forward --address 0.0.0.0 service/prometheus-kube-prometheus-prometheus 8080:80
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 Forwarding from 0.0.0.0:8080 -> 9090
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. De même pour Grafana :
+5. De même pour Grafana :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-kubectl --namespace monitoring port-forward --address 0.0.0.0 service/grafana 8081:80
+kubectl --namespace monitoring port-forward --address 0.0.0.0 service/prometheus-grafana 8081:80
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
-Forwarding from 0.0.0.0:8081 -> 3000
+Forwarding from 0.0.0.0:8081 -> 80
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. Récupérer le mot de passe admin de Grafana :
+6. Enjoy :)
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
-LP7RithkvOulZE1Yhj95obTSuH4e8qUffsuCaBAR
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-1.  Dans Grafana, aller dans Configuration -> Data Sources -> Add data source -> Prometheus, et renseigner "prometheus-server" dans URL :
-
-![](images/grafana2.png)
-
-11. Toujours dans Grafana, aller dans "+" -> Import -> Entrer "6417" dans ID -> Choisir le datasource prometheus créé ci dessus :
-
-![](images/grafana3.png)
-
-![](images/grafana4.png)
-
-12. Enjoy :)
-
-![](images/grafana5.png)
 
 <hr>
 
