@@ -359,7 +359,7 @@ spec:
 ingress.networking.k8s.io/ingress-with-hosts created
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1.  Ajoutons ces deux entrées dans le fichier /etc/hosts :
+13.  Ajoutons ces deux entrées dans le fichier /etc/hosts :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 IP_INGRESS nginx.example.com
@@ -403,6 +403,386 @@ Commercial support is available at
 </body>
 </html>
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+## Canary Deployment
+
+Les déploiements Canary permettent le déploiement progressif de nouvelles versions d'applications sans aucune interruption de service. 
+
+Le **NGINX Ingress Controller**  prend en charge les politiques de répartition du trafic basées sur les en-têtes (header) , le cookie et le poids. Alors que les politiques basées sur les en-têtes et les cookies servent à fournir une nouvelle version de service à un sous-ensemble d'utilisateurs, les politiques basées sur le poids servent à détourner un pourcentage du trafic vers une nouvelle version de service.
+
+Le **NGINX Ingress Controller** utilise les annotations suivantes pour activer les déploiements Canary :
+
+```yaml
+- nginx.ingress.kubernetes.io/canary-by-header
+
+- nginx.ingress.kubernetes.io/canary-by-header-value
+
+- nginx.ingress.kubernetes.io/canary-by-header-pattern
+
+- nginx.ingress.kubernetes.io/canary-by-cookie
+
+- nginx.ingress.kubernetes.io/canary-weight
+```
+
+Les règles s'appliquent dans cet ordre :
+
+- canary-by-header
+
+- canary-by-cookie
+
+- canary-weight
+
+Les déploiements Canary nécessitent que vous créiez deux entrées : une pour le trafic normal et une pour le trafic alternatif. Sachez que vous ne pouvez appliquer qu'une seule entrée Canary.
+
+Vous activez une règle de répartition du trafic particulière en définissant l'annotation Canary associée sur true dans la ressource Kubernetes Ingress, comme dans l'exemple suivant :
+
+- `nginx.ingress.kubernetes.io/canary-by-header : "true"`
+
+
+Exemple : 
+
+1. Déployer les applications et services suivant
+
+- Application V1 :
+
+```yaml
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: echo-v1
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      protocol: TCP
+      name: http
+  selector:
+    app: echo
+    version: v1
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: echo-v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: echo
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: echo
+        version: v1
+    spec:
+      containers:
+        - name: echo
+          image: "hashicorp/http-echo"
+          args:
+            - -listen=:80
+            - --text="echo-v1"
+          ports:
+            - name: http
+              protocol: TCP
+              containerPort: 80
+
+```
+
+- Application V2 :
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: echo-v2
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      protocol: TCP
+      name: http
+  selector:
+    app: echo
+    version: v2
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: echo-v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: echo
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: echo
+        version: v2
+    spec:
+      containers:
+        - name: echo
+          image: "hashicorp/http-echo"
+          args:
+            - -listen=:80
+            - --text="echo-v2"
+          ports:
+            - name: http
+              protocol: TCP
+              containerPort: 80
+
+```
+
+2. Déployer l'ingress de l'application v1
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: nginx
+  name: ingress-echo
+spec:
+  #ingressClassName: nginx
+  rules:
+    - host: canary.example.com
+      http:
+        paths:
+          - path: /echo
+            pathType: Exact
+            backend:
+              service:
+                name: echo-v1
+                port:
+                  number: 80
+
+```
+
+3. Vérifiez qu'il fonctionne
+
+```bash
+curl -H "Host: canary.example.com" http://<IP_ADDRESS>:<PORT>/echo
+
+```
+4. Vous devriez avoir la réponse suivante
+
+**echo-v2**
+
+5. Test : Par Header
+
+Deployez l'ingress suivant :
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/canary: "true"
+    nginx.ingress.kubernetes.io/canary-by-header: "Region"
+    nginx.ingress.kubernetes.io/canary-by-header-pattern: "fr|us"
+    kubernetes.io/ingress.class: nginx
+  name: ingress-echo-canary-header
+spec:
+  #ingressClassName: nginx
+  rules:
+    - host: canary.example.com
+      http:
+        paths:
+          - path: /echo
+            pathType: Exact
+            backend:
+              service:
+                name: echo-v2
+                port:
+                  number: 80
+
+```
+
+6. Faire les test suivants
+
+```bash
+curl   -H "Host: canary.example.com" -H "Region: us" http://<IP_ADDRESS>:<PORT>/echo
+curl   -H "Host: canary.example.com" -H "Region: de" http://<IP_ADDRESS>:<PORT>/echo
+curl   -H "Host: canary.example.com"                 http://<IP_ADDRESS>:<PORT>/echo
+```
+
+7. Résultats
+
+**echo-v2**
+**echo-v1**
+**echo-v1**
+
+8. Supprimer l'ingress ingress-echo-canary-header
+
+```bash
+kubectl delete ingress ingress-echo-canary-header
+```
+
+9. Test : Par cookie
+
+Déployez l'ingress suivant :
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/canary: "true"
+    nginx.ingress.kubernetes.io/canary-by-cookie: "my-cookie"
+    kubernetes.io/ingress.class: nginx
+  name: ingress-echo-canary-cookie
+spec:
+  #ingressClassName: nginx
+  rules:
+    - host: canary.example.com
+      http:
+        paths:
+          - path: /echo
+            pathType: Exact
+            backend:
+              service:
+                name: echo-v2
+                port:
+                  number: 80
+
+```
+
+10. Faire les test suivants
+
+```bash
+curl -s --cookie "my-cookie=always"  -H "Host: canary.example.com"     http://<IP_ADDRESS>:<PORT>/echo
+curl -s --cookie "other-cookie=always"  -H "Host: canary.example.com"  http://<IP_ADDRESS>:<PORT>/echo
+curl   -H "Host: canary.example.com"                                   http://<IP_ADDRESS>:<PORT>/echo
+```
+
+11. Résultats
+
+**echo-v2**
+**echo-v1**
+**echo-v1**
+
+12. Supprimer l'ingress ingress-echo-canary-cookie
+
+```bash
+kubectl delete ingress ingress-echo-canary-cookie
+```
+
+
+13. Test : Par poids
+
+Déployez l'ingress suivant :
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/canary: "true"
+    nginx.ingress.kubernetes.io/canary-by-header: "X-Canary"
+    nginx.ingress.kubernetes.io/canary-weight: "50"
+    kubernetes.io/ingress.class: nginx
+  name: ingress-echo-canary-weight
+spec:
+  #ingressClassName: nginx
+  rules:
+    - host: canary.example.com
+      http:
+        paths:
+          - path: /echo
+            pathType: Exact
+            backend:
+              service:
+                name: echo-v2
+                port:
+                  number: 80
+
+```
+
+14. faire les tests suivants
+
+```bash
+
+# 6 fois : 
+curl   -H "Host: canary.example.com"  http://<IP_ADDRESS>:<PORT>/echo
+
+```
+
+15. Vérifiez bien que vous avez une répartition de 50% entre echo-v1 et echo-v2
+
+16. Utilisez en l'adaptant (url) le fichier: script.js
+
+```javascript
+
+import http from 'k6/http';
+import {check, sleep} from 'k6';
+import {Rate} from 'k6/metrics';
+import {parseHTML} from "k6/html";
+
+const reqRate = new Rate('http_req_rate');
+
+export const options = {
+    stages: [
+        {target: 20, duration: '20s'},
+        {target: 20, duration: '20s'},
+        {target: 0, duration: '20s'},
+    ],
+    thresholds: {
+        'checks': ['rate>0.9'],
+        'http_req_duration': ['p(95)<1000'],
+        'http_req_rate{deployment:echo-v1}': ['rate>=0'],
+        'http_req_rate{deployment:echo-v2}': ['rate>=0'],
+    },
+};
+
+export default function () {
+    const params = {
+        headers: {
+            'Host': 'canary.example.com',
+            'Content-Type': 'text/plain',
+        },
+    };
+
+    const res = http.get(`http://localhost/echo`, params);
+    check(res, {
+        'status code is 200': (r) => r.status === 200,
+    });
+   
+  
+    var body = res.body.replace(/[\r\n]/gm, '');
+
+    switch (body) {
+        case '"echo-v1"':
+            reqRate.add(true, { deployment: 'echo-v1' });
+            reqRate.add(false, { deployment: 'echo-v2' });
+            break;
+        case '"echo-v2"':
+            reqRate.add(false, { deployment: 'echo-v1' });
+            reqRate.add(true, { deployment: 'echo-v2' });
+            break;
+    }
+
+    sleep(1);
+}
+
+
+```
+
+et lancez le de la manière suivante 
+
+`k6 run script.js`
+
+vérifiez la répartition des requetes
 
 ## Clean Up
 
