@@ -271,7 +271,7 @@ ex: my-app.default.svc.cluster.local
 ### Kubernetes: Ingress
 
 - L'objet `Ingress` permet d'exposer un service à l'extérieur d'un cluster Kubernetes
-- Il sont faits pour les services de type HTTP (et pas pour UDD et TCP)
+- Il sont faits pour les services de type HTTP (et pas pour UDP et TCP)
 - Il permet de fournir une URL visible permettant d'accéder un Service Kubernetes
 - Il permet d'avoir des terminations TLS, de faire du _Load Balancing_, etc...
 - Ils ont besoin d'un _ingress Controller_ pour fonctionner
