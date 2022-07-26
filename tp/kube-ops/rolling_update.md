@@ -138,7 +138,7 @@ httpd:2.4.43
 httpd:2.4.43
 ```
 
-14. Si nous faisons un describe sur notre deployement, nous pouvons voir les paramètre **MaxSurge** et **MaxUnavailable** :
+14. Si nous faisons un describe sur notre deployment, nous pouvons voir les paramètre **MaxSurge** et **MaxUnavailable** :
 
 ```bash
 training@master$ kubectl describe deployments -n updating example-update

@@ -306,7 +306,7 @@ curl -sk https://<IP PRIV>/api/v1/namespaces/kube-public/configmaps/cluster-info
 
 ### Kubernetes : Créer un pod en ligne de commande
 
-- Cette commande avant la 1.18 créait un `deployement`
+- Cette commande avant la 1.18 créait un `deployment`
 - Depuis elle démarre un simple `pod`
 
 ```console
