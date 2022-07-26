@@ -1,11 +1,10 @@
 make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/hleclerc/dev/projects/formations/formations-aw'
 mkdir -p build
- 
 jq -r '.[] | [ .course_name, .course_description, .modules[] ] | @tsv' cours.json | sed 's,\t, ,g3;s,\t,$,g' > build/cours.list
  
-sed: 1: "s,\t, ,g3;s,\t,$,g": more than one number or 'g' in substitute flags
-
 fgrep -h "#####"  Makefile build/Makefile | fgrep -v fgrep | sed -e 's/\\$//' | sed -e 's/#####//'
 make: Leaving directory `/Users/hleclerc/dev/projects/formations/formations-aw'
  
+sed: 1: "s,\t, ,g3;s,\t,$,g": more than one number or 'g' in substitute flags
+
