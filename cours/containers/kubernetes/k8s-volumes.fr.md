@@ -1,5 +1,26 @@
 # KUBERNETES : Stockage
 
+
+### Kubernetes : CSI
+
+- [Container Storage Interface](https://github.com/container-storage-interface/spec/blob/master/spec.md)
+- Implémentation Standardisée du stockage
+- Équivalent de CNI mais pour les volumes
+- Avant Kubernetes 1.13, tous les drivers de volumes étaient *in tree*
+- Le but de la séparation est de sortir du code du *core* de Kubernetes
+- GA depuis Kubernetes 1.13
+
+### Kubernetes : CSI
+
+- La plupart des volumes supportés dans Kubernetes supportent maintenant CSI:
+  - [Amazon EBS](https://github.com/kubernetes-sigs/aws-ebs-csi-driver)
+  - [Google PD](https://github.com/kubernetes-sigs/gcp-compute-persistent-disk-csi-driver)
+  - [Cinder](https://github.com/kubernetes/cloud-provider-openstack/tree/master/pkg/csi/cinder)
+  - [GlusterFS](https://github.com/gluster/gluster-csi-driver)
+  - La liste exhaustive est disponible [ici](https://kubernetes-csi.github.io/docs/drivers.html)
+
+
+
 ### Kubernetes : Volumes
 
 - Fournir du stockage persistent aux PODs
@@ -165,6 +186,43 @@ reclaimPolicy: Delete
 volumeBindingMode: WaitForFirstConsumer
 ```
 
+### Kubernetes : PersistentVolume
+
+- Composant de stockage dans le cluster kubernetes
+- Stockage externe aux noeuds du cluster
+- Cycle de vie d'indépendant du pod qui le consomme
+- Peut être provisionné **manuellement** par un administrateur ou **dynamiquement** grâce une `StorageClass`
+- Supporte différent mode d'accès
+    - RWO - read-write par un noeud unique
+    - ROX - read-only par plusieurs noeuds
+    - RWX - read-write par plusieurs noeuds
+
+### Kubernetes : PersistentVolume
+
+```yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: persistent-volume-1
+spec:
+  storageClassName: slow
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/tmp/data"
+```
+
+
+### Reclaim Policy
+
+- Les PV qui sont créés dynamiquement par une `StorageClass` auront la politique de récupération spécifiée dans le champ `reclaimPolicy` de la classe, qui peut être `Delete` ou `Retain`.
+- Si aucun `reclaimPolicy` n'est spécifié lors de la création d'un objet `StorageClass`, il sera par défaut `delete`.
+- Les PV qui sont créés manuellement et gérés via une `StorageClass` auront la politique de récupération qui leur a été attribuée lors de la création.
+- La stratégie de récupération s'applique aux volumes persistants et non à la classe de stockage elle-même. Les PV et les PVC créés à l'aide de cette `StorageClass` hériteront de la stratégie de récupération définie dans `StorageClass`.
+
+
 ### Kubernetes : PersistentVolumeClaims
 
 - Le PVC est un binding entre un pod et un PV. Le pod demande le volume via le PVC.
@@ -222,57 +280,4 @@ spec:
         claimName: myclaim
 ```
 
-### Kubernetes : PersistentVolume
-
-- Composant de stockage dans le cluster kubernetes
-- Stockage externe aux noeuds du cluster
-- Cycle de vie d'indépendant du pod qui le consomme
-- Peut être provisionné **manuellement** par un administrateur ou **dynamiquement** grâce une `StorageClass`
-- Supporte différent mode d'accès
-    - RWO - read-write par un noeud unique
-    - ROX - read-only par plusieurs noeuds
-    - RWX - read-write par plusieurs noeuds
-
-### Kubernetes : PersistentVolume
-
-```yaml
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: persistent-volume-1
-spec:
-  storageClassName: slow
-  capacity:
-    storage: 1Gi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: "/tmp/data"
-```
-
-
-### Reclaim Policy
-
-- Les PV qui sont créés dynamiquement par une `StorageClass` auront la politique de récupération spécifiée dans le champ `reclaimPolicy` de la classe, qui peut être `Delete` ou `Retain`.
-- Si aucun `reclaimPolicy` n'est spécifié lors de la création d'un objet `StorageClass`, il sera par défaut `delete`.
-- Les PV qui sont créés manuellement et gérés via une `StorageClass` auront la politique de récupération qui leur a été attribuée lors de la création.
-- La stratégie de récupération s'applique aux volumes persistants et non à la classe de stockage elle-même. Les PV et les PVC créés à l'aide de cette `StorageClass` hériteront de la stratégie de récupération définie dans `StorageClass`.
-
-### Kubernetes : CSI
-
-- [Container Storage Interface](https://github.com/container-storage-interface/spec/blob/master/spec.md)
-- Implémentation Standardisée du stockage
-- Équivalent de CNI mais pour les volumes
-- Avant Kubernetes 1.13, tous les drivers de volumes étaient *in tree*
-- Le but de la séparation est de sortir du code du *core* de Kubernetes
-- GA depuis Kubernetes 1.13
-
-### Kubernetes : CSI
-
-- La plupart des volumes supportés dans Kubernetes supportent maintenant CSI:
-  - [Amazon EBS](https://github.com/kubernetes-sigs/aws-ebs-csi-driver)
-  - [Google PD](https://github.com/kubernetes-sigs/gcp-compute-persistent-disk-csi-driver)
-  - [Cinder](https://github.com/kubernetes/cloud-provider-openstack/tree/master/pkg/csi/cinder)
-  - [GlusterFS](https://github.com/gluster/gluster-csi-driver)
-  - La liste exhaustive est disponible [ici](https://kubernetes-csi.github.io/docs/drivers.html)
 

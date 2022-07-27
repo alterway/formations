@@ -20,7 +20,7 @@ echo >> build/Makefile
 for i in `cut -d '$' -f1 build/cours.list`; do echo "$i: $i.html $i.pdf $i-handout.pdf $i-print.pdf" >> build/Makefile; done
  
 
-# Make data base, printed on Tue Jul 26 16:36:43 2022
+# Make data base, printed on Wed Jul 27 08:14:57 2022
 
 # Variables
 
@@ -61,7 +61,7 @@ __CFBundleIdentifier = com.microsoft.VSCode
 # environment
 P9K_SSH = 0
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/h2/12qsmrms09b5d8_g44gl87zm0000gn/T/vscode-ipc-50d9844a-618f-493f-8244-8e56411c2b6a.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/h2/12qsmrms09b5d8_g44gl87zm0000gn/T/vscode-ipc-1609eef2-6819-4b55-b451-16882b575d7d.sock
 # environment
 VSCODE_CWD = /Users/hleclerc/dev/projects/formations/formations-aw/labs
 # environment
@@ -316,7 +316,7 @@ all-pdf:
 
 build/cours.list: cours.json
 #  Implicit rule search has not been done.
-#  Last modified 2022-07-26 16:36:43
+#  Last modified 2022-07-27 08:14:57
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -353,7 +353,7 @@ build/Makefile: build/cours.list
 #  A default, MAKEFILES, or -include/sinclude makefile.
 #  Implicit rule search has not been done.
 #  Implicit/static pattern stem: `'
-#  Last modified 2022-07-26 16:36:43
+#  Last modified 2022-07-27 08:14:57
 #  File has been updated.
 #  Successfully updated.
 # automatic
@@ -433,7 +433,7 @@ all-html:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4072 / max = 4072 / min = 4072 / avg = 4072
 
-# Finished Make data base on Tue Jul 26 16:36:43 2022
+# Finished Make data base on Wed Jul 27 08:14:57 2022
 
  
 # GNU Make 3.81
@@ -443,9 +443,8 @@ all-html:
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
- 
 
-# Make data base, printed on Tue Jul 26 16:36:43 2022
+# Make data base, printed on Wed Jul 27 08:14:57 2022
 
 # Variables
 
@@ -454,7 +453,6 @@ all-html:
 # automatic
 ?F = $(notdir $?)
 # environment
- 
 ELECTRON_NO_ATTACH_CONSOLE = 1
 # environment
 VSCODE_LOG_NATIVE = false
@@ -487,7 +485,7 @@ __CFBundleIdentifier = com.microsoft.VSCode
 # environment
 P9K_SSH = 0
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/h2/12qsmrms09b5d8_g44gl87zm0000gn/T/vscode-ipc-50d9844a-618f-493f-8244-8e56411c2b6a.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/h2/12qsmrms09b5d8_g44gl87zm0000gn/T/vscode-ipc-1609eef2-6819-4b55-b451-16882b575d7d.sock
 # environment
 VSCODE_CWD = /Users/hleclerc/dev/projects/formations/formations-aw/labs
 # environment
@@ -622,7 +620,6 @@ MAKEFILES :=
 ITERM_PROFILE = Default
 # environment
 PAGER = less
- 
 # environment
 LC_ALL = C
 # environment
@@ -665,6 +662,7 @@ institute = "alter way Cloud Consulting"
 # . (device 16777231, inode 2820354): 29 files, no impossibilities.
 # build (device 16777231, inode 3684827): No files, no impossibilities so far.
 
+ 
 # 29 files, no impossibilities in 2 directories.
 
 # Implicit Rules
@@ -747,7 +745,7 @@ all-pdf:
 
 build/cours.list: cours.json
 #  Implicit rule search has not been done.
-#  Last modified 2022-07-26 16:36:43
+#  Last modified 2022-07-27 08:14:57
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -783,7 +781,7 @@ help:
 build/Makefile: build/cours.list
 #  A default, MAKEFILES, or -include/sinclude makefile.
 #  Implicit rule search has not been done.
-#  Last modified 2022-07-26 16:36:43
+#  Last modified 2022-07-27 08:14:57
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -847,6 +845,6 @@ all-html:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4072 / max = 4072 / min = 4072 / avg = 4072
 
-# Finished Make data base on Tue Jul 26 16:36:43 2022
+# Finished Make data base on Wed Jul 27 08:14:57 2022
 
  
