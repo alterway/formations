@@ -16,7 +16,7 @@ kubectl create namespace rbac
 
 ## Service Accounts
 
-1. Nous allons créer 3 services accounts :
+1. Nous allons créer 1 service accounts :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 touch example-serviceaccount.yaml
@@ -32,7 +32,7 @@ metadata:
   namespace: rbac
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-2. Créons ce services account :
+2. Créons ce service account :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl apply -f example-serviceaccount.yaml
@@ -160,6 +160,11 @@ kubectl config set-cluster $(kubectl config view -o jsonpath='{.clusters[0].name
 
 11. Mise à jour du context
 
+⚠️ <font color=red>Veuillez vérifier le propriétaire des fichiers  ${TRIG}-kubernetes-csr.crt et ${TRIG}-kubernetes.key </font>
+
+Changer le propriétaire avec votre compte unix si ils sont en **root** ex: `sudo chown ubuntu: et ${TRIG}-kubernetes.key`
+
+
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl config set-credentials ${TRIG} --client-certificate=${TRIG}-kubernetes-csr.crt --client-key=${TRIG}-kubernetes.key --embed-certs --kubeconfig=${TRIG}-kubernetes-config
 
@@ -167,7 +172,7 @@ kubectl config set-credentials ${TRIG} --client-certificate=${TRIG}-kubernetes-c
 
 
 
-12. Optionnelle-ment positionnement sur un namespace
+12. Optionnellement positionnement sur un namespace
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 

@@ -151,6 +151,10 @@ exemple :
 10.10.4.82 worker-1
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+
+⚠️ <font color=red>Si kubeadm est déjà installé sur vos instances, Veuillez passer au point 3.</font>
+
+
 Le contenu du fichier /etc/hosts doit être identique sur les trois machines.
 
 1. Installer et activer Docker
