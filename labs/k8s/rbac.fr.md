@@ -83,7 +83,7 @@ sudo useradd ${TRIG} -m -s /bin/bash
 1. Commençons par générer une clé privée un CSR pour notre utilisateur :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-sudo openssl req -new -newkey rsa:4096 -nodes -keyout ${TRIG}-kubernetes.key -out ${TRIG}-kubernetes.csr -subj "/CN=${TRIG}/O=devops"
+openssl req -new -newkey rsa:4096 -nodes -keyout ${TRIG}-kubernetes.key -out ${TRIG}-kubernetes.csr -subj "/CN=${TRIG}/O=devops"
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 2. Encodons en base64 le CSR généré
@@ -159,11 +159,6 @@ kubectl config set-cluster $(kubectl config view -o jsonpath='{.clusters[0].name
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 11. Mise à jour du context
-
-⚠️ <font color=red>Veuillez vérifier le propriétaire des fichiers  ${TRIG}-kubernetes-csr.crt et ${TRIG}-kubernetes.key </font>
-
-Changer le propriétaire avec votre compte unix si ils sont en **root** ex: `sudo chown ubuntu: et ${TRIG}-kubernetes.key`
-
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl config set-credentials ${TRIG} --client-certificate=${TRIG}-kubernetes-csr.crt --client-key=${TRIG}-kubernetes.key --embed-certs --kubeconfig=${TRIG}-kubernetes-config
