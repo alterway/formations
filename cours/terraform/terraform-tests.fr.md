@@ -36,6 +36,49 @@
 
 ![](images/terraform/checkov.png){height="500px"}
 
+
+
+#### terrascan
+
+Un outil avec des compétences multiples
+
+- 500+ Polices pour les bonnes pratiques de sécurité
+- Scanning de Terraform (HCL2)
+- Scanning des templates AWS CloudFormation (CFT)
+- Scanning des Azure Resource Manager (ARM)
+- Scanning de Kubernetes (JSON/YAML), Helm v3, and Kustomize
+- Scanning de Dockerfiles
+- Support pour AWS, Azure, GCP, Kubernetes, Dockerfile, and GitHub
+- S'intègre avec les scanner de vulnérabilités des images docker image pour les registries AWS, Azure, GCP, Harbor.
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+Violation Details -
+
+	Description    :	Ensure that Azure Resource Group has resource lock enabled
+	File           :	main.tf
+	Module Name    :	root
+	Plan Root      :	./
+	Line           :	1
+	Severity       :	LOW
+	-----------------------------------------------------------------------
+
+
+Scan Summary -
+
+	File/Folder         :	/Users/hleclerc/formation-tf
+	IaC Type            :	terraform
+	Scanned At          :	2022-10-03 07:50:45.659396 +0000 UTC
+	Policies Validated  :	1
+	Violated Policies   :	1
+	Low                 :	1
+	Medium              :	0
+	High                :	0
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
 ### terratest
 
 - Librairie Go

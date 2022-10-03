@@ -424,6 +424,30 @@ variable "whoishel" {
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
+### Variables - Données sensibles
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+
+
+variable "db_password" {
+  description = "Database administrator password."
+  type        = string
+  sensitive   = true
+}
+
+
+- Suppression des output console et journal
+- Permet d'éviter la divulgation accidentel de valeurs sensibles
+- Mais ce n'est pas suffisant pour sécuriser les configurations terraform
+
+
+ 🟢 Bonnes pratiques
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
 ### Variables - Exercice
 
 - Créer le fichier variables.tf

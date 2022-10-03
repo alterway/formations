@@ -7,5 +7,6 @@ jq -r '.[] | [ .course_name, .course_description, .modules[] ] | @tsv' cours.jso
 sed: 1: "s,\t, ,g3;s,\t,$,g": more than one number or 'g' in substitute flags
 
 fgrep -h "#####"  Makefile build/Makefile | fgrep -v fgrep | sed -e 's/\\$//' | sed -e 's/#####//'
+ 
 make: Leaving directory `/Users/hleclerc/dev/projects/formations/formations-aw'
  

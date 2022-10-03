@@ -181,6 +181,7 @@
       "terraform/terraform-init-projet",
       "terraform/terraform-workflow",
       "terraform/terraform-state-backend",
+      "terraform/terraform-workspace",
       "terraform/terraform-commandes-base",
       "terraform/terraform-configuration",
       "terraform/terraform-conditions",
