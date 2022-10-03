@@ -96,7 +96,7 @@ terraform.tfstate.d
 
 
 
-### Les workspaces avec les backend distants  (1)
+### Les workspaces avec les backend distants  (2)
    
 ![](images/terraform/workspace-remote-backend-state.png)
 
