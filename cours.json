@@ -192,6 +192,7 @@
       "terraform/terraform-best-practices",
       "terraform/terraform-tests",
       "terraform/terraform-next-steps",
+      "terraform/terraform-commands-cheat-sheet",
       "terraform/terraform-conclusion"
     ]
   }
