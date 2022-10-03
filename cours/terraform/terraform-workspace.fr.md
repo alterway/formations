@@ -63,7 +63,7 @@ terraform workspace Staging
 
 ### Les workspaces (vue interne : local state )
 
--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.hcl}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 resource "azurerm_resource_group" "rg_1" {
   name     = "a-herlec-rg-${terraform.workspace}-01"
   location = "northeurope"
@@ -75,7 +75,7 @@ resource "azurerm_resource_group" "rg_1" {
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 
 ❯ tree -a terraform.tfstate.d
 terraform.tfstate.d
@@ -90,10 +90,13 @@ terraform.tfstate.d
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-### Les workspaces avec les backend distants
+### Les workspaces avec les backend distants  (1)
 
 ![](images/terraform/workspace-remote-backend.png){height="447px"}
 
+
+
+### Les workspaces avec les backend distants  (1)
    
-![](images/terraform/workspace-remote-backend-state.png){height="447px"}
+![](images/terraform/workspace-remote-backend-state.png)
 
