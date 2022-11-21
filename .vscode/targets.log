@@ -7,23 +7,14 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 
 # This program built for i386-apple-darwin11.3.0
  
-sed -E 's#^(.*)\$.*\$(.*)#build/\1.md: $(addsuffix .fr.md, $(addprefix cours/, \2))\n\trm -f $@\n\t$(foreach module,$^,cat $(module) >> $@;)#' build/cours.list > build/Makefile
- 
-echo >> build/Makefile
- 
-echo -n 'all=' >> build/Makefile
- 
-for i in `cut -d '$' -f1 build/cours.list`; do echo -n "$i " >> build/Makefile; done
- 
-echo >> build/Makefile
- 
-for i in `cut -d '$' -f1 build/cours.list`; do echo "$i: $i.html $i.pdf $i-handout.pdf $i-print.pdf" >> build/Makefile; done
- 
+build/Makefile:36: *** missing separator.  Stop.
 
-# Make data base, printed on Mon Oct  3 08:31:56 2022
+
+# Make data base, printed on Mon Nov 21 10:17:08 2022
 
 # Variables
 
+ 
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
@@ -31,7 +22,6 @@ for i in `cut -d '$' -f1 build/cours.list`; do echo "$i: $i.html $i.pdf $i-hando
 # environment
 ELECTRON_NO_ATTACH_CONSOLE = 1
 # environment
- 
 VSCODE_LOG_NATIVE = false
 # environment
 NVM_INC = /Users/hleclerc/.nvm/versions/node/v18.3.0/include/node
@@ -53,6 +43,8 @@ VSCODE_NLS_CONFIG = {"locale":"fr","availableLanguages":{"*":"fr"},"_languagePac
 _ = /usr/bin/make
 # makefile (from `Makefile', line 30)
 title = "$$(jq -r '."$*".course_description' $(cours))"
+# environment
+LESSOPEN = |pygmentize -P style=dracula -g %s
 # makefile (from `build/Makefile', line 1)
 MAKEFILE_LIST :=  Makefile build/Makefile
 # environment
@@ -60,37 +52,42 @@ VSCODE_VERBOSE_LOGGING = true
 # environment
 __CFBundleIdentifier = com.microsoft.VSCode
 # environment
+INFOPATH = /opt/homebrew/share/info:
+# environment
 P9K_SSH = 0
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/h2/12qsmrms09b5d8_g44gl87zm0000gn/T/vscode-ipc-416bc69b-b59a-498f-b0f8-2f05fba4b26e.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/h2/12qsmrms09b5d8_g44gl87zm0000gn/T/vscode-ipc-f22b25d4-5e3f-4ef3-b574-078b4e05bbad.sock
 # environment
 VSCODE_CWD = /Users/hleclerc/dev/projects/formations/formations-aw
 # environment
 GOHOME = /Users/hleclerc/dev/bin
 # environment
-PATH = /Users/hleclerc/.krew/bin:/opt/homebrew/anaconda3/bin:/opt/homebrew/anaconda3/condabin:/Users/hleclerc/.rd/bin:/Users/hleclerc/.nvm/versions/node/v18.3.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Little Snitch.app/Contents/Components:/Library/Apple/usr/bin:/opt/homebrew/bin:/opt/homebrew/anaconda3/bin:/Users/hleclerc/dev/bin/go/bin:/opt/homebrew/opt/go/libexec/bin:/Users/hleclerc/.local/bin:/Users/hleclerc/bin
+PATH = /opt/homebrew/opt/gnu-sed/libexec/gnubin:/Users/hleclerc/.krew/bin:/opt/homebrew/anaconda3/bin:/opt/homebrew/anaconda3/condabin:/Users/hleclerc/.rd/bin:/Users/hleclerc/.nvm/versions/node/v18.3.0/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Little Snitch.app/Contents/Components:/Library/Apple/usr/bin:/opt/homebrew/bin:/opt/homebrew/anaconda3/bin:/Users/hleclerc/dev/bin/go/bin:/opt/homebrew/opt/go/libexec/bin:/Users/hleclerc/.local/bin:/Users/hleclerc/bin
 # environment
 GOROOT = /opt/homebrew/opt/go/libexec
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
-# makefile (from `build/Makefile', line 2)
+# makefile (from `build/Makefile', line 35)
 -n all = 
 # environment
 GOPATH = /Users/hleclerc/dev/bin/go
 # environment
 NVM_BIN = /Users/hleclerc/.nvm/versions/node/v18.3.0/bin
 # environment
+ 
 VSCODE_LOG_STACK = false
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.P2IbwEFpVj/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.2t1qIYlF1B/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
 CONDA_EXE = /opt/homebrew/anaconda3/bin/conda
+# environment
+SQLITE_EXEMPT_PATH_FROM_VNODE_GUARDS = /Users/hleclerc/Library/WebKit/Databases
 # makefile (from `Makefile', line 20)
 author = "Team alter way Cloud Consulting"
 # environment
@@ -100,7 +97,13 @@ PWD = /Users/hleclerc/dev/projects/formations/formations-aw
 # makefile (from `Makefile', line 22)
 date = "$$(date +'%d %B %Y')"
 # environment
+HOMEBREW_CELLAR = /opt/homebrew/Cellar
+# environment
+ZSH_DISABLE_COMPFIX = true
+# environment
 ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+# environment
+MANPATH = /Users/hleclerc/.nvm/versions/node/v18.3.0/share/man:/opt/homebrew/share/man::
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
@@ -139,6 +142,7 @@ LC_TERMINAL = iTerm2
 SHLVL = 3
 # default
 MAKE_VERSION := 3.81
+ 
 # environment
 USER = hleclerc
 # makefile
@@ -146,7 +150,7 @@ USER = hleclerc
 # default
 MAKECMDGOALS := all
 # environment
-TERM_SESSION_ID = w0t0p0:48328DD8-7E56-4A9F-BD77-0272AA5BA699
+TERM_SESSION_ID = w0t5p0:72A599C1-50CC-46B1-A0A6-0489E00CBBCF
 # environment
 LESS = -R
 # automatic
@@ -165,440 +169,6 @@ TMPDIR = /var/folders/h2/12qsmrms09b5d8_g44gl87zm0000gn/T/
 *F = $(notdir $*)
 # environment
 VSCODE_IPC_HOOK = /Users/hleclerc/Library/Application Support/Code/1.68.0-main.sock
-# makefile
-MAKEFLAGS = Rrp
-# environment
-MFLAGS = -Rrp
-# automatic
-*D = $(patsubst %/,%,$(dir $*))
-# environment
-TERM_PROGRAM_VERSION = 3.4.16
-# environment
-NVM_DIR = /Users/hleclerc/.nvm
-# environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.1644698.1644704.E0F8EEA3-226A-4EBF-AFBC-B98AB544D66B
-# environment
-LC_TERMINAL_VERSION = 3.4.16
-# automatic
-+D = $(patsubst %/,%,$(dir $+))
-# makefile (from `Makefile', line 26)
-revealjsurl = https://osones.com/formations/revealjs
-# automatic
-+F = $(notdir $+)
-# environment
-ITERM_SESSION_ID = w0t0p0:48328DD8-7E56-4A9F-BD77-0272AA5BA699
-# environment
-COLORFGBG = 7;0
-# environment
-__CF_USER_TEXT_ENCODING = 0x1F5:0x0:0x1
-# environment
-COMMAND_MODE = unix2003
-# default
-MAKEFILES := 
-# automatic
-<F = $(notdir $<)
-# environment
-ITERM_PROFILE = Default
-# environment
-PAGER = less
-# environment
-LC_ALL = C
-# environment
-CONDA_PYTHON_EXE = /opt/homebrew/anaconda3/bin/python
-# environment
-P9K_TTY = old
-# automatic
-^F = $(notdir $^)
-# default
-SUFFIXES := 
-# environment
-_CE_M = 
-# makefile (from `Makefile', line 29)
-cours = cours.json
-# environment
-MAKELEVEL := 0
-# environment
-CONDA_PREFIX = /opt/homebrew/anaconda3
-# environment
-TERM = xterm-256color
-# environment
-_P9K_TTY = /dev/ttys000
-# environment
-VSCODE_PID = 1928
-# environment
-_CE_CONDA = 
-# environment
-LANG = C
-# makefile (from `Makefile', line 21)
-institute = "alter way Cloud Consulting"
-# variable set hash-table stats:
-# Load=103/1024=10%, Rehash=0, Collisions=8/145=6%
-
-# Pattern-specific Variable Values
-
-# No pattern-specific variable values.
-
-# Directories
-
-# . (device 16777233, inode 2820354): 29 files, no impossibilities.
-# build (device 16777233, inode 3684827): No files, no impossibilities so far.
-
-# 29 files, no impossibilities in 2 directories.
-
-# Implicit Rules
-
-%:
-
-%: %.html %.pdf %-handout.pdf %-print.pdf
-
-build/%.tex: build/%.md
-#  commands to execute (from `Makefile', line 62):
-	pandoc $< -t beamer -f markdown -s -o $@ --slide-level 3 -V theme=metropolis -H styles/beamer.custom \
-	-V title=$(title) -V institute=$(institute) -V author=$(author) -V date=$(date)
-	
-
-build/%-handout.tex: build/%.md
-#  commands to execute (from `Makefile', line 66):
-	pandoc $< -t beamer -f markdown -s -o $@ --slide-level 3 -V theme=metropolis -H styles/beamer.custom -V handout \
- 
-	-V title=$(title) -V institute=$(institute) -V author=$(author) -V date=$(date)
-	
-
-%.html:
-
-%.html: build/%.md
-#  commands to execute (from `Makefile', line 71):
-	sed 's,^## ,### ,' $< > $<-html # revealjs doesn't support 3 levels
-	pandoc $<-html -t revealjs -f markdown -s -o $@ --slide-level 3 -V theme=awcc \
-	-V revealjs-url=$(revealjsurl) -V navigation=frame -V slideNumber="true" \
-	-V title=$(title) -V institute=$(institute) -V author=$(author) -V date=$(date)
-	
-
-%.pdf:
-
-%.pdf: build/%.tex
-#  commands to execute (from `Makefile', line 78):
-	sed -i 's,π,\\\\pi,g' $< # ugly workaround ...
-	ln -sf styles/beamer*metropolis.sty .
-	pdflatex -output-directory build/ $<
-	pdflatex -output-directory build/ $<
-	rm -f beamer*metropolis.sty
-	mv build/$@ $@
-	
-
-%-handout.pdf:
-
-%-print.pdf:
-
-%-print.pdf: %-handout.pdf
-#  commands to execute (from `Makefile', line 88):
-	pdfnup --nup 2x2 --frame true --suffix print $<
-	mv $*-handout-print.pdf $*-print.pdf
-	
-
-# 11 implicit rules, 0 (0.0%) terminal.
-
-# Files
-
-mrproper: clean
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  commands to execute (from `Makefile', line 101):
-	rm -f *.pdf
-	rm -f *.html
-	rm -f modules.png
-	
-
-all:
-#  Command-line target.
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-all-pdf:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-build/cours.list: cours.json
-#  Implicit rule search has not been done.
-#  Last modified 2022-10-03 08:31:56
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 36):
-	mkdir -p build
-	jq -r '.[] | [ .course_name, .course_description, .modules[] ] | @tsv' $(cours) | sed 's,\t, ,g3;s,\t,$$,g' > build/cours.list
-	
-
-# Not a target:
-.SUFFIXES:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-Makefile:
-#  Implicit rule search has been done.
-#  Last modified 2022-05-19 12:43:24
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-help:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  commands to execute (from `Makefile', line 33):
-	@fgrep -h "#####" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/#####//'
-	
-
-build/Makefile: build/cours.list
-#  A default, MAKEFILES, or -include/sinclude makefile.
-#  Implicit rule search has not been done.
-#  Implicit/static pattern stem: `'
-#  Last modified 2022-10-03 08:31:56
-#  File has been updated.
-#  Successfully updated.
-# automatic
-# @ := build/Makefile
-# automatic
-# % := 
-# automatic
-# * := 
-# automatic
-# + := build/cours.list
-# automatic
-# | := 
-# automatic
-# < := build/cours.list
-# automatic
-# ^ := build/cours.list
-# automatic
-# ? := build/cours.list
-# variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=3/21=14%
-#  commands to execute (from `Makefile', line 40):
-	sed -E 's#^(.*)\$$.*\$$(.*)#build/\1.md: $$(addsuffix .$(lang).md, $$(addprefix cours/, \2))\n\trm -f $$@\n\t$$(foreach module,$$^,cat $$(module) >> $$@;)#' build/cours.list > build/Makefile
-	echo >> build/Makefile
-	echo -n 'all=' >> build/Makefile
-	for i in `cut -d '$$' -f1 build/cours.list`; do echo -n "$$i " >> build/Makefile; done
-	echo >> build/Makefile
-	for i in `cut -d '$$' -f1 build/cours.list`; do echo "$$i: $(addprefix $$i, .html .pdf -handout.pdf -print.pdf)" >> build/Makefile; done
-	
-
-# Not a target:
-.DEFAULT:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-clean:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  commands to execute (from `Makefile', line 96):
-	rm -rf build/
-	rm -f beamer*metropolis.sty
-	
-
-# Not a target:
-cours.json:
-#  Implicit rule search has been done.
-#  Last modified 2022-05-31 08:55:21
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-modules.png:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  commands to execute (from `Makefile', line 93):
-	dot -Tpng modules.dot > modules.png
-	
-
-all-html:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# files hash-table stats:
-# Load=13/1024=1%, Rehash=0, Collisions=0/36=0%
-# VPATH Search Paths
-
-# No `vpath' search paths.
-
-# No general (`VPATH' variable) search path.
-
-# # of strings in strcache: 2
-# # of strcache buffers: 1
-# strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
-# strcache free: total = 4072 / max = 4072 / min = 4072 / avg = 4072
-
-# Finished Make data base on Mon Oct  3 08:31:56 2022
-
- 
-# GNU Make 3.81
-# Copyright (C) 2006  Free Software Foundation, Inc.
-# This is free software; see the source for copying conditions.
-# There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A
-# PARTICULAR PURPOSE.
-
-# This program built for i386-apple-darwin11.3.0
- 
-
-# Make data base, printed on Mon Oct  3 08:31:56 2022
-
-# Variables
-
-# automatic
-<D = $(patsubst %/,%,$(dir $<))
-# automatic
-?F = $(notdir $?)
-# environment
-ELECTRON_NO_ATTACH_CONSOLE = 1
-# environment
- 
-VSCODE_LOG_NATIVE = false
-# environment
-NVM_INC = /Users/hleclerc/.nvm/versions/node/v18.3.0/include/node
-# automatic
-?D = $(patsubst %/,%,$(dir $?))
-# makefile (from `Makefile', line 23)
-lang = fr
-# automatic
-@D = $(patsubst %/,%,$(dir $@))
-# automatic
-@F = $(notdir $@)
-# makefile
-CURDIR := /Users/hleclerc/dev/projects/formations/formations-aw
-# makefile
-SHELL = /bin/sh
-# environment
-VSCODE_NLS_CONFIG = {"locale":"fr","availableLanguages":{"*":"fr"},"_languagePackId":"575d78304484aa5fa0cbb32d34fd883d.fr","_translationsConfigFile":"/Users/hleclerc/Library/Application Support/Code/clp/575d78304484aa5fa0cbb32d34fd883d.fr/tcf.json","_cacheRoot":"/Users/hleclerc/Library/Application Support/Code/clp/575d78304484aa5fa0cbb32d34fd883d.fr","_resolvedLanguagePackCoreLocation":"/Users/hleclerc/Library/Application Support/Code/clp/575d78304484aa5fa0cbb32d34fd883d.fr/4af164ea3a06f701fe3e89a2bcbb421d2026b68f","_corruptedFile":"/Users/hleclerc/Library/Application Support/Code/clp/575d78304484aa5fa0cbb32d34fd883d.fr/corrupted.info","_languagePackSupport":true}
-# environment
-_ = /usr/bin/make
-# makefile (from `Makefile', line 30)
-title = "$$(jq -r '."$*".course_description' $(cours))"
-# makefile (from `build/Makefile', line 1)
-MAKEFILE_LIST :=  Makefile build/Makefile
-# environment
-VSCODE_VERBOSE_LOGGING = true
-# environment
-__CFBundleIdentifier = com.microsoft.VSCode
-# environment
-P9K_SSH = 0
-# environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/h2/12qsmrms09b5d8_g44gl87zm0000gn/T/vscode-ipc-416bc69b-b59a-498f-b0f8-2f05fba4b26e.sock
-# environment
-VSCODE_CWD = /Users/hleclerc/dev/projects/formations/formations-aw
-# environment
-GOHOME = /Users/hleclerc/dev/bin
-# environment
-PATH = /Users/hleclerc/.krew/bin:/opt/homebrew/anaconda3/bin:/opt/homebrew/anaconda3/condabin:/Users/hleclerc/.rd/bin:/Users/hleclerc/.nvm/versions/node/v18.3.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Little Snitch.app/Contents/Components:/Library/Apple/usr/bin:/opt/homebrew/bin:/opt/homebrew/anaconda3/bin:/Users/hleclerc/dev/bin/go/bin:/opt/homebrew/opt/go/libexec/bin:/Users/hleclerc/.local/bin:/Users/hleclerc/bin
-# environment
-GOROOT = /opt/homebrew/opt/go/libexec
-# environment
-LSCOLORS = Gxfxcxdxbxegedabagacad
-# makefile (from `build/Makefile', line 2)
--n all = 
-# environment
-GOPATH = /Users/hleclerc/dev/bin/go
-# environment
-NVM_BIN = /Users/hleclerc/.nvm/versions/node/v18.3.0/bin
-# environment
-VSCODE_LOG_STACK = false
-# environment
-ELECTRON_RUN_AS_NODE = 1
-# default
-.FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
-# environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.P2IbwEFpVj/Listeners
-# automatic
-%F = $(notdir $%)
-# environment
-CONDA_EXE = /opt/homebrew/anaconda3/bin/conda
-# makefile (from `Makefile', line 20)
-author = "Team alter way Cloud Consulting"
-# environment
-VSCODE_PIPE_LOGGING = true
-# environment
-PWD = /Users/hleclerc/dev/projects/formations/formations-aw
-# makefile (from `Makefile', line 22)
-date = "$$(date +'%d %B %Y')"
-# environment
-ORIGINAL_XDG_CURRENT_DESKTOP = undefined
-# environment
-VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
-# environment
-HOME = /Users/hleclerc
-# default
-MAKEFILEPATH = $(shell /usr/bin/xcode-select -print-path 2>/dev/null || echo /Developer)/Makefiles
-# environment
-VSCODE_CLI = 1
-# environment
-VSCODE_CODE_CACHE_PATH = /Users/hleclerc/Library/Application Support/Code/CachedData/4af164ea3a06f701fe3e89a2bcbb421d2026b68f
-# environment
-LOGNAME = hleclerc
-# environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
-# environment
-CONDA_PROMPT_MODIFIER = (base) 
-# environment
-NVM_CD_FLAGS = -q
-# environment
-ZSH = /Users/hleclerc/.oh-my-zsh
-# environment
-VSCODE_HANDLES_UNCAUGHT_ERRORS = true
-# automatic
-^D = $(patsubst %/,%,$(dir $^))
-# environment
-CONDA_DEFAULT_ENV = base
-# environment
-XPC_FLAGS = 0x0
-# environment
-COLORTERM = truecolor
-# default
-MAKE = $(MAKE_COMMAND)
-# environment
-LC_TERMINAL = iTerm2
-# environment
-SHLVL = 3
-# default
-MAKE_VERSION := 3.81
-# environment
-USER = hleclerc
-# makefile
-.DEFAULT_GOAL := help
-# default
-MAKECMDGOALS := all
-# environment
-TERM_SESSION_ID = w0t0p0:48328DD8-7E56-4A9F-BD77-0272AA5BA699
-# environment
-LESS = -R
-# automatic
-%D = $(patsubst %/,%,$(dir $%))
-# environment
-CONDA_SHLVL = 1
-# default
-MAKE_COMMAND := /Library/Developer/CommandLineTools/usr/bin/make
-# environment
-TERM_PROGRAM = iTerm.app
-# default
-.VARIABLES := 
-# environment
-TMPDIR = /var/folders/h2/12qsmrms09b5d8_g44gl87zm0000gn/T/
-# automatic
-*F = $(notdir $*)
-# environment
-VSCODE_IPC_HOOK = /Users/hleclerc/Library/Application Support/Code/1.68.0-main.sock
-# environment
-MAKE_RESTARTS = 1
 # makefile
 MAKEFLAGS = Rrqp
 # environment
@@ -606,28 +176,33 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-TERM_PROGRAM_VERSION = 3.4.16
+TERM_PROGRAM_VERSION = 3.4.18
 # environment
 NVM_DIR = /Users/hleclerc/.nvm
 # environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.1644698.1644704.E0F8EEA3-226A-4EBF-AFBC-B98AB544D66B
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.1644698.1644704.B2944DAF-F84B-4007-8AF6-A206A3F87FBB
 # environment
-LC_TERMINAL_VERSION = 3.4.16
+LC_TERMINAL_VERSION = 3.4.18
+# environment
+HOMEBREW_PREFIX = /opt/homebrew
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
- 
 # makefile (from `Makefile', line 26)
 revealjsurl = https://osones.com/formations/revealjs
 # automatic
 +F = $(notdir $+)
 # environment
-ITERM_SESSION_ID = w0t0p0:48328DD8-7E56-4A9F-BD77-0272AA5BA699
+ITERM_SESSION_ID = w0t5p0:72A599C1-50CC-46B1-A0A6-0489E00CBBCF
+# environment
+HOMEBREW_REPOSITORY = /opt/homebrew
 # environment
 COLORFGBG = 7;0
 # environment
 __CF_USER_TEXT_ENCODING = 0x1F5:0x0:0x1
 # environment
 COMMAND_MODE = unix2003
+# environment
+ZSH_COMPDUMP = /Users/hleclerc/.oh-my-zsh/cache/.zcompdump-m1-hl.local
 # default
 MAKEFILES := 
 # automatic
@@ -657,9 +232,9 @@ CONDA_PREFIX = /opt/homebrew/anaconda3
 # environment
 TERM = xterm-256color
 # environment
-_P9K_TTY = /dev/ttys000
+_P9K_TTY = /dev/ttys007
 # environment
-VSCODE_PID = 1928
+VSCODE_PID = 15882
 # environment
 _CE_CONDA = 
 # environment
@@ -667,7 +242,7 @@ LANG = C
 # makefile (from `Makefile', line 21)
 institute = "alter way Cloud Consulting"
 # variable set hash-table stats:
-# Load=104/1024=10%, Rehash=0, Collisions=8/135=6%
+# Load=112/1024=11%, Rehash=0, Collisions=9/129=7%
 
 # Pattern-specific Variable Values
 
@@ -675,100 +250,58 @@ institute = "alter way Cloud Consulting"
 
 # Directories
 
-# . (device 16777233, inode 2820354): 29 files, no impossibilities.
-# build (device 16777233, inode 3684827): No files, no impossibilities so far.
+# . (device 16777230, inode 2820354): 29 files, no impossibilities.
 
-# 29 files, no impossibilities in 2 directories.
+# 29 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
-%:
-
-%: %.html %.pdf %-handout.pdf %-print.pdf
-
-build/%.tex: build/%.md
-#  commands to execute (from `Makefile', line 62):
-	pandoc $< -t beamer -f markdown -s -o $@ --slide-level 3 -V theme=metropolis -H styles/beamer.custom \
-	-V title=$(title) -V institute=$(institute) -V author=$(author) -V date=$(date)
-	
-
-build/%-handout.tex: build/%.md
-#  commands to execute (from `Makefile', line 66):
-	pandoc $< -t beamer -f markdown -s -o $@ --slide-level 3 -V theme=metropolis -H styles/beamer.custom -V handout \
-	-V title=$(title) -V institute=$(institute) -V author=$(author) -V date=$(date)
-	
-
-%.html:
-
-%.html: build/%.md
-#  commands to execute (from `Makefile', line 71):
-	sed 's,^## ,### ,' $< > $<-html # revealjs doesn't support 3 levels
-	pandoc $<-html -t revealjs -f markdown -s -o $@ --slide-level 3 -V theme=awcc \
-	-V revealjs-url=$(revealjsurl) -V navigation=frame -V slideNumber="true" \
-	-V title=$(title) -V institute=$(institute) -V author=$(author) -V date=$(date)
-	
-
-%.pdf:
-
-%.pdf: build/%.tex
-#  commands to execute (from `Makefile', line 78):
-	sed -i 's,π,\\\\pi,g' $< # ugly workaround ...
-	ln -sf styles/beamer*metropolis.sty .
-	pdflatex -output-directory build/ $<
-	pdflatex -output-directory build/ $<
-	rm -f beamer*metropolis.sty
-	mv build/$@ $@
-	
-
-%-handout.pdf:
-
-%-print.pdf:
-
-%-print.pdf: %-handout.pdf
-#  commands to execute (from `Makefile', line 88):
-	pdfnup --nup 2x2 --frame true --suffix print $<
-	mv $*-handout-print.pdf $*-print.pdf
-	
-
-# 11 implicit rules, 0 (0.0%) terminal.
+# No implicit rules.
 
 # Files
 
-mrproper: clean
+-: cours/intro-awcc.fr.md cours/terraform/terraform-introduction.fr.md cours/terraform/terraform-concepts.fr.md cours/terraform/terraform-init-projet.fr.md cours/terraform/terraform-workflow.fr.md cours/terraform/terraform-state-backend.fr.md cours/terraform/terraform-workspace.fr.md cours/terraform/terraform-commandes-base.fr.md cours/terraform/terraform-configuration.fr.md cours/terraform/terraform-conditions.fr.md cours/terraform/terraform-loops.fr.md cours/terraform/terraform-provisioners.fr.md cours/terraform/terraform-autres-commandes.fr.md cours/terraform/terraform-modules.fr.md cours/terraform/terraform-best-practices.fr.md cours/terraform/terraform-tests.fr.md cours/terraform/terraform-next-steps.fr.md cours/terraform/terraform-commands-cheat-sheet.fr.md cours/terraform/terraform-conclusion.fr.md
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 101):
-	rm -f *.pdf
-	rm -f *.html
-	rm -f modules.png
+#  commands to execute (from `build/Makefile', line 32):
+	rm -f $@
+	$(foreach module,$^,cat $(module) >> $@;)
 	
 
+build/kubernetes-user.md: cours/intro-awcc.fr.md cours/containers/kubernetes/k8s-governance.fr.md cours/containers/kubernetes/k8s-architecture.fr.md cours/containers/kubernetes/k8s-core-api-objects.fr.md cours/containers/kubernetes/k8s-networking.fr.md cours/containers/kubernetes/k8s-volumes.fr.md cours/containers/kubernetes/k8s-workloads-configuration.fr.md cours/containers/kubernetes/k8s-resources-handling.fr.md cours/containers/kubernetes/k8s-observability-monitoring.fr.md cours/containers/kubernetes/k8s-usage.fr.md cours/containers/kubernetes/k8s-operations.fr.md cours/containers/kubernetes/conclusion.fr.md
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `build/Makefile', line 23):
+	rm -f $@
+	$(foreach module,$^,cat $(module) >> $@;)
+	
+
+# Not a target:
 all:
 #  Command-line target.
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-all-pdf:
 #  Implicit rule search has not been done.
+ 
 #  Modification time never checked.
 #  File has not been updated.
 
 build/cours.list: cours.json
 #  Implicit rule search has not been done.
-#  Last modified 2022-10-03 08:31:56
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  Modification time never checked.
+#  File has not been updated.
 #  commands to execute (from `Makefile', line 36):
- 
 	mkdir -p build
 	jq -r '.[] | [ .course_name, .course_description, .modules[] ] | @tsv' $(cours) | sed 's,\t, ,g3;s,\t,$$,g' > build/cours.list
+	
+
+Web: cours/intro-awcc.fr.md cours/aws/iam.fr.md cours/aws/networking.fr.md cours/aws/conclusion.fr.md
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `build/Makefile', line 29):
+	rm -f $@
+	$(foreach module,$^,cat $(module) >> $@;)
 	
 
 # Not a target:
@@ -777,14 +310,56 @@ build/cours.list: cours.json
 #  Modification time never checked.
 #  File has not been updated.
 
+build/Terraform: cours/intro-awcc.fr.md cours/terraform/terraform-introduction.fr.md cours/terraform/terraform-concepts.fr.md cours/terraform/terraform-init-projet.fr.md cours/terraform/terraform-workflow.fr.md cours/terraform/terraform-state-backend.fr.md cours/terraform/terraform-workspace.fr.md cours/terraform/terraform-commandes-base.fr.md cours/terraform/terraform-configuration.fr.md cours/terraform/terraform-conditions.fr.md cours/terraform/terraform-loops.fr.md cours/terraform/terraform-provisioners.fr.md cours/terraform/terraform-autres-commandes.fr.md cours/terraform/terraform-modules.fr.md cours/terraform/terraform-best-practices.fr.md cours/terraform/terraform-tests.fr.md cours/terraform/terraform-next-steps.fr.md cours/terraform/terraform-commands-cheat-sheet.fr.md cours/terraform/terraform-conclusion.fr.md
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `build/Makefile', line 32):
+	rm -f $@
+	$(foreach module,$^,cat $(module) >> $@;)
+	
+
 # Not a target:
 Makefile:
-#  Implicit rule search has been done.
-#  Last modified 2022-05-19 12:43:24
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+build/openstack-ops.md: cours/intro-awcc.fr.md cours/intro.fr.md cours/openstack/openstack-introduction.fr.md cours/openstack/openstack-presentation.fr.md cours/openstack/openstack-presentation-inside.fr.md cours/openstack/openstack-deploiement.fr.md cours/openstack/openstack-deploiement-avance.fr.md cours/openstack/openstack-deploiement-prod.fr.md cours/openstack/openstack-conclusion.fr.md
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `build/Makefile', line 8):
+	rm -f $@
+	$(foreach module,$^,cat $(module) >> $@;)
+	
+
+build/openstack.md: cours/intro-awcc.fr.md cours/intro.fr.md cours/cloud/cloud-introduction.fr.md cours/openstack/openstack-user-introduction.fr.md cours/openstack/openstack-introduction.fr.md cours/cloud/cloud.fr.md cours/openstack/openstack-presentation.fr.md cours/openstack/openstack-presentation-inside.fr.md cours/openstack/openstack-utilisation.fr.md cours/openstack/openstack-deploiement.fr.md cours/openstack/openstack-deploiement-prod.fr.md cours/cloud/archi-cloud-dev.fr.md cours/cloud/archi-cloud-infra.fr.md cours/openstack/openstack-conclusion.fr.md
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `build/Makefile', line 5):
+	rm -f $@
+	$(foreach module,$^,cat $(module) >> $@;)
+	
+
+Fondamentaux.md: cours/intro-awcc.fr.md cours/terraform/terraform-introduction.fr.md cours/terraform/terraform-concepts.fr.md cours/terraform/terraform-init-projet.fr.md cours/terraform/terraform-workflow.fr.md cours/terraform/terraform-state-backend.fr.md cours/terraform/terraform-workspace.fr.md cours/terraform/terraform-commandes-base.fr.md cours/terraform/terraform-configuration.fr.md cours/terraform/terraform-conditions.fr.md cours/terraform/terraform-loops.fr.md cours/terraform/terraform-provisioners.fr.md cours/terraform/terraform-autres-commandes.fr.md cours/terraform/terraform-modules.fr.md cours/terraform/terraform-best-practices.fr.md cours/terraform/terraform-tests.fr.md cours/terraform/terraform-next-steps.fr.md cours/terraform/terraform-commands-cheat-sheet.fr.md cours/terraform/terraform-conclusion.fr.md
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `build/Makefile', line 32):
+	rm -f $@
+	$(foreach module,$^,cat $(module) >> $@;)
+	
+
+build/docker.md: cours/intro-awcc.fr.md cours/containers/containers-introduction.fr.md cours/containers/containers-runtimes.fr.md cours/containers/docker-concepts.fr.md cours/containers/docker-bsr.fr.md cours/containers/docker-ecosystem.fr.md cours/containers/docker-hosts.fr.md cours/containers/docker-orchestration.fr.md cours/containers/docker-monitoring.fr.md cours/containers/kubernetes/k8s-concepts.fr.md cours/containers/kubernetes/k8s-architecture.fr.md cours/containers/k8s-openshift-introduction.fr.md cours/containers/kubernetes/conclusion.fr.md
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `build/Makefile', line 17):
+	rm -f $@
+	$(foreach module,$^,cat $(module) >> $@;)
+	
 
 help:
 #  Implicit rule search has not been done.
@@ -797,11 +372,8 @@ help:
 build/Makefile: build/cours.list
 #  A default, MAKEFILES, or -include/sinclude makefile.
 #  Implicit rule search has not been done.
-#  Last modified 2022-10-03 08:31:56
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  Modification time never checked.
+#  File has not been updated.
 #  commands to execute (from `Makefile', line 40):
 	sed -E 's#^(.*)\$$.*\$$(.*)#build/\1.md: $$(addsuffix .$(lang).md, $$(addprefix cours/, \2))\n\trm -f $$@\n\t$$(foreach module,$$^,cat $$(module) >> $$@;)#' build/cours.list > build/Makefile
 	echo >> build/Makefile
@@ -817,39 +389,72 @@ build/Makefile: build/cours.list
 #  Modification time never checked.
 #  File has not been updated.
 
-clean:
+build/openstack-user.md: cours/intro-awcc.fr.md cours/intro.fr.md cours/cloud/cloud-introduction.fr.md cours/openstack/openstack-introduction.fr.md cours/cloud/cloud.fr.md cours/cloud/cloud-avance.fr.md cours/openstack/openstack-presentation.fr.md cours/openstack/openstack-utilisation.fr.md cours/cloud/archi-cloud-dev.fr.md cours/cloud/archi-cloud-infra.fr.md cours/openstack/openstack-user-conclusion.fr.md
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 96):
-	rm -rf build/
-	rm -f beamer*metropolis.sty
+#  commands to execute (from `build/Makefile', line 11):
+	rm -f $@
+	$(foreach module,$^,cat $(module) >> $@;)
 	
 
-# Not a target:
-cours.json:
-#  Implicit rule search has been done.
-#  Last modified 2022-05-31 08:55:21
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-modules.png:
+Services.md: cours/intro-awcc.fr.md cours/aws/iam.fr.md cours/aws/networking.fr.md cours/aws/conclusion.fr.md
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 93):
-	dot -Tpng modules.dot > modules.png
+#  commands to execute (from `build/Makefile', line 29):
+	rm -f $@
+	$(foreach module,$^,cat $(module) >> $@;)
 	
 
-all-html:
+build/Amazon: cours/intro-awcc.fr.md cours/aws/iam.fr.md cours/aws/networking.fr.md cours/aws/conclusion.fr.md
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+#  commands to execute (from `build/Makefile', line 29):
+	rm -f $@
+	$(foreach module,$^,cat $(module) >> $@;)
+	
+
+ 
+build/openstack-admin-user.md: cours/intro-awcc.fr.md cours/intro.fr.md cours/openstack/openstack-user-introduction.fr.md cours/openstack/openstack-introduction.fr.md cours/openstack/openstack-presentation.fr.md cours/openstack/openstack-presentation-inside.fr.md cours/openstack/openstack-utilisation.fr.md cours/openstack/openstack-deploiement.fr.md cours/openstack/openstack-deploiement-avance.fr.md cours/openstack/openstack-deploiement-prod.fr.md cours/cloud/archi-cloud-dev.fr.md cours/cloud/archi-cloud-infra.fr.md cours/openstack/openstack-conclusion.fr.md
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `build/Makefile', line 14):
+	rm -f $@
+	$(foreach module,$^,cat $(module) >> $@;)
+	
+
+build/cloud.md: cours/intro-awcc.fr.md cours/intro.fr.md cours/cloud/cloud-introduction.fr.md cours/cloud/cloud.fr.md
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `build/Makefile', line 2):
+	rm -f $@
+	$(foreach module,$^,cat $(module) >> $@;)
+	
+
+build/kubernetes-ops.md: cours/intro-awcc.fr.md cours/containers/kubernetes/k8s-governance.fr.md cours/containers/kubernetes/k8s-architecture.fr.md cours/containers/kubernetes/k8s-installation.fr.md cours/containers/kubernetes/k8s-operations.fr.md cours/containers/kubernetes/k8s-scheduling.fr.md cours/containers/kubernetes/k8s-security.fr.md cours/containers/kubernetes/k8s-maintenance.fr.md cours/containers/kubernetes/conclusion.fr.md
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `build/Makefile', line 26):
+	rm -f $@
+	$(foreach module,$^,cat $(module) >> $@;)
+	
+
+build/KUBERNETES.md: cours/intro-awcc.fr.md cours/containers/kubernetes/k8s-governance.fr.md cours/containers/kubernetes/k8s-architecture.fr.md cours/containers/kubernetes/k8s-installation.fr.md cours/containers/kubernetes/k8s-usage.fr.md cours/containers/kubernetes/k8s-core-api-objects.fr.md cours/containers/kubernetes/k8s-imperative-declarative-commands.fr.md cours/containers/kubernetes/k8s-networking.fr.md cours/containers/kubernetes/k8s-volumes.fr.md cours/containers/kubernetes/k8s-workloads-configuration.fr.md cours/containers/kubernetes/k8s-resources-handling.fr.md cours/containers/kubernetes/k8s-observability-monitoring.fr.md cours/containers/kubernetes/k8s-scheduling.fr.md cours/containers/kubernetes/k8s-logging-monitoring.fr.md cours/containers/kubernetes/k8s-operations.fr.md cours/containers/kubernetes/k8s-security.fr.md cours/containers/kubernetes/k8s-helm-intro.fr.md cours/containers/kubernetes/k8s-kustomize-intro.fr.md cours/containers/kubernetes/k8s-ingress.fr.md cours/containers/kubernetes/k8s-maintenance.fr.md cours/containers/kubernetes/k8s-troubleshouting.fr.md cours/containers/kubernetes/k8s-certification.fr.md cours/containers/kubernetes/conclusion.fr.md
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `build/Makefile', line 20):
+	rm -f $@
+	$(foreach module,$^,cat $(module) >> $@;)
+	
 
 # files hash-table stats:
-# Load=13/1024=1%, Rehash=0, Collisions=0/35=0%
+# Load=22/1024=2%, Rehash=0, Collisions=0/24=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -861,6 +466,6 @@ all-html:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4072 / max = 4072 / min = 4072 / avg = 4072
 
-# Finished Make data base on Mon Oct  3 08:31:56 2022
+# Finished Make data base on Mon Nov 21 10:17:08 2022
 
  
