@@ -2,6 +2,8 @@
 
 ### Kubernetes : `kubectl`
 
+![kubectl](images/kubectl.svg){height="200px"}
+
 - Le seul (ou presque) outil pour interagir avec des clusters Kubernetes
 - Utilise un fichier de configuration (kubeconfig) pour communiquer avec l'API de Kubernetes
 - Le(s) fichier(s) se trouve(nt) par défaut dans `~/.kube/config`
