@@ -20,7 +20,7 @@
 
 ### Kubernetes : Architecture
 
-![Synthèse architecture](images/components-of-kubernetes.svg)
+![Synthèse architecture](images/k8s-archi.png)
 
 
 ### Kubernetes : Composants du Control Plane
@@ -108,7 +108,7 @@ Le kube-proxy maintient les règles réseau sur les nœuds. Ces règles permette
 
 ### Kubernetes : Architecture détaillée
 
-![Architecture détaillée](images/k8s-archi.png)
+![Architecture détaillée](images/k8s-arch4-thanks-luxas.png)
 
 ### Kubernetes : Cluster Architecture
 
