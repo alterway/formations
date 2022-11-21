@@ -108,7 +108,7 @@ Le kube-proxy maintient les règles réseau sur les nœuds. Ces règles permette
 
 ### Kubernetes : Architecture détaillée
 
-![Architecture détaillée](images/k8s-arch4-thanks-luxas.png)
+![Architecture détaillée](images/k8s-archi.png)
 
 ### Kubernetes : Cluster Architecture
 
