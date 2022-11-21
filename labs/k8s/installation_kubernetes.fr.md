@@ -62,8 +62,6 @@ apiserver: Running
 kubeconfig: Configured
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
-
 1. Il est possible d'installer d'autres clusters en utilisant le flag profile
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
