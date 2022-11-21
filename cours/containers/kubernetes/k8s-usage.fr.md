@@ -25,7 +25,7 @@ Un seul fichier pour gérer tous ses clusters avec trois informations :
 - Context, association d'un user et d'un serveur
 
 
-![Synthèse architecture](images/kubeconfig-structure.png)
+![Synthèse architecture](images/kubeconfig-structure.png){height="400px"}
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
 
@@ -413,7 +413,7 @@ kubectl describe -n kubernetes-dashboard secret kubernetes-dashboard-token-f68tf
 
 ```
 
-![](images/kubernetes/dashboard-1.png)
+![](images/kubernetes/dashboard-1.png){height="300px"}
 
 ### Kubernetes : Kubernetes Dashboard
 
