@@ -187,7 +187,7 @@ NAME       READY   STATUS    RESTARTS   AGE
 test-pod   1/1     Running   0          34s
 ```
 
-## Mise a jour d'un cluster
+## Mise à jour d'un cluster
 
 1. Pour commencer, il faut mettre à jour kubeadm :
 
