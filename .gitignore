@@ -6,8 +6,9 @@ build/
 beamer*metropolis.sty
 modules.png
 .DS_Store
+.vscode/
 
-.vscode/*
+
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
@@ -20,4 +21,3 @@ modules.png
 # Built Visual Studio Code Extensions
 *.vsix
 
-.vscode/

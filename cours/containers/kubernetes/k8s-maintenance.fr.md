@@ -17,7 +17,7 @@
 - Il est important de mettre à jour la version de kubernetes afin de bénéficier de nouvelles fonctinnalités. 
 - Ce process s'effectue par la mise à jour des composants du control plane
 - Les composants du control plane peuvent avoir des versions différentes mais celle de l'API server doit toujours être suppérieure à celle des autre composants
-- Le passage de version s'effectue de façon incrémentielle. On ne peut par exemple que passer de la version v1.19.x à la version v1.20.x
+- Le passage de version s'effectue de façon incrémentielle. On ne peut par exemple que passer de la version v1.19.x à la version v1.23.x
 - Un upgrade de Kubeadm met à jour les composants du control plane sauf le kubelet. Il est nécessaire de le mettre à jour séparément pour un passage à niveau complet.
 
 

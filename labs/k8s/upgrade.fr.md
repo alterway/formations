@@ -9,7 +9,7 @@ Pour commencer, il faut mettre à jour kubeadm :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 sudo apt-mark unhold kubeadm
-sudo apt-get install kubeadm=1.21.14-0
+sudo apt-get install kubeadm=1.24.10-00
 sudo apt-mark hold kubeadm
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -80,7 +80,7 @@ Nous devons maintenant mettre à jour la kubelet et kubectl :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 sudo apt-mark unhold kubectl kubelet
-sudo apt-get install kubectl=1.21.14-00 kubelet=1.21.14-00
+sudo apt-get install kubectl=1.24.10-00 kubelet=1.24.10-00
 sudo apt-mark hold kubectl kubelet
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -97,7 +97,7 @@ A faire sur les noeud 1 et 2
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 training@worker-0$ sudo apt-mark unhold kubeadm
-training@worker-0$ sudo apt-get install kubeadm=1.21.14-00
+training@worker-0$ sudo apt-get install kubeadm=1.24.10-00
 training@worker-0$ sudo apt-mark hold kubeadm
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -134,7 +134,7 @@ Enfin, comme pour le master nous devons mettre a jour la kubelet et kubectl :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 training@worker-0$ sudo apt-mark unhold kubectl kubelet
-training@worker-0$ sudo apt-get install kubectl=1.21.14-00 kubelet=1.21.14-00
+training@worker-0$ sudo apt-get install kubectl=1.24.10-00 kubelet=1.24.10-00
 training@worker-0$ sudo apt-mark hold kubectl kubelet
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -158,7 +158,7 @@ kubectl get nodes
 
 NAME     STATUS   ROLES    AGE   VERSION
 master   Ready    master   22m   v1.21.14
-worker-0   Ready     <none>   21m    v1.20.7
+worker-0   Ready     <none>   21m    v1.23.16
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Et lister les pods pour vérifier que tout est fonctionnel :

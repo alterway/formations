@@ -12,8 +12,8 @@
 ### Kubernetes Local : Minikube (2)
 
 ```console
-$minikube start --kubernetes-version="v1.20.1"
-Starting local Kubernetes v1.20.1 cluster...
+$minikube start --kubernetes-version="v1.23.16"
+Starting local Kubernetes v1.23.16 cluster...
 Starting VM...
 Getting VM IP address...
 [...]
@@ -30,7 +30,7 @@ Loading cached images from config file.
 
 ```console
 $ kubectl version
-Client Version: v1.20.7
+Client Version: v1.23.16
 Server Version: v1.21.7
 ```
 
