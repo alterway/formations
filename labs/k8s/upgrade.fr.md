@@ -107,6 +107,8 @@ Répéter les actions pour le noeud 2 noeud par noeud (pas en // )
 
 
 Sur le <font color=red><b>master</b></font>
+
+
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl drain worker-0 --ignore-daemonsets
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

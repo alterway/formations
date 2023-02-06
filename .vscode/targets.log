@@ -10,11 +10,10 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 build/Makefile:36: *** missing separator.  Stop.
 
 
-# Make data base, printed on Mon Nov 21 10:17:08 2022
+# Make data base, printed on Mon Feb  6 09:49:04 2023
 
 # Variables
 
- 
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
@@ -30,6 +29,7 @@ NVM_INC = /Users/hleclerc/.nvm/versions/node/v18.3.0/include/node
 # makefile (from `Makefile', line 23)
 lang = fr
 # automatic
+ 
 @D = $(patsubst %/,%,$(dir $@))
 # automatic
 @F = $(notdir $@)
@@ -56,13 +56,13 @@ INFOPATH = /opt/homebrew/share/info:
 # environment
 P9K_SSH = 0
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/h2/12qsmrms09b5d8_g44gl87zm0000gn/T/vscode-ipc-f22b25d4-5e3f-4ef3-b574-078b4e05bbad.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/h2/12qsmrms09b5d8_g44gl87zm0000gn/T/vscode-ipc-49053e2a-c804-4973-b459-b3f92a8ef435.sock
 # environment
 VSCODE_CWD = /Users/hleclerc/dev/projects/formations/formations-aw
 # environment
 GOHOME = /Users/hleclerc/dev/bin
 # environment
-PATH = /opt/homebrew/opt/gnu-sed/libexec/gnubin:/Users/hleclerc/.krew/bin:/opt/homebrew/anaconda3/bin:/opt/homebrew/anaconda3/condabin:/Users/hleclerc/.rd/bin:/Users/hleclerc/.nvm/versions/node/v18.3.0/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Little Snitch.app/Contents/Components:/Library/Apple/usr/bin:/opt/homebrew/bin:/opt/homebrew/anaconda3/bin:/Users/hleclerc/dev/bin/go/bin:/opt/homebrew/opt/go/libexec/bin:/Users/hleclerc/.local/bin:/Users/hleclerc/bin
+PATH = /opt/homebrew/opt/gnu-sed/libexec/gnubin:/Users/hleclerc/.krew/bin:/opt/homebrew/anaconda3/bin:/opt/homebrew/anaconda3/condabin:/Users/hleclerc/.rd/bin:/Users/hleclerc/.nvm/versions/node/v18.3.0/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Little Snitch.app/Contents/Components:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/opt/homebrew/bin:/opt/homebrew/anaconda3/bin:/Users/hleclerc/dev/bin/go/bin:/opt/homebrew/opt/go/libexec/bin:/Users/hleclerc/.local/bin:/Users/hleclerc/bin
 # environment
 GOROOT = /opt/homebrew/opt/go/libexec
 # environment
@@ -74,20 +74,17 @@ GOPATH = /Users/hleclerc/dev/bin/go
 # environment
 NVM_BIN = /Users/hleclerc/.nvm/versions/node/v18.3.0/bin
 # environment
- 
 VSCODE_LOG_STACK = false
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.2t1qIYlF1B/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.K3zswzwDK5/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
 CONDA_EXE = /opt/homebrew/anaconda3/bin/conda
-# environment
-SQLITE_EXEMPT_PATH_FROM_VNODE_GUARDS = /Users/hleclerc/Library/WebKit/Databases
 # makefile (from `Makefile', line 20)
 author = "Team alter way Cloud Consulting"
 # environment
@@ -142,7 +139,6 @@ LC_TERMINAL = iTerm2
 SHLVL = 3
 # default
 MAKE_VERSION := 3.81
- 
 # environment
 USER = hleclerc
 # makefile
@@ -150,7 +146,7 @@ USER = hleclerc
 # default
 MAKECMDGOALS := all
 # environment
-TERM_SESSION_ID = w0t5p0:72A599C1-50CC-46B1-A0A6-0489E00CBBCF
+TERM_SESSION_ID = w2t1p0:3D9E086F-88CE-4C4A-83D5-ACCC52E7B4A1
 # environment
 LESS = -R
 # automatic
@@ -176,13 +172,13 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-TERM_PROGRAM_VERSION = 3.4.18
+TERM_PROGRAM_VERSION = 3.4.19
 # environment
 NVM_DIR = /Users/hleclerc/.nvm
 # environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.1644698.1644704.B2944DAF-F84B-4007-8AF6-A206A3F87FBB
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.1644698.1644704.E795E9B2-FD09-4B48-8948-C5FFA48B2BA0
 # environment
-LC_TERMINAL_VERSION = 3.4.18
+LC_TERMINAL_VERSION = 3.4.19
 # environment
 HOMEBREW_PREFIX = /opt/homebrew
 # automatic
@@ -192,7 +188,7 @@ revealjsurl = https://osones.com/formations/revealjs
 # automatic
 +F = $(notdir $+)
 # environment
-ITERM_SESSION_ID = w0t5p0:72A599C1-50CC-46B1-A0A6-0489E00CBBCF
+ITERM_SESSION_ID = w2t1p0:3D9E086F-88CE-4C4A-83D5-ACCC52E7B4A1
 # environment
 HOMEBREW_REPOSITORY = /opt/homebrew
 # environment
@@ -232,9 +228,9 @@ CONDA_PREFIX = /opt/homebrew/anaconda3
 # environment
 TERM = xterm-256color
 # environment
-_P9K_TTY = /dev/ttys007
+_P9K_TTY = /dev/ttys001
 # environment
-VSCODE_PID = 15882
+VSCODE_PID = 2085
 # environment
 _CE_CONDA = 
 # environment
@@ -242,7 +238,7 @@ LANG = C
 # makefile (from `Makefile', line 21)
 institute = "alter way Cloud Consulting"
 # variable set hash-table stats:
-# Load=112/1024=11%, Rehash=0, Collisions=9/129=7%
+# Load=111/1024=11%, Rehash=0, Collisions=9/128=7%
 
 # Pattern-specific Variable Values
 
@@ -250,7 +246,7 @@ institute = "alter way Cloud Consulting"
 
 # Directories
 
-# . (device 16777230, inode 2820354): 29 files, no impossibilities.
+# . (device 16777234, inode 2820354): 29 files, no impossibilities.
 
 # 29 files, no impossibilities in 1 directories.
 
@@ -269,6 +265,7 @@ institute = "alter way Cloud Consulting"
 	$(foreach module,$^,cat $(module) >> $@;)
 	
 
+ 
 build/kubernetes-user.md: cours/intro-awcc.fr.md cours/containers/kubernetes/k8s-governance.fr.md cours/containers/kubernetes/k8s-architecture.fr.md cours/containers/kubernetes/k8s-core-api-objects.fr.md cours/containers/kubernetes/k8s-networking.fr.md cours/containers/kubernetes/k8s-volumes.fr.md cours/containers/kubernetes/k8s-workloads-configuration.fr.md cours/containers/kubernetes/k8s-resources-handling.fr.md cours/containers/kubernetes/k8s-observability-monitoring.fr.md cours/containers/kubernetes/k8s-usage.fr.md cours/containers/kubernetes/k8s-operations.fr.md cours/containers/kubernetes/conclusion.fr.md
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -282,7 +279,6 @@ build/kubernetes-user.md: cours/intro-awcc.fr.md cours/containers/kubernetes/k8s
 all:
 #  Command-line target.
 #  Implicit rule search has not been done.
- 
 #  Modification time never checked.
 #  File has not been updated.
 
@@ -401,6 +397,7 @@ build/openstack-user.md: cours/intro-awcc.fr.md cours/intro.fr.md cours/cloud/cl
 Services.md: cours/intro-awcc.fr.md cours/aws/iam.fr.md cours/aws/networking.fr.md cours/aws/conclusion.fr.md
 #  Implicit rule search has not been done.
 #  Modification time never checked.
+ 
 #  File has not been updated.
 #  commands to execute (from `build/Makefile', line 29):
 	rm -f $@
@@ -416,7 +413,6 @@ build/Amazon: cours/intro-awcc.fr.md cours/aws/iam.fr.md cours/aws/networking.fr
 	$(foreach module,$^,cat $(module) >> $@;)
 	
 
- 
 build/openstack-admin-user.md: cours/intro-awcc.fr.md cours/intro.fr.md cours/openstack/openstack-user-introduction.fr.md cours/openstack/openstack-introduction.fr.md cours/openstack/openstack-presentation.fr.md cours/openstack/openstack-presentation-inside.fr.md cours/openstack/openstack-utilisation.fr.md cours/openstack/openstack-deploiement.fr.md cours/openstack/openstack-deploiement-avance.fr.md cours/openstack/openstack-deploiement-prod.fr.md cours/cloud/archi-cloud-dev.fr.md cours/cloud/archi-cloud-infra.fr.md cours/openstack/openstack-conclusion.fr.md
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -466,6 +462,6 @@ build/KUBERNETES.md: cours/intro-awcc.fr.md cours/containers/kubernetes/k8s-gove
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4072 / max = 4072 / min = 4072 / avg = 4072
 
-# Finished Make data base on Mon Nov 21 10:17:08 2022
+# Finished Make data base on Mon Feb  6 09:49:04 2023
 
  
