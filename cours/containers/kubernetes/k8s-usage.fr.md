@@ -27,6 +27,9 @@ Un seul fichier pour gérer tous ses clusters avec trois informations :
 - Context, association d'un user et d'un serveur
 
 
+### Kubeconfig
+
+
 ![Synthèse architecture](images/kubeconfig-structure.png){height="400px"}
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
