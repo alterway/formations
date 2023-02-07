@@ -18,7 +18,7 @@
 - Fichier `kubeconfig` peut être passé en paramètre de kubectl avec la variable d'nvironnement `KUBECONFIG`
     . `KUBECONFIG=/opt/k8s/config kubectl get pods`
 
-### Kubeconfig
+### Kubeconfig 1
 
 Un seul fichier pour gérer tous ses clusters avec trois informations :
 
@@ -27,10 +27,12 @@ Un seul fichier pour gérer tous ses clusters avec trois informations :
 - Context, association d'un user et d'un serveur
 
 
-### Kubeconfig
-
+### Kubeconfig 2
 
 ![Synthèse architecture](images/kubeconfig-structure.png){height="400px"}
+
+### Kubeconfig 3
+
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.yaml .numberLines}
 
