@@ -10,16 +10,15 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 build/Makefile:36: *** missing separator.  Stop.
 
 
-# Make data base, printed on Tue Feb  7 13:16:40 2023
+# Make data base, printed on Tue Feb  7 13:33:17 2023
 
 # Variables
 
 # automatic
+ 
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
 ?F = $(notdir $?)
-# environment
-ELECTRON_NO_ATTACH_CONSOLE = 1
 # environment
 VSCODE_LOG_NATIVE = false
 # environment
@@ -34,6 +33,7 @@ lang = fr
 @F = $(notdir $@)
 # makefile
 CURDIR := /Users/hleclerc/dev/projects/formations/formations-aw
+ 
 # makefile
 SHELL = /bin/sh
 # environment
@@ -55,15 +55,13 @@ INFOPATH = /opt/homebrew/share/info:
 # environment
 P9K_SSH = 0
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/h2/12qsmrms09b5d8_g44gl87zm0000gn/T/vscode-ipc-99a22b4f-4ef8-41f1-843b-0adcecc349a1.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/h2/12qsmrms09b5d8_g44gl87zm0000gn/T/vscode-ipc-5c82f7c4-6ba6-44f0-9bbd-24e292e9cef8.sock
 # environment
-VSCODE_CWD = /Users/hleclerc/dev/projects/clients/alterway/train-dev
+VSCODE_CWD = /
 # environment
 GOHOME = /Users/hleclerc/dev/bin
 # environment
 PATH = /opt/homebrew/opt/gnu-sed/libexec/gnubin:/Users/hleclerc/.krew/bin:/opt/homebrew/anaconda3/bin:/opt/homebrew/anaconda3/condabin:/Users/hleclerc/.rd/bin:/Users/hleclerc/.nvm/versions/node/v18.3.0/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Little Snitch.app/Contents/Components:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/opt/homebrew/bin:/opt/homebrew/anaconda3/bin:/Users/hleclerc/dev/bin/go/bin:/opt/homebrew/opt/go/libexec/bin:/Users/hleclerc/.local/bin:/Users/hleclerc/bin
-# environment
-GOROOT = /opt/homebrew/opt/go/libexec
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # makefile (from `build/Makefile', line 35)
@@ -107,8 +105,6 @@ HOME = /Users/hleclerc
 # default
 MAKEFILEPATH = $(shell /usr/bin/xcode-select -print-path 2>/dev/null || echo /Developer)/Makefiles
 # environment
-VSCODE_CLI = 1
-# environment
 VSCODE_CODE_CACHE_PATH = /Users/hleclerc/Library/Application Support/Code/CachedData/4af164ea3a06f701fe3e89a2bcbb421d2026b68f
 # environment
 LOGNAME = hleclerc
@@ -128,24 +124,20 @@ VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 CONDA_DEFAULT_ENV = base
 # environment
 XPC_FLAGS = 0x0
-# environment
-COLORTERM = truecolor
 # default
 MAKE = $(MAKE_COMMAND)
+# default
+MAKECMDGOALS := all
 # environment
-LC_TERMINAL = iTerm2
-# environment
-SHLVL = 3
+SHLVL = 1
 # default
 MAKE_VERSION := 3.81
 # environment
 USER = hleclerc
 # makefile
 .DEFAULT_GOAL := help
-# default
-MAKECMDGOALS := all
 # environment
-TERM_SESSION_ID = w2t1p0:3D9E086F-88CE-4C4A-83D5-ACCC52E7B4A1
+GOROOT = /opt/homebrew/opt/go/libexec
 # environment
 LESS = -R
 # automatic
@@ -154,8 +146,6 @@ LESS = -R
 CONDA_SHLVL = 1
 # default
 MAKE_COMMAND := /Library/Developer/CommandLineTools/usr/bin/make
-# environment
-TERM_PROGRAM = iTerm.app
 # default
 .VARIABLES := 
 # environment
@@ -171,13 +161,11 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-TERM_PROGRAM_VERSION = 3.4.19
-# environment
 NVM_DIR = /Users/hleclerc/.nvm
 # environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.1644698.1644704.24BF6B64-DB29-46EA-A574-D695EDFAC2C0
-# environment
-LC_TERMINAL_VERSION = 3.4.19
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.1644698.1644704
+# makefile (from `Makefile', line 21)
+institute = "alter way Cloud Consulting"
 # environment
 HOMEBREW_PREFIX = /opt/homebrew
 # automatic
@@ -187,11 +175,7 @@ revealjsurl = https://osones.com/formations/revealjs
 # automatic
 +F = $(notdir $+)
 # environment
-ITERM_SESSION_ID = w2t1p0:3D9E086F-88CE-4C4A-83D5-ACCC52E7B4A1
-# environment
 HOMEBREW_REPOSITORY = /opt/homebrew
-# environment
-COLORFGBG = 7;0
 # environment
 __CF_USER_TEXT_ENCODING = 0x1F5:0x0:0x1
 # environment
@@ -203,15 +187,11 @@ MAKEFILES :=
 # automatic
 <F = $(notdir $<)
 # environment
-ITERM_PROFILE = Default
-# environment
 PAGER = less
 # environment
 LC_ALL = C
 # environment
 CONDA_PYTHON_EXE = /opt/homebrew/anaconda3/bin/python
-# environment
-P9K_TTY = old
 # automatic
 ^F = $(notdir $^)
 # default
@@ -225,19 +205,13 @@ MAKELEVEL := 0
 # environment
 CONDA_PREFIX = /opt/homebrew/anaconda3
 # environment
-TERM = xterm-256color
-# environment
-_P9K_TTY = /dev/ttys001
-# environment
 VSCODE_PID = 2085
 # environment
 _CE_CONDA = 
 # environment
 LANG = C
-# makefile (from `Makefile', line 21)
-institute = "alter way Cloud Consulting"
 # variable set hash-table stats:
-# Load=111/1024=11%, Rehash=0, Collisions=9/128=7%
+# Load=97/1024=9%, Rehash=0, Collisions=4/114=4%
 
 # Pattern-specific Variable Values
 
@@ -259,7 +233,6 @@ institute = "alter way Cloud Consulting"
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
- 
 #  commands to execute (from `build/Makefile', line 32):
 	rm -f $@
 	$(foreach module,$^,cat $(module) >> $@;)
@@ -271,6 +244,7 @@ build/kubernetes-user.md: cours/intro-awcc.fr.md cours/containers/kubernetes/k8s
 #  File has not been updated.
 #  commands to execute (from `build/Makefile', line 23):
 	rm -f $@
+ 
 	$(foreach module,$^,cat $(module) >> $@;)
 	
 
@@ -393,7 +367,6 @@ build/openstack-user.md: cours/intro-awcc.fr.md cours/intro.fr.md cours/cloud/cl
 	$(foreach module,$^,cat $(module) >> $@;)
 	
 
- 
 Services.md: cours/intro-awcc.fr.md cours/aws/iam.fr.md cours/aws/networking.fr.md cours/aws/conclusion.fr.md
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -412,6 +385,7 @@ build/Amazon: cours/intro-awcc.fr.md cours/aws/iam.fr.md cours/aws/networking.fr
 	$(foreach module,$^,cat $(module) >> $@;)
 	
 
+ 
 build/openstack-admin-user.md: cours/intro-awcc.fr.md cours/intro.fr.md cours/openstack/openstack-user-introduction.fr.md cours/openstack/openstack-introduction.fr.md cours/openstack/openstack-presentation.fr.md cours/openstack/openstack-presentation-inside.fr.md cours/openstack/openstack-utilisation.fr.md cours/openstack/openstack-deploiement.fr.md cours/openstack/openstack-deploiement-avance.fr.md cours/openstack/openstack-deploiement-prod.fr.md cours/cloud/archi-cloud-dev.fr.md cours/cloud/archi-cloud-infra.fr.md cours/openstack/openstack-conclusion.fr.md
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -461,6 +435,6 @@ build/KUBERNETES.md: cours/intro-awcc.fr.md cours/containers/kubernetes/k8s-gove
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4072 / max = 4072 / min = 4072 / avg = 4072
 
-# Finished Make data base on Tue Feb  7 13:16:40 2023
+# Finished Make data base on Tue Feb  7 13:33:17 2023
 
  
