@@ -10,12 +10,11 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 build/Makefile:36: *** missing separator.  Stop.
 
 
-# Make data base, printed on Tue Feb  7 13:33:17 2023
+# Make data base, printed on Tue Feb  7 18:16:36 2023
 
 # Variables
 
 # automatic
- 
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
 ?F = $(notdir $?)
@@ -33,7 +32,6 @@ lang = fr
 @F = $(notdir $@)
 # makefile
 CURDIR := /Users/hleclerc/dev/projects/formations/formations-aw
- 
 # makefile
 SHELL = /bin/sh
 # environment
@@ -55,7 +53,7 @@ INFOPATH = /opt/homebrew/share/info:
 # environment
 P9K_SSH = 0
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/h2/12qsmrms09b5d8_g44gl87zm0000gn/T/vscode-ipc-5c82f7c4-6ba6-44f0-9bbd-24e292e9cef8.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/h2/12qsmrms09b5d8_g44gl87zm0000gn/T/vscode-ipc-472e0873-a301-4e6f-85ae-ce9f79c55543.sock
 # environment
 VSCODE_CWD = /
 # environment
@@ -202,6 +200,7 @@ _CE_M =
 cours = cours.json
 # environment
 MAKELEVEL := 0
+ 
 # environment
 CONDA_PREFIX = /opt/homebrew/anaconda3
 # environment
@@ -244,7 +243,6 @@ build/kubernetes-user.md: cours/intro-awcc.fr.md cours/containers/kubernetes/k8s
 #  File has not been updated.
 #  commands to execute (from `build/Makefile', line 23):
 	rm -f $@
- 
 	$(foreach module,$^,cat $(module) >> $@;)
 	
 
@@ -343,6 +341,7 @@ build/Makefile: build/cours.list
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+ 
 #  commands to execute (from `Makefile', line 40):
 	sed -E 's#^(.*)\$$.*\$$(.*)#build/\1.md: $$(addsuffix .$(lang).md, $$(addprefix cours/, \2))\n\trm -f $$@\n\t$$(foreach module,$$^,cat $$(module) >> $$@;)#' build/cours.list > build/Makefile
 	echo >> build/Makefile
@@ -385,7 +384,6 @@ build/Amazon: cours/intro-awcc.fr.md cours/aws/iam.fr.md cours/aws/networking.fr
 	$(foreach module,$^,cat $(module) >> $@;)
 	
 
- 
 build/openstack-admin-user.md: cours/intro-awcc.fr.md cours/intro.fr.md cours/openstack/openstack-user-introduction.fr.md cours/openstack/openstack-introduction.fr.md cours/openstack/openstack-presentation.fr.md cours/openstack/openstack-presentation-inside.fr.md cours/openstack/openstack-utilisation.fr.md cours/openstack/openstack-deploiement.fr.md cours/openstack/openstack-deploiement-avance.fr.md cours/openstack/openstack-deploiement-prod.fr.md cours/cloud/archi-cloud-dev.fr.md cours/cloud/archi-cloud-infra.fr.md cours/openstack/openstack-conclusion.fr.md
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -435,6 +433,6 @@ build/KUBERNETES.md: cours/intro-awcc.fr.md cours/containers/kubernetes/k8s-gove
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4072 / max = 4072 / min = 4072 / avg = 4072
 
-# Finished Make data base on Tue Feb  7 13:33:17 2023
+# Finished Make data base on Tue Feb  7 18:16:36 2023
 
  

@@ -257,6 +257,28 @@ kubectl delete -A ...
 kubectl label -A ...
 ```
 
+
+### Kubectl : Se déplacer dans un NS de manière permanente
+
+Évite de toujours préciser le flag `-n`
+
+```console
+
+kubectl get ns
+
+kubectl config set-context --current --namespace <nom-du-namespace>
+
+# ou
+
+alias kubens='kubectl config set-context --current --namespace '
+
+# ex: kubens kube-system 
+
+```
+
+
+
+
 ### Kubernetes : namespace `kube-public` 
 
 ```console
