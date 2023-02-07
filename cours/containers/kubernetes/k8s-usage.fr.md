@@ -401,15 +401,34 @@ $ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.2.0
 - Pour accéder au Dashboard, il faut établir une communication entre votre poste et le cluster Kubernetes :
 
 ```console
+
+# en local  (minikube)
 $ kubectl proxy
+
+# sur master (cloud / vm)
+
+kubectl port-forward -n kubernetes-dashboard svc/kubernetes-dashboard 1234:443 --address 0.0.0.0
+
 ```
 
 - L'accès se fait désormais sur :
 
+```console
+
+# en local  (minikube)
+
 <http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/>
+
+# vm ou cloud 
+
+Utilisez l'adresse ip publique du master : et ouvir <https://IP-PUBIQUE-DU-MASTER:1234>
+
+```
 
 
 ### Kubernetes : Kubernetes Dashboard
+
+
 
 ```console
 kubectl get secrets -n kubernetes-dashboard
