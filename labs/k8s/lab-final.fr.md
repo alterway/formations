@@ -113,6 +113,7 @@
 16. TroubleShooting : Faire en sorte que l'application fonctionne correctement et puisse afficher une page web avec le calcul de Pi. Corrigez toutes les erreurs dans le `deployment`et les `service`
 
 ```yaml
+
 # BUT : faire fonctionner l'application sur curl http://QuelqueChose:8020 
  
 ---
@@ -192,3 +193,5 @@ spec:
 ```
 
 <hr>
+
+
