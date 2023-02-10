@@ -69,27 +69,26 @@ Un exemple simple
 
 ```yaml
 
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  annotations:
-    nginx.ingress.kubernetes.io/auth-realm: Authentication Required
-    nginx.ingress.kubernetes.io/auth-secret: basic-auth
-    nginx.ingress.kubernetes.io/auth-type: basic
-  name: grafana
-  namespace: monitoring
+  name: podinfo-ing
+  namespace: podinfo
 spec:
+  ingressClassName: nginx
   rules:
-  - host: grafana-helaks001.caas.fr
+  - host: podinfo.formation.com
     http:
       paths:
       - backend:
-          serviceName: grafana
-          servicePort: http
+          service:
+            name: podinfo
+            port:
+              number: 9898
+        path: /
+        pathType: Prefix
   tls:
   - hosts:
-    - grafana-helaks001.caas.fr
-    secretName: grafana-helaks001.caas.fr-tls
+    - podinfo.formation.com
+    secretName: podinfo.formation.com-tls
 ```
-
-

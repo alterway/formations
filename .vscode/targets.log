@@ -10,11 +10,12 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 build/Makefile:36: *** missing separator.  Stop.
 
 
-# Make data base, printed on Tue Feb  7 18:16:36 2023
+# Make data base, printed on Fri Feb 10 08:37:21 2023
 
 # Variables
 
 # automatic
+ 
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
 ?F = $(notdir $?)
@@ -53,7 +54,7 @@ INFOPATH = /opt/homebrew/share/info:
 # environment
 P9K_SSH = 0
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/h2/12qsmrms09b5d8_g44gl87zm0000gn/T/vscode-ipc-472e0873-a301-4e6f-85ae-ce9f79c55543.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/h2/12qsmrms09b5d8_g44gl87zm0000gn/T/vscode-ipc-0f65aab4-b74b-4e67-959a-9a53a030698e.sock
 # environment
 VSCODE_CWD = /
 # environment
@@ -83,6 +84,7 @@ CONDA_EXE = /opt/homebrew/anaconda3/bin/conda
 # makefile (from `Makefile', line 20)
 author = "Team alter way Cloud Consulting"
 # environment
+ 
 VSCODE_PIPE_LOGGING = true
 # environment
 PWD = /Users/hleclerc/dev/projects/formations/formations-aw
@@ -184,6 +186,7 @@ ZSH_COMPDUMP = /Users/hleclerc/.oh-my-zsh/cache/.zcompdump-m1-hl.local
 MAKEFILES := 
 # automatic
 <F = $(notdir $<)
+ 
 # environment
 PAGER = less
 # environment
@@ -200,7 +203,6 @@ _CE_M =
 cours = cours.json
 # environment
 MAKELEVEL := 0
- 
 # environment
 CONDA_PREFIX = /opt/homebrew/anaconda3
 # environment
@@ -333,6 +335,7 @@ help:
 #  Modification time never checked.
 #  File has not been updated.
 #  commands to execute (from `Makefile', line 33):
+ 
 	@fgrep -h "#####" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/#####//'
 	
 
@@ -341,7 +344,6 @@ build/Makefile: build/cours.list
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
- 
 #  commands to execute (from `Makefile', line 40):
 	sed -E 's#^(.*)\$$.*\$$(.*)#build/\1.md: $$(addsuffix .$(lang).md, $$(addprefix cours/, \2))\n\trm -f $$@\n\t$$(foreach module,$$^,cat $$(module) >> $$@;)#' build/cours.list > build/Makefile
 	echo >> build/Makefile
@@ -433,6 +435,6 @@ build/KUBERNETES.md: cours/intro-awcc.fr.md cours/containers/kubernetes/k8s-gove
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4072 / max = 4072 / min = 4072 / avg = 4072
 
-# Finished Make data base on Tue Feb  7 18:16:36 2023
+# Finished Make data base on Fri Feb 10 08:37:21 2023
 
  
