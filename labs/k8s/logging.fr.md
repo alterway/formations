@@ -118,10 +118,9 @@ kubectl apply -f https://download.elastic.co/downloads/eck/1.9.1/operator.yaml
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl -n elastic-system logs -f statefulset.apps/elastic-operator
 
-# ou
-
-kubectl -n elastic-system get elasticsearch
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 ...
 {"log.level":"info","@timestamp":"2020-11-01T17:01:06.426Z","log.logger":"controller-runtime.controller","message":"Starting workers","service.version":"1.2.1-b5316231","service.type":"eck","ecs.version":"1.4.0","controller":"enterprisesearch-controller","worker count":3}
