@@ -10,12 +10,11 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 build/Makefile:36: *** missing separator.  Stop.
 
 
-# Make data base, printed on Fri Feb 10 08:37:21 2023
+# Make data base, printed on Fri Feb 10 12:49:39 2023
 
 # Variables
 
 # automatic
- 
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
 ?F = $(notdir $?)
@@ -54,7 +53,7 @@ INFOPATH = /opt/homebrew/share/info:
 # environment
 P9K_SSH = 0
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/h2/12qsmrms09b5d8_g44gl87zm0000gn/T/vscode-ipc-0f65aab4-b74b-4e67-959a-9a53a030698e.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/h2/12qsmrms09b5d8_g44gl87zm0000gn/T/vscode-ipc-a3b2ac56-b2f5-4721-8ee1-ebf73e7a981c.sock
 # environment
 VSCODE_CWD = /
 # environment
@@ -78,13 +77,13 @@ ELECTRON_RUN_AS_NODE = 1
 # environment
 SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.K3zswzwDK5/Listeners
 # automatic
+ 
 %F = $(notdir $%)
 # environment
 CONDA_EXE = /opt/homebrew/anaconda3/bin/conda
 # makefile (from `Makefile', line 20)
 author = "Team alter way Cloud Consulting"
 # environment
- 
 VSCODE_PIPE_LOGGING = true
 # environment
 PWD = /Users/hleclerc/dev/projects/formations/formations-aw
@@ -186,7 +185,6 @@ ZSH_COMPDUMP = /Users/hleclerc/.oh-my-zsh/cache/.zcompdump-m1-hl.local
 MAKEFILES := 
 # automatic
 <F = $(notdir $<)
- 
 # environment
 PAGER = less
 # environment
@@ -260,6 +258,7 @@ build/cours.list: cours.json
 #  Modification time never checked.
 #  File has not been updated.
 #  commands to execute (from `Makefile', line 36):
+ 
 	mkdir -p build
 	jq -r '.[] | [ .course_name, .course_description, .modules[] ] | @tsv' $(cours) | sed 's,\t, ,g3;s,\t,$$,g' > build/cours.list
 	
@@ -335,7 +334,6 @@ help:
 #  Modification time never checked.
 #  File has not been updated.
 #  commands to execute (from `Makefile', line 33):
- 
 	@fgrep -h "#####" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/#####//'
 	
 
@@ -390,6 +388,7 @@ build/openstack-admin-user.md: cours/intro-awcc.fr.md cours/intro.fr.md cours/op
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
+ 
 #  commands to execute (from `build/Makefile', line 14):
 	rm -f $@
 	$(foreach module,$^,cat $(module) >> $@;)
@@ -435,6 +434,6 @@ build/KUBERNETES.md: cours/intro-awcc.fr.md cours/containers/kubernetes/k8s-gove
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4072 / max = 4072 / min = 4072 / avg = 4072
 
-# Finished Make data base on Fri Feb 10 08:37:21 2023
+# Finished Make data base on Fri Feb 10 12:49:39 2023
 
  

@@ -103,13 +103,24 @@ cd eck
 1. Commençons par installer les composants essentiels de ECK, notamment elastic-operator :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
-kubectl apply -f https://download.elastic.co/downloads/eck/1.2.1/all-in-one.yaml
+
+# CRDs
+kubectl apply  -f https://download.elastic.co/downloads/eck/1.9.1/crds.yaml
+
+# Operateur
+kubectl apply -f https://download.elastic.co/downloads/eck/1.9.1/operator.yaml
+
+
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 2. Nous pouvons monitorer le déploiement d'elastic-operator de la façon suivante :
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubectl -n elastic-system logs -f statefulset.apps/elastic-operator
+
+# ou
+
+kubectl -n elastic-system get elasticsearch
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh}
 ...
