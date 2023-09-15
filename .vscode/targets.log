@@ -10,7 +10,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 build/Makefile:36: *** missing separator.  Stop.
 
 
-# Make data base, printed on Fri Feb 10 12:49:39 2023
+# Make data base, printed on Fri Sep 15 08:12:35 2023
 
 # Variables
 
@@ -19,7 +19,9 @@ build/Makefile:36: *** missing separator.  Stop.
 # automatic
 ?F = $(notdir $?)
 # environment
-VSCODE_LOG_NATIVE = false
+ELECTRON_NO_ATTACH_CONSOLE = 1
+# environment
+VSCODE_CRASH_REPORTER_PROCESS_TYPE = extensionHost
 # environment
 NVM_INC = /Users/hleclerc/.nvm/versions/node/v18.3.0/include/node
 # automatic
@@ -35,17 +37,15 @@ CURDIR := /Users/hleclerc/dev/projects/formations/formations-aw
 # makefile
 SHELL = /bin/sh
 # environment
-VSCODE_NLS_CONFIG = {"locale":"fr","availableLanguages":{"*":"fr"},"_languagePackId":"575d78304484aa5fa0cbb32d34fd883d.fr","_translationsConfigFile":"/Users/hleclerc/Library/Application Support/Code/clp/575d78304484aa5fa0cbb32d34fd883d.fr/tcf.json","_cacheRoot":"/Users/hleclerc/Library/Application Support/Code/clp/575d78304484aa5fa0cbb32d34fd883d.fr","_resolvedLanguagePackCoreLocation":"/Users/hleclerc/Library/Application Support/Code/clp/575d78304484aa5fa0cbb32d34fd883d.fr/4af164ea3a06f701fe3e89a2bcbb421d2026b68f","_corruptedFile":"/Users/hleclerc/Library/Application Support/Code/clp/575d78304484aa5fa0cbb32d34fd883d.fr/corrupted.info","_languagePackSupport":true}
+VSCODE_NLS_CONFIG = {"locale":"fr","osLocale":"fr-fr","availableLanguages":{"*":"fr"},"_languagePackId":"aa3fba1efbce50013ff53826d3770fe2.fr","_translationsConfigFile":"/Users/hleclerc/Library/Application Support/Code/clp/aa3fba1efbce50013ff53826d3770fe2.fr/tcf.json","_cacheRoot":"/Users/hleclerc/Library/Application Support/Code/clp/aa3fba1efbce50013ff53826d3770fe2.fr","_resolvedLanguagePackCoreLocation":"/Users/hleclerc/Library/Application Support/Code/clp/aa3fba1efbce50013ff53826d3770fe2.fr/6509174151d557a81c9d0b5f8a5a1e9274db5585","_corruptedFile":"/Users/hleclerc/Library/Application Support/Code/clp/aa3fba1efbce50013ff53826d3770fe2.fr/corrupted.info","_languagePackSupport":true}
 # environment
 _ = /usr/bin/make
 # makefile (from `Makefile', line 30)
 title = "$$(jq -r '."$*".course_description' $(cours))"
 # environment
-LESSOPEN = |pygmentize -P style=dracula -g %s
+_P9K_SSH_TTY = /dev/ttys002
 # makefile (from `build/Makefile', line 1)
 MAKEFILE_LIST :=  Makefile build/Makefile
-# environment
-VSCODE_VERBOSE_LOGGING = true
 # environment
 __CFBundleIdentifier = com.microsoft.VSCode
 # environment
@@ -53,13 +53,15 @@ INFOPATH = /opt/homebrew/share/info:
 # environment
 P9K_SSH = 0
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/h2/12qsmrms09b5d8_g44gl87zm0000gn/T/vscode-ipc-a3b2ac56-b2f5-4721-8ee1-ebf73e7a981c.sock
+LESSOPEN = |pygmentize -P style=dracula -g %s
 # environment
-VSCODE_CWD = /
+VSCODE_CWD = /Users/hleclerc/dev/projects/formations/formations-aw
 # environment
 GOHOME = /Users/hleclerc/dev/bin
 # environment
-PATH = /opt/homebrew/opt/gnu-sed/libexec/gnubin:/Users/hleclerc/.krew/bin:/opt/homebrew/anaconda3/bin:/opt/homebrew/anaconda3/condabin:/Users/hleclerc/.rd/bin:/Users/hleclerc/.nvm/versions/node/v18.3.0/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Little Snitch.app/Contents/Components:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/opt/homebrew/bin:/opt/homebrew/anaconda3/bin:/Users/hleclerc/dev/bin/go/bin:/opt/homebrew/opt/go/libexec/bin:/Users/hleclerc/.local/bin:/Users/hleclerc/bin
+PATH = /opt/homebrew/opt/openjdk/bin:/opt/homebrew/opt/gnu-sed/libexec/gnubin:/Users/hleclerc/.krew/bin:/opt/homebrew/anaconda3/bin:/opt/homebrew/anaconda3/condabin:/Users/hleclerc/.rd/bin:/Users/hleclerc/.nvm/versions/node/v18.3.0/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Little Snitch.app/Contents/Components:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Applications/Wireshark.app/Contents/MacOS:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/homebrew/bin:/opt/homebrew/anaconda3/bin:/Users/hleclerc/dev/bin/go/bin:/opt/homebrew/opt/go/libexec/bin:/Users/hleclerc/.local/bin:/Users/hleclerc/bin
+# environment
+GOROOT = /opt/homebrew/opt/go/libexec
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # makefile (from `build/Makefile', line 35)
@@ -69,22 +71,21 @@ GOPATH = /Users/hleclerc/dev/bin/go
 # environment
 NVM_BIN = /Users/hleclerc/.nvm/versions/node/v18.3.0/bin
 # environment
-VSCODE_LOG_STACK = false
-# environment
 ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.K3zswzwDK5/Listeners
+LS_COLORS = di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43
+# environment
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.h0yN1gC5Bt/Listeners
 # automatic
- 
 %F = $(notdir $%)
 # environment
 CONDA_EXE = /opt/homebrew/anaconda3/bin/conda
 # makefile (from `Makefile', line 20)
 author = "Team alter way Cloud Consulting"
 # environment
-VSCODE_PIPE_LOGGING = true
+DOCKER_BUILDKIT = 1
 # environment
 PWD = /Users/hleclerc/dev/projects/formations/formations-aw
 # makefile (from `Makefile', line 22)
@@ -96,7 +97,7 @@ ZSH_DISABLE_COMPFIX = true
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = undefined
 # environment
-MANPATH = /Users/hleclerc/.nvm/versions/node/v18.3.0/share/man:/opt/homebrew/share/man::
+MANPATH = /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/share/man:/Library/Developer/CommandLineTools/usr/share/man:/Library/Developer/CommandLineTools/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/Users/hleclerc/.nvm/versions/node/v18.3.0/share/man:/opt/homebrew/share/man::
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
@@ -104,11 +105,13 @@ HOME = /Users/hleclerc
 # default
 MAKEFILEPATH = $(shell /usr/bin/xcode-select -print-path 2>/dev/null || echo /Developer)/Makefiles
 # environment
-VSCODE_CODE_CACHE_PATH = /Users/hleclerc/Library/Application Support/Code/CachedData/4af164ea3a06f701fe3e89a2bcbb421d2026b68f
+VSCODE_CLI = 1
+# environment
+VSCODE_CODE_CACHE_PATH = /Users/hleclerc/Library/Application Support/Code/CachedData/6509174151d557a81c9d0b5f8a5a1e9274db5585
 # environment
 LOGNAME = hleclerc
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # environment
 CONDA_PROMPT_MODIFIER = (base) 
 # environment
@@ -123,20 +126,24 @@ VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 CONDA_DEFAULT_ENV = base
 # environment
 XPC_FLAGS = 0x0
+# environment
+COLORTERM = truecolor
 # default
 MAKE = $(MAKE_COMMAND)
-# default
-MAKECMDGOALS := all
 # environment
-SHLVL = 1
+LC_TERMINAL = iTerm2
+# environment
+SHLVL = 3
 # default
 MAKE_VERSION := 3.81
 # environment
 USER = hleclerc
 # makefile
 .DEFAULT_GOAL := help
+# default
+MAKECMDGOALS := all
 # environment
-GOROOT = /opt/homebrew/opt/go/libexec
+TERM_SESSION_ID = w0t0p0:A3409679-E42B-4A7B-8434-E005CC8335B4
 # environment
 LESS = -R
 # automatic
@@ -145,6 +152,8 @@ LESS = -R
 CONDA_SHLVL = 1
 # default
 MAKE_COMMAND := /Library/Developer/CommandLineTools/usr/bin/make
+# environment
+TERM_PROGRAM = iTerm.app
 # default
 .VARIABLES := 
 # environment
@@ -152,7 +161,9 @@ TMPDIR = /var/folders/h2/12qsmrms09b5d8_g44gl87zm0000gn/T/
 # automatic
 *F = $(notdir $*)
 # environment
-VSCODE_IPC_HOOK = /Users/hleclerc/Library/Application Support/Code/1.68.0-main.sock
+VSCODE_IPC_HOOK = /Users/hleclerc/Library/Application Support/Code/1.82-main.sock
+# environment
+MallocNanoZone = 0
 # makefile
 MAKEFLAGS = Rrqp
 # environment
@@ -160,21 +171,29 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
+TERM_PROGRAM_VERSION = 3.4.20
+# environment
 NVM_DIR = /Users/hleclerc/.nvm
 # environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.1644698.1644704
-# makefile (from `Makefile', line 21)
-institute = "alter way Cloud Consulting"
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.76566826.76566832.E88D4F00-5E3C-40BB-8F58-063DD1D7B3E6
+# environment
+LC_TERMINAL_VERSION = 3.4.20
 # environment
 HOMEBREW_PREFIX = /opt/homebrew
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
+# environment
+VSCODE_L10N_BUNDLE_LOCATION = file:///Users/hleclerc/.vscode/extensions/ms-ceintl.vscode-language-pack-fr-1.82.2023091309/translations/extensions/vscode.markdown-language-features.i18n.json
 # makefile (from `Makefile', line 26)
 revealjsurl = https://osones.com/formations/revealjs
 # automatic
 +F = $(notdir $+)
 # environment
+ITERM_SESSION_ID = w0t0p0:A3409679-E42B-4A7B-8434-E005CC8335B4
+# environment
 HOMEBREW_REPOSITORY = /opt/homebrew
+# environment
+COLORFGBG = 7;0
 # environment
 __CF_USER_TEXT_ENCODING = 0x1F5:0x0:0x1
 # environment
@@ -186,17 +205,19 @@ MAKEFILES :=
 # automatic
 <F = $(notdir $<)
 # environment
+ITERM_PROFILE = Default
+# environment
 PAGER = less
 # environment
 LC_ALL = C
 # environment
 CONDA_PYTHON_EXE = /opt/homebrew/anaconda3/bin/python
+# environment
+P9K_TTY = old
 # automatic
 ^F = $(notdir $^)
 # default
 SUFFIXES := 
-# environment
-_CE_M = 
 # makefile (from `Makefile', line 29)
 cours = cours.json
 # environment
@@ -204,13 +225,17 @@ MAKELEVEL := 0
 # environment
 CONDA_PREFIX = /opt/homebrew/anaconda3
 # environment
-VSCODE_PID = 2085
+TERM = xterm-256color
 # environment
-_CE_CONDA = 
+_P9K_TTY = /dev/ttys002
+# environment
+VSCODE_PID = 15438
 # environment
 LANG = C
+# makefile (from `Makefile', line 21)
+institute = "alter way Cloud Consulting"
 # variable set hash-table stats:
-# Load=97/1024=9%, Rehash=0, Collisions=4/114=4%
+# Load=110/1024=11%, Rehash=0, Collisions=9/127=7%
 
 # Pattern-specific Variable Values
 
@@ -218,7 +243,7 @@ LANG = C
 
 # Directories
 
-# . (device 16777234, inode 2820354): 29 files, no impossibilities.
+# . (device 16777233, inode 2820354): 29 files, no impossibilities.
 
 # 29 files, no impossibilities in 1 directories.
 
@@ -228,6 +253,7 @@ LANG = C
 
 # Files
 
+ 
 -: cours/intro-awcc.fr.md cours/terraform/terraform-introduction.fr.md cours/terraform/terraform-concepts.fr.md cours/terraform/terraform-init-projet.fr.md cours/terraform/terraform-workflow.fr.md cours/terraform/terraform-state-backend.fr.md cours/terraform/terraform-workspace.fr.md cours/terraform/terraform-commandes-base.fr.md cours/terraform/terraform-configuration.fr.md cours/terraform/terraform-conditions.fr.md cours/terraform/terraform-loops.fr.md cours/terraform/terraform-provisioners.fr.md cours/terraform/terraform-autres-commandes.fr.md cours/terraform/terraform-modules.fr.md cours/terraform/terraform-best-practices.fr.md cours/terraform/terraform-tests.fr.md cours/terraform/terraform-next-steps.fr.md cours/terraform/terraform-commands-cheat-sheet.fr.md cours/terraform/terraform-conclusion.fr.md
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -258,7 +284,6 @@ build/cours.list: cours.json
 #  Modification time never checked.
 #  File has not been updated.
 #  commands to execute (from `Makefile', line 36):
- 
 	mkdir -p build
 	jq -r '.[] | [ .course_name, .course_description, .modules[] ] | @tsv' $(cours) | sed 's,\t, ,g3;s,\t,$$,g' > build/cours.list
 	
@@ -348,6 +373,7 @@ build/Makefile: build/cours.list
 	echo -n 'all=' >> build/Makefile
 	for i in `cut -d '$$' -f1 build/cours.list`; do echo -n "$$i " >> build/Makefile; done
 	echo >> build/Makefile
+ 
 	for i in `cut -d '$$' -f1 build/cours.list`; do echo "$$i: $(addprefix $$i, .html .pdf -handout.pdf -print.pdf)" >> build/Makefile; done
 	
 
@@ -388,7 +414,6 @@ build/openstack-admin-user.md: cours/intro-awcc.fr.md cours/intro.fr.md cours/op
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
- 
 #  commands to execute (from `build/Makefile', line 14):
 	rm -f $@
 	$(foreach module,$^,cat $(module) >> $@;)
@@ -434,6 +459,6 @@ build/KUBERNETES.md: cours/intro-awcc.fr.md cours/containers/kubernetes/k8s-gove
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4072 / max = 4072 / min = 4072 / avg = 4072
 
-# Finished Make data base on Fri Feb 10 12:49:39 2023
+# Finished Make data base on Fri Sep 15 08:12:35 2023
 
  
