@@ -90,7 +90,7 @@ build-html-labs() {
         -v "${PWD}"/output-html:/output \
         -v "${PWD}"/labs:/input \
           alterway/pandocker-alpine:2.10 \
-           pandoc -t ${STYLE} /input/labs-"${lab}".md -V mainfont="DejaVu Serif" -s ${OPTIONS} --highlight-style tango -o /output/labs-"${lab}"."${LANGUAGE}".html
+           pandoc -t ${STYLE} /input/labs-"${lab}".md -V mainfont="DejaVu Serif" -s ${OPTIONS} --toc --highlight-style tango -o /output/labs-"${lab}"."${LANGUAGE}".html
     rm -f "${LABS_DIR}"/labs-"${lab}".md
   done
 }
