@@ -184,21 +184,20 @@ kubectl delete pod test-pod
 
 ### Quizz kubeadm
 
-* Qu'est-ce que kubeadm ?
+Qu'est-ce que kubeadm ?
   [( )] Un outil pour automatiser le déploiement de conteneurs
   [(X)] Un outil pour gérer le cycle de vie des clusters Kubernetes
   [( )] Un système d'exploitation pour les conteneurs
   [( )] Une distribution de Kubernetes
 
 
-* Quelle commande utilise-t-on pour initialiser un cluster avec kubeadm ?
+Quelle commande utilise-t-on pour initialiser un cluster avec kubeadm ?
   [( )] kubeadm start
   [(X)] kubeadm init
   [( )] kubeadm create
   [( )] kubeadm up
-<!-- La bonne réponse est : kubeadm init -->
 
-* Quel est le rôle principal de kubeadm ?
+Quel est le rôle principal de kubeadm ?
   [( )] Créer des conteneurs
   [( )] Ordonnancer des tâches
   [(X)] Démarrer un cluster Kubernetes minimum, viable et conforme aux meilleures pratiques
@@ -3651,130 +3650,148 @@ service "source2-service" deleted
 
 <hr>
 
-### Quizz Récapitulatif
+## Quizz Récapitulatif
 
-Voici un petit quiz à choix multiples de 20 questions sur les objets de base utilisés dans Kubernetes, avec la structure demandée :
 
-1. Quel objet décrit un groupe logique de nœuds de travail destinés à exécuter des pods ?
+Quel objet décrit un groupe logique de nœuds de travail destinés à exécuter des pods ?
+
 [(X)] Node
 [( )] ReplicaSet
 [( )] Deployment
 [( )] Service
 
-2. Quel objet est responsable de la mise en réseau au sein du cluster ?
+Quel objet est responsable de la mise en réseau au sein du cluster ?
+
 [( )] Pod
 [( )] Volume
 [(X)] Service
 [( )] Ingress
 
-3. Quel objet est utilisé pour stocker des données persistantes ?
+Quel objet est utilisé pour stocker des données persistantes ?
+
 [( )] ConfigMap
 [(X)] Volume
 [( )] Secret
 [( )] Node
 
-4. Quel objet est utilisé pour exécuter des conteneurs dans un cluster ?
+Quel objet est utilisé pour exécuter des conteneurs dans un cluster ?
+
 [( )] ReplicaSet
 [(X)] Pod
 [( )] Service
 [( )] Ingress
 
-5. Quel objet gère les mises à jour et le redéploiement des pods ?
+Quel objet gère les mises à jour et le redéploiement des pods ?
+
 [( )] Node
 [(X)] Deployment
 [( )] Service
 [( )] Volume
 
-6. Quel objet sert à limiter les ressources consommées par un pod ?
+Quel objet sert à limiter les ressources consommées par un pod ?
+
 [(X)] LimitRange
 [( )] ResourceQuota
 [( )] HorizontalPodAutoscaler
 [( )] PodDisruptionBudget
 
-7. Quel objet est utilisé pour authentifier les utilisateurs auprès du cluster ?
+Quel objet est utilisé pour authentifier les utilisateurs auprès du cluster ?
+
 [( )] Role
 [(X)] ServiceAccount
 [( )] Secret
 [( )] ConfigMap
 
-8. Quel objet permet de contrôler l'accès aux ressources du cluster ?
+Quel objet permet de contrôler l'accès aux ressources du cluster ?
+
 [( )] Role
 [( )] ClusterRole
 [(X)] Les deux réponses Role et ClusterRole
 [( )] ServiceAccount
 
-9. Quel objet gère la mise en cache des données dans un cluster ?
+Quel objet gère la mise en cache des données dans un cluster ?
+
 [( )] Volume
 [( )] Secret
 [(X)] ConfigMap
 [( )] PersistentVolumeClaim
 
-10. Quel objet est utilisé pour exposer des services à l'extérieur du cluster ?
+Quel objet est utilisé pour exposer des services à l'extérieur du cluster ?
+
 [( )] Service
 [(X)] Ingress
 [( )] LoadBalancer
 [( )] ExternalIP
 
-11. Quel objet permet de surveiller l'état des pods ?
+Quel objet permet de surveiller l'état des pods ?
+
 [(X)] PodDisruptionBudget
 [( )] HorizontalPodAutoscaler
 [( )] Job
 [( )] DaemonSet
 
-12. Quel objet est utilisé pour automatiser les tâches d'administration du cluster ?
+Quel objet est utilisé pour automatiser les tâches d'administration du cluster ?
+
 [( )] CronJob
 [( )] Job
 [(X)] Les deux réponses CronJob et Job
 [( )] Deployment
 
-13. Quel objet permet de définir des règles de réseau pour les pods ?
+Quel objet permet de définir des règles de réseau pour les pods ?
+
 [(X)] NetworkPolicy
 [( )] IngressRule
 [( )] EgressRule
 [( )] ServicePort
 
-14. Quel objet sert à provisionner automatiquement des volumes de stockage ?
+Quel objet sert à provisionner automatiquement des volumes de stockage ?
+
 [( )] PersistentVolume
 [(X)] StorageClass
 [( )] PersistentVolumeClaim
 [( )] EmptyDir
 
-15. Quel objet est utilisé pour gérer les secrets (mots de passe, clés d'API, etc.) ?
+Quel objet est utilisé pour gérer les secrets (mots de passe, clés d'API, etc.) ?
+
 [( )] ConfigMap
 [(X)] Secret
 [( )] Volume
 [( )] ServiceAccount
 
-16. Quel objet permet de déployer des applications sur plusieurs clusters ?
+Quel objet permet de déployer des applications sur plusieurs clusters ?
+
 [(X)] Federation
 [( )] ReplicaSet
 [( )] Deployment
 [( )] StatefulSet
 
-17. Quel objet sert à surveiller et collecter les métriques du cluster ?
+Quel objet sert à surveiller et collecter les métriques du cluster ?
+
 [(X)] HorizontalPodAutoscaler
 [( )] VerticalPodAutoscaler
 [( )] PodDisruptionBudget
 [( )] ResourceQuota
 
-18. Quel objet est utilisé pour gérer les journaux d'événements du cluster ?
+Quel objet est utilisé pour gérer les journaux d'événements du cluster ?
+
 [(X)] EventSource
 [( )] PodLog
 [( )] ContainerLog
 [( )] AuditLog
 
-19. Quel objet permet de définir des quotas de ressources pour les espaces de noms ?
+Quel objet permet de définir des quotas de ressources pour les espaces de noms ?
+
 [( )] LimitRange
 [(X)] ResourceQuota
 [( )] HorizontalPodAutoscaler
 [( )] VerticalPodAutoscaler
 
-20. Quel objet est utilisé pour définir des règles de gestion des ressources du cluster ?
+Quel objet est utilisé pour définir des règles de gestion des ressources du cluster ?
+
 [( )] ResourceQuota
 [(X)] LimitRange
 [( )] HorizontalPodAutoscaler
 [( )] VerticalPodAutoscaler
-
 
 
 ## Ingress
