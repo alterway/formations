@@ -5742,7 +5742,6 @@ W0408 06:41:41.559443    4249 checks.go:835] detected that the sandbox image "re
 
 Nous pouvons remettre le noeud master en marche :
 
-
 ```bash +.
 kubectl uncordon master
 ```
