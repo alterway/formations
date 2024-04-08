@@ -29,8 +29,6 @@ Vérifions la version de kubeadm :
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ {.zsh .numberLines}
 kubeadm version
 
-kubeadm version: &version.Info{Major:"1", Minor:"23", GitVersion:"v1.23.16", GitCommit:"60e5135f758b6e43d0523b3277e8d34b4ab3801f", GitTreeState:"clean", BuildDate:"2023-01-18T15:59:57Z", GoVersion:"go1.19.5", Compiler:"gc", Platform:"linux/amd64"}
-
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Nous devons maintenant drain le noeud master afin de pouvoir faire l’upgrade dessus :

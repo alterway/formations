@@ -19,137 +19,6 @@ comment:  Labs k8s
 
 ## Création d'un cluster Kubernetes
 
-### Installation avec Minikube
-
-<hr>
-Machine : **master**
-<hr>
-
-1. Commençons par l'installation du binaire Minikube :
-
-```bash +.
-curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
-chmod +x minikube
-sudo mv minikube /usr/local/bin/
-``` 
-
-2. Nous pouvons donc vérifier l'installation de minikube :
-
-```bash +.
-minikube version
-
-minikube version: v1.15.1
-commit: 23f40a012abb52eff365ff99a709501a61ac5876
-```
-
-
-1. Maintenant que nous avons installé le binaire minikube, nous pouvons donc bootstrap un cluster Kubernetes :
-
-```bash +.
-minikube start
-
-😄  minikube v1.23.16 sur Darwin 11.2.3
-✨  Choix automatique du pilote docker. Autres choix:
-👍  Démarrage du noeud de plan de contrôle minikube dans le cluster minikube
-🚜  Pulling base image ...
-💾  Downloading Kubernetes v1.23.16 preload ...
-    > preloaded-images-k8s-v10-v1...: 491.71 MiB / 491.71 MiB  100.00% 5.96 MiB
-    > gcr.io/k8s-minikube/kicbase...: 358.10 MiB / 358.10 MiB  100.00% 4.10 MiB
-    > gcr.io/k8s-minikube/kicbase...: 358.10 MiB / 358.10 MiB  100.00% 4.71 MiB
-🔥  Creating docker container (CPUs=2, Memory=4000MB) ...
-🐳  Préparation de Kubernetes v1.23.16 sur Docker 20.10.6...
-    ▪ Generating certificates and keys ...
-    ▪ Booting up control plane ...
-    ▪ Configuring RBAC rules ...
-🔎  Verifying Kubernetes components...
-    ▪ Using image gcr.io/k8s-minikube/storage-provisioner:v5
-🌟  Enabled addons: storage-provisioner, default-storageclass
-🏄  Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
-
-```
-
-4. Parfait, nous pouvons à tout moment consulter le statut de notre cluster minikube :
-
-```bash +.
-minikube status
-
-minikube
-type: Control Plane
-host: Running
-kubelet: Running
-apiserver: Running
-```
-
-1. Il est possible d'installer d'autres clusters en utilisant le flag profile
-
-```
-minikube start --profile <nom-du-cluster>
-```
-
-
-6. Comme tout cluster Kubernetes, nous pouvons le manipuler via kubectl. Lors de l'installation d'un cluster Kubernetes avec minikube, kubectl est automatiquement configuré pour utiliser le cluster généré (Même si kubectl n'est pas installé durant le bootstrap du cluster). Il nous suffit donc d'installer kubectl :
-
-```
-curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-
-chmod +x ./kubectl
-
-sudo mv ./kubectl /usr/local/bin/kubectl
-
-kubectl version --client
-
-```
-
-7. Nous pouvons lister les pods de la façon suivante :
-
-```
-kubectl get pods -A
-``` 
-
-```bash +.
-
-NAMESPACE     NAME                               READY   STATUS    RESTARTS   AGE
-kube-system   coredns-f9fd979d6-b2mcz            1/1     Running   0          25m
-kube-system   etcd-minikube                      1/1     Running   0          26m
-kube-system   kube-apiserver-minikube            1/1     Running   0          26m
-kube-system   kube-controller-manager-minikube   1/1     Running   0          26m
-kube-system   kube-proxy-4hq45                   1/1     Running   0          25m
-kube-system   kube-scheduler-minikube            1/1     Running   0          26m
-kube-system   storage-provisioner                1/1     Running   1          26m
-``` 
-
-1. Nous allons déployer un pod base sur l'image nginx à titre d'exemple :
-
-```bash +.
-kubectl run --image=nginx:latest test-pod
-```
-
-```bash +.
-pod/test-pod created
-```
-
-1. On peut à tout moment, stopper le cluster minikube :
-
-```bash +.
-minikube stop
-```
-
-```bash +.
-
-✋  Stopping node "minikube"  ...
-🛑  Powering off "minikube" via SSH ...
-🛑  1 nodes stopped.
-```
-
-1. Enfin, si on souhaite détruire notre cluster Kubernetes, nous pouvons le faire de la façon suivante (après avoir stoppé le cluster via la commande ci-dessus) :
-
-```
-rm -rf ~/.minikube
-
-```
-
-<hr>
-
 ### Installation avec Kubeadm
 
 <hr>
@@ -167,41 +36,12 @@ exemple :
 10.10.4.82 worker-1
 ```
 
+1. kubeadm
 
-⚠️ <font color=red>Si kubeadm est déjà installé sur vos instances, Veuillez passer au point 3.</font>
-
-
-Le contenu du fichier /etc/hosts doit être identique sur les trois machines.
-
-1. Installer et activer Docker
-
-```bash +.
-sudo apt-get update
-
-sudo apt-get install docker.io
-
-sudo systemctl enable docker
-
-```
-
-2. Nous allons commencer par installer l’outil Kubeadm, la Kubelet et Kubectl sur les trois machines. Pour ce faire :
-
-```bash +.
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
-
-sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
-
-sudo apt-get update
-
-sudo apt-get install -y kubelet=1.19.11-00 kubeadm=1.19.11-00 kubectl=1.19.11-00
-
-sudo apt-mark hold kubelet kubeadm kubectl
-```
-
-3. Une fois ces outils installés, nous allons utiliser Kubeadm pour initialiser un cluster Kubernetes avec le noeud master. Ainsi, nous pouvons exécuter la commande suivante sur le noeud master uniquement:
+Nous allons utiliser **Kubeadm** pour initialiser un cluster Kubernetes avec le noeud master.
 
 
-3.1 (Préparation de l'environnement) Installation de la completion pour kubectl
+1.1 (Préparation de l'environnement) Installation de la completion pour kubectl
 
 ```bash +.
 
@@ -212,12 +52,14 @@ echo 'complete -o default -F __start_kubectl k' >>~/.bashrc
 source ~/.bashrc
 
 # test 
-k get nodes
+k version --short
+
 ```
 
+1.2 Installation du cluster kubernetes 
 
+Machine : **master**
 
-3.2 Installation du cluster kubernetes 
 
 ```bash +.
 sudo kubeadm init 
@@ -234,9 +76,18 @@ To start using your cluster, you need to run the following as a regular user:
 
 Un token sera généré à l'issue du processus d'initialisation. Il est important de le sauvegarder car il servira à connecter les worker nodes au cluster
 
- 
+Notez la commande de join :
 
-4. Nous avons donc installé un premier noeud master Kubernetes. Nous allons maintenant configurer la CLI kubectl pour pouvoir l’utiliser depuis le master:
+Exemple
+```bash +.
+
+ kubeadm join 10.10.3.243:6443 --token m03nzv.vtfeaij5yu876u7z \
+	--discovery-token-ca-cert-hash sha256:2da9df40f55f901d221d30cf0574264bcd4c62b7c38200498e99e2797a55753f
+
+```
+
+
+2. Nous avons donc installé un premier noeud master Kubernetes. Nous allons maintenant configurer la CLI kubectl pour pouvoir l’utiliser depuis le master:
 
 ```bash +.
 mkdir -p $HOME/.kube
@@ -246,20 +97,35 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
-5. Nous allons maintenant installer un add-on réseaux pour nos pods sur le master. Il existe plusieurs plugins répondant à ce besoin : Calico, Canal, Weave, Flannel etc. Pour cette exercice, nous allons installer le plugin weave, de la façon suivante :
+3. Nous allons maintenant installer un add-on réseaux pour nos pods sur le master. Il existe plusieurs plugins répondant à ce besoin : Calico, Canal, Weave, Flannel etc. Pour cette exercice, nous allons installer le plugin weave, de la façon suivante :
+
+```bash +.
+kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
 
 ```
-kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
+
+Vérification :
+
+```bash +.
+
+ubuntu@master:~$ k get nodes
+NAME     STATUS     ROLES           AGE     VERSION
+master   NotReady   control-plane   3m34s   v1.27.9
+ubuntu@master:~$ k get nodes
+NAME     STATUS   ROLES           AGE     VERSION
+master   Ready    control-plane   4m18s   v1.27.9
+
 ```
 
 **Note** : Si on souhaite utiliser les network policies (que nous explorerons plus tard), il faut utiliser un plugin supportant cette fonctionnalité. (Il faut éviter flannel notamment)
 
 
+Machines : **worker-0**, **worker-1**
 
-6. Nous allons maintenant ajouter les deux noeuds worker à notre cluster. Pour ce faire, nous allons utiliser la commande suivante sur les noeuds worker worker-0 et worker-1:
+4. Nous allons maintenant ajouter les deux noeuds worker à notre cluster. Pour ce faire, nous allons utiliser la commande suivante sur les noeuds worker worker-0 et worker-1:
 
 ```bash +.
-training@worker$ sudo kubeadm join INTERNAL_MASTER_IP:6443 --token TOKEN --discovery-token-ca-cert-hash DISC_TOKEN
+sudo kubeadm join INTERNAL_MASTER_IP:6443 --token TOKEN --discovery-token-ca-cert-hash DISC_TOKEN
 ```
 
 ```bash +.
@@ -279,9 +145,9 @@ kubectl get nodes
 
 ```bash +.
 NAME     STATUS   ROLES    AGE     VERSION
-master   Ready    master   25m     v1.19.3
-worker-0   Ready    <none>   2m24s   v1.19.3
-worker-1   Ready    <none>   1m24s   v1.19.3
+master   Ready    master   25m     v1.27.9
+worker-0   Ready    <none>   2m24s   v1.27.9
+worker-1   Ready    <none>   1m24s   v1.27.9
 ```
 
 
@@ -5661,11 +5527,23 @@ Machine : **master**, **worker-0**, **worker-1**
 
 ### Mise à jour kubeadm
 
+
+Préparation de la mise à jour
+
+```bash +.
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring-1.28.gpg
+
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring-1.28.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /' | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+
+sudo apt-get update
+```
+
+
 Pour commencer, il faut mettre à jour kubeadm :
 
 ```bash +.
 sudo apt-mark unhold kubeadm
-sudo apt-get install kubeadm=1.24.10-00
+sudo apt-get install kubeadm=1.28.8-1.1
 sudo apt-mark hold kubeadm
 ```
 
@@ -5673,8 +5551,6 @@ Vérifions la version de kubeadm :
 
 ```bash +.
 kubeadm version
-
-kubeadm version: &version.Info{Major:"1", Minor:"23", GitVersion:"v1.23.16", GitCommit:"60e5135f758b6e43d0523b3277e8d34b4ab3801f", GitTreeState:"clean", BuildDate:"2023-01-18T15:59:57Z", GoVersion:"go1.19.5", Compiler:"gc", Platform:"linux/amd64"}
 
 ```
 
@@ -5696,36 +5572,35 @@ Nous pouvons avoir un aperçu de l’upgrade de la façon suivante :
 sudo kubeadm upgrade plan
 
 
-[upgrade/config] Making sure the configuration is correct:
+[[upgrade/config] Making sure the configuration is correct:
 [upgrade/config] Reading configuration from the cluster...
 [upgrade/config] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -o yaml'
-W0206 09:34:54.193329    4187 initconfiguration.go:120] Usage of CRI endpoints without URL scheme is deprecated and can cause kubelet errors in the future. Automatically prepending scheme "unix" to the "criSocket" with value "/run/containerd/containerd.sock". Please update your configuration!
 [preflight] Running pre-flight checks.
 [upgrade] Running cluster health checks
 [upgrade] Fetching available versions to upgrade to
-[upgrade/versions] Cluster version: v1.23.16
-[upgrade/versions] kubeadm version: v1.24.10
-I0206 09:34:58.968509    4187 version.go:256] remote version is much newer: v1.26.1; falling back to: stable-1.24
-[upgrade/versions] Target version: v1.24.10
-[upgrade/versions] Latest version in the v1.23 series: v1.23.16
+[upgrade/versions] Cluster version: v1.27.12
+[upgrade/versions] kubeadm version: v1.28.8
+I0408 06:40:22.060915    4163 version.go:256] remote version is much newer: v1.29.3; falling back to: stable-1.28
+[upgrade/versions] Target version: v1.28.8
+[upgrade/versions] Latest version in the v1.27 series: v1.27.12
 
 Components that must be upgraded manually after you have upgraded the control plane with 'kubeadm upgrade apply':
-COMPONENT   CURRENT        TARGET
-kubelet     3 x v1.23.16   v1.24.10
+COMPONENT   CURRENT       TARGET
+kubelet     3 x v1.27.9   v1.28.8
 
 Upgrade to the latest stable version:
 
 COMPONENT                 CURRENT    TARGET
-kube-apiserver            v1.23.16   v1.24.10
-kube-controller-manager   v1.23.16   v1.24.10
-kube-scheduler            v1.23.16   v1.24.10
-kube-proxy                v1.23.16   v1.24.10
-CoreDNS                   v1.8.6     v1.8.6
-etcd                      3.5.6-0    3.5.6-0
+kube-apiserver            v1.27.12   v1.28.8
+kube-controller-manager   v1.27.12   v1.28.8
+kube-scheduler            v1.27.12   v1.28.8
+kube-proxy                v1.27.12   v1.28.8
+CoreDNS                   v1.10.1    v1.10.1
+etcd                      3.5.9-0    3.5.12-0
 
 You can now apply the upgrade by executing the following command:
 
-	kubeadm upgrade apply v1.24.10
+	kubeadm upgrade apply v1.28.8
 
 _____________________________________________________________________
 
@@ -5753,7 +5628,8 @@ Nous pouvons maintenant upgrade les composants du cluster :
 
 ```bash +.
 
-sudo kubeadm upgrade apply v1.24.10
+
+sudo kubeadm upgrade apply v1.28.8
 
 ```
 
@@ -5761,62 +5637,62 @@ sudo kubeadm upgrade apply v1.24.10
 
 ```bash +.
 
-[upgrade/config] Making sure the configuration is correct:
+[[upgrade/config] Making sure the configuration is correct:
 [upgrade/config] Reading configuration from the cluster...
 [upgrade/config] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -o yaml'
-W0206 09:37:16.226531    4245 initconfiguration.go:120] Usage of CRI endpoints without URL scheme is deprecated and can cause kubelet errors in the future. Automatically prepending scheme "unix" to the "criSocket" with value "/run/containerd/containerd.sock". Please update your configuration!
 [preflight] Running pre-flight checks.
 [upgrade] Running cluster health checks
-[upgrade/version] You have chosen to change the cluster version to "v1.24.10"
-[upgrade/versions] Cluster version: v1.23.16
-[upgrade/versions] kubeadm version: v1.24.10
-[upgrade/confirm] Are you sure you want to proceed with the upgrade? [y/N]: y
+[upgrade/version] You have chosen to change the cluster version to "v1.28.8"
+[upgrade/versions] Cluster version: v1.27.12
+[upgrade/versions] kubeadm version: v1.28.8
+[upgrade] Are you sure you want to proceed? [y/N]: y
 
 
 
 [upgrade/prepull] Pulling images required for setting up a Kubernetes cluster
 [upgrade/prepull] This might take a minute or two, depending on the speed of your internet connection
 [upgrade/prepull] You can also perform this action in beforehand using 'kubeadm config images pull'
-[upgrade/apply] Upgrading your Static Pod-hosted control plane to version "v1.24.10" (timeout: 5m0s)...
+W0408 06:41:41.559443    4249 checks.go:835] detected that the sandbox image "registry.k8s.io/pause:3.6" of the container runtime is inconsistent with that used by kubeadm. It is recommended that using "registry.k8s.io/pause:3.9" as the CRI sandbox image.
+[upgrade/apply] Upgrading your Static Pod-hosted control plane to version "v1.28.8" (timeout: 5m0s)...
 [upgrade/etcd] Upgrading to TLS for etcd
 [upgrade/staticpods] Preparing for "etcd" upgrade
-[upgrade/staticpods] Current and new manifests of etcd are equal, skipping upgrade
+[upgrade/staticpods] Renewing etcd-server certificate
+[upgrade/staticpods] Renewing etcd-peer certificate
+[upgrade/staticpods] Renewing etcd-healthcheck-client certificate
+[upgrade/staticpods] Moved new manifest to "/etc/kubernetes/manifests/etcd.yaml" and backed up old manifest to "/etc/kubernetes/tmp/kubeadm-backup-manifests-2024-04-08-06-41-48/etcd.yaml"
+[upgrade/staticpods] Waiting for the kubelet to restart the component
+[upgrade/staticpods] This might take a minute or longer depending on the component/version gap (timeout 5m0s)
+[apiclient] Found 1 Pods for label selector component=etcd
+[upgrade/staticpods] Component "etcd" upgraded successfully!
 [upgrade/etcd] Waiting for etcd to become available
-[upgrade/staticpods] Writing new Static Pod manifests to "/etc/kubernetes/tmp/kubeadm-upgraded-manifests1021044454"
+[upgrade/staticpods] Writing new Static Pod manifests to "/etc/kubernetes/tmp/kubeadm-upgraded-manifests2343628394"
 [upgrade/staticpods] Preparing for "kube-apiserver" upgrade
 [upgrade/staticpods] Renewing apiserver certificate
 [upgrade/staticpods] Renewing apiserver-kubelet-client certificate
 [upgrade/staticpods] Renewing front-proxy-client certificate
 [upgrade/staticpods] Renewing apiserver-etcd-client certificate
-[upgrade/staticpods] Moved new manifest to "/etc/kubernetes/manifests/kube-apiserver.yaml" and backed up old manifest to "/etc/kubernetes/tmp/kubeadm-backup-manifests-2023-02-06-09-38-09/kube-apiserver.yaml"
+[upgrade/staticpods] Moved new manifest to "/etc/kubernetes/manifests/kube-apiserver.yaml" and backed up old manifest to "/etc/kubernetes/tmp/kubeadm-backup-manifests-2024-04-08-06-41-48/kube-apiserver.yaml"
 [upgrade/staticpods] Waiting for the kubelet to restart the component
 [upgrade/staticpods] This might take a minute or longer depending on the component/version gap (timeout 5m0s)
-
-
-.....
-.....
-
-
 [apiclient] Found 1 Pods for label selector component=kube-apiserver
 [upgrade/staticpods] Component "kube-apiserver" upgraded successfully!
 [upgrade/staticpods] Preparing for "kube-controller-manager" upgrade
 [upgrade/staticpods] Renewing controller-manager.conf certificate
-[upgrade/staticpods] Moved new manifest to "/etc/kubernetes/manifests/kube-controller-manager.yaml" and backed up old manifest to "/etc/kubernetes/tmp/kubeadm-backup-manifests-2023-02-06-09-38-09/kube-controller-manager.yaml"
+[upgrade/staticpods] Moved new manifest to "/etc/kubernetes/manifests/kube-controller-manager.yaml" and backed up old manifest to "/etc/kubernetes/tmp/kubeadm-backup-manifests-2024-04-08-06-41-48/kube-controller-manager.yaml"
 [upgrade/staticpods] Waiting for the kubelet to restart the component
 [upgrade/staticpods] This might take a minute or longer depending on the component/version gap (timeout 5m0s)
 [apiclient] Found 1 Pods for label selector component=kube-controller-manager
 [upgrade/staticpods] Component "kube-controller-manager" upgraded successfully!
 [upgrade/staticpods] Preparing for "kube-scheduler" upgrade
 [upgrade/staticpods] Renewing scheduler.conf certificate
-[upgrade/staticpods] Moved new manifest to "/etc/kubernetes/manifests/kube-scheduler.yaml" and backed up old manifest to "/etc/kubernetes/tmp/kubeadm-backup-manifests-2023-02-06-09-38-09/kube-scheduler.yaml"
+[upgrade/staticpods] Moved new manifest to "/etc/kubernetes/manifests/kube-scheduler.yaml" and backed up old manifest to "/etc/kubernetes/tmp/kubeadm-backup-manifests-2024-04-08-06-41-48/kube-scheduler.yaml"
 [upgrade/staticpods] Waiting for the kubelet to restart the component
 [upgrade/staticpods] This might take a minute or longer depending on the component/version gap (timeout 5m0s)
 [apiclient] Found 1 Pods for label selector component=kube-scheduler
 [upgrade/staticpods] Component "kube-scheduler" upgraded successfully!
-[upgrade/postupgrade] Removing the deprecated label node-role.kubernetes.io/master='' from all control plane Nodes. After this step only the label node-role.kubernetes.io/control-plane='' will be present on control plane Nodes.
-[upgrade/postupgrade] Adding the new taint &Taint{Key:node-role.kubernetes.io/control-plane,Value:,Effect:NoSchedule,TimeAdded:<nil>,} to all control plane Nodes. After this step both taints &Taint{Key:node-role.kubernetes.io/control-plane,Value:,Effect:NoSchedule,TimeAdded:<nil>,} and &Taint{Key:node-role.kubernetes.io/master,Value:,Effect:NoSchedule,TimeAdded:<nil>,} should be present on control plane Nodes.
 [upload-config] Storing the configuration used in ConfigMap "kubeadm-config" in the "kube-system" Namespace
 [kubelet] Creating a ConfigMap "kubelet-config" in namespace kube-system with the configuration for the kubelets in the cluster
+[upgrade] Backing up kubelet config file to /etc/kubernetes/tmp/kubeadm-kubelet-config1974182237/config.yaml
 [kubelet-start] Writing kubelet configuration to file "/var/lib/kubelet/config.yaml"
 [bootstrap-token] Configured RBAC rules to allow Node Bootstrap tokens to get nodes
 [bootstrap-token] Configured RBAC rules to allow Node Bootstrap tokens to post CSRs in order for nodes to get long term certificate credentials
@@ -5825,10 +5701,9 @@ W0206 09:37:16.226531    4245 initconfiguration.go:120] Usage of CRI endpoints w
 [addons] Applied essential addon: CoreDNS
 [addons] Applied essential addon: kube-proxy
 
-[upgrade/successful] SUCCESS! Your cluster was upgraded to "v1.24.10". Enjoy!
+[upgrade/successful] SUCCESS! Your cluster was upgraded to "v1.28.8". Enjoy!
 
 [upgrade/kubelet] Now that your control plane is upgraded, please proceed with upgrading your kubelets if you haven't already done so.
-
 
 
 ```
@@ -5855,7 +5730,7 @@ Nous devons maintenant mettre à jour la kubelet et kubectl :
 
 ```bash +.
 sudo apt-mark unhold kubectl kubelet
-sudo apt-get install kubectl=1.24.10-00 kubelet=1.24.10-00
+sudo apt-get install kubectl=1.24.28-1.1 kubelet=1.28.8-1.1
 sudo apt-mark hold kubectl kubelet
 ```
 
@@ -5873,22 +5748,31 @@ Vérification de la mise à jour du **master**
 kubectl get nodes
 
 NAME       STATUS                     ROLES           AGE   VERSION
-master     Ready,SchedulingDisabled   control-plane   16m   v1.24.10
-worker-0   Ready                      <none>          15m   v1.23.16
-worker-1   Ready                      <none>          15m   v1.23.16
+master     Ready,SchedulingDisabled   control-plane   16m   v1.28.8
+worker-0   Ready                      <none>          15m   v1.27.9
+worker-1   Ready                      <none>          15m   v1.27.9
 ```
 
 
 ### Mise à jour worker
 
-Nous devons maintenant mettre à jour les workers :
+A faire sur les noeud **worker-0 et worker-1**
 
-A faire sur les noeud 1 et 2
+
+Préparation de la mise à jour
 
 ```bash +.
-training@worker-0$ sudo apt-mark unhold kubeadm
-training@worker-0$ sudo apt-get install kubeadm=1.24.10-00
-training@worker-0$ sudo apt-mark hold kubeadm
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring-1.28.gpg
+
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring-1.28.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /' | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+
+sudo apt-get update
+```
+
+```bash +.
+sudo apt-mark unhold kubeadm
+sudo apt-get install kubeadm=1.28.8-1.1
+sudo apt-mark hold kubeadm
 ```
 
 Comme pour le master, nous devons drain les noeuds workers :
@@ -5923,16 +5807,16 @@ training@worker-0$ sudo kubeadm upgrade node
 Enfin, comme pour le master nous devons mettre a jour la kubelet et kubectl :
 
 ```bash +.
-training@worker-0$ sudo apt-mark unhold kubectl kubelet
-training@worker-0$ sudo apt-get install kubectl=1.24.10-00 kubelet=1.24.10-00
-training@worker-0$ sudo apt-mark hold kubectl kubelet
+sudo apt-mark unhold kubectl kubelet
+sudo apt-get install kubectl=1.28.8-1.1 kubelet=1.28.8-1.1
+sudo apt-mark hold kubectl kubelet
 ```
 
 En prenant soin de redémarrer la kubelet :
 
 ```bash +.
-training@worker-0$ sudo systemctl daemon-reload
-training@worker-0$ sudo systemctl restart kubelet
+sudo systemctl daemon-reload
+sudo systemctl restart kubelet
 ```
 
 Sans oublier de remettre le noeud en marche :
@@ -5946,13 +5830,14 @@ Nous pouvons maintenant lister les noeuds :
 ```bash +.
 kubectl get nodes
 
-NAME       STATUS                     ROLES           AGE   VERSION
-master     Ready,SchedulingDisabled   control-plane   16m   v1.24.10
-worker-0   Ready                      <none>          15m   v1.24.10
-worker-1   Ready                      <none>          15m   v1.23.16
+NAME       STATUS   ROLES           AGE   VERSION
+master     Ready    control-plane   25m   v1.28.8
+worker-0   Ready    <none>          19m   v1.28.8
+worker-1   Ready    <none>          19m   v1.27.9
+
 ```
 
-Passez à la mise à jour du noeud 2
+Passez à la mise à jour du noeud **worker-1**
 
 Et lister les pods pour vérifier que tout est fonctionnel :
 
