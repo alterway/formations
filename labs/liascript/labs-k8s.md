@@ -446,8 +446,6 @@ kubectl -n lab get svc
 
 ### Quizz Service
 
-Voici un petit quiz à choix multiples sur le manifeste Kubernetes donné, avec la structure demandée :
-
 
 Quel type de service est défini ici ?
 
@@ -853,7 +851,6 @@ pod "postgres-with-longhorn-pvc-pod" deleted
 ```
 
 ### Quizz Stockage
-Voici un petit quiz à choix multiples de 10 questions sur les objets permettant de gérer le stockage dans Kubernetes :
 
 Quel objet permet de provisionner automatiquement des volumes de stockage ?
 
@@ -1101,7 +1098,6 @@ spec:
 <hr>
 
 ### Quizz Configmap
-
 
 
 Quel objet est utilisé pour stocker des données de configuration non sensibles ?
@@ -2693,7 +2689,6 @@ Error from server (NotFound): error when deleting "pod-without-toleration.yaml":
 
 ### Quizz Scheduling
 
-
 Quel composant de Kubernetes est responsable de l'ordonnancement des pods sur les nœuds ?
 
 [(X)] Scheduleur (kube-scheduler)
@@ -3357,7 +3352,6 @@ clusterrole.rbac.authorization.k8s.io "secret-reader" deleted
 
 ### Quizz RBAC
 
-
 Quel objet Kubernetes est utilisé pour définir des autorisations d'accès aux ressources du cluster ?
 
 [( )] ServiceAccount
@@ -3830,7 +3824,6 @@ deployment.apps "example-update" deleted
 ```
 
 ### Quizz Rolling Update
-
 
 Quel objet Kubernetes gère les mises à jour progressives (rolling updates) ?
 
@@ -5856,55 +5849,64 @@ release "echo-server" uninstalled
 
 
 Helm est utilisé pour :
+
 [( )] Surveiller les conteneurs en temps réel.
 [(X)] Gérer les packages Kubernetes.
 [( )] Automatiser le déploiement des applications.
 
 Un Chart Helm est :
+
 [(X)] Un ensemble de fichiers de configuration Kubernetes.
 [( )] Un outil de surveillance des performances.
 [( )] Une commande pour créer des conteneurs.
 
 Pour installer un package avec Helm, on utilise la commande :
+
 [( )] `helm create`
 [(X)] `helm install`
 [( )] `helm package`
 
 Tiller était :
+
 [(X)] Le composant côté serveur de Helm dans les versions antérieures.
 [( )] Un gestionnaire de dépendances.
 [( )] Une interface graphique pour Helm.
 
 Helm 3 a introduit quel changement majeur ?
+
 [( )] Support pour Windows.
 [(X)] Suppression de Tiller.
 [( )] Intégration avec Docker.
 
 Un fichier `values.yaml` sert à :
+
 [( )] Stocker les exécutables binaires.
 [(X)] Personnaliser les configurations d'un Chart.
 [( )] Définir les politiques de réseau.
 
 La commande pour mettre à jour un Chart est :
+
 [(X)] `helm upgrade`
 [( )] `helm refresh`
 [( )] `helm update`
 
 Helm est souvent comparé à :
+
 [( )] Docker Swarm.
 [(X)] `apt` ou `yum` pour les systèmes Linux.
 [( )] Kubernetes lui-même.
 
 Un Repository Helm est :
+
 [( )] Un cluster Kubernetes.
 [(X)] Un lieu de stockage pour les Charts Helm.
 [( )] Une base de données de conteneurs.
 
 La commande pour rechercher un Chart dans un repository est :
+
 [( )] `helm find`
 [(X)] `helm search repo`
 [( )] `helm look-up`
-
 
 
 <hr>
@@ -6136,54 +6138,64 @@ kubectl get  all -l caas.fr/environment=prod
 
 
 Kustomize est un outil pour :
+
 [( )] Créer des conteneurs Docker.
 [(X)] Personnaliser la configuration des ressources Kubernetes sans templates.
 [( )] Surveiller les performances des applications Kubernetes.
 
 La commande de base pour utiliser Kustomize est :
+
 [( )] `kubectl apply`
 [(X)] `kubectl kustomize`
 [( )] `kustomize build`
 
 Un fichier `kustomization.yaml` permet de :
+
 [( )] Définir les politiques de réseau pour les applications.
 [(X)] Déclarer les ressources à personnaliser et les modifications à appliquer.
 [( )] Stocker les secrets de l'application de manière sécurisée.
 
 Kustomize gère les ressources en utilisant :
+
 [( )] Des scripts shell.
 [(X)] Des overlays et des bases.
 [( )] Des fichiers Dockerfile.
 
 Les `overlays` dans Kustomize servent à :
+
 [( )] Surveiller les déploiements.
 [(X)] Adapter une configuration de base à différents environnements ou scénarios.
 [( )] Créer des images de conteneurs.
 
 Avec Kustomize, il est possible de :
+
 [( )] Générer automatiquement des certificats TLS.
 [(X)] Ajouter, modifier ou supprimer des champs dans des ressources Kubernetes.
 [( )] Compiler des applications directement dans le cluster.
 
 La commande pour ajouter un nouveau patch à une ressource est :
+
 [( )] `kustomize edit add label`
 [(X)] `kustomize edit add patch`
 [( )] `kustomize edit add resource`
 
 Kustomize peut être intégré avec :
+
 [( )] Jenkins pour le déploiement continu.
 [(X)] `kubectl` pour appliquer les configurations.
 [( )] Helm pour la gestion des packages.
 
 Pour gérer les secrets avec Kustomize, on utilise :
+
 [( )] `kustomize secret create`
 [(X)] `kustomize edit add secret`
 [( )] `kustomize generate secret`
 
 La fonctionnalité de `configMapGenerator` dans Kustomize sert à :
+
 [( )] Générer des logs de configuration.
 [(X)] Créer ou mettre à jour des ConfigMaps à partir de fichiers ou de valeurs littérales.
-  [( )] Configurer des limites de ressources pour les pods.
+[( )] Configurer des limites de ressources pour les pods.
 
 
 <hr>
@@ -6945,30 +6957,34 @@ kube-system   weave-net-zxg6p                  2/2     Running   1          23m
 ### Quizz Mise à jour kubeadm
 
 Pour mettre à jour kubeadm à la dernière version, vous devez :
+
 [( )] Exécuter `kubeadm upgrade apply` sans mise à jour préalable.
 [(X)] Mettre à jour le paquet kubeadm via le gestionnaire de paquets de votre système.
 [( )] Télécharger la dernière version de Kubernetes et la compiler.
 
 Avant de mettre à jour un cluster, il est recommandé de :
+
 [( )] Supprimer les données de l'etcd cluster.
 [(X)] Sauvegarder l'état actuel du cluster, y compris etcd et toutes les données de configuration.
 [( )] Redémarrer tous les nœuds du cluster.
 
 La commande pour mettre à jour la version de Kubernetes sur les nœuds de contrôle est :
+
 [( )] `kubeadm update`
 [(X)] `kubeadm upgrade apply`
 [( )] `kubeadm upgrade node`
 
 Après avoir mis à jour kubeadm, vous devez également mettre à jour :
+
 [( )] Tous les Pods en cours d'exécution.
 [(X)] kubelet et kubectl sur tous les nœuds.
 [( )] Les images de conteneurs utilisées par les workloads.
 
 Lors de la mise à jour d'un cluster avec kubeadm, quel élément n'est pas automatiquement mis à jour ?
+
 [( )] Les composants de l'API server.
 [(X)] Les applications déployées sur le cluster.
 [( )] Le réseau de pod CNI.
-
 
 <hr>
 
