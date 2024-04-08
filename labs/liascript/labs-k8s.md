@@ -10,6 +10,12 @@ language: fr
 narrator: FR French Male
 
 comment:  Labs k8s
+
+logo: https://assets.alterway.fr/2021/01/strong-mind.png
+
+
+
+
 -->
 
 # Lab Kubernetes
