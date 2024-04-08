@@ -185,6 +185,7 @@ kubectl delete pod test-pod
 ### Quizz kubeadm
 
 Qu'est-ce que kubeadm ?
+
   [( )] Un outil pour automatiser le déploiement de conteneurs
   [(X)] Un outil pour gérer le cycle de vie des clusters Kubernetes
   [( )] Un système d'exploitation pour les conteneurs
@@ -192,6 +193,7 @@ Qu'est-ce que kubeadm ?
 
 
 Quelle commande utilise-t-on pour initialiser un cluster avec kubeadm ?
+
   [( )] kubeadm start
   [(X)] kubeadm init
   [( )] kubeadm create
