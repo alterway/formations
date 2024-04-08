@@ -7385,7 +7385,7 @@ spec:
 
 ```
 
-### Quizz Troubleshhoting
+### Quizz Troubleshooting
 
 
 Si un pod est en état `CrashLoopBackOff`, cela signifie généralement que :
