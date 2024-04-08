@@ -76,7 +76,7 @@ To start using your cluster, you need to run the following as a regular user:
 
 Un token sera généré à l'issue du processus d'initialisation. Il est important de le sauvegarder car il servira à connecter les worker nodes au cluster
 
-Notez la commande de join :
+> Notez la commande de join :
 
 ```bash +.
 
@@ -116,7 +116,7 @@ master   Ready    control-plane   4m18s   v1.27.9
 
 ```
 
-**Note** : Si on souhaite utiliser les network policies (que nous explorerons plus tard), il faut utiliser un plugin supportant cette fonctionnalité. (Il faut éviter flannel notamment)
+> Note : Si on souhaite utiliser les network policies (que nous explorerons plus tard), il faut utiliser un plugin supportant cette fonctionnalité. (Il faut éviter flannel notamment)
 
 
 Machines : **worker-0**, **worker-1**
@@ -2795,6 +2795,9 @@ clusterrole.rbac.authorization.k8s.io "secret-reader" deleted
 
 ## Rolling Update
 
+
+Nous allons voir les différentes stratégie de mise à jour d'un application
+
 ### Stratégies de déploiement
 
 <hr>
@@ -3900,11 +3903,15 @@ Commercial support is available at
  curl IP_INGRESS/httpd
 ```
 
-``` {.html}
+```html +.
 <html><body><h1>It works!</h1></body></html>
+```
 
+```bash +.
  curl IP_INGRESS/nginx
+```
 
+```html +.
 <!DOCTYPE html>
 <html>
 <head>
@@ -3977,6 +3984,8 @@ spec:
 ```bash +.
  kubectl apply -f ingress-with-hosts.yaml
 ```
+
+
 ```bash +.
 ingress.networking.k8s.io/ingress-with-hosts created
 ```
@@ -3994,11 +4003,15 @@ IP_INGRESS httpd.example.com
  curl httpd.example.com
 ```
 
-``` {.html}
+```html +.
 <html><body><h1>It works!</h1></body></html>
+```
 
+```bash +.
  curl nginx.example.com
+```
 
+```html +.
 <!DOCTYPE html>
 <html>
 <head>
@@ -4026,14 +4039,13 @@ Commercial support is available at
 </html>
 ```
 
-
-<hr>
-
-Machine : **master**
-
-<hr>
-
 ### Canary Deployment
+
+<hr>
+
+Machine Master
+
+<hr>
 
 Les déploiements Canary permettent le déploiement progressif de nouvelles versions d'applications sans aucune interruption de service. 
 
@@ -4041,7 +4053,8 @@ Le **NGINX Ingress Controller**  prend en charge les politiques de répartition 
 
 Le **NGINX Ingress Controller** utilise les annotations suivantes pour activer les déploiements Canary :
 
-```
+```yaml 
+
 - nginx.ingress.kubernetes.io/canary-by-header
 
 - nginx.ingress.kubernetes.io/canary-by-header-value
@@ -4916,7 +4929,8 @@ kubectl create namespace kustomize
 
 #### Installation de kustomize
 
-<https://kubectl.docs.kubernetes.io/installation/kustomize/>
+[Installation](https://kubectl.docs.kubernetes.io/installation/kustomize/)
+
 
 Choisissez !
 
@@ -4925,9 +4939,9 @@ Choisissez !
 ```bash +.
 .
 ├── base
-│   ├── deployment.yaml
-│   ├── kustomization.yaml
-│   └── service.yaml
+│   ├── deployment.yaml
+│   ├── kustomization.yaml
+│   └── service.yaml
 └── overlays
     └── prod
         ├── custom-env.yaml
@@ -5127,13 +5141,14 @@ kubectl get  all -l caas.fr/environment=prod
 ## Logging
 
 
+### Simple
+
 <hr>
 
 Machine : **master**
 
 <hr>
 
-### Simple
 
 Avec la CLI kubectl, nous pouvons d'ores et déjà récupérer plusieurs logs concernant notre cluster Kubernetes.
 
@@ -5190,6 +5205,8 @@ kubectl logs test-logs
 ```bash +.
 sudo cat /var/log/containers/*
 ```
+
+
 ```bash +.
 ...
 {"log":"I1027 12:51:51.629401       1 client.go:360] parsed scheme: \"passthrough\"\n","stream":"stderr","time":"2020-10-27T12:51:51.629623287Z"}
@@ -5871,12 +5888,12 @@ kube-system   weave-net-zxg6p                  2/2     Running   1          23m
 
 
 
-**Note** : le CNI doit être mis à jour indépendamment
+> Note: le CNI doit être mis à jour indépendamment
 
 
 <hr>
 
-##  Backup and restaure ETCD
+##  Backup and Restore ETCD
 
 ### Sauvegarde de la base de données ETCD
 
