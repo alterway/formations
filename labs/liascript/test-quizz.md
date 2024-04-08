@@ -1,7 +1,5 @@
-<!-- Begin of a single-choice question -->
-* What is the capital of France?
-  1. Berlin
-  2. Paris
-  3. Rome
-  4. Madrid
-<!-- The correct answer is: Paris -->
+Anzahl und Ordnung der Optionen ist beliebig.
+
+[( )] Diese Wahl ist falsch.
+[(X)] <-- __Richtig__
+[( )] Auch falsh.
