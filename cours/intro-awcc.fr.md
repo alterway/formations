@@ -1,5 +1,8 @@
 # Concernant les supports de cours {-}
 
+
+les Labs sont içi : (https://liascript.github.io/course/?https://raw.githubusercontent.com/alterway/formations/main/labs/liascript/labs-k8s.md) 
+
 ### Supports de cours réalisés par alter way Cloud Consulting
 
 <https://cloud-consulting.alterway.fr>
