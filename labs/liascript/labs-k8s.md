@@ -1098,63 +1098,76 @@ spec:
   restartPolicy: Never
 ```
 
+<hr>
 
 ### Quizz Configmap
 
+
+
 Quel objet est utilisé pour stocker des données de configuration non sensibles ?
+
 [( )] Secret
 [(X)] ConfigMap
 [( )] PersistentVolumeClaim
 [( )] ServiceAccount
 
 Comment les données sont-elles stockées dans une ConfigMap ?
+
 [( )] Sous forme chiffrée
 [(X)] En clair
 [( )] Sous forme de fichiers binaires
 [( )] Sous forme de volumes persistants
 
 Comment une ConfigMap peut-elle être utilisée dans un pod ?
+
 [( )] Exposée en tant que variables d'environnement
 [( )] Montée en tant que volume
 [(X)] Les deux réponses précédentes sont correctes
 
 Quel objet permet de référencer des données stockées dans une ConfigMap ?
+
 [(X)] EnvVar
 [( )] PersistentVolumeClaim
 [( )] ServiceAccount
 [( )] Volume
 
 Quelle commande permet de créer une ConfigMap à partir d'un fichier existant ?
+
 [( )] kubectl create configmap myconfigmap --from-file=./config.txt
 [(X)] kubectl create configmap myconfigmap --from-file=config=./config.txt
 [( )] kubectl apply -f configmap.yaml
 [( )] kubectl expose configmap myconfigmap
 
 Comment une ConfigMap peut-elle être mise à jour ?
+
 [( )] En modifiant directement le fichier YAML de la ConfigMap
 [(X)] En créant une nouvelle ConfigMap avec les données mises à jour
 [( )] En utilisant la commande kubectl edit configmap
 [( )] Impossible de mettre à jour une ConfigMap existante
 
 Quelle est la différence entre une ConfigMap et un Secret ?
+
 [( )] Une ConfigMap stocke des données sensibles, un Secret ne le fait pas
 [(X)] Une ConfigMap stocke des données non sensibles en clair, un Secret stocke des données sensibles encodées en base64
 [( )] Une ConfigMap est montée en tant que volume, un Secret est exposé en tant que variables d'environnement
 [( )] Aucune différence, ils sont utilisés de la même manière
 
 Comment une ConfigMap peut-elle être supprimée ?
+
 [(X)] kubectl delete configmap myconfigmap
 [( )] kubectl remove configmap myconfigmap
 [( )] En modifiant directement le fichier YAML de la ConfigMap
 [( )] Impossible de supprimer une ConfigMap existante
 
 Quel est le meilleur endroit pour stocker une chaîne de connexion à une base de données ?
+
 [( )] ConfigMap
 [(X)] Secret
 [( )] PersistentVolumeClaim
 [( )] ServiceAccount
 
 Quelle est la taille maximale des données pouvant être stockées dans une ConfigMap ?
+
 [( )] 1 Mo
 [(X)] 1 Mo (environ 1 million de paires clé-valeur)
 [( )] Illimitée
@@ -1842,60 +1855,70 @@ Error from server (NotFound): error when deleting "test3-resources.yaml": pods "
 ### Quizz Resource Handling 
 
 Quel objet est utilisé pour limiter les ressources consommées par un pod ?
+
 [(X)] LimitRange
 [( )] ResourceQuota
 [( )] HorizontalPodAutoscaler
 [( )] PodDisruptionBudget
 
 Quel objet permet de définir des quotas de ressources pour les espaces de noms ?
+
 [( )] LimitRange
 [(X)] ResourceQuota
 [( )] HorizontalPodAutoscaler
 [( )] VerticalPodAutoscaler
 
 Quel objet sert à surveiller et collecter les métriques du cluster ?
+
 [( )] LimitRange
 [( )] ResourceQuota
 [(X)] HorizontalPodAutoscaler
 [( )] VerticalPodAutoscaler
 
 Quel objet permet de surveiller l'état des pods ?
+
 [( )] LimitRange
 [( )] ResourceQuota
 [( )] HorizontalPodAutoscaler
 [(X)] PodDisruptionBudget
 
 Quelles ressources peuvent être limitées avec un LimitRange ?
+
 [(X)] CPU, mémoire, nombre de volumes
 [( )] Mémoire, nombre de pods
 [( )] CPU, nombre de nœuds
 [( )] Nombre de services, nombre de pods
 
 Qu'est-ce qu'un ResourceQuota permet de limiter ?
+
 [( )] Le nombre de pods par nœud
 [(X)] La quantité totale de ressources consommées dans un espace de noms
 [( )] La quantité de ressources consommées par un seul pod
 [( )] Le nombre de nœuds dans le cluster
 
 Comment fonctionne un HorizontalPodAutoscaler ?
+
 [( )] Il ajoute ou supprime des nœuds en fonction de la charge
 [(X)] Il ajoute ou supprime des pods en fonction de l'utilisation des ressources
 [( )] Il ajuste les limites de ressources des pods
 [( )] Il migre les pods entre les nœuds
 
 Quel objet permet de réduire les interruptions de service lors de la suppression de pods ?
+
 [( )] LimitRange
 [( )] ResourceQuota
 [( )] HorizontalPodAutoscaler
 [(X)] PodDisruptionBudget
 
 Que se passe-t-il lorsqu'un pod dépasse les limites de ressources définies ?
+
 [( )] Le pod est automatiquement supprimé
 [(X)] Le conteneur est terminé avec un signal d'arrêt
 [( )] Le nœud est redémarré
 [( )] Rien, les limites n'ont aucun effet
 
 Quel objet peut être utilisé pour ajuster automatiquement les ressources allouées aux pods ?
+
 [( )] LimitRange
 [( )] ResourceQuota
 [( )] HorizontalPodAutoscaler
@@ -2165,63 +2188,71 @@ kubectl delete -f .
 
 ### Quizz sur les readiness, liveness, startup probes
 
-Voici un petit quiz à choix multiples de 10 questions sur les readiness, liveness et startup probes dans Kubernetes, sans numérotation des questions et avec la structure demandée :
-
 Quel type de sonde est utilisé pour déterminer si un conteneur est prêt à recevoir du trafic ?
+
 [( )] Liveness Probe
 [(X)] Readiness Probe
 [( )] Startup Probe
 [( )] Health Check
 
 Quel type de sonde est utilisé pour déterminer si un conteneur est en bonne santé ?
+
 [(X)] Liveness Probe
 [( )] Readiness Probe
 [( )] Startup Probe
 [( )] Health Check
 
 Quel type de sonde est utilisé pour détecter les problèmes de démarrage d'un conteneur ?
+
 [( )] Liveness Probe
 [( )] Readiness Probe
 [(X)] Startup Probe
 [( )] Health Check
 
 Quelles sont les différentes méthodes de sonde disponibles ?
+
 [( )] HTTP GET, TCP
 [( )] HTTP GET, TCP, Exec
 [(X)] HTTP GET, TCP, Exec, GRPC
 [( )] HTTP GET, TCP, Exec, UDP
 
 Que se passe-t-il si une sonde Liveness échoue ?
+
 [(X)] Le conteneur est redémarré
 [( )] Le pod est redémarré
 [( )] Le service est redémarré
 [( )] Rien ne se passe
 
 Que se passe-t-il si une sonde Readiness échoue ?
+
 [( )] Le conteneur est redémarré
 [(X)] Le pod est retiré du service
 [( )] Le service est redémarré
 [( )] Rien ne se passe
 
 Quelle est la différence entre une sonde Liveness et une sonde Readiness ?
+
 [( )] Aucune différence, elles font la même chose
 [(X)] La sonde Liveness vérifie si le conteneur est en bonne santé, la sonde Readiness vérifie si le conteneur est prêt à recevoir du trafic
 [( )] La sonde Liveness vérifie si le conteneur est prêt à recevoir du trafic, la sonde Readiness vérifie si le conteneur est en bonne santé
 [( )] La sonde Liveness est utilisée pour les conteneurs web, la sonde Readiness est utilisée pour les autres types de conteneurs
 
 Quelle est la valeur par défaut du délai d'attente (timeout) pour une sonde HTTP ?
+
 [( )] 1 seconde
 [(X)] 1 minute
 [( )] 5 minutes
 [( )] Aucun délai d'attente par défaut
 
 Quelles sont les bonnes pratiques pour configurer les sondes ?
+
 [( )] Utiliser des sondes uniquement pour les applications critiques
 [(X)] Configurer des sondes pour toutes les applications, avec des valeurs de délai appropriées
 [( )] Utiliser uniquement des sondes HTTP GET
 [( )] Ne jamais utiliser de sondes
 
 Comment une sonde Startup est-elle utilisée ?
+
 [( )] Elle remplace la sonde Liveness pendant le démarrage du conteneur
 [(X)] Elle est utilisée en complément de la sonde Liveness pendant le démarrage du conteneur
 [( )] Elle remplace la sonde Readiness pendant le démarrage du conteneur
@@ -2664,60 +2695,70 @@ Error from server (NotFound): error when deleting "pod-without-toleration.yaml":
 
 
 Quel composant de Kubernetes est responsable de l'ordonnancement des pods sur les nœuds ?
+
 [(X)] Scheduleur (kube-scheduler)
 [( )] Contrôleur de réplication (replicaset)
 [( )] Proxy de service (kube-proxy)
 [( )] Gestionnaire de contrôle (controller-manager)
 
 Quels sont les facteurs pris en compte par le scheduleur pour placer un pod sur un nœud ?
+
 [( )] Contraintes de ressources (CPU, mémoire)
 [( )] Contraintes d'affinité et d'anti-affinité
 [( )] Politiques de tolérance aux pannes
 [(X)] Tous les éléments ci-dessus
 
 Comment l'affinité de nœud est-elle spécifiée ?
+
 [(X)] Via des labels de nœud
 [( )] Via des annotations de nœud
 [( )] Via des taints de nœud
 [( )] Via des tolérances de nœud
 
 Que se passe-t-il lorsqu'un nœud devient indisponible ?
+
 [( )] Les pods sont automatiquement redémarrés sur un autre nœud
 [(X)] Les pods sont recréés sur un autre nœud par le contrôleur de réplication
 [( )] Les pods restent sur le nœud indisponible
 [( )] Le cluster est arrêté
 
 Qu'est-ce qu'un taint de nœud ?
+
 [( )] Une préférence pour certains types de charges de travail
 [(X)] Un marquage qui empêche les pods de s'exécuter sur un nœud spécifique
 [( )] Une limite de ressources pour un nœud spécifique
 [( )] Une stratégie d'éviction de pods
 
 Comment les tolérances de pod sont-elles spécifiées ?
+
 [(X)] Dans la spécification du pod (spec.tolerations)
 [( )] Dans la spécification du nœud (spec.tolerations)
 [( )] Dans la spécification du namespace (spec.tolerations)
 [( )] Dans la spécification du déploiement (spec.tolerations)
 
 Que se passe-t-il lorsqu'un pod ne peut pas être schedulé en raison de contraintes de ressources ?
+
 [( )] Le pod est supprimé
 [(X)] Le pod reste en attente jusqu'à ce que des ressources suffisantes soient disponibles
 [( )] Le pod est automatiquement redimensionné pour s'adapter aux ressources disponibles
 [( )] Le cluster est redimensionné pour ajouter plus de nœuds
 
 Quel objet Kubernetes peut être utilisé pour configurer des règles d'ordonnancement personnalisées ?
+
 [(X)] Priorité de classe (PriorityClass)
 [( )] Quota de ressources (ResourceQuota)
 [( )] Limite de ressources (LimitRange)
 [( )] Aucun objet n'est nécessaire, les règles sont configurées dans le fichier de configuration du scheduleur
 
 Comment la priorité de pod est-elle déterminée ?
+
 [( )] Par le nom du pod
 [(X)] Par la priorité de classe ou les valeurs par défaut du scheduleur
 [( )] Par les labels du pod
 [( )] Par les annotations du pod
 
 Que se passe-t-il lorsqu'un pod avec une priorité élevée ne peut pas être schedulé en raison d'un manque de ressources ?
+
 [( )] Le pod est supprimé
 [( )] Le pod reste en attente jusqu'à ce que des ressources suffisantes soient disponibles
 [(X)] Des pods de priorité inférieure peuvent être évincés pour libérer des ressources
@@ -3318,60 +3359,70 @@ clusterrole.rbac.authorization.k8s.io "secret-reader" deleted
 
 
 Quel objet Kubernetes est utilisé pour définir des autorisations d'accès aux ressources du cluster ?
+
 [( )] ServiceAccount
 [(X)] Role et ClusterRole
 [( )] ConfigMap
 [( )] Secret
 
 Quel objet Kubernetes lie une identité (ServiceAccount) à un ensemble de permissions (Role ou ClusterRole) ?
+
 [(X)] RoleBinding et ClusterRoleBinding
 [( )] Role et ClusterRole
 [( )] ServiceAccount
 [( )] Secret
 
 Comment une Role est-elle différente d'une ClusterRole ?
+
 [( )] Une Role définit des autorisations pour tout le cluster, une ClusterRole définit des autorisations pour un namespace spécifique
 [(X)] Une Role définit des autorisations pour un namespace spécifique, une ClusterRole définit des autorisations pour tout le cluster
 [( )] Une Role est utilisée pour les comptes de service, une ClusterRole est utilisée pour les utilisateurs humains
 [( )] Aucune différence, elles sont utilisées de la même manière
 
 Quel objet représente l'identité par défaut utilisée par les pods ?
+
 [(X)] ServiceAccount
 [( )] Role
 [( )] ClusterRole
 [( )] Secret
 
 Comment attribuer une Role à un ServiceAccount dans un namespace spécifique ?
+
 [( )] Créer un RoleBinding
 [( )] Créer un ClusterRoleBinding
 [(X)] Les deux réponses précédentes sont correctes
 [( )] Modifier directement le fichier de configuration du ServiceAccount
 
 Quelles sont les actions de base pouvant être accordées ou refusées via le RBAC ?
+
 [( )] get, list, watch, create
 [( )] get, list, watch, delete
 [( )] get, list, create, delete
 [(X)] get, list, watch, create, update, patch, delete
 
 Comment spécifier les ressources auxquelles une Role ou ClusterRole s'applique ?
+
 [(X)] Via des règles (rules) avec des apiGroups, resources et verbs
 [( )] Via des labels et des annotations
 [( )] Via des quotas de ressources (ResourceQuotas)
 [( )] Via des limites de ressources (LimitRanges)
 
 Quel objet peut être utilisé pour limiter les autorisations d'un utilisateur ou d'un groupe à un ensemble spécifique de nœuds ?
+
 [( )] Role
 [(X)] NodeRestriction
 [( )] ClusterRole
 [( )] RoleBinding
 
 Quel est le moyen recommandé d'accorder des autorisations d'administrateur complet dans un cluster Kubernetes ?
+
 [( )] Créer un ClusterRoleBinding liant le compte d'utilisateur à la Role cluster-admin
 [(X)] Créer un ClusterRoleBinding liant le compte d'utilisateur à la ClusterRole cluster-admin
 [( )] Modifier directement les fichiers de configuration du contrôleur d'admission RBAC
 [( )] Accorder toutes les autorisations via des RoleBindings dans chaque namespace
 
 Que se passe-t-il si un pod tente d'accéder à une ressource sans avoir les autorisations RBAC appropriées ?
+
 [(X)] L'accès est refusé
 [( )] Le pod est redémarré
 [( )] Le pod est supprimé
@@ -3782,60 +3833,70 @@ deployment.apps "example-update" deleted
 
 
 Quel objet Kubernetes gère les mises à jour progressives (rolling updates) ?
+
 [(X)] Deployment
 [( )] ReplicaSet
 [( )] DaemonSet
 [( )] StatefulSet
 
 Que se passe-t-il lors d'une mise à jour progressive ?
+
 [( )] Tous les pods existants sont arrêtés, puis les nouveaux pods sont créés
 [(X)] De nouveaux pods sont créés avec la nouvelle version, puis les anciens pods sont arrêtés progressivement
 [( )] Tous les pods sont mis à jour simultanément
 [( )] Rien ne se passe, les mises à jour doivent être effectuées manuellement
 
 Comment spécifier la stratégie de mise à jour d'un Deployment ?
+
 [(X)] Via la propriété strategy dans la spécification du Deployment
 [( )] Via des annotations sur le Deployment
 [( )] Via un objet séparé UpdateStrategy
 [( )] Il n'y a pas de stratégie de mise à jour, c'est toujours une mise à jour progressive
 
 Quelles sont les stratégies de mise à jour disponibles pour un Deployment ?
+
 [( )] Rolling Update et Recreate
 [(X)] RollingUpdate et Recreate
 [( )] RollingUpdate, Recreate et BlueGreen
 [( )] RollingUpdate, Recreate et Canary
 
 Que signifie "maxUnavailable" dans la stratégie de mise à jour RollingUpdate ?
+
 [(X)] Le nombre maximum de pods indisponibles pendant la mise à jour
 [( )] Le nombre maximum de pods à créer pendant la mise à jour
 [( )] Le nombre maximum de pods à conserver pendant la mise à jour
 [( )] Le nombre maximum de nœuds indisponibles pendant la mise à jour
 
 Que signifie "maxSurge" dans la stratégie de mise à jour RollingUpdate ?
+
 [(X)] Le nombre maximum de pods supplémentaires à créer pendant la mise à jour
 [( )] Le nombre maximum de pods à conserver pendant la mise à jour
 [( )] Le nombre maximum de nœuds supplémentaires à utiliser pendant la mise à jour
 [( )] Le nombre maximum de pods indisponibles pendant la mise à jour
 
 Que se passe-t-il si un pod échoue pendant une mise à jour progressive ?
+
 [( )] La mise à jour est annulée et tous les pods reviennent à l'ancienne version
 [(X)] Le pod défaillant est supprimé et un nouveau pod est créé avec la nouvelle version
 [( )] Le pod défaillant est conservé et la mise à jour se poursuit
 [( )] La mise à jour est suspendue jusqu'à ce que le problème soit résolu manuellement
 
 Comment surveiller la progression d'une mise à jour ?
+
 [(X)] En examinant l'état du Deployment et des ReplicaSets associés
 [( )] En examinant les journaux de chaque pod
 [( )] En utilisant l'outil kubectl rollout status
 [( )] En utilisant des sondes de disponibilité (readiness probes)
 
 Que se passe-t-il si une mise à jour échoue complètement ?
+
 [( )] Tous les pods sont supprimés et le Deployment est mis hors service
 [(X)] Le Deployment revient à l'état stable précédent
 [( )] Le Deployment reste dans un état de mise à jour partielle
 [( )] Une alerte est déclenchée, mais le Deployment reste dans l'état actuel
 
 Comment annuler une mise à jour en cours ?
+
 [(X)] kubectl rollout undo deployment/mon-deployment
 [( )] kubectl rollback deployment/mon-deployment
 [( )] kubectl cancel deployment/mon-deployment
@@ -4277,76 +4338,84 @@ service "source2-service" deleted
 
 
 Quel objet Kubernetes permet de définir des règles de réseau pour les pods ?
+
 [(X)] NetworkPolicy
 [( )] ServiceAccount
 [( )] Secret
 [( )] ConfigMap
 
 Comment fonctionne une NetworkPolicy par défaut ?
+
 [( )] Elle autorise tout le trafic entrant et sortant
 [(X)] Elle bloque tout le trafic entrant et sortant
 [( )] Elle n'a aucun effet par défaut
 [( )] Elle autorise uniquement le trafic entrant
 
 Quelles sont les sources et destinations pouvant être spécifiées dans une NetworkPolicy ?
+
 [(X)] Pods, namespaces, adresses IP
 [( )] Nodes, services, ingress
 [( )] Deployments, ReplicaSets, DaemonSets
 [( )] Volumes, ConfigMaps, Secrets
 
 Quelle est la différence entre une règle d'entrée (ingress) et une règle de sortie (egress) ?
+
 [(X)] Une règle d'entrée contrôle le trafic entrant, une règle de sortie contrôle le trafic sortant
 [( )] Une règle d'entrée s'applique aux pods, une règle de sortie s'applique aux services
 [( )] Une règle d'entrée est prioritaire sur une règle de sortie
 [( )] Aucune différence, elles fonctionnent de la même manière
 
 Comment spécifier les ports autorisés dans une NetworkPolicy ?
+
 [(X)] Via la propriété ports dans les règles
 [( )] Via des annotations sur le pod
 [( )] Via un objet séparé NetworkPolicyPort
 [( )] Impossible de spécifier des ports, seules les adresses IP sont autorisées
 
 Que se passe-t-il lorsqu'un pod tente d'envoyer du trafic interdit par une NetworkPolicy ?
+
 [(X)] Le trafic est bloqué par le réseau
 [( )] Le pod est redémarré
 [( )] Le pod est supprimé
 [( )] Une erreur est générée dans les journaux, mais le trafic est autorisé
 
 Comment une NetworkPolicy s'applique-t-elle à un pod ?
+
 [(X)] Via les sélecteurs podSelector et namespaceSelector
 [( )] Via des annotations sur le pod
 [( )] Via un objet séparé NetworkPolicyBinding
 [( )] Une NetworkPolicy s'applique toujours à tous les pods du cluster
 
 Quels types de trafic peuvent être contrôlés par une NetworkPolicy ?
+
 [(X)] TCP, UDP, SCTP
 [( )] TCP, UDP
 [( )] Uniquement TCP
 [( )] Uniquement UDP
 
 Dans quel ordre les NetworkPolicies sont-elles évaluées ?
+
 [(X)] De la plus spécifique à la moins spécifique
 [( )] De la moins spécifique à la plus spécifique
 [( )] Dans l'ordre de création
 [( )] Dans un ordre aléatoire
 
 Que se passe-t-il si plusieurs NetworkPolicies s'appliquent à un pod et entrent en conflit ?
+
 [(X)] La politique la plus spécifique est appliquée
 [( )] Toutes les politiques sont appliquées, avec une logique "OU"
 [( )] Aucune politique n'est appliquée
 [( )] Une erreur est générée et le pod est supprimé
 
 Comment désactiver complètement les NetworkPolicies pour un namespace spécifique ?
+
 [(X)] Créer une NetworkPolicy sans aucune règle dans ce namespace
 [( )] Supprimer tous les objets NetworkPolicy de ce namespace
 [( )] Ajouter une annotation sur le namespace
 [( )] Impossible de désactiver les NetworkPolicies pour un namespace spécifique
 
-N'hésitez pas si vous avez d'autres questions sur les NetworkPolicies dans Kubernetes !
 
 <hr>
-
-
 
 
 
@@ -7304,54 +7373,64 @@ spec:
 
 
 Si un pod est en état `CrashLoopBackOff`, cela signifie généralement que :
-- [( )] Le pod a été terminé manuellement.
-- [(X)] L'application dans le pod démarre, puis échoue répétitivement.
-- [( )] Le pod est en cours de redémarrage après une mise à jour.
+
+[( )] Le pod a été terminé manuellement.
+[(X)] L'application dans le pod démarre, puis échoue répétitivement.
+[( )] Le pod est en cours de redémarrage après une mise à jour.
 
 Pour diagnostiquer les problèmes de réseau dans un cluster Kubernetes, vous pouvez utiliser :
-- [( )] La commande `kubectl exec`.
-- [(X)] La commande `kubectl describe pod`.
-- [( )] La commande `kubectl logs`.
+
+[( )] La commande `kubectl exec`.
+[(X)] La commande `kubectl describe pod`.
+[( )] La commande `kubectl logs`.
 
 Si une application ne peut pas être déployée, vous devriez vérifier :
-- [( )] La version de Kubernetes.
-- [(X)] Les quotas de ressources et les limites de l'espace de noms.
-- [( )] Les paramètres du pare-feu du nœud.
+
+[( )] La version de Kubernetes.
+[(X)] Les quotas de ressources et les limites de l'espace de noms.
+[( )] Les paramètres du pare-feu du nœud.
 
 Lorsqu'un service ne dirige pas le trafic vers les pods, cela peut être dû à :
-- [( )] Un nombre insuffisant de réplicas de pod.
-- [(X)] Des sélecteurs de pod incorrects dans la spécification du service.
-- [( )] Une mauvaise configuration des sondes de vivacité (liveness probes).
+
+[( )] Un nombre insuffisant de réplicas de pod.
+[(X)] Des sélecteurs de pod incorrects dans la spécification du service.
+[( )] Une mauvaise configuration des sondes de vivacité (liveness probes).
 
 Pour résoudre les problèmes de persistance des données, il faut s'assurer que :
-- [( )] Les pods sont dans le bon espace de noms.
-- [(X)] Les volumes persistants (PV) et les revendications de volumes persistants (PVC) sont correctement configurés.
-- [( )] Les services sont correctement exposés.
+
+[( )] Les pods sont dans le bon espace de noms.
+[(X)] Les volumes persistants (PV) et les revendications de volumes persistants (PVC) sont correctement configurés.
+[( )] Les services sont correctement exposés.
 
 Si `kubectl apply` ne met pas à jour les ressources comme prévu, il faut :
-- [( )] Redémarrer le serveur API de Kubernetes.
-- [(X)] Vérifier les fichiers de configuration pour les erreurs ou les omissions.
-- [( )] Mettre à jour la version de `kubectl`.
+
+[( )] Redémarrer le serveur API de Kubernetes.
+[(X)] Vérifier les fichiers de configuration pour les erreurs ou les omissions.
+[( )] Mettre à jour la version de `kubectl`.
 
 Pour identifier la cause d'un pod non planifié (unscheduled), vous pouvez :
-- [( )] Augmenter le nombre de nœuds dans le cluster.
-- [(X)] Utiliser la commande `kubectl describe pod` pour voir les événements.
-- [( )] Supprimer et recréer le déploiement.
+
+[( )] Augmenter le nombre de nœuds dans le cluster.
+[(X)] Utiliser la commande `kubectl describe pod` pour voir les événements.
+[( )] Supprimer et recréer le déploiement.
 
 Si un pod reste en état `Pending`, cela peut indiquer :
-- [( )] Que le pod est en cours de suppression.
-- [(X)] Un manque de ressources disponibles ou des contraintes d'affinité non satisfaites.
-- [( )] Que les images de conteneur sont en cours de téléchargement.
+
+[( )] Que le pod est en cours de suppression.
+[(X)] Un manque de ressources disponibles ou des contraintes d'affinité non satisfaites.
+[( )] Que les images de conteneur sont en cours de téléchargement.
 
 Pour vérifier pourquoi un pod est terminé prématurément, vous devriez :
-- [( )] Vérifier la configuration du réseau.
-- [(X)] Examiner les journaux du pod et les événements associés.
-- [( )] Mettre à jour les images de conteneur du pod.
+
+[( )] Vérifier la configuration du réseau.
+[(X)] Examiner les journaux du pod et les événements associés.
+[( )] Mettre à jour les images de conteneur du pod.
 
 Quand un nœud est marqué comme `NotReady`, cela peut être dû à :
-- [( )] Des pods en échec sur le nœud.
-- [(X)] Des problèmes avec le kubelet ou la connectivité réseau du nœud.
-- [( )] Une mise à jour en attente pour le nœud.
+
+[( )] Des pods en échec sur le nœud.
+[(X)] Des problèmes avec le kubelet ou la connectivité réseau du nœud.
+[( )] Une mise à jour en attente pour le nœud.
 
 
 ## Merci et Bravo !
