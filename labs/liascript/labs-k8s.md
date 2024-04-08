@@ -78,9 +78,9 @@ Un token sera généré à l'issue du processus d'initialisation. Il est importa
 
 Notez la commande de join :
 
-Exemple
-```bash +.
+Exemple :
 
+```bash +.
  kubeadm join 10.10.3.243:6443 --token m03nzv.vtfeaij5yu876u7z \
 	--discovery-token-ca-cert-hash sha256:2da9df40f55f901d221d30cf0574264bcd4c62b7c38200498e99e2797a55753f
 
