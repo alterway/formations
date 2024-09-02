@@ -2558,13 +2558,14 @@ spec:
 
 5. Créons donc ce pod :
    
+   
 ```bash +.
 kubectl apply -f pod-nodeselector.yaml
 ```
 
 *pod/pod-nodeselector created*
 
-6. Voyons voir dans quel noeud notre pod a été mis :
+1. Voyons voir dans quel noeud notre pod a été mis :
 
 ```bash +.
 kubectl get pods -n scheduling pod-nodeselector -o wide
