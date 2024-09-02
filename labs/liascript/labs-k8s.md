@@ -223,7 +223,13 @@ Machine : **master**
 
 <hr>
 
-**Namespace**
+
+![](images/pds.webp)
+
+
+### Création de namespace
+
+**Namespaces**
 
 Aide à résoudre la complexité de l'organisation des objets au sein d'un cluster. Les namespaces permettent de regrouper des objets afin que vous puissiez les filtrer et les contrôler comme une unité. Qu'il s'agisse d'appliquer des politiques de contrôle d'accès personnalisées ou de séparer tous les composants d'un environnement de test, les namespaces sont un concept puissant et flexible pour gérer les objets en tant que groupe.
 
@@ -239,6 +245,13 @@ Autre méthode
 
 1. Créons un manifeste de namespace avec le contenu yaml suivant :
 
+```bash +.
+touch lab-ns.yaml
+vi lab-ns.yaml
+```
+
+Copier-Coller dans le fichier le yaml suivant
+
 ```yaml
 apiVersion: v1
 kind: Namespace
@@ -246,7 +259,7 @@ metadata:
   name: lab
 ```
 
-2. Appliquons le fichier pour créer le namespace :
+1. Appliquons le fichier pour créer le namespace :
 
 ```bash +.
 kubectl apply -f lab-ns.yaml
@@ -271,6 +284,13 @@ Unité d'exécution de base d'une application Kubernetes. Il constitue la plus p
 
 1. Créons un manifeste d'un pod avec le contenu yaml suivant :
 
+```bash +.
+touch lab-pod.yaml
+vi lab-pod.yaml
+```
+
+Copier-Coller dans le fichier le yaml suivant :
+
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -285,7 +305,7 @@ spec:
     name: nginx
 ```
 
-2. Appliquons le fichier pour créer le pod :
+1. Appliquons le fichier pour créer le pod :
 
 ```bash +.
 kubectl apply -f lab-pod.yaml
@@ -297,12 +317,21 @@ kubectl apply -f lab-pod.yaml
 kubectl -n lab get pods
 ```
 
+### Création d'un déploiement
 
 **Deployment**
 
 Un déploiement Kubernetes est un objet Kubernetes qui fournit des mises à jour déclaratives aux applications. Un déploiement permet de décrire le cycle de vie d'une application, comme les images à utiliser, le nombre de pods qu'il devrait y avoir et la manière dont ils doivent être mis à jour. 
 
 1. Créons un déploiement avec le contenu yaml suivant :
+
+```bash +.
+touch lab-deployment.yaml
+vi lab-deployment.yaml
+```
+
+Copier-Coller dans le fichier le yaml suivant :
+
 
 ```yaml
 apiVersion: apps/v1
@@ -329,7 +358,7 @@ spec:
         - containerPort: 80
 ```
 
-2. Appliquons le fichier pour créer le déploiement :
+1. Appliquons le fichier pour créer le déploiement :
 
 ```bash +.
 kubectl apply -f lab-deployment.yaml
@@ -411,11 +440,18 @@ Y a-t-il un volume monté dans ce déploiement ?
 [( )] Pas de réponse
 
 
-**Service**
+### Création d'un service
 
 Dans Kubernetes, un service est une abstraction qui définit un ensemble logique de pods et une politique permettant d'y accéder (parfois ce modèle est appelé un micro-service). L'ensemble des pods ciblés par un service est généralement déterminé par un "Selector".
 
 1. Créons un manifeste d'un pod avec le contenu yaml suivant :
+
+```bash +.
+touch lab-svc.yaml
+vi lab-svc.yaml
+```
+
+Copier-Coller dans le fichier le yaml suivant :
 
 
 ```yaml
@@ -487,6 +523,20 @@ Vers quel port les requêtes entrantes sont-elles acheminées sur les pods ?
 [( )] 8080
 [( )] 443
 [( )] 22
+
+### Clean Up
+
+lancer les commandes suivantes :
+
+```bash +.
+kubectl delete -f lab-pod.yaml
+kubectl delete -f lab-deployment.yaml
+kubectl delete -f lab-svc.yaml
+kubectl delete -f lab-ns.yaml
+kubectl delete ns basics
+
+```
+
 
 ## Stockage
 
