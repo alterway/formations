@@ -545,6 +545,11 @@ kubectl delete ns basics
 Machine : **master**
 <hr>
 
+![](images/storage.webp)
+
+
+### Environnement
+
 ```bash +.
 mkdir storage
 cd storage
@@ -553,10 +558,11 @@ kubectl create namespace storage
 
 ### PersistentVolume et PersistentVolumeClaim
 
-1. Commençons par définir un persistantvolume :
+1. Commençons par définir un **PersistentVolume** :
 
 ```bash +.
 touch postgres-pv.yaml
+vi postgres-pv.yaml
 ```
 
 Avec le contenu yaml suivant :
@@ -615,7 +621,7 @@ Source:
 Events:            <none>
 ```
 
-4. Nous allons maintenant définir un persistantvolumeclaim :
+4. Nous allons maintenant définir un **PersistentVolumeClaim** :
 
 ```bash +.
 touch postgres-pvc.yaml
@@ -645,8 +651,8 @@ kubectl apply -f postgres-pvc.yaml
 
 ```
 
-*persistentvolumeclaim/postgres-pvc created
-*
+*persistentvolumeclaim/postgres-pvc created*
+
 6. Nous pouvons maintenant inspecter ce pvc :
 
 ```bash +.
@@ -664,6 +670,7 @@ Notre pvc est maintenant **bound** a notre pv.
 
 ```bash +.
 touch postgres-with-pvc-pod.yaml
+vi postgres-with-pvc-pod.yaml
 ```
 
 Avec le contenu yaml suivant :
@@ -987,6 +994,9 @@ Quel objet est utilisé pour stocker des données persistantes dans un cluster ?
 
 Machine : **master**
 
+
+![](images/cm.png)
+
 <hr>
 
 ### All in One
@@ -1234,15 +1244,21 @@ Quelle est la taille maximale des données pouvant être stockées dans une Conf
 
 Machine : **master**
 
+
+
+![](images/secrets.webp)
+
 <hr>
+
+
+### Postgres's Password in a secret (As environment variable)
+
 
 ```bash +.
 mkdir secrets
 cd secrets
 kubectl create namespace secrets
 ```
-
-### Postgres's Password in a secret (As environment variable)
 
 1. Commençons par créer un secret contenant notre mot de passe postgres dans une clé **postgres_password** :
 
@@ -1625,17 +1641,18 @@ Quel objet permet de référencer des données stockées dans un Secret ?
 
 Machine : **master**
 
-```bash +.
-mkdir resources
-cd resources
-kubectl create namespace resources
-```
+
+![](images/limits.jpeg)
 
 <hr>
 
 ### Limits/Requests for a pod
 
-<hr>
+```bash +.
+mkdir resources
+cd resources
+kubectl create namespace resources
+```
 
 
 1. Nous allons commencer par créer un pod qui réclame des ressources et qui a une limite de ressources également :
@@ -1986,15 +2003,21 @@ Quel objet peut être utilisé pour ajuster automatiquement les ressources allou
 
 Machine : **master**
 
+![](images/sondes.webp)
+
+
 <hr>
+
+
+
+### Liveness probe, avec un fichier
+
 
 ```bash +.
 mkdir healthchecking
 cd healthchecking
 kubectl create namespace healthchecking
 ```
-
-### Liveness probe, avec un fichier
 
 1. Commençons par créer un ficher yaml décrivant un pod avec une liveness probe.
 
@@ -2317,14 +2340,21 @@ Comment une sonde Startup est-elle utilisée ?
 
 Machine : master
 
+
+![](images/scheduling.webp)
+
+
 <hr>
 
-```bash +.
+`
+### Taints and Tolerations
+
+``bash +.
 mkdir scheduling
 cd scheduling
 kubectl create namespace scheduling
 ```
-### Taints and Tolerations
+
 
 1. Nous allons commencer par mettre un **taint** sur les noeuds worker-0 et worker-1:
 
@@ -2821,21 +2851,23 @@ Que se passe-t-il lorsqu'un pod avec une priorité élevée ne peut pas être sc
 
 ## RBAC
 
-<hr>
 
 Machine : **master**
 
+![](images/rbac-view-1.png)
+
 <hr>
+
+
+
+### Service Accounts
+
 
 ```bash +.
 mkdir rbac
 cd rbac
 kubectl create namespace rbac
 ```
-
-<hr>
-
-### Service Accounts
 
 1. Nous allons créer 1 service accounts :
 
@@ -3486,6 +3518,10 @@ Que se passe-t-il si un pod tente d'accéder à une ressource sans avoir les aut
 
 Nous allons voir les différentes stratégie de mise à jour d'un application
 
+![](images/05_green.jpg)
+
+<hr>
+
 ### Stratégies de déploiement
 
 <hr>
@@ -3956,6 +3992,10 @@ Comment annuler une mise à jour en cours ?
 
 
 ## Network Policies
+
+
+![](images/np.png)
+
 
 ### Utilisation
 
