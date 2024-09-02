@@ -2336,7 +2336,9 @@ Comment une sonde Startup est-elle utilisée ?
 
 ## Scheduling
 
-Machine : master 
+
+<hr>
+Machine : **master** 
 
 
 ![](images/scheduling.webp)
