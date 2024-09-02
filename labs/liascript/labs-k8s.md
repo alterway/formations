@@ -25,6 +25,11 @@ logo: https://assets.alterway.fr/2021/01/strong-mind.png
 
 ## Création d'un cluster Kubernetes
 
+
+![](images/cluster.svg)
+
+
+
 ### Installation avec Kubeadm
 
 <hr>
