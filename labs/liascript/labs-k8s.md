@@ -994,10 +994,11 @@ Quel objet est utilisé pour stocker des données persistantes dans un cluster ?
 
 Machine : **master**
 
+<hr>
+
 
 ![](images/cm.png)
 
-<hr>
 
 ### All in One
 
@@ -1244,11 +1245,12 @@ Quelle est la taille maximale des données pouvant être stockées dans une Conf
 
 Machine : **master**
 
+<hr>
 
 
 ![](images/secrets.webp)
 
-<hr>
+
 
 
 ### Postgres's Password in a secret (As environment variable)
@@ -2003,10 +2005,11 @@ Quel objet peut être utilisé pour ajuster automatiquement les ressources allou
 
 Machine : **master**
 
+<hr>
+
 ![](images/sondes.webp)
 
 
-<hr>
 
 
 
@@ -2340,11 +2343,12 @@ Comment une sonde Startup est-elle utilisée ?
 <hr>
 Machine : **master** 
 
+<hr>
+
 
 ![](images/scheduling.webp)
 
 
-<hr>
 
 ### Taints and Tolerations
 
@@ -2853,11 +2857,15 @@ Que se passe-t-il lorsqu'un pod avec une priorité élevée ne peut pas être sc
 ## RBAC
 
 
+<hr>
+
 Machine : **master**
+
+<hr>
+
 
 ![](images/rbac-view-1.png)
 
-<hr>
 
 
 
@@ -3516,12 +3524,16 @@ Que se passe-t-il si un pod tente d'accéder à une ressource sans avoir les aut
 
 ## Rolling Update
 
+<hr>
+
+Machine : **master**
+<hr>
+
 
 Nous allons voir les différentes stratégie de mise à jour d'un application
 
 ![](images/05_green.jpg)
 
-<hr>
 
 ### Stratégies de déploiement
 
@@ -3698,6 +3710,7 @@ RollingUpdateStrategy:  25% max unavailable, 25% max surge
 
 
 <hr>
+
 ### Blue/Green
 
 1. Commençons par définir un pod "v1" :
@@ -3994,17 +4007,17 @@ Comment annuler une mise à jour en cours ?
 
 ## Network Policies
 
+<hr>
+
+Machine : **master**
+<hr>
+
 
 ![](images/np.png)
 
 
 ### Utilisation
 
-<hr>
-
-Machine : **master**
-
-<hr>
 
 ```bash +.
 mkdir network-policies
