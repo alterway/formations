@@ -2343,6 +2343,7 @@ Machine : master
 
 ![](images/scheduling.webp)
 
+
 ### Taints and Tolerations
 
 
