@@ -2338,6 +2338,8 @@ Comment une sonde Startup est-elle utilisée ?
 
 Machine : master
 
+<hr>
+
 
 ![](images/scheduling.webp)
 
