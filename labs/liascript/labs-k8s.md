@@ -2336,23 +2336,12 @@ Comment une sonde Startup est-elle utilisée ?
 
 ## Scheduling
 
-<hr>
-
 Machine : master
-
-
 ![](images/scheduling.webp)
-
-
-<hr>
 
 ### Taints and Tolerations
 
-```bash +.
-mkdir scheduling
-cd scheduling
-kubectl create namespace scheduling
-```
+
 
 
 1. Nous allons commencer par mettre un **taint** sur les noeuds worker-0 et worker-1:
