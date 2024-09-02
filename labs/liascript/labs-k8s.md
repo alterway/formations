@@ -2337,6 +2337,8 @@ Comment une sonde Startup est-elle utilisée ?
 ## Scheduling
 
 Machine : master
+
+
 ![](images/scheduling.webp)
 
 ### Taints and Tolerations
