@@ -2346,10 +2346,9 @@ Machine : master
 
 <hr>
 
-`
 ### Taints and Tolerations
 
-``bash +.
+```bash +.
 mkdir scheduling
 cd scheduling
 kubectl create namespace scheduling
