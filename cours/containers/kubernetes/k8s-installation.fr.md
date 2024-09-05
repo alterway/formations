@@ -1,51 +1,18 @@
 # KUBERNETES : Installation
 
-### Kubernetes Local : Minikube (1)
-
-- Outil permettant de démarrer rapidement un cluster mono-node Kubernetes localement
-- Execute Kubernetes dans une machine virtuelle
-- Nécessite des outils de virtualisation (VirtualBox, VMware Fusion, KVM, etc...)
-- Supporte plusieurs systèmes d'exploitation : Linux, Mac OS, Windows
-- Installation : <https://github.com/kubernetes/minikube#Installation>
+### Kubernetes Local : Poste Personnel
 
 
-### Kubernetes Local : Minikube (2)
-
-```console
-$minikube start --kubernetes-version="v1.23.16"
-Starting local Kubernetes v1.23.16 cluster...
-Starting VM...
-Getting VM IP address...
-[...]
-Connecting to cluster...
-Setting up kubeconfig...
-Starting cluster components...
-Kubectl is now configured to use the cluster.
-Loading cached images from config file.
-```
-
-### Kubernetes Local : Minikube (3)
-
-- Effectuer un diagnostic basique du cluster
-
-```console
-$ kubectl version
-Client Version: v1.23.16
-Server Version: v1.21.7
-```
+| Solution      | Description                                                                 | Avantages                                                                                      | Inconvénients                                                                                   |
+|---------------|-----------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------|
+| Minikube      | Outil officiel pour installer un cluster Kubernetes local sur une machine. | - Facile à installer et à configurer<br>- Compatible avec la majorité des environnements<br>- Supporte divers hyperviseurs et conteneurs | - Peut être lourd en ressources<br>- Nécessite une VM pour fonctionner                         |
+| Kind          | Kubernetes IN Docker (KinD) utilise Docker pour exécuter des clusters.      | - Léger et rapide<br>- Simple à configurer<br>- Idéal pour les tests CI/CD                      | - Moins de fonctionnalités avancées<br>- Dépend de Docker                                      |
+| MicroK8s      | Distribution légère de Kubernetes par Canonical.                            | - Facile à installer<br>- Léger et optimisé<br>- Idéal pour les environnements de développement | - Moins de flexibilité dans la configuration<br>- Utilise des snaps (peut ne pas plaire à tout le monde) |
+| K3s           | Distribution allégée de Kubernetes par Rancher.                             | - Très léger et rapide<br>- Idéal pour les environnements IoT et edge<br>- Moins de ressources requises | - Moins de fonctionnalités intégrées<br>- Moins documenté que Minikube                         |
+| Docker Desktop| Inclut une option pour exécuter Kubernetes directement.                     | - Facile à utiliser pour les développeurs habitués à Docker<br>- Intégration transparente avec Docker | - Peut être lourd en ressources<br>- Moins flexible que Minikube ou Kind                       |
 
 
-### Kubernetes Local : Minikube (4)
-
-```console
-$ kubectl get componentstatuses
-NAME                      STATUS    MESSAGE              ERROR
-controller-manager         Healthy      ok
-scheduler                  Healthy      ok
-etcd-0                     Healthy      {"health": "true"}
-```
-
-### Installation de Kubernetes
+### Installation de Kubernetes 
 
 
 - De nombreuses ressources présentes pour le déploiement de Kubernetes dans un environnement de production
