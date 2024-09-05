@@ -17,41 +17,9 @@
 - Ressources représentées par les `Deployments`, `Pods`, `Services`, etc...
 - les différentes opérations possibles : `create, list, get, delete, watch, patch`
 
-```mermaid
-graph TD
-    A[API Server] --> B{RBAC}
-    B --> C[Subjects]
-    B --> D[Resources]
-    B --> E[Operations]
-    
-    C --> F[Users]
-    C --> G[Groups]
-    C --> H[Service Accounts]
-    
-    D --> I[Pods]
-    D --> J[Services]
-    D --> K[Nodes]
-    D --> L[...]
-    
-    E --> M[Get]
-    E --> N[List]
-    E --> O[Create]
-    E --> P[Update]
-    E --> Q[Delete]
-    E --> R[...]
-    
-    S[Roles] --> D
-    S --> E
-    
-    T[RoleBindings] --> C
-    T --> S
-    
-    U[ClusterRoles] --> D
-    U --> E
-    
-    V[ClusterRoleBindings] --> C
-    V --> U
-```
+
+![](images/kubernetes/rbac.svg){height="100px"}
+
 
 ### Service Accounts
 
