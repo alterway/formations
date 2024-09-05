@@ -155,19 +155,35 @@
 - Les SIG (Special Interest Groups) sont une partie essentielle de la structure organisationnelle de la communauté Kubernetes. Ils jouent un rôle crucial dans le développement et la maintenance de différents aspects de Kubernetes. 
 
 
-| SIG | Description | SIG | Description |
-|-----|-------------|-----|-------------|
-| API Machinery | Frameworks extensibles pour les API | Apps | Déploiements et charges de travail |
-| Architecture | Architecture globale et conception du projet | Auth | Authentification et autorisation |
-| Autoscaling | Mise à l'échelle automatique des clusters et workloads | CLI | kubectl et outils en ligne de commande |
-| Cloud Provider | Intégration avec les fournisseurs de cloud | Cluster Lifecycle | Outils pour la gestion du cycle de vie des clusters |
-| Contributor Experience | Amélioration de l'expérience des contributeurs | Docs | Documentation et site web de Kubernetes |
-| Instrumentation | Métriques, logging, et monitoring | Multicluster | Gestion de multiples clusters |
-| Network | Réseautage dans Kubernetes | Node | Composants au niveau du nœud |
-| Release | Coordination des releases | Scalability | Performance et scalabilité |
-| Scheduling | Planification des pods | Security | Sécurité du projet |
-| Storage | Stockage et volumes | Testing | Tests et infrastructure de test |
-| UI | Interface utilisateur et tableaux de bord | Windows | Support de Windows dans Kubernetes |
+| SIG | Description |
+|---|---|
+| API Machinery | Frameworks extensibles pour les API |
+| Architecture | Architecture globale et conception du projet |
+| Autoscaling | Mise à l'échelle automatique des clusters et workloads |
+| Auth | Authentification et autorisation |
+| CLI | kubectl et outils en ligne de commande |
+| Cloud Provider | Intégration avec les fournisseurs de cloud |
+| Cluster Lifecycle | Outils pour la gestion du cycle de vie des clusters |
+| Contributor Experience | Amélioration de l'expérience des contributeurs |
+| Docs | Documentation et site web de Kubernetes |
+| Instrumentation | Métriques, logging, et monitoring |
+
+### Kubernetes : Sig (suite)
+
+
+| SIG | Description |
+|---|---|
+| Multicluster | Gestion de multiples clusters |
+| Network | Réseautage dans Kubernetes |
+| Node | Composants au niveau du nœud |
+| Release | Coordination des releases |
+| Scalability | Performance et scalabilité |
+| Scheduling | Planification des pods |
+| Security | Sécurité du projet |
+| Storage | Stockage et volumes |
+| Testing | Tests et infrastructure de test |
+| UI | Interface utilisateur et tableaux de bord |
+| Windows | Support de Windows dans Kubernetes |
 
 
 
