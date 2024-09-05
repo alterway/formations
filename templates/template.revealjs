@@ -248,7 +248,6 @@ $endif$
           { src: '$revealjs-url$/js/presentable.min.js', async: true, callback: function() { presentable.toc({framework: "revealjs"}); } }
         ]
 
-      plugins: [RevealMermaid],  
       });
     </script>
   $for(include-after)$
