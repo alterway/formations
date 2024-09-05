@@ -38,9 +38,22 @@ body {
   text-shadow: none; 
 }
 
-.reveal .slides > section,
+
+.reveal .slides {
+  height: 100%;
+  width: 100%;
+  top: 0;
+  margin-top: 0;
+}
+
+.reveal .slides > section {
+  min-height: 90%;
+  line-height: 1;
+  font-weight: inherit; 
+}
 .reveal .slides > section > section {
-  line-height: 1.2;
+  min-height: 100%;
+  line-height: 1;
   font-weight: inherit; 
 }
 
@@ -362,21 +375,21 @@ div.wrapper {
   position: relative;
   clear: both;
   width: 100%;
-  #border : 1px solid #000000;
+  #border: 1px solid #000000;
   overflow:auto;
 }
 div.left {
   float: left;
   width: 49%;
   background: #ffffff;
-  #border : 1px solid #000006;
+  #border: 1px solid #000006;
 
   }	
 div.right {
   float: right;
   width: 49%;
   background: #ffffff;
-  #border : 1px solid #000001;
+  #border: 1px solid #000001;
   }
   .wrapper p{
   margin:0px;
