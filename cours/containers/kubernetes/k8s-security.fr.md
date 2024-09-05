@@ -18,7 +18,7 @@
 - les différentes opérations possibles : `create, list, get, delete, watch, patch`
 
 
-![](images/kubernetes/rbac.svg){height="100px"}
+![](images/kubernetes/rbac.svg){height="250px"}
 
 
 ### Service Accounts
