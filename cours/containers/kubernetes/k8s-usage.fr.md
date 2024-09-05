@@ -89,6 +89,13 @@ jobs                                           batch                            
 ingresses                         ing          extensions                           true         Ingress
 ```
 
+- Pourquoi utiliser kubectl api-resources ?
+    - Découverte: Pour connaître les ressources disponibles dans votre cluster.
+    - Documentation: Pour obtenir des informations sur les différentes ressources et leurs propriétés.
+    - Développement: Pour créer des scripts et des outils d'automatisation.
+    - Dépannage: Pour identifier les problèmes liés à des ressources spécifiques.
+
+
 
 ### Kubernetes : `kubectl explain`
 
@@ -309,10 +316,14 @@ curl -sk https://<IP PRIV>/api/v1/namespaces/kube-public/configmaps/cluster-info
 
 ### Kubernetes : namespace `kube-node-lease` 
 
+Qu'est-ce qu'un Lease dans Kubernetes ?
+Un Lease est un objet qui expire après un certain temps s'il n'est pas renouvelé. Dans le contexte de kube-node-lease, chaque nœud du cluster a un Lease associé. La kubelet (l'agent Kubernetes s'exécutant sur chaque nœud) envoie régulièrement des mises à jour à ce Lease pour indiquer qu'il est toujours en fonctionnement.
+
 - Ce namespace particulier existe depuis la 1.14
 - Il contient un objet `lease`par noeud
 - Ces `leases` permettent d'implémenter une nouvelle méthode pour vérifier l'état de santé des noeuds
 - Voir (KEP-0009)[https://github.com/kubernetes/enhancements/blob/master/keps/sig-node/0009-node-heartbeat.md] pour plus d'information
+
 
 ### Kubernetes : `kubectl describe`
 
@@ -325,6 +336,12 @@ curl -sk https://<IP PRIV>/api/v1/namespaces/kube-public/configmaps/cluster-info
  kubectl describe node/worker-0
  kubectl describe node worker-0
 ```
+
+- Pourquoi utiliser kubectl describe ?
+
+    - Dépannage: Pour comprendre pourquoi un objet ne fonctionne pas comme prévu.
+    - Audit: Pour vérifier la configuration d'un objet et s'assurer qu'elle correspond à vos attentes.
+    - Apprentissage: Pour mieux comprendre la structure et le fonctionnement des différents objets Kubernetes.
 
 
 ### Kubernetes : Création d'objets Kubernetes
@@ -341,12 +358,18 @@ curl -sk https://<IP PRIV>/api/v1/namespaces/kube-public/configmaps/cluster-info
 - Depuis elle démarre un simple `pod`
 
 ```console
+# Création d'un pod en tâche de fond
 kubectl run pingu --image=alpine -- ping 127.1
+```
+
+```console
+# Création d'un pod en intératif
+kubectl run -i --tty my-pod --image=debian -- /bin/bash
 ```
 
 ⚠ : Notez le `--`entre le nom de l'image et la commande à lancer
 
-### Kubernetes : Créer un déploiement en ligne de commande
+### Kubernetes : Créer un déploiement (par exemple) en ligne de commande 
 
 - `kubectl create deployment` ...
 - Depuis kubernetes 1.19, il est possible de préciser une commande au moment du `create`
@@ -357,9 +380,11 @@ kubectl create deployment pingu --image=alpine -- ping 127.1
 
 ⚠ : Notez le `--`entre le nom de l'image et la commande à lancer
 
+
+
 ### Kubernetes : Création d'objets Kubernetes
 
-- Pour créer un object Kubernetes depuis votre fichier YAML, utilisez la commande `kubectl create` :
+- Pour créer un object Kubernetes depuis votre fichier `YAML`, utilisez la commande `kubectl create` :
 
 ```console
 kubectl create -f object.yaml
@@ -415,81 +440,88 @@ kubectl apply -f object.yaml
   
 ### Kubernetes : Kubernetes Dashboard
 
-- Pour déployer le Dashboard, exécuter la commande suivante:
+Étape 1: Déployer le Dashboard
 
 ```console
-$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.2.0/aio/deploy/recommended.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
 
 ```
 
-- Pour accéder au Dashboard, il faut établir une communication entre votre poste et le cluster Kubernetes :
+Étape 2: Créer un compte de service et un rôle d'administration
 
-```console
+1. Créer un fichier YAML pour le compte de service:
 
-# en local  (minikube)
-$ kubectl proxy
-
-# sur master (cloud / vm)
-
-kubectl port-forward -n kubernetes-dashboard svc/kubernetes-dashboard 1234:443 --address 0.0.0.0
-
+```yaml
+# dashboard-adminuser.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: admin-user
+  namespace: kubernetes-dashboard
 ```
 
-- L'accès se fait désormais sur :
+2. Appliquer le fichier YAML pour créer le compte de service:
 
 ```console
-
-# en local  (minikube)
-
-<http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/>
-
-# vm ou cloud 
-
-Utilisez l'adresse ip publique du master : et ouvir <https://IP-PUBIQUE-DU-MASTER:1234>
-
-```
-
+kubectl apply -f dashboard-adminuser.yaml
+````
 
 ### Kubernetes : Kubernetes Dashboard
 
+3. Créer un fichier YAML pour le rôle d'administration:
 
-
-```console
-kubectl get secrets -n kubernetes-dashboard
-kubectl describe -n kubernetes-dashboard secret kubernetes-dashboard-token-xxxx
-kubectl describe -n kubernetes-dashboard secret kubernetes-dashboard-token-f68tf | grep "token:" | awk '{print $2}'
-
+```yaml
+# admin-role-binding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: admin-user
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: admin-user
+  namespace: kubernetes-dashboard
 ```
 
-![](images/kubernetes/dashboard-1.png){height="300px"}
+
+4. Appliquer le fichier YAML pour créer le rôle d'administration:
+
+```console
+
+kubectl apply -f admin-role-binding.yaml
+
+```
 
 ### Kubernetes : Kubernetes Dashboard
 
-
-- Authentification par token  :
+Étape 3: Récupérer le token d'accès
 
 ```console
-
-# Création d'un compte de service admin
-
-$ kubectl create serviceaccount -n kube-system cluster-admin-dashboard-sa
-
-# On donne les droits clusterAdmin a ce compte
-$ kubectl create clusterrolebinding -n kube-system cluster-admin-dashboard-sa \
-  --clusterrole=cluster-admin \
-  --serviceaccount=kube-system:cluster-admin-dashboard-sa
-
-# On récupère le token d'authentification pour ce compte
-$ TOKEN=$(kubectl describe secret -n kube-system $(kubectl get secret -n kube-system | awk '/^cluster-admin-dashboard-sa-token-/{print $1}') | awk '$1=="token:"{print $2}')
-
-$ echo ${TOKEN}
-
-# Méthode alternative 
-
-$ kubectl get secret $(kubectl get serviceaccount cluster-admin-dashboard-sa -o jsonpath="{.secrets[0].name}" -n kube-system) -o jsonpath="{.data.token}" -n kube-system | base64 --decode
-
+kubectl -n kubernetes-dashboard create token admin-user
 ```
 
-Il est possible de créer des comptes de service (sa) avec droits différents ex :  `view`
+
+Étape 4: Accéder au Dashboard
+
+Démarrer un proxy pour accéder au Dashboard:
+
+```console
+kubectl proxy
+```
+
+Cela démarre un proxy à l'adresse http://localhost:8001.
+
+Ouvrir le Dashboard dans votre navigateur:
+
+Accédez à l'URL suivante dans votre navigateur:
+
+http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
+
+Se connecter avec le token:
+
+Lorsque vous êtes invité à vous connecter, choisissez l'option "Token" et entrez le token que vous avez récupéré à l'Étape 3.
 
 

@@ -10,14 +10,18 @@
 - Le but de la séparation est de sortir du code du *core* de Kubernetes
 - GA depuis Kubernetes 1.13
 
+
 ### Kubernetes : CSI
 
 - La plupart des volumes supportés dans Kubernetes supportent maintenant CSI:
-  - [Amazon EBS](https://github.com/kubernetes-sigs/aws-ebs-csi-driver)
-  - [Google PD](https://github.com/kubernetes-sigs/gcp-compute-persistent-disk-csi-driver)
-  - [Cinder](https://github.com/kubernetes/cloud-provider-openstack/tree/master/pkg/csi/cinder)
-  - [GlusterFS](https://github.com/gluster/gluster-csi-driver)
-  - La liste exhaustive est disponible [ici](https://kubernetes-csi.github.io/docs/drivers.html)
+    - [Amazon EBS](https://github.com/kubernetes-sigs/aws-ebs-csi-driver)
+    - [Google PD](https://github.com/kubernetes-sigs/gcp-compute-persistent-disk-csi-driver)
+    - [Cinder](https://github.com/kubernetes/cloud-provider-openstack/tree/master/pkg/csi/cinder)
+    - [GlusterFS](https://github.com/gluster/gluster-csi-driver)
+    - La liste exhaustive est disponible [ici](https://kubernetes-csi.github.io/docs/drivers.html)
+    - Drivers CSI: Chaque système de stockage nécessite un driver CSI spécifique pour s'intégrer à Kubernetes.
+    - Points de montage: Les drivers CSI créent des points de montage que Kubernetes peut ensuite attacher aux pods.
+   - Cycle de vie des volumes: Le CSI gère le cycle de vie complet des volumes (provisionnement, attachement, détachement, suppression).
 
 
 ### Kubernetes : Volumes
@@ -224,7 +228,8 @@ spec:
 
 ### Kubernetes : PersistentVolumeClaims
 
-- Le PVC est un binding entre un pod et un PV. Le pod demande le volume via le PVC.
+- Le PVC est un binding entre un `pod` et un `PV`. Le pod demande le volume via le PVC.
+- Le liage est géré automatiquement par Kubernetes.
 - Ressource utilisée et vue comme une requête utilisateur pour solliciter du stockage persistant en définissant :
     - une quantité de stockage
     - un type d'accès

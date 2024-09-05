@@ -2,16 +2,39 @@
 
 ### La méthode déclarative
 
+L'approche déclarative consiste à décrire l'état désiré des ressources. Vous déclarez ce que vous voulez obtenir, et Kubernetes s'occupe de mettre en place et de maintenir cet état.
+
 - Consiste à définir un objet dans un fichier yaml puis à créer l'objet avec la commande kubectl apply ou kubectl create
 - Recommandé pour garder un historique de tous les objets créés, puis de faire du versionning
 - Il facilite également le travail entre équipe.
 
+- Avantages :
+    - Simplicité: Plus facile à comprendre et à maintenir que les commandes impératives.
+    - Reproductibilité: Les fichiers de configuration peuvent être versionnés et utilisés pour recréer un environnement à tout moment.
+    - Idéal pour l'automatisation: Parfaitement adapté aux outils d'intégration continue et de déploiement continu (CI/CD).
+    - Détection des dérives: Kubernetes compare l'état actuel du cluster à l'état désiré défini dans les fichiers de configuration et effectue les modifications nécessaires pour rétablir la conformité.
+- Inconvénients:
+    - Moins de flexibilité pour certaines opérations: Certaines opérations peuvent nécessiter des commandes impératives pour être effectuées.
+
+
 
 ### La méthode impérative
+
+L'approche impérative consiste à donner des instructions directes à Kubernetes pour effectuer des actions spécifiques. On décrit comment réaliser une tâche, pas seulement le résultat final.
 
 - Permet la création rapide des ressources à l'aide d'une commande
 - Gain un temps considérable lors de l'examen
 - Recommandé dans des environnements de lab ou pour tester une commande 
+
+- Avantages :
+    - Flexibilité: Grande liberté dans la façon de gérer les ressources.
+    - Contrôle précis: Possibilité d'effectuer des actions très spécifiques.
+- Inconvénients :
+    - Erreur humaine: Le risque d'erreur est plus élevé car chaque action doit être spécifiée manuellement.
+    - Difficulté de suivi: Il peut être difficile de retracer les modifications apportées à un état donné du cluster.
+    - Moins adapté aux environnements complexes: La gestion manuelle de nombreuses ressources peut devenir rapidement fastidieuse et source d'erreurs.
+
+
 
 
 ### La méthode impérative
@@ -75,3 +98,16 @@ kubectl create service nodeport nginx --tcp=80:80 --node-port=30080 --dry-run=cl
 Ceci n'utilisera pas les labels des pods comme sélecteurs. 
 
 
+### Quand utiliser quelle méthode ?
+
+- Méthode impérative:
+    - Pour des tâches ponctuelles ou des dépannages.
+    - Lorsque vous avez besoin d'un contrôle très précis sur les ressources.
+- Méthode déclarative:
+    - Pour la gestion quotidienne des ressources.
+    - Pour automatiser les déploiements et les mises à jour.
+    -  Pour construire des pipelines CI/CD.
+  
+
+
+  

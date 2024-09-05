@@ -22,39 +22,66 @@
 ### Installation de Kubernetes avec kubeadm
 
 - Certains pré-requis sont nécessaires avant d'installer Kubernetes :
-    - Désactiver le swap (Support **alpha** depuis la 1.22)
+    - Désactiver le `swap` (Support **alpha** depuis la 1.22)
     - Assurer que les ports requis soient ouverts : <https://kubernetes.io/docs/setup/independent/install-kubeadm/#check-required-ports>
-    - Installer une Container Runtime compatible CRI (containerd, CRI-O, Docker)
+    - Installer une Container Runtime compatible CRI (containerd, CRI-O, Docker, ...)
 
 ### kubeadm (1)
 
 - Installer les composants Kubernetes (kubeadm, kubectl, kubelet) : <https://kubernetes.io/docs/setup/independent/install-kubeadm/>
 - Exécuter : 
-     - `kubeadm init` sur le noeud master
-     - `kubeadm join` sur les autres noeuds (avec le token fournit par la commande `kubeadm init`)
+     - `kubeadm init` sur le noeud `master`(control plane)
+     - `kubeadm join` sur les autres noeuds (worker) (avec le token fournit par la commande `kubeadm init`)
 - Copier le fichier de configuration généré par `kubeadm init`
 - Installer le plugin Réseau
-- Optionnellement:  Tester le dploiement d'un pod
+- Optionnellement:  Tester le déploiement d'un pod
 
 ### kubeadm (2)
 
-En plus de l'installation de Kubernetes, kubeadm peut :
+- En plus de l'installation de Kubernetes, kubeadm peut :
 
-- Renouveler les certificats du Control Plane
-- Générer des certificats utilisateurs signés par Kubernetes
-- Effectuer des upgrades de Kubernetes (`kubeadm upgrade`)
+    - Génération des fichiers de configuration: Crée les fichiers de configuration nécessaires pour les composants du cluster.
+    - Gestion des certificats: Génère et distribue les certificats nécessaires pour sécuriser les communications entre les composants du cluster.
+    - Gestion des tokens: Crée des tokens d'authentification pour les nœuds qui rejoignent le cluster.
+    - Vérification de la configuration: Valide que le système et les configurations sont compatibles avec Kubernetes.
+    - Mises à jour et modifications: Facilite les mises à jour des versions de Kubernetes et les modifications de la configuration du cluster.
 
-### Kubernetes managés "as a Service"
+"
+### Kubernetes managés "as a Service Majeurs
 
-- Il existe des solutions managées pour Kubernetes sur les cloud publics :
-    - AWS Elastic Kubernetes Services (EKS): <https://aws.amazon.com/eks/>
-    - Azure Kubernetes Service (AKS): <https://azure.microsoft.com/en-us/services/kubernetes-service/>
-    - Docker Universal Control Plane : <https://docs.docker.com/ee/ucp/>
-    - Google Kubernetes Engine : <https://cloud.google.com/kubernetes-engine/>
-    - Scaleway Kapsule : <https://www.scaleway.com/fr/kubernetes-kapsule/>
-    - Alibaba Container Service for Kubernetes (ACK) <https://www.alibabacloud.com/fr/product/kubernetes>
+- Plateformes Cloud Majeures :
+    - Amazon Elastic Kubernetes Service (EKS):
+        - Documentation : https://aws.amazon.com/fr/eks/
+        - Offre une solution entièrement gérée pour déployer, gérer et mettre à l'échelle des clusters Kubernetes sur AWS.
+    - Google Kubernetes Engine (GKE):
+        - Documentation : https://cloud.google.com/kubernetes-engine
+        - Propose une plateforme hautement disponible et entièrement gérée pour exécuter des applications conteneurisées sur Google Cloud Platform.
+    - Azure Kubernetes Service (AKS):
+        - Documentation : https://azure.microsoft.com/fr-fr/services/kubernetes-service/
+        - Permet de déployer et gérer des clusters Kubernetes sur Azure avec une intégration profonde avec les autres services Azure.
 
-### Installation de Kubernetes
+
+### Kubernetes managés "as a Service Populaires
+
+-  Autres Plateformes Populaires :
+    - DigitalOcean Kubernetes:
+        - Documentation : https://www.digitalocean.com/products/kubernetes/
+        - Offre une solution simple et abordable pour déployer des clusters Kubernetes sur DigitalOcean.
+    - Rancher Kubernetes Engine (RKE):
+        - Documentation : https://rancher.com/docs/rke/latest/en/
+        - Solution open-source pour gérer des clusters Kubernetes multi-cloud et sur site.
+    - Platform9 Managed Kubernetes:
+        - Documentation : https://platform9.com/docs/
+        - Plateforme de gestion de Kubernetes hybride et multi-cloud.
+    - Red Hat OpenShift:
+        - Documentation : https://www.openshift.com/
+        - Plateforme containerisée complète basée sur Kubernetes, offrant une large gamme de fonctionnalités pour les entreprises.
+    - Scaleway Kapsule : 
+        - Documentation : https://www.scaleway.com/fr/kubernetes-kapsule/
+    - Alibaba Container Service for Kubernetes (ACK) 
+        -  Documentation : https://www.alibabacloud.com/fr/product/kubernetes
+
+### Installateurs de Kubernetes
 
 - Via Ansible : `kubespray` <https://github.com/kubernetes-sigs/kubespray>
 - Via Terraform : <https://github.com/poseidon/typhoon>
@@ -63,6 +90,7 @@ En plus de l'installation de Kubernetes, kubeadm peut :
     - kops : <https://github.com/kubernetes/kops>
     - rancher : <https://rancher.com/docs/rancher/v2.5/en/>
     - tanzu : <https://github.com/vmware-tanzu>
+    - clusterAPI : <https://cluster-api.sigs.k8s.io/>
 
 ### Conformité kubernetes
 
@@ -76,4 +104,6 @@ Voici quelques outils permettant de certifier les déploiements des cluster kube
     - <https://github.com/zegl/kube-score>
 - kube-bench
     - <https://github.com/aquasecurity/kube-bench>
+- Kube-hunter:
+    - <https://github.com/aquasecurity/kube-hunter>
 

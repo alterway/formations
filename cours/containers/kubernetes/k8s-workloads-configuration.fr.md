@@ -6,6 +6,7 @@
 - Il peut être créé d'un ensemble de valeurs ou d'un fichier ressource Kubernetes (YAML ou JSON)
 - Un `ConfigMap` peut être sollicité (utilisé) par plusieurs `pods`
 - Limité à **1MiB** de data
+- Non sécurisé: Les données sont stockées en clair dans le cluster.
 
 ### Kubernetes : ConfigMaps
 

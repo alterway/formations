@@ -95,12 +95,17 @@ $body$
   <script src="$revealjs-url$/lib/js/head.min.js"></script>
   <script src="$revealjs-url$/js/reveal.js"></script>
   <script src="$revealjs-url$/js/presentable.min.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js-mermaid-plugin@2.3.0/plugin/mermaid/mermaid.js"></script>
   <script>
 
       // Full list of configuration options available at:
       // https://github.com/hakimel/reveal.js#configuration
       Reveal.initialize({
+        mermaid: {
+          // flowchart: {
+          //   curve: 'linear',
+          // },
+        },
 $if(controls)$
         // Display controls in the bottom right corner
         controls: $controls$,
@@ -242,6 +247,8 @@ $endif$
           // { src: '$revealjs-url$/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad();}},
           { src: '$revealjs-url$/js/presentable.min.js', async: true, callback: function() { presentable.toc({framework: "revealjs"}); } }
         ]
+
+      plugins: [RevealMermaid],  
       });
     </script>
   $for(include-after)$

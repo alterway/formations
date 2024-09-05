@@ -21,17 +21,23 @@
 - Les objets existent uniquement au sein d'un namespace donné
 - Évitent la collision de nom d'objets
 - Font partie du fqdn du service (DNS) (mon-service.mon-namespace.svc.cluster.local)
+- Quotas et limites: Vous pouvez définir des quotas et des limites sur les ressources (CPU, mémoire, nombre de pods, etc.) au niveau du namespace pour contrôler l'utilisation des ressources.
+- Défaut: Le namespace `default` existe par défaut dans chaque cluster Kubernetes.
+
 
 ### Kubernetes : Labels
 
 - Système de clé/valeur
-- Organisent les différents objets de Kubernetes (Pods, RC, Services, etc.) d'une manière cohérente qui reflète la structure de l'application
+- Organisent, filtrent, selectionnent les différents objets de Kubernetes (Pods, RC, Services, etc.) d'une manière cohérente qui reflète la structure de l'application
 - Corrèlent des éléments de Kubernetes : par exemple un service vers des Pods
 - Ils contiennent des informations d'identification utilisées par les requêtes qui utilisent un sélecteur ou dans les sections de sélecteurs dans les définitions d'objets
 - Le nom dans la clé est limité à 63 caractères et le suffixe à 253 caractères
 - La valeur ne peut dépasser 63 caractères
 - La valeur doit commencer un aplhanum ou être vide
 - La valeur peut contenir des `~` `.` et `alphanum`
+- Arbitraires: Vous pouvez définir n'importe quelle paire clé-valeur.
+- Immuables: Une fois créés, les labels ne peuvent pas être modifiés directement. Pour les changer, il faut créer un nouveau déploiement ou un nouveau pod.
+- Multiples: Un objet peut avoir plusieurs labels.
 
 
 ### Kubernetes : Labels
@@ -78,8 +84,12 @@ kubectl get po -A -l k8s-app=kube-dns -l pod-template-hash=6d4b75cb6d
 - Système de clé/valeur
 - Ce sont des informations qui ne sont pas utilisées pour l'identification de ressources.
 - Les annotations ne sont pas utilisées en interne par kubernetes
+- Stockage de données personnalisées: Pour stocker des informations spécifiques à votre application ou à votre infrastructure.
 - Elles peuvent être utilisées par des outils externes ou librairies (ex: cert-manager, ingress-controller...)
 - Le nom dans la clé est limitée à 63 caractères et le suffixe à 253 caractères
+- Arbitraires: Vous pouvez définir n'importe quelle paire clé-valeur.
+- Mutables: Les annotations peuvent être modifiées après la création de l'objet.
+- Multiples: Un objet peut avoir plusieurs annotations.
 
 ### Kubernetes : Annotations
 
@@ -115,7 +125,13 @@ spec:
     - La stack IP (network namespace)
     - Inter-process communication (PID namespace)
     - Volumes
+    - IP: Le pod lui-même dispose d'une adresse IP unique, que tous les conteneurs du pod peuvent utiliser.
+    - Cycle de vie: Les conteneurs d'un pod sont créés et détruits en même temps
+    - Node: Tous les conteneurs d'un pod sont généralement co-localisés sur le même nœud du cluster Kubernetes.
 - C'est la plus petite et la plus simple unité dans Kubernetes
+
+En savoir plus : <https://kubernetes.io/fr/docs/concepts/workloads/pods/pod/>
+
 
 
 ### Kubernetes : Pod
@@ -217,6 +233,36 @@ $ kubectl get pods <POD_NAME> -o jsonpath='{.status}' | jq
 ![deployment](images/deployment.png)
 
 
+
+### Kubernetes : Deployment
+
+```plaintext
++--------------------+
+| Deployment         |
+|                    |
+| Name: my-deployment|
+| Selector: app=web  |
++--------------------+
+          |
+          | matches
+          v
++--------------------+
+| ReplicaSet         |
+|                    |
+| Selector: app=nginx|
++--------------------+
+          |
+          | matches
+          v
++--------------------+
+| Pod                |
+|                    |
+| Labels: app=nginx  |
++--------------------+
+```
+
+
+
 ### Kubernetes : Deployment
 
 ```yaml
@@ -228,7 +274,7 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-      app:nginx
+      app: nginx
   template:
     metadata:
       labels:
@@ -240,6 +286,13 @@ spec:
         ports:
         - containerPort: 80
 ```
+
+ou en ligne de commande
+
+```console
+kubectl create deployment my-deployment --image=nginx:latest --replicas=3
+```
+
 
 ### Kubernetes : DaemonSet
 
@@ -444,6 +497,13 @@ spec:
       restartPolicy: OnFailure
 ```
 
+En ligne de commande :
+
+
+```console
+kubectl create job exemple-job --image=busybox -- /bin/sh -c "date; echo Hello from the Kubernetes cluster"
+```
+
 ### Kubernetes: CronJob
 
 - Un CronJob permet de lancer des Jobs de manière planifiée.
@@ -478,5 +538,11 @@ spec:
                 - '-wle'
                 - print bpi(2000)
 
+```
+
+En ligne de commande :
+
+```console
+kubectl create cronjob exemple-cronjob --image=busybox --schedule="*/5 * * * *" -- /bin/sh -c "date; echo Hello from the Kubernetes cluster"
 ```
 

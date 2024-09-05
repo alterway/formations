@@ -34,38 +34,40 @@
 ### Sondes : Exemples
 
 ```yaml
-apiVersion: v1
+aapiVersion: v1
 kind: Pod
 metadata:
-  name: goproxy
-  labels:
-    app: goproxy
+  name: my-app
 spec:
   containers:
-  - name: nginx
-    image: nginx
+  - name: my-app-container
+    image: my-image
     ports:
-    - containerPort: 80
+    - containerPort: 8080
     readinessProbe:
-      tcpSocket:
-        port: 80
-      initialDelaySeconds: 5
-      periodSeconds: 10
+      httpGet:
+        path: /healthz
+        port: 8080
+        httpHeaders:
+        - name: Authorization
+          value: Bearer my-token
+      initialDelaySeconds: 15
+      periodSeconds: 5
+      timeoutSeconds: 1
+      failureThreshold: 3
     livenessProbe:
       tcpSocket:
-        port: 80
-      initialDelaySeconds: 15
-      periodSeconds: 20
+        port: 8080
+      initialDelaySeconds: 30
+      periodSeconds: 10
+      timeoutSeconds: 2
+      failureThreshold: 5
     startupProbe:
-      initialDelaySeconds: 1
-      periodSeconds: 2
-      timeoutSeconds: 1
-      successThreshold: 1
-      failureThreshold: 1
       exec:
         command:
-        - cat
-        - /etc/nginx/nginx.conf
+        - cat /etc/nginx/nginx.conf
+      initialDelaySeconds: 10
+      timeoutSeconds: 5
 ```
 
 

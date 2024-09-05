@@ -44,7 +44,7 @@
 
 ### Kubernetes : `kube-apiserver`
 
-Sans le `kube-apiserver` le cluster ne sert à rien. De plus, il est **LE SEUL** à interagir avec le cluster `etcd`, que ce soit en écriture ou en lecture.
+Sans le `kube-apiserver` le cluster ne sert à rien. De plus, il est `LE SEUL` à interagir avec le cluster `etcd`, que ce soit en écriture ou en lecture.
 
 - Les configurations d'objets (Pods, Service, RC, etc.) se font via l'API server
 - Un point d'accès à l'état du cluster aux autres composants via une API REST
@@ -134,18 +134,19 @@ Kubernetes n'implémente pas de solution réseau par défaut, mais s'appuie sur 
 
 ### Kubernetes : Aujourd'hui
 
-- Version 1.24.x : stable en production
+- Version 1.30.x : stable en production
 - Solution complète et une des plus utilisées
 - Éprouvée par Google
 - <https://kubernetes.io/releases/>
 
-```console
-1.24
 
-Latest Release:1.24.2 (released: 2022-06-15)
-End of Life:2023-09-29
-Patch Releases: 1.24.1, 1.24.2
-Complete 1.24 **Schedule** and **Changelog**
+**1.31**
+    Latest Release:1.31.0 (released: 2024-08-13)
+    End of Life:2025-10-28
+    Patch Releases: n/a
+    Complete 1.31 [Schedule](https://kubernetes.io/releases/patch-releases/#1-31) and [Changelog](https://git.k8s.io/kubernetes/CHANGELOG/CHANGELOG-1.31.md)
+
+
 
 
 ```

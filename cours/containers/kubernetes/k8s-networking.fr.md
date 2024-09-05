@@ -15,7 +15,13 @@
 - Projet dans la CNCF
 - Standard pour la gestion du réseau en environnement conteneurisé
 - Les solutions précédentes s'appuient sur CNI
+- Flexibilité: Il offre une grande flexibilité pour choisir le type de réseau à utiliser (bridge, VLAN, VXLAN, etc.) et les fonctionnalités associées (routage, NAT, etc.).
+- Plugin: Un CNI est implémenté sous forme de plugin, ce qui permet de choisir le plugin adapté aux environnements et besoins.
 
+- Rôle d'un CNI dans Kubernetes
+    - Création d'interfaces réseau: Lorsqu'un pod est créé, le CNI est appelé pour créer une ou plusieurs interfaces réseau pour les conteneurs du pod.
+    - Configuration IP: Le CNI attribue une adresse IP à chaque interface réseau et configure les routes nécessaires.
+    - Gestion des réseaux: Le CNI gère la configuration réseau au cours du cycle de vie du pod (création, modification, suppression).
 
 ### Kubernetes : POD Networking
 
@@ -23,11 +29,14 @@
 
 ### Kubernetes : Services
 
-- Abstraction des pods sous forme d'une `IP virtuelle` de service et d'un `nom DNS`
+- Une abstraction de niveau supérieur qui expose un ensemble de pods sous un nom et une adresse IP stables.
+- Permet d'accéder à un groupe de pods de manière uniforme, même si les pods individuels sont créés, mis à jour ou supprimés.
 - Rendre un ensemble de pods accessibles depuis l'extérieur
 - Load Balancing entre les pods d'un même service
 
 ### Kubernetes : Services
+
+Service de type Spécial `LoadBalancer` : 
 
 - Load Balancing : intégration avec des cloud provider :
     - AWS ELB
@@ -201,6 +210,20 @@ kubectl expose deploy web --type LoadBalancer --protocol TCP --port 9000 --targe
     - La redirection se produit au niveau DNS, il n'y a aucune proxyfication ou forward
 
 
+Exemples d'utilisation concrets :
+
+- Intégration avec des services tiers:
+    - Base de données externe: Vous avez une base de données hébergée sur un service cloud comme AWS RDS. Au lieu d'utiliser l'adresse IP ou l'URL complète, vous pouvez créer un service ExternalName qui pointera vers le nom DNS de cette base de données. Cela facilite la configuration de vos applications dans le cluster.
+    - API externe: Vous souhaitez consommer une API publique (comme une API météo ou une API de paiement). En créant un service ExternalName qui pointe vers l'URL de cette API, vous pouvez y accéder depuis vos pods comme si c'était un service interne.
+- Migration progressive:
+    - Transition vers un nouveau service: Vous êtes en train de migrer vers un nouveau service et souhaitez maintenir l'ancien pendant un certain temps. Vous pouvez créer un service ExternalName qui pointera alternativement vers l'ancien ou le nouveau service, selon votre configuration.
+- Abstraction de noms DNS complexes:
+    - Noms DNS longs ou difficiles à retenir: Si vous avez des noms DNS très longs ou complexes, un service ExternalName peut servir d'alias plus court et plus facile à mémoriser.
+- Microservices: 
+    - Simplifie les interactions entre différents microservices qui peuvent être déployés sur des infrastructures différentes.
+- Tests: 
+    - Permet de simuler des environnements de test en pointant vers des services de test.
+
 ### Kubernetes : Services : ExternalName
 
 Il est aussi possible de mapper un service avec un nom de domaine en spécifiant le paramètre `spec.externalName`.
@@ -244,11 +267,8 @@ kubectl get svc
 web   ClusterIP   10.96.163.5     <none>        80/TCP     3m56s
 
 kubectl exec web-96d5df5c8-lfmhs -- env | sort
-WEB_PORT=tcp://10.96.163.5:80
-WEB_PORT_80_TCP=tcp://10.96.163.5:80
-WEB_PORT_80_TCP_ADDR=10.96.163.5
-WEB_PORT_80_TCP_PORT=80
-WEB_PORT_80_TCP_PROTO=tcp
+...
+
 WEB_SERVICE_HOST=10.96.163.5
 WEB_SERVICE_PORT=80
 
@@ -282,19 +302,40 @@ ex: my-app.default.svc.cluster.local
 ### Kubernetes : Ingress
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: blog
+  annotations:
+    cert-manager.io/cluster-issuer: le
+    meta.helm.sh/release-name: argocd
+    meta.helm.sh/release-namespace: argocd
+  labels:
+    app.kubernetes.io/component: server
+    app.kubernetes.io/instance: argocd
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: argocd-server
+    app.kubernetes.io/part-of: argocd
+    app.kubernetes.io/version: v2.10.1
+    helm.sh/chart: argo-cd-6.0.14
+  name: argocd-server
+  namespace: argocd
 spec:
+  ingressClassName: nginx
   rules:
-  - host: blog.alterway.fr
+  - host: argocd.caas.fr
     http:
       paths:
-      - path: /
-        backend:
-          serviceName: blog-nodeport
-          servicePort: 80
+      - backend:
+          service:
+            name: argocd-server
+            port:
+              number: 443
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - argocd.caas.fr
+    secretName: argocd-server-tls
 ```
 
 ### Kubernetes : Ingress Controller
