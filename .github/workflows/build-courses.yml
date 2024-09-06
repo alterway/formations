@@ -46,8 +46,17 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_REGION }} 
           SOURCE_DIR: 'output-pdf'
           DEST_DIR: 'formations/pdf'
-      - run: pwd 
-      - run: ls -la
+
+      - 
+        name: Copy a file from s3
+        uses: prewk/s3-cp-action@v2
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          source: 's3://training.alterway.fr/revealjs/'
+          dest: './revealjs'
+          flags: --recursive
+      
       -
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
