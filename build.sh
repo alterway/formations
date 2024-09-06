@@ -178,7 +178,7 @@ done
 #[ $REVEALJSURL == "" ]] && REVEALJSURL="http://10.2.1.35:9000"
 
 #[[ $REVEALJSURL == "" ]] && REVEALJSURL="http://training.alterway.fr/formations/revealjs"
-[[ $REVEALJSURL == "" ]] && REVEALJSURL="http://learn.alterway.fr/revealjs"
+[[ $REVEALJSURL == "" ]] && REVEALJSURL="https://learn.alterway.fr/revealjs"
 
 
 
