@@ -176,7 +176,11 @@ done
 #[[ $REVEALJSURL == "" ]] && REVEALJSURL="https://reveal.alterway.fr"
 #[[ $REVEALJSURL == "" ]] && REVEALJSURL="http://192.168.1.12:9000"
 #[ $REVEALJSURL == "" ]] && REVEALJSURL="http://10.2.1.35:9000"
-[[ $REVEALJSURL == "" ]] && REVEALJSURL="http://training.alterway.fr/formations/revealjs"
+
+#[[ $REVEALJSURL == "" ]] && REVEALJSURL="http://training.alterway.fr/formations/revealjs"
+[[ $REVEALJSURL == "" ]] && REVEALJSURL="http://learn.alterway.fr/revealjs"
+
+
 
 if [[ $THEME == "" ]]; then
   THEME="awcc"
