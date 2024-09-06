@@ -18,6 +18,7 @@ $endif$
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
   <link rel="icon" href="$revealjs-url$/css/theme/$theme$/images/favicon.ico" />
   <link rel="stylesheet" href="$revealjs-url$/css/reveal.css">
+  <link rel="stylesheet" href="$revealjs-url$/css/presentable.min.css">
   <style type="text/css">code{white-space: pre;}</style>
 $if(quotes)$
   <style type="text/css">q { quotes: "“" "”" "‘" "’"; }</style>
@@ -91,8 +92,10 @@ $body$
     </div>
   </div>
 
-  <script src="$revealjs-url$/lib/js/head.js"></script>
+  <script src="$revealjs-url$/lib/js/head.min.js"></script>
   <script src="$revealjs-url$/js/reveal.js"></script>
+  <script src="$revealjs-url$/js/presentable.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js-mermaid-plugin@2.3.0/plugin/mermaid/mermaid.js"></script>
   <script>
       // Full list of configuration options available at:
       // https://github.com/hakimel/reveal.js#configuration
@@ -240,6 +243,8 @@ $endif$
           { src: '$revealjs-url$/lib/js/classList.js', condition: function() { return !document.body.classList; } },
           { src: '$revealjs-url$/plugin/zoom-js/zoom.js', async: true },
           { src: '$revealjs-url$/plugin/notes/notes.js', async: true },
+          // { src: '$revealjs-url$/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad();}},
+          { src: '$revealjs-url$/js/presentable.min.js', async: true, callback: function() { presentable.toc({framework: "revealjs"}); } }
         ]
 
       });
