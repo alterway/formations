@@ -46,7 +46,7 @@
     - Vérification de la configuration: Valide que le système et les configurations sont compatibles avec Kubernetes.
     - Mises à jour et modifications: Facilite les mises à jour des versions de Kubernetes et les modifications de la configuration du cluster.
 
-"
+ 
 ### Kubernetes managés "as a Service Majeurs
 
 - Plateformes Cloud Majeures :

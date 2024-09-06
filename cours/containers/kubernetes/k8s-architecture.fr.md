@@ -140,14 +140,9 @@ Kubernetes n'implémente pas de solution réseau par défaut, mais s'appuie sur 
 - <https://kubernetes.io/releases/>
 
 
-**1.31**
-    Latest Release:1.31.0 (released: 2024-08-13)
-    End of Life:2025-10-28
-    Patch Releases: n/a
+**1.31:**
+    Latest Release:1.31.0 (released: 2024-08-13)  
+    End of Life:2025-10-28  
+    Patch Releases: n/a  
     Complete 1.31 [Schedule](https://kubernetes.io/releases/patch-releases/#1-31) and [Changelog](https://git.k8s.io/kubernetes/CHANGELOG/CHANGELOG-1.31.md)
-
-
-
-
-```
 

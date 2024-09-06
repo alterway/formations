@@ -55,7 +55,7 @@
 - Incubation de Nouveaux Projets:
     - La CNCF offre un programme d'incubation pour les nouveaux projets qui répondent à ses critères.
     - Elle aide ces projets à se développer et à atteindre la maturité nécessaire pour rejoindre la CNCF en tant que projet hébergé.
-    - 
+  
 - Collaboration avec l'Industrie:
     - La CNCF travaille en étroite collaboration avec les principaux acteurs de l'industrie du cloud, tels que les fournisseurs de cloud public, les entreprises technologiques et les universités.
 
