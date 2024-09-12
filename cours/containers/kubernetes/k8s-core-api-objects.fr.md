@@ -594,7 +594,9 @@ kubectl patch cronjob <cronjob-name> -p '{"spec" : {"suspend" : false }}'
 
 exemple :
 
-```yaml +.
+
+
+```yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -633,3 +635,7 @@ spec:
     - ...
      
      
+
+
+
+
