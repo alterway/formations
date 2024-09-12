@@ -250,17 +250,21 @@ metadata:
 
 ```
 
-Les trois lignes suivantes définissent les labels
+Les trois lignes suivantes définissent les labels: 
+
 
 pod-security.kubernetes.io/enforce=baseline : 
+
     - Applique la politique de sécurité "baseline" en mode "enforce". 
     - Cela empêchera la création de pods qui ne respectent pas les critères de sécurité de base.
      
 pod-security.kubernetes.io/audit=restricted : 
+
     - Configure l'audit en mode "restricted". 
     - Cela générera des événements d'audit pour les pods qui ne respectent pas les critères de sécurité restrictifs.
       
 pod-security.kubernetes.io/warn=restricted : 
+
     - Active les avertissements en mode "restricted". 
     - Cela produira des avertissements lors de la création de pods qui ne respectent pas les critères de sécurité restrictifs.
 
