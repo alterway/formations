@@ -616,6 +616,9 @@ spec:
 
 ```
 
+### Extras : Init Containers
+
+
 - Lors du démarrage d'un Pod, le kubelet retarde l'exécution des conteneurs d'initialisation jusqu'à ce que le réseau et le stockage soient prêts. Ensuite, le kubelet exécute les conteneurs d'initialisation du Pod dans l'ordre où ils apparaissent dans la spécification du Pod.
 - Chaque conteneur d'initialisation doit se terminer avec succès avant que le suivant ne démarre. 
 - Si un conteneur ne parvient pas à démarrer en raison de l'environnement d'exécution ou se termine avec un échec, il est relancé conformément à la **restartPolicy** du Pod. Cependant, si la **restartPolicy** du Pod est définie sur **Always**, les conteneurs d'initialisation utilisent la restartPolicy OnFailure.
@@ -623,6 +626,10 @@ spec:
 - Un Pod en cours d'initialisation est dans l'état **Pending** mais doit avoir une condition **Initialized** définie à false.
 - Si le Pod redémarre, ou est redémarré, tous les conteneurs d'initialisation doivent s'exécuter à nouveau.
 
-
+- Utilisations possibles
+    - Charger/préparer des données (code, data, configuration,...)
+    - Organiser les update (migrations) de bases de données
+    - Attendre que certains services soient démarrés (bonne alternative à des sondes)
+    - ...
      
      

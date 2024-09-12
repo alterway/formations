@@ -12,6 +12,8 @@
 | Docker Desktop| Inclut une option pour exécuter Kubernetes directement.                     | - Facile à utiliser pour les développeurs habitués à Docker<br>- Intégration transparente avec Docker | - Peut être lourd en ressources<br>- Moins flexible que Minikube ou Kind                       |
 
 
+     
+
 ### Kubernetes Local : Minikube
 
 - Installation : <https://minikube.sigs.k8s.io/docs/start/?arch=%2Fmacos%2Farm64%2Fstable%2Fbinary+download>
@@ -67,7 +69,7 @@ ou plus simplement : `curl -sfL https://get.k3s.io | sh -`
 
 
 
-![kubectl](images/docker-desktop.svg){height="250px"}
+![docker desktop](images/docker-desktop.svg){height="300px"}
 
     
 
@@ -106,7 +108,7 @@ ou plus simplement : `curl -sfL https://get.k3s.io | sh -`
     - Mises à jour et modifications: Facilite les mises à jour des versions de Kubernetes et les modifications de la configuration du cluster.
 
  
-### Kubernetes managés "as a Service Majeurs
+### Kubernetes managés "as a Service" Majeurs
 
 - Plateformes Cloud Majeures :
     - Amazon Elastic Kubernetes Service (EKS):
@@ -120,7 +122,7 @@ ou plus simplement : `curl -sfL https://get.k3s.io | sh -`
         - Permet de déployer et gérer des clusters Kubernetes sur Azure avec une intégration profonde avec les autres services Azure.
 
 
-### Kubernetes managés "as a Service Populaires
+### Kubernetes managés "as a Service" Populaires
 
 -  Autres Plateformes Populaires :
     - DigitalOcean Kubernetes:
@@ -151,6 +153,7 @@ ou plus simplement : `curl -sfL https://get.k3s.io | sh -`
     - tanzu : <https://github.com/vmware-tanzu>
     - clusterAPI : <https://cluster-api.sigs.k8s.io/>
 
+    
 ### Conformité kubernetes
 
 Voici quelques outils permettant de certifier les déploiements des cluster kubernetes en terme de sécurité et de respects des standard
@@ -167,4 +170,4 @@ Voici quelques outils permettant de certifier les déploiements des cluster kube
     - <https://github.com/aquasecurity/kube-hunter>
 
    
-   
+
