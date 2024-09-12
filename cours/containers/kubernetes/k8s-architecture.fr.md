@@ -130,7 +130,9 @@ Kubernetes n'implémente pas de solution réseau par défaut, mais s'appuie sur 
     - Flannel : <https://github.com/flannel-io/flannel#flannel>
     - Multus : Un  Multi Network plugin permet d'avoir des pods avec plusieurs interfaces
     - Weave Net : https://www.weave.works/oss/net/ 
-    - ... : <https://kubernetes.io/docs/concepts/cluster-administration/networking/>
+    - Voir les autres : <https://kubernetes.io/docs/concepts/cluster-administration/networking/>
+
+    
 
 ### Kubernetes : Aujourd'hui
 
@@ -146,3 +148,7 @@ Kubernetes n'implémente pas de solution réseau par défaut, mais s'appuie sur 
     Patch Releases: n/a  
     Complete 1.31 [Schedule](https://kubernetes.io/releases/patch-releases/#1-31) and [Changelog](https://git.k8s.io/kubernetes/CHANGELOG/CHANGELOG-1.31.md)
 
+
+    
+
+    

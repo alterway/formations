@@ -12,6 +12,65 @@
 | Docker Desktop| Inclut une option pour exécuter Kubernetes directement.                     | - Facile à utiliser pour les développeurs habitués à Docker<br>- Intégration transparente avec Docker | - Peut être lourd en ressources<br>- Moins flexible que Minikube ou Kind                       |
 
 
+### Kubernetes Local : Minikube
+
+- Installation : <https://minikube.sigs.k8s.io/docs/start/?arch=%2Fmacos%2Farm64%2Fstable%2Fbinary+download>
+
+- Créer un cluster
+    - minikube start
+
+- Les cluster sont ajoutés automatiquement au fichier ~/.kube/config 
+- Les cluster sont supprimés automatiquement au fichier ~/.kube/config avec la commande `minikube delete [--all]`
+
+- Supporte de nombreux drivers
+
+    - (HyperKit, Hyper-V, KVM, VirtualBox, but also Docker and many others)
+
+- Beaucoup de plugins 
+
+     
+
+### Kubernetes Local : k3s   
+
+Pré-requis :
+- Linux 
+- Raspberry
+  
+- Installation : <https://docs.k3s.io/installation>
+
+ou plus simplement : `curl -sfL https://get.k3s.io | sh -`
+
+     
+
+- K3s est conçu pour être très léger, nécessitant seulement environ 512 Mo de RAM pour fonctionner. Cela le rend idéal pour les environnements avec des ressources limitées.
+
+     
+
+
+### Kubernetes Local : kind 
+
+- Kubernetes-in-Docker
+- Il faut un serveur docker
+- Fonctionne aussi avec podman
+- Créer un cluster
+     - `kind create cluster`
+- Possibilité de créer plusieurs clusters
+- Possibilité de créer des clusters de plusieurs noeuds (avec un fichier de config yaml)
+
+     
+
+### Kubernetes Local : Docker Desktop
+
+- Installation : <https://www.docker.com/products/docker-desktop/>
+
+- Licence obligatoire si autre utilisation que personnelle (<https://www.docker.com/pricing/>)
+
+
+
+![kubectl](images/docker-desktop.svg){height="250px"}
+
+    
+
 ### Installation de Kubernetes 
 
 
@@ -107,3 +166,5 @@ Voici quelques outils permettant de certifier les déploiements des cluster kube
 - Kube-hunter:
     - <https://github.com/aquasecurity/kube-hunter>
 
+   
+   

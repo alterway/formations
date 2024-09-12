@@ -75,7 +75,26 @@ nginx     1/1       Running   0          31s       app=nginx,env=prod
 ```console
 
 kubectl get po -A -l k8s-app=kube-dns
+# ou 
+kubectl get pods --selector=k8s-app=dns
+
 kubectl get po -A -l k8s-app=kube-dns -l pod-template-hash=6d4b75cb6d
+# equivalent
+kubectl get po -A -l k8s-app=kube-dns,pod-template-hash=6d4b75cb6d
+# ou
+kubectl get po -A --selector=8s-app=kube-dns,pod-template-hash=6d4b75cb6d
+
+# Lister les valeurs d'un label 
+kubectl get pods -L k8s-app
+
+# Lister to les labels d'un object
+
+kubectl get deploy --show-labels
+kubectl get deploy,po --show-labels
+
+# Utiliser la forme négative
+
+kubectl get po -A -l k8s-app!=kube-dns
 
 ```
 
@@ -119,7 +138,10 @@ spec:
 
 ### Kubernetes : Pod
 
-- Ensemble logique composé de un ou plusieurs conteneurs
+- Un Pod n'est pas un processus, c'est un environnement pour les containers
+    - Un pod ne peut pas être redémarré
+    - Il ne peut pas se "planter", les containers d'un pod "oui"
+- C'est, donc, Ensemble logique composé de un ou plusieurs conteneurs
 - Les conteneurs d'un pod fonctionnent ensemble (instanciation et destruction) et sont orchestrés sur un même hôte
 - Les conteneurs partagent certaines spécifications du Pod :
     - La stack IP (network namespace)
@@ -515,7 +537,7 @@ kubectl create job exemple-job --image=busybox -- /bin/sh -c "date; echo Hello f
 ### Kubernetes : CronJob
 
 ```yaml
-apiVersion: batch/v1beta1
+apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: batch-job-every-fifteen-minutes
@@ -546,3 +568,61 @@ En ligne de commande :
 kubectl create cronjob exemple-cronjob --image=busybox --schedule="*/5 * * * *" -- /bin/sh -c "date; echo Hello from the Kubernetes cluster"
 ```
 
+Susprendre un cronjob :
+
+```console
+kubectl patch cronjob <cronjob-name> -p '{"spec" : {"suspend" : true }}'
+```
+
+Reprendre l'exécution :
+
+
+```console
+kubectl patch cronjob <cronjob-name> -p '{"spec" : {"suspend" : false }}'
+```
+
+   
+
+
+### Extras : Init Containers
+
+- On peut définir des conteneurs qui doivent s'exécuter avant les conteneurs principaux
+- Ils seront exécutés dans l'ordre
+    (au lieu d'être exécutés en parallèle)
+- ⚠️ Ils doivent tous réussir avant que les conteneurs principaux ne soient démarrés
+
+
+exemple :
+
+```yaml +.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+  labels:
+    app.kubernetes.io/name: MyApp
+spec:
+  containers:
+  - name: myapp-container
+    image: busybox:1.28
+    command: ['sh', '-c', 'echo The app is running! && sleep 3600']
+  initContainers:
+  - name: init-myservice
+    image: busybox:1.28
+    command: ['sh', '-c', "until nslookup myservice.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for myservice; sleep 2; done"]
+  - name: init-mydb
+    image: busybox:1.28
+    command: ['sh', '-c', "until nslookup mydb.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for mydb; sleep 2; done"]
+
+```
+
+- Lors du démarrage d'un Pod, le kubelet retarde l'exécution des conteneurs d'initialisation jusqu'à ce que le réseau et le stockage soient prêts. Ensuite, le kubelet exécute les conteneurs d'initialisation du Pod dans l'ordre où ils apparaissent dans la spécification du Pod.
+- Chaque conteneur d'initialisation doit se terminer avec succès avant que le suivant ne démarre. 
+- Si un conteneur ne parvient pas à démarrer en raison de l'environnement d'exécution ou se termine avec un échec, il est relancé conformément à la **restartPolicy** du Pod. Cependant, si la **restartPolicy** du Pod est définie sur **Always**, les conteneurs d'initialisation utilisent la restartPolicy OnFailure.
+- Un Pod ne peut pas être **Ready** tant que tous les conteneurs d'initialisation n'ont pas réussi. Les ports d'un conteneur d'initialisation ne sont pas agrégés sous un Service. 
+- Un Pod en cours d'initialisation est dans l'état **Pending** mais doit avoir une condition **Initialized** définie à false.
+- Si le Pod redémarre, ou est redémarré, tous les conteneurs d'initialisation doivent s'exécuter à nouveau.
+
+
+     
+     

@@ -159,53 +159,134 @@ spec:
   ingress: []
 ```
 
-### PodSecurityPolicies
+### NetworkPolicies : outils : Cilium Network Policy Editor
 
-- Permet de contrôler les privilèges d'un pod
-- Permet de définir ce qui est autorisé pendant l'exécution du pod
-- A utiliser dans un contexte multi-tenant et quand les pods ne viennent pas
-  d'un tiers de confiance
-- Peut-être combiné avec le RBAC
-- Attention: Activer cette fonctionnalité peut endommager votre environnement
-- Il faut une PSP par défaut
-- obsolète depuis la version 1.21 de Kubernetes
+Cilium Network Policy Editor : <https://editor.networkpolicy.io/?id=xJYCeLwGmAGxTqjm>
 
-### PodSecurityPolicies
+![cilium](images/kubernetes/npp1.png){height="400px"}
+
+    
+
+### NetworkPolicies : outils : Tufin Network Policy Viewer
+
+Tufin Network Policy Viewer : https://orca.tufin.io/netpol/
+
+
+![tufin](images/kubernetes/npp2.png){height="400px"}
+    
+
+
+
+### NetworkPolicies : outils : Kubernetes NetworkPolicy viewer
+
+Kubernetes NetworkPolicy viewer : <https://artturik.github.io/network-policy-viewer/>
+
+![npg](images/kubernetes/npp3.png){height="400px"}
+
+    
+
+
+
+### Pod Security Admission
+
+Alpha en 1.22, GA depuis la 1.25
+
+Plus simple que les PSP.
+
+- S'appuie sur les standards de sécurité des pods (Pod Security Standards - PSS).
+- Définit trois politiques :
+    - **privileged** (peut tout faire ; pour les composants système)
+        - peut tout faire 
+    - **restricted** (pas d'utilisateur root ; presque aucune capacité)
+        - La politique Restricted vise à appliquer les meilleures pratiques actuelles de renforcement des Pods, au détriment d'une certaine compatibilité. 
+        - Elle est destinée aux opérateurs et développeurs d'applications critiques pour la sécurité, ainsi qu'aux utilisateurs à faible niveau de confiance.
+    - **baseline** (intermédiaire avec des valeurs par défaut raisonnables)
+        - La politique **Baseline** vise à faciliter l'adoption pour les charges de travail conteneurisées courantes tout en prévenant les escalades de privilèges connues.
+        - Cette politique est destinée aux opérateurs d'applications et aux développeurs d'applications non critiques.
+- 
+- Labels sur les namespaces pour indiquer quelles politiques sont autorisées.
+- Supporte également la définition de valeurs par défaut globales.
+- Supporte les modes **enforce**, **audit** et **warn**.
+
+
+    
+
+### Pod Security Admission : Namespace labels  
+
+Trois labels optionnels peuvent être ajoutés aux namespaces :
+
+- pod-security.kubernetes.io/enforce
+- pod-security.kubernetes.io/audit
+- pod-security.kubernetes.io/warn
+
+- enforce = empêche la création de pods
+- warn = autorise la création mais inclut un avertissement dans la réponse de l'API
+    (sera visible par exemple dans la sortie de kubectl)
+- audit = autorise la création mais génère un événement d'audit de l'API
+    (sera visible si l'audit de l'API a été activé et configuré)
+
+Les valeurs possibles sont : 
+
+- baseline, 
+- restricted, 
+- privileged
+
+(définir la valeur à privileged n'a pas vraiment d'effet)
+
+
+### Pod Security Admission : Exemple
+
+
+```yaml 
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    kubernetes.io/metadata.name: formation-k8s
+    pod-security.kubernetes.io/enforce: baseline
+    pod-security.kubernetes.io/audit: restricted
+    pod-security.kubernetes.io/warn: restricted
+  name: formation-k8s
+
+```
+
+Les trois lignes suivantes définissent les labels
+
+pod-security.kubernetes.io/enforce=baseline : 
+    - Applique la politique de sécurité "baseline" en mode "enforce". 
+    - Cela empêchera la création de pods qui ne respectent pas les critères de sécurité de base.
+     
+pod-security.kubernetes.io/audit=restricted : 
+    - Configure l'audit en mode "restricted". 
+    - Cela générera des événements d'audit pour les pods qui ne respectent pas les critères de sécurité restrictifs.
+      
+pod-security.kubernetes.io/warn=restricted : 
+    - Active les avertissements en mode "restricted". 
+    - Cela produira des avertissements lors de la création de pods qui ne respectent pas les critères de sécurité restrictifs.
+
+
+    
+
+### Pod Security Admission : Revenir en arriere 
 
 
 ```yaml
-apiVersion: policy/v1beta1
-kind: PodSecurityPolicy
+apiVersion: v1
+kind: Namespace
 metadata:
-  name: restricted
-spec:
-  privileged: false
-  allowPrivilegeEscalation: false
-  requiredDropCapabilities:
-    - ALL
-  hostNetwork: false
-  hostIPC: false
-  hostPID: false
-  runAsUser:
-    rule: 'MustRunAsNonRoot'
-  readOnlyRootFilesystem: false
+  labels:
+    kubernetes.io/metadata.name: formation-k8s
+    pod-security.kubernetes.io/enforce: privileged
+    pod-security.kubernetes.io/audit: privileged
+    pod-security.kubernetes.io/warn: privileged
+  name: formation-k8s
+
 ```
 
-### Admission Controllers
-
-- Interceptes les requêtes sur l'API Kubernetes
-- Peut effectuer des modifications si nécessaires
-- Conception personnalisée possible
+- Typiquemement les pod dans kube-system doivent pouvoir être en mode privileged.
+- Si vous ne définissez pas de PSA les pod privilégiés sont autorisés.
+   
 
 
-### Admission Controllers
-
-- `DenyEscalatingExec`
-- `ImagePolicyWebhook`
-- `NodeRestriction`
-- `PodSecurityPolicy`
-- `SecurityContextDeny`
-- `ServiceAccount`
-
----
+    
 

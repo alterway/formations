@@ -51,6 +51,7 @@ Service de type Spécial `LoadBalancer` :
     - C'est le service par défaut
     - Attribue une adresse IP interne accessible uniquement au sein du cluster, cette adresse est accessible dans le cluster par les pods et les noeuds
     - Expose le service pour les connexions depuis l'intérieur du cluster 
+    - L'application peut utiliser le port de l'application directement
 
 ![](images/clusterIP.png)
 
@@ -238,6 +239,49 @@ spec:
   type: ExternalName
   externalName: my.database.example.com
 ```
+
+En ligne de commande :
+
+```console
+kubectl create service externalname my-service --external-name  my.database.example.com
+
+```
+
+    
+
+
+### Kubernetes : Services : External IPs
+
+On peut définir une IP externe permettant d'accèder à un service interne
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: nginx
+  name: nginx
+spec:
+  externalIPs:
+  - 1.2.3.4
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: nginx
+```
+
+En ligne de commande : 
+
+```console
+kubectl expose deploy nginx --port=80 --external-ip=1.2.3.4
+
+```
+
+    
+
 ### Kubernetes : Services Discovery
 
 - Kubernetes prend en charge 2 modes principaux de "service discovery"

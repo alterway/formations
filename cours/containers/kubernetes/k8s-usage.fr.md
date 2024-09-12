@@ -288,6 +288,9 @@ alias kubens='kubectl config set-context --current --namespace '
 
 ### Kubernetes : namespace `kube-public` 
 
+`kube-public` est créé par `kubeadm` 
+
+
 ```console
 kubectl get all -n kube-public
 ```
@@ -301,8 +304,17 @@ kubectl -n kube-public get configmaps
 kubectl -n kube-public get configmap cluster-info -o yaml
 # Ce configmap est lisible par tout le monde sans authentification
 curl -k https://{NodeIP}/api/v1/namespaces/kube-public/configmaps/cluster-info
+
 # Contient le kubeconfig
 ```
+
+- Ce configmap contient l'url de l'API du serveur, et la clé publique de l'AC
+
+- Ce fichier ne contient pas de clés client ni de tokens
+
+- Il ne s'agit pas d'informations sensibles
+  
+
 
 ### Kubernetes : kubeconfig
 
