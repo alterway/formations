@@ -149,7 +149,7 @@ spec:
 
 ```
 
-
+### ResourceQuotas
 
 
 ![](images/kubernetes/resource-quota-limitrange.gif){height="450px"}

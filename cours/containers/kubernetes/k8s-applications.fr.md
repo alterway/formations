@@ -9,7 +9,7 @@ Voici quelques stratégies de mise à jour des applications
 - Blue-Green Déploiement
 
 
-![](images//kubernetes/rollingupdate.png){height="350px"}
+![](images//kubernetes/rollingupdate.png){height="250px"}
 
 
 ### RollingUpdate
@@ -18,28 +18,30 @@ Voici quelques stratégies de mise à jour des applications
 Caractéristiques du RollingUpdate :
 
 - Mise à jour progressive :
-
     - Les pods sont mis à jour un par un ou par petits lots, plutôt que tous en même temps.
     - Cela permet de minimiser les temps d'arrêt et de garantir que le service reste disponible pendant la mise à jour.
+ 
 
 - Paramètres configurables :
-
     - **maxUnavailable** : Définit le nombre maximum de pods qui peuvent être indisponibles pendant la mise à jour. Par exemple, maxUnavailable: 1 signifie qu'au maximum un pod peut être hors ligne à tout moment pendant la mise à jour.
     - **maxSurge** : Définit le nombre maximum de pods supplémentaires qui peuvent être créés au-delà du nombre souhaité de pods pendant la mise à jour. Par exemple, maxSurge: 1 signifie qu'un pod supplémentaire peut être créé pendant la mise à jour.
+ 
 
--Maintien de la disponibilité :
-
+- Maintien de la disponibilité :
     - Le déploiement RollingUpdate garantit que certaines instances de l'application restent disponibles pour traiter les requêtes pendant la mise à jour.
     - Cela réduit le risque de temps d'arrêt et améliore l'expérience utilisateur.
+ 
 
 - Facilité de retour en arrière :
     - Si un problème est détecté avec la nouvelle version, Kubernetes permet de revenir facilement à la version précédente des pods.
     - Vous pouvez utiliser la commande kubectl rollout undo pour revenir à une version antérieure du déploiement.
+ 
 
 - Surveillance et gestion des erreurs :
     - Kubernetes surveille l'état des pods pendant la mise à jour. Si un pod ne parvient pas à démarrer ou à devenir sain, Kubernetes arrêtera la mise à jour et conservera les pods en cours d'exécution.
     - Vous pouvez surveiller la progression de la mise à jour avec la commande kubectl rollout status.
 
+ 
 - Compatibilité avec les applications sans état :
     - La stratégie RollingUpdate est particulièrement bien adaptée aux applications sans état où les instances de pod sont interchangeables.
     - Pour les applications avec état, des stratégies supplémentaires peuvent être nécessaires pour gérer les états et les données.
@@ -58,7 +60,7 @@ Caractéristiques du Blue-Green Deployment :
 - Isolation Complète :
     - Les environnements Blue et Green sont complètement isolés l'un de l'autre. Cela permet de tester la nouvelle version (Green) sans affecter l'environnement de production actuel (Blue).
 
-- Redirection du Trafic :
+- Redirection du Traffic :
     - Une fois que l'environnement Green est prêt et testé, le trafic est redirigé de l'environnement Blue vers l'environnement Green.
     - Cette redirection peut être effectuée au niveau du service, du load balancer ou du DNS.
 
@@ -105,5 +107,7 @@ Caractéristiques du Canary Deployment :
 
 ### Canary Deployment Exemple
 
-Voir le lab dédié
+**Voir le lab dédié**
+
+
 
