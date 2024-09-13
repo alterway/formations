@@ -11,7 +11,7 @@
   - grpc : standard GRPC Health Checking Protocol
 
 
-![](images/kubernetes/probes.png){height="700px"}
+![](images/kubernetes/probes.png){height="450px"}
 
 
 ### Sondes : Startup

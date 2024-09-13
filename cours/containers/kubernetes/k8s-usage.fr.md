@@ -586,23 +586,23 @@ kubectl proxy
 
 ### Kubernetes : Kubernetes Dashboard
 
-![](images/kubernetes/dashboard-node.png){height="700px"}
+![](images/kubernetes/dashboard-node.png){height="600px"}
 
 
 
 ### Kubernetes : Kubernetes Dashboard
 
-![](images/kubernetes/dashboard-node.png){height="700px"}
+![](images/kubernetes/dashboard-node.png){height="600px"}
 
 
 ### Kubernetes : Kubernetes Dashboard
 
-![](images/kubernetes/dashboard-ns.png){height="700px"}
+![](images/kubernetes/dashboard-ns.png){height="600px"}
 
 
 ### Kubernetes : Kubernetes Dashboard
 
-![](images/kubernetes/dashboard-pod.png){height="700px"}
+![](images/kubernetes/dashboard-pod.png){height="600px"}
 
 
 

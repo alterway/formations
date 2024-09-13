@@ -87,7 +87,7 @@ ou plus simplement : `curl -sfL https://get.k3s.io | sh -`
     - Assurer que les ports requis soient ouverts : <https://kubernetes.io/docs/setup/independent/install-kubeadm/#check-required-ports>
     - Installer une Container Runtime compatible CRI (containerd, CRI-O, Docker, ...)
 
-### kubeadm (1)
+### kubeadm
 
 - Installer les composants Kubernetes (kubeadm, kubectl, kubelet) : <https://kubernetes.io/docs/setup/independent/install-kubeadm/>
 - Exécuter : 
@@ -97,7 +97,14 @@ ou plus simplement : `curl -sfL https://get.k3s.io | sh -`
 - Installer le plugin Réseau
 - Optionnellement:  Tester le déploiement d'un pod
 
-### kubeadm (2)
+
+### kubeadm demo
+
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/jwBK9b5X1rk?si=t8Q_aGaTV6zcr5u6" title="kubeadm" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
+### kubeadm fonctionnalités
 
 - En plus de l'installation de Kubernetes, kubeadm peut :
 

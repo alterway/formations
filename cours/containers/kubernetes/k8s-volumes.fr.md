@@ -311,5 +311,5 @@ spec:
 
 ### Kubernetes : Provisionnement Dynamique
 
-![](images/kubernetes/storage-class.png){height="700px"}
+![](images/kubernetes/storage-class.png){height="500px"}
 
