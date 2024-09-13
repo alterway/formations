@@ -71,26 +71,40 @@
 ### OCI
 
 - Créé sous la Linux Fondation
-- But : Créer un standard Open Source concernant la manière de "runner" et le format des conteneurs et images
-- Non lié à des produits
-- Non lié à des COE
+- **Standardisation** : Le but principal de l'OCI est de créer des standards ouverts pour les formats de conteneurs et leurs runtimes. Cela permet d'assurer l'interopérabilité entre différentes plateformes et outils.
+- **Portabilité** : En établissant des spécifications communes, l'OCI vise à rendre les conteneurs portables entre différents environnements d'exécution, clouds et systèmes d'exploitation.
+- **Compatibilité** : L'initiative cherche à garantir que les conteneurs créés selon ses spécifications fonctionneront de manière cohérente, quel que soit l'outil utilisé pour les créer ou les exécuter.
+- **Innovation** : Tout en maintenant des standards, l'OCI encourage l'innovation dans l'écosystème des conteneurs en fournissant une base commune sur laquelle les entreprises et les développeurs peuvent construire.
+- **Sécurité** : L'OCI travaille également sur des spécifications liées à la sécurité des conteneurs, visant à améliorer la sécurité globale de l'écosystème.
+- **Collaboration** **industrielle** : L'initiative favorise la collaboration entre de nombreuses entreprises et acteurs majeurs du secteur technologique pour définir ces standards.
+  
 - runC a été donné par Docker à l'OCI comme implémentions de base
 
 ![](images/docker/oci.png){height="100px"}
 
 ### Kubernetes : Projet
 
-- Docs : <https://kubernetes.io/docs/>
-- Slack : <http://slack.k8s.io/>
-- Discuss : <https://discuss.kubernetes.io>
-- Stack Overflow : <https://stackoverflow.com/questions/tagged/kubernetes>
-- Serverfault <https://stackoverflow.com/questions/tagged/kubernetes>
+De nombreuses sources d'informations et de contributions disponibles :
+
+
+- **Docs** : <https://kubernetes.io/docs/>
+
+- **Slack** : <http://slack.k8s.io/>
+
+- **Discuss** : <https://discuss.kubernetes.io>
+
+- **Stack Overflow** : <https://stackoverflow.com/questions/tagged/kubernetes>
+
+- **Serverfault** <https://stackoverflow.com/questions/tagged/kubernetes>
 
 ### Kubernetes : Projet (suite)
 
 - Hébergé sur Github : <https://github.com/kubernetes/kubernetes> :
+  
     - Issues : <https://github.com/kubernetes/kubernetes/issues>
+  
     - Pull Requests <https://github.com/kubernetes/kubernetes/pulls>
+  
     - Releases : <https://github.com/kubernetes/kubernetes/releases>
       
 - Projets en incubation :
@@ -159,7 +173,7 @@
 - Contributor and community guide : <https://github.com/kubernetes/community/blob/master/README.md#kubernetes-community>
 - Décomposée en [Special Interest Groups] : <https://github.com/kubernetes/community/blob/master/sig-list.md>
   
-- Les SIG (Special Interest Groups) sont une partie essentielle de la structure organisationnelle de la communauté Kubernetes. Ils jouent un rôle crucial dans le développement et la maintenance de différents aspects de Kubernetes. 
+- Les **SIG** (Special Interest Groups) sont une partie essentielle de la structure organisationnelle de la communauté Kubernetes. Ils jouent un rôle crucial dans le développement et la maintenance de différents aspects de Kubernetes. 
 
 
 | SIG | Description |

@@ -4,18 +4,26 @@
 ### Kubernetes : Composants
 
 - Kubernetes est écrit en Go, compilé statiquement.
+  
 - Un ensemble de binaires sans dépendances
+  
 - Faciles à conteneuriser et à packager
+  
 - Peut se déployer uniquement avec des conteneurs sans dépendance d'OS
-  - k3d, kind, minikube, docker...
+  
+- k3d, kind, minikube, docker...
 
 ### Kubernetes : Les noeuds (Nodes)
 
-- Les noeuds qui exécutent les conteneurs sont composés de
-  - Un "container Engine" (Docker, CRI-O, containerd...)
-  - Une "kubelet" (node agent)
-  - Un kube-proxy (un composant réseau nécessaire mais pas suffisant)
-- Ancien non des noeuds : **Minions**
+- Les noeuds qui exécutent les conteneurs sont embarquent  :
+
+    - Un "container Engine" (Docker, CRI-O, containerd...)
+  
+    - Une "kubelet" (node agent)
+  
+    - Un kube-proxy (un composant réseau nécessaire mais pas suffisant)
+  
+- Ancien nom des noeuds : **Minions**
 
 
 ### Kubernetes : Architecture
@@ -26,12 +34,23 @@
 ### Kubernetes : Composants du Control Plane
 
 - `etcd`: magasin de données clé-valeur open source cohérent et distribué
+
 - `kube-apiserver` : L'API Server est un composant qui expose l'API Kubernetes, l'API server qui permet la configuration d'objets Kubernetes (Pod, Service, Deployment, etc.)
+
 - core services :
-    - `kube-proxy` : Permet le forwarding TCP/UDP et le load balancing entre les services et les backends (Pods)
+
     - `kube-scheduler` : Implémente les fonctionnalités de scheduling
+    
     - `kube-controller-manager` : Responsable de l'état du cluster, boucle infinie qui régule l'état du cluster afin d'atteindre un état désiré
+    
+    - `kube-cloud-controller-manager` : Est un composant important du plan de contrôle (control plane) de Kubernetes, spécifiquement conçu pour interagir avec l'infrastructure cloud sous-jacente
+    
+    - `kube-proxy` : Permet le forwarding TCP/UDP et le load balancing entre les services et les backends (Pods)
+
+
 - Le control plane est aussi appelé "Master"
+
+![](images//kubernetes/control-plane.webp){height="100px"}
 
 ### Kubernetes : `etcd`
 
@@ -41,6 +60,9 @@
 - Stocke l'état d'un cluster Kubernetes
 - Point sensible (stateful) d'un cluster Kubernetes
 - Projet intégré à la CNCF (<https://github.com/etcd-io>)
+
+
+![](images//kubernetes/etcd.svg){height="100px"}
 
 ### Kubernetes : `kube-apiserver`
 
@@ -58,6 +80,9 @@ Sans le `kube-apiserver` le cluster ne sert à rien. De plus, il est `LE SEUL` �
     - Intéragit avec le kube-scheduler, le controller-manager, le kubelet, etc... 
     - C'est une API donc utilisable via des composants externes (kubectl, curl, lens, ...)
 
+![](images//kubernetes/kube-api-server-ezgif.com-crop.gif){height="150px"}
+
+
 ### Kubernetes : `kube-scheduler`
 
 Le kube-scheduler est le composant responsable d'assigner les pods aux nœuds "worker" du cluster. Il choisit alors selon les contraintes qui lui sont imposées un nœud sur lequel les pods peuvent être démarrés et exécutés.
@@ -65,6 +90,9 @@ Le kube-scheduler est le composant responsable d'assigner les pods aux nœuds "w
 - Planifie les ressources sur le cluster
 - En fonction de règles implicites (CPU, RAM, stockage disponible, etc.)
 - En fonction de règles explicites (règles d'affinité et anti-affinité, labels, etc.)
+
+![](images//kubernetes/kubescheduler.png){height="200px"}
+
 
 
 ### Kubernetes : `kube-controller-manager`
@@ -79,6 +107,28 @@ Le kube-controller-manager exécute et fait tourner les processus de contrôle d
     - Replication Controller : responsable du maintien du nombre de pods pour chaque objet de réplication dans le cluster
     - Endpoints Controller : fait en sorte de joindre correctement les services et les pods 
     - Service Account & Token Controllers : Gestion des comptes et des tokens d'accès à l'API pour l'accès aux `namespaces` Kubernetes
+
+
+![](images//kubernetes/control-loop.svg){height="150px"}
+
+
+
+
+### Kubernetes : `kube-cloud-controller-manager`
+
+- Fonction principale :
+
+    - Le CCM agit comme une interface entre Kubernetes et le fournisseur de cloud spécifique (comme AWS, Google Cloud, Azure, etc.). Il permet à Kubernetes de gérer les ressources spécifiques au cloud de manière indépendante du reste du cluster.
+
+    - Séparation des responsabilités :
+        - Avant l'introduction du CCM, le contrôleur de nœud (node controller), le contrôleur de route (route controller) et le contrôleur de service (service controller) étaient intégrés au contrôleur de gestion Kubernetes (kube-controller-manager). Le CCM a extrait ces fonctionnalités spécifiques au cloud pour les gérer séparément.
+    - Contrôleurs spécifiques au cloud : Le CCM implémente plusieurs contrôleurs qui interagissent avec l'API du fournisseur de cloud :
+        - Node Controller : Vérifie si les nœuds ont été supprimés dans le cloud après avoir cessé de répondre.
+        - Route Controller : Configure les routes dans l'infrastructure cloud pour que les pods sur différents nœuds puissent communiquer.
+        - Service Controller : Crée, met à jour et supprime les load balancers du cloud.
+
+![](images//kubernetes/Kubernetes-Architecture-Diagram-Explained.png){height="250px"}
+
 
 ### Kubernetes : `kube-proxy`
 
