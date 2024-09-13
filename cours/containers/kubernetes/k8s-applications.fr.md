@@ -81,6 +81,53 @@ Caractéristiques du Blue-Green Deployment :
     - Le déploiement Blue-Green nécessite des ressources supplémentaires car les deux environnements doivent fonctionner en parallèle pendant la phase de test et de transition.
 
 
+### Recreate
+
+Le mode de mise à jour "Recreate" dans Kubernetes est une stratégie utilisée pour déployer de nouvelles versions d'applications. Voici ses principales caractéristiques :
+
+1. **Arrêt Complet Avant Redéploiement** :
+   - **Arrêt des Pods Existants** : Tous les Pods de l'ancienne version de l'application sont arrêtés avant que les nouveaux Pods soient créés.
+   - **Création des Nouveaux Pods** : Une fois que tous les anciens Pods sont complètement arrêtés, les nouveaux Pods sont créés et déployés.
+
+2. **Downtime** :
+   - Ce mode entraîne une période de downtime, car il n'y a pas de Pods en cours d'exécution pendant la transition entre les anciennes et les nouvelles versions.
+
+3. **Simplicité** :
+   - La stratégie "Recreate" est simple à comprendre et à implémenter. Elle est souvent utilisée lorsque le downtime est acceptable ou lorsque l'application ne peut pas supporter plusieurs versions en même temps.
+
+4. **Consistance** :
+   - Assure qu’il n’y a qu’une seule version de l’application en cours d’exécution à tout moment, ce qui peut être crucial pour certaines applications qui ne peuvent pas fonctionner correctement avec plusieurs versions déployées simultanément.
+
+5. **Risque Minimal d’Incompatibilité** :
+   - Réduit les risques d’incompatibilité qui peuvent survenir lorsque plusieurs versions de l’application fonctionnent simultanément.
+
+Voici un exemple de configuration pour utiliser la stratégie "Recreate" dans un fichier de déploiement Kubernetes (`deployment.yaml`) :
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app
+spec:
+  replicas: 3
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-app
+        image: my-app-image:latest
+        ports:
+        - containerPort: 80
+```
+
+Cette configuration spécifie que Kubernetes doit utiliser la stratégie "Recreate" pour mettre à jour l'application `my-app`.
+
+
+
 ### Canary Deployment
 
 Si vous avez un ingress controller nginx faire du canary release est très simple.
