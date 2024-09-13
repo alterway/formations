@@ -50,7 +50,7 @@
 
 - Le control plane est aussi appelé "Master"
 
-![](images//kubernetes/control-plane.webp){height="100px"}
+![](images//kubernetes/control-plane.webp){height="150px"}
 
 ### Kubernetes : `etcd`
 
@@ -62,7 +62,7 @@
 - Projet intégré à la CNCF (<https://github.com/etcd-io>)
 
 
-![](images//kubernetes/etcd.svg){height="100px"}
+![](images//kubernetes/etcd.svg){height="250px"}
 
 ### Kubernetes : `kube-apiserver`
 
@@ -80,7 +80,7 @@ Sans le `kube-apiserver` le cluster ne sert à rien. De plus, il est `LE SEUL` �
     - Intéragit avec le kube-scheduler, le controller-manager, le kubelet, etc... 
     - C'est une API donc utilisable via des composants externes (kubectl, curl, lens, ...)
 
-![](images//kubernetes/kube-api-server-ezgif.com-crop.gif){height="150px"}
+![](images//kubernetes/kube-api-server-ezgif.com-crop.gif){height="200px"}
 
 
 ### Kubernetes : `kube-scheduler`
@@ -91,7 +91,7 @@ Le kube-scheduler est le composant responsable d'assigner les pods aux nœuds "w
 - En fonction de règles implicites (CPU, RAM, stockage disponible, etc.)
 - En fonction de règles explicites (règles d'affinité et anti-affinité, labels, etc.)
 
-![](images//kubernetes/kubescheduler.png){height="200px"}
+![](images//kubernetes/kubescheduler.png){height="300px"}
 
 
 
@@ -109,8 +109,7 @@ Le kube-controller-manager exécute et fait tourner les processus de contrôle d
     - Service Account & Token Controllers : Gestion des comptes et des tokens d'accès à l'API pour l'accès aux `namespaces` Kubernetes
 
 
-![](images//kubernetes/control-loop.svg){height="150px"}
-
+![](images//kubernetes/control-loop.svg){height="250px"}
 
 
 
@@ -127,7 +126,7 @@ Le kube-controller-manager exécute et fait tourner les processus de contrôle d
         - Route Controller : Configure les routes dans l'infrastructure cloud pour que les pods sur différents nœuds puissent communiquer.
         - Service Controller : Crée, met à jour et supprime les load balancers du cloud.
 
-![](images//kubernetes/Kubernetes-Architecture-Diagram-Explained.png){height="250px"}
+![](images//kubernetes/Kubernetes-Architecture-Diagram-Explained.png){height="260px"}
 
 
 ### Kubernetes : `kube-proxy`
@@ -135,24 +134,92 @@ Le kube-controller-manager exécute et fait tourner les processus de contrôle d
 Le kube-proxy maintient les règles réseau sur les nœuds. Ces règles permettent la communication vers les pods depuis l'intérieur ou l'extérieur de votre cluster.
 
 - Responsable de la publication de services
-- Utilise *iptables*
+
 - Route les paquets à destination des PODs et réalise le load balancing TCP/UDP
+
+- 3 modes de proxyfication :
+
+     - Userspace mode
+  
+     - IPtables mode
+  
+     - IPVS (IP Virtual Server) mode
+
+
+**Remarque**: Par défaut, Kube-proxy fonctionne sur le port 10249. Vous pouvez utiliser un ensemble d'endpoints exposés par Kube-proxy pour l'interroger et obtenir des informations.
+
+Pour voir quel mode est utilisé :
+
+Sur un des noeuds executer la commande :
+
+```bash
+curl -v localhost:10249/proxyMode;echo
+
+# ex: retourne iptables
+```
+
+Certains plugins réseaux, tel que **Cilium**, permettent de ne plus utiliser **kube-proxy** et de le remplacer par un composant du CNI 
+
+### Kubernetes : `kube-proxy` Userspace mode
+
+![](images//kubernetes/services-userspace-overview.svg){height="400px"}
+
+- Userspace mode est ancien et inefficace. 
+
+- Le paquet est comparé aux règles iptables puis transféré au pod **kube-Proxy**, qui fonctionne comme une application pour transférer le paquet aux pods backend.
+
+- Kube-proxy fonctionne sur chaque nœud en tant que processus dans l'espace utilisateur. 
+
+- Il distribue les requêtes entre les pods pour assurer l'équilibrage de charge et intercepte la communication entre les services. 
+
+- Malgré sa portabilité et sa simplicité, le surcoût de traitement des paquets dans l'espace utilisateur le rend moins efficace pour les charges de trafic élevées.
+
+
+### Kubernetes : `kube-proxy` IPtables mode
+
+![](images//kubernetes/services-iptables-overview.svg){height="400px"}
+
+- Le mode iptables est préférable car il utilise la fonctionnalité iptables du noyau, qui est assez mature. 
+
+- kube-proxy gère les règles iptables en fonction du fichier YAML du service de Kubernetes.
+
+- Pour gérer le trafic des services, Kube-proxy configure des règles iptables sur chaque nœud.
+
+- Il achemine les paquets vers les pods pertinents en utilisant du NAT (Network Address Translation) iptables. 
+
+- Ce mode fonctionne bien avec des volumes de trafic modestes et est plus efficace que le mode espace utilisateur.
+
+### Kubernetes : `kube-proxy` IPVS mode
+
+
+![](images//kubernetes/services-ipvs-overview.svg){height="400px"}
+
+IPVS mode équilibre la charge en utilisant la fonctionnalité IPVS du noyau Linux. Par rapport au mode IPtables, il offre une meilleure évolutivité et des performances améliorées.
+
+IPVS est le mode recommandé pour les installations à grande échelle car il peut gérer de plus gros volumes de trafic avec efficacité. 
+
+**IPtable Non !**
+
 
 
 ### Kubernetes : Kubelet
 
-- Service principal de Kubernetes
+Elle, Il, iel ?  😉
+
+- Agent principal du nœud : Kubelet est le principal agent qui s'exécute sur chaque nœud (machine) d'un cluster Kubernetes.
+- Gestion des pods : Elle est responsable de la création, de la mise à jour et de la suppression des pods sur ce nœud, en suivant les instructions du plan de contrôle Kubernetes.
+- Communication avec l'API Kubernetes : Kubelet communique en permanence avec l'API Kubernetes pour recevoir les mises à jour de configuration et les commandes.
+- Exécution des conteneurs : Il utilise un runtime de conteneur (comme Docker ou containerd) pour lancer et gérer les conteneurs à l'intérieur des pods.
 - Permet à Kubernetes de s'auto configurer :
     - Surveille un dossier contenant les *manifests* (fichiers YAML des différents composant de Kubernetes).
     - Applique les modifications si besoin (upgrade, rollback).
-- Surveille l'état des services du cluster via l'API server (*kube-apiserver*).
-  
+- Surveillance de l'état des pods : Kubelet surveille en permanence l'état des pods et des conteneurs, et signale tout problème au plan de contrôle.
+- Gestion des ressources : Il gère l'allocation des ressources (CPU, mémoire) aux pods et assure que les limites de ressources ne sont pas dépassées.
+- Intégration avec le système d'exploitation : Kubelet s'intègre avec le système d'exploitation hôte pour gérer les réseaux, les volumes et autres fonctionnalités du système.
 
 
-### Kubernetes : Autres composants
+![](images//kubernetes/CRI.png){height="400px"}
 
-- kubelet : Service "agent" fonctionnant sur tous les nœuds et assurant le fonctionnement des autres services
-- kubectl : Ligne de commande permettant de piloter un cluster Kubernetes
 
 
 
@@ -175,11 +242,11 @@ Kubernetes n'implémente pas de solution réseau par défaut, mais s'appuie sur 
 - Chaque pod est conscient de son adresse IP (pas de NAT)
 - Kubernetes n'impose aucune implémentation particulière
 - Quelques exemple d'implémentations : 
-    - Calico : <https://projectcalico.docs.tigera.io/about/about-calico/>
-    - Cilium : <https://github.com/cilium/cilium>
-    - Flannel : <https://github.com/flannel-io/flannel#flannel>
-    - Multus : Un  Multi Network plugin permet d'avoir des pods avec plusieurs interfaces
-    - Weave Net : https://www.weave.works/oss/net/ 
+    - **Calico** : <https://projectcalico.docs.tigera.io/about/about-calico/>
+    - **Cilium** : <https://github.com/cilium/cilium>
+    - **Flannel** : <https://github.com/flannel-io/flannel#flannel>
+    - **Multus** : Un  Multi Network plugin permet d'avoir des pods avec plusieurs interfaces
+    - **Weave Net** : https://www.weave.works/oss/net/ 
     - Voir les autres : <https://kubernetes.io/docs/concepts/cluster-administration/networking/>
 
     
@@ -199,6 +266,7 @@ Kubernetes n'implémente pas de solution réseau par défaut, mais s'appuie sur 
     Complete 1.31 [Schedule](https://kubernetes.io/releases/patch-releases/#1-31) and [Changelog](https://git.k8s.io/kubernetes/CHANGELOG/CHANGELOG-1.31.md)
 
 
-    
 
-    
+
+![Top expectation](images/kubernetes/k2024.avif)
+
