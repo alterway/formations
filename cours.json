@@ -117,6 +117,7 @@
       "containers/kubernetes/k8s-observability-monitoring",
       "containers/kubernetes/k8s-scheduling",
       "containers/kubernetes/k8s-logging-monitoring",
+      "containers/kubernetes/k8s-applications",
       "containers/kubernetes/k8s-operations",
       "containers/kubernetes/k8s-security",
       "containers/kubernetes/k8s-helm-intro",

@@ -13,6 +13,9 @@ Un nœud avec un taint empêche l'exécution sur lui-même des pods qui ne tolè
 - Les _taints_ sont définis ainsi : `key=value:Effect`
 
 
+![](images/kubernetes/taint-toleration.png){height="350px"}
+
+
 ### Taints et Tolerations : Champ "Effect"
 
 Ce champ peut avoir 3 valeurs : `NoSchedule`, `PreferNoSchedule`, `NoExecute`
@@ -104,6 +107,11 @@ tolerations:
 - Champs clé valeur au niveau des podSpecs
 - Pour que le pod puisse s'exécuter il faut que le nœud ait l'ensemble des labels correspondants
   
+![](images/kubernetes/nodeselector.png){height="450px"}
+
+
+### nodeSelector exemple
+
 Exemples 
 
 - Pose du label sur un nœud
@@ -136,6 +144,11 @@ Ce système permet de gérer très finement les règles de placement des pods en
 - Le langage permettant d'exprimer les affinités / anti-affinités est riche de possibilités
 - Possibilité de d'écrire des préférences `soft` (pod déployé malgré tout) ou `hard` (pod déployé uniquement si les règles sont respectées)
 - Contraintes dépendantes de labels présents dans d'autres pods
+
+
+![](images/kubernetes/affinities.png){height="550px"}
+
+
 
 ### Node Affinity
 

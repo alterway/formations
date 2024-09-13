@@ -129,6 +129,28 @@ spec:
     limits.memory: 500Mi
 ```
 
+### ResourceQuotas
+
+```yaml
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: quota-for-objects
+spec:
+  hard:
+    pods: 200
+    services: 10
+    secrets: 20
+    configmaps: 40
+    persistentvolumeclaims: 40
+    services.nodeports: 0
+    services.loadbalancers: 0
+    count/roles.rbac.authorization.k8s.io: 10
+
+```
+
+
+
 
 ![](images/kubernetes/resource-quota-limitrange.gif){height="450px"}
 
