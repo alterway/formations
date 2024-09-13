@@ -18,20 +18,20 @@
 - Fichier `kubeconfig` peut être passé en paramètre de kubectl avec la variable d'nvironnement `KUBECONFIG`
     . `KUBECONFIG=/opt/k8s/config kubectl get pods`
 
-### Kubeconfig 1
+### Kubeconfig 1/4
 
-Un seul fichier pour gérer tous ses clusters avec trois informations :
+Un seul fichier pour gérer tous les clusters avec trois informations :
 
 - Serveurs (IP, CA Cert, Nom)
 - Users (Nom, Certificat, Clé)
 - Context, association d'un user et d'un serveur
 
 
-### Kubeconfig 2
+### Kubeconfig 2/4
 
 ![Synthèse architecture](images/kubeconfig-structure.png){height="400px"}
 
-### Kubeconfig 3
+### Kubeconfig 3/4
 
 
 ```yaml
@@ -60,8 +60,53 @@ users:
 
 ```
 
+### Kubeconfig 3/4
 
-Stocké par défaut dans ~/.kube/config
+Lorsque vous accédez à plusieurs clusters Kubernetes, vous aurez de nombreux fichiers kubeconfig.
+
+Par défaut, kubectl recherche uniquement un fichier nommé config dans le répertoire $HOME/.kube. 
+
+Alors, comment pouvons-nous fusionner plusieurs fichiers kubeconfig en un seul ?
+
+
+- 1. Faire une copie de votre fichier kubeconfig (au cas ou ...)
+
+```bash
+cp ~/.kube/config ~/.kube/config-backup 
+```
+
+- 2. Définir la variable d'environnement KUBECONFIG
+
+La variable d'environnement KUBECONFIG est une liste de chemins vers des fichiers de configuration, par exemple :
+
+```bash
+export KUBECONFIG=~/.kube/config:/path/cluster1/config:/path/cluster2/config:/path/cluster3/config
+```
+
+-  3. Fusionner tous les fichiers kubeconfig en un seul
+  
+```bash
+kubectl config view --flatten > all-in-one-kubeconfig.yaml
+```
+
+- 4. Remplacer l'ancien fichier de configuration par le nouveau fusionné
+
+```bash
+mv all-in-one-kubeconfig.yaml ~/.kube/config
+```
+
+- 5. Tester !
+
+```bash
+kubectl config get-contexts
+```
+
+
+### Kubernetes : Kubectl
+
+![kubectl](images/kubernetes/kubectl2.png){height="500px"}
+
+
 
 ### Kubernetes : Kubectl
 
@@ -145,7 +190,7 @@ kubectl get no
 kubectl get nodes
 ```
 
-### Kubernetes : `kubectl`
+### Kubernetes : `kubectl get` 
 
 - plus d'infos
 
@@ -177,7 +222,7 @@ kubectl get pods  \
 ```
 
 
-### Kubernetes : `kubectl`
+### Kubernetes : `kubectl get`
 
 - Utiliser `jq`
   
@@ -202,7 +247,7 @@ kubectl get pods -o json | jq -r '.items[] | select(.metadata.name | test("test-
 
 ```
 
-### Kubernetes : `kubectl`
+### Kubernetes : `kubectl get`
 
 - Afficher les _namespaces_
 
@@ -218,7 +263,7 @@ kubectl get namespaces
 kubectl -n kube-system get pods
 ```
 
-### Kubernetes : `kubectl`
+### Kubernetes : `kubectl get`
 
 - Afficher les pods (pour le namespace _default_)
 
@@ -227,7 +272,7 @@ kubectl get pods
 kubectl get pod
 ```
 
-### Kubernetes : `kubectl`
+### Kubernetes : `kubectl get`
 
 - Afficher les services (pour le _namespace_ `default`):
 
@@ -236,7 +281,7 @@ kubectl get services
 kubectl get svc
 ```
 
-### Kubernetes : `kubectl`
+### Kubernetes : `kubectl get`
 
 - Afficher les ressources d'un `namespace` particulier
 - Utilisable avec la plupart des commandes `kubectl`
@@ -249,7 +294,7 @@ kubectl run -n NNN ...
 kubectl delete -n NNN ...
 # ...
 ```
-### Kubernetes : `kubectl`
+### Kubernetes : `kubectl get`
 
 - Pour lister des ressources dans tous les namespaces : `--all-namespaces`
 - Depuis kubernetes 1.14 on peut utiliser le flag `-A` en raccourci
@@ -265,7 +310,7 @@ kubectl label -A ...
 ```
 
 
-### Kubectl : Se déplacer dans un NS de manière permanente
+### Kubectl : Se déplacer dans un Namespace de manière permanente (comme un `cd`)
 
 Évite de toujours préciser le flag `-n`
 
@@ -339,7 +384,7 @@ Un Lease est un objet qui expire après un certain temps s'il n'est pas renouvel
 
 ### Kubernetes : `kubectl describe`
 
-- `kubectl describe` a besoin d'un type de ressource et optionnelle-ment un nom de ressource
+- `kubectl describe` a besoin d'un type de ressource et optionnellement un nom de ressource
 - Il est possible de fournir un _préfixe_ de nom de ressource
 
 - ex:
@@ -349,7 +394,7 @@ Un Lease est un objet qui expire après un certain temps s'il n'est pas renouvel
  kubectl describe node worker-0
 ```
 
-- Pourquoi utiliser kubectl describe ?
+- Pourquoi utiliser kubectl describe ? :
 
     - Dépannage: Pour comprendre pourquoi un objet ne fonctionne pas comme prévu.
     - Audit: Pour vérifier la configuration d'un objet et s'assurer qu'elle correspond à vos attentes.
@@ -359,8 +404,11 @@ Un Lease est un objet qui expire après un certain temps s'il n'est pas renouvel
 ### Kubernetes : Création d'objets Kubernetes
 
 - Les objets Kubernetes sont créés sous la forme de fichiers JSON ou YAML et envoyés à l'APIServer
+
 - Possible d'utiliser la commande `kubectl run`, mais limitée aux `deployments` et aux `jobs`
+
 - L'utilisation de fichiers YAML permet de les stocker dans un système de contrôle de version comme git, mercurial, etc...
+
 - La documentation de référence pour l'API Kubernetes <https://kubernetes.io/docs/reference/#api-reference>
 
 
@@ -515,7 +563,6 @@ kubectl apply -f admin-role-binding.yaml
 kubectl -n kubernetes-dashboard create token admin-user
 ```
 
-
 Étape 4: Accéder au Dashboard
 
 Démarrer un proxy pour accéder au Dashboard:
@@ -524,16 +571,38 @@ Démarrer un proxy pour accéder au Dashboard:
 kubectl proxy
 ```
 
-Cela démarre un proxy à l'adresse http://localhost:8001.
+- Cela démarre un proxy à l'adresse <http://localhost:8001>
+- Ouvrir le Dashboard dans votre navigateur:
+    - Accédez à l'URL suivante dans votre navigateur:
+<http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/>
 
-Ouvrir le Dashboard dans votre navigateur:
+- Se connecter avec le token:
+    - Lorsque vous êtes invité à vous connecter, choisissez l'option "Token" et entrez le token que vous avez récupéré à l'Étape 3.
 
-Accédez à l'URL suivante dans votre navigateur:
+![](images/kubernetes/dashboard.png){height="200px"}
 
-http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
 
-Se connecter avec le token:
 
-Lorsque vous êtes invité à vous connecter, choisissez l'option "Token" et entrez le token que vous avez récupéré à l'Étape 3.
+
+### Kubernetes : Kubernetes Dashboard
+
+![](images/kubernetes/dashboard-node.png){height="700px"}
+
+
+
+### Kubernetes : Kubernetes Dashboard
+
+![](images/kubernetes/dashboard-node.png){height="700px"}
+
+
+### Kubernetes : Kubernetes Dashboard
+
+![](images/kubernetes/dashboard-ns.png){height="700px"}
+
+
+### Kubernetes : Kubernetes Dashboard
+
+![](images/kubernetes/dashboard-pod.png){height="700px"}
+
 
 

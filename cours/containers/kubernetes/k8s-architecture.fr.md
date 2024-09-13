@@ -40,17 +40,13 @@
 - core services :
 
     - `kube-scheduler` : Implémente les fonctionnalités de scheduling
-    
     - `kube-controller-manager` : Responsable de l'état du cluster, boucle infinie qui régule l'état du cluster afin d'atteindre un état désiré
-    
     - `kube-cloud-controller-manager` : Est un composant important du plan de contrôle (control plane) de Kubernetes, spécifiquement conçu pour interagir avec l'infrastructure cloud sous-jacente
-    
     - `kube-proxy` : Permet le forwarding TCP/UDP et le load balancing entre les services et les backends (Pods)
-
 
 - Le control plane est aussi appelé "Master"
 
-![](images//kubernetes/control-plane.webp){height="150px"}
+![](images//kubernetes/control-plane.webp){height="250px"}
 
 ### Kubernetes : `etcd`
 
@@ -118,7 +114,6 @@ Le kube-controller-manager exécute et fait tourner les processus de contrôle d
 - Fonction principale :
 
     - Le CCM agit comme une interface entre Kubernetes et le fournisseur de cloud spécifique (comme AWS, Google Cloud, Azure, etc.). Il permet à Kubernetes de gérer les ressources spécifiques au cloud de manière indépendante du reste du cluster.
-
     - Séparation des responsabilités :
         - Avant l'introduction du CCM, le contrôleur de nœud (node controller), le contrôleur de route (route controller) et le contrôleur de service (service controller) étaient intégrés au contrôleur de gestion Kubernetes (kube-controller-manager). Le CCM a extrait ces fonctionnalités spécifiques au cloud pour les gérer séparément.
     - Contrôleurs spécifiques au cloud : Le CCM implémente plusieurs contrôleurs qui interagissent avec l'API du fournisseur de cloud :
@@ -126,7 +121,7 @@ Le kube-controller-manager exécute et fait tourner les processus de contrôle d
         - Route Controller : Configure les routes dans l'infrastructure cloud pour que les pods sur différents nœuds puissent communiquer.
         - Service Controller : Crée, met à jour et supprime les load balancers du cloud.
 
-![](images//kubernetes/Kubernetes-Architecture-Diagram-Explained.png){height="260px"}
+![](images//kubernetes/Kubernetes-Architecture-Diagram-Explained.png){height="280px"}
 
 
 ### Kubernetes : `kube-proxy`
@@ -165,13 +160,9 @@ Certains plugins réseaux, tel que **Cilium**, permettent de ne plus utiliser **
 ![](images//kubernetes/services-userspace-overview.svg){height="400px"}
 
 - Userspace mode est ancien et inefficace. 
-
 - Le paquet est comparé aux règles iptables puis transféré au pod **kube-Proxy**, qui fonctionne comme une application pour transférer le paquet aux pods backend.
-
 - Kube-proxy fonctionne sur chaque nœud en tant que processus dans l'espace utilisateur. 
-
 - Il distribue les requêtes entre les pods pour assurer l'équilibrage de charge et intercepte la communication entre les services. 
-
 - Malgré sa portabilité et sa simplicité, le surcoût de traitement des paquets dans l'espace utilisateur le rend moins efficace pour les charges de trafic élevées.
 
 
@@ -180,13 +171,9 @@ Certains plugins réseaux, tel que **Cilium**, permettent de ne plus utiliser **
 ![](images//kubernetes/services-iptables-overview.svg){height="400px"}
 
 - Le mode iptables est préférable car il utilise la fonctionnalité iptables du noyau, qui est assez mature. 
-
 - kube-proxy gère les règles iptables en fonction du fichier YAML du service de Kubernetes.
-
 - Pour gérer le trafic des services, Kube-proxy configure des règles iptables sur chaque nœud.
-
 - Il achemine les paquets vers les pods pertinents en utilisant du NAT (Network Address Translation) iptables. 
-
 - Ce mode fonctionne bien avec des volumes de trafic modestes et est plus efficace que le mode espace utilisateur.
 
 ### Kubernetes : `kube-proxy` IPVS mode
@@ -194,11 +181,9 @@ Certains plugins réseaux, tel que **Cilium**, permettent de ne plus utiliser **
 
 ![](images//kubernetes/services-ipvs-overview.svg){height="400px"}
 
-IPVS mode équilibre la charge en utilisant la fonctionnalité IPVS du noyau Linux. Par rapport au mode IPtables, il offre une meilleure évolutivité et des performances améliorées.
-
-IPVS est le mode recommandé pour les installations à grande échelle car il peut gérer de plus gros volumes de trafic avec efficacité. 
-
-**IPtable Non !**
+- IPVS mode équilibre la charge en utilisant la fonctionnalité IPVS du noyau Linux. Par rapport au mode IPtables, il offre une meilleure évolutivité et des performances améliorées.
+  
+- IPVS est le mode recommandé pour les installations à grande échelle car il peut gérer de plus gros volumes de trafic avec efficacité. **IPtable Non !**
 
 
 
@@ -218,7 +203,7 @@ Elle, Il, iel ?  😉
 - Intégration avec le système d'exploitation : Kubelet s'intègre avec le système d'exploitation hôte pour gérer les réseaux, les volumes et autres fonctionnalités du système.
 
 
-![](images//kubernetes/CRI.png){height="400px"}
+![](images//kubernetes/CRI.png){height="300px"}
 
 
 
@@ -268,5 +253,6 @@ Kubernetes n'implémente pas de solution réseau par défaut, mais s'appuie sur 
 
 
 
-![Top expectation](images/kubernetes/k2024.avif)
+![Top expectation](images/kubernetes/k2024.avif){height="400px"}
+
 

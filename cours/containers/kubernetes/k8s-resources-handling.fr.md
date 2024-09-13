@@ -130,3 +130,7 @@ spec:
 ```
 
 
+![](images/kubernetes/resource-quota-limitrange.gif){height="700px"}
+
+
+

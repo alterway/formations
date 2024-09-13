@@ -36,8 +36,8 @@ lab-middleware-c46cd576f-7zckz   1m           43Mi
 ### Logging
 
 - Tout comme docker, Kubernetes permet d'afficher les logs générés par les applications avec la commande `kubectl logs`
-- L'option -f permet de diffusion en direct des logs
-- Pour les pods multiconteneurs, il est nécessaire de spécifier le conteneur dont on veut visualiser les logs
+- L'option `-f` permet de diffusion en direct des logs
+- Pour les pods multi-conteneurs, il est nécessaire de spécifier le conteneur dont on veut visualiser les logs
 
 
 ### Logging

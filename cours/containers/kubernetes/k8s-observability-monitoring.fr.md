@@ -10,18 +10,9 @@
   - Command: Exécute une commande dans le conteneur
   - grpc : standard GRPC Health Checking Protocol
 
-### Sondes : Readiness
 
-- Gère le trafic à destination du pod
-- Un pod avec une sonde readiness *NotReady* ne reçoit aucun trafic
-- Permet d'attendre que le service dans le conteneur soit prêt avant de router du trafic
-- Un pod *Ready* est ensuite enregistrer dans les *endpoints* du service associé
+![](images/kubernetes/probes.png){height="700px"}
 
-### Sondes : Liveness
-
-- Gère le redémarrage du conteneur en cas d'incident
-- Un pod avec une sonde liveness sans succès est redémarré au bout d'un intervalle défini
-- Permet de redémarrer automatiquement les pods "tombés" en erreur
 
 ### Sondes : Startup
 
@@ -30,6 +21,23 @@
 - Permet de ne pas augmenter les `initialDelaySeconds` des Readiness et Liveness
 - Elle sert à savoir quand l'application est prête
 - Les 3 sondes combinées permet de gérer très finement la disponibilité de l'application
+
+
+
+### Sondes : Readiness
+
+- Gère le trafic à destination du pod
+- Un pod avec une sonde readiness *NotReady* ne reçoit aucun trafic
+- Permet d'attendre que le service dans le conteneur soit prêt avant de router du trafic
+- Un pod *Ready* est ensuite enregistrer dans les *endpoints* du service associé
+
+
+
+### Sondes : Liveness
+
+- Gère le redémarrage du conteneur en cas d'incident
+- Un pod avec une sonde liveness sans succès est redémarré au bout d'un intervalle défini
+- Permet de redémarrer automatiquement les pods "tombés" en erreur
 
 
 ### Différents types de sondes : `httpGet`
@@ -43,8 +51,6 @@
     - 200-399 = succès
     - tout autre code = échec
 
-
-    
 
 
 ### Différents types de sondes : `exec`

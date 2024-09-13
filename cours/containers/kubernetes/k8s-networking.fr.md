@@ -384,12 +384,23 @@ spec:
 
 ### Kubernetes : Ingress Controller
 
-Pour utiliser un `Ingress`, il faut un Ingress Controller. Il existe plusieurs offres sur le marché :
+Pour utiliser un `Ingress`, il faut un `Ingress Controller`
+
+Il existe plusieurs solutions OSS ou non :
 
 - Traefik : <https://github.com/containous/traefik>
 - Istio : <https://github.com/istio/istio>
 - Linkerd : <https://github.com/linkerd/linkerd>
 - Contour : <https://www.github.com/heptio/contour/>
 - Nginx Controller : <https://github.com/kubernetes/ingress-nginx>
+
+⚠︎ Note : Il est possible d'avoir plusieurs Ingress Controller sur un cluster il suffira dans les objets ingress de préciser sur quelle classe d'ingress on souhaite le créer.
+Ca se fait par `ingressClassName`. 
+
+Ces classes sont créees au moment de l'installation du contrôleur.
+
+Les **Ingress** vont bientôt être dépréciés en faveur des `Gateway API` qui sont la nouvelle génération de Kubernetes Ingress, Load Balancing, et Service Mesh APIs.
+
+Plus d'informations ici : <https://gateway-api.sigs.k8s.io/>
 
 

@@ -28,7 +28,7 @@ A voir :
 - Cela permet d'installer par ex. 10 instances de MongoDB
   (avec des versions et configurations potentiellement différentes)  
 
-### Kubernetes : Conceptes de Helm 
+### Kubernetes : Concepts de Helm 
 
 - `helm` est un outil CLI
 

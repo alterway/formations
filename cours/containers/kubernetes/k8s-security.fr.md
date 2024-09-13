@@ -130,7 +130,9 @@ kubectl auth can-i get pods /
 ### NetworkPolicies
 
 - La ressource `NetworkPolicy` est une spécification permettant de définir comment un ensemble de `pods` communiquent entre eux ou avec d'autres endpoints
+
 - Le `NetworkPolicy` utilisent les labels pour sélectionner les pods sur lesquels s'appliquent les règles qui définissent le trafic alloué sur les pods sélectionnés
+  
 - Le `NetworkPolicy` est générique et fait partie de l'API Kubernetes. Il est nécessaire que le plugin réseau déployé supporte cette spécification
 
 
@@ -138,7 +140,7 @@ kubectl auth can-i get pods /
 
 - DENY tout le trafic sur une application
 - LIMIT le trafic sur une application
-- DENY le trafic all non alloué dans un namespace
+- DENY les trafic entrant et sortant dans un namespace
 - DENY tout le trafic venant d'autres namespaces
 - exemples de Network Policies : <https://github.com/ahmetb/kubernetes-network-policy-recipes>
 
@@ -169,7 +171,7 @@ Cilium Network Policy Editor : <https://editor.networkpolicy.io/?id=xJYCeLwGmAGx
 
 ### NetworkPolicies : outils : Tufin Network Policy Viewer
 
-Tufin Network Policy Viewer : https://orca.tufin.io/netpol/
+Tufin Network Policy Viewer : <https://orca.tufin.io/netpol/>
 
 
 ![tufin](images/kubernetes/npp2.png){height="400px"}

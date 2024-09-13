@@ -61,7 +61,9 @@ spec:
 
 ### Kubernetes : Labels
 
-- La commande `kubectl get pods`, par défaut, ne liste pas les labels. Il est possible de les voir en utilisant `--show-labels`:
+- La commande `kubectl get pods`, par défaut, ne liste pas les labels. 
+  
+- Il est possible de les voir en utilisant `--show-labels`:
 
 ```console
 $ kubectl get pods --show-labels

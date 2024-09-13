@@ -10,6 +10,9 @@
 - Le but de la séparation est de sortir du code du *core* de Kubernetes
 - GA depuis Kubernetes 1.13
 
+![](images/kubernetes/csi.webp){height="400px"}
+
+
 
 ### Kubernetes : CSI
 
@@ -24,6 +27,10 @@
    - Cycle de vie des volumes: Le CSI gère le cycle de vie complet des volumes (provisionnement, attachement, détachement, suppression).
 
 
+![](images/kubernetes/dell-csi.png){height="400px"}
+
+
+
 ### Kubernetes : Volumes
 
 - Fournir du stockage persistent aux PODs
@@ -35,6 +42,13 @@
 - Fonctionnent de la même façon que les volumes Docker pour les volumes hôte :
     - `EmptyDir` ~= volumes docker
     - `HostPath` ~= volumes hôte
+
+
+![](images/kubernetes/volumes.webp){height="400px"}
+
+
+
+
 
 ### Type de Volumes
 
@@ -121,9 +135,9 @@ spec:
 
 ### Type de stockage
 
-- Persistent Volume (PV)— Représentation de bas niveau d'un volume de stockage.
-- Persistent Volume Claim (PVC)— binding entre un Pod et un Persistent Volume (PV).
-- Storage Class — Permet de provionner dynamiquement d'un Persistent Volumes (PV).
+- `Persistent Volume` (PV)        : Représentation de bas niveau d'un volume de stockage.
+- `Persistent Volume Claim` (PVC) : binding entre un Pod et un Persistent Volume (PV).
+- `Storage Class`                 :  Permet de provionner dynamiquement d'un Persistent Volumes (PV).
 
 
 ![](images/kubernetes/storage.png){height="300px"}
@@ -200,6 +214,10 @@ volumeBindingMode: WaitForFirstConsumer
     - ROX - read-only par plusieurs noeuds
     - RWX - read-write par plusieurs noeuds
 
+
+![](images/kubernetes/persistent-volume-claims-k8.png){height="300px"}
+
+
 ### Kubernetes : PersistentVolume
 
 ```yaml
@@ -222,7 +240,9 @@ spec:
 
 - Les PV qui sont créés dynamiquement par une `StorageClass` auront la politique de récupération spécifiée dans le champ `reclaimPolicy` de la classe, qui peut être `Delete` ou `Retain`.
 - Si aucun `reclaimPolicy` n'est spécifié lors de la création d'un objet `StorageClass`, il sera par défaut `delete`.
+
 - Les PV qui sont créés manuellement et gérés via une `StorageClass` auront la politique de récupération qui leur a été attribuée lors de la création.
+
 - La stratégie de récupération s'applique aux volumes persistants et non à la classe de stockage elle-même. Les PV et les PVC créés à l'aide de cette `StorageClass` hériteront de la stratégie de récupération définie dans `StorageClass`.
 
 
@@ -239,6 +259,10 @@ spec:
 - Utilisé par les `StatefulSets` pour solliciter du stockage (Utilisation du champ `volumeClaimTemplates`)
 - Le PVC doit se trouver dans le même namespace que le pod. Pour chaque pod, un PVC effectue une demande de stockage dans un namespace.
 - Les "Claim"" peuvent demander une taille et des modes d'accès spécifiques (par exemple, elles peuvent être montées ReadWriteOnce, ReadOnlyMany ou ReadWriteMany).
+
+
+
+![](images/kubernetes/persistent-volume-and-persistent-volume-claim.png){height="300px"}
 
 
 ### Kubernetes : PersistentVolumeClaims
@@ -284,4 +308,8 @@ spec:
         claimName: myclaim
 ```
 
+
+### Kubernetes : Provisionnement Dynamique
+
+![](images/kubernetes/storage-class.png){height="700px"}
 
