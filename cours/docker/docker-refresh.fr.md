@@ -200,7 +200,7 @@ Architecture de Docker Engine
     - Un Dockerfile peut être utilisé pour créer des images personnalisées à partir d'images de base ou pour créer des images à partir de zéro
 18
 
- Les mécanismes de copy-on-write de Docker
+Les mécanismes de copy-on-write de Docker
 Docker utilise des mécanismes de copy-on-write pour optimiser l'utilisation de l'espace disque et de la mémoire.
 Lorsqu'un conteneur Docker est lancé, il utilise une image de base comme couche de base en lecture seule.
 Toutes les modifications apportées au système de fichiers du conteneur sont stockées dans une couche de différence en lecture-écriture, qui est superposée à la couche de base.
@@ -215,9 +215,9 @@ Lorsqu'un conteneur est supprimé, sa couche de différence est également suppr
 20
 
 Manipulation des images Docker - Introduction
-Les images Docker sont des modèles utilisés pour créer des conteneurs
-Les images Docker peuvent être téléchargées à partir de registres publics ou privés, tels que Docker Hub, Amazon ECR, Harbor, Azure ACR, Github, Gitlab, registry2…
-Les images Docker peuvent être créées à l'aide de la commande docker build, qui construit une nouvelle image à partir d'un fichier Dockerfile
+Les images Docker sont des modèles utilisés pour créer des conteneurs
+Les images Docker peuvent être téléchargées à partir de registres publics ou privés, tels que Docker Hub, Amazon ECR, Harbor, Azure ACR, Github, Gitlab, registry2…
+Les images Docker peuvent être créées à l'aide de la commande docker build, qui construit une nouvelle image à partir d'un fichier Dockerfile
 Les images Docker peuvent être manipulées à l'aide de diverses commandes de base, telles que docker pull, docker images et docker rmi
 21
 
@@ -229,9 +229,9 @@ Les images Docker téléchargées sont stockées dans le cache local pour une ut
 22
 
 Manipulation des images Docker - Affichage des images
-La commande docker images (docker image ls) est utilisée pour afficher la liste des images Docker disponibles sur le système local
-La sortie de la commande docker images affiche les informations suivantes pour chaque image : nom, tag, ID d'image, date de création et taille
-L'option -a peut être utilisée pour afficher toutes les images, y compris les images intermédiaires utilisées lors de la construction d'une image
+La commande docker images (docker image ls) est utilisée pour afficher la liste des images Docker disponibles sur le système local
+La sortie de la commande docker images affiche les informations suivantes pour chaque image : nom, tag, ID d'image, date de création et taille
+L'option -a peut être utilisée pour afficher toutes les images, y compris les images intermédiaires utilisées lors de la construction d'une image
 L'option --digests peut être utilisée pour afficher les digests d'image, qui sont des sommes de contrôle cryptographiques uniques pour chaque image
 
 23
