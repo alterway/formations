@@ -104,6 +104,7 @@
     "course_description": "Formation Kubernetes",
     "modules": [
       "intro-awcc",
+      "containers/kubernetes/k8s-labs",
       "containers/kubernetes/k8s-governance",
       "containers/kubernetes/k8s-architecture",
       "containers/kubernetes/k8s-installation",
