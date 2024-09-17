@@ -104,11 +104,11 @@ kubectl config get-contexts
 
 ### Kubernetes : Kubectl
 
-![kubectl](images/kubernetes/kubectl2.png){height="500px"}
+![](images/kubernetes/kubectl2.png){height="500px"}
 
 
 
-### Kubernetes : Kubectl
+### Kubernetes : Kubectl `api-resources`
 
 - Afficher la liste des ressources API supportées par le serveur:
 
@@ -134,7 +134,7 @@ jobs                                           batch                            
 ingresses                         ing          extensions                           true         Ingress
 ```
 
-- Pourquoi utiliser kubectl api-resources ?
+- Pourquoi utiliser `kubectl api-resources` ?
     - Découverte: Pour connaître les ressources disponibles dans votre cluster.
     - Documentation: Pour obtenir des informations sur les différentes ressources et leurs propriétés.
     - Développement: Pour créer des scripts et des outils d'automatisation.

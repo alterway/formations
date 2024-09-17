@@ -1,5 +1,9 @@
 # Méthode déclarative et impérative pour créer des objets Kubernetes
 
+### déclaratif vs impératif
+
+![](images/kubernetes/imperative-declarative-k8s.jpg)
+
 ### La méthode déclarative
 
 L'approche déclarative consiste à décrire l'état désiré des ressources. Vous déclarez ce que vous voulez obtenir, et Kubernetes s'occupe de mettre en place et de maintenir cet état.

@@ -12,7 +12,7 @@
 - Cronjobs
 - Services
 
-### Kubernetes : Namespaces
+### Kubernetes : `Namespaces`
 
 - Fournissent une séparation logique des ressources :
     - Par utilisateurs
@@ -25,7 +25,7 @@
 - Défaut: Le namespace `default` existe par défaut dans chaque cluster Kubernetes.
 
 
-### Kubernetes : Labels
+### Kubernetes : `Labels`
 
 - Système de clé/valeur
 - Organisent, filtrent, selectionnent les différents objets de Kubernetes (Pods, RC, Services, etc.) d'une manière cohérente qui reflète la structure de l'application
@@ -40,7 +40,7 @@
 - Multiples: Un objet peut avoir plusieurs labels.
 
 
-### Kubernetes : Labels
+### Kubernetes : `Labels`
 
 - Exemple de label :
 
@@ -59,7 +59,7 @@ spec:
     - containerPort: 80
 ```
 
-### Kubernetes : Labels
+### Kubernetes : `Labels`
 
 - La commande `kubectl get pods`, par défaut, ne liste pas les labels. 
   
@@ -100,7 +100,7 @@ kubectl get po -A -l k8s-app!=kube-dns
 
 ```
 
-### Kubernetes : Annotations
+### Kubernetes : `Annotations`
 
 - Système de clé/valeur
 - Ce sont des informations qui ne sont pas utilisées pour l'identification de ressources.
@@ -112,7 +112,7 @@ kubectl get po -A -l k8s-app!=kube-dns
 - Mutables: Les annotations peuvent être modifiées après la création de l'objet.
 - Multiples: Un objet peut avoir plusieurs annotations.
 
-### Kubernetes : Annotations
+### Kubernetes : `Annotations`
 
 - exemple d'annotation
 
@@ -138,7 +138,7 @@ spec:
             port:
 ```
 
-### Kubernetes : Pod
+### Kubernetes : `Pod`
 
 - Un Pod n'est pas un processus, c'est un environnement pour les containers
     - Un pod ne peut pas être redémarré
@@ -158,7 +158,7 @@ En savoir plus : <https://kubernetes.io/fr/docs/concepts/workloads/pods/pod/>
 
 
 
-### Kubernetes : Pod
+### Kubernetes : `Pod`
 
 ![pods](images/pods.png)
 
@@ -179,7 +179,7 @@ spec:
     - containerPort: 80
 ```
 
-### Kubernetes : Pod
+### Kubernetes : `Pod`
 
 Dans les statuts du pod on trouve la notion de phase d'exécution
 
@@ -204,7 +204,7 @@ yy-ss7nk              1/1     Running   0          84m   10.244.0.5   kind-cp
 
 ```
 
-### Kubernetes : Pod
+### Kubernetes : `Pod`
 
 dans les statuts du pod on trouve la notion de Conditions d'état des pods
 
@@ -231,7 +231,7 @@ Conditions:
 ...
 ```
 
-### Kubernetes : Pod
+### Kubernetes : `Pod`
 
 États des containers (States)
 
@@ -247,7 +247,7 @@ Les containers peuvent avoir seulement 3 états
 $ kubectl get pods <POD_NAME> -o jsonpath='{.status}' | jq
 ```
 
-### Kubernetes : Deployment
+### Kubernetes : `Deployment`
 
 - Permet d'assurer le fonctionnement d'un ensemble de Pods
 - Gère les Version, Update et Rollback
@@ -258,7 +258,7 @@ $ kubectl get pods <POD_NAME> -o jsonpath='{.status}' | jq
 
 
 
-### Kubernetes : Deployment
+### Kubernetes : `Deployment`
 
 ```plaintext
 +--------------------+
@@ -287,7 +287,7 @@ $ kubectl get pods <POD_NAME> -o jsonpath='{.status}' | jq
 
 
 
-### Kubernetes : Deployment
+### Kubernetes : `Deployment`
 
 ```yaml
 apiVersion: apps/v1
@@ -318,7 +318,7 @@ kubectl create deployment my-deployment --image=nginx:latest --replicas=3
 ```
 
 
-### Kubernetes : DaemonSet
+### Kubernetes : `DaemonSet`
 
 - Assure que tous les noeuds exécutent une copie du pod sur tous les noeuds du cluster
 - Ne connaît pas la notion de `replicas`.
@@ -328,7 +328,7 @@ kubectl create deployment my-deployment --image=nginx:latest --replicas=3
     - l'exécution d'agents de supervision comme NewRelic agent, Prometheus node exporter
   
 
-### Kubernetes : DaemonSet
+### Kubernetes : `DaemonSet`
 
 ![daemonset](images/daemonset.png)
 
@@ -355,7 +355,7 @@ metadata:
       image: luksa/ssd-monitor
 ```
 
-### Kubernetes : StatefulSet
+### Kubernetes : `StatefulSet`
 
 - Similaire au `Deployment` mais les noms des composants sont prédictibles
 - Les pods possèdent des identifiants uniques.
@@ -367,7 +367,7 @@ metadata:
 ![statefulset](images/statefulset.png){width="500"}
 
 
-### Kubernetes : StatefulSet
+### Kubernetes : `StatefulSet`
 
 ```yaml
 apiVersion: apps/v1
@@ -412,7 +412,7 @@ web-1   1/1     Running   0          7s
 web-2   1/1     Running   0          5s
 ```
 
-### Kubernetes : StatefulSet avancé
+### Kubernetes : `StatefulSet` avancé
 
 ```yaml
 
@@ -491,7 +491,7 @@ spec:
         ...
 ```
 
-### Kubernetes : Job
+### Kubernetes : `Job`
 
 - Crée des pods et s'assurent qu'un certain nombre d'entre eux se terminent avec succès.
 - Peut exécuter plusieurs pods en parallèle
@@ -500,7 +500,7 @@ spec:
 
 ![job](images/job.png)
 
-### Kubernetes : Job
+### Kubernetes : `Job`
 
 ```yaml
 apiVersion: batch/v1
@@ -528,7 +528,7 @@ En ligne de commande :
 kubectl create job exemple-job --image=busybox -- /bin/sh -c "date; echo Hello from the Kubernetes cluster"
 ```
 
-### Kubernetes: CronJob
+### Kubernetes: `CronJob`
 
 - Un CronJob permet de lancer des Jobs de manière planifiée.
 - la programmation des Jobs se définit au format `Cron`
@@ -536,7 +536,7 @@ kubectl create job exemple-job --image=busybox -- /bin/sh -c "date; echo Hello f
 
 ![cronjob](images/cronjob.png)
 
-### Kubernetes : CronJob
+### Kubernetes : `CronJob`
 
 ```yaml
 apiVersion: batch/v1
@@ -586,7 +586,7 @@ kubectl patch cronjob <cronjob-name> -p '{"spec" : {"suspend" : false }}'
    
 
 
-### Extras : Init Containers
+### Extras : `Init Containers`
 
 - On peut définir des conteneurs qui doivent s'exécuter avant les conteneurs principaux
 - Ils seront exécutés dans l'ordre
@@ -620,7 +620,7 @@ spec:
 
 ```
 
-### Extras : Init Containers
+### Extras : `Init Containers`
 
 
 - Lors du démarrage d'un Pod, le kubelet retarde l'exécution des conteneurs d'initialisation jusqu'à ce que le réseau et le stockage soient prêts. Ensuite, le kubelet exécute les conteneurs d'initialisation du Pod dans l'ordre où ils apparaissent dans la spécification du Pod.
