@@ -55,10 +55,11 @@ kubectl set image deployment nginx nginx=nginx:1.15
 - Dry run. Afficher les objets de l'API correspondant sans les créer :
 
 ```bash
-kubectl run nginx --image=nginx --dry-run
+kubectl run nginx --image=nginx --dry-run=client
+kubectl run nginx --image=nginx --dry-run=server
 ```
 
-- Démarrer un container en utiliser une commande différente et des arguments différents :
+- Démarrer un container en utilisant une commande différente et des arguments différents :
 
 ```bash
 kubectl run nginx --image=nginx \
@@ -92,14 +93,24 @@ kubectl attach my-pod -i
 kubectl port-forward my-svc 6000
 ```
 
+- Mettre en place de l'auto-scaling
+ex: Mise à l'échelle automatique avec un minimum de 2 et un maximum de 10 réplicas lorsque l'utilisation du processeur est égale ou supérieure à 70 %
+
+
+```bash
+kubectl autoscale deployment my-Deployments --min=2 --max=10 --cpu-percent=70  
+```
+
+
 ### Kubectl : Logging
 
 - Utiliser `kubectl` pour diagnostiquer les applications et le cluster kubernetes :
 
 ```bash
 kubectl cluster-info
-kubectl get events
+kubectl get events --sort-by='.lastTimestamp'
 kubectl describe node <NODE_NAME>
+kubectl describe node <node-name> | grep Taints
 kubectl  logs (-f) <POD_NAME>
 ```
 

@@ -146,7 +146,7 @@ Ce système permet de gérer très finement les règles de placement des pods en
 - Contraintes dépendantes de labels présents dans d'autres pods
 
 
-![](images/kubernetes/affinities.png){height="550px"}
+![](images/kubernetes/affinities.png){height="500px"}
 
 
 

@@ -264,14 +264,7 @@ $ kubectl get pods <POD_NAME> -o jsonpath='{.status}' | jq
 - Il est lié avec l'object ReplicaSet qui gère le cycle de vie et la mise à l'échelle des pods
 - Souvent combiné avec un objet de type **service**
 
-![deployment](images/deployment.png)
-
-
-
-### Kubernetes : `Deployment`
-
-
-![](images/kubernetes/deployment-1.png){height="600px"}
+![](images/kubernetes/deployment-1.png){height="400px"}
 
 
 ### Kubernetes : `Deployment`

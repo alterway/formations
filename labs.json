@@ -15,6 +15,7 @@
       "k8s/rbac",
       "k8s/rolling_update",
       "k8s/network-policy",
+      "k8s/autoscaling",
       "k8s/ingress",
       "k8s/monitoring",
       "k8s/helm",

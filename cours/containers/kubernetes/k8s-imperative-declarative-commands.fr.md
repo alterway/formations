@@ -2,7 +2,7 @@
 
 ### déclaratif vs impératif
 
-![](images/kubernetes/imperative-declarative-k8s.jpg){height="400x"}
+![](images/kubernetes/imperative-declarative-k8s.jpg){height="500px"}
 
 
 ### La méthode déclarative
