@@ -9,7 +9,7 @@ Voici quelques stratégies de mise à jour des applications
 - Blue-Green Déploiement
 
 
-![](images//kubernetes/rollingupdate.png){height="550px"}
+![](images//kubernetes/rollingupdate.png){height="500px"}
 
 
 ### Rolling Update
