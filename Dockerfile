@@ -12,9 +12,9 @@ RUN <<EOF
     echo '</head>' >> /usr/share/nginx/html/index.html
     echo '<body>' >> /usr/share/nginx/html/index.html
    
-    for i in `ls -1  output-html/*.html`
+    for i in `ls -1  /usr/share/nginx/html/*.html`
     do
-       echo "<a href=$i>$i</a>"  >> /usr/share/nginx/html/index.html
+       echo "<a href=$(basename $i)>$(basename $i)</a>"  >> /usr/share/nginx/html/index.html
     done
 
     echo '</body>' >> /usr/share/nginx/html/index.html
