@@ -147,11 +147,6 @@ spec:
             port:
 ```
 
-### Kubernetes : `Pod`
-
-![](images/kubernetes/how-you-deploy-a-container-on-kubernetes.jpg){height="650px"}
-
-
 
 ### Kubernetes : `Pod`
 

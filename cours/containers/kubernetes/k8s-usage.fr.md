@@ -402,6 +402,11 @@ Un Lease est un objet qui expire après un certain temps s'il n'est pas renouvel
     - Audit: Pour vérifier la configuration d'un objet et s'assurer qu'elle correspond à vos attentes.
     - Apprentissage: Pour mieux comprendre la structure et le fonctionnement des différents objets Kubernetes.
 
+### Kubernetes : Création d'objets Kubernetes
+
+![](images/kubernetes/how-you-deploy-a-container-on-kubernetes.jpg){height="500px"}
+
+
 
 ### Kubernetes : Création d'objets Kubernetes
 
@@ -412,6 +417,7 @@ Un Lease est un objet qui expire après un certain temps s'il n'est pas renouvel
 - L'utilisation de fichiers YAML permet de les stocker dans un système de contrôle de version comme git, mercurial, etc...
 
 - La documentation de référence pour l'API Kubernetes <https://kubernetes.io/docs/reference/#api-reference>
+
 
 
 ### Kubernetes : Créer un pod en ligne de commande

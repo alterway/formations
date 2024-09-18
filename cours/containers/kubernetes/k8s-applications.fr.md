@@ -110,6 +110,9 @@ Le mode de mise à jour "Recreate" dans Kubernetes est une stratégie utilisée 
 5. **Risque Minimal d’Incompatibilité** :
    - Réduit les risques d’incompatibilité qui peuvent survenir lorsque plusieurs versions de l’application fonctionnent simultanément.
 
+
+### Recreate
+
 Voici un exemple de configuration pour utiliser la stratégie "Recreate" dans un fichier de déploiement Kubernetes (`deployment.yaml`) :
 
 ```yaml
