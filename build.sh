@@ -50,8 +50,9 @@ build-html() {
       -V navigation=frame \
       -V revealjs-url="${REVEALJSURL}" \
       -V slideNumber=true \
+      -V previewLinks=true \
       -V title="${TITLE}" \
-      -V institute="alter way Cloud Consulting" \
+      -V institute="Alter Way Cloud Consulting" \
       -o /formations/output-html/"${cours}"."${LANGUAGE}".html \
       /formations/"${COURS_DIR}"/slide-"${cours}"
     rm -f "${COURS_DIR}"/slide-"${cours}"
