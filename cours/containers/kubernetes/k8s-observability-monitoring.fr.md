@@ -207,7 +207,7 @@ spec:
 
 L'API Kubernetes inclut également des points de terminaison de contrôle d'état : healthz (obsolète), readyz, livez.
 
-```console
+```bash
 kubectl get --raw='/readyz?verbose'
 ```
 ### Sondes : Exemple Kubernetes API
@@ -215,7 +215,7 @@ kubectl get --raw='/readyz?verbose'
 
 Point de terminaison **readyz**
 
-```console
+```bash
 [+]ping ok
 [+]log ok
 [+]etcd ok
@@ -249,13 +249,13 @@ readyz check passed
  
  Point de terminaison **livez**
 
-```console`
+```bash`
 kubectl get --raw='/livez?verbose'
 ```
 
 ### Sondes : Exemple Kubernetes API
 
-```console
+```bash
 +]ping ok
 [+]log ok
 [+]etcd ok

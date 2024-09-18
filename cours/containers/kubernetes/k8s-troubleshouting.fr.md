@@ -4,7 +4,7 @@
 
 - Vérifier l'état des pods 
 
-```console
+```bash
     $ kubectl get pods
     NAME                           READY   STATUS           RESTARTS   AGE
     nginx-deploy-8fd84bbd6-b8d48   1/1     Running             0          45d
@@ -23,7 +23,7 @@
 
     Faites une description sur le pod et regardez la section "Events". Vous remarquerez peut-être un warning "Back-off restarting failed"
 
-```console
+```bash
     $ kubectl describe pods mysql-database 
     Events:
     Type     Reason     Age                  From                                                 Message
@@ -40,7 +40,7 @@
 
     Vous pouvez connaître la raison de l'échec en vérifiant les logs des conteneurs de votre pod
 
-```console
+```bash
     $ kubectl logs mysql-database --container=mysql
     2020-03-06 10:07:26+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 8.0.19-1debian10 started.
     2020-03-06 10:07:26+00:00 [Note] [Entrypoint]: Switching to dedicated user 'mysql'
@@ -55,7 +55,7 @@
 
     Faites une description sur le pod et regardez la section "Events". Vous pouvez remarquer l'erreur "ErrImagePull". Cela signifie que vous avez mis une mauvaise image de docker ou que vous avez une mauvaise autorisation d'accès au registre
 
-```console
+```bash
     $ kubectl describe pods mysql-database1 
         Events:
     Type     Reason          Age                 From                                                 Message
@@ -75,7 +75,7 @@
 
     Faites une description sur le pod et regardez la section "Events". Notez que le scheduler n'a pas de nœud dans lequel placer votre pod en raison d'une ressource insuffisante. Vous pouvez augmenter votre CPU ou votre mémoire (selon le message d'avertissement), cela peut se produire en ajoutant de nouveaux nœuds ou en diminuant le nombre de réplicas du déploiement    
 
-```console
+```bash
     $ kubectl describe pods web-deploy-654fb8bb79-24nvd
         Events:
     Type     Reason             Age                From                Message
@@ -100,7 +100,7 @@
 
 - Commandes utiles
 
-```console    
+```bash    
     $ kubectl get pods
     $ kubectl describe pods pod-name
     $ kubectl logs pod-name --container=pods-containers-name
@@ -110,7 +110,7 @@
 
 ### Troubleshooting des Services 
 
-```console
+```bash
    $ kubectl get services 
     NAME          TYPE           CLUSTER-IP    EXTERNAL-IP   PORT(S)        AGE
     kubernetes    ClusterIP      10.16.0.1     <none>        443/TCP        46d
@@ -119,7 +119,7 @@
 
    Il existe plusieurs problèmes courants qui peuvent empêcher les services de fonctionner correctement. Tout d'abord, vérifiez qu'il existe des endpoints pour le service. Pour chaque objet Service, l'API server met à disposition une ressource endpoint.
 
-```console    
+```bash    
    $ kubectl get endpoints web-service
     NAME          ENDPOINTS                                  AGE
     web-service   10.12.0.27:80,10.12.0.28:80,10.12.0.4:80   11m
@@ -127,7 +127,7 @@
 
    Assurez-vous que les endpoints correspondent au nombre de conteneurs que vous pensez être membres de votre service. Dans ce scénario, le service Web sert un déploiement Web avec 3 réplicas de pods.
 
-```console
+```bash
    $ kubectl get deployments
     NAME             READY   UP-TO-DATE   AVAILABLE   AGE
     web-deployment   3/3     3            3           4h43m 
@@ -138,7 +138,7 @@
 
     au cas où les endpoints du service sont manquants, vérifiez le sélecteur du service
 
-```console
+```bash
     ...
     spec:
       - selector:
@@ -147,7 +147,7 @@
 
     Ce sélecteur doit correspondre aux labels des pods sinon le service ne pourra pas exposer les pods
 
-```console
+```bash
     $ kubectl get pods --show-labels
     NAME                              READY   STATUS    RESTARTS   AGE     LABELS
     web-deployment-654fb8bb79-6n9q2   1/1     Running   0          4h53m   run=web-deployment
@@ -164,7 +164,7 @@
 
 - Vérifier l'état des composants du Controlplane  
 
-```console
+```bash
     $ kubectl get componentstatus
     NAME                 STATUS    MESSAGE   ERROR
     controller-manager   Healthy   ok        
@@ -173,7 +173,7 @@
 
 - Vérifier l'état des nœuds  
 
-```console
+```bash
     $ kubectl get nodes 
     NAME       STATUS   ROLES   AGE   VERSION
     worker-1   Ready    worker   8d   v1.21.0
@@ -185,7 +185,7 @@
 
 - Vérifier les pods du Controlplane 
 
-```console
+```bash
     $ kubectl get pods -n kube-systems 
     NAME                           READY    STATUS   RESTARTS   AGE
     coredns-78fcdf6894-5dntv       1/1      Running  0          1h
@@ -204,7 +204,7 @@
 
 - Vérifier les services du Controlplane
 
-```console
+```bash
     $ service kube-apiserver status
     ● kube-apiserver.service - Kubernetes API Server
     Loaded: loaded (/etc/systemd/system/kube-apiserver.service; enabled; vendor preset: enabled)
@@ -221,7 +221,7 @@
 
 - Vérifier les logs de service
 
-```console
+```bash
     $ kubectl logs kube-apiserver-master -n kube-system
 
     I0401 13:45:38.190735 1 server.go:703] external host was not specified, using 172.17.0.117
@@ -244,14 +244,14 @@
 
 - Vérifier l'état du nœud
 
-```console
+```bash
     $ kubectl get nodes
     NAME       STATUS   ROLES   AGE   VERSION
     worker-1   Ready    <none>   8d   v1.21.0
     worker-2   NotReady <none>   8d   v1.21.0
 ````
 
-```console
+```bash
     $ kubectl describe node worker-1
     ...
     Conditions:
@@ -266,7 +266,7 @@
 
 ### Troubleshooting des noeuds
 
-```console
+```bash
     $ kubectl describe node worker-2
     Conditions:
         Type           Status    LastHeartbeatTime               Reason                   Message
@@ -283,7 +283,7 @@
 - Vérifier les certificats :
   
 
-```console
+```bash
    $ openssl x509 -in /var/lib/kubelet/worker-1.crt -text
     Certificate:
         Data:

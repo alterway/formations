@@ -8,7 +8,7 @@
 - Et est copié aussi dans le `replicaSet` (annotation)
 - Cela permet de suivre quelle commande a créé ou modifié ce `replicatset`
 
-```console
+```bash
 
 $ kubectl create -f nginx.yaml --record
 deployment.apps/nginx created
@@ -21,7 +21,7 @@ kubectl rollout history
 
 - Utiliser le flag `--record`
 
-```console
+```bash
 # déployer l'image worker:v0.2
 kubectl create deployment worker --image=dockercoins/worker:v0.2
 
@@ -39,13 +39,13 @@ kubectl rollout history deployment worker
 
 - Il est possible d'augmenter le nombre de pods avec la commande `kubectl scale` :
 
-```console
+```bash
 kubectl scale --replicas=5 deployment nginx
 ```
 
 - Il est possible de changer l'image d'un container utilisée par un _Deployment_ :
 
-```console
+```bash
 kubectl set image deployment nginx nginx=nginx:1.15
 ```
 
@@ -54,20 +54,20 @@ kubectl set image deployment nginx nginx=nginx:1.15
 
 - Dry run. Afficher les objets de l'API correspondant sans les créer :
 
-```console
+```bash
 kubectl run nginx --image=nginx --dry-run
 ```
 
 - Démarrer un container en utiliser une commande différente et des arguments différents :
 
-```console
+```bash
 kubectl run nginx --image=nginx \
 --command -- <cmd> <arg1> ... <argN>
 ```
 
 - Démarrer un Cron Job qui calcule π et l'affiche toutes les 5 minutes :
 
-```console
+```bash
 kubectl run pi --schedule="0/5 * * * ?" --image=perl --restart=OnFailure \
 -- perl -Mbignum=bpi -wle 'print bpi(2000)'
 ```
@@ -76,19 +76,19 @@ kubectl run pi --schedule="0/5 * * * ?" --image=perl --restart=OnFailure \
 
 - Se connecter à un container:
 
-```console
+```bash
 kubectl run -it busybox --image=busybox -- sh
 ```
 
 - S'attacher à un container existant :
 
-```console
+```bash
 kubectl attach my-pod -i
 ```
 
 - Accéder à un service via un port :
 
-```console
+```bash
 kubectl port-forward my-svc 6000
 ```
 
@@ -96,7 +96,7 @@ kubectl port-forward my-svc 6000
 
 - Utiliser `kubectl` pour diagnostiquer les applications et le cluster kubernetes :
 
-```console
+```bash
 kubectl cluster-info
 kubectl get events
 kubectl describe node <NODE_NAME>
@@ -111,7 +111,7 @@ kubectl  logs (-f) <POD_NAME>
   par exemple si l'on donne un nom de déploiement ou de replica set, les logs correspondront au premier pod
 - Par défaut les logs affichées sont celles du premier container dans le pod. 
 
-```console
+```bash
 # exemple :
 kubectl logs deploy/nginx
 ```
@@ -126,7 +126,7 @@ kubectl logs deploy/nginx
    - `--since` pour n'afficher que les logs à partir d'une certaine date
    - `--timestamps`affichera le timestamp du message
 
-```console
+```bash
 # exemple :
 kubectl logs deploy/pingpong --tail 100 --follow --since=5s
 # Affichera toutes les logs depuis 5 secondes et commencera au 100eme messages et continuera l'affichage des nouveaux messages
@@ -138,7 +138,7 @@ kubectl logs deploy/pingpong --tail 100 --follow --since=5s
 
 - Pour afficher les logs de plusieurs pod il faudra utiliser un `selecteur` (label)
 
-```console
+```bash
 kubectl logs -l app=my-app --tail 100 # -f 
 ```
 
@@ -152,7 +152,7 @@ kubectl logs -l app=my-app --tail 100 # -f
 
 - Obtenir la liste des noeuds ainsi que les informations détaillées :
 
-```console
+```bash
 kubectl get nodes
 kubectl describe nodes
 ```
@@ -161,7 +161,7 @@ kubectl describe nodes
 
 - Marquer le noeud comme _unschedulable_ (+ drainer les pods) et _schedulable_ :
 
-```console
+```bash
 kubectl cordon <NODE_NAME>
 kubectl drain <NDOE_NAME>
 kubectl uncordon <NODE_NAME>
@@ -171,7 +171,7 @@ kubectl uncordon <NODE_NAME>
 
 - Dans le cas ou votre kubeconfig comporte plusieurs clusters
 
-```console
+```bash
 
 # lister les contextes
 kubectl config get-contexts
@@ -192,7 +192,7 @@ alias kubectx='kubectl config use-context '
 
 Évite de toujours préciser le flag `-n`
 
-```console
+```bash
 
 kubectl get ns
 
@@ -213,7 +213,7 @@ alias kubens='kubectl config set-context --current --namespace '
 installation de krew (<https://krew.sigs.k8s.io/docs/user-guide/setup/install/>)
 
 
-```console
+```bash
 
 kubectl krew install example
 

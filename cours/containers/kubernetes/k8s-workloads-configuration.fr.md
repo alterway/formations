@@ -94,20 +94,20 @@ spec:
 
 - En utilisant le contenu complet d'un répertoire
 
-```console
+```bash
 kubectl create configmap my-config --from-file=./my/dir/path/
 ```
 
 - En utilisant le contenu d'un fichier d'un répertoire
 
-```console
+```bash
 kubectl create configmap my-config --from-literal=key1=value1 --from-literal=key2=value2
 ```
 
 - En utilisant des clés valeurs
 
 
-```console
+```bash
 kubectl create configmap my-config --from-literal=key1=value1 --from-literal=key2=value2
 ```
 
@@ -130,13 +130,13 @@ kubectl create configmap my-config --from-literal=key1=value1 --from-literal=key
 
 ### Kubernetes : Secrets
 
-```console
+```bash
 $ kubectl create secret docker-registry mydockerhubsecret \
 --docker-username="employeeusername" --docker-password="employeepassword" \
 --docker-email="employee.email@organization.com"
 ```
 
-```console
+```bash
 kubectl create secret generic dev-db-secret --from-literal=username=devuser --from-literal=password='S!B\*d$zDsb'
 ```
 

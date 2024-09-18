@@ -114,7 +114,7 @@ kubectl config get-contexts
 
 - Afficher la liste des ressources API supportées par le serveur:
 
-```console
+```bash
 $ kubectl api-resources
 NAME                              SHORTNAMES   APIGROUP                             NAMESPACED   KIND
 configmaps                        cm                                                true         ConfigMap
@@ -149,19 +149,19 @@ ingresses                         ing          extensions                       
 - Le "man pages" de kubernetes
 - Explorer les types et définitions
 
-```console
+```bash
 kubectl explain type
 ```
 
 - Expliquer la définition d'un champs de ressource, ex:
 
-```console
+```bash
 kubectl explain node.spec
 ```
 
 - Boucler sur les définitions
   
-```console
+```bash
 kubectl explain node --recursive
 ```
 
@@ -181,13 +181,13 @@ kubectl explain node --recursive
 
 - Afficher les noeuds du cluster :
 
-```console
+```bash
 kubectl get nodes
 ```
 
 - Ces commandes sont équivalentes:
 
-```console
+```bash
 kubectl get no
 kubectl get nodes
 ```
@@ -196,14 +196,14 @@ kubectl get nodes
 
 - plus d'infos
 
-```console
+```bash
 kubectl get nodes -o wide
 ```
 
 - Sortie yaml / json 
 
 
-```console
+```bash
 kubectl get nodes -o yaml
 kubectl get nodes -o json
 ```
@@ -213,7 +213,7 @@ kubectl get nodes -o json
 
     - Plus d'infos : https://kubernetes.io/docs/reference/kubectl/jsonpath/
 
-```console 
+```bash 
 
 kubectl get pods -o=jsonpath='{@}'
 kubectl get pods -o=jsonpath='{.items[0]}'
@@ -228,7 +228,7 @@ kubectl get pods  \
 
 - Utiliser `jq`
   
-```console
+```bash
 kubectl get nodes -o json |
         jq ".items[] | {name:.metadata.name} + .status.capacity"
 ```
@@ -239,7 +239,7 @@ kubectl get nodes -o json |
 
 ex: 
 
-```console
+```bash
 
 # KO :
 kubectl get pods -o jsonpath='{.items[?(@.metadata.name=~/^test$/)].metadata.name}'
@@ -253,7 +253,7 @@ kubectl get pods -o json | jq -r '.items[] | select(.metadata.name | test("test-
 
 - Afficher les _namespaces_
 
-```console
+```bash
 kubectl get ns
 kubectl get namespaces
 ```
@@ -261,7 +261,7 @@ kubectl get namespaces
 - Par défaut, kubectl utilise le _namespace_ `default`
 - Il est possible de sélectionner un _namespace_ avec l'option `-n` ou `--namespace`
 
-```console
+```bash
 kubectl -n kube-system get pods
 ```
 
@@ -269,7 +269,7 @@ kubectl -n kube-system get pods
 
 - Afficher les pods (pour le namespace _default_)
 
-```console
+```bash
 kubectl get pods
 kubectl get pod
 ```
@@ -278,7 +278,7 @@ kubectl get pod
 
 - Afficher les services (pour le _namespace_ `default`):
 
-```console
+```bash
 kubectl get services
 kubectl get svc
 ```
@@ -288,7 +288,7 @@ kubectl get svc
 - Afficher les ressources d'un `namespace` particulier
 - Utilisable avec la plupart des commandes `kubectl`
 
-```console
+```bash
 kubectl get pods --namespace=kube-system
 kubectl get pods -n kube-system
 kubectl create -n NNN ...
@@ -302,7 +302,7 @@ kubectl delete -n NNN ...
 - Depuis kubernetes 1.14 on peut utiliser le flag `-A` en raccourci
 - Il est possible de l'utiliser avec beaucoup de commande kubectl pour manipuler toutes les ressources 
 
-```console
+```bash
 kubectl get pods --all-namespaces
 # ou
 kubectl get pods -A
@@ -316,7 +316,7 @@ kubectl label -A ...
 
 Évite de toujours préciser le flag `-n`
 
-```console
+```bash
 
 kubectl get ns
 
@@ -338,14 +338,14 @@ alias kubens='kubectl config set-context --current --namespace '
 `kube-public` est créé par `kubeadm` 
 
 
-```console
+```bash
 kubectl get all -n kube-public
 ```
 
 - Le configMap contient les informations données par la commande
   `kubectl cluster-info`
 
-```console
+```bash
 kubectl -n kube-public get configmaps
 # voir le contenu du configmap (cm)
 kubectl -n kube-public get configmap cluster-info -o yaml
@@ -367,7 +367,7 @@ curl -k https://{NodeIP}/api/v1/namespaces/kube-public/configmaps/cluster-info
 
 - Extraire le kubeconfig du configmap `cluster-info`
 
-```console
+```bash
 curl -sk https://<IP PRIV>/api/v1/namespaces/kube-public/configmaps/cluster-info \
      | jq -r .data.kubeconfig
 ```
@@ -391,7 +391,7 @@ Un Lease est un objet qui expire après un certain temps s'il n'est pas renouvel
 
 - ex:
   
-```console
+```bash
  kubectl describe node/worker-0
  kubectl describe node worker-0
 ```
@@ -419,12 +419,12 @@ Un Lease est un objet qui expire après un certain temps s'il n'est pas renouvel
 - Cette commande avant la 1.18 créait un `deployment`
 - Depuis elle démarre un simple `pod`
 
-```console
+```bash
 # Création d'un pod en tâche de fond
 kubectl run pingu --image=alpine -- ping 127.1
 ```
 
-```console
+```bash
 # Création d'un pod en intératif
 kubectl run -i --tty my-pod --image=debian -- /bin/bash
 ```
@@ -436,7 +436,7 @@ kubectl run -i --tty my-pod --image=debian -- /bin/bash
 - `kubectl create deployment` ...
 - Depuis kubernetes 1.19, il est possible de préciser une commande au moment du `create`
 
-```console
+```bash
 kubectl create deployment pingu --image=alpine -- ping 127.1
 ```
 
@@ -448,13 +448,13 @@ kubectl create deployment pingu --image=alpine -- ping 127.1
 
 - Pour créer un object Kubernetes depuis votre fichier `YAML`, utilisez la commande `kubectl create` :
 
-```console
+```bash
 kubectl create -f object.yaml
 ```
 
 - Il est possible de créer des objets Kubernetes à partir d'une URL :
 
-```console
+```bash
 kubectl create -f https://raw.githubusercontent.com/kubernetes/examples/master/guestbook/frontend-deployment.yaml
 ```
 
@@ -462,13 +462,13 @@ kubectl create -f https://raw.githubusercontent.com/kubernetes/examples/master/g
 
 - Pour les supprimer exécuter simplement :
 
-```console
+```bash
 kubectl delete -f object.yaml
 ```
 
 - Mettre à jour un objet Kubernetes en écrasant la configuration existante:
 
-```console
+```bash
 kubectl replace -f object.yaml
 kubectl apply -f object.yaml
 ```
@@ -504,7 +504,7 @@ kubectl apply -f object.yaml
 
 Étape 1: Déployer le Dashboard
 
-```console
+```bash
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
 
 ```
@@ -524,7 +524,7 @@ metadata:
 
 2. Appliquer le fichier YAML pour créer le compte de service:
 
-```console
+```bash
 kubectl apply -f dashboard-adminuser.yaml
 ````
 
@@ -551,7 +551,7 @@ subjects:
 
 4. Appliquer le fichier YAML pour créer le rôle d'administration:
 
-```console
+```bash
 
 kubectl apply -f admin-role-binding.yaml
 
@@ -561,7 +561,7 @@ kubectl apply -f admin-role-binding.yaml
 
 Étape 3: Récupérer le token d'accès
 
-```console
+```bash
 kubectl -n kubernetes-dashboard create token admin-user
 ```
 
@@ -569,7 +569,7 @@ kubectl -n kubernetes-dashboard create token admin-user
 
 Démarrer un proxy pour accéder au Dashboard:
 
-```console
+```bash
 kubectl proxy
 ```
 

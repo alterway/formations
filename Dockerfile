@@ -14,7 +14,7 @@ RUN <<EOF
    
     for i in `ls -1  /usr/share/nginx/html/*.html`
     do
-       echo "<a href=$(basename $i)>$(basename $i)</a>"  >> /usr/share/nginx/html/index.html
+       echo "<br>- <a href=$(basename $i)>$(basename $i)</a><br>"  >> /usr/share/nginx/html/index.html
     done
 
     echo '</body>' >> /usr/share/nginx/html/index.html

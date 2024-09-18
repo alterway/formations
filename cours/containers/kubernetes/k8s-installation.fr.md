@@ -70,7 +70,7 @@ ou plus simplement : `curl -sfL https://get.k3s.io | sh -`
 - Licence obligatoire si autre utilisation que personnelle (<https://www.docker.com/pricing/>)
 
 
-![docker desktop](images/docker-desktop.svg){height="350px"}
+![Docker desktop](images/docker-desktop.svg){height="350px"}
 
 
 
@@ -82,7 +82,7 @@ ou plus simplement : `curl -sfL https://get.k3s.io | sh -`
 - Build et Run de container (nerdctl ou Docker CLI)
 - Choix des version de kubernetes
 
-![docker desktop](images/kubernetes/rancher-desktop.png){height="350px"}
+![Rancher desktop](images/kubernetes/rancher-desktop.png){height="350px"}
 
 
 
@@ -118,17 +118,21 @@ ou plus simplement : `curl -sfL https://get.k3s.io | sh -`
 ### kubeadm demo
 
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/jwBK9b5X1rk?si=t8Q_aGaTV6zcr5u6" title="kubeadm" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="660" height="415" src="https://www.youtube.com/embed/jwBK9b5X1rk?si=t8Q_aGaTV6zcr5u6" title="kubeadm" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 
 ### kubeadm fonctionnalités
 
-- En plus de l'installation de Kubernetes, kubeadm peut :
+- En plus de l'installation de Kubernetes, `kubeadm` peut :
 
     - Génération des fichiers de configuration: Crée les fichiers de configuration nécessaires pour les composants du cluster.
+  
     - Gestion des certificats: Génère et distribue les certificats nécessaires pour sécuriser les communications entre les composants du cluster.
+  
     - Gestion des tokens: Crée des tokens d'authentification pour les nœuds qui rejoignent le cluster.
+  
     - Vérification de la configuration: Valide que le système et les configurations sont compatibles avec Kubernetes.
+  
     - Mises à jour et modifications: Facilite les mises à jour des versions de Kubernetes et les modifications de la configuration du cluster.
 
  
@@ -138,9 +142,11 @@ ou plus simplement : `curl -sfL https://get.k3s.io | sh -`
     - Amazon Elastic Kubernetes Service (EKS):
         - Documentation : https://aws.amazon.com/fr/eks/
         - Offre une solution entièrement gérée pour déployer, gérer et mettre à l'échelle des clusters Kubernetes sur AWS.
+
     - Google Kubernetes Engine (GKE):
         - Documentation : https://cloud.google.com/kubernetes-engine
         - Propose une plateforme hautement disponible et entièrement gérée pour exécuter des applications conteneurisées sur Google Cloud Platform.
+  
     - Azure Kubernetes Service (AKS):
         - Documentation : https://azure.microsoft.com/fr-fr/services/kubernetes-service/
         - Permet de déployer et gérer des clusters Kubernetes sur Azure avec une intégration profonde avec les autres services Azure.
@@ -169,7 +175,9 @@ ou plus simplement : `curl -sfL https://get.k3s.io | sh -`
 ### Installateurs de Kubernetes
 
 - Via Ansible : `kubespray` <https://github.com/kubernetes-sigs/kubespray>
+  
 - Via Terraform : <https://github.com/poseidon/typhoon>
+
 - Il existe d'autres projets open source basés sur le langage Go :
     - kube-aws : <https://github.com/kubernetes-incubator/kube-aws>
     - kops : <https://github.com/kubernetes/kops>

@@ -119,7 +119,7 @@ demandée.
 #### Exemples
 
 
-```console
+```bash
 ./build.sh -c docker -l fr -o html
 ./build.sh -o pdf
 ./build.sh -c openstack-user -u ~/reveal.js
@@ -142,7 +142,7 @@ Le build se fait entièrement en local.
 
 Quelques exemples :
 
-```console
+```bash
 make openstack.pdf
 make docker-handout.pdf
 make docker-print.pdf

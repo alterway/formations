@@ -154,7 +154,7 @@ Exemple :
 
 - Vérifier la version installée avec la commande : `terraform version`
 
-```console 
+```bash 
 terraform version
 Terraform v1.2.1
 on darwin_amd64

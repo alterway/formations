@@ -26,7 +26,7 @@
 - Voici les étapes à suivre pour une mise à niveau d'un cluster avec Kubeadm: 
 - La commande `kubeadm upgrade plan` fournit les informations sur la version actuelle de kubeadm installée, la version du cluster et la dernière version stable de Kubernetes disponible 
  
-```console
+```bash
  kubectl drain worker-0
  apt-get upgrade -y kubeadm=1.21.0-00
  apt-get upgrade -y kubelet=1.21.0-00

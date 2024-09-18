@@ -71,7 +71,7 @@ spec:
     app: web
 ```
 
-```console
+```bash
 # déploiement 
 
 kubectl create deployment web --image=nginx
@@ -113,7 +113,7 @@ spec:
 ```
 
 
-```console
+```bash
 # déploiement 
 
 kubectl create deployment web --image=nginx
@@ -155,7 +155,7 @@ spec:
     app: my-nginx
 ```
 
-```console
+```bash
 # déploiement 
 
 kubectl create deployment web --image=nginx
@@ -192,7 +192,7 @@ spec:
   type: LoadBalancer
 ```
 
-```console
+```bash
 # déploiement 
 
 kubectl create deployment web --image=myapp
@@ -242,7 +242,7 @@ spec:
 
 En ligne de commande :
 
-```console
+```bash
 kubectl create service externalname my-service --external-name  my.database.example.com
 
 ```
@@ -275,7 +275,7 @@ spec:
 
 En ligne de commande : 
 
-```console
+```bash
 kubectl expose deploy nginx --port=80 --external-ip=1.2.3.4
 
 ```
@@ -306,7 +306,7 @@ kubectl expose deploy nginx --port=80 --external-ip=1.2.3.4
 
 - exemple :
 
-```console
+```bash
 kubectl get svc
 web   ClusterIP   10.96.163.5     <none>        80/TCP     3m56s
 

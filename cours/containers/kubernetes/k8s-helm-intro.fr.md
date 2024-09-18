@@ -48,7 +48,7 @@ A voir :
 
 - Structure par défaut d'un chart
 
-```console
+```bash
 mychart/
 ├── Chart.yaml
 ├── charts
@@ -72,7 +72,7 @@ mychart/
 ### Kubernetes : Helm installation premiers pas
 
 - Installer Helm (sur une distribution Linux):
-```console
+```bash
 curl \
   https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get-helm-3 | bash
 ```

@@ -74,7 +74,7 @@ spec:
   
 - Il est possible de les voir en utilisant `--show-labels`:
 
-```console
+```bash
 $ kubectl get pods --show-labels
 NAME      READY     STATUS    RESTARTS   AGE       LABELS
 nginx     1/1       Running   0          31s       app=nginx,env=prod
@@ -149,6 +149,12 @@ spec:
 
 ### Kubernetes : `Pod`
 
+![](images/kubernetes/how-you-deploy-a-container-on-kubernetes.jpg){height="650px"}
+
+
+
+### Kubernetes : `Pod`
+
 - Un Pod n'est pas un processus, c'est un environnement pour les containers
     - Un pod ne peut pas être redémarré
     - Il ne peut pas se "planter", les containers d'un pod "oui"
@@ -169,7 +175,7 @@ En savoir plus : <https://kubernetes.io/fr/docs/concepts/workloads/pods/pod/>
 
 ### Kubernetes : `Pod`
 
-![pods](images/pods.png)
+![](images/pods.png)
 
 ### Kubernetes : Pod
 
@@ -200,13 +206,13 @@ Dans les statuts du pod on trouve la notion de phase d'exécution
     - `Unknown`: L'état du pod ne peut pas être déterminé
 
 
-```console
+```bash
 $ kubectl get pods -o wide
 ```
 
 en sortie :
 
-```console
+```bash
 NAME                  READY   STATUS    RESTARTS   AGE   IP           NODE      
 xx-79c5968bdc-6lcfq   1/1     Running   0          84m   10.244.0.6   kind-cp   
 yy-ss7nk              1/1     Running   0          84m   10.244.0.5   kind-cp
@@ -223,13 +229,13 @@ dans les statuts du pod on trouve la notion de Conditions d'état des pods
     - `Initialized`: Les "Init containers sont démarrés"
     - `Ready`: Le pod est capable de répondre aux demandes ; par conséquent, il doit être inclus dans le service et les répartiteurs de charge.
 
-```console
-$ kubectl describe pods <POD_NAME>
+```bash
+kubectl describe pods <POD_NAME>
 ```
 
 en sortie
 
-```console
+```bash
 ...
 Conditions:
   Type              Status
@@ -252,7 +258,7 @@ Les containers peuvent avoir seulement 3 états
     - `Terminated`: L'exécution du conteneur s'est déroulée et s'est terminée par un succès ou un échec.
 
 
-```console
+```bash
 $ kubectl get pods <POD_NAME> -o jsonpath='{.status}' | jq
 ```
 
@@ -322,7 +328,7 @@ spec:
 
 ou en ligne de commande
 
-```console
+```bash
 kubectl create deployment my-deployment --image=nginx:latest --replicas=3
 ```
 
@@ -401,7 +407,7 @@ spec:
         - containerPort: 80
 ```
 
-```console
+```bash
 kubectl get po
 NAME    READY   STATUS              RESTARTS   AGE
 web-0   0/1     ContainerCreating   0          3s
@@ -533,7 +539,7 @@ spec:
 En ligne de commande :
 
 
-```console
+```bash
 kubectl create job exemple-job --image=busybox -- /bin/sh -c "date; echo Hello from the Kubernetes cluster"
 ```
 
@@ -575,20 +581,20 @@ spec:
 
 En ligne de commande :
 
-```console
+```bash
 kubectl create cronjob exemple-cronjob --image=busybox --schedule="*/5 * * * *" -- /bin/sh -c "date; echo Hello from the Kubernetes cluster"
 ```
 
 Susprendre un cronjob :
 
-```console
+```bash
 kubectl patch cronjob <cronjob-name> -p '{"spec" : {"suspend" : true }}'
 ```
 
 Reprendre l'exécution :
 
 
-```console
+```bash
 kubectl patch cronjob <cronjob-name> -p '{"spec" : {"suspend" : false }}'
 ```
 
