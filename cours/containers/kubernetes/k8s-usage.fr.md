@@ -2,7 +2,9 @@
 
 ### Kubernetes : `kubectl`
 
-![kubectl](images/kubectl.svg){height="200px"}
+![](images/kubectl.svg){height="200px"}
+
+   
 
 - Le seul (ou presque) outil pour interagir avec des clusters Kubernetes
 - Utilise un fichier de configuration (kubeconfig) pour communiquer avec l'API de Kubernetes
@@ -483,7 +485,7 @@ kubectl apply -f object.yaml
 
 ### Kubernetes : Kubernetes Dashboard
 
-![](images/kubernetes/dashboard-0.png){height="500px"}
+![](images/kubernetes/dashboard-node.png){height="600px"}
 
 
 ### Kubernetes : Kubernetes Dashboard
@@ -586,23 +588,22 @@ kubectl proxy
 
 ### Kubernetes : Kubernetes Dashboard
 
-![](images/kubernetes/dashboard-node.png){height="600px"}
-
-
-
-### Kubernetes : Kubernetes Dashboard
-
-![](images/kubernetes/dashboard-node.png){height="600px"}
-
-
-### Kubernetes : Kubernetes Dashboard
-
 ![](images/kubernetes/dashboard-ns.png){height="600px"}
 
 
 ### Kubernetes : Kubernetes Dashboard
 
+![](images/kubernetes/dashboard-workload.png){height="600px"}
+
+
+### Kubernetes : Kubernetes Dashboard
+
 ![](images/kubernetes/dashboard-pod.png){height="600px"}
+
+
+### Kubernetes : Kubernetes Dashboard
+
+![](images/kubernetes/dashboard-pod-detail.png){height="600px"}
 
 
 

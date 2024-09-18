@@ -10,6 +10,8 @@
 | MicroK8s      | Distribution légère de Kubernetes par Canonical.                            | - Facile à installer<br>- Léger et optimisé<br>- Idéal pour les environnements de développement | - Moins de flexibilité dans la configuration<br>- Utilise des snaps (peut ne pas plaire à tout le monde) |
 | K3s           | Distribution allégée de Kubernetes par Rancher.                             | - Très léger et rapide<br>- Idéal pour les environnements IoT et edge<br>- Moins de ressources requises | - Moins de fonctionnalités intégrées<br>- Moins documenté que Minikube                         |
 | Docker Desktop| Inclut une option pour exécuter Kubernetes directement.                     | - Facile à utiliser pour les développeurs habitués à Docker<br>- Intégration transparente avec Docker | - Peut être lourd en ressources<br>- Moins flexible que Minikube ou Kind                       |
+| Rancher Desktop| - Open Source,<br>- Choix des version de k8s<br>- Choix du CRI            | - Facile à utiliser | - Moins d'extensions que Minikube                    |
+
 
 
      
@@ -68,8 +70,23 @@ ou plus simplement : `curl -sfL https://get.k3s.io | sh -`
 - Licence obligatoire si autre utilisation que personnelle (<https://www.docker.com/pricing/>)
 
 
+![docker desktop](images/docker-desktop.svg){height="350px"}
 
-![docker desktop](images/docker-desktop.svg){height="300px"}
+
+
+### Kubernetes Local : Rancher Desktop
+
+- Installation : <https://rancherdesktop.io/>
+- Configuration Simple
+- Port-Forwarding simple
+- Build et Run de container (nerdctl ou Docker CLI)
+- Choix des version de kubernetes
+
+![docker desktop](images/kubernetes/rancher-desktop.png){height="350px"}
+
+
+
+
 
     
 

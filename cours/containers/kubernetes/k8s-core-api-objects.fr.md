@@ -3,13 +3,21 @@
 ### Kubernetes : Core API Resources
 
 - Namespaces
+  
 - Labels
+  
 - Annotations
+  
 - Pods
+  
 - Deployments
+  
 - DaemonSets
+  
 - Jobs
+  
 - Cronjobs
+  
 - Services
 
 ### Kubernetes : `Namespaces`
@@ -18,6 +26,7 @@
     - Par utilisateurs
     - Par projet / applications
     - Autres...
+  
 - Les objets existent uniquement au sein d'un namespace donné
 - Évitent la collision de nom d'objets
 - Font partie du fqdn du service (DNS) (mon-service.mon-namespace.svc.cluster.local)
@@ -74,7 +83,7 @@ nginx     1/1       Running   0          31s       app=nginx,env=prod
 
 - Lister des ressources par l'utilisation de labels
 
-```console
+```bash
 
 kubectl get po -A -l k8s-app=kube-dns
 # ou 
