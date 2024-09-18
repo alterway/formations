@@ -275,31 +275,8 @@ $ kubectl get pods <POD_NAME> -o jsonpath='{.status}' | jq
 
 ### Kubernetes : `Deployment`
 
-```plaintext
-+--------------------+
-| Deployment         |
-|                    |
-| Name: my-deployment|
-| Selector: app=web  |
-+--------------------+
-          |
-          | matches
-          v
-+--------------------+
-| ReplicaSet         |
-|                    |
-| Selector: app=nginx|
-+--------------------+
-          |
-          | matches
-          v
-+--------------------+
-| Pod                |
-|                    |
-| Labels: app=nginx  |
-+--------------------+
-```
 
+![](images/kubernetes/deployment-1.png){height="600px"}
 
 
 ### Kubernetes : `Deployment`
@@ -308,7 +285,7 @@ $ kubectl get pods <POD_NAME> -o jsonpath='{.status}' | jq
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-nginx
+  name: my-app
 spec:
   replicas: 3
   selector:
@@ -329,8 +306,12 @@ spec:
 ou en ligne de commande
 
 ```bash
-kubectl create deployment my-deployment --image=nginx:latest --replicas=3
+kubectl create deployment my-app --image=nginx:latest --replicas=3
 ```
+
+### Kubernetes : `Deployment`
+
+![](images/kubernetes/deployment-anim.gif){height="600px"}
 
 
 ### Kubernetes : `DaemonSet`

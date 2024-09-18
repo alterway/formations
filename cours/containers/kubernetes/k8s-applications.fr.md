@@ -9,10 +9,10 @@ Voici quelques stratégies de mise à jour des applications
 - Blue-Green Déploiement
 
 
-![](images//kubernetes/rollingupdate.png){height="250px"}
+![](images//kubernetes/rollingupdate.png){height="550px"}
 
 
-### RollingUpdate
+### Rolling Update
 
 
 Caractéristiques du RollingUpdate :
@@ -47,6 +47,10 @@ Caractéristiques du RollingUpdate :
     - Pour les applications avec état, des stratégies supplémentaires peuvent être nécessaires pour gérer les états et les données.
 
 
+### Rolling Update
+
+![](images/kubernetes/rolling-update.gif){height="600px"}
+
 
 ### Blue Green
 
@@ -79,6 +83,11 @@ Caractéristiques du Blue-Green Deployment :
 
 - Ressources Supplémentaires :
     - Le déploiement Blue-Green nécessite des ressources supplémentaires car les deux environnements doivent fonctionner en parallèle pendant la phase de test et de transition.
+
+
+### blue green
+
+![](images/kubernetes/blue-green.gif){height="600px"}
 
 
 ### Recreate
@@ -153,6 +162,11 @@ Caractéristiques du Canary Deployment :
     - Les outils de déploiement continu (CD) peuvent automatiser le processus de déploiement Canary, y compris la redirection du trafic et la surveillance.
 
 ### Canary Deployment Exemple
+
+
+![](images/kubernetes/GIF-canary-deployment.webp){height="500px"}
+
+
 
 **Voir le lab dédié**
 
