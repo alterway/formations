@@ -101,7 +101,7 @@ kubectl create configmap my-config --from-file=./my/dir/path/
 - En utilisant le contenu d'un fichier d'un répertoire
 
 ```bash
-kubectl create configmap my-config --from-literal=key1=value1 --from-literal=key2=value2
+kubectl create configmap my-config --from-file=./my/dir/path/myfile.txt
 ```
 
 - En utilisant des clés valeurs

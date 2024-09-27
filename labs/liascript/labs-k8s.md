@@ -730,7 +730,233 @@ Volumes:
 
 <hr>
 
+### PV et PVC Azure
+
+Faites cet exercice que si vous êtes sur un environnement Azure.
+Le cluster kubernetes est déjà créé et c'est un virtual cluster (vcluster)
+
+
+<hr>
+
+Nous allons créer une classe de stockage spécifique pour créer des disques Azure de 2 types différents :
+
+- Azurefile
+- Managed Disk
+
+
+1. AzureFile Storage Class
+
+créer un fichier azurefile-sc.yaml
+
+```yaml +.
+#azurefile-sc.yaml
+allowVolumeExpansion: true
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  labels:
+    addonmanager.kubernetes.io/mode: EnsureExists
+    kubernetes.io/cluster-service: "true"
+  name: azurefile
+mountOptions:
+- mfsymlinks
+- actimeo=30
+- nosharesock
+parameters:
+  skuName: Standard_LRS
+provisioner: file.csi.azure.com
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+```
+
+2. Appliquez ce manifest 
+
+```bash
+kubectl apply -f azurefile-sc.yaml
+```
+
+3. Vérifiez
+
+```bash
+kubectl sc 
+NAME        PROVISIONER          RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+azurefile   file.csi.azure.com   Delete          Immediate           true                   3s
+```
+
+Si vous créez un pvc avec la classe de stockage azurefile automatiquement le binding se fera avec le `pv`
+
+4. Création d'un pvc
+
+Créer un fichier azurefile-pvc.yaml
+
+
+```yaml +.
+# azurefile-pvc.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: photo-pvc
+  namespace: storage
+spec:
+  storageClassName: azurefile
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 3Gi
+
+```
+
+
+5. Appliquez ce manifest 
+
+```bash
+kubectl apply -f azurefile-pvc.yaml
+```
+
+
+6. Vérifiez sa création
+
+La création du pv sous jacent peut prendre un peu de temps vous allez certainement passer par une phase de pending...
+
+
+```bash
+kubectl get pvc -n storage
+NAME        STATUS    VOLUME   CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+photo-pvc   Pending                                      azurefile      <unset>                 10s
+
+
+kubectl get pvc -n storage
+NAME        STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+photo-pvc   Bound    pvc-e3d31860-8867-4a2d-8443-1807fe348c52   3Gi        RWX            azurefile      <unset>                 75s
+```
+
+7. Utilisation de ce pvc
+
+
+Créer un fichier azurefile-myapp.yaml
+
+```yaml +.
+# azurefile-myapp.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: my-app
+  name: my-app
+  namespace: storage
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-app
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        volumeMounts:
+          - mountPath: "/usr/share/nginx/html/img"
+            name: photo-volume
+            subPath: img
+      volumes:
+      - name: photo-volume
+        persistentVolumeClaim:
+          claimName: photo-pvc
+```
+
+
+8. Appliquez ce manifest 
+
+```bash
+kubectl apply -f azurefile-myapp.yaml
+```
+
+9. Vérifiez 
+
+```bash
+
+kubectl get pod -n storage
+
+NAME                      READY   STATUS    RESTARTS   AGE
+my-app-69b7c7dd6d-jx6r7   1/1     Running   0          5s
+my-app-69b7c7dd6d-mbzt8   1/1     Running   0          5s
+my-app-69b7c7dd6d-r8qbr   1/1     Running   0          5s
+
+
+# Prenez un des pods
+# Exécutez les commandes
+
+kubectl exec -ti my-app-69b7c7dd6d-jx6r7 -n storage  -- ls -la /usr/share/nginx/html
+
+total 20
+drwxr-xr-x 1 root root 4096 Sep 27 09:37 .
+drwxr-xr-x 1 root root 4096 Sep 27 06:01 ..
+-rw-r--r-- 1 root root  497 Aug 12 14:21 50x.html
+drwxrwxrwx 2 root root    0 Sep 27 09:32 img
+-rw-r--r-- 1 root root  615 Aug 12 14:21 index.html
+
+kubectl exec -ti my-app-69b7c7dd6d-jx6r7 -n storage  -- sh -c 'echo "hello" > /usr/share/nginx/html/img/hello.txt'
+
+# Depuis un autre pod 
+
+kubectl exec -ti my-app-69b7c7dd6d-mbzt8 -n storage  -- more  /usr/share/nginx/html/img/hello.txt
+
+```
+10.  Dupliquez le fichier `azurefile-myapp.yaml` en changeant juste le nom du déployment
+  
+
+11. Appliquez le manifest
+
+12. Vérifiez que vous avez bien 2 déploiement fonctionnels
+
+13. Vous avez donc 2 déploiements et 6 pods en tout qui partagent le même répertoire de fichiers (RWX)
+
+
+Apercu dans Azure
+
+![](images/kubernetes/azurefile.png)
+
+
+<hr>
+
+### Classe de Stockage (RWO) (Azure)
+
+
+Créez une classe de stockage `managed` avec les caractérisques suivantes
+
+```yaml
+allowVolumeExpansion: true
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  labels:
+    addonmanager.kubernetes.io/mode: EnsureExists
+    kubernetes.io/cluster-service: "true"
+  name: managed
+parameters:
+  cachingmode: ReadOnly
+  kind: Managed
+  storageaccounttype: StandardSSD_LRS
+provisioner: disk.csi.azure.com
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+
+```
+
+
+
+
+<hr>
 ### Longhorn (rancher)
+
+Ne faites cet exercice que si vous êtes sur un environnement ou vous avez installé kubernetes sur 3 machines
 
 <hr>
 
@@ -902,7 +1128,16 @@ kubectl describe pods -n storage postgres-with-longhorn-pvc-pod
 
 <hr>
 
-### Clean Up
+### Clean Up Azure
+
+```bash +.
+kubectl delete deploy --all -n storage
+kubectl delete pvc --all -n storage
+
+```
+
+<hr>
+### Clean Up LongHorm
 
 <hr>
 

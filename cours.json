@@ -124,6 +124,7 @@
       "containers/kubernetes/k8s-security",
       "containers/kubernetes/k8s-helm-intro",
       "containers/kubernetes/k8s-kustomize-intro",
+      "containers/kubernetes/k8s-argocd-intro",
       "containers/kubernetes/k8s-ingress",
       "containers/kubernetes/k8s-maintenance",
       "containers/kubernetes/k8s-troubleshouting",
