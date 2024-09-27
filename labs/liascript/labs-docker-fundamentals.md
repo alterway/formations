@@ -41,10 +41,11 @@ By the end of this exercise, you should be able to:
 
 ### 1.1. Launching and Managing Containers
 
-<section "style"="color: purple;">Step 1: </section> **Let’s begin by containerizing a simple ping process on your node:**
+```text
+Step 1: Let’s begin by containerizing a simple ping process on your node-0:
+```
 
-
-```bash
+```shell
 [ubuntu@node ~]$ docker container run alpine ping 8 .8.8.
 ```
 
@@ -76,7 +77,7 @@ Press CTRL+C to kill the process.
 Step 2: List all of the containers on your node-0 host:
 ```
 
-```bash
+```shell
 [ubuntu@node ~]$ docker container ls -a
 ```
 
@@ -99,7 +100,7 @@ from our shell so it can run in the background:
 1. The Container Lifecycle
 
 
-```bash
+```shell
 [ubuntu@node ~]$ docker container run -d alpine ping 8 .8.8.
 ```
 
@@ -116,7 +117,7 @@ the ping output isn’t streaming to the terminal this time.
 List your running containers:
 ```
 
-```bash
+```shell
 [ubuntu@node ~]$ docker container ls
 ```
 
