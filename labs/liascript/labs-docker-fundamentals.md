@@ -18,71 +18,22 @@ logo: https://assets.alterway.fr/2021/01/strong-mind.png
 
 -->
 
-# Lab Dockeer fundamentals
+# Lab Dockeer Fundamentals
 
 
-## Contents
 
+## Docker Container Fundamentals
 
-- Docker Container Essentials
-- 1. The Container Lifecycle
-   - 1.1. Launching and Managing Containers
-   - 1.2. Interrogating Containers
-   - 1.3. Launching New Processes in Old Containers
-   - 1.4. Cleaning up Containers
-   - 1.5. Optional: Independent Container Filesystems
-   - 1.6. Conclusion
-- 2. Interactive Image Creation
-   - 2.1. Modifying a Container
-   - 2.2. Capturing Container State as an Image
-   - 2.3. Conclusion
-- 3. Creating Images with Dockerfiles (1/2)
-   - 3.1. Writing and Building a Dockerfile
-   - 3.2. Using the Build Cache
-   - 3.3. Using the history Command
-   - 3.4. Conclusion
-- 4. Creating Images with Dockerfiles (2/2)
-   - 4.1. Setting Default Commands
-   - 4.2. Combining Default Commands and Options
-   - 4.3. Running as Non-Root by Default
-   - 4.4. Conclusion
-- 5. Multi-Stage Builds
-   - 5.1. Defining a multi-stage build
-   - 5.2. Building Intermediate Images
-   - 5.3. Optional: Building from Scratch
-   - 5.4. Optional: Enabling BuildKit
-   - 5.5. Conclusion
-- 6. Managing Images
-   - 6.1. Making an Account on Docker’s Hosted Registry
-   - 6.2. Tagging and Listing Images
-   - 6.3. Sharing Images on Docker Hub
-   - 6.4. Conclusion
-- 7. Managing Container Logs
-   - 7.1. Setting the Logging Driver
-   - 7.2. Configuring Log Compression and Rotation
-   - 7.3. Conclusion
-- 8. Sharing and Streaming Logs
-   - 8.1. Setup
-   - 8.2. Conclusion
-
-
-## CN100: Docker Container Essentials
-
-Welcome! The following exercises will give you the chance to practice the techniques and try out
-the tools described in this class. For your convenience, a lab environment which you can access
-through your browser has been created for you by our lab provider, Strigo. Your instructor will
-give you the link and access code needed to access the labs; please connect using the latest
-Google Chrome or Firefox. A short primer on how to use Strigo is available here.
-
-```
-CN100: Docker Container Essentials
+```text
+Docker Container Fundamentals
 ```
 
 ## 1. The Container Lifecycle
 
-```
+```text
 By the end of this exercise, you should be able to:
 ```
+
 - Start, stop and restart containers
 - Interrogate containers for process logs, resource consumption, and configuration and state
     metadata
@@ -90,19 +41,21 @@ By the end of this exercise, you should be able to:
 
 ### 1.1. Launching and Managing Containers
 
-```
+```text
 Step 1: Let’s begin by containerizing a simple ping process on your node-0:
 ```
+
+```bash
+[ubuntu@node ~]$ docker container run alpine ping 8 .8.8.
 ```
-[centos@node-0 ~]$ docker container run alpine ping 8 .8.8.
-```
+
 - docker container run creates a new container
 - alpine is the container image we’ll use to define the filesystem our process sees
 - what follows the image definition (ping 8.8.8.8 in this case) is the actual process
     and its arguments to be containerized.
 You should see Docker download the alpine image, and then start the ping:
 
-```
+```text
 Unable to find image 'alpine:latest' locally
 latest: Pulling from library/alpine
 df20fa9351a1: Pull complete
@@ -115,48 +68,60 @@ PING 8 .8.8.8 ( 8 .8.8.8): 56 data bytes
 64 bytes from 8 .8.8.8: seq= 3 ttl= 109 time= 1 .185 ms
 64 bytes from 8 .8.8.8: seq= 4 ttl= 109 time= 1 .146 ms
 ```
-```
+
+```text
 Press CTRL+C to kill the process.
 ```
-```
+
+```text
 Step 2: List all of the containers on your node-0 host:
 ```
+
+```bash
+[ubuntu@node ~]$ docker container ls -a
 ```
-[centos@node-0 ~]$ docker container ls -a
-```
-```
+
+```text
 CONTAINER ID IMAGE COMMAND ... STATUS ...
 81484551f69b alpine "ping 8.8.8.8" ... Exited ( 0 ) 50 seconds ago ...
 ```
-```
+
+```text
 We can see our container and its status. Sending a CTRL+C to the ping process that was
 attached to our terminal killed the ping, and since ping was the primary process in our
 container, it caused the container itself to exit.
 ```
-```
+
+```text
 Step 3: Let’s run the same container again, this time with the -d flag to detach the ping process
 from our shell so it can run in the background:
 ```
+
 1. The Container Lifecycle
 
 
+```bash
+[ubuntu@node ~]$ docker container run -d alpine ping 8 .8.8.
 ```
-[centos@node-0 ~]$ docker container run -d alpine ping 8 .8.8.
-```
-```
+
+```text
 4bf570c09043c0094fef87e9cad7e94e20b2b2c8bd1029bb49def581cdcb
 ```
-```
+
+```text
 This time we just get the container ID back (4bf5... in my case, yours will be different), but
 the ping output isn’t streaming to the terminal this time.
 ```
-```
+
+```text
 List your running containers:
 ```
+
+```bash
+[ubuntu@node ~]$ docker container ls
 ```
-[centos@node-0 ~]$ docker container ls
-```
-```
+
+```text
 CONTAINER ID IMAGE COMMAND STATUS ...
 4bf570c09043 alpine "ping 8.8.8.8" Up About a minute ...
 ```
@@ -167,7 +132,7 @@ and which is still running in the background.
 Step 4: Stop your running container:
 
 ```
-[centos@node-0 ~]$ docker container stop <container ID of running container>
+[ubuntu@node ~]$ docker container stop <container ID of running container>
 ```
 ```
 Notice it takes a long time (about 10 seconds) to return. When a container is stopped, there
@@ -182,7 +147,7 @@ Step 5: Run the docker container ls again, and you’ll see nothing; there are n
 containers. To see our stopped containers, again use:
 
 ```
-[centos@node-0 ~]$ docker container ls -a
+[ubuntu@node ~]$ docker container ls -a
 ```
 ```
 CONTAINER ID IMAGE COMMAND CREATED STATUS
@@ -197,10 +162,10 @@ Step 6: Restart the container you just exited (it should be the one more recentl
 137 exit code), and list containers one more time:
 
 ```
-[centos@node-0 ~]$ docker container start <container ID>
+[ubuntu@node ~]$ docker container start <container ID>
 ```
 ```
-[centos@node-0 ~]$ docker container ls
+[ubuntu@node ~]$ docker container ls
 ```
 ```
 CONTAINER ID IMAGE COMMAND CREATED STATUS
@@ -219,7 +184,7 @@ that it can be restarted later.
 Step 1: Retrieve your state and config information about your running container:
 ```
 ```
-[centos@node-0 ~]$ docker container inspect <container ID>
+[ubuntu@node ~]$ docker container inspect <container ID>
 ```
 ```
 [
@@ -244,7 +209,7 @@ have a rough idea of the information available here.
 Step 2: Retrieve your resource consumption stats about your container:
 ```
 ```
-[centos@node-0 ~]$ docker container stats <container ID>
+[ubuntu@node ~]$ docker container stats <container ID>
 ```
 ```
 CONT. ID NAME CPU % MEM USAGE / LIMIT MEM % NET I/O BLOCK I/O PIDS
@@ -259,7 +224,7 @@ Step 3: Retrieve the same information as the previous step, formatted as JSON an
 instantaneously, without streaming:
 ```
 ```
-[centos@node-0 ~]$ docker container stats --no-stream \
+[ubuntu@node ~]$ docker container stats --no-stream \
 --format '{{json .}}' <container ID>
 ```
 ```
@@ -284,7 +249,7 @@ Step 4: Retrieve the logs from your containerized process:
 
 
 ```
-[centos@node-0 ~]$ docker container logs <container ID>
+[ubuntu@node ~]$ docker container logs <container ID>
 ```
 ```
 PING 8 .8.8.8 ( 8 .8.8.8): 56 data bytes
@@ -302,7 +267,7 @@ idea to strictly run one process within a container, rather than a complicated p
 Step 5: Get a list of processes running in your container:
 
 ```
-[centos@node-0 ~]$ docker container top <container ID>
+[ubuntu@node ~]$ docker container top <container ID>
 ```
 ```
 UID PID PPID C STIME TTY TIME CMD
@@ -314,17 +279,17 @@ indicates the PID of each process on the host. Remember that if this process exi
 container will exit. Try this yourself by listing containers and then killing the host process:
 ```
 ```
-[centos@node-0 ~]$ docker container ls
+[ubuntu@node ~]$ docker container ls
 ```
 ```
 CONTAINER ID IMAGE COMMAND
 4bf570c09043 alpine "ping 8.8.8.8"
 ```
 ```
-[centos@node-0 ~]$ sudo kill -9 <PID from container top command above>
+[ubuntu@node ~]$ sudo kill -9 <PID from container top command above>
 ```
 ```
-[centos@node-0 ~]$ docker container ls
+[ubuntu@node ~]$ docker container ls
 ```
 ```
 CONTAINER ID IMAGE COMMAND
@@ -346,7 +311,7 @@ Step 1: Restart your ping container, exactly as you did before:
 
 
 ```
-[centos@node-0 ~]$ docker container start <container ID>
+[ubuntu@node ~]$ docker container start <container ID>
 ```
 ```
 Remember from our use of docker container top before that there’s just one process
@@ -358,7 +323,7 @@ Step 2: Look at the PID tree of your container from the container’s perspectiv
 inside your container:
 ```
 ```
-[centos@node-0 ~]$ docker container exec <container ID> ps
+[ubuntu@node ~]$ docker container exec <container ID> ps
 ```
 ```
 PID USER TIME COMMAND
@@ -378,7 +343,7 @@ kernel PID namespace in action.
 Step 3: Launch an interactive shell inside your running container:
 ```
 ```
-[centos@node-0 ~]$ docker container exec -it <container ID> sh
+[ubuntu@node ~]$ docker container exec -it <container ID> sh
 / #
 ```
 ```
@@ -419,7 +384,7 @@ When you’re done practicing, type exit to return to your host.
 Step 1: List all of your containers one more time:
 
 ```
-[centos@node-0 ~]$ docker container ls -a
+[ubuntu@node ~]$ docker container ls -a
 CONTAINER ID IMAGE COMMAND CREATED STATUS
 4bf570c09043 alpine "ping 8.8.8.8" 37 minutes ago Up 10 minutes
 81484551f69b alpine "ping 8.8.8.8" 41 minutes ago Exited ( 0 ) 41 minutes ago
@@ -427,12 +392,12 @@ CONTAINER ID IMAGE COMMAND CREATED STATUS
 Step 2: Remove the exited container:
 
 ```
-[centos@node-0 ~]$ docker container rm <container ID of Exited container>
+[ubuntu@node ~]$ docker container rm <container ID of Exited container>
 ```
 Step 3: Attempt to remove the running container:
 
 ```
-[centos@node-0 ~]$ docker container rm <container ID>
+[ubuntu@node ~]$ docker container rm <container ID>
 ```
 ```
 Error response from daemon: You cannot remove a running container
@@ -445,7 +410,7 @@ running container. We could stop it then remove it as we did above, or we could 
 removal:
 ```
 ```
-[centos@node-0 ~]$ docker container rm -f <container ID>
+[ubuntu@node ~]$ docker container rm -f <container ID>
 ```
 ```
 At this point, all of your containers from this exercise should be gone. Use
@@ -463,7 +428,7 @@ Step 1: Create a container using the centos:7 image and connect to its bash shel
 mode:
 
 ```
-[centos@node-0 ~]$ docker container run -it centos:7 bash
+[ubuntu@node ~]$ docker container run -it centos:7 bash
 ```
 Step 2: Explore your container’s filesystem with ls, and then create a new file. Use ls again to
 confirm you have successfully created your file. Use the -l option with ls to list the files and
@@ -485,7 +450,7 @@ Step 4: Run the same command as before to start a container using the centos:7 i
 
 
 ```
-[centos@node-0 ~]$ docker container run -it centos:7 bash
+[ubuntu@node ~]$ docker container run -it centos:7 bash
 ```
 ```
 Step 5: Use ls to explore your container. You will see that your previously created test.txt is
@@ -520,7 +485,7 @@ By the end of this exercise, you should be able to:
 Step 1: Start a bash terminal in a CentOS container:
 
 ```
-[centos@node-0 ~]$ docker container run -it centos:7 bash
+[ubuntu@node ~]$ docker container run -it centos:7 bash
 ```
 Step 2: Install a couple pieces of software in this container - there’s nothing special about wget,
 any changes to the filesystem will do. Afterwards, exit the container:
@@ -533,8 +498,8 @@ Step 3: Finally, try docker container diff to see what’s changed about a conta
 to its image; you’ll need to get the container ID via docker container ls -a first:
 
 ```
-[centos@node-0 ~]$ docker container ls -a
-[centos@node-0 ~]$ docker container diff <container ID>
+[ubuntu@node ~]$ docker container ls -a
+[ubuntu@node ~]$ docker container diff <container ID>
 ```
 ```
 C /root
@@ -554,12 +519,12 @@ layer; now let’s save that read/write layer as a new read-only image layer in 
 image that reflects our additions, via the docker container commit:
 
 ```
-[centos@node-0 ~]$ docker container commit <container ID> myapp:1.
+[ubuntu@node ~]$ docker container commit <container ID> myapp:1.
 ```
 Step 2: Check that you can see your new image by listing all your images:
 
 ```
-[centos@node-0 ~]$ docker image ls
+[ubuntu@node ~]$ docker image ls
 ```
 ```
 REPOSITORY TAG IMAGE ID CREATED SIZE
@@ -573,7 +538,7 @@ are installed:
 
 
 ```
-[centos@node-0 ~]$ docker container run -it myapp:1.0 bash
+[ubuntu@node ~]$ docker container run -it myapp:1.0 bash
 [root@2ecb80c76853 /]# which wget
 ```
 ```
@@ -622,7 +587,7 @@ your Dockerfile. Since we’re currently in the directory myimage which contains
 just. (here).
 
 ```
-[centos@node-0 myimage]$ docker image build -t myimage.
+[ubuntu@node myimage]$ docker image build -t myimage.
 ```
 ```
 You’ll see a long build output describing each step of the build. The builder goes through the
@@ -652,7 +617,7 @@ worked as expected:
 
 
 ```
-[centos@node-0 myimage]$ docker container run -it myimage bash
+[ubuntu@node myimage]$ docker container run -it myimage bash
 [root@1d86d4093cce /]# wget example.com
 [root@1d86d4093cce /]# cat index.html
 [root@1d86d4093cce /]# exit
@@ -666,7 +631,7 @@ Step 4: It’s also possible to pipe a Dockerfile in from STDIN; try rebuilding 
 following:
 ```
 ```
-[centos@node-0 myimage]$ cat Dockerfile | docker image build -t myimage -f -.
+[ubuntu@node myimage]$ cat Dockerfile | docker image build -t myimage -f -.
 ```
 ```
 (This is useful when reading a Dockerfile from a remote location with curl, for example).
@@ -713,7 +678,7 @@ an image. Try it with your new image:
 
 
 ```
-[centos@node-0 myimage]$ docker image history myimage:latest
+[ubuntu@node myimage]$ docker image history myimage:latest
 ```
 ```
 IMAGE CREATED CREATED BY SIZE
@@ -776,13 +741,13 @@ also sets some parameters for that command.
 Step 2: Rebuild your image:
 ```
 ```
-[centos@node-0 myimage]$ docker image build -t myimage.
+[ubuntu@node myimage]$ docker image build -t myimage.
 ```
 ```
 Step 3: Run a container from your new image with no command provided:
 ```
 ```
-[centos@node-0 myimage]$ docker container run myimage
+[ubuntu@node myimage]$ docker container run myimage
 ```
 ```
 You should see the command provided by the CMD parameter in the Dockerfile running.
@@ -791,7 +756,7 @@ You should see the command provided by the CMD parameter in the Dockerfile runni
 Step 4: Try explicitly providing a command when running a container:
 ```
 ```
-[centos@node-0 myimage]$ docker container run myimage echo "hello world"
+[ubuntu@node myimage]$ docker container run myimage echo "hello world"
 ```
 ```
 Providing a command in docker container run overrides the command defined by CMD.
@@ -808,8 +773,8 @@ ENTRYPOINT ["ping"]
 Step 6: Build the image and use it to run a container with no process arguments:
 ```
 ```
-[centos@node-0 myimage]$ docker image build -t myimage.
-[centos@node-0 myimage]$ docker container run myimage
+[ubuntu@node myimage]$ docker image build -t myimage.
+[ubuntu@node myimage]$ docker container run myimage
 ```
 ```
 You’ll get an error. What went wrong?
@@ -818,7 +783,7 @@ You’ll get an error. What went wrong?
 Step 7: Try running with an argument after the image name:
 ```
 ```
-[centos@node-0 myimage]$ docker container run myimage 127 .0.0.
+[ubuntu@node myimage]$ docker container run myimage 127 .0.0.
 ```
 ```
 You should see a successful ping output. Tokens provided after an image name are sent as
@@ -843,8 +808,8 @@ as default parameters for the ENTRYPOINT command. Add a CMD with a default IP to
 Step 3: Build the image and run a container with the defaults:
 
 ```
-[centos@node-0 myimage]$ docker image build -t myimage.
-[centos@node-0 myimage]$ docker container run myimage
+[ubuntu@node myimage]$ docker image build -t myimage.
+[ubuntu@node myimage]$ docker container run myimage
 ```
 ```
 You should see it pinging the default IP, 127.0.0.1.
@@ -852,7 +817,7 @@ You should see it pinging the default IP, 127.0.0.1.
 Step 4: Run another container with a custom IP argument:
 
 ```
-[centos@node-0 myimage]$ docker container run myimage 8 .8.8.
+[ubuntu@node myimage]$ docker container run myimage 8 .8.8.
 ```
 ```
 This time, you should see a ping to 8.8.8.8. Explain the difference in behavior between
@@ -863,7 +828,7 @@ these two last containers.
 Step 1: Make a new directory for this example, and move there:
 
 ```
-[centos@node-0 ~]$ mkdir ~/user ; cd ~/user
+[ubuntu@node ~]$ mkdir ~/user ; cd ~/user
 ```
 Step 2: Define a simple pinging container in a Dockerfile:
 
@@ -874,9 +839,9 @@ CMD ["ping", "8.8.8.8"]
 Step 3: Build and run your image, and check the user ID of the ping process:
 
 ```
-[centos@node-0 user]$ docker image build -t pinger:root.
-[centos@node-0 user]$ docker container run --name rootdemo -d pinger:root
-[centos@node-0 user]$ docker container exec rootdemo ps -aux
+[ubuntu@node user]$ docker image build -t pinger:root.
+[ubuntu@node user]$ docker container run --name rootdemo -d pinger:root
+[ubuntu@node user]$ docker container exec rootdemo ps -aux
 ```
 ```
 USER PID %CPU %MEM VSZ RSS TTY STAT START TIME COMMAND
@@ -901,10 +866,10 @@ CMD ["ping", "8.8.8.8"]
 Step 5: Build, run, and check your process tree again:
 ```
 ```
-[centos@node-0 user]$ docker container rm -f rootdemo
-[centos@node-0 user]$ docker image build -t pinger:user.
-[centos@node-0 user]$ docker container run --name userdemo -d pinger:user
-[centos@node-0 user]$ docker container exec userdemo ps -aux
+[ubuntu@node user]$ docker container rm -f rootdemo
+[ubuntu@node user]$ docker image build -t pinger:user.
+[ubuntu@node user]$ docker container run --name userdemo -d pinger:user
+[ubuntu@node user]$ docker container exec userdemo ps -aux
 ```
 ```
 USER PID %CPU %MEM VSZ RSS TTY STAT START TIME COMMAND
@@ -919,7 +884,7 @@ privileges.
 Step 6: Clean up your container:
 ```
 ```
-[centos@node-0 user]$ docker container rm -f userdemo
+[ubuntu@node user]$ docker container rm -f userdemo
 ```
 ### 4.4. Conclusion
 
@@ -963,8 +928,8 @@ return 0 ;
 Step 3: Try compiling and running this right on the host OS:
 
 ```
-[centos@node-0 multi]$ gcc -Wall hello.c -o hello
-[centos@node-0 multi]$ ./hello
+[ubuntu@node multi]$ gcc -Wall hello.c -o hello
+[ubuntu@node multi]$ ./hello
 ```
 Step 4: Now let’s Dockerize our hello world application. Add a Dockerfile to the multi folder
 with this content:
@@ -983,8 +948,8 @@ CMD /app/bin/hello
 Step 5: Build the image and note its size:
 
 ```
-[centos@node-0 multi]$ docker image build -t my-app-large.
-[centos@node-0 multi]$ docker image ls | grep my-app-large
+[ubuntu@node multi]$ docker image build -t my-app-large.
+[ubuntu@node multi]$ docker image ls | grep my-app-large
 ```
 ```
 REPOSITORY TAG IMAGE ID CREATED SIZE
@@ -993,7 +958,7 @@ my-app-large latest a7d0c6fe0849 3 seconds ago 189MB
 Step 6: Test the image to confirm it was built successfully:
 
 ```
-[centos@node-0 multi]$ docker container run my-app-large
+[ubuntu@node multi]$ docker container run my-app-large
 ```
 ```
 It should print “hello world” in the console.
@@ -1024,8 +989,8 @@ CMD /app/hello
 Step 8: Build the image again and compare the size with the previous version:
 ```
 ```
-[centos@node-0 multi]$ docker image build -t my-app-small.
-[centos@node-0 multi]$ docker image ls | grep 'my-app-'
+[ubuntu@node multi]$ docker image build -t my-app-small.
+[ubuntu@node multi]$ docker image ls | grep 'my-app-'
 ```
 ```
 REPOSITORY TAG IMAGE ID CREATED SIZE
@@ -1040,7 +1005,7 @@ does not contain the Alpine SDK.
 Step 9: Finally, make sure the app works:
 ```
 ```
-[centos@node-0 multi]$ docker container run --rm my-app-small
+[ubuntu@node multi]$ docker container run --rm my-app-small
 ```
 ```
 You should get the expected ‘Hello, World!’ output from the container with just the required
@@ -1056,7 +1021,7 @@ we like.
 Step 1: Build an image from the build stage in your Dockerfile using the --target flag:
 ```
 ```
-[centos@node-0 multi]$ docker image build -t my-build-stage --target build.
+[ubuntu@node multi]$ docker image build -t my-build-stage --target build.
 ```
 ```
 Notice all its layers are pulled from the cache; even though the build stage wasn’t tagged
@@ -1066,7 +1031,7 @@ originally, its layers are nevertheless persisted in the cache.
 Step 2: Run a container from this image and make sure it yields the expected result:
 ```
 ```
-[centos@node-0 multi]$ docker container run -it --rm my-build-stage /app/bin/hello
+[ubuntu@node multi]$ docker container run -it --rm my-build-stage /app/bin/hello
 ```
 5. Multi-Stage Builds
 
@@ -1118,12 +1083,12 @@ container’s filesystem for anything.
 Step 3: Build your image:
 
 ```
-[centos@node-0 scratch]$ docker image build -t sleep:scratch.
+[ubuntu@node scratch]$ docker image build -t sleep:scratch.
 ```
 Step 4: List your images, and search for the one you just built:
 
 ```
-[centos@node-0 scratch]$ docker image ls | grep scratch
+[ubuntu@node scratch]$ docker image ls | grep scratch
 ```
 ```
 REPOSITORY TAG IMAGE ID CREATED SIZE
@@ -1141,8 +1106,8 @@ since ls isn’t installed in this ultra-minimal image, so we have to find where
 filesystem is mounted on the host. Start by finding the PID of your sleep process after its running:
 ```
 ```
-[centos@node-0 scratch]$ docker container run --name sleeper -d sleep:scratch
-[centos@node-0 scratch]$ docker container top sleeper
+[ubuntu@node scratch]$ docker container run --name sleeper -d sleep:scratch
+[ubuntu@node scratch]$ docker container top sleeper
 ```
 ```
 UID PID PPID C STIME TTY TIME CMD
@@ -1155,7 +1120,7 @@ In this example, the PID for sleep is 1190.
 Step 6: List your container’s filesystem from the host using this PID:
 ```
 ```
-[centos@node-0 scratch]$ sudo ls /proc/<PID>/root
+[ubuntu@node scratch]$ sudo ls /proc/<PID>/root
 ```
 ```
 dev etc proc sleep sys
@@ -1170,7 +1135,7 @@ requirements to form the most minimal container filesystem possible.
 Step 7: Clean up by deleting your container:
 ```
 ```
-[centos@node-0 scratch]$ docker container rm -f sleeper
+[ubuntu@node scratch]$ docker container rm -f sleeper
 ```
 ### 5.4. Optional: Enabling BuildKit
 
@@ -1180,7 +1145,7 @@ optimizations of the build process.
 Step 1: Back in the ~/multi directory, turn on BuildKit:
 ```
 ```
-[centos@node-0 multi]$ export DOCKER_BUILDKIT= 1
+[ubuntu@node multi]$ export DOCKER_BUILDKIT= 1
 ```
 ```
 Step 2: Add an AS label to the final stage of your Dockerfile (this is not strictly necessary, but will
@@ -1202,7 +1167,7 @@ Step 3: Re-build my-app-small, without the cache:
 
 
 ```
-[centos@node-0 multi]$ docker image build --no-cache -t my-app-small-bk.
+[ubuntu@node multi]$ docker image build --no-cache -t my-app-small-bk.
 ```
 ```
 [+] Building 15 .5s ( 14 /14) FINISHED
@@ -1242,7 +1207,7 @@ necessary for the image being built, and skipped it.
 Step 5: Turn off BuildKit:
 
 ```
-[centos@node-0 multi]$ export DOCKER_BUILDKIT= 0
+[ubuntu@node multi]$ export DOCKER_BUILDKIT= 0
 ```
 ### 5.5. Conclusion
 
@@ -1281,13 +1246,13 @@ account.
 Step 1: Download the centos:7 image from Docker Hub:
 ```
 ```
-[centos@node-0 ~]$ docker image pull centos:7
+[ubuntu@node ~]$ docker image pull centos:7
 ```
 ```
 Step 2: Make a new tag of this image:
 ```
 ```
-[centos@node-0 ~]$ docker image tag centos:7 my-centos:dev
+[ubuntu@node ~]$ docker image tag centos:7 my-centos:dev
 ```
 ```
 Note no new image has been created; my-centos:dev is just a pointer pointing to the
@@ -1297,7 +1262,7 @@ same image as centos:7.
 Step 3: List your images:
 ```
 ```
-[centos@node-0 ~]$ docker image ls
+[ubuntu@node ~]$ docker image ls
 ```
 ```
 You should have centos:7 and my-centos:dev both listed, but they ought to have the
@@ -1309,7 +1274,7 @@ same hash under image ID, since they’re actually the same image.
 Step 1: Push your image to Docker Hub:
 ```
 ```
-[centos@node-0 ~]$ docker image push my-centos:dev
+[ubuntu@node ~]$ docker image push my-centos:dev
 ```
 ```
 You should get a denied: requested access to the resource is denied error.
@@ -1321,8 +1286,8 @@ share on Docker Hub must be named like <Docker ID>/<repo name>[:<optional tag>].
 Step 3: Retag your image to be namespaced properly, and push again:
 ```
 ```
-[centos@node-0 ~]$ docker image tag my-centos:dev <Docker ID>/my-centos:dev
-[centos@node-0 ~]$ docker image push <Docker ID>/my-centos:dev
+[ubuntu@node ~]$ docker image tag my-centos:dev <Docker ID>/my-centos:dev
+[ubuntu@node ~]$ docker image push <Docker ID>/my-centos:dev
 ```
 ```
 Step 4: Search Docker Hub for your new <Docker ID>/my-centos repo, and confirm that you
@@ -1336,7 +1301,7 @@ Step 5: Next, make a new directory called hubdemo, and in it create a Dockerfile
 of that. Build the image, and simultaneously tag it as :1.0:
 
 ```
-[centos@node-0 hubdemo]$ docker image build -t <Docker ID>/my-centos:1.0.
+[ubuntu@node hubdemo]$ docker image build -t <Docker ID>/my-centos:1.0.
 ```
 Step 6: Push your :1.0 tag to Docker Hub, and confirm you can see it in the appropriate
 repository.
@@ -1346,7 +1311,7 @@ have the version of your image that wasn’t namespaced with your Docker Hub use
 this using docker image rm:
 
 ```
-[centos@node-0 ~]$ docker image rm my-centos:dev
+[ubuntu@node ~]$ docker image rm my-centos:dev
 ```
 ```
 Only the tag gets deleted, not the actual image. The image layers are still referenced by
@@ -1388,8 +1353,8 @@ json-file driver, and the journald driver.
 Step 1: Run a simple container with the default logging configuration, and inspect its logs:
 ```
 ```
-[centos@node-0 ~]$ docker container run -d centos:7 ping 8 .8.8.8
-[centos@node-0 ~]$ docker container logs <container ID>
+[ubuntu@node ~]$ docker container run -d centos:7 ping 8 .8.8.8
+[ubuntu@node ~]$ docker container logs <container ID>
 ```
 ```
 PING 8 .8.8.8 ( 8 .8.8.8) 56 ( 84 ) bytes of data.
@@ -1403,7 +1368,7 @@ untruncated container ID returned when you created the container above, or finda
 docker container ls --no-trunc:
 ```
 ```
-[centos@node-0 ~]$ sudo head -5 \
+[ubuntu@node ~]$ sudo head -5 \
 /var/lib/docker/containers/<container ID>/<container ID>-json.log
 ```
 ```
@@ -1435,7 +1400,7 @@ permissions in order to edit it):
 Step 4: Restart Docker so the new logging configuration takes effect:
 ```
 ```
-[centos@node-0 ~]$ sudo service docker restart
+[ubuntu@node ~]$ sudo service docker restart
 ```
 7. Managing Container Logs
 
@@ -1443,12 +1408,12 @@ Step 4: Restart Docker so the new logging configuration takes effect:
 Step 5: Run another container, just like the one you ran above, but this time name it demo:
 
 ```
-[centos@node-0 ~]$ docker container run -d --name demo centos:7 ping 8 .8.8.8
+[ubuntu@node ~]$ docker container run -d --name demo centos:7 ping 8 .8.8.8
 ```
 Step 6: Inspect the system journal for messages from the demo container:
 
 ```
-[centos@node-0 ~]$ journalctl CONTAINER_NAME=demo
+[ubuntu@node ~]$ journalctl CONTAINER_NAME=demo
 -- Logs begin at Wed 2021 -05-19 15 :03:26 UTC, end at Wed 2021 -05-19 15 :11:09 UTC. --
 May 19 15 :11:02 node-0 138194df21dc[ 1701 ]: PING 8 .8.8.8 ( 8 .8.8.8) 56 ( 84 ) bytes of data.
 May 19 15 :11:02 node-0 138194df21dc[ 1701 ]: 64 bytes from 8 .8.8.8: icmp_seq= 1 ttl= 113 time= 1 .14 ms
@@ -1481,12 +1446,12 @@ to look like this:
 Step 2: Restart Docker so the new logging configuration takes effect:
 
 ```
-[centos@node-0 ~]$ sudo service docker restart
+[ubuntu@node ~]$ sudo service docker restart
 ```
 Step 3: Start another container generating logs:
 
 ```
-[centos@node-0 ~]$ docker container run --name logdemo -d centos:7 ping 8 .8.8.8
+[ubuntu@node ~]$ docker container run --name logdemo -d centos:7 ping 8 .8.8.8
 ```
 Step 4: Find the container’s log files under /var/lib/docker/containers.
 
@@ -1508,7 +1473,7 @@ docker inspect --format="{{.Id}}” bbe74cd96891
 Find the full container ID for your logdemo container, and locate the log files:
 ```
 ```
-[centos@node-0 ~]$ sudo ls -lsh /var/lib/docker/containers/<container ID>
+[ubuntu@node ~]$ sudo ls -lsh /var/lib/docker/containers/<container ID>
 ```
 ```
 <container ID>-json.log
@@ -1526,7 +1491,7 @@ once it gets rotated out to .1.gz, it will be automatically compressed.
 Step 6: Clean up by removing this container:
 ```
 ```
-[centos@node-0 ~]$ docker container rm -f logdemo
+[ubuntu@node ~]$ docker container rm -f logdemo
 ```
 ### 7.3. Conclusion
 
@@ -1559,14 +1524,14 @@ Step 1: Start by creating a volume that we’ll mount into both containers so th
 logs:
 
 ```
-[centos@node-0 ~]$ docker volume create streamer
+[ubuntu@node ~]$ docker volume create streamer
 ```
 Step 2: Next let’s create an example container that writes something to a file in its filesystem.
 This is obviously a simple example, but imagine this is any containerized application writing a log
 or any other file to its filesystem:
 
 ```
-[centos@node-0 ~]$ docker container run -d --name myapp -v streamer:/tmp \
+[ubuntu@node ~]$ docker container run -d --name myapp -v streamer:/tmp \
 alpine:3.5 sh -c "while true; do date >> /tmp/logs ; sleep 1; done"
 ```
 ```
@@ -1576,7 +1541,7 @@ where our process is writing its logfiles.
 Step 3: Try and read the logs for this container in the usual manner:
 
 ```
-[centos@node-0 ~]$ docker container logs myapp
+[ubuntu@node ~]$ docker container logs myapp
 ```
 ```
 You’ll see nothing, of course - the shell command we’ve containerized doesn’t write anything
@@ -1586,7 +1551,7 @@ to STDOUT, so there’s nothing to see in the logs.
 But, check out the contents of your mounted volume:
 ```
 ```
-[centos@node-0 ~]$ sudo cat /var/lib/docker/volumes/streamer/_data/logs
+[ubuntu@node ~]$ sudo cat /var/lib/docker/volumes/streamer/_data/logs
 ```
 ```
 Wed May 19 15 :40:03 UTC 2021
@@ -1602,7 +1567,7 @@ Step 4: Create another container that mounts the streamer volume, and which cont
 simple process that writes any updates it finds to the logs file in that volume to STDOUT:
 
 ```
-[centos@node-0 ~]$ docker container run -d --name streamcontainer -v streamer:/tmp \
+[ubuntu@node ~]$ docker container run -d --name streamcontainer -v streamer:/tmp \
 alpine:3.5 tail -f /tmp/logs
 ```
 8. Sharing and Streaming Logs
@@ -1612,7 +1577,7 @@ alpine:3.5 tail -f /tmp/logs
 Step 5: Check the logs of this new container in the usual fashion:
 ```
 ```
-[centos@node-0 ~]$ docker container logs streamcontainer
+[ubuntu@node ~]$ docker container logs streamcontainer
 ```
 ```
 Wed May 19 15 :48:18 UTC 2021
