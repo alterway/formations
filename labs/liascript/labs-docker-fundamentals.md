@@ -42,7 +42,7 @@ By the end of this exercise, you should be able to:
 ### 1.1. Launching and Managing Containers
 
 ```text
-Step 1: Let’s begin by containerizing a simple ping process on your node-0:
+Step 1: Let’s begin by containerizing a simple ping process on your node:
 ```
 
 ```shell
@@ -74,7 +74,7 @@ Press CTRL+C to kill the process.
 ```
 
 ```text
-Step 2: List all of the containers on your node-0 host:
+Step 2: List all of the containers on your node host:
 ```
 
 ```shell
@@ -1466,10 +1466,10 @@ Step 6: Inspect the system journal for messages from the demo container:
 ```
 [ubuntu@node ~]$ journalctl CONTAINER_NAME=demo
 -- Logs begin at Wed 2021 -05-19 15 :03:26 UTC, end at Wed 2021 -05-19 15 :11:09 UTC. --
-May 19 15 :11:02 node-0 138194df21dc[ 1701 ]: PING 8 .8.8.8 ( 8 .8.8.8) 56 ( 84 ) bytes of data.
-May 19 15 :11:02 node-0 138194df21dc[ 1701 ]: 64 bytes from 8 .8.8.8: icmp_seq= 1 ttl= 113 time= 1 .14 ms
-May 19 15 :11:03 node-0 138194df21dc[ 1701 ]: 64 bytes from 8 .8.8.8: icmp_seq= 2 ttl= 113 time= 1 .14 ms
-May 19 15 :11:04 node-0 138194df21dc[ 1701 ]: 64 bytes from 8 .8.8.8: icmp_seq= 3 ttl= 113 time= 1 .19 ms
+May 19 15 :11:02 node 138194df21dc[ 1701 ]: PING 8 .8.8.8 ( 8 .8.8.8) 56 ( 84 ) bytes of data.
+May 19 15 :11:02 node 138194df21dc[ 1701 ]: 64 bytes from 8 .8.8.8: icmp_seq= 1 ttl= 113 time= 1 .14 ms
+May 19 15 :11:03 node 138194df21dc[ 1701 ]: 64 bytes from 8 .8.8.8: icmp_seq= 2 ttl= 113 time= 1 .14 ms
+May 19 15 :11:04 node 138194df21dc[ 1701 ]: 64 bytes from 8 .8.8.8: icmp_seq= 3 ttl= 113 time= 1 .19 ms
 ```
 ```
 In this way, container logs can be sent to the system journal for ingestion by a centralized
@@ -1480,7 +1480,7 @@ logging framework along with the rest of the journal messages.
 By default, container logfiles can grow unbounded until all host disk is consumed. Many
 file-based logging drivers like json-file support automatic log rotation and compression.
 
-Step 1: Configure the Docker engine on node-0 to create a json file of logs, swapping to a new
+Step 1: Configure the Docker engine on node to create a json file of logs, swapping to a new
 file every 5 kb, preserving a maximum of 3 files, by changing your /etc/docker/daemon.json
 to look like this:
 
