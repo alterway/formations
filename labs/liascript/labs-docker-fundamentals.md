@@ -470,8 +470,59 @@ process inside a container. The state of this process determines the liveness of
 STDOUT and STDERR of this process is what’s logged by container logs, and this process’
 response to SIGTERM determines how our container behaves during a controlled shutdown.
 ```
+
 1. The Container Lifecycle
 
+
+```
+Created ---> Running ---> Stopped
+   ^          |  ^          |
+   |          |  |          |
+   |          v  |          v
+   +----- Paused |      Removed
+                 |          ^
+                 |          |
+                 +----------+
+```
+
+States and Transitions
+
+1. **Created**
+   - Initial state after `docker create`
+   - Can transition to:
+     - Running (via `docker start`)
+     - Removed (via `docker rm`)
+
+2. **Running**
+   - Container is executing
+   - Reached via `docker start` from Created or Stopped state
+   - Can transition to:
+     - Stopped (via `docker stop` or when process completes)
+     - Paused (via `docker pause`)
+
+3. **Stopped**
+   - Container has been stopped
+   - Can transition to:
+     - Running (via `docker start`)
+     - Removed (via `docker rm`)
+
+4. **Paused**
+   - Container execution is paused
+   - Can transition to:
+     - Running (via `docker unpause`)
+
+5. **Removed**
+   - Container is deleted
+   - Final state, reached via `docker rm` from Created or Stopped state
+
+Key Docker Commands
+
+- `docker create`: Create a new container (Created state)
+- `docker start`: Start a container (transition to Running)
+- `docker stop`: Stop a running container (transition to Stopped)
+- `docker pause`: Pause a running container (transition to Paused)
+- `docker unpause`: Unpause a paused container (return to Running)
+- `docker rm`: Remove a stopped or created container (transition to Removed)
 
 ## 2. Interactive Image Creation
 
