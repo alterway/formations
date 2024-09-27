@@ -6452,15 +6452,11 @@ Contenu du fichier `overlays/prod/kustomization.yaml`
 ```yaml +.
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-commonLabels:
-    caas.fr/environment: "prod"
-bases:
-- ../../base
 
-patchesStrategicMerge:
-- custom-env.yaml
-- replica-and-rollout-strategy.yaml
-- database-secret.yaml
+labels:
+- includeSelectors: true
+  pairs:
+    caas.fr/environment: prod
 
 secretGenerator:
 - literals:
@@ -6472,6 +6468,13 @@ images:
 - name: nginx
   newName: nginx
   newTag: 1.21.0
+resources:
+- ../../base
+
+patches:
+- path: custom-env.yaml
+- path: replica-and-rollout-strategy.yaml
+- path: database-secret.yaml
 ```
 
 #### Lancement overlay prod
@@ -6645,7 +6648,9 @@ pod "test-logs" deleted
 
 <hr>
 
-### Stack Elastic
+### Stack Elastic 
+
+Découvertesdes Opérateurs
 
 <hr>
 machine : **master**
@@ -6665,6 +6670,7 @@ kubectl apply  -f https://download.elastic.co/downloads/eck/1.9.1/crds.yaml
 
 # Operateur
 kubectl apply -f https://download.elastic.co/downloads/eck/1.9.1/operator.yaml
+
 
 
 ```
@@ -6710,7 +6716,7 @@ spec:
         resources:
           requests:
             storage: 5Gi
-        storageClassName: longhorn
+        storageClassName: longhorn ### Attention Mettre la bonne classe de stockage
     config:
       node.master: true
       node.data: true
@@ -6750,8 +6756,11 @@ elasticsearch-es-http   ClusterIP   10.99.41.114   <none>        9200/TCP   2m24
 7. Testons la connexion a notre elasticsearch :
 
 ```bash +.
+IP=$(kubectl get service elasticsearch-es-http  -o jsonpath='{.spec.clusterIP}')
+
 PASSWORD=$(kubectl get secret elasticsearch-es-elastic-user -o go-template='{{.data.elastic | base64decode}}')
-curl -u "elastic:$PASSWORD" -k "https://CLUSTER_IP_ELASTICSEARCH:9200"
+
+curl -u "elastic:$PASSWORD" -k "https://$IP:9200"
 ```
 ```bash +.
 {
@@ -6809,6 +6818,8 @@ kibana.kibana.k8s.elastic.co/kibana created
 ```bash +.
 kubectl get kibana kibana
 ```
+
+
 ```bash +.
 NAME     HEALTH   NODES   VERSION   AGE
 kibana   green    1       7.9.3     2m23s
@@ -6829,6 +6840,7 @@ kibana-kb-http   ClusterIP   10.106.23.116   <none>        5601/TCP   2m45s
 ```bash +.
 kubectl get secret elasticsearch-es-elastic-user -o=jsonpath='{.data.elastic}' | base64 --decode; echo
 ```
+
 ```bash +.
 pb809RTC51EVCd3f19i9UVW5
 ```
@@ -6839,7 +6851,16 @@ pb809RTC51EVCd3f19i9UVW5
 kubectl port-forward --address 0.0.0.0 service/kibana-kb-http 5601
 ```
 
-Notre Kibana est donc installé ! Vous pouvez y'accéder à l'aide de l'URL suivante : https://MASTER_EXTERNAL_IP:5601
+Notre Kibana est donc installé ! Vous pouvez y'accéder à l'aide de l'URL suivante :
+
+- https://MASTER_EXTERNAL_IP:5601
+ 
+ ou 
+ 
+- https://localhost:5601
+
+en fonction de la plateforme de formation
+
 
 Page d'authentification :
 
@@ -6849,7 +6870,7 @@ Page d'accueil :
 
 ![](images/elastic2.png)
 
-14. Nous allons maintenant collecter des logs . Nous allons installé un filebeat et récupérer les logs se trouvant dans /var/log/containers, /var/lib/docker/containers et /var/log/pods/. On va donc créer le fichier filebeat.yaml suivant :
+1.  Nous allons maintenant collecter des logs . Nous allons installé un filebeat et récupérer les logs se trouvant dans /var/log/containers, /var/lib/docker/containers et /var/log/pods/. On va donc créer le fichier filebeat.yaml suivant :
 
 ```bash +.
 touch filebeat.yaml
