@@ -14,11 +14,9 @@ comment:  Labs Docker Fundamentals
 logo: https://assets.alterway.fr/2021/01/strong-mind.png
 
 
-
-
 -->
 
-# Lab Dockeer Fundamentals
+# Lab Docker Fundamentals
 
 
 
@@ -41,12 +39,14 @@ By the end of this exercise, you should be able to:
 
 ### 1.1. Launching and Managing Containers
 
-```text
-Step 1: Let’s begin by containerizing a simple ping process on your node:
-```
+
+<div style="color: purple">
+Step 1:</div> 
+Let’s begin by containerizing a simple ping process on your node:
+
 
 ```shell
-[ubuntu@node ~]$ docker container run alpine ping 8 .8.8.
+[ubuntu@node ~]$ docker container run alpine ping 8.8.8.8.
 ```
 
 - docker container run creates a new container
