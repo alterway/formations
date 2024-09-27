@@ -40,9 +40,9 @@ By the end of this exercise, you should be able to:
 ### 1.1. Launching and Managing Containers
 
 
-<div style="color: purple">
-Step 1:</div> 
-Let’s begin by containerizing a simple ping process on your node:
+<p style="color: purple"><b>
+Step 1:</b></p>
+**Let’s begin by containerizing a simple ping process on your node:**
 
 
 ```shell
