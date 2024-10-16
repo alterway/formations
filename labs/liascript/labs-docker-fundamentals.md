@@ -1543,7 +1543,6 @@ COPY --from=build /app/bin/hello /app/hello
 CMD /app/hello
 ```
 
-```
 <p style="color: purple"><b>
 Step 3</b></p>
 **Re-build my-app-small, without the cache:**
