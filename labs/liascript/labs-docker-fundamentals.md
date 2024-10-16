@@ -3,7 +3,7 @@ author:   Hervé Leclerc
 
 email:    herve.leclerc@alterway.fr
 
-version:  0.0.1
+version:  1.0.0
 
 language: en
 
