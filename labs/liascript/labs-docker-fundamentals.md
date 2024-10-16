@@ -2275,7 +2275,6 @@ to stop and remove containers
 ## 10. Advanced Orchestration Swarm mode
 
 
-
 ### 10.1 Initialize Docker Swarm and Add Nodes to the Cluster
 
 In this exercise, you'll initialize Docker Swarm. Docker Swarm provides clustering and orchestration capabilities to allow you to turn a group of machines running Docker into a single, virtual Docker engine.
