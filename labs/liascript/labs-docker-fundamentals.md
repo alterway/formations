@@ -5,9 +5,9 @@ email:    herve.leclerc@alterway.fr
 
 version:  0.0.1
 
-language: fr
+language: en
 
-narrator: FR French Male
+narrator: US English Male
 
 comment:  Labs Docker Fundamentals
 
