@@ -30,6 +30,12 @@ Docker Container Fundamentals
 
 ## 0. Docker installation
 
+
+To quickly setup a dev environment, Docker provides a convenience install script:
+
+
+### Using quick install script
+
 ```shell
 # Get installer and install docker engine
 curl -fsSL get.docker.com | sh
