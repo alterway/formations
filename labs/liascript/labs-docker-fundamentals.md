@@ -24,7 +24,7 @@ logo: https://assets.alterway.fr/2021/01/strong-mind.png
 
 ## Docker Container Fundamentals
 
-```text
+```shell
 Docker Container Fundamentals
 ```
 
@@ -55,7 +55,7 @@ docker run --rm -ti wernight/funbox nyancat
 
 ## 1. The Container Lifecycle
 
-```text
+```shell
 By the end of this exercise, you should be able to:
 ```
 
@@ -83,7 +83,7 @@ docker container run alpine ping 8.8.8.8.
     and its arguments to be containerized.
 You should see Docker download the alpine image, and then start the ping:
 
-```text
+```shell
 Unable to find image 'alpine:latest' locally
 latest: Pulling from library/alpine
 df20fa9351a1: Pull complete
@@ -97,7 +97,7 @@ PING 8 .8.8.8 ( 8 .8.8.8): 56 data bytes
 64 bytes from 8 .8.8.8: seq= 4 ttl= 109 time= 1 .146 ms
 ```
 
-```text
+```shell
 Press CTRL+C to kill the process.
 ```
 
@@ -111,7 +111,7 @@ Step 2</b></p>
 docker container ls -a
 ```
 
-```text
+```shell
 CONTAINER ID IMAGE COMMAND ... STATUS ...
 81484551f69b alpine "ping 8.8.8.8" ... Exited ( 0 ) 50 seconds ago ...
 ```
@@ -135,16 +135,16 @@ Step 3</b></p>
 docker container run -d alpine ping 8 .8.8.
 ```
 
-```text
+```shell
 4bf570c09043c0094fef87e9cad7e94e20b2b2c8bd1029bb49def581cdcb
 ```
 
 
-This time we just get the container ID back (4bf5... in my case, yours will be different), but
+This time we just get the container `ID` back (4bf5... in my case, yours will be different), but
 the ping output isn’t streaming to the terminal this time.
 
 
-```text
+```shell
 List your running containers:
 ```
 
@@ -152,12 +152,12 @@ List your running containers:
 docker container ls
 ```
 
-```text
+```shell
 CONTAINER ID IMAGE COMMAND STATUS ...
 4bf570c09043 alpine "ping 8.8.8.8" Up About a minute ...
 ```
 
-By omitting the -a flag, we get only our running containers - so only the one we just started
+By omitting the `-a` flag, we get only our running containers - so only the one we just started
 and which is still running in the background.
 
 
@@ -173,10 +173,9 @@ docker container stop <container ID of running container>
 
 >Notice it takes a long time (about 10 seconds) to return. When a container is stopped, there
 >is a two step process:
-
-- A SIGTERM is sent to the PID 1 process in the container, asking but not forcing it to
+>>- A SIGTERM is sent to the PID 1 process in the container, asking but not forcing it to
     stop
-- After 10 seconds, a SIGKILL is sent to the PID 1 process, forcing it to return and the
+>>- After 10 seconds, a SIGKILL is sent to the PID 1 process, forcing it to return and the
     container to enter its EXITED state.
 
 
@@ -268,8 +267,12 @@ docker container stats <container ID>
 ```
 
 ```shell
-CONT. ID NAME CPU % MEM USAGE / LIMIT MEM % NET I/O BLOCK I/O PIDS
-4bf5... zen_bartik 0 .02% 48KiB / 3 .7GiB 0 .00% 27kB / 26 .4kB 0B / 0B 1
+CONTAINER ID   NAME                   CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
+20b319e8affd   dockercoins-redis-1    0.45%     3.387MiB / 3.837GiB   0.09%     9.11kB / 9.07kB   0B / 0B     6
+8465838a890a   dockercoins-webui-1    0.00%     21.58MiB / 3.837GiB   0.55%     6.91kB / 370B     0B / 0B     10
+03e948de8bc5   dockercoins-rng-1      0.49%     16.19MiB / 3.837GiB   0.41%     72.6kB / 77.5kB   0B / 0B     1
+0b10a276008f   dockercoins-worker-1   1.34%     12.68MiB / 3.837GiB   0.32%     147kB / 162kB     0B / 0B     1
+7d840d2c4b6c   dockercoins-hasher-1   0.46%     19.16MiB / 3.837GiB   0.49%     83.7kB / 65.2kB   0B / 0B     22
 ```
 
 
@@ -323,7 +326,7 @@ PING 8 .8.8.8 ( 8 .8.8.8): 56 data bytes
 ```
 
 
-Here we see the STDOUT and STDERR of the primary process in our container -
+Here we see the `STDOUT` and `STDERR` of the primary process in our container -
 ping 8.8.8.8 in this case. Note that if you launch other processes in a container, their
 output will not be captured in the container logs! Only the process with PID 1 inside a
 container is logged in this fashion; this is one of the simplest reasons why it’s often a good
@@ -345,7 +348,7 @@ root 3312 3293 0 15 :47? 00 :00:00 ping 8 .8.8.
 ```
 
 
-Our container is running just one process, ping 8.8.8.8. The PID column in this output
+Our container is running just one process, `ping 8.8.8.8`. The PID column in this output
 indicates the PID of each process on the host. Remember that if this process exits, the
 container will exit. Try this yourself by listing containers and then killing the host process:
 
@@ -586,6 +589,7 @@ Step 6</b></p>
 
 <p style="color: purple"><b>
 Step 7</b></p>
+
 **Remember to clean up by deleting the containers created in this section.**
 
 ### 1.6. Conclusion
@@ -641,10 +645,15 @@ States and Transitions
 Key Docker Commands
 
 - `docker create`: Create a new container (Created state)
+  
 - `docker start`: Start a container (transition to Running)
+  
 - `docker stop`: Stop a running container (transition to Stopped)
+  
 - `docker pause`: Pause a running container (transition to Paused)
+  
 - `docker unpause`: Unpause a paused container (return to Running)
+  
 - `docker rm`: Remove a stopped or created container (transition to Removed)
 
 ## 2. Interactive Image Creation
@@ -787,7 +796,7 @@ Step 2</b></p>
 **Build your image with the build command. Don’t miss the. at the end; that’s the path to your Dockerfile. Since we’re currently in the directory myimage which contains it, the path is just. (here).**
 
 ```shell
-[ubuntu@node myimage]$ docker image build -t myimage.
+docker image build -t myimage.
 ```
 
 
@@ -820,7 +829,7 @@ Step 3</b></p>
 
 
 ```shell
-[ubuntu@node myimage]$ docker container run -it myimage bash
+docker container run -it myimage bash
 [root@1d86d4093cce /]# wget example.com
 [root@1d86d4093cce /]# cat index.html
 [root@1d86d4093cce /]# exit
@@ -836,7 +845,7 @@ Step 4</b></p>
 **It’s also possible to pipe a Dockerfile in from STDIN; try rebuilding your image with the following:**
 
 ```shell
-[ubuntu@node myimage]$ cat Dockerfile | docker image build -t myimage -f -.
+cat Dockerfile | docker image build -t myimage -f -.
 ```
 
 (This is useful when reading a Dockerfile from a remote location with curl, for example).
@@ -874,7 +883,7 @@ Step 3</b></p>
 <p style="color: purple"><b>
 Step 4</b></p>
 
-**Swap the order of the two RUN commands for installing wget and vim in the Dockerfile:**
+**Swap the order of the two `RUN` commands for installing wget and vim in the Dockerfile:**
 
 ```dockerfile
 FROM centos:
@@ -898,17 +907,17 @@ Step 1</b></p>
 
 
 ```shell
-[ubuntu@node myimage]$ docker image history myimage:latest
+docker image history myimage:latest
 ```
 
 ```shell
-IMAGE CREATED CREATED BY SIZE
-f2e85c162453 8 seconds ago /bin/sh -c yum install -y wget 87 .2MB
+IMAGE CREATED   CREATED BY SIZE
+f2e85c162453 8  seconds ago /bin/sh -c yum install -y wget 87 .2MB
 93385ea67464 12 seconds ago /bin/sh -c yum install -y vim 142MB
-27ad488e6b79 3 minutes ago /bin/sh -c yum update -y 86 .5MB
-5182e96772bf 44 hours ago /bin/sh -c #(nop) CMD ["/bin/bash"] 0B
-<missing> 44 hours ago /bin/sh -c #(nop) LABEL org.label-schema.... 0B
-<missing> 44 hours ago /bin/sh -c #(nop) ADD file:6340c690b08865d... 200MB
+27ad488e6b79 3  minutes ago /bin/sh -c yum update -y 86 .5MB
+5182e96772bf 44 hours   ago /bin/sh -c #(nop) CMD ["/bin/bash"] 0B
+<missing>    44 hours   ago /bin/sh -c #(nop) LABEL org.label-schema.... 0B
+<missing>    44 hours   ago /bin/sh -c #(nop) ADD file:6340c690b08865d... 200MB
 ```
 
 Note the image id of the layer built for the yum update command.
@@ -974,7 +983,7 @@ Step 2</b></p>
 **Rebuild your image:**
 
 ```shell
-[ubuntu@node myimage]$ docker image build -t myimage.
+docker image build -t myimage.
 ```
 
 <p style="color: purple"><b>
@@ -983,11 +992,11 @@ Step 3</b></p>
 **Run a container from your new image with no command provided:**
 
 ```shell
-[ubuntu@node myimage]$ docker container run myimage
+docker container run myimage
 ```
 
 
-You should see the command provided by the CMD parameter in the Dockerfile running.
+You should see the command provided by the `CMD` parameter in the Dockerfile running.
 
 <p style="color: purple"><b>
 Step 4</b></p>
@@ -995,7 +1004,7 @@ Step 4</b></p>
 **Try explicitly providing a command when running a container:**
 
 ```shell
-[ubuntu@node myimage]$ docker container run myimage echo "hello world"
+docker container run myimage echo "hello world"
 ```
 
 Providing a command in docker container run overrides the command defined by CMD.
@@ -1003,7 +1012,7 @@ Providing a command in docker container run overrides the command defined by CMD
 <p style="color: purple"><b>
 Step 5</b></p>
 
-**Replace the CMD instruction in your Dockerfile with an ENTRYPOINT:**
+**Replace the CMD instruction in your Dockerfile with an `ENTRYPOINT`:**
 
 ```dockerfile
 ...
@@ -1016,8 +1025,8 @@ Step 6</b></p>
 **Build the image and use it to run a container with no process arguments:**
 
 ```shell
-[ubuntu@node myimage]$ docker image build -t myimage.
-[ubuntu@node myimage]$ docker container run myimage
+docker image build -t myimage.
+docker container run myimage
 ```
 
 
@@ -1029,7 +1038,7 @@ Step 7</b></p>
 **Try running with an argument after the image name:**
 
 ```shell
-[ubuntu@node myimage]$ docker container run myimage 127 .0.0.
+docker container run myimage 127 .0.0.
 ```
 
 You should see a successful ping output. Tokens provided after an image name are sent as
@@ -1046,7 +1055,7 @@ arguments to the command specified by ENTRYPOINT.
 <p style="color: purple"><b>
 Step 1</b></p>
 
-**Open your Dockerfile and modify the ENTRYPOINT instruction to include 2 arguments for the ping command:**
+**Open your `Dockerfile` and modify the ENTRYPOINT instruction to include 2 arguments for the ping command:**
 
 ```dockerfile
 ENTRYPOINT ["ping", "-c", "3"]
@@ -1055,7 +1064,7 @@ ENTRYPOINT ["ping", "-c", "3"]
 <p style="color: purple"><b>
 Step 2</b></p>
 
-**If `CMD` and ENTRYPOINT are both specified in a Dockerfile, tokens listed in CMD are used as default parameters for the ENTRYPOINT command. Add a CMD with a default IP to ping:**
+**If `CMD` and ENTRYPOINT are both specified in a Dockerfile, tokens listed in `CMD` are used as default parameters for the `ENTRYPOINT` command. Add a `CMD` with a default IP to ping:**
 
 #### CMD ["127.0.0.1"]
 
@@ -1065,8 +1074,8 @@ Step 3</b></p>
 **Build the image and run a container with the defaults:**
 
 ```shell
-[ubuntu@node myimage]$ docker image build -t myimage.
-[ubuntu@node myimage]$ docker container run myimage
+docker image build -t myimage.
+docker container run myimage
 ```
 
 
@@ -1078,7 +1087,7 @@ Step 4</b></p>
 **Run another container with a custom IP argument:**
 
 ```shell
-[ubuntu@node myimage]$ docker container run myimage 8 .8.8.
+docker container run myimage 8 .8.8.
 ```
 
 
@@ -1113,9 +1122,9 @@ Step 3</b></p>
 **Build and run your image, and check the user ID of the ping process:**
 
 ```shell
-[ubuntu@node user]$ docker image build -t pinger:root.
-[ubuntu@node user]$ docker container run --name rootdemo -d pinger:root
-[ubuntu@node user]$ docker container exec rootdemo ps -aux
+docker image build -t pinger:root.
+docker container run --name rootdemo -d pinger:root
+docker container exec rootdemo ps -aux
 ```
 
 ```shell
@@ -1149,10 +1158,10 @@ Step 5</b></p>
 
 
 ```shell
-[ubuntu@node user]$ docker container rm -f rootdemo
-[ubuntu@node user]$ docker image build -t pinger:user.
-[ubuntu@node user]$ docker container run --name userdemo -d pinger:user
-[ubuntu@node user]$ docker container exec userdemo ps -aux
+docker container rm -f rootdemo
+docker image build -t pinger:user.
+docker container run --name userdemo -d pinger:user
+docker container exec userdemo ps -aux
 ```
 
 ```shell
@@ -1171,7 +1180,7 @@ Step 6</b></p>
 
 
 ```shell
-[ubuntu@node user]$ docker container rm -f userdemo
+docker container rm -f userdemo
 ```
 
 ### 4.4. Conclusion
@@ -1194,7 +1203,7 @@ By the end of this exercise, you should be able to:
 
 - Write a Dockerfile that describes multiple images, which can copy files from one image to
     the next.
-- Enable BuildKit for faster build times
+- Enable `BuildKit` for faster build times
 
 ### 5.1. Defining a multi-stage build
 
@@ -1276,7 +1285,7 @@ It should print “hello world” in the console.
 <p style="color: purple"><b>
 Step 7</b></p>
 
-**Update your Dockerfile to use an AS clause on the first line, and add a second stanza describing a second build stage:**
+**Update your `Dockerfile` to use an AS clause on the first line, and add a second stanza describing a second build stage:**
 
 ```dockerfile
 FROM alpine:3.5 AS build
@@ -1656,7 +1665,7 @@ You should get a denied: requested access to the resource is denied error.
 <p style="color: purple"><b>
 Step 2</b></p>
 
-**Login by doing docker login, and try pushing again. The push fails again because we haven’t namespaced our image correctly for distribution on Docker Hub; all images you want to share on Docker Hub must be named like <Docker ID>/<repo name>[:<optional tag>].**
+**Login by doing docker login, and try pushing again. The push fails again because we haven’t namespaced our image correctly for distribution on Docker Hub; all images you want to share on Docker Hub must be named like `<Docker ID>`/`<repo name>`[:`<optional tag>`].**
 
 <p style="color: purple"><b>
 Step 3</b></p>
@@ -1671,15 +1680,15 @@ docker image push <Docker ID>/my-centos:dev
 <p style="color: purple"><b>
 Step 4</b></p>
 
-**Search Docker Hub for your new <Docker ID>/my-centos repo, and confirm that you can see the :dev tag therein.**
+**Search Docker Hub for your new `<Docker ID>`/`my-centos` repo, and confirm that you can see the :dev tag therein.**
 
 6. Managing Images
 
 
 <p style="color: purple"><b>
-Step 5</b></p>**Next, make a new directory called hubdemo, and in it create a Dockerfile that uses
-<Docker ID>/my-centos:dev as its base image, and installs any application you like on top
-of that. Build the image, and simultaneously tag it as :1.0:**
+Step 5</b></p>
+
+**Next, make a new directory called hubdemo, and in it create a Dockerfile that uses `<Docker ID>`/`my-centos:dev` as its base image, and installs any application you like on top of that. Build the image, and simultaneously tag it as :1.0:**
 
 ```shell
 [ubuntu@node hubdemo]$ docker image build -t <Docker ID>/my-centos:1.0.
@@ -1708,7 +1717,7 @@ another tag.
 >In this exercise, we practiced tagging images and exchanging them on the public registry. The
 >namespacing rules for images on registries are mandatory: user-generated images to be
 >exchanged on the public registry must be named like
-><Docker ID>/<repo name>[:<optional tag>]; official images in the Docker registry just
+>`<Docker ID>`/`<repo name>`[:`<optional tag>`]; official images in the Docker registry just
 >have the repo name and tag.
 
 Also note that as we saw when building images, image names and tags are just pointers; deleting
@@ -1757,7 +1766,7 @@ PING 8 .8.8.8 ( 8 .8.8.8) 56 ( 84 ) bytes of data.
 <p style="color: purple"><b>
 Step 2</b></p>
 
-**Examine these same logs directly on disk; note <container ID> here is the full, untruncated container ID returned when you created the container above, or findable via**
+**Examine these same logs directly on disk; note `<container ID>` here is the full, untruncated container ID returned when you created the container above, or findable via**
 
 ```shall
 docker container ls --no-trunc:**
@@ -1787,7 +1796,7 @@ By default, logs are recorded as per the json-file driver format.
 <p style="color: purple"><b>
 Step 3</b></p>
 
-**Configure your logging driver to send logs to the system journal by updating /etc/docker/daemon.json to look like this (note you’ll need to open this file with sudo permissions in order to edit it):**
+**Configure your logging driver to send logs to the system journal by updating `/etc/docker/daemon.json` to look like this (note you’ll need to open this file with sudo permissions in order to edit it):**
 
 ```json
 {
@@ -1841,7 +1850,7 @@ file-based logging drivers like json-file support automatic log rotation and com
 <p style="color: purple"><b>
 Step 1</b></p>
 
-**Configure the Docker engine on node to create a json file of logs, swapping to a new file every 5 kb, preserving a maximum of 3 files, by changing your /etc/docker/daemon.json to look like this:**
+**Configure the Docker engine on node to create a json file of logs, swapping to a new file every 5 kb, preserving a maximum of 3 files, by changing your `/etc/docker/daemon.json` to look like this:**
 
 ```json
 {
@@ -1882,7 +1891,7 @@ When running a container or listing running containers, docker will typically re
 shortened container ID such as bbe74cd96891. In order to locate the appropriate directory
 for your container logs, you will need to the full container ID, such as
 bbe74cd968911071ac8a67b21bb0ba4396d546958af143a49692442907fdb261. To get the
-full cotnainer ID you can use docker inspect command. example:
+full contnainer ID you can use docker inspect command. example:
 
 ```shell
 #the bellow command will return the full ID of the container matching the shortened ID
@@ -1908,7 +1917,7 @@ files get rotated out.
 <p style="color: purple"><b>
 Step 5</b></p>
 
-**Keep listing the above directory every few seconds; you should see the original log file get rotated to <container ID>-json.log.1.gz once it reaches about 5 kb in size. Also, once it gets rotated out to .1.gz, it will be automatically compressed.**
+**Keep listing the above directory every few seconds; you should see the original log file get rotated to `<container ID>-json.log.1.gz` once it reaches about 5 kb in size. Also, once it gets rotated out to .1.gz, it will be automatically compressed.**
 
 <p style="color: purple"><b>
 Step 6</b></p>
@@ -2002,7 +2011,7 @@ driver. These are what we want to extract into the regular logs.
 <p style="color: purple"><b>
 Step 4</b></p>
 
-**Create another container that mounts the streamer volume, and which containerizes a simple process that writes any updates it finds to the logs file in that volume to STDOUT:**
+**Create another container that mounts the streamer volume, and which containerizes a simple process that writes any updates it finds to the logs file in that volume to `STDOUT`:**
 
 ```shell
 docker container run -d --name streamcontainer -v streamer:/tmp \
