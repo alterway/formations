@@ -1791,8 +1791,8 @@ Step 2</b></p>
 
 **Examine these same logs directly on disk; note `<container ID>` here is the full, untruncated container ID returned when you created the container above, or findable via**
 
-```shall
-docker container ls --no-trunc:**
+```shell
+docker container ls --no-trunc
 ```
 
 ```shell
@@ -2078,7 +2078,6 @@ Now we can fetch the contents of our logfile using the usual container logging A
 
 ## 9. Simple Orchestration
 
-
 ### 9.1 Simple orchestration via docker compose 
 
 <p style="color: purple"><b>
@@ -2235,7 +2234,6 @@ This is a great way to customize build and run parameters
 
 ```shell
 docker compose ps
-
 ```
 
 ```text 
@@ -2260,15 +2258,14 @@ to stop application containers
 
 ```shell
 docker compose rm
-
 ```
-to remove containers
 
+to remove containers
 
 ```shell
 docker compose down
-
 ```
+
 to stop and remove containers
 
 
@@ -2284,7 +2281,8 @@ In this exercise, you'll initialize Docker Swarm. Docker Swarm provides clusteri
 1. Open a terminal in the same VM that you cloned this GitHub repository
 2. Identify the IP address of your VM. In Linux, you can can open the Connection Information Prompt on the top right and find your address under the `IPv4` section. You can also use `ifconfig` to find the IP. It should look something like `192.168.x.x`.
 3. Run the following command:
-```
+
+```shell
 docker swarm init --advertise-addr <IP-from-previous-step>
 ```
 
@@ -2336,5 +2334,5 @@ yyuuufleycap2uvmgovszem18 *  master                     Ready   Active        Le
 
 The asterisk indicates your current machine. All nodes should be `Ready` Status and `Active`.
 
-
+---
 
