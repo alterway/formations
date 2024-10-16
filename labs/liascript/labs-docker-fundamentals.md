@@ -2272,15 +2272,15 @@ docker compose down
 to stop and remove containers
 
 
-# 10. Advanced Orchestration Swarm mode
+## 10. Advanced Orchestration Swarm mode
 
 
 
-# Exercise 1 - Initialize Docker Swarm and Add Nodes to the Cluster
+### 10.1 Initialize Docker Swarm and Add Nodes to the Cluster
 
 In this exercise, you'll initialize Docker Swarm. Docker Swarm provides clustering and orchestration capabilities to allow you to turn a group of machines running Docker into a single, virtual Docker engine.
 
-## Initialize Swarm Manager Node
+### 10.2 Initialize Swarm Manager Node
 
 1. Open a terminal in the same VM that you cloned this GitHub repository
 2. Identify the IP address of your VM. In Linux, you can can open the Connection Information Prompt on the top right and find your address under the `IPv4` section. You can also use `ifconfig` to find the IP. It should look something like `192.168.x.x`.
@@ -2311,7 +2311,7 @@ To add a manager to this swarm, run 'docker swarm join-token manager' and follow
 
 Copy the `docker swarm join` command for the next step.
 
-## Add Swarm Worker Nodes
+### 10.3 Add Swarm Worker Nodes
 
 To demonstrate Docker Swarm service model and networking, you'll need to add some worker nodes to the swarm.
 
