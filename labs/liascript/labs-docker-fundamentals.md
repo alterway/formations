@@ -28,14 +28,11 @@ Docker Container Fundamentals
 
 ## 0. Docker installation
 
-```bash
-# Get installer 
+```shell
+# Get installer and install docker engine
 
-curl -o install.sh -L get.docker.com
+curl -fsSL get.docker.com | sh
 
-# launch installer
-
-bash install.sh
 
 # Add ubuntu user to docker  group
 
@@ -70,7 +67,7 @@ By the end of this exercise, you should be able to:
 
 
 <p style="color: purple"><b>
-Step 1:</b></p>
+Step 1</b></p>
 **Let’s begin by containerizing a simple ping process on your node:**
 
 
@@ -102,9 +99,10 @@ PING 8 .8.8.8 ( 8 .8.8.8): 56 data bytes
 Press CTRL+C to kill the process.
 ```
 
-```text
-Step 2: List all of the containers on your node host:
-```
+<p style="color: purple"><b>
+Step 2</b></p>
+**List all of the containers on your node host:**
+
 
 ```shell
 [ubuntu@node ~]$ docker container ls -a
@@ -115,16 +113,17 @@ CONTAINER ID IMAGE COMMAND ... STATUS ...
 81484551f69b alpine "ping 8.8.8.8" ... Exited ( 0 ) 50 seconds ago ...
 ```
 
-```text
+
 We can see our container and its status. Sending a CTRL+C to the ping process that was
 attached to our terminal killed the ping, and since ping was the primary process in our
 container, it caused the container itself to exit.
-```
 
-```text
-Step 3: Let’s run the same container again, this time with the -d flag to detach the ping process
-from our shell so it can run in the background:
-```
+
+<p style="color: purple"><b>
+Step 3</b></p>
+**Let’s run the same container again, this time with the -d flag to detach the ping process
+from our shell so it can run in the background:**
+
 
 1. The Container Lifecycle
 
@@ -137,10 +136,10 @@ from our shell so it can run in the background:
 4bf570c09043c0094fef87e9cad7e94e20b2b2c8bd1029bb49def581cdcb
 ```
 
-```text
+
 This time we just get the container ID back (4bf5... in my case, yours will be different), but
 the ping output isn’t streaming to the terminal this time.
-```
+
 
 ```text
 List your running containers:
@@ -154,68 +153,87 @@ List your running containers:
 CONTAINER ID IMAGE COMMAND STATUS ...
 4bf570c09043 alpine "ping 8.8.8.8" Up About a minute ...
 ```
-```
+
 By omitting the -a flag, we get only our running containers - so only the one we just started
 and which is still running in the background.
-```
-Step 4: Stop your running container:
 
-```
+
+<p style="color: purple"><b>
+Step 4</b></p>
+**Stop your running container:**
+
+```shell
 [ubuntu@node ~]$ docker container stop <container ID of running container>
 ```
-```
+
+
 Notice it takes a long time (about 10 seconds) to return. When a container is stopped, there
 is a two step process:
-```
-1. A SIGTERM is sent to the PID 1 process in the container, asking but not forcing it to
+
+
+- A SIGTERM is sent to the PID 1 process in the container, asking but not forcing it to
     stop
-2. After 10 seconds, a SIGKILL is sent to the PID 1 process, forcing it to return and the
+- After 10 seconds, a SIGKILL is sent to the PID 1 process, forcing it to return and the
     container to enter its EXITED state.
 
-Step 5: Run the docker container ls again, and you’ll see nothing; there are no running
-containers. To see our stopped containers, again use:
 
-```
+<p style="color: purple"><b>
+Step 5</b></p>
+**Run the docker container ls again, and you’ll see nothing; there are no running
+containers. To see our stopped containers, again use:**
+
+```shell
 [ubuntu@node ~]$ docker container ls -a
 ```
-```
+
+```shell
 CONTAINER ID IMAGE COMMAND CREATED STATUS
 4bf570c09043 alpine "ping 8.8.8.8" 4 minutes ago Exited ( 137 ) a minute ago
 81484551f69b alpine "ping 8.8.8.8" 8 minutes ago Exited ( 0 ) 8 minutes ago
 ```
-```
+
 The exit codes presented (137 and 0) are the exit codes of the ping process when it was
 terminated.
-```
-Step 6: Restart the container you just exited (it should be the one more recently created, with the
-137 exit code), and list containers one more time:
 
-```
+
+<p style="color: purple"><b>
+Step 6</b></p>
+**Restart the container you just exited (it should be the one more recently created, with the
+137 exit code), and list containers one more time:**
+
+```shell
 [ubuntu@node ~]$ docker container start <container ID>
 ```
-```
+
+```shell
 [ubuntu@node ~]$ docker container ls
 ```
-```
+
+```shell
 CONTAINER ID IMAGE COMMAND CREATED STATUS
 4bf570c09043 alpine "ping 8.8.8.8" 11 minutes ago Up 25 seconds
 ```
-```
+
+
 Even when a container exits, its filesystem and configuration information are preserved so
 that it can be restarted later.
-```
+
 ### 1.2. Interrogating Containers
 
 1. The Container Lifecycle
 
 
-```
-Step 1: Retrieve your state and config information about your running container:
-```
-```
+<p style="color: purple"><b>
+Step 1</b></p>
+**Retrieve your state and config information about your running container:**
+
+
+
+```shell
 [ubuntu@node ~]$ docker container inspect <container ID>
 ```
-```
+
+```json
 [
 {
 "Id": "4bf570c09043c0094fef87e9cad7e94e20b2b2c8bd1029bb49def581cdcb8864",
@@ -228,35 +246,43 @@ Step 1: Retrieve your state and config information about your running container:
 "Status": "running",
 ...
 ```
-```
+
+
 This output provides a wealth of information about how your container is configured, as well
 as state conditions and error messages. This is one of the first places to look when
 debugging a malfunctioning container. Take some time to read through the fields now so you
 have a rough idea of the information available here.
-```
-```
-Step 2: Retrieve your resource consumption stats about your container:
-```
-```
+
+<p style="color: purple"><b>
+Step 2</b></p>
+**Retrieve your resource consumption stats about your container:**
+
+
+```shell
 [ubuntu@node ~]$ docker container stats <container ID>
 ```
-```
+
+```shell
 CONT. ID NAME CPU % MEM USAGE / LIMIT MEM % NET I/O BLOCK I/O PIDS
 4bf5... zen_bartik 0 .02% 48KiB / 3 .7GiB 0 .00% 27kB / 26 .4kB 0B / 0B 1
 ```
-```
+
+
 Here we see live resource consumption of this container; press CTRL+C when you’re done
 watching this monitor.
-```
-```
-Step 3: Retrieve the same information as the previous step, formatted as JSON and only
-instantaneously, without streaming:
-```
-```
+
+<p style="color: purple"><b>
+Step 3</b></p>
+**Retrieve the same information as the previous step, formatted as JSON and only
+instantaneously, without streaming:**
+
+
+```shell
 [ubuntu@node ~]$ docker container stats --no-stream \
 --format '{{json .}}' <container ID>
 ```
-```
+
+```json
 {"BlockIO":"0B / 0B",
 "CPUPerc":"0.02%",
 "Container":"4bf",
@@ -267,99 +293,122 @@ instantaneously, without streaming:
 "NetIO":"47.8kB / 47.2kB",
 "PIDs":"1"}
 ```
-```
+
+
+
 This option is useful for capturing consumption information by an external monitoring service
 that knows how to ingest JSON.
-```
-```
-Step 4: Retrieve the logs from your containerized process:
-```
+
+<p style="color: purple"><b>
+Step 6</b></p>
+**Retrieve the logs from your containerized process:**
+
 1. The Container Lifecycle
 
 
-```
+```shell
 [ubuntu@node ~]$ docker container logs <container ID>
 ```
-```
+
+```shell
 PING 8 .8.8.8 ( 8 .8.8.8): 56 data bytes
 64 bytes from 8 .8.8.8: seq= 0 ttl= 109 time= 1 .500 ms
 64 bytes from 8 .8.8.8: seq= 1 ttl= 109 time= 1 .183 ms
 64 bytes from 8 .8.8.8: seq= 2 ttl= 109 time= 1 .095 ms
 ```
-```
+
+
 Here we see the STDOUT and STDERR of the primary process in our container -
 ping 8.8.8.8 in this case. Note that if you launch other processes in a container, their
 output will not be captured in the container logs! Only the process with PID 1 inside a
 container is logged in this fashion; this is one of the simplest reasons why it’s often a good
 idea to strictly run one process within a container, rather than a complicated process tree.
-```
-Step 5: Get a list of processes running in your container:
 
-```
+
+<p style="color: purple"><b>
+Step 5</b></p>
+**Get a list of processes running in your container:**
+
+```shell
 [ubuntu@node ~]$ docker container top <container ID>
 ```
-```
+
+```shell
 UID PID PPID C STIME TTY TIME CMD
 root 3312 3293 0 15 :47? 00 :00:00 ping 8 .8.8.
 ```
-```
+
+
 Our container is running just one process, ping 8.8.8.8. The PID column in this output
 indicates the PID of each process on the host. Remember that if this process exits, the
 container will exit. Try this yourself by listing containers and then killing the host process:
-```
-```
+
+```shell
 [ubuntu@node ~]$ docker container ls
 ```
-```
+
+```shell
 CONTAINER ID IMAGE COMMAND
 4bf570c09043 alpine "ping 8.8.8.8"
 ```
-```
+
+```shell
 [ubuntu@node ~]$ sudo kill -9 <PID from container top command above>
 ```
-```
+
+```shell
 [ubuntu@node ~]$ docker container ls
 ```
+
 ```
 CONTAINER ID IMAGE COMMAND
 ```
-```
+
+
 Killing the host process and exiting a container are functionally equivalent, as we see here.
-```
-```
-Notes
+
+
+**Notes**
 Warning: do not use kill to stop containers! This was just an example to show the
 relationship between host processes and container state. This method can lead to unintended
 consequences with more sophisticated containers.
-```
+
+
+
 ### 1.3. Launching New Processes in Old Containers
 
-Step 1: Restart your ping container, exactly as you did before:
+<p style="color: purple"><b>
+Step 1</b></p>
+**Restart your ping container, exactly as you did before:**
 
 1. The Container Lifecycle
 
 
-```
+```shell
 [ubuntu@node ~]$ docker container start <container ID>
 ```
-```
+
+
 Remember from our use of docker container top before that there’s just one process
 running inside this container. Sometimes, especially when debugging, it can be helpful to be
 able to launch additional processes ‘inside’ a container.
-```
-```
-Step 2: Look at the PID tree of your container from the container’s perspective by running ps
-inside your container:
-```
-```
+
+<p style="color: purple"><b>
+Step 2</b></p>
+**Look at the PID tree of your container from the container’s perspective by running ps
+inside your container:**
+
+```shell
 [ubuntu@node ~]$ docker container exec <container ID> ps
 ```
-```
+
+```shell
 PID USER TIME COMMAND
 1 root 0 :00 ping 8 .8.8.
 11 root 0 :00 ps
 ```
-```
+
+
 docker container exec launches a new process inside an already running container.
 Note the output of ps in this case: it sees the PID tree as it appears inside the container’s
 kernel namespaces. So from that perspective, ping looks like PID 1 since it is the primary
@@ -367,85 +416,104 @@ process inside this container, rather than the host system PID returned by
 docker container top. Despite the different PIDs, these pings are the exact same
 process, as we saw previously when killing the host ping exited the container; this is the
 kernel PID namespace in action.
-```
-```
-Step 3: Launch an interactive shell inside your running container:
-```
-```
+
+
+<p style="color: purple"><b>
+Step 3</b></p>
+***Launch an interactive shell inside your running container:***
+
+```shell
 [ubuntu@node ~]$ docker container exec -it <container ID> sh
 / #
 ```
-```
+
+
 From here, you have an interactive prompt you can use to explore your container’s
 filesystem and namespaces, similar to if you SSHed into a remote host. Try out some
 common commands:
-```
-```
+
+```shell
 / # ls
 ```
-```
+
+```shell
 bin dev etc home lib media mnt opt proc root
 run sbin srv sys tmp usr var
 ```
-```
+
+```shell
 / # ps
 ```
-```
+
+```shell
 PID USER TIME COMMAND
 1 root 0 :00 ping 8 .8.8.
 16 root 0 :00 sh
 22 root 0 :00 ps
 ```
-```
+
+```shell
 / # whoami
-```
-```
 root
 ```
-```
+
+
 When you’re done practicing, type exit to return to your host.
-```
+
+
 ### 1.4. Cleaning up Containers
 
 1. The Container Lifecycle
 
 
-Step 1: List all of your containers one more time:
+<p style="color: purple"><b>
+Step 1</b></p>
+**List all of your containers one more time:**
 
-```
+```shell
 [ubuntu@node ~]$ docker container ls -a
 CONTAINER ID IMAGE COMMAND CREATED STATUS
 4bf570c09043 alpine "ping 8.8.8.8" 37 minutes ago Up 10 minutes
 81484551f69b alpine "ping 8.8.8.8" 41 minutes ago Exited ( 0 ) 41 minutes ago
 ```
-Step 2: Remove the exited container:
 
-```
+<p style="color: purple"><b>
+Step 2</b></p>
+**Remove the exited container:**
+
+```shell
 [ubuntu@node ~]$ docker container rm <container ID of Exited container>
 ```
-Step 3: Attempt to remove the running container:
 
-```
+<p style="color: purple"><b>
+Step 3</b></p>
+**Attempt to remove the running container:**
+
+```shell
 [ubuntu@node ~]$ docker container rm <container ID>
 ```
-```
+
+```shell
 Error response from daemon: You cannot remove a running container
 4bf570c09043c0094fef87e9cad7e94e20b2b2c8bd1029bb49def581cdcb8864.
 Stop the container before attempting removal or force remove
 ```
-```
+
+
 As displayed in the error message, docker container rm will decline to remove a
 running container. We could stop it then remove it as we did above, or we could force
 removal:
-```
-```
+
+```shell
 [ubuntu@node ~]$ docker container rm -f <container ID>
 ```
-```
+
+
 At this point, all of your containers from this exercise should be gone. Use
 docker container ls -a to confirm this. If any containers remain, use the commands
 you learned during these exercises to remove them.
-```
+
+
 ### 1.5. Optional: Independent Container Filesystems
 
 One important detail to understand about container filesystems is that each container has an
@@ -453,54 +521,70 @@ independent filesystem, even if they’re started from the same image. We’ll s
 filesystems are implemented in the next chapter, but for now it’s worth exploring how they appear
 in practice:
 
-Step 1: Create a container using the centos:7 image and connect to its bash shell in interactive
-mode:
+<p style="color: purple"><b>
+Step 1</b></p>
 
-```
+**Create a container using the centos:7 image and connect to its bash shell in interactive
+mode:**
+
+```shell
 [ubuntu@node ~]$ docker container run -it centos:7 bash
 ```
-Step 2: Explore your container’s filesystem with ls, and then create a new file. Use ls again to
-confirm you have successfully created your file. Use the -l option with ls to list the files and
-directories in a long list format.
 
-```
+<p style="color: purple"><b>
+Step 2</b></p>
+**Explore your container’s filesystem with ls, and then create a new file. Use ls again to
+confirm you have successfully created your file. Use the -l option with ls to list the files and
+directories in a long list format.**
+
+```shell
 [root@2b8de2ffdf85 /]# ls -l
 [root@2b8de2ffdf85 /]# echo 'Hello there...' > test.txt
 [root@2b8de2ffdf85 /]# ls -l
 ```
-Step 3: Exit the connection to the container:
 
-```
+<p style="color: purple"><b>
+Step 3</b></p>
+**Exit the connection to the container:**
+
+```shell
 [root@2b8de2ffdf85 /]# exit
 ```
-Step 4: Run the same command as before to start a container using the centos:7 image:
+
+<p style="color: purple"><b>
+Step 4</b></p>
+**Run the same command as before to start a container using the centos:7 image:**
 
 1. The Container Lifecycle
 
 
-```
+```shell
 [ubuntu@node ~]$ docker container run -it centos:7 bash
 ```
-```
-Step 5: Use ls to explore your container. You will see that your previously created test.txt is
+
+<p style="color: purple"><b>
+Step 5</b></p>
+**Use ls to explore your container. You will see that your previously created test.txt is
 nowhere to be found in your new container; while both containers were based on the same
 centos:7 image, changes made to the filesystem inside a container (like adding test.txt) are
-local only to the container that made the change, preserving independence between containers.
-Step 6: Challenge: Using the commands you learned previously, restart the container you
-created test.txt in, connect to it, and prove that that file is still present in that container.
-Step 7: Remember to clean up by deleting the containers created in this section.
-```
+local only to the container that made the change, preserving independence between containers.**
+
+<p style="color: purple"><b>
+Step 6</b></p>
+**Challenge: Using the commands you learned previously, restart the container you
+created test.txt in, connect to it, and prove that that file is still present in that container.**
+
+<p style="color: purple"><b>
+Step 7</b></p>
+**Remember to clean up by deleting the containers created in this section.**
+
 ### 1.6. Conclusion
 
-```
 In this exercise we learned the basic commands to start, stop, restart and investigate a container.
 But beyond basic syntax, we learned some examples of the importance of the primary, PID 1
 process inside a container. The state of this process determines the liveness of our container, the
 STDOUT and STDERR of this process is what’s logged by container logs, and this process’
 response to SIGTERM determines how our container behaves during a controlled shutdown.
-```
-
-1. The Container Lifecycle
 
 
 ```
@@ -562,79 +646,101 @@ By the end of this exercise, you should be able to:
 
 ### 2.1. Modifying a Container
 
-Step 1: Start a bash terminal in a CentOS container:
+<p style="color: purple"><b>
+Step 1</b></p>
+**Start a bash terminal in a CentOS container:**
 
-```
+```shell
 [ubuntu@node ~]$ docker container run -it centos:7 bash
 ```
-Step 2: Install a couple pieces of software in this container - there’s nothing special about wget,
-any changes to the filesystem will do. Afterwards, exit the container:
 
-```
+<p style="color: purple"><b>
+Step 2</b></p>
+**Install a couple pieces of software in this container - there’s nothing special about wget,
+any changes to the filesystem will do. Afterwards, exit the container:**
+
+```shell
 [root@dfe86ed42be9 /]# yum install -y which wget
 [root@dfe86ed42be9 /]# exit
 ```
-Step 3: Finally, try docker container diff to see what’s changed about a container relative
-to its image; you’ll need to get the container ID via docker container ls -a first:
 
-```
+<p style="color: purple"><b>
+Step 3</b></p>
+**Finally, try docker container diff to see what’s changed about a container relative
+to its image; you’ll need to get the container ID via docker container `ls -a` first:**
+
+```shell
 [ubuntu@node ~]$ docker container ls -a
 [ubuntu@node ~]$ docker container diff <container ID>
 ```
-```
+
+```shell
 C /root
 A /root/.bash_history
 C /usr
 C /usr/bin
 A /usr/bin/gsoelim
 ```
-```
+
+
 Those C at the beginning of lines stand for files changed, and A for added; lines that start
 with D indicate deletions.
-```
+
+
 ### 2.2. Capturing Container State as an Image
 
-Step 1: Installing which and wget in the last step wrote information to the container’s read/write
+<p style="color: purple"><b>
+Step 1</b></p>
+**Installing which and wget in the last step wrote information to the container’s read/write
 layer; now let’s save that read/write layer as a new read-only image layer in order to create a new
-image that reflects our additions, via the docker container commit:
+image that reflects our additions, via the docker container commit:**
 
-```
+```shell
 [ubuntu@node ~]$ docker container commit <container ID> myapp:1.
 ```
-Step 2: Check that you can see your new image by listing all your images:
 
-```
+
+<p style="color: purple"><b>
+Step 2</b></p>
+**Check that you can see your new image by listing all your images:**
+
+```shell
 [ubuntu@node ~]$ docker image ls
 ```
-```
+
+
+```shell
 REPOSITORY TAG IMAGE ID CREATED SIZE
 myapp 1 .0 34f97e0b087b 8 seconds ago 300MB
 centos 7 5182e96772bf 44 hours ago 200MB
 ```
-Step 3: Create a container running bash using your new image, and check that which and wget
-are installed:
+
+<p style="color: purple"><b>
+Step 3</b></p>
+**Create a container running bash using your new image, and check that which and wget
+are installed:**
 
 2. Interactive Image Creation
 
 
-```
+```shell
 [ubuntu@node ~]$ docker container run -it myapp:1.0 bash
 [root@2ecb80c76853 /]# which wget
 ```
-```
+
+
 The which commands should show the path to the specified executable, indicating they
 have been installed in the image. Exit your container when done by typing exit.
-```
+
+
 ### 2.3. Conclusion
 
-```
+
 In this exercise, you learned how to inspect the contents of a container’s read / write layer with
 docker container diff, and then commit those changes to a new image layer with
 docker container commit. Committing a container as an image in this fashion can be useful
 when developing an environment inside a container, when you want to capture that environment
 for reproduction elsewhere.
-```
-2. Interactive Image Creation
 
 
 ## 3. Creating Images with Dockerfiles (1/2)
@@ -1582,7 +1688,6 @@ allocating and managing disk space for logs; while we can’t provision an unlim
 on each of our nodes for logs, the more logs we’re able to keep, the further back in history we can
 look when troubleshooting our deployments.
 ```
-7. Managing Container Logs
 
 
 ## 8. Sharing and Streaming Logs
@@ -1676,4 +1781,5 @@ you’re running, because you’ll want a standardized way of consuming logs fro
 processes. Once all relevant logs are available via the container logging API, it becomes
 relatively straightforward to integrate these logs with whichever logging aggregator you prefer.
 ```
-8. Sharing and Streaming Logs
+
+
