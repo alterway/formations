@@ -89,7 +89,7 @@ docker container run alpine ping 8.8.8.8.
     and its arguments to be containerized.
 You should see Docker download the alpine image, and then start the ping:
 
-```shell
+```text
 Unable to find image 'alpine:latest' locally
 latest: Pulling from library/alpine
 df20fa9351a1: Pull complete
@@ -117,7 +117,7 @@ Step 2</b></p>
 docker container ls -a
 ```
 
-```shell
+```text
 CONTAINER ID IMAGE COMMAND ... STATUS ...
 81484551f69b alpine "ping 8.8.8.8" ... Exited ( 0 ) 50 seconds ago ...
 ```
@@ -141,7 +141,7 @@ Step 3</b></p>
 docker container run -d alpine ping 8 .8.8.
 ```
 
-```shell
+```text
 4bf570c09043c0094fef87e9cad7e94e20b2b2c8bd1029bb49def581cdcb
 ```
 
@@ -150,7 +150,7 @@ This time we just get the container `ID` back (4bf5... in my case, yours will be
 the ping output isn’t streaming to the terminal this time.
 
 
-```shell
+```text
 List your running containers:
 ```
 
@@ -158,7 +158,7 @@ List your running containers:
 docker container ls
 ```
 
-```shell
+```text
 CONTAINER ID IMAGE COMMAND STATUS ...
 4bf570c09043 alpine "ping 8.8.8.8" Up About a minute ...
 ```
@@ -194,7 +194,7 @@ Step 5</b></p>
 docker container ls -a
 ```
 
-```shell
+```text
 CONTAINER ID IMAGE COMMAND CREATED STATUS
 4bf570c09043 alpine "ping 8.8.8.8" 4 minutes ago Exited ( 137 ) a minute ago
 81484551f69b alpine "ping 8.8.8.8" 8 minutes ago Exited ( 0 ) 8 minutes ago
@@ -217,7 +217,7 @@ docker container start <container ID>
 docker container ls
 ```
 
-```shell
+```text
 CONTAINER ID IMAGE COMMAND CREATED STATUS
 4bf570c09043 alpine "ping 8.8.8.8" 11 minutes ago Up 25 seconds
 ```
@@ -272,7 +272,7 @@ Step 2</b></p>
 docker container stats <container ID>
 ```
 
-```shell
+```text
 CONTAINER ID   NAME                   CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O   PIDS
 20b319e8affd   dockercoins-redis-1    0.45%     3.387MiB / 3.837GiB   0.09%     9.11kB / 9.07kB   0B / 0B     6
 8465838a890a   dockercoins-webui-1    0.00%     21.58MiB / 3.837GiB   0.55%     6.91kB / 370B     0B / 0B     10
@@ -324,7 +324,7 @@ Step 6</b></p>
 docker container logs <container ID>
 ```
 
-```shell
+```text
 PING 8 .8.8.8 ( 8 .8.8.8): 56 data bytes
 64 bytes from 8 .8.8.8: seq= 0 ttl= 109 time= 1 .500 ms
 64 bytes from 8 .8.8.8: seq= 1 ttl= 109 time= 1 .183 ms
@@ -348,7 +348,7 @@ Step 5</b></p>
 docker container top <container ID>
 ```
 
-```shell
+```text
 UID PID PPID C STIME TTY TIME CMD
 root 3312 3293 0 15 :47? 00 :00:00 ping 8 .8.8.
 ```
@@ -362,7 +362,7 @@ container will exit. Try this yourself by listing containers and then killing th
 docker container ls
 ```
 
-```shell
+```text
 CONTAINER ID IMAGE COMMAND
 4bf570c09043 alpine "ping 8.8.8.8"
 ```
@@ -419,7 +419,7 @@ Step 2</b></p>
 docker container exec <container ID> ps
 ```
 
-```shell
+```text
 PID USER TIME COMMAND
 1 root 0 :00 ping 8 .8.8.
 11 root 0 :00 ps
@@ -454,7 +454,7 @@ common commands:
 / # ls
 ```
 
-```shell
+```text
 bin dev etc home lib media mnt opt proc root
 run sbin srv sys tmp usr var
 ```
@@ -463,7 +463,7 @@ run sbin srv sys tmp usr var
 / # ps
 ```
 
-```shell
+```text
 PID USER TIME COMMAND
 1 root 0 :00 ping 8 .8.8.
 16 root 0 :00 sh
@@ -491,6 +491,9 @@ Step 1</b></p>
 
 ```shell
 docker container ls -a
+```
+
+```shell
 CONTAINER ID IMAGE COMMAND CREATED STATUS
 4bf570c09043 alpine "ping 8.8.8.8" 37 minutes ago Up 10 minutes
 81484551f69b alpine "ping 8.8.8.8" 41 minutes ago Exited ( 0 ) 41 minutes ago
@@ -514,7 +517,7 @@ Step 3</b></p>
 docker container rm <container ID>
 ```
 
-```shell
+```text
 Error response from daemon: You cannot remove a running container
 4bf570c09043c0094fef87e9cad7e94e20b2b2c8bd1029bb49def581cdcb8864.
 Stop the container before attempting removal or force remove
@@ -700,7 +703,7 @@ docker container ls -a
 docker container diff <container ID>
 ```
 
-```shell
+```text
 C /root
 A /root/.bash_history
 C /usr
@@ -735,7 +738,7 @@ docker image ls
 ```
 
 
-```shell
+```text
 REPOSITORY TAG IMAGE ID CREATED SIZE
 myapp 1 .0 34f97e0b087b 8 seconds ago 300MB
 centos 7 5182e96772bf 44 hours ago 200MB
@@ -836,6 +839,9 @@ Step 3</b></p>
 
 ```shell
 docker container run -it myimage bash
+```
+
+```text
 [root@1d86d4093cce /]# wget example.com
 [root@1d86d4093cce /]# cat index.html
 [root@1d86d4093cce /]# exit
@@ -916,7 +922,7 @@ Step 1</b></p>
 docker image history myimage:latest
 ```
 
-```shell
+```text
 IMAGE CREATED   CREATED BY SIZE
 f2e85c162453 8  seconds ago /bin/sh -c yum install -y wget 87 .2MB
 93385ea67464 12 seconds ago /bin/sh -c yum install -y vim 142MB
@@ -937,7 +943,7 @@ Step 2</b></p>
 with a single command:
 
 
-```shell
+```dockerfile
 RUN yum install -y wget vim
 ```
 
@@ -1133,7 +1139,7 @@ docker container run --name rootdemo -d pinger:root
 docker container exec rootdemo ps -aux
 ```
 
-```shell
+```text
 USER PID %CPU %MEM VSZ RSS TTY STAT START TIME COMMAND
 root 1 0 .8 0 .0 24856 1800? Ss 17 :52 0 :00 ping 8 .8.8.
 root 7 0 .0 0 .0 51748 3364? Rs 17 :52 0 :00 ps -aux
@@ -1170,7 +1176,7 @@ docker container run --name userdemo -d pinger:user
 docker container exec userdemo ps -aux
 ```
 
-```shell
+```text
 USER PID %CPU %MEM VSZ RSS TTY STAT START TIME COMMAND
 1000 1 0 .7 0 .0 24856 1908? Ss 17 :55 0 :00 ping 8 .8.8.
 1000 7 0 .0 0 .0 51748 3468? Rs 17 :55 0 :00 ps -aux
@@ -1192,7 +1198,7 @@ docker container rm -f userdemo
 ### 4.4. Conclusion
 
 
->CMD, ENTRYPOINT and USER all share one thing in common: they’re all optional Dockerfile
+>`CMD`, `ENTRYPOINT` and `USER` all share one thing in common: they’re all optional Dockerfile
 >commands, but they should be present in virtually all Dockerfiles. CMD and ENTRYPOINT help
 >clarify for future users of your image just what process your image is meant to containerize; since
 >images should be built to containerize exactly one specific process in almost all cases, capturing
@@ -1269,7 +1275,7 @@ docker image build -t my-app-large.
 docker image ls | grep my-app-large
 ```
 
-```shell
+```text
 REPOSITORY TAG IMAGE ID CREATED SIZE
 my-app-large latest a7d0c6fe0849 3 seconds ago 189MB
 ```
@@ -1321,7 +1327,7 @@ docker image build -t my-app-small.
 docker image ls | grep 'my-app-'
 ```
 
-```shell
+```text
 REPOSITORY TAG IMAGE ID CREATED SIZE
 my-app-small latest f49ec3971aa6 6 seconds ago 4 .01MB
 my-app-large latest a7d0c6fe0849 About a minute ago 189MB
@@ -1432,7 +1438,7 @@ Step 3</b></p>
 **Build your image:**
 
 ```shell
-[ubuntu@node scratch]$ docker image build -t sleep:scratch.
+docker image build -t sleep:scratch.
 ```
 
 <p style="color: purple"><b>
@@ -1441,10 +1447,10 @@ Step 4</b></p>
 **List your images, and search for the one you just built:**
 
 ```shell
-[ubuntu@node scratch]$ docker image ls | grep scratch
+docker image ls | grep scratch
 ```
 
-```shell
+```text
 REPOSITORY TAG IMAGE ID CREATED SIZE
 sleep scratch 1b68b20a85a8 9 minutes ago 128kB
 ```
@@ -1459,11 +1465,11 @@ Step 5</b></p>
 **Run your image, and check out its filesystem; we can’t list directly inside the container, since ls isn’t installed in this ultra-minimal image, so we have to find where this container’s filesystem is mounted on the host. Start by finding the PID of your sleep process after its running:**
 
 ```shell
-[ubuntu@node scratch]$ docker container run --name sleeper -d sleep:scratch
-[ubuntu@node scratch]$ docker container top sleeper
+docker container run --name sleeper -d sleep:scratch
+docker container top sleeper
 ```
 
-```shell
+```text
 UID PID PPID C STIME TTY TIME CMD
 root 1190 1174 0 15 :21? 00 :00:00 /sleep
 ```
@@ -1477,10 +1483,10 @@ Step 6</b></p>
 **List your container’s filesystem from the host using this PID:**
 
 ```shell
-[ubuntu@node scratch]$ sudo ls /proc/<PID>/root
+sudo ls /proc/<PID>/root
 ```
 
-```shell
+```text
 dev etc proc sleep sys
 ```
 
@@ -1496,7 +1502,7 @@ Step 7</b></p>
 **Clean up by deleting your container:**
 
 ```shell
-[ubuntu@node scratch]$ docker container rm -f sleeper
+docker container rm -f sleeper
 ```
 
 
@@ -1536,7 +1542,7 @@ Step 3</b></p>
 docker image build --no-cache -t my-app-small-bk.
 ```
 
-```shell
+```text
 [+] Building 15 .5s ( 14 /14) FINISHED
 => [internal] load Dockerfile
 => => transferring dockerfile: 97B
@@ -1697,7 +1703,7 @@ Step 5</b></p>
 **Next, make a new directory called hubdemo, and in it create a Dockerfile that uses `<Docker ID>`/`my-centos:dev` as its base image, and installs any application you like on top of that. Build the image, and simultaneously tag it as :1.0:**
 
 ```shell
-[ubuntu@node hubdemo]$ docker image build -t <Docker ID>/my-centos:1.0.
+docker image build -t <Docker ID>/my-centos:1.0.
 ```
 
 <p style="color: purple"><b>
@@ -1762,7 +1768,7 @@ docker container run -d centos:7 ping 8 .8.8.8
 docker container logs <container ID>
 ```
 
-```shell
+```text
 PING 8 .8.8.8 ( 8 .8.8.8) 56 ( 84 ) bytes of data.
 64 bytes from 8 .8.8.8: icmp_seq= 1 ttl= 113 time= 0 .631 ms
 64 bytes from 8 .8.8.8: icmp_seq= 2 ttl= 113 time= 0 .652 ms
@@ -1783,7 +1789,7 @@ sudo head -5 \
 /var/lib/docker/containers/<container ID>/<container ID>-json.log
 ```
 
-```shell
+```json
 {"log":"PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.\n","stream":"stdout",
 "time":"2018-09-17T17:29:35.263052015Z"}
 {"log":"64 bytes from 8.8.8.8: icmp_seq=1 ttl=113 time=0.631 ms\n","stream":"stdout",
@@ -2003,7 +2009,7 @@ But, check out the contents of your mounted volume:
 sudo cat /var/lib/docker/volumes/streamer/_data/logs
 ```
 
-```shell
+```text
 Wed May 19 15 :40:03 UTC 2021
 Wed May 19 15 :40:04 UTC 2021
 Wed May 19 15 :40:05 UTC 2021
@@ -2036,7 +2042,7 @@ Step 5</b></p>
 docker container logs streamcontainer
 ```
 
-```shell
+```text
 Wed May 19 15 :48:18 UTC 2021
 Wed May 19 15 :48:19 UTC 2021
 Wed May 19 15 :48:20 UTC 2021
@@ -2275,6 +2281,10 @@ You should see the following output:
 
 ```shell
 docker swarm init --advertise-addr 192.168.231.130
+
+```
+
+```text
 Swarm initialized: current node (abk00th1nhe3lb4fvjyiqvitf) is now a manager.
 
 To add a worker to this swarm, run the following command:
@@ -2297,7 +2307,7 @@ Run the command from the previous step in each additional machine you want to jo
 You should see the following output:
 
 ```shell 
-$ docker swarm join \
+docker swarm join \
   --token SWMTKN-1-1e4qkzhijskumj17epwoms5oa8uy7tmejvcvskqarsvcxvlvhh-ayutk7rk8plzesr97wryfjvs9 \
   192.168.231.140:2377
 
@@ -2306,7 +2316,7 @@ This node joined a swarm as a worker.
 
 To ensure that your swarm nodes have been properly added, switch to your manager node and run `docker node ls`:
 
-```shell
+```text
 ID                           HOSTNAME                   STATUS  AVAILABILITY  MANAGER STATUS
 ovd9qwjf95eo3x5ijdi2ecjzg    localuser-virtual-machine  Ready   Active        
 yyuuufleycap2uvmgovszem18 *  master                     Ready   Active        Leader
