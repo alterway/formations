@@ -26,6 +26,35 @@ logo: https://assets.alterway.fr/2021/01/strong-mind.png
 Docker Container Fundamentals
 ```
 
+## 0. Docker installation
+
+```bash
+# Get installer 
+
+curl -o install.sh -L get.docker.com
+
+# launch installer
+
+bash install.sh
+
+# Add ubuntu user to docker  group
+
+sudo usermod -aG docker ubuntu
+
+
+# Reload user group
+
+newgrp docker
+
+
+# Test installation
+
+docker run --rm -ti wernight/funbox nyancat
+
+
+```
+
+
 ## 1. The Container Lifecycle
 
 ```text
