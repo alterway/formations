@@ -26,6 +26,8 @@ logo: https://assets.alterway.fr/2021/01/strong-mind.png
 
 ```shell
 Docker Container Fundamentals
+
+[qr-code](https://liascript.github.io/course/?https://raw.githubusercontent.com/alterway/formations/refs/heads/main/labs/liascript/labs-docker-fundamentals.md#1)
 ```
 
 ## 0. Docker installation
