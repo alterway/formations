@@ -557,7 +557,7 @@ docker container run -it centos:7 bash
 <p style="color: purple"><b>
 Step 2</b></p>
 
-**Explore your container’s filesystem with ls, and then create a new file. Use ls again to confirm you have successfully created your file. Use the -l option with ls to list the files and directories in a long list format.**
+**Explore your container’s filesystem with ls, and then create a new file. Use ls again to confirm you have successfully created your file. Use the `-l` option with ls to list the files and directories in a long list format.**
 
 ```shell
 [root@2b8de2ffdf85 /]# ls -l
@@ -610,7 +610,7 @@ Step 7</b></p>
 >response to SIGTERM determines how our container behaves during a controlled shutdown.
 
 
-```
+```text
 Created ---> Running ---> Stopped
    ^          |  ^          |
    |          |  |          |
@@ -621,7 +621,8 @@ Created ---> Running ---> Stopped
                  +----------+
 ```
 
-States and Transitions
+
+**States and Transitions**
 
 1. **Created**
    - Initial state after `docker create`
@@ -700,6 +701,7 @@ Step 3</b></p>
 
 ```shell
 docker container ls -a
+
 docker container diff <container ID>
 ```
 
@@ -754,6 +756,9 @@ Step 3</b></p>
 
 ```shell
 docker container run -it myapp:1.0 bash
+````
+
+```shell
 [root@2ecb80c76853 /]# which wget
 ```
 
@@ -939,9 +944,7 @@ Step 2</b></p>
 
 **Replace the two RUN commands that installed wget and vim**
 
-
 with a single command:
-
 
 ```dockerfile
 RUN yum install -y wget vim
@@ -1037,7 +1040,8 @@ Step 6</b></p>
 **Build the image and use it to run a container with no process arguments:**
 
 ```shell
-docker image build -t myimage.
+docker image build -t myimage .
+
 docker container run myimage
 ```
 
@@ -1050,7 +1054,7 @@ Step 7</b></p>
 **Try running with an argument after the image name:**
 
 ```shell
-docker container run myimage 127 .0.0.
+docker container run myimage 127.0.0
 ```
 
 You should see a successful ping output. Tokens provided after an image name are sent as
@@ -1099,7 +1103,7 @@ Step 4</b></p>
 **Run another container with a custom IP argument:**
 
 ```shell
-docker container run myimage 8 .8.8.
+docker container run myimage 8.8.8.8
 ```
 
 
@@ -1134,8 +1138,10 @@ Step 3</b></p>
 **Build and run your image, and check the user ID of the ping process:**
 
 ```shell
-docker image build -t pinger:root.
+docker image build -t pinger:root .
+
 docker container run --name rootdemo -d pinger:root
+
 docker container exec rootdemo ps -aux
 ```
 
@@ -1245,6 +1251,9 @@ Step 3</b></p>
 
 ```shell
 gcc -Wall hello.c -o hello
+````
+
+```shell
 ./hello
 ```
 
@@ -1271,7 +1280,8 @@ Step 5</b></p>
 **Build the image and note its size:**
 
 ```shell
-docker image build -t my-app-large.
+docker image build -t my-app-large .
+
 docker image ls | grep my-app-large
 ```
 
@@ -1323,7 +1333,8 @@ Step 8</b></p>
 **Build the image again and compare the size with the previous version:**
 
 ```shell
-docker image build -t my-app-small.
+docker image build -t my-app-small .
+
 docker image ls | grep 'my-app-'
 ```
 
@@ -1362,7 +1373,7 @@ Step 1</b></p>
 **Build an image from the build stage in your Dockerfile using the --target flag:**
 
 ```shell
-docker image build -t my-build-stage --target build.
+docker image build -t my-build-stage --target build .
 ```
 
 
@@ -1438,7 +1449,7 @@ Step 3</b></p>
 **Build your image:**
 
 ```shell
-docker image build -t sleep:scratch.
+docker image build -t sleep:scratch .
 ```
 
 <p style="color: purple"><b>
@@ -1604,7 +1615,6 @@ export DOCKER_BUILDKIT= 0
 
 By the end of this exercise, you should be able to:
 
-
 - Rename and retag an image
 - Push and pull images from the public registry
 - Delete image tags and image layers, and understand the difference between the two
@@ -1686,6 +1696,7 @@ Step 3</b></p>
 
 ```shell
 docker image tag my-centos:dev <Docker ID>/my-centos:dev
+
 docker image push <Docker ID>/my-centos:dev
 ```
 
@@ -1703,7 +1714,7 @@ Step 5</b></p>
 **Next, make a new directory called hubdemo, and in it create a Dockerfile that uses `<Docker ID>`/`my-centos:dev` as its base image, and installs any application you like on top of that. Build the image, and simultaneously tag it as :1.0:**
 
 ```shell
-docker image build -t <Docker ID>/my-centos:1.0.
+docker image build -t <Docker ID>/my-centos:1.0 .
 ```
 
 <p style="color: purple"><b>
@@ -1764,7 +1775,8 @@ Step 1</b></p>
 
 
 ```shell
-docker container run -d centos:7 ping 8 .8.8.8
+docker container run -d centos:7 ping 8.8.8.8
+
 docker container logs <container ID>
 ```
 
@@ -1833,7 +1845,7 @@ Step 5</b></p>
 **Run another container, just like the one you ran above, but this time name it demo:**
 
 ```shell
-docker container run -d --name demo centos:7 ping 8 .8.8.8
+docker container run -d --name demo centos:7 ping 8.8.8.8
 ```
 
 <p style="color: purple"><b>
@@ -1843,6 +1855,9 @@ Step 5</b></p>
 
 ```shell
 journalctl CONTAINER_NAME=demo
+```
+
+```text
 -- Logs begin at Wed 2021 -05-19 15 :03:26 UTC, end at Wed 2021 -05-19 15 :11:09 UTC. --
 May 19 15 :11:02 node 138194df21dc[ 1701 ]: PING 8 .8.8.8 ( 8 .8.8.8) 56 ( 84 ) bytes of data.
 May 19 15 :11:02 node 138194df21dc[ 1701 ]: 64 bytes from 8 .8.8.8: icmp_seq= 1 ttl= 113 time= 1 .14 ms
@@ -1868,10 +1883,10 @@ Step 1</b></p>
 {
 "log-driver": "json-file",
 "log-opts": {
-"max-size": "5k",
-"max-file": "3",
-"compress": "true"
-}
+   "max-size": "5k",
+   "max-file": "3",
+   "compress": "true"
+   }
 }
 ```
 
@@ -1890,7 +1905,7 @@ Step 3</b></p>
 **Start another container generating logs:**
 
 ```shell
-docker container run --name logdemo -d centos:7 ping 8 .8.8.8
+docker container run --name logdemo -d centos:7 ping 8.8.8.8
 ```
 
 <p style="color: purple"><b>
@@ -2281,7 +2296,6 @@ You should see the following output:
 
 ```shell
 docker swarm init --advertise-addr 192.168.231.130
-
 ```
 
 ```text
@@ -2321,6 +2335,7 @@ ID                           HOSTNAME                   STATUS  AVAILABILITY  MA
 ovd9qwjf95eo3x5ijdi2ecjzg    localuser-virtual-machine  Ready   Active        
 yyuuufleycap2uvmgovszem18 *  master                     Ready   Active        Leader
 ```
+
 The asterisk indicates your current machine. All nodes should be `Ready` Status and `Active`.
 
 
