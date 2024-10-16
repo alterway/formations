@@ -27,8 +27,12 @@ logo: https://assets.alterway.fr/2021/01/strong-mind.png
 ```shell
 Docker Container Fundamentals
 
-[qr-code](https://liascript.github.io/course/?https://raw.githubusercontent.com/alterway/formations/refs/heads/main/labs/liascript/labs-docker-fundamentals.md#1)
 ```
+
+Accès au lab : 
+
+
+[qr-code](https://liascript.github.io/course/?https://raw.githubusercontent.com/alterway/formations/refs/heads/main/labs/liascript/labs-docker-fundamentals.md#1)
 
 ## 0. Docker installation
 
@@ -1068,7 +1072,7 @@ Step 2</b></p>
 
 **If `CMD` and ENTRYPOINT are both specified in a Dockerfile, tokens listed in `CMD` are used as default parameters for the `ENTRYPOINT` command. Add a `CMD` with a default IP to ping:**
 
-#### CMD ["127.0.0.1"]
+`CMD ["127.0.0.1"]`
 
 <p style="color: purple"><b>
 Step 3</b></p>
@@ -2049,6 +2053,265 @@ Now we can fetch the contents of our logfile using the usual container logging A
 >you’re running, because you’ll want a standardized way of consuming logs from all these
 >processes. Once all relevant logs are available via the container logging API, it becomes
 >relatively straightforward to integrate these logs with whichever logging aggregator you prefer.
+
+
+
+## 9. Simple Orchestration
+
+
+### 9.1 Simple orchestration via docker compose 
+
+<p style="color: purple"><b>
+Step 1</b></p>
+
+**Clone the source code for the app we will be working on.**
+
+```shell
+git clone https://github.com/docker-training/orchestration-workshop
+
+cd orchestration-workshop/dockercoins
+```
+
+<p style="color: purple"><b>
+Step 2</b></p>
+
+**look at docker-compose.yaml file**
+
+```shell
+vi docker-compose.yaml 
+```
+
+```yaml
+version: "3.7"
+
+services:
+  rng:
+    image: training/dockercoins-rng:1.0
+    networks:
+    - dockercoins
+    ports:
+    - "8001:80"
+
+  hasher:
+    image: training/dockercoins-hasher:1.0
+    networks:
+    - dockercoins
+    ports:
+    - "8002:80"
+
+  webui:
+    image: training/dockercoins-webui:1.0
+    networks:
+    - dockercoins
+    ports:
+    - "8000:80"
+  redis:
+    image: redis
+    networks:
+    - dockercoins
+
+  worker:
+    image: training/dockercoins-worker:1.0
+    networks:
+    - dockercoins
+
+networks:
+    dockercoins:    
+```
+
+<p style="color: purple"><b>
+Step 3</b></p>
+
+**Start the application**
+
+
+```shell 
+docker compose up
+```
+
+<p style="color: purple"><b>
+Step 4</b></p>
+
+**Open the webui**
+
+```text
+Open http:/<your vm public ip>:8000
+```
+
+<p style="color: purple"><b>
+Step 5</b></p>
+
+**Stop the application**
+
+
+Hit `CTRL-C` 
+
+
+When we hit Ctrl-C, Compose tries to gracefully terminate all of the containers.
+
+After ten seconds (or if we press ^C again) it will forcibly kill them.
+
+
+### 9.2 Structure of docker-compose.ym file
+
+
+**Compose file structure :**
+
+A Compose file has multiple sections:
+
+    - `version` is mandatory. (Typically use "3".)
+    - `services` is mandatory. Each service corresponds to a container.
+    - `networks` is optional and indicates to which networks containers should be connected.
+    (By default, containers will be connected on a private, per-compose-file network.)
+    - `volumes` is optional and can define volumes to be used and/or shared by the containers.
+
+
+**Compose file versions :**
+
+    - Version 1 is legacy and shouldn't be used.
+     (If you see a Compose file without version and services, it's a legacy v1 file.)
+    - Version 2 added support for networks and volumes.
+    - Version 3 added support for deployment options (scaling, rolling updates, etc).
+
+Typically use version: "3".
+
+
+**Containers in docker-compose.yml :**
+
+    - Each service in the YAML file must contain either build, or image.
+    - build indicates a path containing a Dockerfile.
+    - image indicates an image name (local, or on a registry).
+
+
+Container parameters
+    - command indicates what to run (like CMD in a Dockerfile).
+
+    - ports translates to one (or multiple) -p options to map ports.
+      You can specify local ports (i.e. x:y to expose public port x).
+
+    - volumes translates to one (or multiple) -v options.
+      You can use relative paths here.
+
+**Environment variables :**
+
+We can use environment variables in Compose files
+
+(like $THIS or ${THAT})
+
+We can provide default values, e.g. ${PORT-8000}
+
+Compose will also automatically load the environment file .env
+
+(it should contain VAR=value, one per line)
+
+This is a great way to customize build and run parameters
+
+(base image versions to use, build and run secrets, port numbers...)
+
+
+### 9.3 Useful commands
+
+**Checking stack status**
+
+```shell
+docker compose ps
+
+```
+
+```text 
+NAME                   IMAGE                             COMMAND                  SERVICE   CREATED       STATUS         PORTS
+dockercoins-hasher-1   training/dockercoins-hasher:1.0   "ruby hasher.rb"         hasher    3 hours ago   Up 6 seconds   0.0.0.0:8002->80/tcp, [::]:8002->80/tcp
+dockercoins-redis-1    redis                             "docker-entrypoint.s…"   redis     3 hours ago   Up 6 seconds   6379/tcp
+dockercoins-rng-1      training/dockercoins-rng:1.0      "python rng.py"          rng       3 hours ago   Up 6 seconds   0.0.0.0:8001->80/tcp, [::]:8001->80/tcp
+dockercoins-webui-1    training/dockercoins-webui:1.0    "node webui.js"          webui     3 hours ago   Up 6 seconds   0.0.0.0:8000->80/tcp, [::]:8000->80/tcp
+dockercoins-worker-1   training/dockercoins-worker:1.0   "python worker.py"       worker    3 hours ago   Up 6 seconds
+```
+
+**Cleaning up**
+
+
+```shell
+docker compose kill
+
+```
+
+to stop application containers
+
+
+```shell
+docker compose rm
+
+```
+to remove containers
+
+
+```shell
+docker compose down
+
+```
+to stop and remove containers
+
+
+# 10. Advanced Orchestration Swarm mode
+
+
+
+# Exercise 1 - Initialize Docker Swarm and Add Nodes to the Cluster
+
+In this exercise, you'll initialize Docker Swarm. Docker Swarm provides clustering and orchestration capabilities to allow you to turn a group of machines running Docker into a single, virtual Docker engine.
+
+## Initialize Swarm Manager Node
+
+1. Open a terminal in the same VM that you cloned this GitHub repository
+2. Identify the IP address of your VM. In Linux, you can can open the Connection Information Prompt on the top right and find your address under the `IPv4` section. You can also use `ifconfig` to find the IP. It should look something like `192.168.x.x`.
+3. Run the following command:
+```
+docker swarm init --advertise-addr <IP-from-previous-step>
+```
+
+The IP specified by the `--advertise-addr` parameter allows worker nodes to find and join the swarm created by the master node.
+
+You should see the following output:
+
+```shell
+docker swarm init --advertise-addr 192.168.231.130
+Swarm initialized: current node (abk00th1nhe3lb4fvjyiqvitf) is now a manager.
+
+To add a worker to this swarm, run the following command:
+
+    docker swarm join \
+    --token SWMTKN-1-477by6an1fjqbwrnyz1evf4j29p3lvsziv1j6fy3pc5gi7iz4a-1tx4v5ij76aachfukvhl55q9u \
+    192.168.231.130:2377
+
+To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+```
+
+Copy the `docker swarm join` command for the next step.
+
+## Add Swarm Worker Nodes
+
+To demonstrate Docker Swarm service model and networking, you'll need to add some worker nodes to the swarm.
+
+Run the command from the previous step in each additional machine you want to join the swarm. Ensure that each machine is able to access IP defined by your `--advertise-addr`.
+
+You should see the following output:
+
+```shell 
+$ docker swarm join \
+  --token SWMTKN-1-1e4qkzhijskumj17epwoms5oa8uy7tmejvcvskqarsvcxvlvhh-ayutk7rk8plzesr97wryfjvs9 \
+  192.168.231.140:2377
+
+This node joined a swarm as a worker.
+```
+
+To ensure that your swarm nodes have been properly added, switch to your manager node and run `docker node ls`:
+
+```shell
+ID                           HOSTNAME                   STATUS  AVAILABILITY  MANAGER STATUS
+ovd9qwjf95eo3x5ijdi2ecjzg    localuser-virtual-machine  Ready   Active        
+yyuuufleycap2uvmgovszem18 *  master                     Ready   Active        Leader
+```
+The asterisk indicates your current machine. All nodes should be `Ready` Status and `Active`.
 
 
 
