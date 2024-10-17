@@ -174,10 +174,8 @@ docker container stop <container ID of running container>
 
 >Notice it takes a long time (about 10 seconds) to return. When a container is stopped, there
 >is a two step process:
-
->>- A SIGTERM is sent to the PID 1 process in the container, asking but not forcing it to stop
->>- After 10 seconds, a SIGKILL is sent to the PID 1 process, forcing it to return and the container to enter its EXITED state.
-
+>>- A `SIGTERM` is sent to the `PID 1` process in the container, asking but not forcing it to stop
+>>- After 10 seconds, a `SIGKILL` is sent to the `PID 1` process, forcing it to return and the container to enter its `EXITED` state.
 
 <p style="color: purple"><b>
 Step 5</b></p>
