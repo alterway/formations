@@ -91,12 +91,12 @@ latest: Pulling from library/alpine
 df20fa9351a1: Pull complete
 Digest: sha256:185518070891758909c9f839cf4ca393ee977ac378609f700f60a771a2dfe
 Status: Downloaded newer image for alpine:latest
-PING 8 .8.8.8 ( 8 .8.8.8): 56 data bytes
-64 bytes from 8 .8.8.8: seq= 0 ttl= 109 time= 2 .094 ms
-64 bytes from 8 .8.8.8: seq= 1 ttl= 109 time= 1 .156 ms
-64 bytes from 8 .8.8.8: seq= 2 ttl= 109 time= 1 .186 ms
-64 bytes from 8 .8.8.8: seq= 3 ttl= 109 time= 1 .185 ms
-64 bytes from 8 .8.8.8: seq= 4 ttl= 109 time= 1 .146 ms
+PING 8.8.8.8 ( 8.8.8.8): 56 data bytes
+64 bytes from 8.8.8.8: seq= 0 ttl= 109 time= 2 .094 ms
+64 bytes from 8.8.8.8: seq= 1 ttl= 109 time= 1 .156 ms
+64 bytes from 8.8.8.8: seq= 2 ttl= 109 time= 1 .186 ms
+64 bytes from 8.8.8.8: seq= 3 ttl= 109 time= 1 .185 ms
+64 bytes from 8.8.8.8: seq= 4 ttl= 109 time= 1 .146 ms
 ```
 
 ```shell
@@ -314,10 +314,10 @@ docker container logs <container ID>
 ```
 
 ```text
-PING 8 .8.8.8 ( 8 .8.8.8): 56 data bytes
-64 bytes from 8 .8.8.8: seq= 0 ttl= 109 time= 1 .500 ms
-64 bytes from 8 .8.8.8: seq= 1 ttl= 109 time= 1 .183 ms
-64 bytes from 8 .8.8.8: seq= 2 ttl= 109 time= 1 .095 ms
+PING 8.8.8.8 ( 8.8.8.8): 56 data bytes
+64 bytes from 8.8.8.8: seq= 0 ttl= 109 time= 1 .500 ms
+64 bytes from 8.8.8.8: seq= 1 ttl= 109 time= 1 .183 ms
+64 bytes from 8.8.8.8: seq= 2 ttl= 109 time= 1 .095 ms
 ```
 
 Here we see the `STDOUT` and `STDERR` of the primary process in our container -
@@ -400,9 +400,9 @@ docker container exec <container ID> ps
 ```
 
 ```text
-PID USER TIME COMMAND
-1 root 0 :00 ping 8 .8.8.
-11 root 0 :00 ps
+PID USER   TIME COMMAND
+1   root   0:00 ping 8.8.8.8
+11  root   0:00 ps
 ```
 
 `docker container exec` launches a new process inside an already running container.
@@ -444,10 +444,10 @@ run sbin srv sys tmp usr var
 ```
 
 ```text
-PID USER TIME COMMAND
-1 root 0 :00 ping 8 .8.8.
-16 root 0 :00 sh
-22 root 0 :00 ps
+PID USER   TIME   COMMAND
+1   root   0:00   ping 8 .8.8.
+16  root   0:00   sh
+22  root   0:00   ps
 ```
 
 ```shell
@@ -727,7 +727,7 @@ Step 3</b></p>
 
 ```shell
 docker container run -it myapp:1.0 bash
-````
+```
 
 ```shell
 [root@2ecb80c76853 /]# which wget
@@ -747,7 +747,7 @@ have been installed in the image. Exit your container when done by typing exit.
 >for reproduction elsewhere.
 
 
-## 3. Creating Images with Dockerfiles (1/2)
+## 3. Creating Images with Dockerfiles
 
 By the end of this exercise, you should be able to:
 
@@ -810,9 +810,6 @@ Step 3</b></p>
 
 **Verify that your new image exists with docker image ls, then use your new image to run a container and wget something from within that container, just to confirm that everything worked as expected:**
 
-3. Creating Images with Dockerfiles (1/2)
-
-
 ```shell
 docker container run -it myimage bash
 ```
@@ -866,6 +863,7 @@ Step 2</b></p>
 
 <p style="color: purple"><b>
 Step 3</b></p>
+
 **Build the image again; which steps use the cache this time?**
 
 <p style="color: purple"><b>
@@ -890,8 +888,6 @@ Build one last time. Which steps are cached this time?
 Step 1</b></p>
 
 **The docker image history command allows us to inspect the build cache history of an image. Try it with your new image:**
-
-3. Creating Images with Dockerfiles (1/2)
 
 
 ```shell
@@ -942,9 +938,9 @@ Step 3</b></p>
 
 By the end of this exercise, you should be able to:
 
-- Define a default process for an image to containerize by using the ENTRYPOINT or CMD
+- Define a default process for an image to containerize by using the `ENTRYPOINT` or `CMD`
     Dockerfile commands
-- Understand the differences and interactions between ENTRYPOINT and CMD
+- Understand the differences and interactions between ENTRYPOINT and `CMD`
 - Ensure that a containerized process doesn’t run as root by default.
 
 ### 4.1. Setting Default Commands
@@ -1078,8 +1074,8 @@ docker container run myimage 8.8.8.8
 ```
 
 
-This time, you should see a ping to 8.8.8.8. Explain the difference in behavior between
-these two last containers.
+> This time, you should see a ping to 8.8.8.8
+>Explain the difference in behavior between these two last containers.
 
 ### 4.3. Running as Non-Root by Default
 
@@ -1117,9 +1113,11 @@ docker container exec rootdemo ps -aux
 ```
 
 ```text
-USER PID %CPU %MEM VSZ RSS TTY STAT START TIME COMMAND
-root 1 0 .8 0 .0 24856 1800? Ss 17 :52 0 :00 ping 8 .8.8.
-root 7 0 .0 0 .0 51748 3364? Rs 17 :52 0 :00 ps -aux
+sh-4.2# ps -aux
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root           1  0.1  0.0   6208  1352 pts/0    Ss+  09:23   0:00 ping 8.8.8.8
+root           7  0.2  0.0   3676  2568 pts/1    Ss   09:23   0:00 sh
+root          13  0.0  0.0   7812  3012 pts/1    R+   09:23   0:00 ps -aux
 ```
 
 
@@ -1154,9 +1152,11 @@ docker container exec userdemo ps -aux
 ```
 
 ```text
-USER PID %CPU %MEM VSZ RSS TTY STAT START TIME COMMAND
-1000 1 0 .7 0 .0 24856 1908? Ss 17 :55 0 :00 ping 8 .8.8.
-1000 7 0 .0 0 .0 51748 3468? Rs 17 :55 0 :00 ps -aux
+sh-4.2# ps -aux
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+1000           1  0.1  0.0   6208  1352 pts/0    Ss+  09:23   0:00 ping 8.8.8.8
+1000           7  0.2  0.0   3676  2568 pts/1    Ss   09:23   0:00 sh
+1000          13  0.0  0.0   7812  3012 pts/1    R+   09:23   0:00 ps -aux
 ```
 
 This is a simple way to tighten the security of any image that doesn’t need containerized root
@@ -1222,7 +1222,7 @@ Step 3</b></p>
 
 ```shell
 gcc -Wall hello.c -o hello
-````
+```
 
 ```shell
 ./hello
@@ -1310,8 +1310,8 @@ docker image ls | grep 'my-app-'
 ```
 
 ```text
-REPOSITORY TAG IMAGE ID CREATED SIZE
-my-app-small latest f49ec3971aa6 6 seconds ago 4 .01MB
+REPOSITORY   TAG    IMAGE ID     CREATED            SIZE
+my-app-small latest f49ec3971aa6 6 seconds ago      4.01MB
 my-app-large latest a7d0c6fe0849 About a minute ago 189MB
 ```
 
@@ -1734,7 +1734,7 @@ By the end of this exercise, you should be able to:
 ### 7.1. Setting the Logging Driver
 
 
-Docker offers a number of different logging drivers for recording the STDOUT and STDERR of
+Docker offers a number of different logging drivers for recording the `STDOUT` and `STDERR` of
 PID 1 processes in a container; below we’ll explore the defaults which correspond to the
 json-file driver, and the journald driver.
 
@@ -1751,10 +1751,10 @@ docker container logs <container ID>
 ```
 
 ```text
-PING 8 .8.8.8 ( 8 .8.8.8) 56 ( 84 ) bytes of data.
-64 bytes from 8 .8.8.8: icmp_seq= 1 ttl= 113 time= 0 .631 ms
-64 bytes from 8 .8.8.8: icmp_seq= 2 ttl= 113 time= 0 .652 ms
-64 bytes from 8 .8.8.8: icmp_seq= 3 ttl= 113 time= 0 .646 ms
+PING 8.8.8.8 ( 8.8.8.8) 56 ( 84 ) bytes of data.
+64 bytes from 8.8.8.8: icmp_seq= 1 ttl= 113 time= 0 .631 ms
+64 bytes from 8.8.8.8: icmp_seq= 2 ttl= 113 time= 0 .652 ms
+64 bytes from 8.8.8.8: icmp_seq= 3 ttl= 113 time= 0 .646 ms
 ```
 
 <p style="color: purple"><b>
@@ -1829,10 +1829,10 @@ journalctl CONTAINER_NAME=demo
 
 ```text
 -- Logs begin at Wed 2021 -05-19 15 :03:26 UTC, end at Wed 2021 -05-19 15 :11:09 UTC. --
-May 19 15 :11:02 node 138194df21dc[ 1701 ]: PING 8 .8.8.8 ( 8 .8.8.8) 56 ( 84 ) bytes of data.
-May 19 15 :11:02 node 138194df21dc[ 1701 ]: 64 bytes from 8 .8.8.8: icmp_seq= 1 ttl= 113 time= 1 .14 ms
-May 19 15 :11:03 node 138194df21dc[ 1701 ]: 64 bytes from 8 .8.8.8: icmp_seq= 2 ttl= 113 time= 1 .14 ms
-May 19 15 :11:04 node 138194df21dc[ 1701 ]: 64 bytes from 8 .8.8.8: icmp_seq= 3 ttl= 113 time= 1 .19 ms
+May 19 15 :11:02 node 138194df21dc[ 1701 ]: PING 8.8.8.8 ( 8.8.8.8) 56 ( 84 ) bytes of data.
+May 19 15 :11:02 node 138194df21dc[ 1701 ]: 64 bytes from 8.8.8.8: icmp_seq= 1 ttl= 113 time= 1 .14 ms
+May 19 15 :11:03 node 138194df21dc[ 1701 ]: 64 bytes from 8.8.8.8: icmp_seq= 2 ttl= 113 time= 1 .14 ms
+May 19 15 :11:04 node 138194df21dc[ 1701 ]: 64 bytes from 8.8.8.8: icmp_seq= 3 ttl= 113 time= 1 .19 ms
 ```
 
 
@@ -1986,7 +1986,7 @@ docker container logs myapp
 
 
 You’ll see nothing, of course - the shell command we’ve containerized doesn’t write anything
-to STDOUT, so there’s nothing to see in the logs.
+to `STDOUT`, so there’s nothing to see in the logs.
 
 But, check out the contents of your mounted volume:
 
@@ -2148,38 +2148,38 @@ After ten seconds (or if we press ^C again) it will forcibly kill them.
 **Compose file structure :**
 
 A Compose file has multiple sections:
-
-    - `version` is mandatory. (Typically use "3".)
-    - `services` is mandatory. Each service corresponds to a container.
-    - `networks` is optional and indicates to which networks containers should be connected.
-    (By default, containers will be connected on a private, per-compose-file network.)
-    - `volumes` is optional and can define volumes to be used and/or shared by the containers.
+- `version` is mandatory. (Typically use "3".)
+- `services` is mandatory. Each service corresponds to a container.
+- `networks` is optional and indicates to which networks containers should be connected.
+(By default, containers will be connected on a private per-compose-file network.)
+- `volumes` is optional and can define volumes to be used and/or shared by the containers.
 
 
 **Compose file versions :**
 
-    - Version 1 is legacy and shouldn't be used.
-     (If you see a Compose file without version and services, it's a legacy v1 file.)
-    - Version 2 added support for networks and volumes.
-    - Version 3 added support for deployment options (scaling, rolling updates, etc).
+- Version 1 is legacy and shouldn't be used.
+  (If you see a Compose file without version and services, it's a legacy v1 file.)
+- Version 2 added support for networks and volumes.
+- Version 3 added support for deployment options (scaling, rolling updates, etc).
 
-Typically use version: "3".
+**Typically use version: "3"**
 
 
 **Containers in docker-compose.yml :**
 
-    - Each service in the YAML file must contain either build, or image.
-    - build indicates a path containing a Dockerfile.
-    - image indicates an image name (local, or on a registry).
+- Each service in the YAML file must contain either build, or image.
+- build indicates a path containing a Dockerfile.
+- image indicates an image name (local, or on a registry).
 
 
 Container parameters
-    - command indicates what to run (like CMD in a Dockerfile).
 
-    - ports translates to one (or multiple) -p options to map ports.
-      You can specify local ports (i.e. x:y to expose public port x).
+- command indicates what to run (like CMD in a Dockerfile).
 
-    - volumes translates to one (or multiple) -v options.
+- ports translates to one (or multiple) -p options to map ports.
+  You can specify local ports (i.e. x:y to expose public port x).
+
+- volumes translates to one (or multiple) -v options.
       You can use relative paths here.
 
 **Environment variables :**
