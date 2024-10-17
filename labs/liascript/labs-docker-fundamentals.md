@@ -26,6 +26,9 @@ Docker Container Fundamentals
 
 ```
 
+<script src="https://asciinema.org/a/bJMOlPe5F4mFLY0Rl6fiJSOp3.js" id="asciicast-bJMOlPe5F4mFLY0Rl6fiJSOp3" async></script>
+
+
 Accès au lab : 
 
 
