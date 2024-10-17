@@ -13,14 +13,11 @@ comment:  Labs Docker Fundamentals
 
 logo: https://assets.alterway.fr/2021/01/strong-mind.png
 
-
 -->
 
 # Lab Docker Fundamentals
 
 ![class](images/cl-1.jpeg)
-
-
 
 ## Docker Container Fundamentals
 
@@ -55,7 +52,6 @@ newgrp docker
 
 # Test installation
 docker run --rm -ti wernight/funbox nyancat
-
 ```
 
 
@@ -176,13 +172,11 @@ Step 4</b></p>
 docker container stop <container ID of running container>
 ```
 
-
 >Notice it takes a long time (about 10 seconds) to return. When a container is stopped, there
 >is a two step process:
->>- A SIGTERM is sent to the PID 1 process in the container, asking but not forcing it to
-    stop
->>- After 10 seconds, a SIGKILL is sent to the PID 1 process, forcing it to return and the
-    container to enter its EXITED state.
+
+>>- A SIGTERM is sent to the PID 1 process in the container, asking but not forcing it to stop
+>>- After 10 seconds, a SIGKILL is sent to the PID 1 process, forcing it to return and the container to enter its EXITED state.
 
 
 <p style="color: purple"><b>
@@ -195,7 +189,7 @@ docker container ls -a
 ```
 
 ```text
-CONTAINER ID IMAGE COMMAND CREATED STATUS
+CONTAINER ID IMAGE  COMMAND        CREATED       STATUS
 4bf570c09043 alpine "ping 8.8.8.8" 4 minutes ago Exited ( 137 ) a minute ago
 81484551f69b alpine "ping 8.8.8.8" 8 minutes ago Exited ( 0 ) 8 minutes ago
 ```
@@ -290,7 +284,6 @@ Step 3</b></p>
 
 **Retrieve the same information as the previous step, formatted as JSON and only instantaneously, without streaming:**
 
-
 ```shell
 docker container stats --no-stream \
 --format '{{json .}}' <container ID>
@@ -308,7 +301,6 @@ docker container stats --no-stream \
 "PIDs":"1"}
 ```
 
-
 This option is useful for capturing consumption information by an external monitoring service
 that knows how to ingest JSON.
 
@@ -318,7 +310,6 @@ Step 6</b></p>
 **Retrieve the logs from your containerized process:**
 
 1. The Container Lifecycle
-
 
 ```shell
 docker container logs <container ID>
@@ -331,13 +322,11 @@ PING 8 .8.8.8 ( 8 .8.8.8): 56 data bytes
 64 bytes from 8 .8.8.8: seq= 2 ttl= 109 time= 1 .095 ms
 ```
 
-
 Here we see the `STDOUT` and `STDERR` of the primary process in our container -
 ping 8.8.8.8 in this case. Note that if you launch other processes in a container, their
 output will not be captured in the container logs! Only the process with PID 1 inside a
 container is logged in this fashion; this is one of the simplest reasons why it’s often a good
 idea to strictly run one process within a container, rather than a complicated process tree.
-
 
 <p style="color: purple"><b>
 Step 5</b></p>
@@ -352,7 +341,6 @@ docker container top <container ID>
 UID PID PPID C STIME TTY TIME CMD
 root 3312 3293 0 15 :47? 00 :00:00 ping 8 .8.8.
 ```
-
 
 Our container is running just one process, `ping 8.8.8.8`. The PID column in this output
 indicates the PID of each process on the host. Remember that if this process exits, the
@@ -375,21 +363,17 @@ sudo kill -9 <PID from container top command above>
 docker container ls
 ```
 
-```
+```text
 CONTAINER ID IMAGE COMMAND
 ```
 
-
 Killing the host process and exiting a container are functionally equivalent, as we see here.
 
-
-**Notes**
+Notes :
 
 >Warning: do not use kill to stop containers! This was just an example to show the
 >relationship between host processes and container state. This method can lead to unintended
 >consequences with more sophisticated containers.
-
-
 
 ### 1.3. Launching New Processes in Old Containers
 
@@ -400,11 +384,9 @@ Step 1</b></p>
 
 1. The Container Lifecycle
 
-
 ```shell
 docker container start <container ID>
 ```
-
 
 Remember from our use of docker container top before that there’s just one process
 running inside this container. Sometimes, especially when debugging, it can be helpful to be
@@ -425,26 +407,26 @@ PID USER TIME COMMAND
 11 root 0 :00 ps
 ```
 
+`docker container exec` launches a new process inside an already running container.
 
-docker container exec launches a new process inside an already running container.
-Note the output of ps in this case: it sees the PID tree as it appears inside the container’s
-kernel namespaces. So from that perspective, ping looks like PID 1 since it is the primary
-process inside this container, rather than the host system PID returned by
-docker container top. Despite the different PIDs, these pings are the exact same
-process, as we saw previously when killing the host ping exited the container; this is the
-kernel PID namespace in action.
+Notes
 
+>The output of ps in this case: it sees the PID tree as it appears inside the container’s
+>kernel namespaces. So from that perspective, ping looks like PID 1 since it is the primary
+>process inside this container, rather than the host system PID returned by
+>docker container top. 
+>Despite the different PIDs, these pings are the exact same process, as we saw previously when killing the host ping exited the container;
+>this is the kernel PID namespace in action.
 
 <p style="color: purple"><b>
 Step 3</b></p>
 
-***Launch an interactive shell inside your running container:***
+**Launch an interactive shell inside your running container:**
 
 ```shell
 docker container exec -it <container ID> sh
 / #
 ```
-
 
 From here, you have an interactive prompt you can use to explore your container’s
 filesystem and namespaces, similar to if you SSHed into a remote host. Try out some
@@ -475,14 +457,11 @@ PID USER TIME COMMAND
 root
 ```
 
-
 When you’re done practicing, type exit to return to your host.
-
 
 ### 1.4. Cleaning up Containers
 
 1. The Container Lifecycle
-
 
 <p style="color: purple"><b>
 Step 1</b></p>
@@ -523,7 +502,6 @@ Error response from daemon: You cannot remove a running container
 Stop the container before attempting removal or force remove
 ```
 
-
 As displayed in the error message, docker container rm will decline to remove a
 running container. We could stop it then remove it as we did above, or we could force
 removal:
@@ -532,11 +510,9 @@ removal:
 docker container rm -f <container ID>
 ```
 
-
 At this point, all of your containers from this exercise should be gone. Use
 docker container ls -a to confirm this. If any containers remain, use the commands
 you learned during these exercises to remove them.
-
 
 ### 1.5. Optional: Independent Container Filesystems
 
@@ -581,7 +557,6 @@ Step 4</b></p>
 
 1. The Container Lifecycle
 
-
 ```shell
 docker container run -it centos:7 bash
 ```
@@ -609,7 +584,6 @@ Step 7</b></p>
 >STDOUT and STDERR of this process is what’s logged by container logs, and this process’
 >response to SIGTERM determines how our container behaves during a controlled shutdown.
 
-
 ```text
 Created ---> Running ---> Stopped
    ^          |  ^          |
@@ -621,8 +595,7 @@ Created ---> Running ---> Stopped
                  +----------+
 ```
 
-
-**States and Transitions**
+States and Transitions :
 
 1. **Created**
    - Initial state after `docker create`
