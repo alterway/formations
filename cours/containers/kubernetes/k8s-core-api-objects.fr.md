@@ -60,6 +60,7 @@ metadata:
   name: nginx
   labels:
     app: nginx
+    env: prod
 spec:
   containers:
   - name: nginx
@@ -133,8 +134,7 @@ metadata:
   name: test-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
-    cert-manager.io/cluster-issuer: theClusterIssuer
-    kubernetes.io/tls-acme: "true"
+    cert-manager.io/cluster-issuer: theClusterIssuer 
 spec:
   rules:
   - http:
@@ -216,7 +216,7 @@ yy-ss7nk              1/1     Running   0          84m   10.244.0.5   kind-cp
 
 ### Kubernetes : `Pod`
 
-dans les statuts du pod on trouve la notion de Conditions d'état des pods
+Dans les statuts du pod on trouve la notion de Conditions d'état des pods
 
 - Conditions :
     - `PodScheduled`: Un nœud a été sélectionné avec succès pour "lancer" le pod, et la planification est terminée.
@@ -257,6 +257,15 @@ Les containers peuvent avoir seulement 3 états
 $ kubectl get pods <POD_NAME> -o jsonpath='{.status}' | jq
 ```
 
+
+### Kubernetes : `Pod`
+
+
+![](images/kubernetes/kubernetes-pod.png){height="400px"}
+
+
+
+
 ### Kubernetes : `Deployment`
 
 - Permet d'assurer le fonctionnement d'un ensemble de Pods
@@ -291,7 +300,7 @@ spec:
         - containerPort: 80
 ```
 
-ou en ligne de commande
+Ou en ligne de commande
 
 ```bash
 kubectl create deployment my-app --image=nginx:latest --replicas=3
@@ -609,9 +618,9 @@ spec:
 
 - Lors du démarrage d'un Pod, le kubelet retarde l'exécution des conteneurs d'initialisation jusqu'à ce que le réseau et le stockage soient prêts. Ensuite, le kubelet exécute les conteneurs d'initialisation du Pod dans l'ordre où ils apparaissent dans la spécification du Pod.
 - Chaque conteneur d'initialisation doit se terminer avec succès avant que le suivant ne démarre. 
-- Si un conteneur ne parvient pas à démarrer en raison de l'environnement d'exécution ou se termine avec un échec, il est relancé conformément à la **restartPolicy** du Pod. Cependant, si la **restartPolicy** du Pod est définie sur **Always**, les conteneurs d'initialisation utilisent la restartPolicy OnFailure.
-- Un Pod ne peut pas être **Ready** tant que tous les conteneurs d'initialisation n'ont pas réussi. Les ports d'un conteneur d'initialisation ne sont pas agrégés sous un Service. 
-- Un Pod en cours d'initialisation est dans l'état **Pending** mais doit avoir une condition **Initialized** définie à false.
+- Si un conteneur ne parvient pas à démarrer en raison de l'environnement d'exécution ou se termine avec un échec, il est relancé conformément à la `restartPolicy` du Pod. Cependant, si la `restartPolicy` du Pod est définie sur `Always`, les conteneurs d'initialisation utilisent la restartPolicy OnFailure.
+- Un Pod ne peut pas être `Ready` tant que tous les conteneurs d'initialisation n'ont pas réussi. Les ports d'un conteneur d'initialisation ne sont pas agrégés sous un Service. 
+- Un Pod en cours d'initialisation est dans l'état `Pending` mais doit avoir une condition `Initialized` définie à false.
 - Si le Pod redémarre, ou est redémarré, tous les conteneurs d'initialisation doivent s'exécuter à nouveau.
 
 - Utilisations possibles

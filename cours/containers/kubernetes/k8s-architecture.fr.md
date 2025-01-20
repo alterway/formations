@@ -238,17 +238,19 @@ Kubernetes n'implémente pas de solution réseau par défaut, mais s'appuie sur 
 
 ### Kubernetes : Aujourd'hui
 
-- Version 1.30.x : stable en production
+Les versions de Kubernetes sont exprimées sous la forme x.y.z, où x est la version majeure, y est la version mineure et z est la version du correctif, conformément à la terminologie du Semantic Versioning.
+
+- Version 1.31.x : stable en production
 - Solution complète et une des plus utilisées
 - Éprouvée par Google
 - <https://kubernetes.io/releases/>
 
 
-**1.31:**
-    Latest Release:1.31.0 (released: 2024-08-13)  
-    End of Life:2025-10-28  
+**1.32:**
+    Latest Release:1.32.0 (released: 2024-12-11)  
+    End of Life: 2026-02-28
     Patch Releases: n/a  
-    Complete 1.31 [Schedule](https://kubernetes.io/releases/patch-releases/#1-31) and [Changelog](https://git.k8s.io/kubernetes/CHANGELOG/CHANGELOG-1.31.md)
+    Complete 1.31 [Schedule](https://kubernetes.io/releases/patch-releases/#1-32) and [Changelog](https://git.k8s.io/kubernetes/CHANGELOG/CHANGELOG-1.32.md)
 
 
 

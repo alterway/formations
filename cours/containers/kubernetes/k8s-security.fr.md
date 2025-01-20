@@ -2,14 +2,37 @@
 
 ### Authentication & Autorisation
 
-- RBAC (Role Based Access Control)
-- ABAC (Attribute-based access control)
-- WebHook
-- Certificates
-- Token
+
+### Authentication 
+
+Authentication (Qui êtes-vous ?):
+
+- Vérifie l'identité de l'utilisateur
+- Méthodes principales :
+
+    - Certificats clients X.509
+    - Tokens Bearer (JWT)
+    - Service Accounts pour les pods
+    - OpenID Connect / OAuth2
+    - Fichiers de configuration statiques
+
+**Résultat** : identité confirmée ou requête rejetée
 
 
-### RBAC
+
+### RBAC (Autorisation)
+
+
+Authorization (Que pouvez-vous faire ?):
+
+- Vérifie les permissions de l'utilisateur authentifié
+- Utilise principalement RBAC (Role-Based Access Control)
+- Composants clés :
+
+    - Roles : définissent les permissions dans un namespace
+    - ClusterRoles : permissions à l'échelle du cluster
+    - RoleBindings : lient les rôles aux utilisateurs dans un namespace
+    - ClusterRoleBindings : lient les rôles aux utilisateurs au niveau cluster
 
 3 entités sont utilisées :
 
@@ -17,6 +40,13 @@
 - Ressources représentées par les `Deployments`, `Pods`, `Services`, etc...
 - les différentes opérations possibles : `create, list, get, delete, watch, patch`
 
+
+### RBAC
+
+- L'authentification précède toujours l'autorisation
+- Une requête doit passer les deux contrôles pour être acceptée
+- Les deux mécanismes sont indépendants mais complémentaires
+- RBAC est le standard de facto pour l'autorisation dans Kubernetes
 
 ![](images/kubernetes/rbac.svg){height="250px"}
 
@@ -125,6 +155,11 @@ kubectl auth can-i get pods /
 --namespace=default /
 --as=spesnova@example.com
 ```
+
+
+### NetworkPolicies
+
+![](images/kubernetes/Secure-Your-Kubernetes-Cluster-1024x586.png)
 
 
 ### NetworkPolicies

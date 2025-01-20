@@ -571,9 +571,21 @@ kubectl apply -f admin-role-binding.yaml
 kubectl -n kubernetes-dashboard create token admin-user
 ```
 
+
+Copiez le token affiché et sauvegardez le.
+
+
+
+### Kubernetes : Kubernetes Dashboard 
+
 Étape 4: Accéder au Dashboard
 
+
+**Si vous êtes sur votre PC (installation locale de kubernetes)**
+
 Démarrer un proxy pour accéder au Dashboard:
+
+
 
 ```bash
 kubectl proxy
@@ -591,6 +603,29 @@ kubectl proxy
 
 
 
+### Kubernetes : Kubernetes Dashboard
+
+**Si vos machines sont déployées sur un Cloud Provider (AWS, Azure, GCP, etc)**
+
+
+- Sur le `master`
+
+```bash
+kubectl -n kubernetes-dashboard port-forward svc/kubernetes-dashboard 8443:443 --address=0.0.0.0
+```
+
+
+Dans votre navigateur utilisez l'url suivante en l'adaptant avec l'adresse IP publique du master
+
+https://[IP-PUBLIQUE-MASTER]:8443/
+
+
+- Acceptez l'alerte de sécurité concernant le certificate
+
+- Se connecter avec le token:
+    - Lorsque vous êtes invité à vous connecter, choisissez l'option "Token" et entrez le token que vous avez récupéré à l'Étape 3.
+  
+![](images/kubernetes/dashboard.png){height="200px"}
 
 ### Kubernetes : Kubernetes Dashboard
 

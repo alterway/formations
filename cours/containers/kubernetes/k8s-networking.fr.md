@@ -4,10 +4,14 @@
 
 - Kubernetes n'implémente pas de solution de gestion de réseau par défaut
 - Le réseau est implémenté par des solutions tierces:
+    - [Antrea](https://antrea.io/) : Open vSwitch dans kubernetes
     - [Calico](https://www.projectcalico.org/): IPinIP + BGP
     - [Cilium](https://cilium.io/): eBPF
     - [Weave](https://www.weave.works/)
+    - [Canal](https://projectcalico.docs.tigera.io/getting-started/kubernetes/flannel/flannel) : Flannel + Calico
+    - [Multus](https://github.com/k8snetworkplumbingwg/multus-cni) : Multi Plugins
     - Bien [d'autres](https://kubernetes.io/docs/concepts/cluster-administration/networking/)
+
 
 ### Kubernetes : CNI
 
@@ -36,14 +40,10 @@
 
 ### Kubernetes : Services
 
-Service de type Spécial `LoadBalancer` : 
 
-- Load Balancing : intégration avec des cloud provider :
-    - AWS ELB
-    - GCP
-    - Azure Kubernetes Service
-    - OpenStack
-    - ...
+![pod network](images/kubernetes/k8s_service.jpg)
+
+
 
 ### Kubernetes : Services : ClusterIP
 
@@ -177,6 +177,14 @@ kubectl expose deploy web --type NodePort --protocol TCP --port 80 --target-port
 
 ### Kubernetes : Services : LoadBalancer
 
+Service de type Spécial
+
+- Load Balancing : intégration avec des cloud provider :
+    - AWS ELB
+    - GCP
+    - Azure Kubernetes Service
+    - OpenStack
+    - ...
 
 ```yaml
 apiVersion: v1
@@ -280,7 +288,19 @@ kubectl expose deploy nginx --port=80 --external-ip=1.2.3.4
 
 ```
 
-    
+### Kubernetes : Services Résumé
+
+- `ClusterIP` : C'est le type de service par défaut. Il fournit une IP virtuelle stable accessible uniquement à l'intérieur du cluster, parfait pour la communication entre microservices.
+  
+- `NodePort` : Il étend ClusterIP en exposant le service sur un port spécifique de chaque nœud du cluster. C'est utile pour le développement ou les environnements de test.
+  
+- `LoadBalancer` : Idéal pour la production, il étend NodePort en provisionnant automatiquement un load balancer externe (souvent fourni par le cloud provider).
+  
+- `ExternalName` : Un cas particulier qui permet de créer un alias CNAME vers un service externe au cluster.
+  
+- `Headless Service` : Utilisé quand vous avez besoin d'une découverte de service fine, sans Load Balancing. Très utile pour les bases de données distribuées.
+  
+- `ExternalIPs` : Permet d'exposer un service Kubernetes sur une adresse IP spécifique qui existe déjà sur l'un des nœuds du cluster, offrant ainsi un accès direct depuis l'extérieur sans passer par un LoadBalancer.
 
 ### Kubernetes : Services Discovery
 
@@ -394,8 +414,9 @@ Il existe plusieurs solutions OSS ou non :
 - Contour : <https://www.github.com/heptio/contour/>
 - Nginx Controller : <https://github.com/kubernetes/ingress-nginx>
 
-⚠︎ Note : Il est possible d'avoir plusieurs Ingress Controller sur un cluster il suffira dans les objets ingress de préciser sur quelle classe d'ingress on souhaite le créer.
-Ca se fait par `ingressClassName`. 
+⚠︎ Note : Il est possible d'avoir plusieurs `Ingress Controller` sur un cluster il suffira dans les objets ingress de préciser sur quelle classe d'ingress on souhaite le créer.
+
+Ca se fait par l'attribut `ingressClassName`. 
 
 Ces classes sont créees au moment de l'installation du contrôleur.
 
@@ -404,3 +425,47 @@ Les **Ingress** vont bientôt être dépréciés en faveur des `Gateway API` qui
 Plus d'informations ici : <https://gateway-api.sigs.k8s.io/>
 
 
+### Kubernetes : Gateway API
+
+Les Gateway APIs sont une évolution des Ingress Controllers, offrant une approche plus moderne et flexible pour gérer le trafic entrant dans un cluster Kubernetes. Voici les points essentiels :
+
+Architecture en layers:
+
+- GatewayClass : Définit l'implémentation (comme NGINX, Traefik, etc.)
+- Gateway : Instance spécifique qui gère le trafic entrant
+- Route : Définit les règles de routage (HTTP, TCP, etc.)
+
+
+Avantages principaux:
+
+    - Configuration plus fine et granulaire
+    - Support natif de plusieurs protocoles
+    - Meilleure séparation des responsabilités
+    - API plus extensible et cohérente
+
+
+Cas d'utilisation:
+
+    - Multi-tenancy avec isolation du trafic
+    - Gestion avancée du routage
+    - Configuration du TLS
+    - Gestion du trafic nord-sud et est-ouest
+
+
+Différence avec les Ingress:
+
+Les Gateway APIs offrent plus de fonctionnalités que les Ingress traditionnels :
+
+    - Support multi-protocole natif
+    - Meilleure extensibilité
+    - Configuration plus détaillée
+    - Meilleure séparation des rôles
+
+
+### Kubernetes : Gateway API
+
+![](images/kubernetes/gateway-api-resources.png)
+
+
+
+En savoir plus :[Evolving Kubernetes networking with the Gateway API](https://kubernetes.io/blog/2021/04/22/evolving-kubernetes-networking-with-the-gateway-api/)

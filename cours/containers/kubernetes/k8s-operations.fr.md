@@ -235,3 +235,13 @@ kubectl example deploy
 Liste des plugins : <https://krew.sigs.k8s.io/plugins/>
   
 
+très utiles 
+
+- `neat` : permet de d'avoir un ouput "propre" d'une resource kubernetes - très utile pour créer des manifestes à partir de resources existantes
+- `ctx` : permet de changer de contexte facilement
+- `ns` : permet de changet de namespace facilement
+- `node-shell` : Créer un shell racine sur un nœud via kubectl, très pratique sur les CSP
+- `df-pv` : Afficher l'utilisation du disque (comme la commande df) pour les volumes persistants
+- `popeye` : Analyse vos clusters pour détecter d'éventuels problèmes de ressources
+  
+  
