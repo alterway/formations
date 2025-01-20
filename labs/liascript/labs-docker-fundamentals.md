@@ -22,23 +22,24 @@ logo: https://assets.alterway.fr/2021/01/strong-mind.png
 ## Docker Container Fundamentals
 
 
+<script src="https://asciinema.org/a/bJMOlPe5F4mFLY0Rl6fiJSOp3.js" id="asciicast-bJMOlPe5F4mFLY0Rl6fiJSOp3" async></script>
+
+
 Accès au lab : 
 
-
 [qr-code](https://liascript.github.io/course/?https://raw.githubusercontent.com/alterway/formations/refs/heads/main/labs/liascript/labs-docker-fundamentals.md)
+
 
 ## 0. Docker installation
 
 
-To quickly setup a dev environment, Docker provides a convenience install script:
+To quickly setup a lab environment, Docker provides a convenience install script:
 
-
-### Using quick install script
+**Using quick install script**
 
 ```shell
 # Get installer and install docker engine
 curl -fsSL get.docker.com | sh
-
 
 # Add ubuntu user to docker  group
 sudo usermod -aG docker ubuntu
@@ -72,8 +73,10 @@ Step 1</b></p>
 
 
 ```shell
-docker container run alpine ping 8.8.8.8.
+docker container run alpine ping 8.8.8.8
 ```
+
+![class](rec/docker-run.gif)
 
 - docker container run creates a new container
 - alpine is the container image we’ll use to define the filesystem our process sees
@@ -110,8 +113,8 @@ docker container ls -a
 ```
 
 ```text
-CONTAINER ID IMAGE COMMAND ... STATUS ...
-81484551f69b alpine "ping 8.8.8.8" ... Exited ( 0 ) 50 seconds ago ...
+CONTAINER ID   IMAGE  COMMAND            STATUS  
+81484551f69b   alpine "ping 8.8.8.8"     Exited ( 0 ) 50 seconds ago  
 ```
 
 
@@ -130,7 +133,7 @@ Step 3</b></p>
 
 
 ```shell
-docker container run -d alpine ping 8 .8.8.
+docker container run -d alpine ping 8.8.8.8
 ```
 
 ```text
@@ -170,6 +173,7 @@ docker container stop <container ID of running container>
 
 >Notice it takes a long time (about 10 seconds) to return. When a container is stopped, there
 >is a two step process:
+
 >>- A `SIGTERM` is sent to the `PID 1` process in the container, asking but not forcing it to stop
 >>- After 10 seconds, a `SIGKILL` is sent to the `PID 1` process, forcing it to return and the container to enter its `EXITED` state.
 
@@ -233,15 +237,18 @@ docker container inspect <container ID>
 ```json
 [
 {
-"Id": "4bf570c09043c0094fef87e9cad7e94e20b2b2c8bd1029bb49def581cdcb8864",
-"Created": "2020-06-24T15:36:18.849921401Z",
-"Path": "ping",
-"Args": [
-"8.8.8.8"
-],
-"State": {
-"Status": "running",
-...
+  "Id": "4bf570c09043c0094fef87e9cad7e94e20b2b2c8bd1029bb49def581cdcb8864",
+  "Created": "2020-06-24T15:36:18.849921401Z",
+  "Path": "ping",
+  "Args": [
+    "8.8.8.8"
+  ],
+  "State": {
+  "Status": "running",
+  ...
+  }
+}
+]
 ```
 
 
@@ -284,7 +291,8 @@ docker container stats --no-stream \
 ```
 
 ```json
-{"BlockIO":"0B / 0B",
+{
+"BlockIO":"0B / 0B",
 "CPUPerc":"0.02%",
 "Container":"4bf",
 "ID":"4bf570c09043",
@@ -292,7 +300,8 @@ docker container stats --no-stream \
 "MemUsage":"48KiB / 3.7GiB",
 "Name":"zen_bartik",
 "NetIO":"47.8kB / 47.2kB",
-"PIDs":"1"}
+"PIDs":"1"
+}
 ```
 
 This option is useful for capturing consumption information by an external monitoring service
@@ -333,7 +342,7 @@ docker container top <container ID>
 
 ```text
 UID PID PPID C STIME TTY TIME CMD
-root 3312 3293 0 15 :47? 00 :00:00 ping 8 .8.8.
+root 3312 3293 0 15 :47? 00 :00:00 ping 8.8.8.8
 ```
 
 Our container is running just one process, `ping 8.8.8.8`. The PID column in this output
@@ -441,7 +450,7 @@ run sbin srv sys tmp usr var
 
 ```text
 PID USER   TIME   COMMAND
-1   root   0:00   ping 8 .8.8.
+1   root   0:00   ping 8.8.8.8
 16  root   0:00   sh
 22  root   0:00   ps
 ```
@@ -548,8 +557,6 @@ Step 3</b></p>
 Step 4</b></p>
 
 **Run the same command as before to start a container using the centos:7 image:**
-
-1. The Container Lifecycle
 
 ```shell
 docker container run -it centos:7 bash
@@ -1373,7 +1380,7 @@ this, we can build FROM scratch.
 <p style="color: purple"><b>
 Step 1</b></p>
 
-**In a new directory ~/scratch, create a file named sleep.c that just launches a sleeping process for an hour:**
+**In a new directory ~/scratch, create a file named `sleep.c` that just launches a sleeping process for an hour:**
 
 ```c
 #include <stdio.h>
@@ -1390,7 +1397,7 @@ return 0 ;
 <p style="color: purple"><b>
 Step 2</b></p>
 
-**Create a file named Dockerfile to build this sleep program in a build stage, and then copy it to a scratch-based image:***
+**Create a file named `Dockerfile` to build this sleep program in a build stage, and then copy it to a scratch-based image:***
 
 ```dockerfile
 FROM alpine:3.8 AS build
@@ -1519,7 +1526,7 @@ Step 3</b></p>
 docker image build --no-cache -t my-app-small-bk.
 ```
 
-```text
+```text 
 [+] Building 15 .5s ( 14 /14) FINISHED
 => [internal] load Dockerfile
 => => transferring dockerfile: 97B
@@ -1715,7 +1722,6 @@ still being referenced by another such pointer. Only when the last pointer is de
 layers actually destroyed by docker image rm.
 
 
-
 ## 7. Managing Container Logs
 
 
@@ -1790,7 +1796,7 @@ Step 3</b></p>
 
 ```json
 {
-"log-driver": "journald"
+  "log-driver": "journald"
 }
 ```
 
@@ -1825,7 +1831,7 @@ journalctl CONTAINER_NAME=demo
 
 ```text
 -- Logs begin at Wed 2021 -05-19 15 :03:26 UTC, end at Wed 2021 -05-19 15 :11:09 UTC. --
-May 19 15 :11:02 node 138194df21dc[ 1701 ]: PING 8.8.8.8 ( 8.8.8.8) 56 ( 84 ) bytes of data.
+May 19 15 :11:02 node 138194df21dc[ 1701 ]: PING 8.8.8.8 (8.8.8.8) 56 ( 84 ) bytes of data.
 May 19 15 :11:02 node 138194df21dc[ 1701 ]: 64 bytes from 8.8.8.8: icmp_seq= 1 ttl= 113 time= 1 .14 ms
 May 19 15 :11:03 node 138194df21dc[ 1701 ]: 64 bytes from 8.8.8.8: icmp_seq= 2 ttl= 113 time= 1 .14 ms
 May 19 15 :11:04 node 138194df21dc[ 1701 ]: 64 bytes from 8.8.8.8: icmp_seq= 3 ttl= 113 time= 1 .19 ms
@@ -1884,7 +1890,7 @@ When running a container or listing running containers, docker will typically re
 shortened container ID such as bbe74cd96891. In order to locate the appropriate directory
 for your container logs, you will need to the full container ID, such as
 bbe74cd968911071ac8a67b21bb0ba4396d546958af143a49692442907fdb261. To get the
-full contnainer ID you can use docker inspect command. example:
+full container ID you can use docker inspect command. example:
 
 ```shell
 #the bellow command will return the full ID of the container matching the shortened ID
@@ -2147,7 +2153,7 @@ A Compose file has multiple sections:
 - `version` is mandatory. (Typically use "3".)
 - `services` is mandatory. Each service corresponds to a container.
 - `networks` is optional and indicates to which networks containers should be connected.
-(By default, containers will be connected on a private per-compose-file network.)
+  (By default, containers will be connected on a private per-compose-file network.)
 - `volumes` is optional and can define volumes to be used and/or shared by the containers.
 
 
