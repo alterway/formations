@@ -15,7 +15,7 @@
 
 ### Kubernetes : Les noeuds (Nodes)
 
-- Les noeuds qui exécutent les conteneurs sont embarquent  :
+- Les noeuds qui exécutent les conteneurs embarquent  :
 
     - Un "container Engine" (Docker, CRI-O, containerd...)
   
@@ -52,13 +52,17 @@
 
 - Site : <https://etcd.io>
 - Code : <https://github.com/etcd-io/etcd> 
-- Base de données de type Clé/Valeur (_Key Value Store_)
+- Base de données de type Clé/Valeur distribuée (_Distributed Key Value Store_) 
+- Haute disponibilité: etcd est conçu pour être hautement disponible, même en cas de panne de certains nœuds
+- Cohérence forte: etcd garantit que toutes les données sont cohérentes entre tous les nœuds.
+- API simple: etcd offre une API simple et facile à utiliser pour interagir avec les données.
+- Surveillance: etcd fournit des outils de surveillance pour suivre l'état du cluster.
 - Stocke l'état d'un cluster Kubernetes
 - Point sensible (stateful) d'un cluster Kubernetes
 - Projet intégré à la CNCF (<https://github.com/etcd-io>)
 
 
-![](images//kubernetes/etcd.svg){height="250px"}
+![](images//kubernetes/etcd.svg){height="240px"}
 
 ### Kubernetes : `kube-apiserver`
 

@@ -7,18 +7,21 @@
    
 
 - Le seul (ou presque) outil pour interagir avec des clusters Kubernetes
-- Utilise un fichier de configuration (kubeconfig) pour communiquer avec l'API de Kubernetes
-- Le(s) fichier(s) se trouve(nt) par défaut dans `~/.kube/config`
-- Le fichier de config. contient :
+- Utilise un ou plusieurs fichier(s) de configuration (kubeconfig) pour communiquer avec l'API de Kubernetes
+- Le(s) fichier(s) se trouve(nt) par défaut dans le répertoire `~/.kube/config`
+   
+- Le fichier de configuration contient des informations essentielles pour se connecter au cluster, notamment :
     - L'adresse(URI) de l'APIServer
     - Les chemins des certificats TLS utilisés pour l'authentification
+    - Le contexte actuel (cluster, utilisateur, namespace) pour cibler un environnement spécifique.
+    - Des informations d'identification (jetons, mots de passe) pour l'authentification.
 
 - Fichier `kubeconfig` peut être passé en paramètre de kubectl avec le _flag_ `--kubeconfig`
-    . `kubectl --kubeconfig=/opt/k8s/config get po`
+    - ex:  `kubectl --kubeconfig=/opt/k8s/config get po`
 
-
+  
 - Fichier `kubeconfig` peut être passé en paramètre de kubectl avec la variable d'nvironnement `KUBECONFIG`
-    . `KUBECONFIG=/opt/k8s/config kubectl get pods`
+    - ex: `KUBECONFIG=/opt/k8s/config kubectl get pods`
 
 ### Kubeconfig 1/4
 
@@ -66,12 +69,12 @@ users:
 
 Lorsque vous accédez à plusieurs clusters Kubernetes, vous aurez de nombreux fichiers kubeconfig.
 
-Par défaut, kubectl recherche uniquement un fichier nommé config dans le répertoire $HOME/.kube. 
+Par défaut, kubectl recherche uniquement un fichier nommé `config` dans le répertoire $HOME/.kube. 
 
 Alors, comment pouvons-nous fusionner plusieurs fichiers kubeconfig en un seul ?
 
 
-- 1. Faire une copie de votre fichier kubeconfig (au cas ou ...)
+- 1. Faire une copie de votre fichier kubeconfig (au cas ou 😱...)
 
 ```bash
 cp ~/.kube/config ~/.kube/config-backup 
@@ -169,15 +172,21 @@ kubectl explain node --recursive
 
 - Les noms de ressources les plus courants ont 3 formes:
 
-    - singulier (par exemple, node, service, deployment)
-    - pluriel (par exemple, nodes, services, deployments)
-    - court (par exemple no, svc, deploy)
+    - **singulier** (par exemple, node, service, deployment)
+    - **pluriel** (par exemple, nodes, services, deployments)
+    - **court** (par exemple no, svc, deploy)
 
 - Certaines ressources n'ont pas de nom court (clusterroles, clusterrolebindings, roles ...)
 
 - Les points de terminaison (endpoints) ont uniquement une forme plurielle ou courte (ep)
 
-### Kubernetes : `kubectl get`
+### Kubernetes - Obtenir des informations : `kubectl get`
+
+Nous allons explorer en détail les différents types de ressources Kubernetes plus tard dans ce cours. 
+
+Pour l'instant, concentrons-nous sur l'utilisation de **kubectl** pour récupérer des informations sur notre cluster.
+
+Voiçi quelques exemples d'utilisation de cette commande très puissante
 
 - Afficher les noeuds du cluster :
 
@@ -192,7 +201,7 @@ kubectl get no
 kubectl get nodes
 ```
 
-### Kubernetes : `kubectl get` 
+### Kubernetes - Obtenir des informations : `kubectl get` 
 
 - plus d'infos
 
@@ -224,7 +233,7 @@ kubectl get pods  \
 ```
 
 
-### Kubernetes : `kubectl get`
+### Kubernetes - Obtenir des informations : `kubectl get`
 
 - Utiliser `jq`
   
@@ -249,7 +258,7 @@ kubectl get pods -o json | jq -r '.items[] | select(.metadata.name | test("test-
 
 ```
 
-### Kubernetes : `kubectl get`
+### Kubernetes - Obtenir des informations : `kubectl get`
 
 - Afficher les _namespaces_
 
@@ -265,7 +274,7 @@ kubectl get namespaces
 kubectl -n kube-system get pods
 ```
 
-### Kubernetes : `kubectl get`
+### Kubernetes - Obtenir des informations : `kubectl get`
 
 - Afficher les pods (pour le namespace _default_)
 
@@ -274,7 +283,7 @@ kubectl get pods
 kubectl get pod
 ```
 
-### Kubernetes : `kubectl get`
+### Kubernetes - Obtenir des informations : `kubectl get`
 
 - Afficher les services (pour le _namespace_ `default`):
 
@@ -291,12 +300,13 @@ kubectl get svc
 ```bash
 kubectl get pods --namespace=kube-system
 kubectl get pods -n kube-system
+# Mais aussi sur d'autres commandes
 kubectl create -n NNN ...
 kubectl run -n NNN ...
 kubectl delete -n NNN ...
 # ...
 ```
-### Kubernetes : `kubectl get`
+### Kubernetes - Obtenir des informations : `kubectl get`
 
 - Pour lister des ressources dans tous les namespaces : `--all-namespaces`
 - Depuis kubernetes 1.14 on peut utiliser le flag `-A` en raccourci

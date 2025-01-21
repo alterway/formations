@@ -18,19 +18,19 @@
 
 ### Kubernetes Local : Minikube
 
-- Installation : <https://minikube.sigs.k8s.io/docs/start/?arch=%2Fmacos%2Farm64%2Fstable%2Fbinary+download>
+- Installation : <https://minikube.sigs.k8s.io/docs/start>
 
 - Créer un cluster
     - minikube start
 
-- Les cluster sont ajoutés automatiquement au fichier ~/.kube/config 
+- Les cluster sont ajoutés automatiquement au fichier ~/.kube/config de votre poste de travail
 - Les cluster sont supprimés automatiquement au fichier ~/.kube/config avec la commande `minikube delete [--all]`
 
 - Supporte de nombreux drivers
-
     - (HyperKit, Hyper-V, KVM, VirtualBox, but also Docker and many others)
 
-- Beaucoup de plugins 
+- Beaucoup de plugins (addons)
+    - `minikube addons list`
 
      
 
@@ -86,16 +86,24 @@ ou plus simplement : `curl -sfL https://get.k3s.io | sh -`
 
 
 
+### Kubernetes Local : Podman Desktop 
 
+- Installation : <https://podman-desktop.io/>
+- Docker ou Kubernetes au choix
+- docker-compose (podman compose) doisponible
+- Configuration simple
+- Utilisation de contextes multiples
+- Création de clusters kubernetes locaux avec kind
 
-    
+![Podman desktop](images/kubernetes/podman-desktop.png){height="350px"}
 
 ### Installation de Kubernetes 
 
 
 - De nombreuses ressources présentes pour le déploiement de Kubernetes dans un environnement de production
 
-- Un des outils est [kubeadm](https://github.com/kubernetes/kubeadm) utilisé pour rapidement démarrer / configurer un cluster Kubernetes
+
+[Kubeadm](https://github.com/kubernetes/kubeadm) est un outil qui facilite le déploiement de Kubernetes en automatisant les tâches d'initialisation et de configuration d'un cluster.
 
 ### Installation de Kubernetes avec kubeadm
 
@@ -172,7 +180,7 @@ ou plus simplement : `curl -sfL https://get.k3s.io | sh -`
     - Alibaba Container Service for Kubernetes (ACK) 
         -  Documentation : https://www.alibabacloud.com/fr/product/kubernetes
 
-### Installateurs de Kubernetes
+### Autres Installateurs de Kubernetes
 
 - Via Ansible : `kubespray` <https://github.com/kubernetes-sigs/kubespray>
   
@@ -188,17 +196,21 @@ ou plus simplement : `curl -sfL https://get.k3s.io | sh -`
     
 ### Conformité kubernetes
 
-Voici quelques outils permettant de certifier les déploiements des cluster kubernetes en terme de sécurité et de respects des standard
+Voici quelques outils permettant de certifier les déploiements des cluster kubernetes en terme de sécurité et de respects des standards
 
-- Sonobuoy 
+- **Sonobuoy** 
     - <https://github.com/vmware-tanzu/sonobuoy>
-- Popeye
+  
+- **Popeye**
     - <https://github.com/derailed/popeye>
-- kube-score
+  
+- **kube-score**
     - <https://github.com/zegl/kube-score>
-- kube-bench
+  
+- **kube-bench**
     - <https://github.com/aquasecurity/kube-bench>
-- Kube-hunter:
+  
+- **Kube-hunter:**
     - <https://github.com/aquasecurity/kube-hunter>
 
    
