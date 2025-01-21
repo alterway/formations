@@ -199,7 +199,7 @@ section.titleslide h1 {
   padding: 5px;
   font-style: italic;
   background: rgba(255, 255, 255, 0.05);
-  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2); }
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2); }
 
 .reveal blockquote p:first-child,
 .reveal blockquote p:last-child {
@@ -218,9 +218,10 @@ section.titleslide h1 {
   font-family: monospace;
   line-height: 1.2em;
   word-wrap: break-word;
-  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3); }
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.3); }
 
 .reveal code {
+  border-radius: 10px;
   background: #b9b6b6; 
   font-family: monospace; 
   text-transform: none;
@@ -229,7 +230,6 @@ section.titleslide h1 {
 
 .reveal pre code {
   display: block;
-  border-radius: 10px;
   padding: 3px;
   overflow: auto;
   max-height: 550px;
