@@ -158,15 +158,19 @@ section.titleslide h1 {
  
   display: inline-block; 
   text-align: left;
-  margin: 0 0 0 1em; }
+  /* margin: 0 0 0 1em; */
+  margin-bottom: 5px
+}
 
 .reveal ol {
   display: block;
-  list-style-type: decimal; }
+  list-style-type: decimal; 
+}
 
 .reveal ul {
   display: block;
-  list-style-type: disc; }
+  list-style-type: disc; 
+}
 
 .reveal ul ul {
   list-style-type: square; }
