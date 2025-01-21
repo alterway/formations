@@ -95,5 +95,5 @@ spec:
   - Argo Rollouts pour les déploiements avancés
   - Argo Events pour l'event-driven
   - Argo Workflows pour l'orchestration
-
-   
+        
+    
