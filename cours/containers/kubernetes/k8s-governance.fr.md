@@ -23,13 +23,14 @@
 ![](images/kubernetes/cncf.png){height="100px"}
 
 
-### CNCF : Pré-requis
+### Avoir son projet porté par la CNCF
 
 - Alignement avec les Objectifs de la CNCF   
     - Technologies Cloud Natives: Votre projet doit être étroitement lié aux technologies cloud natives, telles que les conteneurs, les orchestrateurs de conteneurs (Kubernetes), les services de réseau, les systèmes de stockage distribués, et les outils de gestion du cycle de vie des applications cloud natives.
     - Open Source: Le projet doit être open source sous une licence approuvée par la CNCF (comme Apache 2.0 ou MIT).
     - Communauté Active: Il est essentiel de démontrer l'existence d'une communauté active autour du projet, avec des contributions régulières de développeurs et des utilisateurs.
 
+  
     
 - Maturation du Projet
     - Code de Qualité: Le code source doit être bien structuré, documenté et suivre les meilleures pratiques de développement.
@@ -45,39 +46,38 @@
     - La CNCF héberge un grand nombre de projets open source populaires, tels que Kubernetes, Prometheus, Envoy, et bien d'autres. Ces projets sont au cœur de l'infrastructure cloud native moderne.
     - Elle fournit un cadre de gouvernance et un environnement de collaboration pour ces projets.
     
-
+  
 - Définition de Standards:
     - La CNCF travaille à la définition de standards et de meilleures pratiques pour les technologies cloud natives.
     - Elle favorise l'interopérabilité entre les différents projets et outils.
     
-
+  
 - Promotion de l'Écosystème:
     - La CNCF organise des événements, des conférences et des meetups pour promouvoir les technologies cloud natives et rassembler la communauté.
     - Elle favorise l'adoption de ces technologies par les entreprises et les développeurs.
     
-
+  
 - Incubation de Nouveaux Projets:
     - La CNCF offre un programme d'incubation pour les nouveaux projets qui répondent à ses critères.
     - Elle aide ces projets à se développer et à atteindre la maturité nécessaire pour rejoindre la CNCF en tant que projet hébergé.
       
-
+  
 - Collaboration avec l'Industrie:
     - La CNCF travaille en étroite collaboration avec les principaux acteurs de l'industrie du cloud, tels que les fournisseurs de cloud public, les entreprises technologiques et les universités.
     
-
+  
 - Elle contribue à façonner l'avenir du cloud computing.
 
 
 ### OCI
 
 - Créé sous la Linux Fondation
-- **Standardisation** : Le but principal de l'OCI est de créer des standards ouverts pour les formats de conteneurs et leurs runtimes. Cela permet d'assurer l'interopérabilité entre différentes plateformes et outils.
-- **Portabilité** : En établissant des spécifications communes, l'OCI vise à rendre les conteneurs portables entre différents environnements d'exécution, clouds et systèmes d'exploitation.
-- **Compatibilité** : L'initiative cherche à garantir que les conteneurs créés selon ses spécifications fonctionneront de manière cohérente, quel que soit l'outil utilisé pour les créer ou les exécuter.
-- **Innovation** : Tout en maintenant des standards, l'OCI encourage l'innovation dans l'écosystème des conteneurs en fournissant une base commune sur laquelle les entreprises et les développeurs peuvent construire.
-- **Sécurité** : L'OCI travaille également sur des spécifications liées à la sécurité des conteneurs, visant à améliorer la sécurité globale de l'écosystème.
-- **Collaboration** **industrielle** : L'initiative favorise la collaboration entre de nombreuses entreprises et acteurs majeurs du secteur technologique pour définir ces standards.
-  
+- `Standardisation` : Le but principal de l'OCI est de créer des standards ouverts pour les formats de conteneurs et leurs runtimes. Cela permet d'assurer l'interopérabilité entre différentes plateformes et outils.
+- `Portabilité` : En établissant des spécifications communes, l'OCI vise à rendre les conteneurs portables entre différents environnements d'exécution, clouds et systèmes d'exploitation.
+- `Compatibilité` : L'initiative cherche à garantir que les conteneurs créés selon ses spécifications fonctionneront de manière cohérente, quel que soit l'outil utilisé pour les créer ou les exécuter.
+- `Innovation` : Tout en maintenant des standards, l'OCI encourage l'innovation dans l'écosystème des conteneurs en fournissant une base commune sur laquelle les entreprises et les développeurs peuvent construire.
+- `Sécurité` : L'OCI travaille également sur des spécifications liées à la sécurité des conteneurs, visant à améliorer la sécurité globale de l'écosystème.
+- `Collaboration` `industrielle` : L'initiative favorise la collaboration entre de nombreuses entreprises et acteurs majeurs du secteur technologique pour définir ces standards.
 - runC a été donné par Docker à l'OCI comme implémentions de base
 
 ![](images/docker/oci.png){height="100px"}
