@@ -230,7 +230,7 @@ section.titleslide h1 {
 .reveal pre code {
   display: block;
   border-radius: 10px;
-  padding: 5px;
+  padding: 3px;
   overflow: auto;
   max-height: 550px;
   word-wrap: normal; 
