@@ -41,7 +41,7 @@
 ### Kubernetes : Services
 
 
-![pod network](images/kubernetes/k8s_service.jpg)
+![pod network](images/kubernetes/k8s_service.jpg){height="550px"}
 
 
 
@@ -469,3 +469,6 @@ Les Gateway APIs offrent plus de fonctionnalités que les Ingress traditionnels 
 
 
 En savoir plus :[Evolving Kubernetes networking with the Gateway API](https://kubernetes.io/blog/2021/04/22/evolving-kubernetes-networking-with-the-gateway-api/)
+
+  
+   

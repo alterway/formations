@@ -1,21 +1,20 @@
 # Introduction à ArgoCD
 
-## Qu'est-ce qu'ArgoCD ?
+### Qu'est-ce qu'ArgoCD ?
 
 ArgoCD est un outil de déploiement continu (CD) déclaratif pour Kubernetes.
 - Conçu pour implémenter le GitOps
 - Open source et partie de la CNCF
 - Permet de synchroniser l'état souhaité (Git) avec l'état réel (Kubernetes)
 
-## Pourquoi ArgoCD ?
 
-### Avantages Clés
+### ArgoCD : Avantages Clés
 - **GitOps natif**: Votre code Git devient la source unique de vérité
 - **Automatisation**: Déploiements automatiques lors des changements dans Git
 - **Visibilité**: Interface utilisateur intuitive pour surveiller les déploiements
 - **Sécurité**: Gestion fine des accès et audit complet des changements
 
-## Architecture
+## ArgoCD: Architecture
 
 ```
                     ┌─────────────┐
@@ -32,7 +31,12 @@ ArgoCD est un outil de déploiement continu (CD) déclaratif pour Kubernetes.
 └──────────────┘   └──────────────┘   └─────────────┘
 ```
 
-## Concepts Fondamentaux
+### ArgoCD : Concepts Fondamentaux
+
+
+![argocd](images/kubernetes/argocd.png)
+
+
 
 ### 1. Applications
 - Groupe de ressources Kubernetes à déployer ensemble
@@ -49,7 +53,7 @@ ArgoCD est un outil de déploiement continu (CD) déclaratif pour Kubernetes.
 - Détection des dérives de configuration
 - Rollback automatique possible
 
-## Exemple de Configuration
+### Exemple de Configuration
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -68,7 +72,7 @@ spec:
     namespace: production
 ```
 
-## Bonnes Pratiques
+### Bonnes Pratiques
 
 1. **Structure des Repositories**
    - Séparer le code applicatif des manifestes Kubernetes
@@ -84,7 +88,7 @@ spec:
    - Surveiller les métriques ArgoCD
    - Mettre en place des notifications
 
-## Pour Aller Plus Loin
+### Pour Aller Plus Loin
 
 - Documentation officielle : https://argo-cd.readthedocs.io/
 - Projets complémentaires :

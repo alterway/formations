@@ -340,9 +340,6 @@ alias kubens='kubectl config set-context --current --namespace '
 
 ```
 
-
-
-
 ### Kubernetes : namespace `kube-public` 
 
 `kube-public` est créé par `kubeadm` 

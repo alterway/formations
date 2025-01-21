@@ -4,11 +4,14 @@
 ### Kubernetes : CSI
 
 - [Container Storage Interface](https://github.com/container-storage-interface/spec/blob/master/spec.md)
-- Implémentation Standardisée du stockage
+- CSI est une interface standard pour connecter Kubernetes à différents fournisseurs de stockage.
 - Équivalent de CNI mais pour les volumes
 - Avant Kubernetes 1.13, tous les drivers de volumes étaient *in tree*
 - Le but de la séparation est de sortir du code du *core* de Kubernetes
 - GA depuis Kubernetes 1.13
+- Permet d'utiliser des solutions de stockage variées (cloud, locales, etc.) de manière transparente.
+- Simplifie l'intégration de nouveaux systèmes de stockage.
+  
 
 ![](images/kubernetes/csi.webp){height="400px"}
 
