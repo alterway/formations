@@ -142,12 +142,11 @@ section.titleslide h1 {
   max-width: 95%;
   max-height: 95%; }
 
-strong{
-    font-weight: bold; }
-
+/****
 .reveal strong,
 .reveal b {
   font-weight: bold; }
+****/
 
 .reveal em {
   font-style: italic; }
