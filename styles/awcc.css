@@ -159,7 +159,7 @@ section.titleslide h1 {
   display: inline-block; 
   text-align: left;
   /* margin: 0 0 0 1em; */
-  margin-bottom: 5px
+  margin-bottom: 10px
 }
 
 .reveal ol {
@@ -235,6 +235,7 @@ section.titleslide h1 {
 .reveal pre code {
   display: block;
   padding: 10px;
+  margin: 10px;
   overflow: auto;
   max-height: 550px;
   word-wrap: normal; 
