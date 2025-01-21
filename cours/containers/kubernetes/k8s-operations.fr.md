@@ -232,10 +232,7 @@ kubectl example deploy
 
 ```
 
-Liste des plugins : <https://krew.sigs.k8s.io/plugins/>
-  
-
-très utiles 
+Liste des plugins : <https://krew.sigs.k8s.io/plugins/> très utiles  :
 
 - `neat` : permet de d'avoir un ouput "propre" d'une resource kubernetes - très utile pour créer des manifestes à partir de resources existantes
 - `ctx` : permet de changer de contexte facilement

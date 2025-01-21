@@ -159,7 +159,12 @@ section.titleslide h1 {
   display: inline-block; 
   text-align: left;
   /* margin: 0 0 0 1em; */
-  margin-bottom: 10px
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.reveal li {
+  margin-bottom: 5px;
 }
 
 .reveal ol {
@@ -183,7 +188,8 @@ section.titleslide h1 {
 .reveal ol ol,
 .reveal ol ul {
   display: block;
-  margin-left: 40px; }
+  margin-left: 40px; 
+}
 
 .reveal dt {
   font-weight: bold; }
