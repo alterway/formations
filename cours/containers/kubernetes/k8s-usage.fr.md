@@ -542,7 +542,7 @@ metadata:
 
 ```bash
 kubectl apply -f dashboard-adminuser.yaml
-````
+```
 
 ### Kubernetes : Kubernetes Dashboard
 

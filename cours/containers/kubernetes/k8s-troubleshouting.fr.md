@@ -212,7 +212,7 @@
     Docs: https://github.com/kubernetes/kubernetes
     Main PID: 15767 (kube-apiserver)
     Tasks: 13 (limit: 2362)
-````
+```
 
     Répétez le même process pour les autres services tels que:  kube-controller-manager, kube-scheduler, kubelet,  kube-proxy 
 
@@ -249,7 +249,7 @@
     NAME       STATUS   ROLES   AGE   VERSION
     worker-1   Ready    <none>   8d   v1.21.0
     worker-2   NotReady <none>   8d   v1.21.0
-````
+```
 
 ```bash
     $ kubectl describe node worker-1
