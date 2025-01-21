@@ -225,7 +225,7 @@ section.titleslide h1 {
   box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.3); }
 
 .reveal code {
-  border-radius: 10px;
+  border-radius: 5px;
   background: #b9b6b6; 
   font-family: monospace; 
   text-transform: none;
@@ -234,11 +234,12 @@ section.titleslide h1 {
 
 .reveal pre code {
   display: block;
-  padding: 3px;
+  padding: 10px;
   overflow: auto;
   max-height: 550px;
   word-wrap: normal; 
-  background: #b9b6b6;}
+  background: #b9b6b6;
+}
 
   .reveal .code-wrapper {
     white-space: normal;
