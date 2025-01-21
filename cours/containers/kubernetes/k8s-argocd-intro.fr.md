@@ -96,3 +96,4 @@ spec:
   - Argo Events pour l'event-driven
   - Argo Workflows pour l'orchestration
 
+   
