@@ -245,7 +245,8 @@ section.titleslide h1 {
   overflow: auto;
   max-height: 550px;
   word-wrap: normal; 
-  background: #b9b6b6;
+  /*background: #b9b6b6;*/
+  background: #9fcbf0;
 }
 
   .reveal .code-wrapper {
