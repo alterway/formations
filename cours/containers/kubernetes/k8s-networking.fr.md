@@ -331,12 +331,9 @@ kubectl get svc
 web   ClusterIP   10.96.163.5     <none>        80/TCP     3m56s
 
 kubectl exec web-96d5df5c8-lfmhs -- env | sort
-...
 
 WEB_SERVICE_HOST=10.96.163.5
 WEB_SERVICE_PORT=80
-
-
 ```
 
 
@@ -468,9 +465,11 @@ Les Gateway APIs offrent plus de fonctionnalités que les Ingress traditionnels 
 
 
 
-En savoir plus :[Evolving Kubernetes networking with the Gateway API](https://kubernetes.io/blog/2021/04/22/evolving-kubernetes-networking-with-the-gateway-api/)  
+- En savoir plus : [Evolving Kubernetes networking with the Gateway API](https://kubernetes.io/blog/2021/04/22/evolving-kubernetes-networking-with-the-gateway-api/)  
 
- 
- ---
-     
-   
+
+
+
+
+
+
