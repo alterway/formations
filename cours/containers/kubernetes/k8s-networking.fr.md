@@ -461,7 +461,7 @@ Les Gateway APIs offrent plus de fonctionnalités que les Ingress traditionnels 
 
 ### Kubernetes : Gateway API
 
-![](images/kubernetes/gateway-api-resources.png)
+![](images/kubernetes/gateway-api-resources.png){height="450px"}
 
 
 
