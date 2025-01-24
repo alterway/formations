@@ -6082,10 +6082,10 @@ kubectl get all -n monitoring
 4. Nous allons faire un port-forward pour se connecter à notre serveur Prometheus :
 
 ```bash +.
-kubectl --namespace monitoring port-forward --address 0.0.0.0 service/prometheus-kube-prometheus-prometheus 8080:80
+kubectl --namespace monitoring port-forward --address 0.0.0.0 service/prometheus-kube-prometheus-prometheus 9090:9090
 ```
 ```bash +.
-Forwarding from 0.0.0.0:8080 -> 9090
+Forwarding from 0.0.0.0:9090 -> 9090
 ```
 
 5. De même pour Grafana :
