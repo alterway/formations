@@ -1685,9 +1685,9 @@ kubectl exec -it -n secrets pod-with-volume-secret -- cat /tmp/secret.txt
 1. Commençons par installer Kubeseal :
 
 ```bash +.
-curl -Lo kubeseal https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.16.0/kubeseal-linux-amd64
-chmod +x kubeseal
-sudo mv kubeseal /usr/local/bin/
+curl -OL "https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.28.0/kubeseal-0.28.0-linux-amd64.tar.gz"
+tar -xvzf kubeseal-0.28.0-linux-amd64.tar.gz kubeseal
+sudo install -m 755 kubeseal /usr/local/bin/kubeseal
 ```
 
 2. Vérifions son installation :
@@ -1701,22 +1701,9 @@ kubeseal version: v0.16.0
 3. Nous allons également installer l'opérateur via helm :
 
 ```bash +.
-helm repo add stable https://charts.helm.sh/stable
-helm repo update
-helm install --namespace kube-system sealed-secrets stable/sealed-secrets
+kubectl apply -f https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.28.0/controller.yaml
 ```
 
-```bash +.
-
-NAME: sealed-secrets
-LAST DEPLOYED: Sun Nov  1 10:18:33 2020
-NAMESPACE: kube-system
-STATUS: deployed
-REVISION: 1
-TEST SUITE: None
-NOTES:
-You should now be able to create sealed secrets
-```
 
 4. Nous allons maintenant créer un secret :
 
