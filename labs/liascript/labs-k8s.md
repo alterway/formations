@@ -1695,7 +1695,7 @@ sudo install -m 755 kubeseal /usr/local/bin/kubeseal
 ```bash +.
 kubeseal --version
 
-kubeseal version: v0.16.0
+kubeseal version: 0.28.0
 ```
 
 3. Nous allons également installer l'opérateur via helm :
@@ -1726,7 +1726,7 @@ metadata:
 5. Et un SealedSecret à partir de ce secret :
 
 ```bash +.
-kubeseal --controller-name=sealed-secrets --controller-namespace=kube-system --format yaml <secret-example.yaml > sealed-secret-example.yaml
+kubeseal  --format yaml <secret-example.yaml > sealed-secret-example.yaml
 
 cat sealed-secret-example.yaml
 
@@ -1741,7 +1741,7 @@ metadata:
   namespace: secrets
 spec:
   encryptedData:
-    secret: AgBy3DUDSGCwPLFOJ+jYp1wm1Wqf9PlCFLvIdUDPMdSr0tBIniBLNBpQbdZ+bqP6Tq7zBhDuJz4hNq5qchgfHXyKb6qxhSP30BuquSBHboO+19NHMEG6GOYT1TatHJwUVFlzGtqHcIRFwwEOZpJs9FRByYMf4jSbfu1Lb9u1E1Q49I3Ycw+LprqSZG4rZXtnBL+d6R1iO9OKsx6uQ3fklSYRyYuNWCrqGPYINcX9pcShvJHa8N30H6xZT8jrTpp+UPNXQTI3iaBHxHMTcc5jQCcduOp5Wgbm4G8OEr1Pd4fiNCb7QBAuiGLQa81RhdN887cifdv6mweDLnsRJk09fWGIyTXTezgCYnpsBQv0RFk/EEFiL7pm7w6zMHjp+ldy8NwonoJ8DL6mXFM2otdstGiDayoELrr47MEMp+Y4VVvbQai2YufUKdbF0/unBeB0BRMCMHYgqkCoKG5UPaekIVaYSPjUvT69WjY6DJnFoMz8uVtTqIaCpFAZ8Lm0G3cpfko3rwUGDefmVi4E8eLmcLn3t8KSdzkY5TLP+s58LFjFeDPz+OWvxnJ+1NmOig4OgzhItC0ngtulwhY2lXbuLgNhkjTXHTqRlCF4PXu/vcYHFhq4sBp+bTCvVsJYJTBpkNNCefT51KMTIg+xqOWC73/FqFwujJ4JAue4N99Fvh+7qbEYEw5sPPv6CmwuO0oVzNv52bjBRQ==
+    secret: AgCBfoKchuzToR5xawARJjH970U7fB3uh5/TkYq8M+zBFG+QuqAEHzCi5YVgGedmYTGaxe75FQ/CPxc0iPg6QYLlA9NJvNULdAUPle8v5OodcoBKQxpzDhLuyJMOqyO+Z/Kc7LD1eesVihMTHZ50Axp8ea8choGGJex15JnTA3pUJEfbzxcWvLqLUmcP+wtdDdCYvZeaKPaJrAf2Tz7Bvk2uadvInYg/aW8CZ9y+oagktpxznNn08wb58JDTVktYDBsYXE8vmYTq3WzcXtjV27sSpuodCNK8yjgE/Dbe284pDovUZFVDliqJxfvVlAiSkLBkkKt0QI/wB/FCmzl6JQ15AfV40mwt/w8BVPGIpte77942qJ1bCgRksFlNCq/nDn1rpiv6ZKj5fHQ8ahTfG6HI6XUUhdAKE5KTI5Kl0AqT+YaaFG8MwQ3h9cGm8wXCgsN751tbFBF+BctCXuoLP+gP3PvJYVM3kQVBPUniy5DdL40UEWaNL7yS6miTUwjS1nww0QCFvxCmcnkG3V77aC3sRmsKEIX/Ag8VCH+WUwgzF4oSbMjSUBsWDOHS5tzQVvFz0p4G+qMgoBxB+9oc4wSPLryQRE3fFdxvMAN7BXVt1/ww8yAovoeKgdpJZEfKfc37bU7JqPXwkDeWJhAdCFHZCIbrnPUzpdEvdo3hqGQoCnrDO7bneciWH/1CSw1wObMZl66myA==
   template:
     metadata:
       creationTimestamp: null
@@ -2134,6 +2134,99 @@ Error from server (Forbidden): error when creating "test3-resources.yaml": pods 
 ```
 
 La création échoue puisque la request demandée, s'ajoutant aux requests des deux pods existants, est supérieur à celle définie par la ressource quota qui est de 1Gi.
+
+
+### Auto scaling
+
+- Déployer cette application de demo
+
+```yaml+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: hpa-demo-deployment
+spec:
+ selector:
+   matchLabels:
+     run: hpa-demo-deployment
+ replicas: 1
+ template:
+   metadata:
+     labels:
+       run: hpa-demo-deployment
+   spec:
+     containers:
+     - name: hpa-demo-deployment
+       image: k8s.gcr.io/hpa-example
+       ports:
+       - containerPort: 80
+       resources:
+         limits:
+           cpu: 500m
+         requests:
+           cpu: 200m
+```
+
+- Créer le service 
+
+```yaml+
+apiVersion: v1
+kind: Service
+metadata:
+ name: hpa-demo-deployment
+ labels:
+   run: hpa-demo-deployment
+spec:
+ ports:
+ - port: 80
+ selector:
+   run: hpa-demo-deployment
+```
+
+- Créer l'HPA 
+
+```yaml+
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+ name: hpa-demo-deployment
+spec:
+ scaleTargetRef:
+   apiVersion: apps/v1
+   kind: Deployment
+   name: hpa-demo-deployment
+ minReplicas: 1
+ maxReplicas: 10
+ targetCPUUtilizationPercentage: 50
+```
+
+- Provoquer du load 
+
+```bash+
+kubectl run -i --tty load-generator --rm --image=busybox --restart=Never -- /bin/sh -c "while sleep 0.01; do wget -q -O- http://hpa-demo-deployment; done"
+
+```
+
+- Vérifier l'HPA  
+
+```bash+
+kubectl get hpa
+
+```
+
+- Vérifier le déploiement
+
+```bash+
+kubectl get deployment hpa-demo-deployment 
+kubectl describe hpa-demo-deployment 
+```
+
+- Regarder les events
+
+```bash+
+kubectl get events
+```
+
 
 ### Clean up
 
