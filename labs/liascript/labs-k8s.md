@@ -7609,7 +7609,7 @@ kubectl get pods
 16. TroubleShooting : Faire en sorte que l'application fonctionne correctement et puisse afficher une page web avec le calcul de Pi. Corrigez toutes les erreurs dans le `deployment`et les `service`
 
 
-17. Faire en sorte que l'application soit accessible par un ingress sur le fqdn pi.[votre-id-formation].caas.fr
+
   
 ```yaml
 
@@ -7691,7 +7691,13 @@ spec:
   type: ClusterIP
 ```
 
+  
+
+17. Faire en sorte que l'application soit accessible par un ingress sur le fqdn pi.[votre-id-formation].caas.fr
+
 <hr>
+
+
 
 
 
