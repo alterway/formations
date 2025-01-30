@@ -7044,9 +7044,9 @@ Machine : **master**, **worker-0**, **worker-1**
 Préparation de la mise à jour
 
 ```bash +.
-curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring-1.28.gpg
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.31/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring-1.31.gpg
 
-echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring-1.28.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /' | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring-1.31.gpg] https://pkgs.k8s.io/core:/stable:/v1.31/deb/ /' | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
 
 sudo apt-get update
 ```
@@ -7056,7 +7056,7 @@ Pour commencer, il faut mettre à jour kubeadm :
 
 ```bash +.
 sudo apt-mark unhold kubeadm
-sudo apt-get install kubeadm=1.28.8-1.1
+sudo apt-get install kubeadm=1.31.5-1.1
 sudo apt-mark hold kubeadm
 ```
 
@@ -7091,29 +7091,28 @@ sudo kubeadm upgrade plan
 [preflight] Running pre-flight checks.
 [upgrade] Running cluster health checks
 [upgrade] Fetching available versions to upgrade to
-[upgrade/versions] Cluster version: v1.27.12
-[upgrade/versions] kubeadm version: v1.28.8
-I0408 06:40:22.060915    4163 version.go:256] remote version is much newer: v1.29.3; falling back to: stable-1.28
-[upgrade/versions] Target version: v1.28.8
-[upgrade/versions] Latest version in the v1.27 series: v1.27.12
+[upgrade/versions] Cluster version: v1.30.2
+[upgrade/versions] kubeadm version: v1.31.5
+[upgrade/versions] Target version: v1.31.5
+[upgrade/versions] Latest version in the v1.30 series: v1.30.2
 
 Components that must be upgraded manually after you have upgraded the control plane with 'kubeadm upgrade apply':
 COMPONENT   CURRENT       TARGET
-kubelet     3 x v1.27.9   v1.28.8
+kubelet     3 x v1.27.9   v1.31.5
 
 Upgrade to the latest stable version:
 
 COMPONENT                 CURRENT    TARGET
-kube-apiserver            v1.27.12   v1.28.8
-kube-controller-manager   v1.27.12   v1.28.8
-kube-scheduler            v1.27.12   v1.28.8
-kube-proxy                v1.27.12   v1.28.8
-CoreDNS                   v1.10.1    v1.10.1
+kube-apiserver            v1.30.2   v1.31.5
+kube-controller-manager   v1.30.2   v1.31.5
+kube-scheduler            v1.30.2   v1.31.5
+kube-proxy                v1.30.2   v1.31.5
+CoreDNS                   v1.x.x    v1.x.x
 etcd                      3.5.9-0    3.5.12-0
 
 You can now apply the upgrade by executing the following command:
 
-	kubeadm upgrade apply v1.28.8
+	kubeadm upgrade apply v1.31.5
 
 _____________________________________________________________________
 
@@ -7142,7 +7141,7 @@ Nous pouvons maintenant upgrade les composants du cluster :
 ```bash +.
 
 
-sudo kubeadm upgrade apply v1.28.8
+sudo kubeadm upgrade apply v1.31.5
 
 ```
 
@@ -7155,9 +7154,9 @@ sudo kubeadm upgrade apply v1.28.8
 [upgrade/config] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -o yaml'
 [preflight] Running pre-flight checks.
 [upgrade] Running cluster health checks
-[upgrade/version] You have chosen to change the cluster version to "v1.28.8"
-[upgrade/versions] Cluster version: v1.27.12
-[upgrade/versions] kubeadm version: v1.28.8
+[upgrade/version] You have chosen to change the cluster version to "v1.31.5"
+[upgrade/versions] Cluster version: v1.30.2
+[upgrade/versions] kubeadm version: v1.31.5
 [upgrade] Are you sure you want to proceed? [y/N]: y
 
 
@@ -7166,7 +7165,7 @@ sudo kubeadm upgrade apply v1.28.8
 [upgrade/prepull] This might take a minute or two, depending on the speed of your internet connection
 [upgrade/prepull] You can also perform this action in beforehand using 'kubeadm config images pull'
 W0408 06:41:41.559443    4249 checks.go:835] detected that the sandbox image "registry.k8s.io/pause:3.6" of the container runtime is inconsistent with that used by kubeadm. It is recommended that using "registry.k8s.io/pause:3.9" as the CRI sandbox image.
-[upgrade/apply] Upgrading your Static Pod-hosted control plane to version "v1.28.8" (timeout: 5m0s)...
+[upgrade/apply] Upgrading your Static Pod-hosted control plane to version "v1.31.5" (timeout: 5m0s)...
 [upgrade/etcd] Upgrading to TLS for etcd
 [upgrade/staticpods] Preparing for "etcd" upgrade
 [upgrade/staticpods] Renewing etcd-server certificate
@@ -7214,7 +7213,7 @@ W0408 06:41:41.559443    4249 checks.go:835] detected that the sandbox image "re
 [addons] Applied essential addon: CoreDNS
 [addons] Applied essential addon: kube-proxy
 
-[upgrade/successful] SUCCESS! Your cluster was upgraded to "v1.28.8". Enjoy!
+[upgrade/successful] SUCCESS! Your cluster was upgraded to "v1.31.5". Enjoy!
 
 [upgrade/kubelet] Now that your control plane is upgraded, please proceed with upgrading your kubelets if you haven't already done so.
 
@@ -7242,7 +7241,7 @@ Nous devons maintenant mettre à jour la kubelet et kubectl :
 
 ```bash +.
 sudo apt-mark unhold kubectl kubelet
-sudo apt-get install kubectl=1.24.28-1.1 kubelet=1.28.8-1.1
+sudo apt-get install kubectl=1.31.5-1.1 kubelet=1.31.5-1.1
 sudo apt-mark hold kubectl kubelet
 ```
 
@@ -7260,7 +7259,7 @@ Vérification de la mise à jour du **master**
 kubectl get nodes
 
 NAME       STATUS                     ROLES           AGE   VERSION
-master     Ready,SchedulingDisabled   control-plane   16m   v1.28.8
+master     Ready,SchedulingDisabled   control-plane   16m   v1.31.5
 worker-0   Ready                      <none>          15m   v1.27.9
 worker-1   Ready                      <none>          15m   v1.27.9
 ```
@@ -7283,7 +7282,7 @@ sudo apt-get update
 
 ```bash +.
 sudo apt-mark unhold kubeadm
-sudo apt-get install kubeadm=1.28.8-1.1
+sudo apt-get install kubeadm=1.31.5-1.1
 sudo apt-mark hold kubeadm
 ```
 
@@ -7320,7 +7319,7 @@ Enfin, comme pour le master nous devons mettre a jour la kubelet et kubectl :
 
 ```bash +.
 sudo apt-mark unhold kubectl kubelet
-sudo apt-get install kubectl=1.28.8-1.1 kubelet=1.28.8-1.1
+sudo apt-get install kubectl=1.31.5-1.1 kubelet=1.31.5-1.1
 sudo apt-mark hold kubectl kubelet
 ```
 
@@ -7343,8 +7342,8 @@ Nous pouvons maintenant lister les noeuds :
 kubectl get nodes
 
 NAME       STATUS   ROLES           AGE   VERSION
-master     Ready    control-plane   25m   v1.28.8
-worker-0   Ready    <none>          19m   v1.28.8
+master     Ready    control-plane   25m   v1.31.5
+worker-0   Ready    <none>          19m   v1.31.5
 worker-1   Ready    <none>          19m   v1.27.9
 
 ```
@@ -7609,6 +7608,9 @@ kubectl get pods
 
 16. TroubleShooting : Faire en sorte que l'application fonctionne correctement et puisse afficher une page web avec le calcul de Pi. Corrigez toutes les erreurs dans le `deployment`et les `service`
 
+
+17. Faire en sorte que l'application soit accessible par un ingress sur le fqdn pi.[votre-id-formation].caas.fr
+  
 ```yaml
 
 # BUT : faire fonctionner l'application sur curl http://QuelqueChose:8020 
