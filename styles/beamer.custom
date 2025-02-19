@@ -2,7 +2,7 @@
 
 \definecolor{oBlue}{HTML}{211B55}
 
-\setbeamercolor{osones text}{%
+\setbeamercolor{awcc text}{%
   fg=oBlue,
   bg=black!2
 }
@@ -11,15 +11,15 @@
   fg=oBlue
 }
 
-\setbeamercolor{palette osones}{%
-  use=osones text,
-  fg=osones text.bg,
-  bg=osones text.fg
+\setbeamercolor{palette awcc}{%
+  use=awcc text,
+  fg=awcc text.bg,
+  bg=awcc text.fg
 }
 
 \setbeamercolor{frametitle}{%
-  use=palette osones,
-  parent=palette osones
+  use=palette awcc,
+  parent=palette awcc
 }
 
 % Page numbering, progress bar
