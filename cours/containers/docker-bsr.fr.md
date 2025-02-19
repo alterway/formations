@@ -26,7 +26,7 @@
 
 ```bash
 FROM alpine:3.4
-MAINTAINER Osones <docker@osones.io>
+MAINTAINER Alter Way <docker@alterway.fr>
 RUN apk -U add nginx
 EXPOSE 80 443
 CMD ["nginx"]

@@ -25,13 +25,6 @@ Auteurs :
 
 HTML et PDF construits automatiquement : <https://alterway.fr/formations/>
 
-* OpenStack User [PDF](https://osones.com/formations/pdf/openstack-user.fr.pdf)/[HTML](https://osones.com/formations/openstack-user.fr.html)
-* OpenStack Ops [PDF](https://osones.com/formations/pdf/openstack-ops.fr.pdf)/[HTML](https://osones.com/formations/openstack-ops.fr.html)
-* Kubernetes User [PDF](https://osones.com/formations/pdf/kubernetes-user.fr.pdf)/[HTML](https://osones.com/formations/kubernetes-user.fr.html)
-* Kubernetes Ops [PDF](https://osones.com/formations/pdf/kubernetes-ops.fr.pdf)/[HTML](https://osones.com/formations/kubernetes-ops.fr.html)
-* Cloud [PDF](https://osones.com/formations/pdf/cloud.fr.pdf)/[HTML](https://osones.com/formations/cloud.fr.html)
-* Docker [PDF](https://osones.com/formations/pdf/docker.fr.pdf)/[HTML](https://osones.com/formations/docker.fr.html)
-
 ## Pré-requis
 
 
@@ -89,7 +82,7 @@ Un daemon Docker est donc le seul pré-requis pour le build via `build.sh`
                         clone https://github.com/hakimel/reveal.js and set
                         this variable to your local copy.
                         This option is also necessary even if you only want PDF
-                        output. Default: https://osones.com/formations/revealjs
+                        output. Default: https://www.alterway.fr/formations/revealjs
 
     -c course           Course to build, "all" for build them all !
 

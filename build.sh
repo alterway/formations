@@ -144,7 +144,7 @@ display_help() {
                         clone https://github.com/hakimel/reveal.js and set
                         this variable to your local copy.
                         This option is also necessary even if you only want PDF
-                        output. Default: https://osones.com/formations/revealjs
+                        output.
 
     -c course           Course to build, "all" for build them all !
 

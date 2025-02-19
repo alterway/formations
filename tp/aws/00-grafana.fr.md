@@ -41,7 +41,7 @@ Créer un target group `awcc-tp-webapp` avec un _traffic port_ en `3000`, un
 healthcheck sur le path `/login`.
 
 Faire en sorte que les requêtes qui arrivent sur l'ALB avec le header `Host:
-grafana.awcc.osones.com` soient _forward to_ le target group `awcc-tp-webapp`
+grafana.awcc.alterway.fr` soient _forward to_ le target group `awcc-tp-webapp`
 et les autres requêtes à `awcc-tp-default`.
 
 Faire en sorte que l'ALB redirige les requêtes HTTP vers HTTPS.
