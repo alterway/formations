@@ -3765,9 +3765,9 @@ USERNAME="${1}"
 GROUP="developers" # Exemple: mettez vos groupes ici ou laissez vide
 
 # Namespace et Rôle pour le RoleBinding (Optionnel - Décommentez et configurez pour créer RBAC)
-# CREATE_RBAC="true"
-# TARGET_NAMESPACE="default" # Namespace où l'utilisateur aura des droits
-# K8S_ROLE="view" # Rôle à assigner (ex: view, edit, admin, ou un rôle custom)
+CREATE_RBAC="true"
+TARGET_NAMESPACE="awcc" # Namespace où l'utilisateur aura des droits
+K8S_ROLE="awcc" # Rôle à assigner (ex: view, edit, admin, ou un rôle custom)
 
 
 # ---- Validation ----
@@ -3943,13 +3943,25 @@ if [[ $? -ne 0 ]]; then echo "Erreur lors de la configuration des identifiants u
 kubectl config set-context "${USERNAME}-context" \
   --cluster="${CLUSTER_NAME}" \
   --user="${USERNAME}" \
+  --namespace="${TARGET_NAMESPACE:-default}" \
   --kubeconfig="${KUBECONFIG_FILE}"
-  # Optionnel: Définir le namespace par défaut pour ce contexte
-  # --namespace="${TARGET_NAMESPACE:-default}" \
+
 if [[ $? -ne 0 ]]; then echo "Erreur lors de la configuration du contexte dans ${KUBECONFIG_FILE}."; exit 1; fi
+
+if [[ -n "$TARGET_NAMESPACE" ]]; then
+  echo "Définition du namespace par défaut '${TARGET_NAMESPACE}' pour le contexte '${USERNAME}-context'..."
+  kubectl config set-context "${USERNAME}-context" \
+    --namespace="${TARGET_NAMESPACE}" \
+    --kubeconfig="${KUBECONFIG_FILE}"
+  if [[ $? -ne 0 ]]; then echo "Erreur lors de la définition du namespace pour le contexte dans ${KUBECONFIG_FILE}."; exit 1; fi
+else
+   echo "Aucun namespace par défaut spécifique n'a été configuré pour le contexte."
+fi
+
 
 
 # Définir le contexte actuel dans le nouveau fichier kubeconfig
+echo "Définition du contexte actuel sur '${USERNAME}-context' dans ${KUBECONFIG_FILE}..."
 kubectl config use-context "${USERNAME}-context" --kubeconfig="${KUBECONFIG_FILE}"
 if [[ $? -ne 0 ]]; then echo "Erreur lors de la définition du contexte actuel dans ${KUBECONFIG_FILE}."; exit 1; fi
 
