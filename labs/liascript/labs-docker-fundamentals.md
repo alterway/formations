@@ -76,7 +76,8 @@ Step 1</b></p>
 docker container run alpine ping 8.8.8.8
 ```
 
-![class](rec/docker-run.gif)
+
+![class](images/docker-run.gif)
 
 - docker container run creates a new container
 - alpine is the container image we’ll use to define the filesystem our process sees
