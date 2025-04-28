@@ -69,11 +69,11 @@ By the end of this exercise, you should be able to:
 <p style="color: purple"><b>
 Step 1</b></p>
 
-**Let’s begin by containerizing a simple ping process on your node:**
+**Let’s begin by containerizing a simple `ping` process on your node:**
 
 
 ```shell
-docker container run alpine ping 8.8.8.8
+docker container run alpine ping '8.8.8.8'
 ```
 
 
@@ -134,7 +134,7 @@ Step 3</b></p>
 
 
 ```shell
-docker container run -d alpine ping 8.8.8.8
+docker container run -d alpine ping '8.8.8.8'
 ```
 
 ```text
