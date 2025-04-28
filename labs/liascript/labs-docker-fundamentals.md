@@ -2060,9 +2060,9 @@ Step 1</b></p>
 **Clone the source code for the app we will be working on.**
 
 ```shell
-git clone https://github.com/docker-training/orchestration-workshop
+git clone https://github.com/alterway/dockercoins.git
 
-cd orchestration-workshop/dockercoins
+cd dockercoins
 ```
 
 <p style="color: purple"><b>
