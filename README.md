@@ -19,7 +19,7 @@ Auteurs :
 * Jean-François Taltavull
 * Anita Meliho
 * Arnaud Meukam
-* Mohamed Reda Larbi Youcef <mohamed-reda.larbi-youcef@alterway.fr>
+* Mohamed Reda Larbi Youcef 
 * Hervé Leclerc <herve.leclerc@alterway.fr>
 * David Guglielmi <david.guglielmi@alterway.fr>
 
