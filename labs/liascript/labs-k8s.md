@@ -7878,7 +7878,7 @@ kubectl get pods
 <hr>
 
 
-## Lab final
+## Lab final n°1
 
 <hr>
 
@@ -8081,9 +8081,337 @@ spec:
 
 
 
+<hr>
 
 
-## Solutions pour le lab
+## Lab final n°2
+
+<hr>
+
+### A vous de jouer ! (again)
+
+<hr>
+
+
+1. Appliquer les manifestes suivants :
+
+
+```yaml
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: troubleshoot-101
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-config
+  namespace: troubleshoot-101
+data:
+  DB_HOSTT: db
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: deny-frontend-to-backend
+  namespace: troubleshoot-101
+spec:
+  podSelector:
+    matchLabels:
+      app: backend
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: monitoring
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  namespace: troubleshoot-101
+spec:
+  selector:
+    app: frontend
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: troubleshoot-101
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: nginx
+        ports:
+        - containerPort: 8080
+        env:
+        - name: BACKEND_URL
+          value: http://backend:8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+  namespace: troubleshoot-101
+spec:
+  selector:
+    app: backend
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: troubleshoot-101
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: busybox
+        command: ["sh", "-c"]
+        args: ["echo Connecting to DB at $DB_HOST; sleep 3600"]
+        env:
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: DB_HOST
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: db-data
+  namespace: troubleshoot-101
+spec:
+  accessModes:
+  - ReadOnlyMany
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: db
+  namespace: troubleshoot-101
+spec:
+  selector:
+    matchLabels:
+      app: db
+  serviceName: "db"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - name: db
+        image: busybox
+        command: ["sh", "-c"]
+        args: ["echo Starting DB; sleep 3600"]
+        volumeMounts:
+        - name: db-data
+          mountPath: /data
+  volumeClaimTemplates:
+  - metadata:
+      name: db-data
+    spec:
+      accessModes:
+      - ReadOnlyMany
+      resources:
+        requests:
+          storage: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: db
+  namespace: troubleshoot-101
+spec:
+  selector:
+    app: db
+  ports:
+  - protocol: TCP
+    port: 5432
+    targetPort: 5432
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: db-init
+  namespace: troubleshoot-101
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: troubleshoot-101
+  name: secret-writer
+rules:
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["get"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: db-init-binding
+  namespace: troubleshoot-101
+subjects:
+- kind: ServiceAccount
+  name: db-init
+  namespace: troubleshoot-101
+roleRef:
+  kind: Role
+  name: secret-writer
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-init
+  namespace: troubleshoot-101
+spec:
+  template:
+    spec:
+      serviceAccountName: db-init
+      restartPolicy: Never
+      containers:
+      - name: init
+        image: bitnami/kubectl
+        command: ["kubectl"]
+        args: ["create", "secret", "generic", "mysecret", "--from-literal=key=value"]
+
+```
+
+2. 🎯 Objectif :
+
+Debug d’une application Kubernetes “fonctionnelle mais cassée”
+Vous travaillez dans une équipe SRE. Une application déployée dans le namespace troubleshoot-101 semble avoir tous ses pods en état Running, mais l’interface utilisateur ne répond pas.
+
+Votre mission : trouver et corriger tous les problèmes bloquants pour que l’application soit pleinement fonctionnelle.
+
+3. 🧩 Contexte
+  
+L'application est composée de trois services principaux :
+
+frontend : l'interface utilisateur.
+
+backend : la logique métier.
+
+db : une base de données (simulée).
+
+
+4. 🔍 Ce que vous pouvez constater :
+
+Tous les pods sont en état Running dans le namespace.
+
+Le service frontend est exposé en interne sur le port 80.
+
+Une NetworkPolicy est en place.
+
+Un Job d'initialisation a été exécuté.
+
+Des ConfigMap, PVC, ServiceAccount, RBAC, etc., sont utilisés.
+
+
+5. 🛠️ Outils autorisés
+
+Vous pouvez utiliser tous les outils CLI standards (kubectl, k9s, stern, etc.). Le but est d’analyser les ressources Kubernetes et non de réécrire toute l’application.
+
+6. ✅ Résultat attendu :
+
+L'application doit :
+
+- Afficher une réponse HTTP correcte via curl http://frontend.troubleshoot-101.svc.cluster.local
+
+- Le backend doit pouvoir se connecter à la db
+
+- Le Job d’init doit réussir à créer un Secret
+
+
+7. 📄 Script : check_solution.sh
+
+```bash
+#!/bin/bash
+
+NS="troubleshoot-101"
+TOTAL=0
+OK=0
+
+function check() {
+  DESC="$1"
+  shift
+  if eval "$@"; then
+    echo -e "✅  $DESC"
+    ((OK++))
+  else
+    echo -e "❌  $DESC"
+  fi
+  ((TOTAL++))
+}
+
+echo "🔍 Vérification de l'exercice dans le namespace '$NS'..."
+echo
+
+check "Le frontend peut contacter le backend" \
+  "kubectl exec -n $NS deploy/frontend -- curl -s --connect-timeout 3 http://backend:8080 | grep -q 'DB'"
+
+check "La variable DB_HOST est bien présente dans le pod backend" \
+  "kubectl exec -n $NS deploy/backend -- printenv | grep -q '^DB_HOST='"
+
+check "Le PVC de la DB est monté en lecture-écriture" \
+  "[[ \$(kubectl get pvc -n $NS db-data-0 -o jsonpath='{.spec.accessModes[0]}') != 'ReadOnlyMany' ]]"
+
+check "Le job db-init a réussi" \
+  "[[ \$(kubectl get job -n $NS db-init -o jsonpath='{.status.succeeded}') -eq 1 ]]"
+
+check "Le secret 'mysecret' a bien été créé" \
+  "kubectl get secret -n $NS mysecret &>/dev/null"
+
+echo
+echo "🧮 Score : $OK / $TOTAL"
+
+if [ $OK -eq $TOTAL ]; then
+  echo -e '🎉 Bravo ! Tout est corrigé.'
+else
+  echo -e '🛠️  Il reste des erreurs à corriger.'
+fi
+```
+
+
+## Solutions 
+
+
+### pour le lab final n° 1
 <hr>
 
 
@@ -8195,6 +8523,233 @@ spec:
   type: LoadBalancer
 
 ```
+
+### pour le lab final n° 2
+<hr>
+
+
+### Solution / Tips
+
+
+- Manifeste corrigé :
+
+```yaml
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: troubleshoot-101
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-config
+  namespace: troubleshoot-101
+data:
+  DB_HOST: db
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-frontend-to-backend
+  namespace: troubleshoot-101
+spec:
+  podSelector:
+    matchLabels:
+      app: backend
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: frontend
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  namespace: troubleshoot-101
+spec:
+  selector:
+    app: frontend
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: troubleshoot-101
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: nginx
+        ports:
+        - containerPort: 8080
+        env:
+        - name: BACKEND_URL
+          value: http://backend:8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+  namespace: troubleshoot-101
+spec:
+  selector:
+    app: backend
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: troubleshoot-101
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: busybox
+        command: ["sh", "-c"]
+        args: ["echo Connecting to DB at $DB_HOST; sleep 3600"]
+        env:
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: DB_HOST
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: db-data
+  namespace: troubleshoot-101
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: db
+  namespace: troubleshoot-101
+spec:
+  selector:
+    matchLabels:
+      app: db
+  serviceName: "db"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - name: db
+        image: busybox
+        command: ["sh", "-c"]
+        args: ["echo Starting DB; sleep 3600"]
+        volumeMounts:
+        - name: db-data
+          mountPath: /data
+  volumeClaimTemplates:
+  - metadata:
+      name: db-data
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: db
+  namespace: troubleshoot-101
+spec:
+  selector:
+    app: db
+  ports:
+  - protocol: TCP
+    port: 5432
+    targetPort: 5432
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: db-init
+  namespace: troubleshoot-101
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: troubleshoot-101
+  name: secret-writer
+rules:
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["get", "create"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: db-init-binding
+  namespace: troubleshoot-101
+subjects:
+- kind: ServiceAccount
+  name: db-init
+  namespace: troubleshoot-101
+roleRef:
+  kind: Role
+  name: secret-writer
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-init
+  namespace: troubleshoot-101
+spec:
+  template:
+    spec:
+      serviceAccountName: db-init
+      restartPolicy: Never
+      containers:
+      - name: init
+        image: bitnami/kubectl
+        command: ["kubectl"]
+        args: ["create", "secret", "generic", "mysecret", "--from-literal=key=value"]
+
+```
+
+
 
 ### Quizz Troubleshooting
 

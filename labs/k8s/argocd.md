@@ -1,5 +1,3 @@
-Bien sûr, je vais vous guider à travers un laboratoire complet sur l'utilisation d'Argo CD. Ce laboratoire couvrira les étapes suivantes :
-
 1. **Préparation de l'environnement**
 2. **Installation d'Argo CD**
 3. **Création d'un repository Git avec une application Kubernetes**
