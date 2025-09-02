@@ -298,9 +298,43 @@ kubectl expose deploy nginx --port=80 --external-ip=1.2.3.4
   
 - `ExternalName` : Un cas particulier qui permet de créer un alias CNAME vers un service externe au cluster.
   
-- `Headless Service` : Utilisé quand vous avez besoin d'une découverte de service fine, sans Load Balancing. Très utile pour les bases de données distribuées.
+- `Headless Service` : A Utiliser quand vous avez besoin d'une découverte de service fine, sans Load Balancing. Très utile pour les bases de données distribuées.
   
 - `ExternalIPs` : Permet d'exposer un service Kubernetes sur une adresse IP spécifique qui existe déjà sur l'un des nœuds du cluster, offrant ainsi un accès direct depuis l'extérieur sans passer par un LoadBalancer.
+
+### Kubernetes : Quand utiliser tel ou tel type de service ?
+
+Choisir le bon type de service dans Kubernetes est essentiel pour l'architecture de votre application. Voici un guide pour vous aider à décider :
+
+- `ClusterIP`
+
+    - **Quand l'utiliser ?** Pour la communication **interne** au cluster. C'est le type par défaut et le plus courant.
+    - **Cas d'usage typique :** Un pod frontend qui doit communiquer avec un pod backend (par exemple, une API ou une base de données) à     l'intérieur du même cluster. Le service n'est pas exposé à l'extérieur.
+
+- `NodePort`
+
+    - **Quand l'utiliser ?** Pour exposer un service à l'extérieur du cluster à des fins de **développement, de test ou de démonstration**.     Il n'est généralement **pas recommandé pour la production**.
+    - **Cas d'usage typique :** Vous développez une application sur Minikube ou un cluster on-premise et vous avez besoin d'un accès rapide     à un service depuis votre machine locale via `http://<IP_DU_NOEUD>:<NODE_PORT>`.
+
+- `LoadBalancer`
+
+    - **Quand l'utiliser ?** Pour exposer une application à Internet en **production**, en particulier sur un fournisseur de cloud (AWS,     GCP, Azure).
+    - **Cas d'usage typique :** Une application web ou une API que les utilisateurs finaux doivent pouvoir atteindre. Le fournisseur de     cloud provisionne automatiquement un load balancer externe qui distribue le trafic vers vos services.
+
+- `ExternalName`
+
+    - **Quand l'utiliser ?** Lorsque vous souhaitez qu'un service Kubernetes soit un alias pour un **service externe** (en dehors du     cluster).
+    - **Cas d'usage typique :** Votre application dans le cluster doit se connecter à une base de données externe gérée (comme Amazon RDS)     ou à une API tierce. Au lieu de coder en dur l'URL externe, vous créez un service `ExternalName` (`database.local`) qui pointe vers     l'endpoint externe (`xxxx.rds.amazonaws.com`).
+
+- `Headless Service`
+
+    - **Quand l'utiliser ?** Lorsque vous n'avez **pas besoin de load balancing** et que vous voulez que les clients se connectent     directement aux pods. La découverte de service renvoie les IPs de tous les pods.
+    - **Cas d'usage typique :** Pour les applications **StatefulSets** comme les bases de données distribuées (par exemple, Cassandra,     MongoDB) où les pods ont des identités réseau stables et doivent pouvoir se découvrir et communiquer entre eux.
+
+- `ExternalIPs`
+
+    - **Quand l'utiliser ?** Un cas d'usage plus avancé où vous voulez assigner une **IP externe statique que vous gérez vous-même** à un     service. Le trafic arrivant sur cette IP sur n'importe quel noeud est routé vers le service.
+    - **Cas d'usage typique :** Vous avez un cluster on-premise et un routeur externe qui peut diriger le trafic vers les IPs de vos nœuds.     Vous pouvez alors exposer un service sur une IP spécifique de ce routeur.
 
 ### Kubernetes : Services Discovery
 

@@ -113,7 +113,7 @@ kubectl config get-contexts
 
 
 
-### Kubernetes : Kubectl `api-resources`
+### Kubernetes : kubectl `api-resources`
 
 - Afficher la liste des ressources API supportées par le serveur:
 
@@ -655,3 +655,60 @@ https://[IP-PUBLIQUE-MASTER]:8443/
 
 
 
+### Résumé des commandes `kubectl`
+
+
+*   **Lister les ressources : `kubectl get`**
+    *   *Utilité* : Voir les objets qui tournent sur le cluster.
+    *   *Exemples* :
+        ```shell
+        # Lister les pods dans le namespace actuel
+        kubectl get pods
+
+        # Lister les nœuds avec plus d'informations
+        kubectl get nodes -o wide
+
+        # Lister les services dans tous les namespaces
+        kubectl get services -A
+        ```
+
+*   **Inspecter une ressource : `kubectl describe`**
+    *   *Utilité* : Obtenir une vue détaillée et les événements récents d'un objet. Indispensable pour le débogage.
+    *   *Exemple* :
+        ```shell
+        # Voir les détails d'un pod spécifique
+        kubectl describe pod <nom-du-pod>
+        ```
+
+*   **Créer ou Mettre à jour : `kubectl apply`**
+    *   *Utilité* : Appliquer une configuration définie dans un fichier YAML. La commande la plus courante pour déployer.
+    *   *Exemple* :
+        ```shell
+        kubectl apply -f mon-deploiement.yaml
+        ```
+
+*   **Supprimer des ressources : `kubectl delete`**
+    *   *Utilité* : Supprimer les objets créés à partir d'un fichier YAML.
+    *   *Exemple* :
+        ```shell
+        kubectl delete -f mon-deploiement.yaml
+        ```
+
+---
+
+### Aide et Découverte
+
+*   **Découvrir les API : `kubectl api-resources`**
+    *   *Utilité* : Lister tous les types de ressources que vous pouvez créer sur le cluster (ex: `pods`, `deployments`, `ingresses`...).
+    *   *Exemple* :
+        ```shell
+        kubectl api-resources
+        ```
+
+*   **Obtenir de la documentation : `kubectl explain`**
+    *   *Utilité* : Comprendre la structure et les champs possibles pour un type de ressource, directement dans le terminal.
+    *   *Exemple* :
+        ```shell
+        # Comprendre ce qu'on peut mettre dans la section 'spec' d'un pod
+        kubectl explain pod.spec
+        ```
