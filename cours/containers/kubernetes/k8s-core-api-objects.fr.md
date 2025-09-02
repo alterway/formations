@@ -667,3 +667,9 @@ spec:
     - Attendre que certains services soient démarrés (bonne alternative à des sondes)
     - ...
      
+
+
+
+    
+
+    
