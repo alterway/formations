@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: result
+  namespace: vote-app
+  labels:
+    app: result
+    component: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: result
+  template:
+    metadata:
+      labels:
+        app: result
+        component: frontend
+    spec:
+      containers:
+      - name: result
+        image: dockersamples/examplevotingapp_result
+        ports:
+        - containerPort: 80
+        envFrom:
+        - configMapRef:
+            name: result-config
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "200m"
+            memory: "256Mi"

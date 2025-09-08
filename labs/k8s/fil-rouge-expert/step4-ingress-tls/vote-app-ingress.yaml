@@ -1,0 +1,35 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: vote-app-ingress
+  namespace: vote-app
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-staging"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - vote.mondomaine.com
+    - result.mondomaine.com
+    secretName: vote-app-tls
+  rules:
+  - host: "vote.mondomaine.com"
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: vote
+            port:
+              number: 80
+  - host: "result.mondomaine.com"
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: result
+            port:
+              number: 80

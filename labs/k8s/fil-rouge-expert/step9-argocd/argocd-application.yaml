@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: voting-app
+  namespace: argocd # ArgoCD gère ses applications depuis son propre namespace
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/VOTRE-USER/VOTRE-REPO.git # <-- MODIFIEZ CECI
+    targetRevision: HEAD # ou le nom de votre branche, ex: main
+    path: labs/k8s/fil-rouge-expert/step8-helm-chart/voting-app-chart # <-- MODIFIEZ CECI si le chemin est différent
+    helm:
+      values: |
+        replicaCount: 1
+        ingress:
+          enabled: true
+          hosts:
+            vote: vote.votre-domaine.com # <-- MODIFIEZ CECI
+            result: result.votre-domaine.com # <-- MODIFIEZ CECI
+  destination:
+    server: https://kubernetes.default.svc # Adresse du cluster local
+    namespace: vote-app # Où déployer l'application
+  syncPolicy:
+    automated:
+      prune: true # Supprime les anciennes ressources qui ne sont plus dans le chart
+      selfHeal: true # Réapplique l'état désiré si une dérive est détectée dans le cluster
+    syncOptions:
+    - CreateNamespace=true # Crée le namespace de destination s'il n'existe pas

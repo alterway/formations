@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "voting-app.fullname" . }}-result
+  labels:
+    {{- include "voting-app.labels" . | nindent 4 }}
+    app.kubernetes.io/component: result
+spec:
+  replicas: {{ .Values.result.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "voting-app.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: result
+  template:
+    metadata:
+      labels:
+        {{- include "voting-app.selectorLabels" . | nindent 8 }}
+        app.kubernetes.io/component: result
+    spec:
+      containers:
+        - name: result
+          image: "{{ .Values.result.image }}:{{ .Values.result.tag }}"
+          ports:
+            - containerPort: 80
+          envFrom:
+          - configMapRef:
+              name: {{ include "voting-app.fullname" . }}-config
+          resources:
+            {{- toYaml .Values.result.resources | nindent 12 }}

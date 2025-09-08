@@ -1,0 +1,71 @@
+# Allow Ingress Controller to access frontend services (vote and result)
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-ingress-to-frontend
+  namespace: vote-app
+spec:
+  podSelector:
+    matchLabels:
+      component: frontend
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - namespaceSelector: {}
+      podSelector:
+        matchLabels:
+          app.kubernetes.io/name: ingress-nginx
+---
+# Allow vote app to access redis
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-vote-to-redis
+  namespace: vote-app
+spec:
+  podSelector:
+    matchLabels:
+      app: redis
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: vote
+---
+# Allow worker to access redis and db
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-worker-to-backend
+  namespace: vote-app
+spec:
+  podSelector:
+    matchLabels:
+      app: db
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: worker
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-worker-to-redis
+  namespace: vote-app
+spec:
+  podSelector:
+    matchLabels:
+      app: redis
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: worker

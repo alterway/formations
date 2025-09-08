@@ -1,0 +1,84 @@
+# Default values for voting-app chart.
+
+replicaCount: 1
+
+vote:
+  image: dockersamples/examplevotingapp_vote
+  tag: latest
+  replicaCount: 1
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "200m"
+      memory: "256Mi"
+
+result:
+  image: dockersamples/examplevotingapp_result
+  tag: latest
+  replicaCount: 1
+  config:
+    options: "Cats vs Dogs"
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "200m"
+      memory: "256Mi"
+
+worker:
+  image: dockersamples/examplevotingapp_worker
+  tag: latest
+  replicaCount: 2 # Default to 2 because of HPA
+  hpa:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 5
+    cpuUtilizationPercentage: 50
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "200m"
+      memory: "256Mi"
+
+redis:
+  image: redis
+  tag: alpine
+  replicaCount: 1
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "128Mi"
+    limits:
+      cpu: "200m"
+      memory: "256Mi"
+
+db:
+  image: postgres
+  tag: "9.4"
+  password: "supersecret" # This should be overridden in production
+  persistence:
+    storageClass: "standard" # Or your default storage class
+    size: 1Gi
+  resources:
+    requests:
+      cpu: "200m"
+      memory: "256Mi"
+    limits:
+      cpu: "400m"
+      memory: "512Mi"
+
+ingress:
+  enabled: true
+  className: "nginx"
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-staging"
+  hosts:
+    vote: vote.mondomaine.com
+    result: result.mondomaine.com
+  tls:
+    secretName: vote-app-tls

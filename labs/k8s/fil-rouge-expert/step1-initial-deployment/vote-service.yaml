@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: vote
+  namespace: vote-app
+  labels:
+    app: vote
+    component: frontend
+spec:
+  type: ClusterIP
+  selector:
+    app: vote
+  ports:
+  - port: 80
+    targetPort: 80

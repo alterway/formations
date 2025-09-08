@@ -1,0 +1,22 @@
+# Scénario 2: Surcharge le CPU d'un pod "result" pendant 2 minutes.
+apiVersion: litmuschaos.io/v1alpha1
+kind: ChaosEngine
+metadata:
+  name: result-cpu-hog-chaos
+  namespace: vote-app
+spec:
+  engineState: 'active'
+  appinfo:
+    appns: 'vote-app'
+    applabel: 'app=result'
+    appkind: 'deployment'
+  chaosServiceAccount: litmus-sa
+  experiments:
+    - name: pod-cpu-hog
+      spec:
+        components:
+          env:
+            - name: TOTAL_CHAOS_DURATION
+              value: '120' # Durée en secondes
+            - name: CPU_CORES
+              value: '1' # Nombre de coeurs CPU à utiliser

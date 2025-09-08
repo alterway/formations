@@ -1,0 +1,360 @@
+# Ce fichier contient toutes les ressources nécessaires pour déployer l'application
+# de vote dans un état stable et résilient, prête pour les exercices de Chaos Engineering.
+
+# 1. Namespace pour isoler l'application
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: vote-app
+---
+# 2. StorageClass autorisant l'expansion de volume (pour le Scénario 4)
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: resizable-storage
+# Le provisioner dépend de l'environnement.
+# Pour les principaux clouds, les provisioners CSI sont souvent les valeurs par défaut.
+# Exemples : 'kubernetes.io/gce-pd', 'kubernetes.io/aws-ebs', 'kubernetes.io/azure-disk'
+# 'rancher.io/local-path' ou 'k8s.io/minikube-hostpath' pour des installations locales.
+# Pour cet exercice, nous laissons un provisioner standard. Adaptez-le si nécessaire.
+provisioner: kubernetes.io/gce-pd 
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+---
+# 3. Configuration et Secrets
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: result-config
+  namespace: vote-app
+data:
+  VOTE_OPTIONS: "Cats vs Dogs"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: db-secret
+  namespace: vote-app
+type: Opaque
+data:
+  POSTGRES_PASSWORD: "c3VwZXJzZWNyZXQ=" # "supersecret" en base64
+---
+# 4. RBAC pour le worker
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: litmus-sa # Nommé ainsi pour la compatibilité avec l'annexe
+  namespace: vote-app
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: litmus-chaos-role
+  namespace: vote-app
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["create","delete","get","list","patch","update", "deletecollection"]
+- apiGroups: [""]
+  resources: ["pods/exec"]
+  verbs: ["create","get","list"]
+- apiGroups: [""]
+  resources: ["events"]
+  verbs: ["create", "get", "list", "patch", "update"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: litmus-chaos-role-binding
+  namespace: vote-app
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: litmus-chaos-role
+subjects:
+- kind: ServiceAccount
+  name: litmus-sa
+  namespace: vote-app
+---
+# 5. Application Redis
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  namespace: vote-app
+  labels:
+    app: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redis
+        image: redis:alpine
+        ports:
+        - containerPort: 6379
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "200m"
+            memory: "256Mi"
+        readinessProbe:
+          tcpSocket:
+            port: 6379
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: 6379
+          initialDelaySeconds: 15
+          periodSeconds: 20
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  namespace: vote-app
+spec:
+  type: ClusterIP
+  selector:
+    app: redis
+  ports:
+  - port: 6379
+    targetPort: 6379
+---
+# 6. Base de données PostgreSQL (StatefulSet)
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: db
+  namespace: vote-app
+  labels:
+    app: db
+spec:
+  serviceName: "db"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - name: db
+        image: postgres:9.4
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: POSTGRES_PASSWORD
+        resources:
+          requests:
+            cpu: "200m"
+            memory: "256Mi"
+          limits:
+            cpu: "400m"
+            memory: "512Mi"
+        readinessProbe:
+          tcpSocket:
+            port: 5432
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          tcpSocket:
+            port: 5432
+          initialDelaySeconds: 15
+          periodSeconds: 20
+        volumeMounts:
+        - name: db-data
+          mountPath: /var/lib/postgresql/data
+  volumeClaimTemplates:
+  - metadata:
+      name: db-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "resizable-storage"
+      resources:
+        requests:
+          storage: 1Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: db
+  namespace: vote-app
+spec:
+  clusterIP: None
+  selector:
+    app: db
+  ports:
+  - port: 5432
+    targetPort: 5432
+---
+# 7. Application Vote (Frontend)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vote
+  namespace: vote-app
+  labels:
+    app: vote
+    component: frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: vote
+  template:
+    metadata:
+      labels:
+        app: vote
+        component: frontend
+    spec:
+      containers:
+      - name: vote
+        image: dockersamples/examplevotingapp_vote
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "200m"
+            memory: "256Mi"
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vote
+  namespace: vote-app
+spec:
+  type: ClusterIP
+  selector:
+    app: vote
+  ports:
+  - port: 80
+    targetPort: 80
+---
+# 8. Application Result (Frontend)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: result
+  namespace: vote-app
+  labels:
+    app: result
+    component: frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: result
+  template:
+    metadata:
+      labels:
+        app: result
+        component: frontend
+    spec:
+      containers:
+      - name: result
+        image: dockersamples/examplevotingapp_result
+        ports:
+        - containerPort: 80
+        envFrom:
+        - configMapRef:
+            name: result-config
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "200m"
+            memory: "256Mi"
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: result
+  namespace: vote-app
+spec:
+  type: ClusterIP
+  selector:
+    app: result
+  ports:
+  - port: 80
+    targetPort: 80
+---
+# 9. Application Worker (Backend)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker
+  namespace: vote-app
+  labels:
+    app: worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: worker
+  template:
+    metadata:
+      labels:
+        app: worker
+    spec:
+      serviceAccountName: litmus-sa
+      containers:
+      - name: worker
+        image: dockersamples/examplevotingapp_worker
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "200m"
+            memory: "256Mi"
+        env:
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-secret
+              key: POSTGRES_PASSWORD

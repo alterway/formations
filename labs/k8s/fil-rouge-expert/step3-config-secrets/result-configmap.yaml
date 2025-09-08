@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: result-config
+  namespace: vote-app
+data:
+  VOTE_OPTIONS: "Cats vs Dogs"

@@ -1,0 +1,24 @@
+# Scénario 4: Remplit à 80% le volume persistant du pod "db" pendant 3 minutes.
+apiVersion: litmuschaos.io/v1alpha1
+kind: ChaosEngine
+metadata:
+  name: db-disk-fill-chaos
+  namespace: vote-app
+spec:
+  engineState: 'active'
+  appinfo:
+    appns: 'vote-app'
+    applabel: 'app=db'
+    appkind: 'statefulset' # Attention, la cible est un StatefulSet ici
+  chaosServiceAccount: litmus-sa
+  experiments:
+    - name: disk-fill
+      spec:
+        components:
+          env:
+            - name: TOTAL_CHAOS_DURATION
+              value: '180' # Durée en secondes
+            - name: FILL_PERCENTAGE
+              value: '80' # Pourcentage de remplissage du disque
+            - name: TARGET_PATH
+              value: '/var/lib/postgresql/data' # Chemin du volume à remplir

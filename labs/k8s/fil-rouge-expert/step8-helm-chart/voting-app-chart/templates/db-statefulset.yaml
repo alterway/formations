@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "voting-app.fullname" . }}-db
+  labels:
+    {{- include "voting-app.labels" . | nindent 4 }}
+    app.kubernetes.io/component: db
+spec:
+  serviceName: {{ include "voting-app.fullname" . }}-db
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "voting-app.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: db
+  template:
+    metadata:
+      labels:
+        {{- include "voting-app.selectorLabels" . | nindent 8 }}
+        app.kubernetes.io/component: db
+    spec:
+      containers:
+      - name: db
+        image: "{{ .Values.db.image }}:{{ .Values.db.tag }}"
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "voting-app.fullname" . }}-secret
+              key: POSTGRES_PASSWORD
+        volumeMounts:
+        - name: db-data
+          mountPath: /var/lib/postgresql/data
+        resources:
+          {{- toYaml .Values.db.resources | nindent 12 }}
+  volumeClaimTemplates:
+  - metadata:
+      name: db-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: {{ .Values.db.persistence.storageClass }}
+      resources:
+        requests:
+          storage: {{ .Values.db.persistence.size }}

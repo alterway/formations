@@ -1,0 +1,26 @@
+# Scénario 3: Ajoute 2 secondes de latence sur le trafic sortant du "worker" vers le service "db" pendant 2 minutes.
+apiVersion: litmuschaos.io/v1alpha1
+kind: ChaosEngine
+metadata:
+  name: worker-network-latency-chaos
+  namespace: vote-app
+spec:
+  engineState: 'active'
+  appinfo:
+    appns: 'vote-app'
+    applabel: 'app=worker'
+    appkind: 'deployment'
+  chaosServiceAccount: litmus-sa
+  experiments:
+    - name: pod-network-latency
+      spec:
+        components:
+          env:
+            - name: TOTAL_CHAOS_DURATION
+              value: '120' # Durée en secondes
+            - name: NETWORK_LATENCY
+              value: '2000' # en millisecondes
+            - name: TARGET_CONTAINER
+              value: 'worker' # Nom du conteneur dans le pod
+            - name: DESTINATION_HOSTS
+              value: 'db' # Cible le service 'db'

@@ -1,0 +1,24 @@
+# Scénario 1: Supprime un pod "vote" toutes les 10 secondes pendant 1 minute.
+apiVersion: litmuschaos.io/v1alpha1
+kind: ChaosEngine
+metadata:
+  name: vote-pod-delete-chaos
+  namespace: vote-app
+spec:
+  engineState: 'active'
+  appinfo:
+    appns: 'vote-app'
+    applabel: 'app=vote'
+    appkind: 'deployment'
+  chaosServiceAccount: litmus-sa
+  experiments:
+    - name: pod-delete
+      spec:
+        components:
+          env:
+            - name: TOTAL_CHAOS_DURATION
+              value: '60' # Durée en secondes
+            - name: CHAOS_INTERVAL
+              value: '10' # Intervalle entre chaque suppression de pod
+            - name: FORCE
+              value: 'false'

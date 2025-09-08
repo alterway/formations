@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "voting-app.fullname" . }}-config
+  labels:
+    {{- include "voting-app.labels" . | nindent 4 }}
+data:
+  VOTE_OPTIONS: {{ .Values.result.config.options | quote }}
