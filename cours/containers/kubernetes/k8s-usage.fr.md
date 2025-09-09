@@ -661,6 +661,7 @@ https://[IP-PUBLIQUE-MASTER]:8443/
 *   **Lister les ressources : `kubectl get`**
     *   *Utilité* : Voir les objets qui tournent sur le cluster.
     *   *Exemples* :
+
         ```shell
         # Lister les pods dans le namespace actuel
         kubectl get pods
@@ -675,6 +676,7 @@ https://[IP-PUBLIQUE-MASTER]:8443/
 *   **Inspecter une ressource : `kubectl describe`**
     *   *Utilité* : Obtenir une vue détaillée et les événements récents d'un objet. Indispensable pour le débogage.
     *   *Exemple* :
+  
         ```shell
         # Voir les détails d'un pod spécifique
         kubectl describe pod <nom-du-pod>
@@ -683,6 +685,7 @@ https://[IP-PUBLIQUE-MASTER]:8443/
 *   **Créer ou Mettre à jour : `kubectl apply`**
     *   *Utilité* : Appliquer une configuration définie dans un fichier YAML. La commande la plus courante pour déployer.
     *   *Exemple* :
+  
         ```shell
         kubectl apply -f mon-deploiement.yaml
         ```
@@ -690,6 +693,7 @@ https://[IP-PUBLIQUE-MASTER]:8443/
 *   **Supprimer des ressources : `kubectl delete`**
     *   *Utilité* : Supprimer les objets créés à partir d'un fichier YAML.
     *   *Exemple* :
+  
         ```shell
         kubectl delete -f mon-deploiement.yaml
         ```
@@ -708,6 +712,7 @@ https://[IP-PUBLIQUE-MASTER]:8443/
 *   **Obtenir de la documentation : `kubectl explain`**
     *   *Utilité* : Comprendre la structure et les champs possibles pour un type de ressource, directement dans le terminal.
     *   *Exemple* :
+  
         ```shell
         # Comprendre ce qu'on peut mettre dans la section 'spec' d'un pod
         kubectl explain pod.spec
@@ -715,5 +720,6 @@ https://[IP-PUBLIQUE-MASTER]:8443/
    
     
 
-
+---
     
+
