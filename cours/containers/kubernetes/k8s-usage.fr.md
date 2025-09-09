@@ -712,9 +712,8 @@ https://[IP-PUBLIQUE-MASTER]:8443/
         # Comprendre ce qu'on peut mettre dans la section 'spec' d'un pod
         kubectl explain pod.spec
         ```
-
-     
-
-
+   
     
+
+
     
