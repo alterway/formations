@@ -666,10 +666,8 @@ spec:
     - Organiser les update (migrations) de bases de données
     - Attendre que certains services soient démarrés (bonne alternative à des sondes)
     - ...
-     
-
-
-
     
 
-    
+---
+  
+
