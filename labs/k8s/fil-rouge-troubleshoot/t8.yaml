@@ -1,0 +1,127 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-app
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web-app
+  template:
+    metadata:
+      labels:
+        app: web-app
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.21
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "128Mi"
+            cpu: "200m"
+        # Configuration personnalisée pour l'app
+        command: ["/bin/sh"]
+        args:
+          - -c
+          - |
+            cat > /usr/share/nginx/html/index.html << 'EOF'
+            <!DOCTYPE html>
+            <html>
+            <head><title>My Web App</title></head>
+            <body>
+                <h1>Welcome to My Web App!</h1>
+                <p>This is served from Kubernetes</p>
+                <p>Server: $(hostname)</p>
+            </body>
+            </html>
+            EOF
+            cat > /usr/share/nginx/html/api/status << 'EOF'
+            {"status": "ok", "version": "1.0"}
+            EOF
+            mkdir -p /usr/share/nginx/html/api
+            echo '{"status": "ok", "version": "1.0"}' > /usr/share/nginx/html/api/status
+            nginx -g 'daemon off;'
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-app-service
+  namespace: default
+spec:
+  selector:
+    app: web-app
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: 80
+  type: ClusterIP
+
+---
+# Service supplémentaire avec un nom différent (piège)
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp-svc
+  namespace: default
+spec:
+  selector:
+    app: web-application  # Sélecteur qui ne match rien
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: 80
+  type: ClusterIP
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web-app-ingress
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: "nginx"  # Ou selon votre ingress controller
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: myapp.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: webapp-svc  
+            port:
+              number: 80
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: web-app-service   # Ce chemin pointe vers le bon service
+            port:
+              number: 80
+
+---
+# Pod de test pour simuler les requêtes externes
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ingress-test
+  namespace: default
+spec:
+  containers:
+  - name: curl
+    image: curlimages/curl:7.85.0
+    command: 
+    - sleep
+    - "3600"
+  restartPolicy: Always

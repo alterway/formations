@@ -1,0 +1,86 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: app-credentials
+  namespace: default
+type: Opaque
+data:
+  # Les valeurs sont encodées en base64
+  # username = "admin" -> YWRtaW4=
+  # password = "secret123" -> c2VjcmV0MTIz
+  # api-key = "abc-123-def-456" -> YWJjLTEyMy1kZWYtNDU2
+  username: YWRtaW4=
+  password: c2VjcmV0MTIz
+  api-key: YWJjLTEyMy1kZWYtNDU2
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: secure-app
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: secure-app
+  template:
+    metadata:
+      labels:
+        app: secure-app
+    spec:
+      containers:
+      - name: app
+        image: busybox:1.35
+        command: 
+        - /bin/sh
+        - -c
+        - |
+          echo "=== Application Starting ==="
+          echo "Username: $DB_USER"
+          echo "Password: $DB_PASS"
+          echo "API Key: $API_KEY" 
+          echo "=========================="
+          if [ -z "$DB_USER" ] || [ -z "$DB_PASS" ] || [ -z "$API_KEY" ]; then
+            echo "ERROR: Missing required credentials!"
+            exit 1
+          fi
+          echo "All credentials loaded successfully"
+          sleep 3600
+        env:
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: app-credentials
+              key: username
+        - name: DB_PASS
+          valueFrom:
+            secretKeyRef:
+              name: app-secrets     
+              key: password
+        - name: API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: app-credentials
+              key: api_key          
+        resources:
+          requests:
+            memory: "32Mi"
+            cpu: "50m"
+          limits:
+            memory: "64Mi"
+            cpu: "100m"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: secure-app-service
+spec:
+  selector:
+    app: secure-app
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+  type: ClusterIP

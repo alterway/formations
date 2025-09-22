@@ -1,0 +1,130 @@
+# Exercice 9 - Application avec contraintes de placement
+# Problème : Pods ne peuvent pas être schedulés à cause de taints/tolerations
+# Symptômes : Pods restent en Pending, problèmes de scheduling
+
+# D'abord, nous simulons un noeud avec un taint
+# (Les élèves devront appliquer cette commande manuellement)
+# kubectl taint nodes <node-name> environment=production:NoSchedule
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: production-app
+  namespace: default
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: production-app
+      environment: production
+  template:
+    metadata:
+      labels:
+        app: production-app
+        environment: production
+    spec:
+      # Tentative de placement sur les noeuds de production
+      nodeSelector:
+        environment: production
+      
+      # ⚠️ ERREUR: Toleration incorrecte - key et value ne matchent pas le taint
+      tolerations:
+      - key: "env"                    # Devrait être "environment"
+        operator: "Equal"
+        value: "prod"                 # Devrait être "production"
+        effect: "NoSchedule"
+      
+      # Affinité pour éviter de mettre tous les pods sur le même noeud
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - production-app
+              topologyKey: kubernetes.io/hostname
+      
+      containers:
+      - name: app
+        image: nginx:1.21
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "256Mi"
+            cpu: "200m"
+        env:
+        - name: ENVIRONMENT
+          value: "production"
+        - name: REPLICA_INFO
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: production-app-service
+spec:
+  selector:
+    app: production-app
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: ClusterIP
+
+---
+# Application de développement pour comparaison (celle-ci devrait fonctionner)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dev-app
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: dev-app
+      environment: development
+  template:
+    metadata:
+      labels:
+        app: dev-app
+        environment: development
+    spec:
+      # Pas de contraintes spéciales pour le dev
+      containers:
+      - name: app
+        image: nginx:1.21
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dev-app-service
+spec:
+  selector:
+    app: dev-app
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: ClusterIP

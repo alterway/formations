@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-frontend
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: webapp-frontend
+  template:
+    metadata:
+      labels:
+        app: webapp-frontend
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.21
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "32Mi"  
+            cpu: "100m"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp-frontend-service
+spec:
+  selector:
+    app: webapp-frontend
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: ClusterIP

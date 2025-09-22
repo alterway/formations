@@ -30,6 +30,16 @@ Cet exercice a pour but de simuler le cycle de vie complet d'une application mic
     *   Déployez chaque service (`vote`, `result`, `redis`, `worker`, `db`) en utilisant des manifestes `Deployment` et `Service` (de type `ClusterIP`).
     *   Utilisez des `labels` cohérents pour chaque composant (ex: `app: vote`, `component: frontend`).
 
+Images : 
+
+- votes : dockersamples/examplevotingapp_worker
+- posgresql : postgres:9.4
+- redis : redis:alpine
+- result : dockersamples/examplevotingapp_result
+- worker : dockersamples/examplevotingapp_worker
+
+
+
 ---
 
 ### Étape 2 : Persistance des Données avec un `StatefulSet`

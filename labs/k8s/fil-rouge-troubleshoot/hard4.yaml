@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: stuck-ns
+
+
+---
+
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: externalresources.stable.example.com
+spec:
+  group: stable.example.com
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                databaseName:
+                  type: string
+  scope: Namespaced
+  names:
+    plural: externalresources
+    singular: externalresource
+    kind: ExternalResource
+    shortNames:
+    - extres
+---
+
+apiVersion: "stable.example.com/v1"
+kind: ExternalResource
+metadata:
+  name: my-database-claim
+  namespace: stuck-ns
+  # ERREUR CRUCIALE : Ce finalizer empêche la suppression de l'objet
+  # tant qu'un contrôleur ne l'a pas retiré.
+  # Or, ce contrôleur n'existe pas.
+  finalizers:
+    - "external-resource.example.com/cleanup"
+spec:
+  databaseName: "production-db-1234"

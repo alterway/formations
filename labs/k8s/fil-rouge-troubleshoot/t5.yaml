@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-api
+  namespace: default
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: webapp-api
+  template:
+    metadata:
+      labels:
+        app: webapp-api
+    spec:
+      containers:
+      - name: api
+        image: nginx:1.21
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "128Mi"
+            cpu: "200m"
+        # Configuration d'un index.html custom via command
+        command: ["/bin/sh"]
+        args:
+          - -c
+          - |
+            echo '<html><body><h1>API Ready</h1><p>Version 1.0</p></body></html>' > /usr/share/nginx/html/index.html
+            echo '<html><body><h1>Health OK</h1></body></html>' > /usr/share/nginx/html/health
+            nginx -g 'daemon off;'
+        readinessProbe:
+          httpGet:
+            path: /healthcheck 
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          timeoutSeconds: 1
+          failureThreshold: 3
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 80
+          initialDelaySeconds: 15
+          periodSeconds: 20
+          timeoutSeconds: 1
+          failureThreshold: 3
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp-api-service
+spec:
+  selector:
+    app: webapp-api
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: ClusterIP
+
+---
+# Pod pour tester l'accès au service
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-client
+  namespace: default
+spec:
+  containers:
+  - name: curl
+    image: curlimages/curl:7.85.0
+    command: 
+    - sleep
+    - "3600"
+  restartPolicy: Always

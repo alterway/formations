@@ -1,0 +1,151 @@
+# Exercice 10 - Application avec permissions Kubernetes API
+# Problème : RBAC mal configuré, ServiceAccount sans permissions
+# Symptômes : Application ne peut pas accéder à l'API Kubernetes, erreurs 403
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: monitoring-sa
+  namespace: default
+
+---
+# Role avec des permissions pour lire les pods et services
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: default
+  name: pod-reader
+rules:
+- apiGroups: [""]
+  resources: ["pods", "services"]
+  verbs: ["get", "watch", "list"]
+
+---
+# ⚠️ ERREUR: RoleBinding pointe vers le mauvais ServiceAccount
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: read-pods
+  namespace: default
+subjects:
+- kind: ServiceAccount
+  name: monitor-sa        # Devrait être "monitoring-sa"
+  namespace: default
+roleRef:
+  kind: Role
+  name: pod-reader
+  apiGroup: rbac.authorization.k8s.io
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: monitoring-app
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: monitoring-app
+  template:
+    metadata:
+      labels:
+        app: monitoring-app
+    spec:
+      serviceAccountName: monitoring-sa
+      containers:
+      - name: kubectl-pod
+        image: bitnami/kubectl:latest
+        command: 
+        - /bin/bash
+        - -c
+        - |
+          echo "=== Monitoring App Started ==="
+          echo "Attempting to list pods..."
+          
+          while true; do
+            echo "--- $(date) ---"
+            echo "Trying to list pods:"
+            kubectl get pods --output=wide || echo "Failed to list pods"
+            
+            echo "Trying to list services:"
+            kubectl get services || echo "Failed to list services"
+            
+            echo "Checking current ServiceAccount:"
+            cat /var/run/secrets/kubernetes.io/serviceaccount/namespace
+            
+            echo "Sleeping for 30 seconds..."
+            sleep 30
+          done
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "128Mi"
+            cpu: "200m"
+        env:
+        - name: KUBERNETES_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+
+---
+# Pod supplémentaire pour tester les permissions manuellement
+apiVersion: v1
+kind: Pod
+metadata:
+  name: rbac-test
+  namespace: default
+spec:
+  serviceAccountName: monitoring-sa
+  containers:
+  - name: kubectl
+    image: bitnami/kubectl:latest
+    command: 
+    - sleep
+    - "3600"
+  restartPolicy: Always
+
+---
+# Deployment de test sans ServiceAccount spécial (pour comparaison)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: normal-app
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: normal-app
+  template:
+    metadata:
+      labels:
+        app: normal-app
+    spec:
+      # Utilise le ServiceAccount par défaut
+      containers:
+      - name: test
+        image: nginx:1.21
+        resources:
+          requests:
+            memory: "32Mi"
+            cpu: "50m"
+          limits:
+            memory: "64Mi"
+            cpu: "100m"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: monitoring-service
+spec:
+  selector:
+    app: monitoring-app
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+  type: ClusterIP

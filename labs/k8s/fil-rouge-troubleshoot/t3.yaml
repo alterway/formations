@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-cache
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+      tier: cache
+  template:
+    metadata:
+      labels:
+        app: redis
+        tier: cache
+        version: "6.2"
+    spec:
+      containers:
+      - name: redis
+        image: redis:6.2-alpine
+        ports:
+        - containerPort: 6379
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "128Mi"
+            cpu: "200m"
+        command: ["redis-server"]
+        args: ["--appendonly", "yes"]
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-service
+  namespace: default
+spec:
+  selector:
+    app: redis-cache
+    tier: cache
+  ports:
+  - protocol: TCP
+    port: 6379
+    targetPort: 6379
+  type: ClusterIP
+
+---
+# Pod client pour tester la connexion
+apiVersion: v1
+kind: Pod
+metadata:
+  name: redis-client
+  namespace: default
+spec:
+  containers:
+  - name: redis-cli
+    image: redis:6.2-alpine
+    command: 
+    - sleep
+    - "3600"
+  restartPolicy: Always

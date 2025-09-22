@@ -1,0 +1,76 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  # Fichier de configuration pour l'application
+  config.json: |
+    {
+      "monitoring": {
+        "enabled": true,
+        "port": 9090
+      },
+      "log_level": "info"
+    }
+  # Fichier de statut que la sonde de vivacité est censée vérifier
+  status.initial: "pending_check"
+
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: app-secret
+type: Opaque
+stringData:
+  # Une "clé API" que l'application est censée utiliser
+  api-key.txt: "ultra-secret-key-that-must-be-present"
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapp
+  template:
+    metadata:
+      labels:
+        app: webapp
+    spec:
+      containers:
+      - name: webapp-container
+        image: nginx:1.21.6 # Une image standard qui ne plantera pas d'elle-même
+        ports:
+        - containerPort: 80
+        
+        # La sonde qui va causer le problème
+        livenessProbe:
+          exec:
+            # Cette commande vérifie que deux fichiers de configuration existent.
+            # C'est ici que le bât blesse, mais ce n'est pas évident à première vue.
+            command:
+            - cat
+            - /app/config/config.json
+            - /app/secret/api-key.txt
+          initialDelaySeconds: 10 # On laisse le temps au pod de démarrer
+          periodSeconds: 5
+
+        # Montage des volumes
+        volumeMounts:
+        - name: config-volume
+          mountPath: /app/config # Monte tout le ConfigMap dans /app/config
+        - name: secret-volume
+          mountPath: /app/secret/api-key.txt # ERREUR SUBTILE : Monte UN SEUL fichier dans ce chemin
+          
+      volumes:
+      - name: config-volume
+        configMap:
+          name: app-config
+      - name: secret-volume
+        secret:
+          secretName: app-secret

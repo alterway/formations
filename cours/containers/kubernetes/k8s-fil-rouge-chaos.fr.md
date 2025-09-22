@@ -97,10 +97,11 @@ Cette section vous guide pour installer et configurer un outil de Chaos Engineer
 ### Étape 1 : Installation de LitmusChaos
 
 1.  **Installez le portail Chaos :**
-    Appliquez le manifeste d'installation de Litmus. Cela déploiera tous les composants nécessaires dans le namespace `litmus`.
+   
 
     ```shell
-    kubectl apply -f https://litmuschaos.github.io/litmus/2.14.0/litmus-2.14.0.yaml
+    helm repo add litmuschaos https://litmuschaos.github.io/litmus-helm/
+    helm upgrade --install chaos litmuschaos/litmus --namespace=litmus --set portal.frontend.service.type=NodePort --create-namespace
     ```
     *(Vérifiez la [dernière version](https://litmuschaos.github.io/litmus/index.yaml) si nécessaire)*
 
@@ -108,7 +109,18 @@ Cette section vous guide pour installer et configurer un outil de Chaos Engineer
     Nous allons installer les expériences de chaos génériques (`generic`) depuis le Chaos Hub de Litmus.
 
     ```shell
-    kubectl apply -f https://hub.litmuschaos.io/api/chaos/2.14.0?file=charts/generic/generic-chaos-experiments.yaml
+       # Pod Delete
+       kubectl apply -f https://hub.litmuschaos.io/api/chaos/1.13.8?file=charts/generic/pod-delete/experiment.yaml -n vote-app
+
+       # CPU Hog
+       kubectl apply -f https://hub.litmuschaos.io/api/chaos/1.13.8?file=charts/generic/pod-cpu-hog/experiment.yaml -n vote-app
+
+       # Network Loss
+       kubectl apply -f https://hub.litmuschaos.io/api/chaos/1.13.8?file=charts/generic/pod-network-loss/experiment.yaml -n vote-app
+
+       # Network Latency
+       kubectl apply -f https://hub.litmuschaos.io/api/chaos/1.13.8?file=charts/generic/pod-network-latency/experiment.yaml -n vote-app
+
     ```
 
 ### Étape 2 : Configuration des Permissions (RBAC)
@@ -184,7 +196,7 @@ metadata:
 spec:
   engineState: 'active'
   appinfo:
-    appns: 'vote-app'
+    appns: 'vote'
     applabel: 'app=vote'
     appkind: 'deployment'
   chaosServiceAccount: litmus-sa

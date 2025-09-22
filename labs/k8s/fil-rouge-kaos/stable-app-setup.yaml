@@ -7,6 +7,24 @@ kind: Namespace
 metadata:
   name: vote-app
 ---
+
+
+# Service ClusterIP
+apiVersion: v1
+kind: Service
+metadata:
+  name: db
+  namespace: vote-app
+spec:
+  clusterIP: None
+  selector:
+    app: db
+  ports:
+  - port: 5432
+    targetPort: 5432
+---
+
+
 # 2. StorageClass autorisant l'expansion de volume (pour le Scénario 4)
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
@@ -17,7 +35,7 @@ metadata:
 # Exemples : 'kubernetes.io/gce-pd', 'kubernetes.io/aws-ebs', 'kubernetes.io/azure-disk'
 # 'rancher.io/local-path' ou 'k8s.io/minikube-hostpath' pour des installations locales.
 # Pour cet exercice, nous laissons un provisioner standard. Adaptez-le si nécessaire.
-provisioner: kubernetes.io/gce-pd 
+provisioner: kubernetes.io/aws-ebs
 allowVolumeExpansion: true
 reclaimPolicy: Delete
 volumeBindingMode: WaitForFirstConsumer
@@ -181,6 +199,7 @@ spec:
         volumeMounts:
         - name: db-data
           mountPath: /var/lib/postgresql/data
+          subPath: pgdata
   volumeClaimTemplates:
   - metadata:
       name: db-data
@@ -191,19 +210,7 @@ spec:
         requests:
           storage: 1Gi
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: db
-  namespace: vote-app
-spec:
-  clusterIP: None
-  selector:
-    app: db
-  ports:
-  - port: 5432
-    targetPort: 5432
----
+
 # 7. Application Vote (Frontend)
 apiVersion: apps/v1
 kind: Deployment
