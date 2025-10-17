@@ -6,14 +6,14 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: monitoring-sa
-  namespace: default
+  namespace: troubleshooting
 
 ---
 # Role avec des permissions pour lire les pods et services
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  namespace: default
+  namespace: troubleshooting
   name: pod-reader
 rules:
 - apiGroups: [""]
@@ -26,11 +26,11 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: read-pods
-  namespace: default
+  namespace: troubleshooting
 subjects:
 - kind: ServiceAccount
   name: monitor-sa        # Devrait être "monitoring-sa"
-  namespace: default
+  namespace: troubleshooting
 roleRef:
   kind: Role
   name: pod-reader
@@ -41,7 +41,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: monitoring-app
-  namespace: default
+  namespace: troubleshooting
 spec:
   replicas: 1
   selector:
@@ -96,7 +96,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: rbac-test
-  namespace: default
+  namespace: troubleshooting
 spec:
   serviceAccountName: monitoring-sa
   containers:
@@ -113,7 +113,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: normal-app
-  namespace: default
+  namespace: troubleshooting
 spec:
   replicas: 1
   selector:
@@ -141,6 +141,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: monitoring-service
+  namespace: troubleshooting
 spec:
   selector:
     app: monitoring-app

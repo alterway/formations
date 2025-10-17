@@ -1,0 +1,207 @@
+# ====================================================================
+# EXERCICE DE TROUBLESHOOTING - SONDES KUBERNETES
+# ====================================================================
+# 
+# OBJECTIF : Identifier et corriger les problèmes de configuration
+#            des sondes (startupProbe, livenessProbe, readinessProbe)
+#
+# DÉPLOIEMENT :
+#   kubectl apply -f troubleshooting.yaml
+#
+# OBSERVATION :
+#   kubectl get pods -n troubleshooting -w
+#   kubectl describe pod -n troubleshooting -l app=backend-api
+#   kubectl get events -n troubleshooting --sort-by='.lastTimestamp'
+#   kubectl get endpoints -n troubleshooting backend-api -w
+#
+# ====================================================================
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: troubleshooting
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-script
+  namespace: troubleshooting
+data:
+  app.sh: |
+    #!/bin/sh
+    echo "Application démarrage..."
+    # L'application met 25 secondes à démarrer
+    sleep 25
+    echo "ready" > /tmp/ready
+    echo "Application prête, démarrage du serveur..."
+    
+    # Simuler une application qui devient dégradée après 45 secondes
+    # (cache qui expire, connexions DB qui se ferment, etc.)
+    (sleep 45 && rm /tmp/ready && echo "Application dégradée, nettoyage cache...") &
+    
+    # Serveur HTTP simple qui répond toujours 200 OK
+    while true; do
+      echo -e "HTTP/1.1 200 OK\r\n\r\nOK" | nc -l -p 8080
+    done
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-api
+  namespace: troubleshooting
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend-api
+  template:
+    metadata:
+      labels:
+        app: backend-api
+    spec:
+      containers:
+      - name: api
+        image: alpine:latest
+        command: ["/bin/sh", "/config/app.sh"]
+        ports:
+        - containerPort: 8080
+          name: http
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+        
+        # STARTUP PROBE
+        # Vérifie si l'application a fini son démarrage
+        # ⚠️  PROBLÈME : L'app met 25s à démarrer, mais cette config
+        #    donne seulement 5s + (5 × 5s) = 30s maximum
+        #    → Risque de redémarrages intermittents selon la charge du cluster
+        startupProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 2
+          failureThreshold: 4        # Trop juste !
+          successThreshold: 1
+        
+        # LIVENESS PROBE
+        # Vérifie si l'application doit être redémarrée
+        # ⚠️  PROBLÈME 1 : Vérifie seulement le port HTTP (qui répond toujours)
+        #    même quand l'app est dégradée (fichier /tmp/ready supprimé)
+        # ⚠️  PROBLÈME 2 : failureThreshold trop bas (seulement 2)
+        #    → Tue le pod après 30s de latence temporaire
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 0     # Correct : la startupProbe bloque cette probe
+          periodSeconds: 15
+          timeoutSeconds: 2
+          failureThreshold: 2        # Trop agressif !
+          successThreshold: 1
+        
+        # READINESS PROBE
+        # Vérifie si l'application peut recevoir du trafic
+        # ⚠️  PROBLÈME : Vérifie un fichier qui disparaît après 45s
+        #    Le pod devient "Not Ready" mais n'est jamais redémarré
+        #    → Pod zombie qui consomme des ressources sans servir
+        # ⚠️  CONFUSION : La readiness devrait vérifier HTTP (léger)
+        #    et la liveness devrait vérifier l'état interne (fichier)
+        readinessProbe:
+          exec:
+            command:
+            - cat
+            - /tmp/ready
+          initialDelaySeconds: 0
+          periodSeconds: 8
+          timeoutSeconds: 2
+          failureThreshold: 2
+          successThreshold: 1
+      volumes:
+      - name: config
+        configMap:
+          name: app-script
+          defaultMode: 0755
+
+---
+# SERVICE
+# Expose les pods backend-api via un ClusterIP
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-api
+  namespace: troubleshooting
+spec:
+  selector:
+    app: backend-api
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+  type: ClusterIP
+
+---
+# POD DE TEST
+# Permet de tester l'accès au service depuis le cluster
+# Usage: kubectl exec -n troubleshooting test-client -- curl backend-api
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-client
+  namespace: troubleshooting
+spec:
+  containers:
+  - name: curl
+    image: curlimages/curl:latest
+    command: 
+      - sleep
+      - "3600"
+
+# ====================================================================
+# SYMPTÔMES ATTENDUS :
+# ====================================================================
+# 
+# 1. Redémarrages intermittents au démarrage
+#    → "Startup probe failed: HTTP probe failed"
+#
+# 2. Après ~45 secondes, les pods deviennent "Not Ready" (0/1)
+#    mais continuent de tourner (état Running)
+#    → kubectl get pods -n troubleshooting
+#
+# 3. Les endpoints disparaissent du service
+#    → kubectl get endpoints -n troubleshooting backend-api
+#
+# 4. Les pods "zombies" consomment des ressources sans servir
+#
+# ====================================================================
+# QUESTIONS POUR VOS ÉLÈVES :
+# ====================================================================
+#
+# 1. Pourquoi certains pods redémarrent-ils au démarrage ?
+# 2. Pourquoi les pods deviennent "Not Ready" après 45 secondes ?
+# 3. Pourquoi ne sont-ils pas redémarrés automatiquement ?
+# 4. Quelle est la différence sémantique entre readiness et liveness ?
+# 5. Comment corriger la configuration ?
+#
+# ====================================================================
+# INDICES :
+# ====================================================================
+#
+# - Regardez les logs : kubectl logs -n troubleshooting -l app=backend-api
+# - Vérifiez le timing : combien de temps l'app met-elle à démarrer ?
+# - Comparez ce que vérifient les readiness et liveness probes
+# - Calculez le temps maximum autorisé par la startupProbe
+# - Observer le comportement après 45 secondes d'exécution
+#
+# ====================================================================

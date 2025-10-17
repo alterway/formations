@@ -2,9 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: webapp-frontend
-  namespace: default
+  namespace: troubleshooting
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: webapp-frontend
@@ -20,17 +20,18 @@ spec:
         - containerPort: 80
         resources:
           requests:
-            memory: "64Mi"
-            cpu: "250m"
+            memory: "3Mi"
+            cpu: "30m"
           limits:
-            memory: "32Mi"  
-            cpu: "100m"
+            memory: "3Mi"
+            cpu: "30m"
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: webapp-frontend-service
+  namespace: troubleshooting
 spec:
   selector:
     app: webapp-frontend
@@ -39,3 +40,25 @@ spec:
     port: 80
     targetPort: 80
   type: ClusterIP
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: load-generator
+  namespace: troubleshooting
+spec:
+  containers:
+  - name: busybox
+    image: busybox
+    command:
+      - /bin/sh
+      - -c
+      - |
+        header=$(head -c 32288 /dev/zero | tr '\0' 'a')
+        while true; do
+          for i in $(seq 1 1550); do
+            wget -q -O- --header="X-My-Header: $header" http://webapp-frontend-service &
+          done
+          wait
+        done

@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: redis-cache
-  namespace: default
+  namespace: troubleshooting
 spec:
   replicas: 1
   selector:
@@ -36,7 +36,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: redis-service
-  namespace: default
+  namespace: troubleshooting
 spec:
   selector:
     app: redis-cache
@@ -53,7 +53,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: redis-client
-  namespace: default
+  namespace: troubleshooting
 spec:
   containers:
   - name: redis-cli

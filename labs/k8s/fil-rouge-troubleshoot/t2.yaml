@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: app-config
-  namespace: default
+  namespace: troubleshooting
 data:
   database.properties: |
     db.host=mysql-service
@@ -18,7 +18,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend-app
-  namespace: default
+  namespace: troubleshooting
 spec:
   replicas: 1
   selector:
@@ -58,6 +58,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: backend-service
+  namespace: troubleshooting
 spec:
   selector:
     app: backend-app

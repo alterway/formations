@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: app-credentials
-  namespace: default
+  namespace: troubleshooting
 type: Opaque
 data:
   # Les valeurs sont encodées en base64
@@ -18,7 +18,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: secure-app
-  namespace: default
+  namespace: troubleshooting
 spec:
   replicas: 1
   selector:
@@ -76,6 +76,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: secure-app-service
+  namespace: troubleshooting
 spec:
   selector:
     app: secure-app

@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: app-config
+  namespace: troubleshooting
 data:
   # Fichier de configuration pour l'application
   config.json: |
@@ -21,6 +22,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: app-secret
+  namespace: troubleshooting
 type: Opaque
 stringData:
   # Une "clé API" que l'application est censée utiliser
@@ -32,6 +34,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: webapp-deployment
+  namespace: troubleshooting
 spec:
   replicas: 1
   selector:
