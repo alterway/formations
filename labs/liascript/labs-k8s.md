@@ -154,8 +154,8 @@ kubectl get nodes
 ```
 
 ```bash +.
-NAME     STATUS   ROLES    AGE     VERSION
-master   Ready    master   25m     v1.33.5
+NAME       STATUS   ROLES    AGE     VERSION
+master     Ready    master   25m     v1.33.5
 worker-0   Ready    <none>   2m24s   v1.33.5
 worker-1   Ready    <none>   1m24s   v1.33.5
 ```
