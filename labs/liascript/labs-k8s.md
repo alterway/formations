@@ -120,10 +120,10 @@ Vérification :
 
 ubuntu@master:~$ k get nodes
 NAME     STATUS     ROLES           AGE     VERSION
-master   NotReady   control-plane   3m34s   v1.27.9
+master   NotReady   control-plane   3m34s   v1.33.5
 ubuntu@master:~$ k get nodes
 NAME     STATUS   ROLES           AGE     VERSION
-master   Ready    control-plane   4m18s   v1.27.9
+master   Ready    control-plane   4m18s   v1.33.5
 
 ```
 
@@ -155,9 +155,9 @@ kubectl get nodes
 
 ```bash +.
 NAME     STATUS   ROLES    AGE     VERSION
-master   Ready    master   25m     v1.27.9
-worker-0   Ready    <none>   2m24s   v1.27.9
-worker-1   Ready    <none>   1m24s   v1.27.9
+master   Ready    master   25m     v1.33.5
+worker-0   Ready    <none>   2m24s   v1.33.5
+worker-1   Ready    <none>   1m24s   v1.33.5
 ```
 
 
@@ -7428,9 +7428,9 @@ Machine : **master**, **worker-0**, **worker-1**
 Préparation de la mise à jour
 
 ```bash +.
-curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.31/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring-1.31.gpg
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.34/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring-1.34.gpg
 
-echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring-1.31.gpg] https://pkgs.k8s.io/core:/stable:/v1.31/deb/ /' | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring-1.34.gpg] https://pkgs.k8s.io/core:/stable:/v1.34/deb/ /' | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
 
 sudo apt-get update
 ```
@@ -7440,7 +7440,7 @@ Pour commencer, il faut mettre à jour kubeadm :
 
 ```bash +.
 sudo apt-mark unhold kubeadm
-sudo apt-get install kubeadm=1.31.13-1.1
+sudo apt-get install kubeadm=1.34.1-1.1
 sudo apt-mark hold kubeadm
 ```
 
@@ -7475,28 +7475,28 @@ sudo kubeadm upgrade plan
 [preflight] Running pre-flight checks.
 [upgrade] Running cluster health checks
 [upgrade] Fetching available versions to upgrade to
-[upgrade/versions] Cluster version: v1.30.2
-[upgrade/versions] kubeadm version: v1.31.13
-[upgrade/versions] Target version: v1.31.13
-[upgrade/versions] Latest version in the v1.30 series: v1.30.2
+[upgrade/versions] Cluster version: v1.33.5
+[upgrade/versions] kubeadm version: v1.34.1
+[upgrade/versions] Target version: v1.34.1
+[upgrade/versions] Latest version in the v1.30 series: v1.33.5
 
 Components that must be upgraded manually after you have upgraded the control plane with 'kubeadm upgrade apply':
 COMPONENT   CURRENT       TARGET
-kubelet     3 x v1.27.9   v1.31.13
+kubelet     3 x v1.33.5   v1.34.1
 
 Upgrade to the latest stable version:
 
 COMPONENT                 CURRENT    TARGET
-kube-apiserver            v1.30.2   v1.31.13
-kube-controller-manager   v1.30.2   v1.31.13
-kube-scheduler            v1.30.2   v1.31.13
-kube-proxy                v1.30.2   v1.31.13
+kube-apiserver            v1.33.5   v1.34.1
+kube-controller-manager   v1.33.5   v1.34.1
+kube-scheduler            v1.33.5   v1.34.1
+kube-proxy                v1.33.5   v1.34.1
 CoreDNS                   v1.x.x    v1.x.x
 etcd                      3.5.9-0    3.5.12-0
 
 You can now apply the upgrade by executing the following command:
 
-	kubeadm upgrade apply v1.31.13
+	kubeadm upgrade apply v1.34.1
 
 _____________________________________________________________________
 
@@ -7525,7 +7525,7 @@ Nous pouvons maintenant upgrade les composants du cluster :
 ```bash +.
 
 
-sudo kubeadm upgrade apply v1.31.13
+sudo kubeadm upgrade apply v1.34.1
 
 ```
 
@@ -7538,9 +7538,9 @@ sudo kubeadm upgrade apply v1.31.13
 [upgrade/config] FYI: You can look at this config file with 'kubectl -n kube-system get cm kubeadm-config -o yaml'
 [preflight] Running pre-flight checks.
 [upgrade] Running cluster health checks
-[upgrade/version] You have chosen to change the cluster version to "v1.31.13"
-[upgrade/versions] Cluster version: v1.30.2
-[upgrade/versions] kubeadm version: v1.31.13
+[upgrade/version] You have chosen to change the cluster version to "v1.34.1"
+[upgrade/versions] Cluster version: v1.33.5
+[upgrade/versions] kubeadm version: v1.34.1
 [upgrade] Are you sure you want to proceed? [y/N]: y
 
 
@@ -7549,7 +7549,7 @@ sudo kubeadm upgrade apply v1.31.13
 [upgrade/prepull] This might take a minute or two, depending on the speed of your internet connection
 [upgrade/prepull] You can also perform this action in beforehand using 'kubeadm config images pull'
 W0408 06:41:41.559443    4249 checks.go:835] detected that the sandbox image "registry.k8s.io/pause:3.6" of the container runtime is inconsistent with that used by kubeadm. It is recommended that using "registry.k8s.io/pause:3.9" as the CRI sandbox image.
-[upgrade/apply] Upgrading your Static Pod-hosted control plane to version "v1.31.13" (timeout: 5m0s)...
+[upgrade/apply] Upgrading your Static Pod-hosted control plane to version "v1.34.1" (timeout: 5m0s)...
 [upgrade/etcd] Upgrading to TLS for etcd
 [upgrade/staticpods] Preparing for "etcd" upgrade
 [upgrade/staticpods] Renewing etcd-server certificate
@@ -7597,7 +7597,7 @@ W0408 06:41:41.559443    4249 checks.go:835] detected that the sandbox image "re
 [addons] Applied essential addon: CoreDNS
 [addons] Applied essential addon: kube-proxy
 
-[upgrade/successful] SUCCESS! Your cluster was upgraded to "v1.31.13". Enjoy!
+[upgrade/successful] SUCCESS! Your cluster was upgraded to "v1.34.1". Enjoy!
 
 [upgrade/kubelet] Now that your control plane is upgraded, please proceed with upgrading your kubelets if you haven't already done so.
 
@@ -7625,7 +7625,7 @@ Nous devons maintenant mettre à jour la kubelet et kubectl :
 
 ```bash +.
 sudo apt-mark unhold kubectl kubelet
-sudo apt-get install kubectl=1.31.13-1.1 kubelet=1.31.13-1.1
+sudo apt-get install kubectl=1.34.1-1.1 kubelet=1.34.1-1.1
 sudo apt-mark hold kubectl kubelet
 ```
 
@@ -7643,9 +7643,9 @@ Vérification de la mise à jour du **master**
 kubectl get nodes
 
 NAME       STATUS                     ROLES           AGE   VERSION
-master     Ready,SchedulingDisabled   control-plane   16m   v1.31.13
-worker-0   Ready                      <none>          15m   v1.27.9
-worker-1   Ready                      <none>          15m   v1.27.9
+master     Ready,SchedulingDisabled   control-plane   16m   v1.34.1
+worker-0   Ready                      <none>          15m   v1.33.5
+worker-1   Ready                      <none>          15m   v1.33.5
 ```
 
 
@@ -7657,16 +7657,16 @@ A faire sur les noeud **worker-0 et worker-1**
 Préparation de la mise à jour
 
 ```bash +.
-curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.31/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring-1.31.gpg
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.34/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring-1.34.gpg
 
-echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring-1.31.gpg] https://pkgs.k8s.io/core:/stable:/v1.31/deb/ /' | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring-1.34.gpg] https://pkgs.k8s.io/core:/stable:/v1.34/deb/ /' | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
 
 sudo apt-get update
 ```
 
 ```bash +.
 sudo apt-mark unhold kubeadm
-sudo apt-get install kubeadm=1.31.13-1.1
+sudo apt-get install kubeadm=1.34.1-1.1
 sudo apt-mark hold kubeadm
 ```
 
@@ -7703,7 +7703,7 @@ Enfin, comme pour le master nous devons mettre a jour la kubelet et kubectl :
 
 ```bash +.
 sudo apt-mark unhold kubectl kubelet
-sudo apt-get install kubectl=1.31.13-1.1 kubelet=1.31.13-1.1
+sudo apt-get install kubectl=1.34.1-1.1 kubelet=1.34.1-1.1
 sudo apt-mark hold kubectl kubelet
 ```
 
@@ -7726,9 +7726,9 @@ Nous pouvons maintenant lister les noeuds :
 kubectl get nodes
 
 NAME       STATUS   ROLES           AGE   VERSION
-master     Ready    control-plane   25m   v1.31.13
-worker-0   Ready    <none>          19m   v1.31.13
-worker-1   Ready    <none>          19m   v1.27.9
+master     Ready    control-plane   25m   v1.34.1
+worker-0   Ready    <none>          19m   v1.34.1
+worker-1   Ready    <none>          19m   v1.33.5
 
 ```
 
