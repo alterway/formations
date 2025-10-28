@@ -73,8 +73,10 @@ Machine : **master**
 
 
 ```bash +.
-sudo kubeadm init 
+sudo kubeadm init  --apiserver-cert-extra-sans [adresse-ip-du-master] --pod-network-cidr=192.168.100.0/24
 ```
+
+
 
 ```bash +.
 ...
@@ -91,11 +93,18 @@ Un token sera généré à l'issue du processus d'initialisation. Il est importa
 
 ```bash +.
 
- kubeadm join 10.10.3.243:6443 --token m03nzv.vtfeaij5yu876u7z --discovery-token-ca-cert-hash sha256:2da9df40f55f901d221d30cf0574264bcd4c62b7c38200498e99e2797a55753f
+ sudo kubeadm join 10.10.3.243:6443 --token m03nzv.vtfeaij5yu876u7z --discovery-token-ca-cert-hash sha256:2da9df40f55f901d221d30cf0574264bcd4c62b7c38200498e99e2797a55753f
 
 ```
 
 
+Si vous perdez cette commande vous pouvez re-générer la commande de join de cette manière
+
+```
+
+kubeadm token create --print-join-command
+
+```
 
 2. Nous avons donc installé un premier noeud master Kubernetes. Nous allons maintenant configurer la CLI kubectl pour pouvoir l’utiliser depuis le master:
 
