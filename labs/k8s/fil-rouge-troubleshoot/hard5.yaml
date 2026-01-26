@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ressource-protegee
+  namespace: namespace-a-supprimer
+  labels:
+    protege-moi: "true"
+data:
+  message: "ne me supprime pas"
+
+
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: webhook-en-panne
+  namespace: default
+spec:
+  ports:
+  - port: 443
+    targetPort: 8443
+  selector:
+    # Ce sélecteur ne correspond à AUCUN pod,
+    # le service n'aura donc jamais d'Endpoints.
+    app: service-webhook-inexistant
+
+---
+
+apiVersion: admissionregistration.k8s.io/v1beta1
+kind: ValidatingAdmissionWebhookConfiguration
+metadata:
+  name: demo-webhook-bloquant
+webhooks:
+- name: demo-bloquant.example.com
+  failurePolicy: Fail
+  sideEffects: None
+  rules:
+  - apiGroups: [""]
+    apiVersions: ["v1"]
+    operations: ["DELETE"]
+    resources: ["configmaps"]
+    scope: Namespaced
+  objectSelector:
+    matchLabels:
+      protege-moi: "true"
+  clientConfig:
+    service:
+      namespace: default
+      name: webhook-en-panne
+      path: "/validate"
+    caBundle: Cg==
+  admissionReviewVersions: ["v1", "v1beta1"]
+
+
