@@ -55,7 +55,7 @@ spec:
       serviceAccountName: monitoring-sa
       containers:
       - name: kubectl-pod
-        image: bitnami/kubectl:latest
+        image: soldevelo/kubectl:latest
         command: 
         - /bin/bash
         - -c
@@ -101,7 +101,7 @@ spec:
   serviceAccountName: monitoring-sa
   containers:
   - name: kubectl
-    image: bitnami/kubectl:latest
+    image: soldevelo/kubectl:latest
     command: 
     - sleep
     - "3600"
