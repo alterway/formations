@@ -70,16 +70,6 @@ Avant de mettre un cluster en production, auditez sa conformité :
 popeye
 ```
 
-### Mini-Défi : Choix d'Architecture
-
-**Contexte** : Votre entreprise veut monter une chaîne CI/CD GitHub Actions pour tester le déploiement d'opérateurs K8s multi-nœuds à chaque Pull Request.
-
-**Question** : Quelle solution privilégiez-vous ?
-1. Un cluster EKS dédié allumé 24/7.
-2. Un cluster local `KinD` instancié dynamiquement dans le runner de la CI.
-3. Une VM avec `Minikube`.
-
-
 
 ### Mini-Défi : Choix d'Architecture (Réponses)
 
@@ -99,6 +89,7 @@ popeye
 1. Un cluster EKS dédié allumé 24/7.
 2. Un cluster local `KinD` instancié dynamiquement dans le runner de la CI.
 3. Une VM avec `Minikube`.
+
 
 (Réponse : **Option 2 (KinD)** ! Démarrage en ~20s, destruction automatique à la fin du job, coût quasi nul et isolation parfaite).
 

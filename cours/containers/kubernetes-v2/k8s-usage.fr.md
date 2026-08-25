@@ -111,10 +111,16 @@ kubectl who-can delete namespaces
 
 Quelle commande en une ligne permet de lister le nom de tous les pods ayant déjà redémarré au moins 1 fois, triés par leur nœud ?
 
+
+## Mini-Défi : La Commande Ninja
+
+**Objectif** : Vous suspectez une fuite de mémoire sur un cluster de 150 pods. 
+
+Quelle commande en une ligne permet de lister le nom de tous les pods ayant déjà redémarré au moins 1 fois, triés par leur nœud ?
+
 ```bash
 # Solution experte :
 kubectl get pods --field-selector status.phase=Running \
   -o custom-columns=POD:.metadata.name,NODE:.spec.nodeName,RESTARTS:.status.containerStatuses[0].restartCount \
   --sort-by='.spec.nodeName'
 ```
-
