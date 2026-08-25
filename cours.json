@@ -132,6 +132,39 @@
       "containers/kubernetes/conclusion"
     ]
   },
+  "kubernetes-full-v2": {
+    "course_name": "KUBERNETES",
+    "course_description": "Formation Kubernetes V2 - Expert & Opérationnel",
+    "modules": [
+      "intro-awcc",
+      "containers/kubernetes-v2/k8s-labs",
+      "containers/kubernetes-v2/k8s-governance",
+      "containers/kubernetes-v2/k8s-architecture",
+      "containers/kubernetes-v2/k8s-installation",
+      "containers/kubernetes-v2/k8s-usage",
+      "containers/kubernetes-v2/k8s-imperative-declarative-commands",
+      "containers/kubernetes-v2/k8s-core-api-objects",
+      "containers/kubernetes-v2/k8s-workloads-configuration",
+      "containers/kubernetes-v2/k8s-resources-handling",
+      "containers/kubernetes-v2/k8s-scheduling",
+      "containers/kubernetes-v2/k8s-volumes",
+      "containers/kubernetes-v2/k8s-networking",
+      "containers/kubernetes-v2/k8s-ingress",
+      "containers/kubernetes-v2/k8s-applications",
+      "containers/kubernetes-v2/k8s-autoscaling",
+      "containers/kubernetes-v2/k8s-observability-monitoring",
+      "containers/kubernetes-v2/k8s-logging-monitoring",
+      "containers/kubernetes-v2/k8s-troubleshouting",
+      "containers/kubernetes-v2/k8s-operations",
+      "containers/kubernetes-v2/k8s-maintenance",
+      "containers/kubernetes-v2/k8s-security",
+      "containers/kubernetes-v2/k8s-helm-intro",
+      "containers/kubernetes-v2/k8s-kustomize-intro",
+      "containers/kubernetes-v2/k8s-argocd-intro",
+      "containers/kubernetes-v2/k8s-certification",
+      "containers/kubernetes-v2/conclusion"
+    ]
+  },
   "kubernetes-beginer": {
     "course_name": "kubernetes-beginer",
     "course_description": "Kubernetes Beginer 2 jours",
@@ -234,4 +267,3 @@
     ]
   }
 }
-
