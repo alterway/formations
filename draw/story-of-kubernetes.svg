@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6800 2300" width="6800" height="2300">
+  <rect width="6800" height="2300" fill="#ffffff"/>
+  <line x1="280" y1="1100" x2="6520" y2="1100" stroke="#0d3b66" stroke-width="10"/>
+  <line x1="280" y1="925" x2="280" y2="130" stroke="#0d3b66" stroke-width="8"/>
+  <circle cx="280" cy="130" r="32" fill="#0d3b66"/>
+  <circle cx="280" cy="1100" r="175" fill="#0d3b66"/>
+  <text x="280" y="1100" text-anchor="middle" dominant-baseline="central" font-family="Helvetica Neue,Arial,sans-serif" font-size="90" font-weight="bold" fill="#ffffff">2004</text>
+  <text x="260" y="14" text-anchor="start" font-family="Helvetica Neue,Arial,sans-serif" font-size="50" font-weight="700" fill="#0d3b66">Google</text>
+  <text x="260" y="78" text-anchor="start" font-family="Helvetica Neue,Arial,sans-serif" font-size="50" font-weight="700" fill="#0d3b66">Utilise Borg</text>
+  <line x1="800" y1="1275" x2="800" y2="1900" stroke="#0077b6" stroke-width="8"/>
+  <circle cx="800" cy="1900" r="32" fill="#0077b6"/>
+  <circle cx="800" cy="1100" r="175" fill="#0077b6"/>
+  <text x="800" y="1100" text-anchor="middle" dominant-baseline="central" font-family="Helvetica Neue,Arial,sans-serif" font-size="90" font-weight="bold" fill="#ffffff">2006</text>
+  <text x="780" y="2002" text-anchor="start" font-family="Helvetica Neue,Arial,sans-serif" font-size="50" font-weight="700" fill="#0d3b66">Google travaille sur les</text>
+  <text x="780" y="2066" text-anchor="start" font-family="Helvetica Neue,Arial,sans-serif" font-size="50" font-weight="700" fill="#0d3b66">« Process Containers »</text>
+  <text x="780" y="2130" text-anchor="start" font-family="Helvetica Neue,Arial,sans-serif" font-size="50" font-weight="700" fill="#0d3b66">(renommé « cgroups »)</text>
+  <line x1="1320" y1="925" x2="1320" y2="130" stroke="#0d3b66" stroke-width="8"/>
+  <circle cx="1320" cy="130" r="32" fill="#0d3b66"/>
+  <circle cx="1320" cy="1100" r="175" fill="#0d3b66"/>
+  <text x="1320" y="1100" text-anchor="middle" dominant-baseline="central" font-family="Helvetica Neue,Arial,sans-serif" font-size="90" font-weight="bold" fill="#ffffff">2008</text>
+  <text x="1300" y="14" text-anchor="start" font-family="Helvetica Neue,Arial,sans-serif" font-size="50" font-weight="700" fill="#0d3b66">Les cgroups intégrés</text>
+  <text x="1300" y="78" text-anchor="start" font-family="Helvetica Neue,Arial,sans-serif" font-size="50" font-weight="700" fill="#0d3b66">dans Linux (2.6.24)</text>
+  <line x1="1840" y1="1275" x2="1840" y2="1900" stroke="#0077b6" stroke-width="8"/>
+  <circle cx="1840" cy="1900" r="32" fill="#0077b6"/>
+  <circle cx="1840" cy="1100" r="175" fill="#0077b6"/>
+  <text x="1840" y="1100" text-anchor="middle" dominant-baseline="central" font-family="Helvetica Neue,Arial,sans-serif" font-size="120" font-weight="bold" fill="#ffffff">...</text>
+  <text x="1820" y="2002" text-anchor="start" font-family="Helvetica Neue,Arial,sans-serif" font-size="50" font-weight="700" fill="#0d3b66">Borg continue d&apos;être</text>
+  <text x="1820" y="2066" text-anchor="start" font-family="Helvetica Neue,Arial,sans-serif" font-size="50" font-weight="700" fill="#0d3b66">développé chez Google</text>
+  <line x1="2360" y1="925" x2="2360" y2="130" stroke="#0d3b66" stroke-width="8"/>
+  <circle cx="2360" cy="130" r="32" fill="#0d3b66"/>
+  <circle cx="2360" cy="1100" r="175" fill="#0d3b66"/>
+  <text x="2360" y="1100" text-anchor="middle" dominant-baseline="central" font-family="Helvetica Neue,Arial,sans-serif" font-size="90" font-weight="bold" fill="#ffffff">2013</text>
+  <text x="2340" y="14" text-anchor="start" font-family="Helvetica Neue,Arial,sans-serif" font-size="50" font-weight="700" fill="#0d3b66">Google annonce Omega</text>
+  <text x="2340" y="78" text-anchor="start" font-family="Helvetica Neue,Arial,sans-serif" font-size="50" font-weight="700" fill="#0d3b66">Docker publie 1ère release</text>
+  <line x1="2880" y1="1275" x2="2880" y2="1900" stroke="#0077b6" stroke-width="8"/>
+  <circle cx="2880" cy="1900" r="32" fill="#0077b6"/>
+  <circle cx="2880" cy="1100" r="175" fill="#0077b6"/>
+  <text x="2880" y="1100" text-anchor="middle" dominant-baseline="central" font-family="Helvetica Neue,Arial,sans-serif" font-size="90" font-weight="bold" fill="#ffffff">2014</text>
+  <text x="2860" y="2002" text-anchor="start" font-family="Helvetica Neue,Arial,sans-serif" font-size="50" font-weight="700" fill="#0d3b66">1er commit Github k8s</text>
+  <text x="2860" y="2066" text-anchor="start" font-family="Helvetica Neue,Arial,sans-serif" font-size="50" font-weight="700" fill="#0d3b66">k8s annoncé (Wired Mag.)</text>
+  <text x="2860" y="2130" text-anchor="start" font-family="Helvetica Neue,Arial,sans-serif" font-size="50" font-weight="700" fill="#0d3b66">CoreOS introduit Flannel</text>
+  <line x1="3400" y1="925" x2="3400" y2="130" stroke="#0d3b66" stroke-width="8"/>
+  <circle cx="3400" cy="130" r="32" fill="#0d3b66"/>
+  <circle cx="3400" cy="1100" r="175" fill="#0d3b66"/>
+  <text x="3400" y="1100" text-anchor="middle" dominant-baseline="central" font-family="Helvetica Neue,Arial,sans-serif" font-size="90" font-weight="bold" fill="#ffffff">2015</text>
+  <text x="3380" y="-50" text-anchor="start" font-family="Helvetica Neue,Arial,sans-serif" font-size="50" font-weight="700" fill="#0d3b66">k8s v1.0 → CNCF (Juillet)</text>
+  <text x="3380" y="14" text-anchor="start" font-family="Helvetica Neue,Arial,sans-serif" font-size="50" font-weight="700" fill="#0d3b66">Alter Way adopte Docker</text>
+  <text x="3380" y="78" text-anchor="start" font-family="Helvetica Neue,Arial,sans-serif" font-size="50" font-weight="700" fill="#0d3b66">pour toute sa CI/CD</text>
+  <line x1="3920" y1="1275" x2="3920" y2="1900" stroke="#0077b6" stroke-width="8"/>
+  <circle cx="3920" cy="1900" r="32" fill="#0077b6"/>
+  <circle cx="3920" cy="1100" r="175" fill="#0077b6"/>
+  <text x="3920" y="1100" text-anchor="middle" dominant-baseline="central" font-family="Helvetica Neue,Arial,sans-serif" font-size="90" font-weight="bold" fill="#ffffff">2016</text>
+  <text x="3900" y="2002" text-anchor="start" font-family="Helvetica Neue,Arial,sans-serif" font-size="50" font-weight="700" fill="#0d3b66">k8s v1.2 - v1.5</text>
+  <line x1="4440" y1="925" x2="4440" y2="130" stroke="#0d3b66" stroke-width="8"/>
+  <circle cx="4440" cy="130" r="32" fill="#0d3b66"/>
+  <circle cx="4440" cy="1100" r="175" fill="#0d3b66"/>
+  <text x="4440" y="1100" text-anchor="middle" dominant-baseline="central" font-family="Helvetica Neue,Arial,sans-serif" font-size="90" font-weight="bold" fill="#ffffff">2017</text>
+  <text x="4420" y="14" text-anchor="start" font-family="Helvetica Neue,Arial,sans-serif" font-size="50" font-weight="700" fill="#0d3b66">AWS EKS annoncé</text>
+  <text x="4420" y="78" text-anchor="start" font-family="Helvetica Neue,Arial,sans-serif" font-size="50" font-weight="700" fill="#0d3b66">Microsoft AKS Preview</text>
+  <line x1="4960" y1="1275" x2="4960" y2="1900" stroke="#0077b6" stroke-width="8"/>
+  <circle cx="4960" cy="1900" r="32" fill="#0077b6"/>
+  <circle cx="4960" cy="1100" r="175" fill="#0077b6"/>
+  <text x="4960" y="1100" text-anchor="middle" dominant-baseline="central" font-family="Helvetica Neue,Arial,sans-serif" font-size="90" font-weight="bold" fill="#ffffff">2018</text>
+  <text x="4940" y="2002" text-anchor="start" font-family="Helvetica Neue,Arial,sans-serif" font-size="50" font-weight="700" fill="#0d3b66">GKE GA / EKS GA / AKS GA</text>
+  <line x1="5480" y1="925" x2="5480" y2="130" stroke="#0d3b66" stroke-width="8"/>
+  <circle cx="5480" cy="130" r="32" fill="#0d3b66"/>
+  <circle cx="5480" cy="1100" r="175" fill="#0d3b66"/>
+  <text x="5480" y="1100" text-anchor="middle" dominant-baseline="central" font-family="Helvetica Neue,Arial,sans-serif" font-size="90" font-weight="bold" fill="#ffffff">2022</text>
+  <text x="5460" y="14" text-anchor="start" font-family="Helvetica Neue,Arial,sans-serif" font-size="50" font-weight="700" fill="#0d3b66">Multi-Cloud</text>
+  <text x="5460" y="78" text-anchor="start" font-family="Helvetica Neue,Arial,sans-serif" font-size="50" font-weight="700" fill="#0d3b66">&amp; Cloud Hybride</text>
+  <line x1="6000" y1="1275" x2="6000" y2="1900" stroke="#0077b6" stroke-width="8"/>
+  <circle cx="6000" cy="1900" r="32" fill="#0077b6"/>
+  <circle cx="6000" cy="1100" r="175" fill="#0077b6"/>
+  <text x="6000" y="1100" text-anchor="middle" dominant-baseline="central" font-family="Helvetica Neue,Arial,sans-serif" font-size="90" font-weight="bold" fill="#ffffff">2024</text>
+  <text x="5980" y="2002" text-anchor="start" font-family="Helvetica Neue,Arial,sans-serif" font-size="50" font-weight="700" fill="#0d3b66">k8s v1.30 - v1.31</text>
+  <text x="5980" y="2066" text-anchor="start" font-family="Helvetica Neue,Arial,sans-serif" font-size="50" font-weight="700" fill="#0d3b66">Sidecar Containers GA</text>
+  <line x1="6520" y1="925" x2="6520" y2="130" stroke="#0d3b66" stroke-width="8"/>
+  <circle cx="6520" cy="130" r="32" fill="#0d3b66"/>
+  <circle cx="6520" cy="1100" r="175" fill="#0d3b66"/>
+  <text x="6520" y="1100" text-anchor="middle" dominant-baseline="central" font-family="Helvetica Neue,Arial,sans-serif" font-size="90" font-weight="bold" fill="#ffffff">2026</text>
+  <text x="6540" y="-50" text-anchor="end" font-family="Helvetica Neue,Arial,sans-serif" font-size="50" font-weight="700" fill="#0d3b66">k8s v1.36</text>
+  <text x="6540" y="14" text-anchor="end" font-family="Helvetica Neue,Arial,sans-serif" font-size="50" font-weight="700" fill="#0d3b66">Gateway API GA</text>
+  <text x="6540" y="78" text-anchor="end" font-family="Helvetica Neue,Arial,sans-serif" font-size="50" font-weight="700" fill="#0d3b66">Standard Cloud Native</text>
+</svg>
