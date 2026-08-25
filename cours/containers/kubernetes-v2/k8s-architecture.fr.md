@@ -5,7 +5,7 @@
 ```
  ┌─────────────────────────────────────────────────────────────┐
  │                CONTROL PLANE (Cerveau)                      │
- │   [ etcd ] ◄──► [ kube-apiserver ] ◄──► [ Controllers ]    │
+ │   [ etcd ] ◄──► [ kube-apiserver ] ◄──► [ Controllers ]     │
  │                        ▲                                    │
  │                        │  (Reconcile loop & Scheduler)      │
  └────────────────────────┼────────────────────────────────────┘
@@ -61,7 +61,7 @@ La promesse fondamentale de Kubernetes : **Déclaratif vs Réel**.
     │          LA BOUCLE INFINIE DE CONTRÔLE        │
     │                                               │
     │      1. Observer l'état réel actuel           │
-    │      2. Comparer avec l'état désiré (YAML)   │
+    │      2. Comparer avec l'état désiré (YAML)    │
     │      3. Agir pour résorber l'écart (Reconcile)│
     └───────────────────────────────────────────────┘
 ```
@@ -121,7 +121,17 @@ Kubernetes impose **3 règles absolues** à tous les plugins réseau (CNI) :
 ### Mini-Défi SRE : Autopsie de Pannes
 
 **Scénario 1** : Si le `kube-apiserver` devient inaccessible pendant 10 minutes, que deviennent les Pods applicatifs en cours d'exécution ?
-*(Réponse : Ils continuent de tourner normalement ! Seules les opérations de modification et le redémarrage en cas de crash sont gelés).*
+
 
 **Scénario 2** : Si le `kube-scheduler` crashe, que se passe-t-il lors d'un `kubectl apply` d'un nouveau Deployment ?
-*(Réponse : Le Deployment et les Pods sont créés dans etcd, mais les Pods restent bloqués en état `Pending`).*
+
+
+### Mini-Défi SRE : Autopsie de Pannes (Réponses)
+
+**Scénario 1** : Si le `kube-apiserver` devient inaccessible pendant 10 minutes, que deviennent les Pods applicatifs en cours d'exécution ?
+
+(Réponse : Ils continuent de tourner normalement ! Seules les opérations de modification et le redémarrage en cas de crash sont gelés).
+
+**Scénario 2** : Si le `kube-scheduler` crashe, que se passe-t-il lors d'un `kubectl apply` d'un nouveau Deployment ?
+
+(Réponse : Le Deployment et les Pods sont créés dans etcd, mais les Pods restent bloqués en état `Pending`).

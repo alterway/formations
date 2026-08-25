@@ -3,16 +3,17 @@
 ### Le Dilemme : Impératif vs Déclaratif
 
 ```
-   APPROCHE IMPÉRATIVE                      APPROCHE DÉCLARATIVE
-"Fais ceci, puis cela maintenant !"       "Voici l'état final que je veux."
-        (Exécution directe)                     (GitOps / Versionné)
-               │                                       │
-               ▼                                       ▼
-  kubectl run / kubectl create                 kubectl apply -f app.yaml
-  Rapide en lab / CLI / Urgence               Reproductible, auditable, CI/CD
+   APPROCHE IMPÉRATIVE                          APPROCHE DÉCLARATIVE
+"Fais ceci, puis cela maintenant !"           "Voici l'état final que je veux."
+        (Exécution directe)                         (GitOps / Versionné)
+               │                                           │
+               ▼                                           ▼
+  kubectl run / kubectl create                   kubectl apply -f app.yaml
+  Rapide en lab / CLI / Urgence                  Reproductible, auditable, CI/CD
 ```
 
 ![](images/kubernetes/imperative-declarative-k8s.jpg){height="260px"}
+
 
 ### Quand Utiliser Chaque Approche ?
 
@@ -67,6 +68,12 @@ kubectl diff -f k8s/production/
 # Appliquer avec Server-Side Apply (standard moderne K8s 1.22+)
 kubectl apply --server-side -f k8s/production/
 ```
+
+### Mini-Défi : Le « Speedrun » YAML
+
+**Objectif** : En moins de 30 secondes et sans ouvrir d'éditeur de texte, générez un fichier `stack.yaml` contenant à la fois un **Deployment** `redis` (image `redis:alpine`) et son **Service** `redis-svc` exposant le port TCP `6379`.
+
+
 
 ### Mini-Défi : Le « Speedrun » YAML
 

@@ -3,12 +3,12 @@
 ### Le Principe 12-Factor : Découpler Code & Configuration
 
 ```
-  [ Image de Conteneur Immuable ]  +  [ ConfigMap / Secret ]
-         (my-app:1.0)                        (dev / staging / prod)
-               │                                       │
-               └───────────────────┬───────────────────┘
-                                   ▼
-                         [ Pod Exécutable ]
+       [ Image de Conteneur Immuable ]     +       [ ConfigMap / Secret ]
+              (my-app:1.0)                        (dev / staging / prod)
+                    │                                       │
+                    └──────────────────────┬────────────────┘
+                                           ▼
+                              [ Pod Exécutable ]
 ```
 
 - Une même image binaire doit pouvoir tourner en Dev, Pré-prod et Prod sans être recompilée.
@@ -94,4 +94,11 @@ Dans une démarche GitOps, **interdiction de commiter des Secrets K8s en clair d
 
 Pourtant, l'application continue d'utiliser l'ancienne valeur. Pourquoi ?
 
-*(Réponse : Les variables d'environnement (`env` / `envFrom`) sont injectées **au moment du démarrage du processus** dans le conteneur. Elles ne se mettent pas à jour à chaud ! Il faut redémarrer le Pod (`kubectl rollout restart deployment/mon-app`) ou monter le ConfigMap en tant que **Volume**).*
+
+### Mini-Défi : Le Mystère de la Variable Fantôme
+
+**Incident SRE** : Vous modifiez une valeur dans un `ConfigMap` existant via `kubectl edit cm app-config`. 
+
+Pourtant, l'application continue d'utiliser l'ancienne valeur. Pourquoi ?
+
+(Réponse : Les variables d'environnement (`env` / `envFrom`) sont injectées **au moment du démarrage du processus** dans le conteneur. Elles ne se mettent pas à jour à chaud ! Il faut redémarrer le Pod (`kubectl rollout restart deployment/mon-app`) ou monter le ConfigMap en tant que **Volume**).

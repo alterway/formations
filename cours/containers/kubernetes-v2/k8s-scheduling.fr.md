@@ -3,12 +3,12 @@
 ### L'Objectif : Maîtriser le Placement des Pods
 
 ```
-       ATTIRER des Pods                       REPOUSSER des Pods
-  (Affinité & Sélecteurs de Nœuds)         (Taints & Tolerations)
-               │                                      │
-               ▼                                      ▼
-"Ce pod IA DOIT tourner sur               "Ce nœud GPU est réservé,
- des machines équipées de GPU"             aucun pod standard n'y entre !"
+       ATTIRER des Pods                            REPOUSSER des Pods
+  (Affinité & Sélecteurs de Nœuds)              (Taints & Tolerations)
+               │                                           │
+               ▼                                           ▼
+"Ce pod IA DOIT tourner sur                    "Ce nœud GPU est réservé,
+ des machines équipées de GPU"                  aucun pod standard n'y entre !"
 ```
 
 ![](images/kubernetes/affinities.png){height="220px"}
@@ -55,7 +55,7 @@ spec:
         app: bookstore-api
 ```
 
-- **`topologySpreadConstraints`** est le standard moderne recommandé pour équilibrer parfaitement les charges.
+- *`topologySpreadConstraints` est le standard moderne recommandé pour équilibrer parfaitement les charges.
 
 ### 3. Taints & Tolerations : La Ségrégation des Nœuds
 
@@ -70,13 +70,13 @@ spec:
 
 ### Résumé Visuel des Règles de Placement
 
-| Mécanisme | Portée | Type de Contrainte | Cas d'Usage |
+| Mécanisme | Portée | Type de Règle | Cas d'Usage Typique |
 | :--- | :--- | :--- | :--- |
-| **`nodeSelector`** | Nœud | Binaire (Strict) | Attribuer à un type de machine simple |
-| **`nodeAffinity`** | Nœud | Hard (`required`) ou Soft (`preferred`) | Ciblage multi-zones, architectures CPU spécifiques |
-| **`podAntiAffinity`** | Pod $\leftrightarrow$ Pod | Hard / Soft | Garantir qu'aucun réplica ne partage le même nœud physique |
-| **`topologySpread`** | Nœuds / Zones | Répartition pondérée | Équilibrer 50 pods sur 3 zones sans surcoût |
-| **`Taints/Tolerations`** | Nœud $\leftrightarrow$ Pod | Répulsion (`NoSchedule` / `NoExecute`) | Isoler les Control Planes, nœuds GPU, nœuds en maintenance |
+| **`nodeSelector`** | Nœud | Binaire (Strict) | Cibler un type d'instance simple (ex: SSD) |
+| **`nodeAffinity`** | Nœud | Hard (`required`) / Soft (`preferred`) | Ciblage multi-zones & architectures CPU |
+| **`podAntiAffinity`** | Pod $\leftrightarrow$ Pod | Hard / Soft | Répartir les réplicas sur des hôtes distincts |
+| **`topologySpread`** | Nœuds / Zones | Étalement uniforme | Équilibrer les pods sur plusieurs AZs |
+| **`Taints / Tolerations`** | Nœud $\leftrightarrow$ Pod | Répulsion (`NoSchedule` / `NoExecute`) | Nœuds GPU, isolation Control Plane, maintenance |
 
 ### Mini-Défi : Le Pod Éjecté
 

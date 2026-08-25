@@ -3,22 +3,22 @@
 ### La Hiérarchie des Objets Kubernetes
 
 ```
- ┌─────────────────────────────────────────────────────────────┐
- │                      NAMESPACE                              │
- │                                                             │
- │   ┌─────────────────────────────────────────────────────┐   │
- │   │                   DEPLOYMENT                        │   │
- │   │    (Gère les Rolling Updates & l'historique)        │   │
- │   │                        │                            │   │
- │   │                        ▼                            │   │
- │   │                   REPLICASET                        │   │
- │   │        (Maintient le nombre exact de Pods)          │   │
- │   │                        │                            │   │
- │   │                        ▼                            │   │
- │   │                      PODS                           │   │
- │   │         [ App Container | Native Sidecar ]          │   │
- │   └─────────────────────────────────────────────────────┘   │
- └─────────────────────────────────────────────────────────────┘
+           ┌─────────────────────────────────────────────────────────────┐
+           │                      NAMESPACE                              │
+           │                                                             │
+           │   ┌─────────────────────────────────────────────────────┐   │
+           │   │                   DEPLOYMENT                        │   │
+           │   │    (Gère les Rolling Updates & l'historique)        │   │
+           │   │                        │                            │   │
+           │   │                        ▼                            │   │
+           │   │                   REPLICASET                        │   │
+           │   │        (Maintient le nombre exact de Pods)          │   │
+           │   │                        │                            │   │
+           │   │                        ▼                            │   │
+           │   │                      PODS                           │   │
+           │   │         [ App Container | Native Sidecar ]          │   │
+           │   └─────────────────────────────────────────────────────┘   │
+           └─────────────────────────────────────────────────────────────┘
 ```
 
 ### 1. Le Pod : L'Atome Indivisible
@@ -55,14 +55,14 @@ spec:
 ### 2. Labels vs Annotations : Ne Les Confondez Plus !
 
 ```
-              LABELS                             ANNOTATIONS
-  Utilisés par Kubernetes pour sélectionner    Utilisés par des outils tiers
-        (Sélecteurs, Services, RBAC)           (Monitoring, CI/CD, Git commit)
-                │                                       │
-                ▼                                       ▼
-  - app: bookstore                             - git-commit: 7f8a92b
-  - env: production                            - prometheus.io/scrape: "true"
-  - tier: backend                              - ingress.class: nginx
+              LABELS                                       ANNOTATIONS
+  Utilisés par Kubernetes pour sélectionner              Utilisés par des outils tiers
+        (Sélecteurs, Services, RBAC)                     (Monitoring, CI/CD, Git commit)
+                │                                                 │
+                ▼                                                 ▼
+  - app: bookstore                                       - git-commit: 7f8a92b
+  - env: production                                      - prometheus.io/scrape: "true"
+  - tier: backend                                        - ingress.class: nginx
 ```
 
 > **Règle d'or** : Si Kubernetes doit filtrer ou router dessus $\rightarrow$ **Label**. Si c'est informatif $\rightarrow$ **Annotation**.
@@ -74,9 +74,11 @@ Le Deployment orchestre des **ReplicaSets** pour garantir des mises à jour sans
 ```
 [ Deployment v1 ] ──► [ ReplicaSet v1 (3 Pods) ]  ◄── Traffic 100%
          │
+         │         
     (Mise à jour d'image vers v2 : RollingUpdate)
          │
-         ├──► [ ReplicaSet v1 (1 Pod) ]          ◄── Traffic 33%
+         │
+         ├──► [ ReplicaSet v1 (1 Pod) ]           ◄── Traffic 33%
          └──► [ ReplicaSet v2 (2 Pods) ]          ◄── Traffic 67%
 ```
 
@@ -108,6 +110,7 @@ Quand vos applications ne sont pas jetables (bases de données, Kafka, ElasticSe
 
 ```
 [ StatefulSet: redis ]
+   |
    ├── redis-0  ──► Lié au PVC data-redis-0 (Disque SSD 1)
    ├── redis-1  ──► Lié au PVC data-redis-1 (Disque SSD 2)
    └── redis-2  ──► Lié au PVC data-redis-2 (Disque SSD 3)
@@ -124,6 +127,9 @@ Quand vos applications ne sont pas jetables (bases de données, Kafka, ElasticSe
 | **DaemonSet** | Exécute exactement **1 copie du Pod sur chaque nœud** | Collecteur de logs (Fluentd), agent de métriques (Prometheus node-exporter), CNI |
 | **Job** | Exécute une tâche jusqu'à son terme (succès) puis s'arrête | Migration de schéma SQL, calcul de rapport ponctuel |
 | **CronJob** | Planifie des Jobs selon une expression temporelle cron | Sauvegarde nocturne `0 2 * * *`, nettoyage de logs |
+
+
+### 5. DaemonSet, Job & CronJob (Suite)
 
 ```yaml
 apiVersion: batch/v1
@@ -162,4 +168,24 @@ spec:
     tier: api
 ```
 
-*(Réponse : Le sélecteur du Service exige `tier: api`, alors que les Pods ont `tier: core`. Les labels doivent correspondre exactement !).*
+### Mini-Défi : Le « Piège du Sélecteur »
+
+**Code Review** : Pourquoi le Service ci-dessous ne reçoit aucun trafic bien que les 3 Pods du Deployment soient `Running` ?
+
+```yaml
+# Deployment
+spec:
+  template:
+    metadata:
+      labels:
+        app: backend-api
+        tier: core
+---
+# Service
+spec:
+  selector:
+    app: backend-api
+    tier: api
+```
+
+(Réponse : Le sélecteur du Service exige `tier: api`, alors que les Pods ont `tier: core`. Les labels doivent correspondre exactement !).

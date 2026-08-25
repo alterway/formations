@@ -59,4 +59,14 @@ Le projet est piloté par des **Special Interest Groups (SIGs)** autonomes :
 3. **Cilium** ?
 4. **OpenTelemetry** ?
 
-*(Réponse : Kubernetes, ArgoCD et Cilium sont **Graduated** ! OpenTelemetry est **Incubating** en voie rapide vers la graduation).*
+
+### Mini-Défi : Décodez le Paysage CNCF (Réponses)
+
+**Question flash** : Dans quel statut CNCF se situent ces projets incontournables ?
+
+1. **Kubernetes** ?
+2. **ArgoCD** ?
+3. **Cilium** ?
+4. **OpenTelemetry** ?
+
+(Réponse : Kubernetes, ArgoCD et Cilium sont **Graduated** ! OpenTelemetry est **Incubating** en voie rapide vers la graduation). 
