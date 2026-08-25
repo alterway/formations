@@ -18,17 +18,22 @@
 
 1. **Maîtriser la génération impérative** :
    `kubectl run ... --dry-run=client -o yaml` (interdiction d'écrire du YAML de zéro !).
+
 2. **Configurer son environnement dès la 1ère minute** :
-   ```bash
+   ```
    alias k=kubectl
    export do="--dry-run=client -o yaml"
    export now="--force --grace-period=0"
    ```
+
 3. **Optimiser sa configuration `.vimrc`** :
    ```vim
    set tabstop=2 shiftwidth=2 expandtab autoindent number
    ```
+
 4. **Utiliser les signets et la recherche doc** :
    Aller directement sur les pages d'exemples de la documentation officielle.
 5. **S'entraîner sur Killer.sh** :
    Deux sessions de simulation d'examen gratuites sont incluses avec l'inscription à l'examen.
+
+ 
