@@ -2,7 +2,7 @@
 
 ### Qu'est-ce que le GitOps ?
 
-```
+```{.center}
           APPROCHE CI CLASSIQUE                     APPROCHE GITOPS (ArgoCD)
   [ Runner CI / GitHub Actions ]              [ Git Repository (Source of Truth) ]
                 │ (Push)                                       │
@@ -44,13 +44,13 @@ spec:
 
 ### 2. Le Tableau de Bord & les Statuts ArgoCD
 
-```
-    SYNC STATUS                              HEALTH STATUS
-  ┌───────────────┐                        ┌───────────────┐
-  │ Synced        │ (Cluster == Git)       │ Healthy       │ (Tous les pods sont Ready)
-  │ OutOfSync     │ (Git a changé)         │ Progressing   │ (Rolling update en cours)
-  │ Unknown       │ (Erreur de parsing)    │ Degraded      │ (CrashLoopBackOff / Erreur)
-  └───────────────┘                        └───────────────┘
+```{.center}
+  SYNC STATUS                              HEALTH STATUS
+┌───────────────┐                        ┌───────────────┐
+│ Synced        │ (Cluster == Git)       │ Healthy       │ (Tous les pods sont Ready)
+│ OutOfSync     │ (Git a changé)         │ Progressing   │ (Rolling update en cours)
+│ Unknown       │ (Erreur de parsing)    │ Degraded      │ (CrashLoopBackOff / Erreur)
+└───────────────┘                        └───────────────┘
 ```
 
 - **Drift Correction (Self-Healing)** : Si un développeur supprime un Pod ou modifie un Service avec `kubectl edit` en production, ArgoCD détecte l'écart en quelques secondes et rétablit immédiatement l'état déclaré dans Git !

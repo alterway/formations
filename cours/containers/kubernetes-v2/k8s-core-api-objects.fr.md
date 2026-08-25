@@ -2,23 +2,23 @@
 
 ### La Hiérarchie des Objets Kubernetes
 
-```
-                     ┌─────────────────────────────────────────────────────────────┐
-                     │                      NAMESPACE                              │
-                     │                                                             │
-                     │   ┌─────────────────────────────────────────────────────┐   │
-                     │   │                   DEPLOYMENT                        │   │
-                     │   │    (Gère les Rolling Updates & l'historique)        │   │
-                     │   │                        │                            │   │
-                     │   │                        ▼                            │   │
-                     │   │                   REPLICASET                        │   │
-                     │   │        (Maintient le nombre exact de Pods)          │   │
-                     │   │                        │                            │   │
-                     │   │                        ▼                            │   │
-                     │   │                      PODS                           │   │
-                     │   │         [ App Container | Native Sidecar ]          │   │
-                     │   └─────────────────────────────────────────────────────┘   │
-                     └─────────────────────────────────────────────────────────────┘
+```{.center}
+┌─────────────────────────────────────────────────────────────┐
+│                      NAMESPACE                              │
+│                                                             │
+│   ┌─────────────────────────────────────────────────────┐   │
+│   │                   DEPLOYMENT                        │   │
+│   │    (Gère les Rolling Updates & l'historique)        │   │
+│   │                        │                            │   │
+│   │                        ▼                            │   │
+│   │                   REPLICASET                        │   │
+│   │        (Maintient le nombre exact de Pods)          │   │
+│   │                        │                            │   │
+│   │                        ▼                            │   │
+│   │                      PODS                           │   │
+│   │         [ App Container | Native Sidecar ]          │   │
+│   └─────────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────────┘
 ```
 
 ### 1. Le Pod : L'Atome Indivisible
@@ -54,7 +54,7 @@ spec:
 
 ### 2. Labels vs Annotations : Ne Les Confondez Plus !
 
-```
+```{.center}
               LABELS                                       ANNOTATIONS
   Utilisés par Kubernetes pour sélectionner              Utilisés par des outils tiers
         (Sélecteurs, Services, RBAC)                     (Monitoring, CI/CD, Git commit)
@@ -71,7 +71,7 @@ spec:
 
 Le Deployment orchestre des **ReplicaSets** pour garantir des mises à jour sans interruption :
 
-```
+```{.center}
 [ Deployment v1 ] ──► [ ReplicaSet v1 (3 Pods) ]  ◄── Traffic 100%
          │
          │         
@@ -108,7 +108,7 @@ kubectl rollout undo deployment/web-app
 
 Quand vos applications ne sont pas jetables (bases de données, Kafka, ElasticSearch) :
 
-```
+```{.center}
 [ StatefulSet: redis ]
    |
    ├── redis-0  ──► Lié au PVC data-redis-0 (Disque SSD 1)

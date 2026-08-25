@@ -57,7 +57,7 @@ spec:
 
 Fini les certificats SSL expirés un dimanche soir à 23h !
 
-```
+```{.center}
 [ Ingress avec annotation ] ──► [ cert-manager ] ──► [ Let's Encrypt API ]
                                      │ (Challenge HTTP-01 / DNS-01)
                                      ▼
@@ -68,7 +68,7 @@ Fini les certificats SSL expirés un dimanche soir à 23h !
 
 La **Gateway API** est le successeur officiel de l'Ingress standard, conçu pour les architectures modernes et la séparation des responsabilités :
 
-```
+```{.center}
  ┌─────────────────────────────────────────────────────────────┐
  │ ÉQUIPE INFRA / CLOUD (Cluster Admin)                        │
  │  ► GatewayClass : Définit le fournisseur (Envoy, Cilium...) │

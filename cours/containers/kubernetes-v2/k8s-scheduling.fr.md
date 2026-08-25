@@ -2,7 +2,7 @@
 
 ### L'Objectif : Maîtriser le Placement des Pods
 
-```
+```{.center}
        ATTIRER des Pods                            REPOUSSER des Pods
   (Affinité & Sélecteurs de Nœuds)              (Taints & Tolerations)
                │                                           │

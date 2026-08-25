@@ -2,17 +2,17 @@
 
 ### Les 3 Dimensions de l'Autoscaling
 
-```
-    ┌─────────────────────────────────────────────────────────────┐
-    │ 1. HPA (Horizontal Pod Autoscaler) : Varie le NOMBRE de Pods│
-    │    [ Pod ] ──► [ Pod ] [ Pod ] [ Pod ] [ Pod ]              │
-    ├─────────────────────────────────────────────────────────────┤
-    │ 2. VPA (Vertical Pod Autoscaler) : Varie la TAILLE du Pod   │
-    │    [ Petit Pod (1 CPU) ] ──► [ GROS Pod (4 CPU) ]           │
-    ├─────────────────────────────────────────────────────────────┤
-    │ 3. Cluster Autoscaler / Karpenter : Varie le NOMBRE de NŒUDS│
-    │    [ Node 1 ] ──► [ Node 1 ] [ Node 2 ] [ Node 3 ]          │
-    └─────────────────────────────────────────────────────────────┘
+```{.center}
+┌─────────────────────────────────────────────────────────────┐
+│ 1. HPA (Horizontal Pod Autoscaler) : Varie le NOMBRE de Pods│
+│    [ Pod ] ──► [ Pod ] [ Pod ] [ Pod ] [ Pod ]              │
+├─────────────────────────────────────────────────────────────┤
+│ 2. VPA (Vertical Pod Autoscaler) : Varie la TAILLE du Pod   │
+│    [ Petit Pod (1 CPU) ] ──► [ GROS Pod (4 CPU) ]           │
+├─────────────────────────────────────────────────────────────┤
+│ 3. Cluster Autoscaler / Karpenter : Varie le NOMBRE de NŒUDS│
+│    [ Node 1 ] ──► [ Node 1 ] [ Node 2 ] [ Node 3 ]          │
+└─────────────────────────────────────────────────────────────┘
 ```
 
 ### 1. Horizontal Pod Autoscaler (HPA v2)
@@ -44,13 +44,13 @@ spec:
       target:
         type: AverageValue
         averageValue: 400Mi
-```
+```{.center}
 
 ### 2. KEDA : Autoscaling Piloté par les Événements
 
 Le CPU/RAM ne suffit plus : comment réagir AVANT que le CPU ne sature ?
 
-```
+```{.center}
 [ File RabbitMQ / Kafka ] ──► [ KEDA Controller ] ──► [ HPA K8s ] ──► [ Scale Pods ]
   (10 000 messages en attente)
 ```

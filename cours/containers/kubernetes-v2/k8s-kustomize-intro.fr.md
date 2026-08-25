@@ -2,7 +2,7 @@
 
 ### Le Concept : Personnaliser Sans Moteur de Templates
 
-```
+```{.center}
                   [ BASE (Manifests Communs) ]
                   (Deployment, Service, Config)
                                 │
@@ -67,7 +67,9 @@ configMapGenerator:
       - config.properties
 ```
 
-- **Fonctionnalité magique** : Kustomize calcule un hash SHA du contenu du fichier (ex: `app-config-7b2m8f4k9g`).
+- **Fonctionnalité magique** : Kustomize calcule un hash SHA du contenu du fichier (ex: 
+`app-config-7b2m8f4k9g`).
+
 - Lorsque vous modifiez `config.properties`, le nom du ConfigMap change, ce qui force Kubernetes à déclencher **automatiquement un Rolling Update propre** de tous les Pods sans manipulation manuelle !
 
 ### Helm vs Kustomize : Le Tableau Décisionnel

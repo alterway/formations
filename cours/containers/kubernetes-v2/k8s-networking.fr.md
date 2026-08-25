@@ -2,7 +2,7 @@
 
 ### Le Problème : Les Adresses IP des Pods Sont Mortelles !
 
-```
+```{.center}
  [ Pod Web 1 (10.244.1.42) ] ──► (Meurt) ──► [ Nouveau Pod (10.244.2.89) ]
                                                    ▲
                                                    │
@@ -20,30 +20,30 @@
 
 Chaque Service enregistré reçoit automatiquement un nom DNS FQDN :
 
-```
-             ┌──────────────────────────────────────────────────┐
-             │       mon-service.mon-namespace.svc.cluster.local│
-             └───────────────┬──────────────────────────────────┘
-                                       │
-                 ┌─────────────────────┼───────────────────────┐
-                 ▼                     ▼                       ▼
-        [ Mêmes Namespace ]    [ Autre Namespace ]      [ FQDN Complet ]
-        "curl mon-service"    "curl mon-service.prod".  "curl mon-service.prod.svc..."
+```{.center}
+     ┌──────────────────────────────────────────────────┐
+     │       mon-service.mon-namespace.svc.cluster.local│
+     └───────────────┬──────────────────────────────────┘
+                               │
+         ┌─────────────────────┼───────────────────────┐
+         ▼                     ▼                       ▼
+[ Mêmes Namespace ]    [ Autre Namespace ]      [ FQDN Complet ]
+"curl mon-service"    "curl mon-service.prod".  "curl mon-service.prod.svc..."
 ```
 
 ### 2. Les 4 Types de Services Kubernetes
 
-```
-                      [ LoadBalancer ]          (Cloud Public : AWS NLB / GCP LB)
-                             │
-                             ▼
-                        [ NodePort ]            (Port 30000-32767 sur chaque Nœud)
-                             │
-                             ▼
-                       [ ClusterIP ]            (IP Virtuelle interne au Cluster)
-                             │
-                             ▼
-             [ Pod 1 ]   [ Pod 2 ]   [ Pod 3 ]
+```{.center}
+         [ LoadBalancer ]          (Cloud Public : AWS NLB / GCP LB)
+                │
+                ▼
+           [ NodePort ]            (Port 30000-32767 sur chaque Nœud)
+                │
+                ▼
+          [ ClusterIP ]            (IP Virtuelle interne au Cluster)
+                │
+                ▼
+[ Pod 1 ]   [ Pod 2 ]   [ Pod 3 ]
 ```
 
 ### Typologie Détaillée des Services
@@ -60,7 +60,7 @@ Chaque Service enregistré reçoit automatiquement un nom DNS FQDN :
 
 Comment le Service sait-il où envoyer le trafic ?
 
-```
+```{.center}
 [ Service (port: 80) ] ──► [ EndpointSlice ] ──► [ Pod 1: 10.244.1.15:8080 ]
    (Sélecteur: app=web)                             [ Pod 2: 10.244.2.20:8080 ]
 ```

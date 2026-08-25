@@ -2,17 +2,17 @@
 
 ### Les 3 Piliers de l'Observabilité Cloud Native
 
-```
-                      ┌───────────────────────────────────────────────┐
-                      │               OBSERVABILITÉ                   │
-                      │                                               │
-                      │   [ MÉTRIQUES ]   [ LOGS ]     [ TRACES ]     │
-                      │    Prometheus      Loki      OpenTelemetry    │
-                      │   (Tendances)   (Détails)     (Parcours)      │
-                      └───────┬─────────────┬──────────────┬──────────┘
-                              └─────────────┼──────────────┘
-                                            ▼
-                                  [ GRAFANA DASHBOARDS ]
+```{.center}
+┌───────────────────────────────────────────────┐
+│               OBSERVABILITÉ                   │
+│                                               │
+│   [ MÉTRIQUES ]   [ LOGS ]     [ TRACES ]     │
+│    Prometheus      Loki      OpenTelemetry    │
+│   (Tendances)   (Détails)     (Parcours)      │
+└───────┬─────────────┬──────────────┬──────────┘
+        └─────────────┼──────────────┘
+                      ▼
+            [ GRAFANA DASHBOARDS ]
 ```
 
 ![](images/kubernetes/dashboard-0.png){height="220px"}
@@ -21,7 +21,7 @@
 
 Prometheus collecte les métriques par **Pull (Scraping HTTP)** à intervalles réguliers :
 
-```
+```{.center}
 [ Pod Applicatif ] ──► Expose /metrics (format Prometheus)
                              ▲
                              │ (Scrape toutes les 15s)
@@ -61,7 +61,7 @@ spec:
 
 Comment identifier quel microservice ralentit une transaction utilisateur sur 15 étapes ?
 
-```
+```{.center}
 [ Client ] ──► [ Frontend ] (20ms)
                    │
                    ▼

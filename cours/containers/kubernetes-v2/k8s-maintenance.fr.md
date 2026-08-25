@@ -2,7 +2,7 @@
 
 ### La Procédure de Maintenance d'un Nœud Sans Interruption
 
-```
+```{.center}
 [ Nœud Actif avec Pods ] ──► [ 1. CORDON ] ──► Aucun nouveau pod n'est admis
                                    │
                                    ▼
@@ -51,7 +51,7 @@ spec:
 
 ### 3. Stratégie de Mise à Niveau du Cluster (`kubeadm`)
 
-```
+```bash
    1. Mettre à niveau le Control Plane Master 1
       $ sudo apt update && sudo apt install -y kubeadm=1.31.0-1.1
       $ sudo kubeadm upgrade plan

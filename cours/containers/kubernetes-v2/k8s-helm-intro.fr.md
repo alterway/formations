@@ -2,7 +2,7 @@
 
 ### Pourquoi Helm ? Le Package Manager Cloud Native
 
-```
+```{.center}
  [ 20 Fichiers YAML Complexes ]  ──► Packagés dans un  ──► [ 1 Helm Chart ]
  (Deployments, Services, RBAC,                             (my-app:1.2.0)
   CRDs, Ingress, Secrets...)                                     │

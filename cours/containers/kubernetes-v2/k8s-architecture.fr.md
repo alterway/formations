@@ -74,7 +74,7 @@ La promesse fondamentale de Kubernetes : **Déclaratif vs Réel**.
 
 Comment un Pod trouve-t-il son Node d'hébergement ?
 
-```
+```{.center}
 [ Nouveau Pod non assigné (nodeName="") ]
                │
                ▼

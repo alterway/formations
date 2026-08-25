@@ -4,17 +4,17 @@
 
 ![](images/kubernetes/kubernetes.png){height="110px"}
 
-```
-                      ┌─────────────────────────────────────────────────────────────┐
-                      │                 VOTRE NOUVEAU SOCLE OPS / SRE               │
-                      │                                                             │
-                      │  ✔ Maîtrise de l'architecture interne & du Control Plane    │
-                      │  ✔ Déploiements résilients & Zéro Downtime (Probes, PDB)    │
-                      │  ✔ Réseau L4/L7, Ingress, Gateway API & Découverte DNS      │
-                      │  ✔ Sécurité Zero-Trust (PSA Restricted, RBAC, NetPol)       │
-                      │  ✔ Observabilité complète (Prometheus, Grafana Loki, OTel)  │
-                      │  ✔ Industrialisation GitOps avec ArgoCD & Kustomize         │
-                      └─────────────────────────────────────────────────────────────┘
+```{.center}
+┌─────────────────────────────────────────────────────────────┐
+│                 VOTRE NOUVEAU SOCLE OPS / SRE               │
+│                                                             │
+│  ✔ Maîtrise de l'architecture interne & du Control Plane    │
+│  ✔ Déploiements résilients & Zéro Downtime (Probes, PDB)    │
+│  ✔ Réseau L4/L7, Ingress, Gateway API & Découverte DNS      │
+│  ✔ Sécurité Zero-Trust (PSA Restricted, RBAC, NetPol)       │
+│  ✔ Observabilité complète (Prometheus, Grafana Loki, OTel)  │
+│  ✔ Industrialisation GitOps avec ArgoCD & Kustomize         │
+└─────────────────────────────────────────────────────────────┘
 ```
 
 ### La Checklist Avant Toute Mise en Production

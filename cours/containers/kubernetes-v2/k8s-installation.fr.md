@@ -29,7 +29,7 @@ EOF
 
 `kubeadm` est l'outil officiel standard pour initialiser un cluster de production :
 
-```
+```{.center}
 [ Étape 1 : Control Plane ]
   $ sudo kubeadm init --pod-network-cidr=10.244.0.0/16
          │
@@ -44,7 +44,7 @@ EOF
 
 ### Modèle de Responsabilité Partagée (Managed Cloud)
 
-```
+```{.center}
 ┌─────────────────────────────────────────────────────────────┐
 │ Fournisseur Cloud (GCP/AWS/Azure/Scaleway/OVH...)           │
 │  ► etcd, kube-apiserver, scheduler, controller-manager      │

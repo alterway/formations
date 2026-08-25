@@ -2,7 +2,7 @@
 
 ### Éphémère vs Persistant : L'Architecture du Stockage
 
-```
+```{.center}
            ÉPHÉMÈRE                                       PERSISTANT
   (Meurt avec le Pod)                         (Survit à la destruction du Pod)
            │                                                  │
@@ -25,7 +25,7 @@
 
 ### Le Trio Gagnant : StorageClass, PV & PVC
 
-```
+```{.center}
   1. L'Administrateur déclare le fournisseur
      [ StorageClass: "fast-ssd" ] (AWS gp3, GCP pd-ssd, Ceph)
                   │

@@ -50,7 +50,7 @@ Kubernetes classe automatiquement chaque Pod pour savoir qui sacrifier en premie
 
 ### Gouvernance : LimitRange vs ResourceQuota
 
-```
+```{.center}
          LIMITRANGE                             RESOURCEQUOTA
   (S'applique à CHAQUE Pod)             (S'applique à TOUT le Namespace)
              │                                         │

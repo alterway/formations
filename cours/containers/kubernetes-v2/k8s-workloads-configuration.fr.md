@@ -2,13 +2,13 @@
 
 ### Le Principe 12-Factor : Découpler Code & Configuration
 
-```
-       [ Image de Conteneur Immuable ]     +       [ ConfigMap / Secret ]
-              (my-app:1.0)                        (dev / staging / prod)
-                    │                                       │
-                    └──────────────────────┬────────────────┘
-                                           ▼
-                              [ Pod Exécutable ]
+```{.center}
+[ Image de Conteneur Immuable ]     +       [ ConfigMap / Secret ]
+       (my-app:1.0)                        (dev / staging / prod)
+             │                                       │
+             └──────────────────────┬────────────────┘
+                                    ▼
+                       [ Pod Exécutable ]
 ```
 
 - Une même image binaire doit pouvoir tourner en Dev, Pré-prod et Prod sans être recompilée.
@@ -84,7 +84,7 @@ Dans une démarche GitOps, **interdiction de commiter des Secrets K8s en clair d
 1. **Sealed Secrets (Bitnami)** : Chiffrement asymétrique. Seul le cluster K8s possède la clé privée pour déchiffrer le manifeste commit dans Git.
 2. **External Secrets Operator (ESO)** : Synchronise les secrets directement depuis HashiCorp Vault, AWS Secrets Manager, GCP Secret Manager ou Azure Key Vault.
 
-```
+```{.center}
  [ AWS Secrets Mgr / Vault ] ──► [ External Secrets Operator ] ──► [ Secret K8s local ]
 ```
 

@@ -2,7 +2,7 @@
 
 ### L'Objectif : Déployer en Pleine Journée Sans Peur !
 
-```
+```{.center}
    STRATÉGIE RECREATE                            STRATÉGIE ROLLING UPDATE
 [ Ancien Pod ] ──► (Détruit)                    [ V1 ] [ V1 ] ──► [ V1 ] [ V2 ]
          │ (Downtime !)                                            │

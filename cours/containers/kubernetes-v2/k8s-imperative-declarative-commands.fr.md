@@ -2,7 +2,7 @@
 
 ### Le Dilemme : Impératif vs Déclaratif
 
-```
+```{.center}
    APPROCHE IMPÉRATIVE                          APPROCHE DÉCLARATIVE
 "Fais ceci, puis cela maintenant !"           "Voici l'état final que je veux."
         (Exécution directe)                         (GitOps / Versionné)
@@ -45,7 +45,7 @@ kubectl create configmap app-cfg --from-literal=DB_HOST=postgres --dry-run=clien
 
 Quand vous faites `kubectl apply -f manifest.yaml`, Kubernetes compare 3 versions :
 
-```
+```{.center}
     [ Fichier Local (Nouveau souhait) ]
                    │
                    ▼

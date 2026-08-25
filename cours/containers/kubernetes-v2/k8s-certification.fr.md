@@ -2,7 +2,7 @@
 
 ### Le Panorama des Certifications Officielles
 
-```
+```{.center}
       KCNA (Fondamentaux)          CKAD (Développeur)           CKA (Administrateur)          CKS (Sécurité)
    QCM Théorique Cloud Native    100% Pratique Hands-on       100% Pratique Hands-on      100% Pratique Hands-on
    Architecture & CNCF           Pods, Deploy, Services,      Control Plane, Upgrades,    PSA, Falco, Trivy,

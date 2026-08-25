@@ -19,18 +19,18 @@ complete -o default -F __start_kubectl k
 
 Un `kubeconfig` regroupe 3 entités distinctes :
 
-```
-      CLUSTERS                    USERS
- (URL API + CA TLS)         (Certificats / Tokens)
-         │                            │
-         └─────────────┬──────────────┘
-                       ▼
-                   CONTEXTS
-      (Association Cluster + User + Namespace)
-                       │
-                       ▼
-                CURRENT-CONTEXT
-            (Le contexte actif ciblé)
+```{.center}
+     CLUSTERS                    USERS
+(URL API + CA TLS)         (Certificats / Tokens)
+        │                            │
+        └─────────────┬──────────────┘
+                      ▼
+                  CONTEXTS
+     (Association Cluster + User + Namespace)
+                      │
+                      ▼
+               CURRENT-CONTEXT
+           (Le contexte actif ciblé)
 ```
 
 ![](images/kubeconfig-structure.png){height="260px"}

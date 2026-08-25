@@ -2,15 +2,15 @@
 
 ### L'Arsenal Opérationnel de l'Ingénieur Platform
 
-```
-                      ┌─────────────────────────────────────────────────────────────┐
-                      │                 OPÉRATIONS EN DIRECT                        │
-                      │                                                             │
-                      │  ► Tunneling Sécurisé  : kubectl port-forward               │
-                      │  ► Transfert Fichiers  : kubectl cp                         │
-                      │  ► Automatisation CI/CD: kubectl wait --for=condition=...   │
-                      │  ► Débogage Live       : kubectl exec / kubectl attach      │
-                      └─────────────────────────────────────────────────────────────┘
+```{.center}
+┌─────────────────────────────────────────────────────────────┐
+│                 OPÉRATIONS EN DIRECT                        │
+│                                                             │
+│  ► Tunneling Sécurisé  : kubectl port-forward               │
+│  ► Transfert Fichiers  : kubectl cp                         │
+│  ► Automatisation CI/CD: kubectl wait --for=condition=...   │
+│  ► Débogage Live       : kubectl exec / kubectl attach      │
+└─────────────────────────────────────────────────────────────┘
 ```
 
 ### 1. Tunnel Sécurisé : `kubectl port-forward`

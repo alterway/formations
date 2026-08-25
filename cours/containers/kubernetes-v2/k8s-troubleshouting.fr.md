@@ -42,6 +42,7 @@ kubectl debug -it mon-pod-distroless --image=nicolaka/netshoot --target=mon-app
 **Constat** : Un conteneur Java SpringBoot redémarre toutes les 2 minutes sans aucun message d'erreur dans les logs applicatifs.
 
 En tapant `kubectl describe pod java-app` :
+
 ```
 Last State:     Terminated
   Reason:       OOMKilled

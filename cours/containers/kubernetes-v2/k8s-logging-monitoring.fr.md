@@ -2,7 +2,7 @@
 
 ### Le Flux des Logs dans Kubernetes
 
-```
+```{.center}
  [ Pod Container ] ──► Écrit sur stdout / stderr
                              │
                              ▼ (Géré par le CRI : containerd)
