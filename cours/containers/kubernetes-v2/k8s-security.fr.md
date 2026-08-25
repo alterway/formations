@@ -3,18 +3,18 @@
 ### Le Modèle des 4C de la Sécurité Cloud Native
 
 ```
-            ┌───────────────────────────────────────────┐
-            │                  CLOUD                    │
-            │   ┌───────────────────────────────────┐   │
-            │   │              CLUSTER              │   │
-            │   │   ┌───────────────────────────┐   │   │
-            │   │   │         CONTAINER         │   │   │
-            │   │   │   ┌───────────────────┐   │   │   │
-            │   │   │   │       CODE        │   │   │   │
-            │   │   │   └───────────────────┘   │   │   │
-            │   │   └───────────────────────────┘   │   │
-            │   └───────────────────────────────────┘   │
-            └───────────────────────────────────────────┘
+                                ┌───────────────────────────────────────────┐
+                                │                  CLOUD                    │
+                                │   ┌───────────────────────────────────┐   │
+                                │   │              CLUSTER              │   │
+                                │   │   ┌───────────────────────────┐   │   │
+                                │   │   │         CONTAINER         │   │   │
+                                │   │   │   ┌───────────────────┐   │   │   │
+                                │   │   │   │       CODE        │   │   │   │
+                                │   │   │   └───────────────────┘   │   │   │
+                                │   │   └───────────────────────────┘   │   │
+                                │   └───────────────────────────────────┘   │
+                                └───────────────────────────────────────────┘
 ```
 
 ![](images/kubernetes/Secure-Your-Kubernetes-Cluster-1024x586.png){height="220px"}
@@ -140,7 +140,11 @@ spec:
 
 **Question flash** : Quelle commande `kubectl` permet de vérifier immédiatement si l'utilisateur `alice` a le droit de supprimer des secrets dans le namespace `production` ?
 
+
+### Mini-Défi : L'Erreur d'Audit de Sécurité
+
+**Question flash** : Quelle commande `kubectl` permet de vérifier immédiatement si l'utilisateur `alice` a le droit de supprimer des secrets dans le namespace `production` ?
+
 ```bash
 # La réponse instantanée :
 kubectl auth can-i delete secrets -n production --as alice
-```

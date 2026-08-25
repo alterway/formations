@@ -3,14 +3,14 @@
 ### L'Arsenal Opérationnel de l'Ingénieur Platform
 
 ```
-  ┌─────────────────────────────────────────────────────────────┐
-  │                 OPÉRATIONS EN DIRECT                        │
-  │                                                             │
-  │  ► Tunneling Sécurisé  : kubectl port-forward               │
-  │  ► Transfert Fichiers  : kubectl cp                         │
-  │  ► Automatisation CI/CD: kubectl wait --for=condition=...   │
-  │  ► Débogage Live       : kubectl exec / kubectl attach      │
-  └─────────────────────────────────────────────────────────────┘
+                      ┌─────────────────────────────────────────────────────────────┐
+                      │                 OPÉRATIONS EN DIRECT                        │
+                      │                                                             │
+                      │  ► Tunneling Sécurisé  : kubectl port-forward               │
+                      │  ► Transfert Fichiers  : kubectl cp                         │
+                      │  ► Automatisation CI/CD: kubectl wait --for=condition=...   │
+                      │  ► Débogage Live       : kubectl exec / kubectl attach      │
+                      └─────────────────────────────────────────────────────────────┘
 ```
 
 ### 1. Tunnel Sécurisé : `kubectl port-forward`
@@ -56,13 +56,19 @@ kubectl cp default/reporting-pod:/app/report.pdf ./report.pdf -c app-container
 
 **Objectif** : Vous écrivez un script de déploiement qui applique un manifest, attend que l'application soit prête, et effectue un rollback automatique immédiat si le déploiement échoue au bout de 90 secondes.
 
+
+
+### Mini-Défi : Le Pipeline CI/CD Résilient
+
+**Objectif** : Vous écrivez un script de déploiement qui applique un manifest, attend que l'application soit prête, et effectue un rollback automatique immédiat si le déploiement échoue au bout de 90 secondes.
+
 ```bash
 # Le script SRE parfait :
 kubectl apply -f app-deployment.yaml
 if ! kubectl rollout status deployment/web-app --timeout=90s; then
-    echo "⚠️ Déploiement échoué ! Rollback immédiat..."
+    echo "Déploiement échoué ! Rollback immédiat..."
     kubectl rollout undo deployment/web-app
     exit 1
 fi
-echo "✅ Déploiement réussi avec succès !"
+echo "Déploiement réussi avec succès !"
 ```

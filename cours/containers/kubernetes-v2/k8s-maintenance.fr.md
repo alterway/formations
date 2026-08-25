@@ -90,4 +90,12 @@ velero restore create --from-backup prod-backup-2026-08-25
 
 Quel est le problème et comment le résoudre proprement ?
 
-*(Réponse : L'application a un PDB exigeant `minAvailable: 2`, mais il n'y a plus assez de place sur les autres nœuds du cluster pour démarrer le second pod. Solution : Ajouter un nouveau worker node au cluster ou augmenter temporairement les ressources disponibles pour débloquer l'éviction).*
+
+### Mini-Défi : Le Drain Bloqué
+
+**Incident SRE** : Vous lancez `kubectl drain worker-02`, mais la commande reste bloquée indéfiniment avec le message :
+`Cannot evict pod: PodDisruptionBudget "api-pdb" is currently violated`.
+
+Quel est le problème et comment le résoudre proprement ?
+
+(Réponse : L'application a un PDB exigeant `minAvailable: 2`, mais il n'y a plus assez de place sur les autres nœuds du cluster pour démarrer le second pod. Solution : Ajouter un nouveau worker node au cluster ou augmenter temporairement les ressources disponibles pour débloquer l'éviction).

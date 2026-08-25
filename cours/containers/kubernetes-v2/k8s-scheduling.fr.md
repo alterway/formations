@@ -85,4 +85,12 @@ spec:
 
 Que se passe-t-il pour ces 10 pods ?
 
-*(Réponse : S'ils n'ont pas de `tolerations` explicite pour `maintenance=true`, ils sont **immédiatement tués et expulsés** (NoExecute). Le Deployment Controller recréera de nouveaux pods sur les autres nœuds sains).*
+
+### Mini-Défi : Le Pod Éjecté
+
+**Question flash** : Vous exécutez la commande suivante sur un worker node hébergeant 10 pods de production :
+`kubectl taint node worker-1 maintenance=true:NoExecute`
+
+Que se passe-t-il pour ces 10 pods ?
+
+(Réponse : S'ils n'ont pas de `tolerations` explicite pour `maintenance=true`, ils sont **immédiatement tués et expulsés** (NoExecute). Le Deployment Controller recréera de nouveaux pods sur les autres nœuds sains).

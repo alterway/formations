@@ -70,4 +70,10 @@ Le pod passe immédiatement en `Completed` puis en `CrashLoopBackOff`.
 
 Pourquoi ce conteneur refuse-t-il de rester en vie ?
 
-*(Réponse : Le processus principal par défaut d'une image Ubuntu est `/bin/bash`. Sans terminal interactif (`-it`) ni commande longue (`sleep infinity`), le shell termine son exécution immédiatement (PID 1 s'arrête avec code 0), ce qui éteint le Pod).*
+
+**Incident SRE** : Vous lancez un pod avec l'image `ubuntu:latest` sans argument particulier : `kubectl run test --image=ubuntu`.
+Le pod passe immédiatement en `Completed` puis en `CrashLoopBackOff`.
+
+Pourquoi ce conteneur refuse-t-il de rester en vie ?
+
+(Réponse : Le processus principal par défaut d'une image Ubuntu est `/bin/bash`. Sans terminal interactif (`-it`) ni commande longue (`sleep infinity`), le shell termine son exécution immédiatement (PID 1 s'arrête avec code 0), ce qui éteint le Pod).

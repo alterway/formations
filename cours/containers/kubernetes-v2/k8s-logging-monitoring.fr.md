@@ -56,4 +56,12 @@ Quand vous tapez `kubectl logs mon-pod`, vous ne voyez que 2 lignes de démarrag
 
 Quelle option magique de `kubectl logs` permet de voir les derniers instants du conteneur décédé ?
 
-*(Réponse : `kubectl logs mon-pod --previous` ou `kubectl logs mon-pod -p`).*
+
+### Mini-Défi : Le Crash Mystère
+
+**Incident SRE** : Un Pod s'est crashé il y a 30 secondes et vient d'être recréé par son ReplicaSet. 
+Quand vous tapez `kubectl logs mon-pod`, vous ne voyez que 2 lignes de démarrage, les logs de l'erreur qui a causé la mort du pod ont disparu.
+
+Quelle option magique de `kubectl logs` permet de voir les derniers instants du conteneur décédé ?
+
+(Réponse : `kubectl logs mon-pod --previous` ou `kubectl logs mon-pod -p`).

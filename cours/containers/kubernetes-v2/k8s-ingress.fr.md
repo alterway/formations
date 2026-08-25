@@ -3,10 +3,10 @@
 ### Le Problème : 50 Microservices = 50 Load Balancers Payants ?
 
 ```
-          APPROCHE NAÏVE (L4)                      APPROCHE INGRESS / L7
- 50 Services type LoadBalancer          1 SEUL Load Balancer Cloud Public
-  = 50 IP publiques à payer              = 1 seule IP, routage L7 intelligent
-  = Facture Cloud x50 !                  = Répartition par nom de domaine & URL !
+          APPROCHE NAÏVE (L4)                           APPROCHE INGRESS / L7
+ 50 Services type LoadBalancer                 1 SEUL Load Balancer Cloud Public
+  = 50 IP publiques à payer                     = 1 seule IP, routage L7 intelligent
+  = Facture Cloud x50 !                         = Répartition par nom de domaine & URL !
 ```
 
 - **Ingress Controller** : Le proxy inverse (NGINX, Traefik, Envoy, HAProxy) qui écoute le trafic mondial.
@@ -81,6 +81,14 @@ La **Gateway API** est le successeur officiel de l'Ingress standard, conçu pour
 ```
 
 - **Avantages clés** : Séparation des rôles (RBAC granulaire), routage multi-namespaces, splitting de trafic natif (Canary / Blue-Green) sans annotations constructeur obscures !
+
+### Mini-Défi : Diagnostic d'une Erreur 502 / 503
+
+**Incident SRE** : Un utilisateur essaie de joindre `https://store.formation.com/api` et obtient une erreur `502 Bad Gateway` de la part d'Ingress Nginx.
+
+Quelle est la démarche méthodique d'investigation ?
+
+
 
 ### Mini-Défi : Diagnostic d'une Erreur 502 / 503
 

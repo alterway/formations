@@ -75,11 +75,19 @@ En tapant `kubectl get hpa`, la colonne `TARGETS` affiche obstinément : `<unkno
 
 Quelles sont les 2 causes directes de ce blocage ?
 
+
+### Mini-Défi : Le HPA Aveugle
+
+**Incident SRE** : Vous configurez un HPA sur un Deployment. 
+En tapant `kubectl get hpa`, la colonne `TARGETS` affiche obstinément : `<unknown>/70%`.
+
+Quelles sont les 2 causes directes de ce blocage ?
+
 ```bash
 # Diagnostic :
 kubectl describe hpa bookstore-api-hpa
 ```
 
-*(Réponses :*
-1. *Le Deployment n'a pas de `resources.requests.cpu` définie (le HPA ne sait pas sur quelle base calculer le pourcentage !).*
-2. *Le composant `metrics-server` n'est pas installé ou ne parvient pas à joindre les Kubelets).*
+(Réponses :
+1. Le Deployment n'a pas de `resources.requests.cpu` définie (le HPA ne sait pas sur quelle base calculer le pourcentage !).
+2. Le composant `metrics-server` n'est pas installé ou ne parvient pas à joindre les Kubelets).

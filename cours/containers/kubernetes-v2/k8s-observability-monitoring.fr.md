@@ -3,16 +3,16 @@
 ### Les 3 Piliers de l'Observabilité Cloud Native
 
 ```
-            ┌───────────────────────────────────────────────┐
-            │               OBSERVABILITÉ                   │
-            │                                               │
-            │   [ MÉTRIQUES ]   [ LOGS ]     [ TRACES ]     │
-            │    Prometheus      Loki      OpenTelemetry    │
-            │   (Tendances)   (Détails)     (Parcours)      │
-            └───────┬─────────────┬──────────────┬──────────┘
-                    └─────────────┼──────────────┘
-                                  ▼
-                        [ GRAFANA DASHBOARDS ]
+                      ┌───────────────────────────────────────────────┐
+                      │               OBSERVABILITÉ                   │
+                      │                                               │
+                      │   [ MÉTRIQUES ]   [ LOGS ]     [ TRACES ]     │
+                      │    Prometheus      Loki      OpenTelemetry    │
+                      │   (Tendances)   (Détails)     (Parcours)      │
+                      └───────┬─────────────┬──────────────┬──────────┘
+                              └─────────────┼──────────────┘
+                                            ▼
+                                  [ GRAFANA DASHBOARDS ]
 ```
 
 ![](images/kubernetes/dashboard-0.png){height="220px"}
@@ -25,10 +25,12 @@ Prometheus collecte les métriques par **Pull (Scraping HTTP)** à intervalles r
 [ Pod Applicatif ] ──► Expose /metrics (format Prometheus)
                              ▲
                              │ (Scrape toutes les 15s)
-[ Prometheus Operator ] ─────┴──► Enregistre dans la base TSDB
                              │
+[ Prometheus Operator ] ─────┴──────► Enregistre dans la base TSDB
+                             │
+                             │ 
                              ▼
-[ Grafana Dashboard ] ◄─────── (Requêtes PromQL)
+[ Grafana Dashboard ]   ◄─────────── (Requêtes PromQL)
 ```
 
 - **`kube-state-metrics`** : Génère des métriques sur l'état des objets K8s (nombre de pods en Pending, réplicas désirés vs réels).
@@ -86,9 +88,15 @@ k9s
 
 **Question SRE** : Vous devez écrire une règle d'alerte pour être réveillé uniquement si le taux d'erreur 5xx de votre API dépasse 5% pendant 5 minutes.
 
+
+### Mini-Défi : Alerte PromQL
+
+**Question SRE** : Vous devez écrire une règle d'alerte pour être réveillé uniquement si le taux d'erreur 5xx de votre API dépasse 5% pendant 5 minutes.
+
 ```promql
 # Requête PromQL experte :
 sum(rate(http_requests_total{status=~"5.."}[5m])) 
 / 
 sum(rate(http_requests_total[5m])) * 100 > 5
 ```
+

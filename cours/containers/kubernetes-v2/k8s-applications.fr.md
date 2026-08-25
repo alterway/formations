@@ -3,11 +3,11 @@
 ### L'Objectif : Déployer en Pleine Journée Sans Peur !
 
 ```
-   STRATÉGIE RECREATE                       STRATÉGIE ROLLING UPDATE
-[ Ancien Pod ] ──► (Détruit)               [ V1 ] [ V1 ] ──► [ V1 ] [ V2 ]
-         │ (Downtime !)                                       │
-         ▼                                                    ▼
-[ Nouveau Pod ] ──► (Démarré)                              [ V2 ] [ V2 ] (0 Downtime)
+   STRATÉGIE RECREATE                            STRATÉGIE ROLLING UPDATE
+[ Ancien Pod ] ──► (Détruit)                    [ V1 ] [ V1 ] ──► [ V1 ] [ V2 ]
+         │ (Downtime !)                                            │
+         ▼                                                         ▼
+[ Nouveau Pod ] ──► (Démarré)                                   [ V2 ] [ V2 ] (0 Downtime)
 ```
 
 ![](images/kubernetes/rolling-update.gif){height="200px"}
@@ -96,4 +96,18 @@ livenessProbe:
 
 Pourquoi cette configuration est-elle une bombe à retardement en production ?
 
-*(Réponse : Si la base de données ralentit ou sature, la liveness probe échoue en timeout. Kubernetes croit à tort que le Pod web est mort et le tue, provoquant une cascade de redémarrages catastrophique (thundering herd). La Liveness Probe doit être **locale et ultra-légère** !).*
+
+### Mini-Défi : L'Erreur de la Liveness Probe
+
+**Code Review** : Vous observez qu'en pic de charge, vos Pods se mettent à redémarrer en boucle de façon incontrôlable.
+
+En inspectant la config :
+```yaml
+livenessProbe:
+  httpGet:
+    path: /api/v1/check-database-and-heavy-query # <── Requête SQL complexe en BDD !
+```
+
+Pourquoi cette configuration est-elle une bombe à retardement en production ?
+
+(Réponse : Si la base de données ralentit ou sature, la liveness probe échoue en timeout. Kubernetes croit à tort que le Pod web est mort et le tue, provoquant une cascade de redémarrages catastrophique (thundering herd). La Liveness Probe doit être **locale et ultra-légère** !).

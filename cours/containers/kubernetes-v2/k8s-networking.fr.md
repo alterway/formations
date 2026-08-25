@@ -24,23 +24,23 @@ Chaque Service enregistré reçoit automatiquement un nom DNS FQDN :
              ┌──────────────────────────────────────────────────┐
              │       mon-service.mon-namespace.svc.cluster.local│
              └───────────────┬──────────────────────────────────┘
-                             │
-       ┌─────────────────────┼─────────────────────┐
-       ▼                     ▼                     ▼
-[ Mêmes Namespace ]    [ Autre Namespace ]   [ FQDN Complet ]
-"curl mon-service"    "curl mon-service.prod" "curl mon-service.prod.svc..."
+                                       │
+                 ┌─────────────────────┼───────────────────────┐
+                 ▼                     ▼                       ▼
+        [ Mêmes Namespace ]    [ Autre Namespace ]      [ FQDN Complet ]
+        "curl mon-service"    "curl mon-service.prod".  "curl mon-service.prod.svc..."
 ```
 
 ### 2. Les 4 Types de Services Kubernetes
 
 ```
-                      [ LoadBalancer ] (Cloud Public : AWS NLB / GCP LB)
+                      [ LoadBalancer ]          (Cloud Public : AWS NLB / GCP LB)
                              │
                              ▼
-                        [ NodePort ] (Port 30000-32767 sur chaque Nœud)
+                        [ NodePort ]            (Port 30000-32767 sur chaque Nœud)
                              │
                              ▼
-                       [ ClusterIP ] (IP Virtuelle interne au Cluster)
+                       [ ClusterIP ]            (IP Virtuelle interne au Cluster)
                              │
                              ▼
              [ Pod 1 ]   [ Pod 2 ]   [ Pod 3 ]
@@ -101,6 +101,16 @@ Quand vous tapez `kubectl get endpoints auth-service`, la colonne `ENDPOINTS` af
 
 Quelles sont les 2 causes les plus probables ?
 
-*(Réponses :*
-1. *Le sélecteur de labels du Service ne correspond pas aux labels des Pods.*
-2. *Les Pods ne passent pas leurs Readiness Probes (Pods non `Ready`), donc Kubernetes les a retirés des Endpoints).*
+
+### Mini-Défi : Le Service Fantôme
+
+**Incident SRE** : Vous créez un Service `auth-service` pour exposer 3 Pods. 
+Lorsque vous faites `curl auth-service` depuis un autre Pod, la requête renvoie instantanément : `Connection refused`.
+
+Quand vous tapez `kubectl get endpoints auth-service`, la colonne `ENDPOINTS` affiche `<none>`.
+
+Quelles sont les 2 causes les plus probables ?
+
+(Réponses :
+1. Le sélecteur de labels du Service ne correspond pas aux labels des Pods.
+2. Les Pods ne passent pas leurs Readiness Probes (Pods non `Ready`), donc Kubernetes les a retirés des Endpoints).

@@ -231,15 +231,21 @@ section.titleslide h1 {
   box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.3); }
 
 .reveal code {
-  border-radius: 5px;
-  background: #b9b6b6; 
-  font-family: monospace; 
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-size: 0.78em;
+  background: #eaedf2;
+  color: #1e293b;
+  padding: 1px 6px;
+  border-radius: 4px;
+  border: 1px solid #cbd5e1;
   text-transform: none;
   tab-size: 2;
+  vertical-align: baseline;
 }
 
 .reveal pre code {
   display: block;
+  font-size: 1em;
   padding: 10px;
   margin: 10px;
   overflow: auto;
@@ -247,6 +253,8 @@ section.titleslide h1 {
   word-wrap: normal; 
   /*background: #b9b6b6;*/
   background: #9fcbf0;
+  border: none;
+  color: inherit;
 }
 
   .reveal .code-wrapper {

@@ -3,12 +3,12 @@
 ### Éphémère vs Persistant : L'Architecture du Stockage
 
 ```
-           ÉPHÉMÈRE                                  PERSISTANT
-  (Meurt avec le Pod)                    (Survit à la destruction du Pod)
-           │                                             │
-           ▼                                             ▼
-  emptyDir / configMap / secret             PersistentVolumeClaim (PVC)
-  Cache local, scratchpad, RAM              Bases de données, fichiers partagés
+           ÉPHÉMÈRE                                       PERSISTANT
+  (Meurt avec le Pod)                         (Survit à la destruction du Pod)
+           │                                                  │
+           ▼                                                  ▼
+  emptyDir / configMap / secret                  PersistentVolumeClaim (PVC)
+  Cache local, scratchpad, RAM                   Bases de données, fichiers partagés
 ```
 
 ![](images/kubernetes/persistent-volume-claims-k8.png){height="220px"}
@@ -77,10 +77,17 @@ Que devient le disque physique (PV) quand le développeur supprime le PVC ?
 - **`Delete` (par défaut)** : Le volume physique dans le Cloud/SAN est **immédiatement détruit**.
 - **`Retain` (recommandé en production)** : Le volume physique est conservé avec ses données pour permettre une récupération manuelle en cas d'erreur humaine.
 
-### Mini-Défi : Le PVC Bloqué en `Pending`
+### Mini-Défi : Le PVC Bloqué en Pending
 
 **Scénario d'incident** : Vous créez un PVC avec `storageClassName: standard` et `accessModes: [ReadWriteMany]` sur un cluster EKS avec disques EBS.
 
 Le PVC reste indéfiniment en statut `Pending`. Pourquoi ?
 
-*(Réponse : Les disques blocs EBS d'AWS ne supportent que le mode **ReadWriteOnce** (RWO). Le provisionneur CSI refuse d'allouer un disque EBS pour une demande de type ReadWriteMany (RWX), qui nécessite un système de fichiers distribué comme EFS / NFS).*
+
+### Mini-Défi : Le PVC Bloqué en Pending
+
+**Scénario d'incident** : Vous créez un PVC avec `storageClassName: standard` et `accessModes: [ReadWriteMany]` sur un cluster EKS avec disques EBS.
+
+Le PVC reste indéfiniment en statut `Pending`. Pourquoi ?
+
+(Réponse : Les disques blocs EBS d'AWS ne supportent que le mode **ReadWriteOnce** (RWO). Le provisionneur CSI refuse d'allouer un disque EBS pour une demande de type ReadWriteMany (RWX), qui nécessite un système de fichiers distribué comme EFS / NFS)
