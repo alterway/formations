@@ -326,3 +326,4 @@ spec:
 
 **Pour démarrer la panne :** `kubectl apply -f chaos-scenario-4.yaml`
 **Pour arrêter la panne :** `kubectl delete -f chaos-scenario-4.yaml`
+

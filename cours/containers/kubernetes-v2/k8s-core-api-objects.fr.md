@@ -189,3 +189,4 @@ spec:
 ```
 
 (Réponse : Le sélecteur du Service exige `tier: api`, alors que les Pods ont `tier: core`. Les labels doivent correspondre exactement !).
+

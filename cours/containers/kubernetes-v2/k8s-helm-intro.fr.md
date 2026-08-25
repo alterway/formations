@@ -85,3 +85,4 @@ message: Erreur: Connexion refusée # <── Erreur de parsing YAML !
 ```
 
 (Réponse : Le parseur YAML interprète la seconde partie comme une nouvelle clé imbriquée invalide et le `helm install` crashe. Il faut toujours quoter les chaînes : `message: "Erreur: Connexion refusée"` et utiliser la fonction `{{ .Values.message | quote }}` dans le template).
+

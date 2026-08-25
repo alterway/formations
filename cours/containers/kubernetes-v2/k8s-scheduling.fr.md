@@ -94,3 +94,4 @@ Que se passe-t-il pour ces 10 pods ?
 Que se passe-t-il pour ces 10 pods ?
 
 (Réponse : S'ils n'ont pas de `tolerations` explicite pour `maintenance=true`, ils sont **immédiatement tués et expulsés** (NoExecute). Le Deployment Controller recréera de nouveaux pods sur les autres nœuds sains).
+

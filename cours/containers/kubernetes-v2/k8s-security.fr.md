@@ -148,3 +148,4 @@ spec:
 ```bash
 # La réponse instantanée :
 kubectl auth can-i delete secrets -n production --as alice
+

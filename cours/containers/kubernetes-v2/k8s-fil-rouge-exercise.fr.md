@@ -401,3 +401,4 @@ Maintenant que nous gérons les ressources au niveau des conteneurs, nous allons
     *   Utilisez `kubectl get pods -n vote-app` pour voir le statut, qui sera `ImagePullBackOff` ou `CrashLoopBackOff`.
     *   **Diagnostic :** Utilisez `kubectl describe pod <nom-du-pod> -n vote-app` pour voir les événements et comprendre la cause de l'erreur (l'image n'a pas été trouvée).
     *   **Logs :** Utilisez `kubectl logs <nom-du-pod> -n vote-app` pour inspecter les journaux de l'application à l'intérieur du conteneur, ce qui est utile pour les erreurs applicatives.
+

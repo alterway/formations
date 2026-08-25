@@ -102,4 +102,3 @@ popeye
 
 (Réponse : **Option 2 (KinD)** ! Démarrage en ~20s, destruction automatique à la fin du job, coût quasi nul et isolation parfaite).
 
- 

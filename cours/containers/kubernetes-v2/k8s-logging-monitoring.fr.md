@@ -65,3 +65,4 @@ Quand vous tapez `kubectl logs mon-pod`, vous ne voyez que 2 lignes de démarrag
 Quelle option magique de `kubectl logs` permet de voir les derniers instants du conteneur décédé ?
 
 (Réponse : `kubectl logs mon-pod --previous` ou `kubectl logs mon-pod -p`).
+

@@ -252,3 +252,4 @@ Synchronisation:
   
     - Actions de Synchronisation: Si des différences sont détectées, Argo CD peut créer, mettre à jour, ou supprimer des ressources pour aligner l'état actuel du cluster avec l'état souhaité.
 Sync Status: Indique si l'application est en
+

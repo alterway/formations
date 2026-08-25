@@ -99,3 +99,4 @@ Quel est le problème et comment le résoudre proprement ?
 Quel est le problème et comment le résoudre proprement ?
 
 (Réponse : L'application a un PDB exigeant `minAvailable: 2`, mais il n'y a plus assez de place sur les autres nœuds du cluster pour démarrer le second pod. Solution : Ajouter un nouveau worker node au cluster ou augmenter temporairement les ressources disponibles pour débloquer l'éviction).
+

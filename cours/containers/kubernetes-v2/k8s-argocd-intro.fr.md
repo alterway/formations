@@ -101,3 +101,4 @@ Un administrateur supprime accidentellement un Deployment avec `kubectl delete d
 Que se passe-t-il dans les 10 secondes qui suivent ?
 
 (Réponse : ArgoCD détecte que le Deployment manque dans le cluster par rapport à la branche `main` de Git, et le recrée instantanément à l'identique !).
+

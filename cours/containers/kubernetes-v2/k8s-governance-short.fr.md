@@ -19,3 +19,4 @@
 ### Communauté
 *   Organisée en **SIGs** (Special Interest Groups), chacun responsable d'un aspect du projet (ex: `sig-network`, `sig-storage`, `sig-security`).
 *   **KubeCon** : Conférences majeures organisées par la CNCF pour rassembler la communauté et partager les nouveautés.
+

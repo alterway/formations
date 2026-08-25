@@ -36,4 +36,3 @@
 5. **S'entraîner sur Killer.sh** :
    Deux sessions de simulation d'examen gratuites sont incluses avec l'inscription à l'examen.
 
- 

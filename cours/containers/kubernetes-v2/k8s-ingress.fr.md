@@ -106,3 +106,4 @@ kubectl get endpoints backend-api-svc
 # 3. Vérifier les logs du contrôleur Ingress en temps réel
 kubectl logs -n ingress-nginx -l app.kubernetes.io/name=ingress-nginx --tail=50
 ```
+

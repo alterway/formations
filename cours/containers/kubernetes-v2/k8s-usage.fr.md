@@ -117,3 +117,4 @@ kubectl get pods --field-selector status.phase=Running \
   -o custom-columns=POD:.metadata.name,NODE:.spec.nodeName,RESTARTS:.status.containerStatuses[0].restartCount \
   --sort-by='.spec.nodeName'
 ```
+

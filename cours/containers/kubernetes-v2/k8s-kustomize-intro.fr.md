@@ -88,3 +88,4 @@ kubectl kustomize overlays/production/
 # Quelle commande permet d'appliquer directement l'overlay en production ?
 kubectl apply -k overlays/production/
 ```
+

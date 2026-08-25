@@ -72,3 +72,4 @@ if ! kubectl rollout status deployment/web-app --timeout=90s; then
 fi
 echo "Déploiement réussi avec succès !"
 ```
+

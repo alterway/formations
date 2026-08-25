@@ -111,3 +111,4 @@ livenessProbe:
 Pourquoi cette configuration est-elle une bombe à retardement en production ?
 
 (Réponse : Si la base de données ralentit ou sature, la liveness probe échoue en timeout. Kubernetes croit à tort que le Pod web est mort et le tue, provoquant une cascade de redémarrages catastrophique (thundering herd). La Liveness Probe doit être **locale et ultra-légère** !).
+

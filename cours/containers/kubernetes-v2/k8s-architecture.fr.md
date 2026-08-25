@@ -135,3 +135,4 @@ Kubernetes impose **3 règles absolues** à tous les plugins réseau (CNI) :
 **Scénario 2** : Si le `kube-scheduler` crashe, que se passe-t-il lors d'un `kubectl apply` d'un nouveau Deployment ?
 
 (Réponse : Le Deployment et les Pods sont créés dans etcd, mais les Pods restent bloqués en état `Pending`).
+

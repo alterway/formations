@@ -85,3 +85,4 @@ kubectl create deployment redis --image=redis:alpine --dry-run=client -o yaml > 
 echo "---" >> stack.yaml
 kubectl create service clusterip redis-svc --tcp=6379:6379 --dry-run=client -o yaml >> stack.yaml
 ```
+

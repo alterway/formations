@@ -31,8 +31,10 @@ build-html() {
     for module in $(jq -r '.["'"$cours"'"].modules[]' $LIST); do
       if [ -f "${COURS_DIR}"/"${module}"."${LANGUAGE}".md ]; then
         cat ${COURS_DIR}/"${module}"."${LANGUAGE}".md >> "${COURS_DIR}"/slide-"${cours}"
+        echo -e "\n" >> "${COURS_DIR}"/slide-"${cours}"
       elif [ -f "${COURS_DIR}"/"${module}"."${FALLBACK_LANGUAGE}".md ]; then
         cat "${COURS_DIR}"/"${module}"."${FALLBACK_LANGUAGE}".md >> "${COURS_DIR}"/slide-"${cours}"
+        echo -e "\n" >> "${COURS_DIR}"/slide-"${cours}"
       else
         echo "module ${module} doesn't exist in any of the languages"
       fi

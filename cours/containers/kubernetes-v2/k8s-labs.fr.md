@@ -37,4 +37,3 @@ complete -o default -F __start_kubectl k
 2. **Pratiquer par le défi** : Chaque module comporte des mini-défis et pièges réels de production.
 3. **Investigation méthodique** : Observer les événements, inspecter les statuts et auditer les logs.
 
-

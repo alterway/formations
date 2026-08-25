@@ -265,3 +265,4 @@ L'objectif de cette étape est d'utiliser notre installation GitOps pour simuler
 4.  **Résoudre le problème :**
     *   Corrigez le `selector` dans `.../templates/redis-service.yaml` dans Git.
     *   Commettez et poussez le correctif. ArgoCD réappliquera la bonne configuration pour le service, qui retrouvera ses endpoints, et les applications `vote` et `worker` recommenceront à fonctionner normalement.
+

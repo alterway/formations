@@ -91,3 +91,4 @@ kubectl describe hpa bookstore-api-hpa
 (Réponses :
 1. Le Deployment n'a pas de `resources.requests.cpu` définie (le HPA ne sait pas sur quelle base calculer le pourcentage !).
 2. Le composant `metrics-server` n'est pas installé ou ne parvient pas à joindre les Kubelets).
+
