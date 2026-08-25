@@ -8,7 +8,7 @@
 - **Juillet 2015** : Sortie de Kubernetes 1.0 et don du projet à la toute nouvelle **CNCF** (Cloud Native Computing Foundation).
 - **Aujourd'hui** : L'OS universel du Cloud et le standard incontournable d'orchestration distribuée.
 
-![](images/kubernetes/story-of-kubernetes.png){height="280px"}
+![](images/kubernetes/story-of-kubernetes.png){height="300px"}
 
 ### La CNCF : La Fondation du Cloud Native
 

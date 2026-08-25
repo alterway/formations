@@ -55,7 +55,7 @@ spec:
         app: bookstore-api
 ```
 
-- *`topologySpreadConstraints` est le standard moderne recommandé pour équilibrer parfaitement les charges.
+- `topologySpreadConstraints` est le standard moderne recommandé pour équilibrer parfaitement les charges.
 
 ### 3. Taints & Tolerations : La Ségrégation des Nœuds
 

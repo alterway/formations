@@ -2,7 +2,7 @@
 
 ### Vue d'Ensemble : Deux Mondes Complémentaires
 
-```
+```{.center}
  ┌─────────────────────────────────────────────────────────────┐
  │                CONTROL PLANE (Cerveau)                      │
  │   [ etcd ] ◄──► [ kube-apiserver ] ◄──► [ Controllers ]     │
@@ -37,7 +37,7 @@
 
 Toute action (`kubectl`, CI/CD, Kubelet) passe par un pipeline strict en 4 étapes :
 
-```
+```{.center}
 Requête HTTP ──► [1. Authentication] ──► [2. Authorization (RBAC)]
                       │
                       ▼
@@ -56,14 +56,14 @@ Requête HTTP ──► [1. Authentication] ──► [2. Authorization (RBAC)]
 
 La promesse fondamentale de Kubernetes : **Déclaratif vs Réel**.
 
-```
-    ┌───────────────────────────────────────────────┐
-    │          LA BOUCLE INFINIE DE CONTRÔLE        │
-    │                                               │
-    │      1. Observer l'état réel actuel           │
-    │      2. Comparer avec l'état désiré (YAML)    │
-    │      3. Agir pour résorber l'écart (Reconcile)│
-    └───────────────────────────────────────────────┘
+```{.center}
+┌───────────────────────────────────────────────┐
+│          LA BOUCLE INFINIE DE CONTRÔLE        │
+│                                               │
+│      1. Observer l'état réel actuel           │
+│      2. Comparer avec l'état désiré (YAML)    │
+│      3. Agir pour résorber l'écart (Reconcile)│
+└───────────────────────────────────────────────┘
 ```
 
 - Regroupe des dizaines de contrôleurs : *NodeController, ReplicaSetController, EndpointsController, ServiceAccountController...*

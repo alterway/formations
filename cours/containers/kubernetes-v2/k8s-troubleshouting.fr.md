@@ -2,17 +2,17 @@
 
 ### La Méthodologie d'Investigation en 4 Étapes
 
-```
-   [ 1. ÉTAT GLOBAL ] ──► kubectl get pods -o wide (Identifier les coupables)
-            │
-            ▼
-   [ 2. AUTOPSIE ]    ──► kubectl describe pod <nom> (Section Events & Last State)
-            │
-            ▼
-   [ 3. DERNIERS MOTS ] ──► kubectl logs <nom> --previous (Pourquoi a-t-il crashé ?)
-            │
-            ▼
-   [ 4. INFILTRATION ]  ──► kubectl debug -it <nom> --image=busybox (Debug éphémère)
+```{.center}
+[ 1. ÉTAT GLOBAL ] ──► kubectl get pods -o wide (Identifier les coupables)
+        │
+        ▼
+[ 2. AUTOPSIE ]    ──► kubectl describe pod <nom> (Section Events & Last State)
+        │
+        ▼
+[ 3. DERNIERS MOTS ] ──► kubectl logs <nom> --previous (Pourquoi a-t-il crashé ?)
+        │
+        ▼
+[ 4. INFILTRATION ]  ──► kubectl debug -it <nom> --image=busybox (Debug éphémère)
 ```
 
 ### Le Guide des Statuts de Pods
