@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: frontend-monitor
+  namespace: monitoring # Là où est la stack Prometheus
+  labels:
+    release: kps # TRÈS IMPORTANT : Doit matcher le 'serviceMonitorSelector' de Prometheus
+spec:
+  selector:
+    matchLabels:
+      app: frontend # Doit matcher les labels de du Service 'frontend'
+  namespaceSelector:
+    matchNames:
+      - online-boutique # Le namespace où est déployée l'app
+  endpoints:
+  - port: http # Le NOM du port dans le fichier service.yaml
+    interval: 15s
+    path: /metrics
+
