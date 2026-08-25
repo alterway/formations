@@ -84,5 +84,5 @@ En regardant avec `htop` sur le Worker Node, le CPU réel consommé n'est que de
 **Scénario d'incident** : Vous déployez un pod avec `requests.cpu: "4"`. 
 En regardant avec `htop` sur le Worker Node, le CPU réel consommé n'est que de 10%. Pourtant, le Pod reste bloqué en statut `Pending`. Pourquoi ?
 
-(Réponse : Le scheduler prend ses décisions sur la base de la **somme des Requests réservées**, et non sur la charge réelle du CPU à l'instant T ! Si les autres pods ont réservé tout le CPU théorique du nœud, le scheduler refuse d'en ajouter un nouveau).
+**Réponse** : Le scheduler prend ses décisions sur la base de la **somme des Requests réservées**, et non sur la charge réelle du CPU à l'instant T ! Si les autres pods ont réservé tout le CPU théorique du nœud, le scheduler refuse d'en ajouter un nouveau.
 

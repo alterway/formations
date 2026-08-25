@@ -91,5 +91,5 @@ popeye
 3. Une VM avec `Minikube`.
 
 
-(Réponse : **Option 2 (KinD)** ! Démarrage en ~20s, destruction automatique à la fin du job, coût quasi nul et isolation parfaite).
+**Réponse** : **Option 2 (KinD)** ! Démarrage en ~20s, destruction automatique à la fin du job, coût quasi nul et isolation parfaite.
 

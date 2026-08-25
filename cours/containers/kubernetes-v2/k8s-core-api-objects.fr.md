@@ -3,22 +3,22 @@
 ### La Hiérarchie des Objets Kubernetes
 
 ```
-           ┌─────────────────────────────────────────────────────────────┐
-           │                      NAMESPACE                              │
-           │                                                             │
-           │   ┌─────────────────────────────────────────────────────┐   │
-           │   │                   DEPLOYMENT                        │   │
-           │   │    (Gère les Rolling Updates & l'historique)        │   │
-           │   │                        │                            │   │
-           │   │                        ▼                            │   │
-           │   │                   REPLICASET                        │   │
-           │   │        (Maintient le nombre exact de Pods)          │   │
-           │   │                        │                            │   │
-           │   │                        ▼                            │   │
-           │   │                      PODS                           │   │
-           │   │         [ App Container | Native Sidecar ]          │   │
-           │   └─────────────────────────────────────────────────────┘   │
-           └─────────────────────────────────────────────────────────────┘
+                     ┌─────────────────────────────────────────────────────────────┐
+                     │                      NAMESPACE                              │
+                     │                                                             │
+                     │   ┌─────────────────────────────────────────────────────┐   │
+                     │   │                   DEPLOYMENT                        │   │
+                     │   │    (Gère les Rolling Updates & l'historique)        │   │
+                     │   │                        │                            │   │
+                     │   │                        ▼                            │   │
+                     │   │                   REPLICASET                        │   │
+                     │   │        (Maintient le nombre exact de Pods)          │   │
+                     │   │                        │                            │   │
+                     │   │                        ▼                            │   │
+                     │   │                      PODS                           │   │
+                     │   │         [ App Container | Native Sidecar ]          │   │
+                     │   └─────────────────────────────────────────────────────┘   │
+                     └─────────────────────────────────────────────────────────────┘
 ```
 
 ### 1. Le Pod : L'Atome Indivisible

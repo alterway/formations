@@ -76,5 +76,5 @@ Le pod passe immédiatement en `Completed` puis en `CrashLoopBackOff`.
 
 Pourquoi ce conteneur refuse-t-il de rester en vie ?
 
-(Réponse : Le processus principal par défaut d'une image Ubuntu est `/bin/bash`. Sans terminal interactif (`-it`) ni commande longue (`sleep infinity`), le shell termine son exécution immédiatement (PID 1 s'arrête avec code 0), ce qui éteint le Pod).
+**Réponse** : Le processus principal par défaut d'une image Ubuntu est `/bin/bash`. Sans terminal interactif (`-it`) ni commande longue (`sleep infinity`), le shell termine son exécution immédiatement (PID 1 s'arrête avec code 0), ce qui éteint le Pod.
 

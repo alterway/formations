@@ -69,5 +69,5 @@ Le projet est piloté par des **Special Interest Groups (SIGs)** autonomes :
 3. **Cilium** ?
 4. **OpenTelemetry** ?
 
-(Réponse : Kubernetes, ArgoCD et Cilium sont **Graduated** ! OpenTelemetry est **Incubating** en voie rapide vers la graduation).
+**Réponse** : Kubernetes, ArgoCD et Cilium sont **Graduated** ! OpenTelemetry est **Incubating** en voie rapide vers la graduation.
 

@@ -111,7 +111,8 @@ Quand vous tapez `kubectl get endpoints auth-service`, la colonne `ENDPOINTS` af
 
 Quelles sont les 2 causes les plus probables ?
 
-(Réponses :
+**Réponses** :
+
 1. Le sélecteur de labels du Service ne correspond pas aux labels des Pods.
-2. Les Pods ne passent pas leurs Readiness Probes (Pods non `Ready`), donc Kubernetes les a retirés des Endpoints).
+2. Les Pods ne passent pas leurs Readiness Probes (Pods non `Ready`), donc Kubernetes les a retirés des Endpoints.
 

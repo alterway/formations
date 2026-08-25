@@ -101,5 +101,5 @@ Pourtant, l'application continue d'utiliser l'ancienne valeur. Pourquoi ?
 
 Pourtant, l'application continue d'utiliser l'ancienne valeur. Pourquoi ?
 
-(Réponse : Les variables d'environnement (`env` / `envFrom`) sont injectées **au moment du démarrage du processus** dans le conteneur. Elles ne se mettent pas à jour à chaud ! Il faut redémarrer le Pod (`kubectl rollout restart deployment/mon-app`) ou monter le ConfigMap en tant que **Volume**).
+**Réponse** : Les variables d'environnement (`env` / `envFrom`) sont injectées **au moment du démarrage du processus** dans le conteneur. Elles ne se mettent pas à jour à chaud ! Il faut redémarrer le Pod (`kubectl rollout restart deployment/mon-app`) ou monter le ConfigMap en tant que **Volume**.
 

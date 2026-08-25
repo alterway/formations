@@ -90,5 +90,5 @@ Le PVC reste indéfiniment en statut `Pending`. Pourquoi ?
 
 Le PVC reste indéfiniment en statut `Pending`. Pourquoi ?
 
-(Réponse : Les disques blocs EBS d'AWS ne supportent que le mode **ReadWriteOnce** (RWO). Le provisionneur CSI refuse d'allouer un disque EBS pour une demande de type ReadWriteMany (RWX), qui nécessite un système de fichiers distribué comme EFS / NFS)
+**Réponse** : Les disques blocs EBS d'AWS ne supportent que le mode **ReadWriteOnce** (RWO). Le provisionneur CSI refuse d'allouer un disque EBS pour une demande de type ReadWriteMany (RWX), qui nécessite un système de fichiers distribué comme EFS / NFS
 
