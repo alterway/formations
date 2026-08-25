@@ -8315,7 +8315,7 @@ spec:
       restartPolicy: Never
       containers:
       - name: init
-        image: bitnami/kubectl
+        image: alpine/k8s:1.35.6
         command: ["kubectl"]
         args: ["create", "secret", "generic", "mysecret", "--from-literal=key=value"]
 
@@ -8752,7 +8752,7 @@ spec:
       restartPolicy: Never
       containers:
       - name: init
-        image: bitnami/kubectl
+        image: alpine/k8s:1.35.6
         command: ["kubectl"]
         args: ["create", "secret", "generic", "mysecret", "--from-literal=key=value"]
 

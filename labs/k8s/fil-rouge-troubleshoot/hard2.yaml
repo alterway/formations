@@ -1,5 +1,4 @@
 ---
-
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -36,9 +35,9 @@ metadata:
   name: configmap-reader-role
   namespace: expert-ns
 rules:
-- apiGroups: [""] # "" indique l'API core
-  resources: ["configmaps"]
-  verbs: ["get", "watch", "list"]
+  - apiGroups: [""] # "" indique l'API core
+    resources: ["configmaps"]
+    verbs: ["get", "watch", "list"]
 
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -47,9 +46,9 @@ metadata:
   name: app-role-binding
   namespace: expert-ns
 subjects:
-- kind: ServiceAccount
-  name: app-service-account
-  namespace: expert-ns
+  - kind: ServiceAccount
+    name: app-service-account
+    namespace: expert-ns
 roleRef:
   kind: Role
   name: configmap-reader-role
@@ -71,40 +70,39 @@ spec:
         app: webapp
     spec:
       volumes:
-      - name: shared-html
-        emptyDir: {}
+        - name: shared-html
+          emptyDir: {}
 
       containers:
-      - name: main-app
-        image: nginx:1.21.6
-        ports:
-        - containerPort: 80
-        volumeMounts:
-        - name: shared-html
-          mountPath: /usr/share/nginx/html
+        - name: main-app
+          image: nginx:1.21.6
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: shared-html
+              mountPath: /usr/share/nginx/html
 
-      - name: config-loader-sidecar
-        # On utilise une image kubectl pour simuler un client API
-        image: bitnami/kubectl:1.23
-        # Cette commande tente de lire le configmap et d'écrire son contenu
-        # dans le volume partagé. Elle échouera en boucle à cause des permissions.
-        command:
-        - /bin/sh
-        - -c
-        - |
-          echo "Attempting to fetch configuration...";
-          while true; do
-            kubectl get configmap app-html-config -n expert-ns -o jsonpath='{.data.index\.html}' > /mnt/html/index.html;
-            if [ $? -eq 0 ]; then
-              echo "Configuration successfully written.";
-              sleep 3600; # On a réussi, on attend
-            else
-              echo "Failed to fetch configmap. Retrying in 10 seconds...";
-              sleep 10;
-            fi
-          done
-        volumeMounts:
-        - name: shared-html
-          mountPath: /mnt/html
+        - name: config-loader-sidecar
+          # On utilise une image kubectl pour simuler un client API
+          image: alpine/k8s:1.35.6
+          # Cette commande tente de lire le configmap et d'écrire son contenu
+          # dans le volume partagé. Elle échouera en boucle à cause des permissions.
+          command:
+            - /bin/sh
+            - -c
+            - |
+              echo "Attempting to fetch configuration...";
+              while true; do
+                kubectl get configmap app-html-config -n expert-ns -o jsonpath='{.data.index\.html}' > /mnt/html/index.html;
+                if [ $? -eq 0 ]; then
+                  echo "Configuration successfully written.";
+                  sleep 3600; # On a réussi, on attend
+                else
+                  echo "Failed to fetch configmap. Retrying in 10 seconds...";
+                  sleep 10;
+                fi
+              done
+          volumeMounts:
+            - name: shared-html
+              mountPath: /mnt/html
 ---
-

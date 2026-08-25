@@ -16,9 +16,9 @@ metadata:
   namespace: troubleshooting
   name: pod-reader
 rules:
-- apiGroups: [""]
-  resources: ["pods", "services"]
-  verbs: ["get", "watch", "list"]
+  - apiGroups: [""]
+    resources: ["pods", "services"]
+    verbs: ["get", "watch", "list"]
 
 ---
 # ⚠️ ERREUR: RoleBinding pointe vers le mauvais ServiceAccount
@@ -28,9 +28,9 @@ metadata:
   name: read-pods
   namespace: troubleshooting
 subjects:
-- kind: ServiceAccount
-  name: monitor-sa        # Devrait être "monitoring-sa"
-  namespace: troubleshooting
+  - kind: ServiceAccount
+    name: monitor-sa # Devrait être "monitoring-sa"
+    namespace: troubleshooting
 roleRef:
   kind: Role
   name: pod-reader
@@ -54,41 +54,41 @@ spec:
     spec:
       serviceAccountName: monitoring-sa
       containers:
-      - name: kubectl-pod
-        image: bitnami/kubectl:latest
-        command: 
-        - /bin/bash
-        - -c
-        - |
-          echo "=== Monitoring App Started ==="
-          echo "Attempting to list pods..."
-          
-          while true; do
-            echo "--- $(date) ---"
-            echo "Trying to list pods:"
-            kubectl get pods --output=wide || echo "Failed to list pods"
-            
-            echo "Trying to list services:"
-            kubectl get services || echo "Failed to list services"
-            
-            echo "Checking current ServiceAccount:"
-            cat /var/run/secrets/kubernetes.io/serviceaccount/namespace
-            
-            echo "Sleeping for 30 seconds..."
-            sleep 30
-          done
-        resources:
-          requests:
-            memory: "64Mi"
-            cpu: "100m"
-          limits:
-            memory: "128Mi"
-            cpu: "200m"
-        env:
-        - name: KUBERNETES_NAMESPACE
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.namespace
+        - name: kubectl-pod
+          image: alpine/k8s:1.35.6
+          command:
+            - /bin/bash
+            - -c
+            - |
+              echo "=== Monitoring App Started ==="
+              echo "Attempting to list pods..."
+
+              while true; do
+                echo "--- $(date) ---"
+                echo "Trying to list pods:"
+                kubectl get pods --output=wide || echo "Failed to list pods"
+                
+                echo "Trying to list services:"
+                kubectl get services || echo "Failed to list services"
+                
+                echo "Checking current ServiceAccount:"
+                cat /var/run/secrets/kubernetes.io/serviceaccount/namespace
+                
+                echo "Sleeping for 30 seconds..."
+                sleep 30
+              done
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+          env:
+            - name: KUBERNETES_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
 
 ---
 # Pod supplémentaire pour tester les permissions manuellement
@@ -100,11 +100,11 @@ metadata:
 spec:
   serviceAccountName: monitoring-sa
   containers:
-  - name: kubectl
-    image: bitnami/kubectl:latest
-    command: 
-    - sleep
-    - "3600"
+    - name: kubectl
+      image: alpine/k8s:1.35.6
+      command:
+        - sleep
+        - "3600"
   restartPolicy: Always
 
 ---
@@ -126,15 +126,15 @@ spec:
     spec:
       # Utilise le ServiceAccount par défaut
       containers:
-      - name: test
-        image: nginx:1.21
-        resources:
-          requests:
-            memory: "32Mi"
-            cpu: "50m"
-          limits:
-            memory: "64Mi"
-            cpu: "100m"
+        - name: test
+          image: nginx:1.21
+          resources:
+            requests:
+              memory: "32Mi"
+              cpu: "50m"
+            limits:
+              memory: "64Mi"
+              cpu: "100m"
 
 ---
 apiVersion: v1
@@ -146,7 +146,7 @@ spec:
   selector:
     app: monitoring-app
   ports:
-  - protocol: TCP
-    port: 8080
-    targetPort: 8080
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
   type: ClusterIP

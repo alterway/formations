@@ -120,7 +120,7 @@ spec:
 
       - name: config-loader-sidecar
         # On utilise une image kubectl pour simuler un client API
-        image: bitnami/kubectl:1.23
+        image: alpine/k8s:1.35.6
         # Cette commande tente de lire le configmap et d'écrire son contenu
         # dans le volume partagé. Elle échouera en boucle à cause des permissions.
         command:

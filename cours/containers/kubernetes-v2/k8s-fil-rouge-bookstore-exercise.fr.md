@@ -583,7 +583,7 @@ spec:
   serviceAccountName: bookstore-observer-sa
   containers:
   - name: kubectl
-    image: bitnami/kubectl:1.30
+    image: alpine/k8s:1.35.6
     command:
       - /bin/sh
       - -c
