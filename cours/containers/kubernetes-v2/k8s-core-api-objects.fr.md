@@ -55,14 +55,14 @@ spec:
 ### 2. Labels vs Annotations : Ne Les Confondez Plus !
 
 ```{.center}
-              LABELS                                       ANNOTATIONS
-  Utilisés par Kubernetes pour sélectionner              Utilisés par des outils tiers
-        (Sélecteurs, Services, RBAC)                     (Monitoring, CI/CD, Git commit)
-                │                                                 │
-                ▼                                                 ▼
-  - app: bookstore                                       - git-commit: 7f8a92b
-  - env: production                                      - prometheus.io/scrape: "true"
-  - tier: backend                                        - ingress.class: nginx
+            LABELS                                       ANNOTATIONS
+Utilisés par Kubernetes pour sélectionner              Utilisés par des outils tiers
+      (Sélecteurs, Services, RBAC)                     (Monitoring, CI/CD, Git commit)
+              │                                                 │
+              ▼                                                 ▼
+- app: bookstore                                       - git-commit: 7f8a92b
+- env: production                                      - prometheus.io/scrape: "true"
+- tier: backend                                        - ingress.class: nginx
 ```
 
 > **Règle d'or** : Si Kubernetes doit filtrer ou router dessus $\rightarrow$ **Label**. Si c'est informatif $\rightarrow$ **Annotation**.
@@ -82,7 +82,6 @@ Le Deployment orchestre des **ReplicaSets** pour garantir des mises à jour sans
          └──► [ ReplicaSet v2 (2 Pods) ]          ◄── Traffic 67%
 ```
 
-![](images/kubernetes/rollingupdate.png){height="220px"}
 
 ### Contrôler le Rolling Update
 
@@ -148,25 +147,10 @@ spec:
           restartPolicy: OnFailure
 ```
 
-### Mini-Défi : Le « Piège du Sélecteur »
+### Strategies de rolling Update
 
-**Code Review** : Pourquoi le Service ci-dessous ne reçoit aucun trafic bien que les 3 Pods du Deployment soient `Running` ?
+![](images/kubernetes/rollingupdate.png){height=100%}
 
-```yaml
-# Deployment
-spec:
-  template:
-    metadata:
-      labels:
-        app: backend-api
-        tier: core
----
-# Service
-spec:
-  selector:
-    app: backend-api
-    tier: api
-```
 
 ### Mini-Défi : Le « Piège du Sélecteur »
 
@@ -188,5 +172,25 @@ spec:
     tier: api
 ```
 
-(Réponse : Le sélecteur du Service exige `tier: api`, alors que les Pods ont `tier: core`. Les labels doivent correspondre exactement !).
+### Mini-Défi : Le « Piège du Sélecteur »
+
+**Code Review** : Pourquoi le Service ci-dessous ne reçoit aucun trafic bien que les 3 Pods du Deployment soient `Running` ?
+
+```yaml
+# Deployment
+spec:
+  template:
+    metadata:
+      labels:
+        app: backend-api
+        tier: core
+---
+# Service
+spec:
+  selector:
+    app: backend-api
+    tier: api
+```
+
+**Réponse** : Le sélecteur du Service exige `tier: api`, alors que les Pods ont `tier: core`. Les labels doivent correspondre exactement !.
 

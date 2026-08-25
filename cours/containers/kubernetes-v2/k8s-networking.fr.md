@@ -21,12 +21,12 @@
 Chaque Service enregistré reçoit automatiquement un nom DNS FQDN :
 
 ```{.center}
-     ┌──────────────────────────────────────────────────┐
-     │       mon-service.mon-namespace.svc.cluster.local│
-     └───────────────┬──────────────────────────────────┘
+     ┌───────────────────────────────────────────────────────┐
+     │       mon-service.mon-namespace.svc.cluster.local     │
+     └─────────────────────────┬─────────────────────────────┘
                                │
-         ┌─────────────────────┼───────────────────────┐
-         ▼                     ▼                       ▼
+         ┌─────────────────────┼────────────────────────┐
+         ▼                     ▼                        ▼
 [ Mêmes Namespace ]    [ Autre Namespace ]      [ FQDN Complet ]
 "curl mon-service"    "curl mon-service.prod".  "curl mon-service.prod.svc..."
 ```

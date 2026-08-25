@@ -69,15 +69,15 @@ Fini les certificats SSL expirés un dimanche soir à 23h !
 La **Gateway API** est le successeur officiel de l'Ingress standard, conçu pour les architectures modernes et la séparation des responsabilités :
 
 ```{.center}
- ┌─────────────────────────────────────────────────────────────┐
- │ ÉQUIPE INFRA / CLOUD (Cluster Admin)                        │
- │  ► GatewayClass : Définit le fournisseur (Envoy, Cilium...) │
- │  ► Gateway : Déclare le point d'entrée, IP et ports 80/443  │
- ├─────────────────────────────────────────────────────────────┤
- │ ÉQUIPE DÉVELOPPEMENT / APPLICATION                          │
- │  ► HTTPRoute : Règle de routage autonome par namespace      │
- │  ► GRPCRoute / TCPRoute : Support natif au-delà du HTTP !   │
- └─────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────┐
+│ ÉQUIPE INFRA / CLOUD (Cluster Admin)                        │
+│  ► GatewayClass : Définit le fournisseur (Envoy, Cilium...) │
+│  ► Gateway : Déclare le point d'entrée, IP et ports 80/443  │
+├─────────────────────────────────────────────────────────────┤
+│ ÉQUIPE DÉVELOPPEMENT / APPLICATION                          │
+│  ► HTTPRoute : Règle de routage autonome par namespace      │
+│  ► GRPCRoute / TCPRoute : Support natif au-delà du HTTP !   │
+└─────────────────────────────────────────────────────────────┘
 ```
 
 - **Avantages clés** : Séparation des rôles (RBAC granulaire), routage multi-namespaces, splitting de trafic natif (Canary / Blue-Green) sans annotations constructeur obscures !

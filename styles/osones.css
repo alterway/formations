@@ -5,7 +5,7 @@
  */
 @import url(../../lib/font/league-gothic/league-gothic.css);
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic);
-@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
+@import url(https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;0,900;1,400;1,700&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;0,900;1,400;1,700&display=swap);
 /**
  * Solarized colors by Ethan Schoonover
  */
@@ -127,7 +127,9 @@ section.titleslide h1 {
 
 .reveal strong,
 .reveal b {
-  font-weight: bold; }
+  font-weight: 700;
+  color: #111827;
+}
 
 .reveal em {
   font-style: italic; }
@@ -207,31 +209,41 @@ section.titleslide h1 {
   max-height: 400px;
   word-wrap: normal; }
 
+.reveal .sourceCode.center,
+.reveal div.sourceCode.center,
+.reveal div.sourceCode.center-block,
+.reveal div.center .sourceCode,
 .reveal pre.center,
+.reveal pre.center-block,
+.reveal pre.fit-center,
+.reveal .sourceCode.center pre,
+.reveal .sourceCode.center-block pre,
+.reveal div.center pre,
+.reveal div.center-block pre {
+  width: fit-content;
+  max-width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
+.reveal .sourceCode.center code,
 .reveal pre.center code,
+.reveal div.center pre code,
+.reveal pre.center-block code,
+.reveal div.center-block pre code {
+  text-align: left;
+}
+
 .reveal pre.text-center,
 .reveal pre.text-center code,
-.reveal .sourceCode.center pre,
-.reveal .sourceCode.center code,
 .reveal .sourceCode.text-center pre,
 .reveal .sourceCode.text-center code,
-.reveal div.center pre,
-.reveal div.center pre code,
 .reveal div.text-center pre,
 .reveal div.text-center pre code,
 .reveal center pre,
 .reveal center pre code {
   text-align: center;
-}
-
-.reveal pre.center-block,
-.reveal pre.fit-center,
-.reveal div.center-block pre,
-.reveal .sourceCode.center-block pre {
-  width: fit-content;
-  max-width: 95%;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .reveal table {

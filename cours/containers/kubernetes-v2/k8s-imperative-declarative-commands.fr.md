@@ -12,7 +12,6 @@
   Rapide en lab / CLI / Urgence                  Reproductible, auditable, CI/CD
 ```
 
-![](images/kubernetes/imperative-declarative-k8s.jpg){height="260px"}
 
 
 ### Quand Utiliser Chaque Approche ?
@@ -46,13 +45,13 @@ kubectl create configmap app-cfg --from-literal=DB_HOST=postgres --dry-run=clien
 Quand vous faites `kubectl apply -f manifest.yaml`, Kubernetes compare 3 versions :
 
 ```{.center}
-    [ Fichier Local (Nouveau souhait) ]
-                   │
-                   ▼
-    [ Last-Applied-Configuration (Annotation dans l'objet) ]
-                   │
-                   ▼
-    [ État Actuel en Direct dans etcd ]
+[ Fichier Local (Nouveau souhait) ]
+               │
+               ▼
+[ Last-Applied-Configuration (Annotation dans l'objet) ]
+               │
+               ▼
+[ État Actuel en Direct dans etcd ]
 ```
 
 - Cela permet de fusionner vos changements **sans écraser** les champs injectés dynamiquement (ex: annotations de monitoring, tokens de sécurité ou IP de statut).

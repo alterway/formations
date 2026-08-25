@@ -20,8 +20,8 @@ complete -o default -F __start_kubectl k
 Un `kubeconfig` regroupe 3 entités distinctes :
 
 ```{.center}
-     CLUSTERS                    USERS
-(URL API + CA TLS)         (Certificats / Tokens)
+     CLUSTERS                      USERS
+(URL API + CA TLS)           (Certificats / Tokens)
         │                            │
         └─────────────┬──────────────┘
                       ▼

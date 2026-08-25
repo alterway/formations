@@ -81,7 +81,7 @@ popeye
 3. Une VM avec `Minikube`.
 
 
-  ### Mini-Défi : Choix d'Architecture (Réponses)
+### Mini-Défi : Choix d'Architecture (Réponses)
 
 **Contexte** : Votre entreprise veut monter une chaîne CI/CD GitHub Actions pour tester le déploiement d'opérateurs K8s multi-nœuds à chaque Pull Request.
 

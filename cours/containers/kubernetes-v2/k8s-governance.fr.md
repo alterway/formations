@@ -20,7 +20,7 @@
 
 ### Les Niveaux de Maturité CNCF
 
-```
+```{.center}
     [ Sandbox ] ──► [ Incubating ] ──► [ Graduated ]
 (Expérimentation)    (Adoption active)  (Production Ready &
                                          Gouvernance éprouvée)
