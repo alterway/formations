@@ -49,12 +49,15 @@ body {
 .reveal .slides > section {
   min-height: 90%;
   line-height: 1;
-  font-weight: inherit; 
+  font-weight: inherit;
+  /* ensure tables fill the full slide width */
+  box-sizing: border-box;
 }
 .reveal .slides > section > section {
   min-height: 100%;
   line-height: 1;
-  font-weight: inherit; 
+  font-weight: inherit;
+  box-sizing: border-box;
 }
 
 
@@ -266,40 +269,68 @@ section.titleslide h1 {
   }
   
 
+/*
+ * TABLE WRAPPER — allows horizontal scroll on very wide tables
+ * and ensures the table always fills 100% of the slide.
+ */
+.reveal .slides section .table-wrapper {
+  overflow-x: auto;
+  width: 100%;
+}
+
 .reveal table {
   border: 1px solid #d0d4dc;
-  margin: 15px auto;
+  margin: 10px auto;
   border-collapse: separate;
-  border-spacing: 0; 
+  border-spacing: 0;
+  /* auto layout: browser distributes columns based on content */
+  table-layout: auto;
   width: 100%;
-  max-width: 100%;
-  font-size: 0.72em;
+  min-width: 100%;
+  font-size: 0.70em;
   line-height: 1.35;
   border-radius: 6px;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
+/* Compact variant — smaller font for dense tables */
+.reveal table.compact,
+.reveal section.compact-table table {
+  font-size: 0.62em;
+}
+
+/* Wide variant — stretch to fill (default already, kept for clarity) */
+.reveal table.wide,
+.reveal section.wide-table table {
+  min-width: 100%;
+}
+
 .reveal table th {
   font-weight: 700;
   background: #211b55;
   color: #ffffff;
-  padding: 10px 14px;
+  padding: 9px 12px;
   text-align: left;
   border: none;
   letter-spacing: 0.3px;
+  /* Don't wrap header labels */
+  white-space: nowrap;
 }
 
 .reveal table th,
 .reveal table td {
   text-align: left;
-  padding: 8px 12px;
+  padding: 7px 11px;
   vertical-align: middle;
 }
 
 .reveal table td {
   border-top: 1px solid #e5e8ee;
   color: #2c3e50;
+  /* Allow long text to wrap gracefully inside cells */
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .reveal table th[align="center"],
@@ -323,12 +354,14 @@ section.titleslide h1 {
 
 .reveal table code {
   font-size: 0.88em;
-  padding: 2px 6px;
+  padding: 2px 5px;
   background: #e9ecf2;
   color: #1b263b;
   border-radius: 4px;
   border: 1px solid #d3d9e4;
-  white-space: nowrap;
+  /* Allow code in cells to wrap if needed to prevent column explosion */
+  white-space: normal;
+  word-break: break-all;
 }
 
 .reveal sup {
