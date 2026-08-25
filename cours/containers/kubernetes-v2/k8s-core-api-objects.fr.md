@@ -147,9 +147,9 @@ spec:
           restartPolicy: OnFailure
 ```
 
-### Strategies de rolling Update
+### 6. Strategies de rolling Update
 
-![](images/kubernetes/rollingupdate.png){height=100%}
+![](images/kubernetes/rollingupdate.png){height=400px}
 
 
 ### Mini-Défi : Le « Piège du Sélecteur »

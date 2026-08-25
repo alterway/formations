@@ -22,7 +22,9 @@ Requests trop hautes = Nœuds vides              Requests trop basses = Noisy ne
 
 
 
-Un mébibyte (MiB ) est également une unité d'information numérique, mais il est basé sur le système binaire. Un mébibyte équivaut à 1024 x 1024 octets = 1 048 576 octets, soit 2^20 octets. Le terme "mébibyte" a été introduit par la Commission électrotechnique internationale (CEI) en 1998 pour établir une distinction claire avec le mégaoctet basé sur le système décimal. Malheureusement, le terme mébibyte n'a pas encore été adopté par le grand public, de sorte que vous verrez régulièrement "mégaoctet" ou simplement MB, se référant soit à 1 000 000 d'octets, soit à 1 048 576 octets, sans savoir lequel est le bon.
+Un **mébibyte** (MiB ) est également une unité d'information numérique, mais il est basé sur le système binaire. 
+Un mébibyte équivaut à 1024 x 1024 octets = 1 048 576 octets, soit 2^20 octets. 
+Le terme "mébibyte" a été introduit par la Commission électrotechnique internationale (CEI) en 1998 pour établir une distinction claire avec le mégaoctet basé sur le système décimal. Malheureusement, le terme mébibyte n'a pas encore été adopté par le grand public, de sorte que vous verrez régulièrement "mégaoctet" ou simplement MB, se référant soit à 1 000 000 d'octets, soit à 1 048 576 octets, sans savoir lequel est le bon.
 
 ### CPU vs RAM : Deux Comportements Radicaux (Suite)
 
