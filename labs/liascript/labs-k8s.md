@@ -355,7 +355,7 @@ restartPolicy: Always
 
 ---
 
-#### Exercice pratique : Déploiement d'un Pod avec Sidecar natif
+#### Pod avec Sidecar natif
 
 Dans cet exercice, nous allons déployer un Pod contenant :
 1. Un `initContainer` standard (`init-config`) qui prépare un fichier HTML dans un volume partagé puis s'arrête.
@@ -671,7 +671,7 @@ Un objet **Job** crée un ou plusieurs Pods et s'assure qu'un nombre spécifié 
 
 ---
 
-#### Exercice pratique : Création d'un Job de calcul
+#### Création d'un Job de calcul
 
 1. Créons le fichier manifeste `lab-job.yaml` :
 
@@ -753,7 +753,7 @@ Un objet **CronJob** permet d'exécuter des **Jobs** selon une planification tem
 
 ---
 
-#### Exercice pratique : Création d'un CronJob de rapport
+#### Création d'un CronJob de rapport
 
 1. Créons le fichier manifeste `lab-cronjob.yaml` :
 
@@ -1041,7 +1041,7 @@ Contrairement aux Deployments qui gèrent des applications sans état (*stateles
 
 ---
 
-#### Exercice pratique : Déploiement d'un StatefulSet avec stockage dédié et Service Headless
+#### StatefulSet avec stockage dédié et Service Headless
 
 1. Créons le manifeste combiné `lab-statefulset.yaml` :
 
@@ -9191,7 +9191,7 @@ spec:
 
 <hr>
 
-### Troubleshooting Moderne avec Conteneurs Éphémères (`kubectl debug`)
+### Troubleshooting  avec Conteneurs Éphémères (`kubectl debug`)
 
 **Le défi des conteneurs sécurisés en production (Distroless & Scratch)**
 
