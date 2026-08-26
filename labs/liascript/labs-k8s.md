@@ -333,7 +333,7 @@ kubectl -n lab get pods
 
 <hr>
 
-### InitContainer en Sidecar natif (K8s 1.28+)
+### InitContainer en Sidecar natif
 
 **Sidecars natifs (Native Sidecars)**
 
@@ -679,7 +679,7 @@ Il existe deux manières fondamentales de résoudre un Service selon son type :
 
 ---
 
-#### Exercice pratique : Comparaison de résolution DNS
+#### Comparaison de résolution DNS
 
 1. Créons le manifeste `lab-dns-discovery.yaml` :
 
@@ -3666,7 +3666,7 @@ Les contraintes **Topology Spread Constraints** (`topologySpreadConstraints`) pe
 
 ---
 
-#### Exercice pratique : Répartition équilibrée de réplicas sur les nœuds
+#### Répartition équilibrée de réplicas sur les nœuds
 
 1. Créons le manifeste `lab-topology-spread.yaml` :
 
@@ -4833,7 +4833,7 @@ Le standard moderne intégré nativement à Kubernetes est **Pod Security Admiss
 
 ---
 
-#### Exercice pratique : Application du profil Restricted et test de conformité
+#### Application du profil Restricted et test de conformité
 
 1. Créons un namespace dédié `sec-restricted` :
 
@@ -6928,7 +6928,7 @@ La **Gateway API (`gateway.networking.k8s.io/v1`)** est le standard officiel Clo
 
 ---
 
-#### Exercice pratique : Routage multi-services et Canary avec Gateway API
+#### Routage multi-services et Canary avec Gateway API
 
 1. Créons un namespace dédié `lab-gateway` :
 
@@ -9769,7 +9769,7 @@ Depuis Kubernetes 1.25+, la commande **`kubectl debug`** résout ce problème en
 
 ---
 
-#### Exercice pratique : Déboguer un Pod "Distroless" sans shell
+#### Déboguer un Pod "Distroless" sans shell
 
 1. Déployons un Pod exécutant une image sécurisée "distroless" (sans aucun shell ni outil système) :
 
