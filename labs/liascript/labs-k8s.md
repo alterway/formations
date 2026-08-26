@@ -331,6 +331,125 @@ kubectl apply -f lab-pod.yaml
 kubectl -n lab get pods
 ```
 
+<hr>
+
+### InitContainer en Sidecar natif (K8s 1.28+)
+
+**Sidecars natifs (Native Sidecars)**
+
+Historiquement, les conteneurs sidecars (agents de collecte de logs, proxys de service mesh, synchroniseurs de secrets type Vault Agent) étaient déclarés dans la section `containers: []` au même titre que l'application principale. Cela posait deux problèmes majeurs :
+1. **Aucun ordre de démarrage garanti** : L'application pouvait démarrer avant que son proxy réseau ou son agent de secret ne soit opérationnel.
+2. **Problème à l'extinction** : Dans les Jobs ou lors de l'arrêt du Pod, le sidecar continuait souvent de tourner, empêchant le Pod de se terminer proprement.
+
+Depuis **Kubernetes 1.28 (GA en 1.29+)**, Kubernetes gère nativement le cycle de vie des Sidecars via les **`initContainers`** en ajoutant simplement la directive :
+
+```yaml
+restartPolicy: Always
+```
+
+**Cycle de vie d'un Sidecar natif :**
+- Il démarre **avant** les conteneurs applicatifs standards (`containers:`).
+- Dès qu'il passe à l'état *Running* (ou que ses *startup/readiness probes* sont validées), Kubernetes poursuit la séquence et lance les conteneurs applicatifs sans attendre qu'il se termine.
+- Il reste en exécution permanente pendant toute la vie du Pod.
+- Lors de l'arrêt du Pod, il est éteint **en dernier**, après l'arrêt complet des conteneurs applicatifs.
+
+---
+
+#### Exercice pratique : Déploiement d'un Pod avec Sidecar natif
+
+Dans cet exercice, nous allons déployer un Pod contenant :
+1. Un `initContainer` standard (`init-config`) qui prépare un fichier HTML dans un volume partagé puis s'arrête.
+2. Un **Sidecar natif** (`log-agent-sidecar` avec `restartPolicy: Always`) qui écrit en continu dans ce même volume partagé.
+3. Un conteneur applicatif **Nginx** (`web-app`) qui sert les fichiers générés en direct.
+
+1. Créons le fichier manifeste `lab-sidecar-pod.yaml` :
+
+```bash +.
+touch lab-sidecar-pod.yaml
+vi lab-sidecar-pod.yaml
+```
+
+Copier-coller le contenu YAML suivant :
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: lab-sidecar-pod
+  namespace: lab
+  labels:
+    app: native-sidecar-demo
+spec:
+  # Volume partagé en mémoire entre tous les conteneurs du Pod
+  volumes:
+  - name: shared-data
+    emptyDir: {}
+
+  initContainers:
+  # 1. InitContainer classique : prépare les données puis se termine avec succès
+  - name: init-config
+    image: busybox:1.36
+    command: ['sh', '-c', 'echo "<h1>InitContainer classique : Page initialisee</h1>" > /usr/share/nginx/html/index.html']
+    volumeMounts:
+    - name: shared-data
+      mountPath: /usr/share/nginx/html
+
+  # 2. Sidecar natif : tourne en continu aux côtés de l'application principale
+  - name: log-agent-sidecar
+    image: busybox:1.36
+    restartPolicy: Always   # <── Transforme l'initContainer en Sidecar natif !
+    command: ['sh', '-c', 'while true; do echo "<p>Sidecar tick: $(date)</p>" >> /usr/share/nginx/html/index.html; sleep 5; done']
+    volumeMounts:
+    - name: shared-data
+      mountPath: /usr/share/nginx/html
+
+  containers:
+  # 3. Conteneur applicatif principal : démarre une fois les initContainers initialisés
+  - name: web-app
+    image: nginx:alpine
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - name: shared-data
+      mountPath: /usr/share/nginx/html
+```
+
+2. Déployons le Pod :
+
+```bash +.
+kubectl apply -f lab-sidecar-pod.yaml
+```
+
+3. Observons le statut du Pod et la séquence des conteneurs :
+
+```bash +.
+kubectl -n lab get pod lab-sidecar-pod
+```
+
+4. Inspectons les conteneurs avec `describe` :
+
+```bash +.
+kubectl -n lab describe pod lab-sidecar-pod
+```
+
+> Observez la section `Init Containers:` : le conteneur `init-config` a le statut `Terminated (Completed)`, tandis que le conteneur `log-agent-sidecar` a le statut `State: Running` avec `Restart Policy: Always`.
+
+5. Testons la réponse du serveur web Nginx :
+
+```bash +.
+kubectl -n lab exec -it lab-sidecar-pod -c web-app -- wget -qO- http://localhost:80
+```
+
+Vous devriez voir le message initialisé par le premier `initContainer` ainsi que les lignes de log ajoutées en continu par le `log-agent-sidecar` !
+
+6. Nettoyons le Pod de démonstration :
+
+```bash +.
+kubectl -n lab delete pod lab-sidecar-pod
+```
+
+<hr>
+
 ### Création d'un déploiement
 
 **Deployment**

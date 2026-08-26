@@ -44,7 +44,7 @@ spec:
       target:
         type: AverageValue
         averageValue: 400Mi
-```{.center}
+```
 
 ### 2. KEDA : Autoscaling Piloté par les Événements
 
