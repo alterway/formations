@@ -657,6 +657,131 @@ Vers quel port les requêtes entrantes sont-elles acheminées sur les pods ?
 [( )] 443
 [( )] 22
 
+<hr>
+
+### Découverte DNS et Résolution de Services (ClusterIP vs Headless)
+
+**Découverte de services avec CoreDNS**
+
+Dans un cluster Kubernetes, la découverte des services repose sur le serveur DNS interne **CoreDNS**. 
+
+Il existe deux manières fondamentales de résoudre un Service selon son type :
+
+1. **Service `ClusterIP` standard (Virtual IP / VIP)** :
+   - Kubernetes alloue une adresse IP virtuelle unique fixe (`ClusterIP`).
+   - La requête DNS `svc-clusterip.lab.svc.cluster.local` renvoie un enregistrement `A` pointant vers **cette unique IP virtuelle**.
+   - `kube-proxy` (via iptables, IPVS ou eBPF/Cilium) intercepte le trafic et assure la répartition de charge vers les Pods sous-jacents (*Endpoints*).
+
+2. **Service `Headless` (`clusterIP: None`)** :
+   - Kubernetes **n'alloue aucune IP virtuelle**.
+   - La requête DNS `svc-headless.lab.svc.cluster.local` renvoie directement **la liste complète des adresses IP individuelles de tous les Pods**.
+   - C'est ce mécanisme qui permet aux applications distribuées (StatefulSets, bases de données, cluster Redis/Kafka, gRPC) d'accéder directement à des nœuds spécifiques.
+
+---
+
+#### Exercice pratique : Comparaison de résolution DNS
+
+1. Créons le manifeste `lab-dns-discovery.yaml` :
+
+```bash +.
+touch lab-dns-discovery.yaml
+vi lab-dns-discovery.yaml
+```
+
+Copier-coller le contenu YAML suivant :
+
+```yaml
+# 1. Un Deployment de 2 réplicas Nginx
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-dns-app
+  namespace: lab
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web-dns
+  template:
+    metadata:
+      labels:
+        app: web-dns
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+---
+# 2. Un Service standard (ClusterIP avec VIP)
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-clusterip
+  namespace: lab
+spec:
+  type: ClusterIP
+  selector:
+    app: web-dns
+  ports:
+  - port: 80
+    targetPort: 80
+---
+# 3. Un Service Headless (clusterIP: None)
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-headless
+  namespace: lab
+spec:
+  clusterIP: None        # Pas de VIP !
+  selector:
+    app: web-dns
+  ports:
+  - port: 80
+    targetPort: 80
+```
+
+2. Appliquons le manifeste :
+
+```bash +.
+kubectl apply -f lab-dns-discovery.yaml
+```
+
+3. Vérifions les IPs des Pods et des Services créés :
+
+```bash +.
+# Noter les 2 IPs réelles des pods
+kubectl -n lab get pods -l app=web-dns -o wide
+
+# Noter que svc-clusterip a une IP, alors que svc-headless affiche "None"
+kubectl -n lab get svc -l app=web-dns
+```
+
+4. Interrogeons CoreDNS pour le **Service ClusterIP standard** depuis un pod temporaire de test réseau :
+
+```bash +.
+kubectl run dns-test --image=busybox:1.36 -n lab --restart=Never -it --rm -- nslookup svc-clusterip.lab.svc.cluster.local
+```
+
+> **Observation :** CoreDNS renvoie **une seule adresse IP** (l'adresse virtuelle VIP du service).
+
+5. Interrogeons CoreDNS pour le **Service Headless** :
+
+```bash +.
+kubectl run dns-test --image=busybox:1.36 -n lab --restart=Never -it --rm -- nslookup svc-headless.lab.svc.cluster.local
+```
+
+> **Observation :** CoreDNS renvoie **directement les deux adresses IP distinctes des Pods** !
+
+6. Nettoyons les ressources :
+
+```bash +.
+kubectl delete -f lab-dns-discovery.yaml
+```
+
+<hr>
+
 ### Les Jobs (Traitements Batch Ponctuels)
 
 **Job**
@@ -3521,6 +3646,103 @@ pod-nodename   1/1     Running   0          4s    10.44.0.4       master   <none
 
 Sans surprise le noeud master. :)
 
+<hr>
+
+### Topology Spread Constraints (Répartition Haute Disponibilité)
+
+**Topology Spread Constraints**
+
+Dans les architectures haute disponibilité en production (notamment en environnement multi-nœuds ou multi-zones de disponibilité dans le Cloud), il est crucial d'éviter que tous les réplicas d'une application ne soient concentrés sur un seul et même nœud ou une seule zone de panne (*failure domain*).
+
+Les contraintes **Topology Spread Constraints** (`topologySpreadConstraints`) permettent de contrôler avec précision la répartition équilibrée de vos Pods à travers le cluster sans avoir recours à des règles complexes d'anti-affinité.
+
+**Paramètres clés :**
+- `maxSkew` : L'écart maximal autorisé (différence de nombre de pods) entre deux domaines topologiques. Une valeur de `1` garantit une répartition ultra-équilibrée.
+- `topologyKey` : La clé de label du nœud définissant le domaine de panne (ex: `kubernetes.io/hostname` pour équilibrer nœud par nœud, ou `topology.kubernetes.io/zone` pour équilibrer zone par zone).
+- `whenUnsatisfiable` :
+  - `DoNotSchedule` : Règle stricte (Hard constraint) — Si le placement viole le `maxSkew`, le pod reste à l'état `Pending`.
+  - `ScheduleAnyway` : Règle souple (Soft constraint) — Le scheduler fait de son mieux pour minimiser l'écart.
+- `labelSelector` : Permet d'identifier les pods faisant partie du même groupe à répartir.
+
+---
+
+#### Exercice pratique : Répartition équilibrée de réplicas sur les nœuds
+
+1. Créons le manifeste `lab-topology-spread.yaml` :
+
+```bash +.
+touch lab-topology-spread.yaml
+vi lab-topology-spread.yaml
+```
+
+Copier-coller le contenu YAML suivant :
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: balanced-app
+  namespace: scheduling
+  labels:
+    app: balanced-web
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: balanced-web
+  template:
+    metadata:
+      labels:
+        app: balanced-web
+    spec:
+      # Définition de la contrainte de répartition
+      topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app: balanced-web
+      containers:
+      - name: nginx
+        image: nginx:alpine
+        resources:
+          requests:
+            cpu: 50m
+            memory: 64Mi
+```
+
+2. Déployons l'application :
+
+```bash +.
+kubectl apply -f lab-topology-spread.yaml
+```
+
+3. Observons la répartition exacte des Pods sur les différents nœuds du cluster :
+
+```bash +.
+kubectl get pods -n scheduling -l app=balanced-web -o wide
+```
+
+> Vous observerez que les 4 Pods sont répartis équitablement entre les nœuds disponibles (par exemple 2 pods sur `worker-0` et 2 pods sur `worker-1`) pour respecter l'écart maximal strict (`maxSkew: 1`).
+
+4. Testons un passage à 6 réplicas :
+
+```bash +.
+kubectl -n scheduling scale deployment balanced-app --replicas=6
+kubectl get pods -n scheduling -l app=balanced-web -o wide
+```
+
+> Les 2 nouveaux Pods sont à nouveau distribués de manière à conserver un écart parfait entre chaque nœud.
+
+5. Supprimons le déploiement :
+
+```bash +.
+kubectl -n scheduling delete deployment balanced-app
+```
+
+<hr>
+
 ### Clean Up
 
 Nous pouvons supprimer les ressources générées par cet exercice de la façon suivante :
@@ -4583,6 +4805,150 @@ Que se passe-t-il si un pod tente d'accéder à une ressource sans avoir les aut
 [( )] Le pod est supprimé
 [( )] Une erreur est générée dans les journaux, mais l'accès est autorisé
 
+<hr>
+
+## Pod Security Standards (PSS & PSA)
+
+<hr>
+Machine : **master**
+<hr>
+
+### Sécurisation des Pods avec Pod Security Admission
+
+**De PSP (PodSecurityPolicy) vers PSS / PSA**
+
+Historiquement, Kubernetes utilisait les *PodSecurityPolicies (PSP)*, qui étaient complexes et ont été **dépréciées en v1.21 puis définitivement retirées en v1.25**.
+
+Le standard moderne intégré nativement à Kubernetes est **Pod Security Admission (PSA)** qui applique les **Pod Security Standards (PSS)**.
+
+**Les 3 niveaux de sécurité PSS :**
+1. **`privileged`** : Aucune restriction (autorise l'accès root complet, `hostNetwork`, `hostPID`, conteneurs privilégiés).
+2. **`baseline`** : Empêche les escalades de privilèges connues (interdit le mode privilégié, les ports/réseaux hôte, les volumes `hostPath`).
+3. **`restricted`** : Sécurité renforcée (*hardened*) selon l'état de l'art (exige un utilisateur non-root, l'interdiction d'élévation de privilèges `allowPrivilegeEscalation: false`, le drop de toutes les capacités Linux `drop: ["ALL"]`, et le profil seccomp par défaut).
+
+**Les 3 modes de contrôle configurables via des labels de namespace :**
+- `pod-security.kubernetes.io/enforce` : **Bloque** la création de tout Pod non conforme (erreur de l'API Server).
+- `pod-security.kubernetes.io/warn` : **Avertit** l'administrateur lors de l'application du manifeste sans bloquer.
+- `pod-security.kubernetes.io/audit` : Enregistre une trace dans le journal d'audit sans bloquer.
+
+---
+
+#### Exercice pratique : Application du profil Restricted et test de conformité
+
+1. Créons un namespace dédié `sec-restricted` :
+
+```bash +.
+kubectl create namespace sec-restricted
+```
+
+2. Appliquons les labels d'admission PSA en mode strict (`enforce: restricted` et `warn: restricted`) :
+
+```bash +.
+kubectl label --overwrite namespace sec-restricted \
+  pod-security.kubernetes.io/enforce=restricted \
+  pod-security.kubernetes.io/enforce-version=latest \
+  pod-security.kubernetes.io/warn=restricted \
+  pod-security.kubernetes.io/warn-version=latest
+```
+
+3. Vérifions les labels appliqués sur le namespace :
+
+```bash +.
+kubectl get namespace sec-restricted --show-labels
+```
+
+4. **Test 1 : Tentative de déploiement d'un Pod non conforme (Standard / Non sécurisé)**
+
+Créons le fichier `unsecured-pod.yaml` :
+
+```bash +.
+touch unsecured-pod.yaml
+vi unsecured-pod.yaml
+```
+
+Copier-coller le contenu YAML suivant :
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: unsecured-pod
+  namespace: sec-restricted
+spec:
+  containers:
+  - name: nginx
+    image: nginx:alpine
+```
+
+Tentons d'appliquer ce manifeste dans le namespace `sec-restricted` :
+
+```bash +.
+kubectl apply -f unsecured-pod.yaml
+```
+
+> **Résultat attendu :** L'API Server rejette immédiatement la création du Pod avec une erreur explicite du type :
+> `Error from server (Forbidden): error when creating "unsecured-pod.yaml": pods "unsecured-pod" is forbidden: violates PodSecurity "restricted:latest"` (absence de runAsNonRoot, allowPrivilegeEscalation, capabilities, seccompProfile).
+
+5. **Test 2 : Déploiement d'un Pod durci conforme aux exigences Restricted**
+
+Créons le fichier `secured-pod.yaml` :
+
+```bash +.
+touch secured-pod.yaml
+vi secured-pod.yaml
+```
+
+Copier-coller le contenu YAML suivant :
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: secured-pod
+  namespace: sec-restricted
+spec:
+  # Configuration du contexte de sécurité au niveau Pod
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 10001
+    runAsGroup: 10001
+    fsGroup: 10001
+    seccompProfile:
+      type: RuntimeDefault
+  containers:
+  - name: secure-app
+    image: busybox:1.36
+    command: ["/bin/sh", "-c", "echo 'Pod sécurisé et conforme !' && sleep 3600"]
+    # Configuration du contexte de sécurité au niveau Conteneur
+    securityContext:
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: false
+      capabilities:
+        drop:
+        - ALL
+```
+
+Appliquons le Pod conforme :
+
+```bash +.
+kubectl apply -f secured-pod.yaml
+```
+
+*pod/secured-pod created*
+
+6. Vérifions que le Pod est bien admis et en cours d'exécution :
+
+```bash +.
+kubectl -n sec-restricted get pods
+kubectl -n sec-restricted logs secured-pod
+```
+
+7. Nettoyons les ressources :
+
+```bash +.
+kubectl delete namespace sec-restricted
+rm -f unsecured-pod.yaml secured-pod.yaml
+```
 
 <hr>
 
@@ -6543,6 +6909,204 @@ et lancez le de la manière suivante
 `k6 run script.js`
 
 vérifiez la répartition des requetes
+
+<hr>
+
+### Gateway API (Le standard moderne de routage K8s v1.29+)
+
+**Pourquoi la Gateway API ?**
+
+L'API Ingress historique (`networking.k8s.io/v1`) présentait plusieurs limitations :
+- **Absence de séparation des rôles** : Un seul objet YAML Ingress mélangeait la configuration d'infrastructure (ports, certificats TLS) et le routage applicatif.
+- **Prolifération d'annotations non-standards** : Chaque contrôleur Ingress (Nginx, Traefik, HAProxy) inventait ses propres annotations pour gérer les réécritures d'URL, le canary deployment ou les en-têtes.
+- **Routage avancé limité** : Impossible de faire nativement du routage par header HTTP, méthode, ou de la pondération de trafic (*Traffic Splitting / Canary*) sans annotations propriétaires.
+
+La **Gateway API (`gateway.networking.k8s.io/v1`)** est le standard officiel Cloud Native qui structure le réseau selon 3 rôles clés :
+1. **Fournisseur d'infrastructure (`GatewayClass`)** : Définit le type de contrôleur (ex: `cilium`, `envoy-gateway`, `istio`).
+2. **Opérateur de cluster / DevOps (`Gateway`)** : Définit les points d'entrée réseau, les ports d'écoute (*listeners* : HTTP 80, HTTPS 443) et les certificats TLS.
+3. **Développeur applicatif (`HTTPRoute`, `GRPCRoute`)** : Définit les règles de routage indépendantes (chemins `/api`, en-têtes HTTP, poids pour le trafic Canary 80%/20%).
+
+---
+
+#### Exercice pratique : Routage multi-services et Canary avec Gateway API
+
+1. Créons un namespace dédié `lab-gateway` :
+
+```bash +.
+kubectl create namespace lab-gateway
+```
+
+2. Déployons deux versions d'une application (`v1` et `v2`) :
+
+```bash +.
+touch lab-gateway-apps.yaml
+vi lab-gateway-apps.yaml
+```
+
+Copier-coller le contenu YAML suivant :
+
+```yaml
+# Application V1
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-v1
+  namespace: lab-gateway
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: demo-app
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: demo-app
+        version: v1
+    spec:
+      containers:
+      - name: web
+        image: nginxdemos/hello:plain-text
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-v1
+  namespace: lab-gateway
+spec:
+  selector:
+    app: demo-app
+    version: v1
+  ports:
+  - port: 80
+    targetPort: 80
+---
+# Application V2 (Canary)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-v2
+  namespace: lab-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-app
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: demo-app
+        version: v2
+    spec:
+      containers:
+      - name: web
+        image: nginxdemos/hello:plain-text
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-v2
+  namespace: lab-gateway
+spec:
+  selector:
+    app: demo-app
+    version: v2
+  ports:
+  - port: 80
+    targetPort: 80
+```
+
+Appliquons le déploiement des applications :
+
+```bash +.
+kubectl apply -f lab-gateway-apps.yaml
+```
+
+3. Créons le manifeste de la `Gateway` et du `HTTPRoute` :
+
+```bash +.
+touch lab-gateway-routes.yaml
+vi lab-gateway-routes.yaml
+```
+
+Copier-coller le contenu YAML suivant :
+
+```yaml
+# 1. Définition du point d'entrée réseau (Géré par l'Ops)
+apiVersion: gateway.networking.k8s.io/v1
+kind: Gateway
+metadata:
+  name: main-gateway
+  namespace: lab-gateway
+spec:
+  gatewayClassName: eg    # ou cilium, traefik, envoy-gateway selon le contrôleur
+  listeners:
+  - name: http
+    protocol: HTTP
+    port: 80
+    allowedRoutes:
+      namespaces:
+        from: Same
+---
+# 2. Définition du routage applicatif (Géré par le Dev)
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: app-route
+  namespace: lab-gateway
+spec:
+  parentRefs:
+  - name: main-gateway
+  hostnames:
+  - "demo.alterway.local"
+  rules:
+  # Règle 1 : Routage par en-tête HTTP (Ex: trafic beta/test vers la v2)
+  - matches:
+    - headers:
+      - name: X-Environment
+        value: canary
+    backendRefs:
+    - name: service-v2
+      port: 80
+  # Règle 2 : Routage pondéré par défaut (80% trafic v1, 20% trafic v2)
+  - backendRefs:
+    - name: service-v1
+      port: 80
+      weight: 80
+    - name: service-v2
+      port: 80
+      weight: 20
+```
+
+4. Appliquons les ressources Gateway API :
+
+```bash +.
+kubectl apply -f lab-gateway-routes.yaml
+```
+
+5. Inspectons l'état des ressources Gateway et HTTPRoute :
+
+```bash +.
+kubectl -n lab-gateway get gateway
+kubectl -n lab-gateway get httproute
+kubectl -n lab-gateway describe httproute app-route
+```
+
+> Dans la description du `HTTPRoute`, observez la section `Status:` confirmant que la route est bien attachée au parent (`main-gateway`) avec la condition `Accepted: True`.
+
+6. Nettoyons les ressources :
+
+```bash +.
+kubectl delete namespace lab-gateway
+rm -f lab-gateway-apps.yaml lab-gateway-routes.yaml
+```
+
+<hr>
 
 ### Clean Up
 
