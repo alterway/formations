@@ -657,6 +657,178 @@ Vers quel port les requêtes entrantes sont-elles acheminées sur les pods ?
 [( )] 443
 [( )] 22
 
+### Les Jobs (Traitements Batch Ponctuels)
+
+**Job**
+
+Un objet **Job** crée un ou plusieurs Pods et s'assure qu'un nombre spécifié d'entre eux se terminent avec succès (code retour 0). Contrairement aux Deployments (qui maintiennent des applications en ligne en continu), un Job est conçu pour exécuter une tâche ponctuelle (migration de base de données, calcul, batch de traitement, sauvegarde) et s'arrêter.
+
+**Paramètres clés d'un Job :**
+- `completions` : Nombre total d'exécutions réussies requises pour considérer le Job terminé.
+- `parallelism` : Nombre de Pods pouvant s'exécuter simultanément en parallèle.
+- `backoffLimit` : Nombre maximum de tentatives de réessai en cas d'échec d'un Pod avant de déclarer le Job en échec (par défaut 6).
+- `restartPolicy` : Doit être obligatoirement défini à `OnFailure` ou `Never` (la valeur `Always` est interdite pour un Job).
+
+---
+
+#### Exercice pratique : Création d'un Job de calcul
+
+1. Créons le fichier manifeste `lab-job.yaml` :
+
+```bash +.
+touch lab-job.yaml
+vi lab-job.yaml
+```
+
+Copier-coller le contenu YAML suivant :
+
+```yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pi-computation-job
+  namespace: lab
+spec:
+  completions: 3        # Exécuter 3 calculs avec succès au total
+  parallelism: 2        # Exécuter 2 Pods en parallèle maximum
+  backoffLimit: 2       # Max 2 essais en cas d'échec
+  template:
+    metadata:
+      name: pi-job
+    spec:
+      restartPolicy: OnFailure
+      containers:
+      - name: pi-calculator
+        image: perl:5.34.0
+        command: ["perl", "-Mbignum=p,100", "-e", "print 4*atan2(1,1).qq{\n}; sleep 3;"]
+```
+
+2. Appliquons le manifeste pour démarrer le Job :
+
+```bash +.
+kubectl apply -f lab-job.yaml
+```
+
+3. Observons l'exécution du Job et des Pods :
+
+```bash +.
+kubectl -n lab get jobs -w
+```
+
+Dans un autre terminal (ou après quelques secondes) :
+
+```bash +.
+kubectl -n lab get pods -l job-name=pi-computation-job
+```
+
+> Vous remarquerez que les Pods passent à l'état `Completed`. Les Pods terminés sont conservés par Kubernetes pour vous permettre de consulter leurs logs et résultats.
+
+4. Consultons les logs de l'un des Pods terminés :
+
+```bash +.
+kubectl -n lab logs -l job-name=pi-computation-job --tail=1
+```
+
+5. Supprimons le Job (ce qui nettoie automatiquement ses Pods associés) :
+
+```bash +.
+kubectl -n lab delete job pi-computation-job
+```
+
+<hr>
+
+### Les CronJobs (Traitements Planifiés Périodiques)
+
+**CronJob**
+
+Un objet **CronJob** permet d'exécuter des **Jobs** selon une planification temporelle périodique définie au format cron standard (`minute heure jour-du-mois mois jour-de-la-semaine`).
+
+**Paramètres clés d'un CronJob :**
+- `schedule` : Expression cron définissant la fréquence d'exécution (ex: `*/1 * * * *` pour chaque minute).
+- `concurrencyPolicy` : Comportement si un nouveau Job doit démarrer alors que le précédent n'est pas encore terminé :
+  - `Allow` (défaut) : Exécutions concurrentes autorisées.
+  - `Forbid` : Ne démarre pas de nouveau Job tant que l'actuel tourne.
+  - `Replace` : Annule le Job en cours et lance le nouveau.
+- `successfulJobsHistoryLimit` / `failedJobsHistoryLimit` : Nombre de Jobs terminés/échoués conservés dans l'historique (par défaut 3 et 1).
+
+---
+
+#### Exercice pratique : Création d'un CronJob de rapport
+
+1. Créons le fichier manifeste `lab-cronjob.yaml` :
+
+```bash +.
+touch lab-cronjob.yaml
+vi lab-cronjob.yaml
+```
+
+Copier-coller le contenu YAML suivant :
+
+```yaml
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: periodic-report-cronjob
+  namespace: lab
+spec:
+  schedule: "*/1 * * * *"             # Toutes les minutes
+  concurrencyPolicy: Forbid            # Pas d'exécutions simultanées
+  successfulJobsHistoryLimit: 3        # Conserver les 3 derniers succès
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+          - name: reporter
+            image: busybox:1.36
+            command:
+            - /bin/sh
+            - -c
+            - date; echo "Génération du rapport périodique avec succès !"
+```
+
+2. Appliquons le CronJob :
+
+```bash +.
+kubectl apply -f lab-cronjob.yaml
+```
+
+3. Observons la planification et la création automatique des Jobs :
+
+```bash +.
+kubectl -n lab get cronjob periodic-report-cronjob
+```
+
+Attendez 1 à 2 minutes, puis listez les Jobs et Pods créés automatiquement :
+
+```bash +.
+kubectl -n lab get jobs
+kubectl -n lab get pods
+```
+
+4. Déclenchons manuellement un Job à la volée depuis le modèle du CronJob :
+
+```bash +.
+kubectl -n lab create job --from=cronjob/periodic-report-cronjob manual-report-test
+```
+
+5. Vérifions les logs du Job déclenché manuellement :
+
+```bash +.
+kubectl -n lab logs job/manual-report-test
+```
+
+6. Nettoyons le CronJob et le Job manuel :
+
+```bash +.
+kubectl -n lab delete cronjob periodic-report-cronjob
+kubectl -n lab delete job manual-report-test --ignore-not-found
+```
+
+<hr>
+
 ### Clean Up
 
 lancer les commandes suivantes :
@@ -667,7 +839,6 @@ kubectl delete -f lab-deployment.yaml
 kubectl delete -f lab-svc.yaml
 kubectl delete -f lab-ns.yaml
 kubectl delete ns basics
-
 ```
 
 
@@ -855,6 +1026,147 @@ Volumes:
 ...
 ```
 
+<hr>
+
+### StatefulSets et Services Headless (Applications avec état)
+
+**StatefulSet**
+
+Contrairement aux Deployments qui gèrent des applications sans état (*stateless*) où tous les Pods sont interchangeables et portent des noms aléatoires, un **StatefulSet** est conçu pour les applications avec état (bases de données PostgreSQL/MySQL, Redis Cluster, Kafka, Elasticsearch).
+
+**Caractéristiques fondamentales d'un StatefulSet :**
+1. **Identité ordonnée et prédictible** : Les Pods sont nommés `<nom>-0`, `<nom>-1`, `<nom>-2`. Ils sont créés dans l'ordre croissant ($0 \rightarrow 1 \rightarrow 2$) et détruits dans l'ordre décroissant ($2 \rightarrow 1 \rightarrow 0$).
+2. **Service Headless (`clusterIP: None`)** : Fournit une identité réseau stable. Chaque Pod reçoit un enregistrement DNS individuel : `<nom-du-pod>.<nom-du-service-headless>.<namespace>.svc.cluster.local`.
+3. **`volumeClaimTemplates`** : Chaque réplica obtient son **propre** volume persistant (`PVC` dédié). Si le pod `web-0` est supprimé ou redémarré sur un autre nœud, il se reconnectera **automatiquement au même volume `data-web-0`**.
+
+---
+
+#### Exercice pratique : Déploiement d'un StatefulSet avec stockage dédié et Service Headless
+
+1. Créons le manifeste combiné `lab-statefulset.yaml` :
+
+```bash +.
+touch lab-statefulset.yaml
+vi lab-statefulset.yaml
+```
+
+Copier-coller le contenu YAML suivant :
+
+```yaml
+# 1. Le Service Headless (clusterIP: None) pour la résolution DNS individuelle de chaque Pod
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-headless-svc
+  namespace: storage
+  labels:
+    app: stateful-web
+spec:
+  clusterIP: None        # <── Service Headless (pas de VIP unique)
+  ports:
+  - port: 80
+    name: http
+  selector:
+    app: stateful-web
+---
+# 2. Le StatefulSet
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: web-stateful
+  namespace: storage
+spec:
+  serviceName: "web-headless-svc"    # Liaison obligatoire avec le Service Headless
+  replicas: 2
+  selector:
+    matchLabels:
+      app: stateful-web
+  template:
+    metadata:
+      labels:
+        app: stateful-web
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+          name: http
+        volumeMounts:
+        - name: web-data
+          mountPath: /usr/share/nginx/html
+  # Modèle de génération automatique de PVC par réplica
+  volumeClaimTemplates:
+  - metadata:
+      name: web-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 100Mi
+```
+
+2. Déployons le StatefulSet et le Service Headless :
+
+```bash +.
+kubectl apply -f lab-statefulset.yaml
+```
+
+3. Observons l'ordre séquentiel de création des Pods et des PVCs :
+
+```bash +.
+kubectl -n storage get pods -l app=stateful-web -w
+```
+
+Dans un autre terminal :
+
+```bash +.
+kubectl -n storage get pvc -l app=stateful-web
+```
+
+> Notez que deux PVCs distincts ont été créés automatiquement : `web-data-web-stateful-0` et `web-data-web-stateful-1`.
+
+4. Écrivons un contenu unique sur chaque Pod pour tester la persistance de l'état :
+
+```bash +.
+kubectl -n storage exec web-stateful-0 -- sh -c 'echo "Je suis le serveur web-stateful-0 (Primaire)" > /usr/share/nginx/html/index.html'
+kubectl -n storage exec web-stateful-1 -- sh -c 'echo "Je suis le serveur web-stateful-1 (Replica)" > /usr/share/nginx/html/index.html'
+```
+
+5. Testons la résolution DNS directe (Headless) et le contenu de chaque Pod depuis un pod de test :
+
+```bash +.
+kubectl -n storage run dns-test --image=busybox:1.36 --restart=Never -it --rm -- nslookup web-stateful-0.web-headless-svc.storage.svc.cluster.local
+```
+
+Testons la requête HTTP directe vers le pod 0 puis vers le pod 1 :
+
+```bash +.
+kubectl -n storage run curl-test --image=curlimages/curl:8.5.0 --restart=Never -it --rm -- curl -s http://web-stateful-0.web-headless-svc:80
+kubectl -n storage run curl-test --image=curlimages/curl:8.5.0 --restart=Never -it --rm -- curl -s http://web-stateful-1.web-headless-svc:80
+```
+
+6. Preuve de persistance : Supprimons le pod `web-stateful-0` :
+
+```bash +.
+kubectl -n storage delete pod web-stateful-0
+```
+
+Attendez que Kubernetes le recrée automatiquement, puis interrogez-le à nouveau :
+
+```bash +.
+kubectl -n storage run curl-test --image=curlimages/curl:8.5.0 --restart=Never -it --rm -- curl -s http://web-stateful-0.web-headless-svc:80
+```
+
+> Le contenu *"Je suis le serveur web-stateful-0 (Primaire)"* est toujours là ! Le Pod recréé a automatiquement ré-attaché son volume dédié `web-data-web-stateful-0`.
+
+7. Nettoyons les ressources :
+
+```bash +.
+kubectl delete -f lab-statefulset.yaml
+# Remarque : Kubernetes ne supprime jamais les PVCs automatiquement lors de la suppression d'un StatefulSet pour éviter toute perte accidentelle de données.
+kubectl -n storage delete pvc -l app=stateful-web
+```
 
 <hr>
 
@@ -8877,7 +9189,91 @@ spec:
 
 ```
 
+<hr>
 
+### Troubleshooting Moderne avec Conteneurs Éphémères (`kubectl debug`)
+
+**Le défi des conteneurs sécurisés en production (Distroless & Scratch)**
+
+En production et selon les bonnes pratiques de sécurité (SecOps), les images de conteneurs sont de plus en plus épurées :
+- Images **Distroless** ou **Scratch** (contenant uniquement le binaire compilé de l'application).
+- Aucun interpréteur de commande (`/bin/sh`, `/bin/bash`), aucun outil réseau (`curl`, `netstat`, `ip`, `dig`).
+
+Dans cette situation, la commande classique `kubectl exec -it <pod> -- sh` échoue irrémédiablement (`OCI runtime exec failed: exec: "/bin/sh": executable file not found in $PATH`).
+
+Depuis Kubernetes 1.25+, la commande **`kubectl debug`** résout ce problème en permettant d'injecter dynamiquement un **conteneur éphémère d'investigation** (`ephemeralContainers`) dans le Pod sans devoir le redémarrer ni modifier son manifeste original !
+
+---
+
+#### Exercice pratique : Déboguer un Pod "Distroless" sans shell
+
+1. Déployons un Pod exécutant une image sécurisée "distroless" (sans aucun shell ni outil système) :
+
+```bash +.
+kubectl run distroless-app --image=gcr.io/distroless/static-debian12:nonroot --restart=Never --command -- /bin/pause
+```
+
+2. Vérifions que le Pod est en cours d'exécution :
+
+```bash +.
+kubectl get pod distroless-app
+```
+
+3. Tentons une commande `kubectl exec` classique :
+
+```bash +.
+kubectl exec -it distroless-app -- /bin/sh
+```
+
+> **Résultat :** L'exécution échoue car aucun interpréteur de commande (`sh`) n'existe dans cette image sécurisée.
+
+4. Injectons un conteneur éphémère de diagnostic avec `kubectl debug` :
+
+Nous allons injecter une image riche en outils de diagnostic (`busybox:1.36` ou `nicolaka/netshoot`) et cibler le conteneur applicatif principal (`--target=distroless-app`) afin de partager son espace de noms de processus (*Process Namespace Sharing*) :
+
+```bash +.
+kubectl debug -it distroless-app --image=busybox:1.36 --target=distroless-app
+```
+
+5. Depuis le shell du conteneur éphémère :
+
+Exécutez les commandes de diagnostic suivantes pour inspecter le Pod :
+
+```bash
+# Observer les processus du conteneur cible distroless (partage de PID)
+ps aux
+
+# Inspecter l'environnement réseau et les interfaces du Pod
+netstat -tulpn
+ip addr
+
+# Quitter la session de debug
+exit
+```
+
+6. Observons la présence du conteneur éphémère dans la description du Pod :
+
+```bash +.
+kubectl describe pod distroless-app
+```
+
+> Observez la section `Ephemeral Containers:` avec l'état `Terminated` suite à votre sortie.
+
+7. Autre cas d'usage : Déboguer un Pod en créant une copie avec une image ou commande modifiée :
+
+```bash +.
+# Créer une copie interactive d'un pod en panne
+kubectl debug distroless-app -it --copy-to=distroless-debug-copy --container=distroless-app --image=busybox:1.36 -- /bin/sh
+```
+
+8. Nettoyons les pods de test :
+
+```bash +.
+kubectl delete pod distroless-app
+kubectl delete pod distroless-debug-copy --ignore-not-found
+```
+
+<hr>
 
 ### Quizz Troubleshooting
 
