@@ -32,10 +32,12 @@ EOF
 ```{.center}
 [ Étape 1 : Control Plane ]
   $ sudo kubeadm init --pod-network-cidr=10.244.0.0/16
+         |
          │
          ▼ (Génère certificats TLS, etcd, apiserver, et le token de join)
 [ Étape 2 : Plugin Réseau (CNI) ]
   $ kubectl apply -f https://docs.cilium.io/...
+         |
          │
          ▼ (Les nœuds passent de NotReady à Ready)
 [ Étape 3 : Raccordement des Workers ]
@@ -46,14 +48,18 @@ EOF
 
 ```{.center}
 ┌─────────────────────────────────────────────────────────────┐
+|                                                             |
 │ Fournisseur Cloud (GCP/AWS/Azure/Scaleway/OVH...)           │
 │  ► etcd, kube-apiserver, scheduler, controller-manager      │
 │  ► Sauvegardes etcd, patchs de sécurité, haute dispo        │
+|                                                             |
 ├─────────────────────────────────────────────────────────────┤
+|                                                             |
 │ Votre Responsabilité (DevOps / SRE)                         │
 │  ► Gestion des versions de Worker Nodes (Node Pools)        │
 │  ► Sécurité réseau, RBAC, ingress, dimensionnement (HPA)    │
 │  ► Vos manifests applicatifs et vos données                 │
+|                                                             |
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -70,6 +76,29 @@ Avant de mettre un cluster en production, auditez sa conformité :
 popeye
 ```
 
+```{.center}
+ ___     ___ _____   _____                                                      K          .-'-.
+| _ \___| _ \ __\ \ / / __|                                                      8     __|      `\
+|  _/ _ \  _/ _| \ V /| _|                                                        s   `-,-`--._   `\
+|_| \___/_| |___| |_| |___|                                                      []  .->'  a     `|-'
+  Biffs`em and Buffs`em!                                                          `=/ (__/_       /
+                                                                                    \_,    `    _)
+                                                                                       `----;  |
+
+
+GENERAL [NEXTERWAY] (2026-08-27T08:43:48+02:00)
+┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅
+  · Connectivity...................................................................................✅
+  · MetricServer...................................................................................✅
+
+
+CILIUMENDPOINTS (0 SCANNED)                                                  💥 0 😱 0 🔊 0 ✅ 0 100٪
+┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅
+  · Nothing to report.
+
+...  
+
+```
 
 ### Mini-Défi : Choix d'Architecture (Réponses)
 

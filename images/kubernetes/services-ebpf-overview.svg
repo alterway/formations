@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" id="svg-ebpf" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 656 486" style="enable-background:new 0 0 656 486;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#000000;stroke-width:0.8425;}
+	.st1{fill:none;stroke:#000000;stroke-width:2.0786;}
+	.st2{stroke:#000000;stroke-width:2.0786;stroke-linecap:round;}
+	.st3{fill:none;stroke:#000000;stroke-width:5;}
+	.st4{stroke:#000000;stroke-width:4.7036;stroke-linecap:round;}
+	.st5{fill:none;stroke:#000000;stroke-width:4.2928;}
+	.st6{stroke:#000000;stroke-width:4.2928;stroke-linecap:round;}
+	.st7{fill:#85BFF1;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+	.st8{font-family:'ArialMT', sans-serif;}
+	.st9{font-size:30px;}
+	.st10{font-size:22px;}
+	.st11{fill:none;stroke:#000000;stroke-width:5.1965;}
+	.st12{stroke:#000000;stroke-width:5.1965;stroke-linecap:round;}
+	.st13{fill:#F1CB85;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+	.st14{fill:#B9F185;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+	.st15{fill:#EDC1F8;stroke:#000000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+	.st16{fill:#FFE680;stroke:#000000;stroke-width:1.7787;}
+	.st17{font-family:'ArialMT', sans-serif;font-weight:bold;}
+	.st18{font-size:38px;}
+</style>
+<g id="layer1">
+	<rect id="rect-node" x="104.3" y="72.5" class="st0" width="545.8" height="253.1"/>
+	<text transform="matrix(1 0 0 1 537.5965 317.8163)" class="st17 st18">Node</text>
+
+	<g id="g-apiserver" transform="translate(188.04, -29.04)">
+		<g transform="translate(22.08, -86.34)">
+			<rect x="199.9" y="119.8" class="st15" width="191.8" height="58.6"/>
+			<text transform="matrix(1 0 0 1 223.8 159.2)" class="st8 st9">apiserver</text>
+		</g>
+	</g>
+
+	<g id="g-ebpf-agent" transform="matrix(0.89067, 0, 0, 1, 199.65, -24.25)">
+		<rect x="216.9" y="119.8" class="st14" width="250" height="58.6"/>
+		<text transform="matrix(1 0 0 1 245 158.5)" class="st8 st9">eBPF Agent</text>
+	</g>
+
+	<g id="arrow-api-agent" transform="matrix(1, 0, 0, -0.9257, 15.3, 1193.2)">
+		<path class="st1" d="M485.1, 1264.5 c0,-71.3 0,-71.3 0,-71.3"/>
+		<path class="st2" d="M476.8, 1202.5 l8.7,-15 l8.7,15 H476.8 z"/>
+	</g>
+
+	<g id="arrow-agent-bpf" transform="matrix(-0.8321, -1.1231, 0.8957, -0.8943, -72.94, 1678.3)">
+		<path class="st1" d="M501.5, 1075.9 c0,-71.3 0,-71.3 0,-71.3"/>
+		<path class="st2" d="M493.2, 1013.9 l8.7,-15 l8.7,15 L493.2, 1013.9 z"/>
+	</g>
+
+	<path id="path-ebpf-cloud" class="st16" d="M332.5,202c-14.5,0-27,8.6-33,21.2c-5-0.9-10.3-1.4-15.8-1.4
+		c-34.3,0-62.2,19.1-62.2,42.6s27.8,42.6,62.2,42.6c16.9,0,32.2-4.6,43.4-12.2c7.4,16.3,34,28.3,65.7,28.3
+		c33.5,0,61.4-13.4,66.8-31.1c17-5.3,28.6-15.7,28.6-27.7c0-17.3-24.4-31.4-54.4-31.4c-8.5,0-16.5,1.1-23.6,3.1
+		c-2-10.5-14.8-18.6-30.3-18.6c-5.8,0-11.2,1.2-15.9,3.1C357.7,209.5,345.9,202,332.5,202L332.5,202z"/>
+	<text transform="matrix(1 0 0 1 270 248)" class="st8 st9">clusterIP</text>
+	<text transform="matrix(1 0 0 1 235 284)" class="st8 st9" fill="#047857">(eBPF Maps)</text>
+
+	<g id="g-client" transform="matrix(0.89067, 0, 0, 1, -194.97, -142.36)">
+		<rect x="388" y="235.5" class="st13" width="224.3" height="58.6"/>
+		<text transform="matrix(1 0 0 1 450 274.5)" class="st8 st9">Client</text>
+	</g>
+
+	<g id="arrow-client-ebpf" transform="matrix(0.9119, -0.4103, -0.3799, -0.8442, 113.6, 1385.4)">
+		<path class="st11" d="M664.6, 1154.3 c0,-71.3 0,-71.3 0,-71.3"/>
+		<path class="st12" d="M656.2, 1092.3 l8.7,-15 l8.7,15 H656.2 z"/>
+	</g>
+
+	<g id="arrow-ebpf-pod1" transform="matrix(0.9659, 0.2588, 0.2588, -0.9659, -272.8, 1126.2)">
+		<path class="st3" d="M362, 988.4 C260, 874.6 260, 874.6 260, 874.6"/>
+		<path class="st4" d="M253, 881.5 l-4.8,-18.4 l17.8,6.9 L253, 881.5 z"/>
+	</g>
+	<g id="arrow-ebpf-pod2" transform="matrix(1, 0, 0, -1.3566, -154.75, 1749.5)">
+		<path class="st5" d="M485.1, 1103.7 c0,-71.3 0,-71.3 0,-71.3"/>
+		<path class="st6" d="M476.8, 1041.6 l8.7,-15 l8.7,15 H476.8 z"/>
+	</g>
+	<g id="arrow-ebpf-pod3" transform="matrix(-0.9659, 0.2588, -0.2588, -0.9659, 654.3, 1126.2)">
+		<path class="st3" d="M76.1, 911.8 C-25.9, 798 -25.9, 798 -25.9, 798"/>
+		<path class="st4" d="M-32.9, 804.9 l-4.8,-18.4 l17.8,6.9 L-32.9, 804.9 z"/>
+	</g>
+
+	<g id="g-backend-pods" transform="translate(-212.35, 769.73)">
+		<g transform="matrix(0.8879, 0, 0, 1, 43.5, 0)">
+			<rect x="196.7" y="-408.1" class="st7" width="224.3" height="118.6"/>
+			<text transform="matrix(1 0 0 1 203.4 -377.15)" class="st8 st9">Backend Pod 1</text>
+			<text transform="matrix(1 0 0 1 203.8 -338.06)" class="st8 st10">labels: app=MyApp</text>
+			<text transform="matrix(1 0 0 1 203.8 -308.06)" class="st8 st10">port: 9376</text>
+		</g>
+		<g transform="matrix(0.8879, 0, 0, 1, 262.0, 0)">
+			<rect x="196.7" y="-408.1" class="st7" width="224.3" height="118.6"/>
+			<text transform="matrix(1 0 0 1 203.4 -377.15)" class="st8 st9">Backend Pod 2</text>
+			<text transform="matrix(1 0 0 1 203.8 -338.06)" class="st8 st10">labels: app=MyApp</text>
+			<text transform="matrix(1 0 0 1 203.8 -308.06)" class="st8 st10">port: 9376</text>
+		</g>
+		<g transform="matrix(0.8879, 0, 0, 1, 480.5, 0)">
+			<rect x="196.7" y="-408.1" class="st7" width="224.3" height="118.6"/>
+			<text transform="matrix(1 0 0 1 203.4 -377.15)" class="st8 st9">Backend Pod 3</text>
+			<text transform="matrix(1 0 0 1 203.8 -338.06)" class="st8 st10">labels: app=MyApp</text>
+			<text transform="matrix(1 0 0 1 203.8 -308.06)" class="st8 st10">port: 9376</text>
+		</g>
+	</g>
+</g>
+</svg>

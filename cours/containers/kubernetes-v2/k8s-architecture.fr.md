@@ -9,7 +9,9 @@
  │                        ▲                                    │
  │                        │  (Reconcile loop & Scheduler)      │
  └────────────────────────┼────────────────────────────────────┘
+                          |
                           │ HTTPS / TLS (Port 6443)
+                          |
  ┌────────────────────────┼────────────────────────────────────┐
  │                        ▼                                    │
  │   WORKER NODE 1                 WORKER NODE 2               │
@@ -22,11 +24,10 @@
 - **Control Plane (Master)** : Prend les décisions globales, stocke l'état, détecte et réconcilie les écarts.
 - **Worker Nodes** : Exécutent vos conteneurs applicatifs et gèrent le trafic réseau local.
 
-![](images/kubernetes/control-plane.webp){height="220px"}
 
 ### 1. `etcd` : Le Cœur Persistant
 
-![](images/kubernetes/etcd.svg){height="140px"}
+![](images/kubernetes/etcd.svg){height="250px"}
 
 - **Nature** : Base clé-valeur distribuée, ultra-rapide et transactionnelle.
 - **Algorithme de consensus RAFT** : Nécessite un quorum strict : $\lfloor N/2 \rfloor + 1$ nœuds (clusters de 3 ou 5 nœuds).
@@ -50,7 +51,7 @@ Requête HTTP ──► [1. Authentication] ──► [2. Authorization (RBAC)]
 - **Stateless** : Horizontalement scalable derrière un Load Balancer.
 - Émet des flux d'événements (`watch`) vers tous les autres contrôleurs.
 
-![](images/kubernetes/kube-api-server-ezgif.com-crop.gif){height="180px"}
+![](images/kubernetes/kube-api-server-ezgif.com-crop.gif){height="200px"}
 
 ### 3. `kube-controller-manager` : La Boucle de Réconciliation
 
@@ -93,7 +94,7 @@ Comment un Pod trouve-t-il son Node d'hébergement ?
 
 ### Les Composants du Worker Node
 
-![](images/kubernetes/Kubernetes-Architecture-Diagram-Explained.png){height="230px"}
+![](images/kubernetes/Kubernetes-Architecture-Diagram-Explained.png){height="250px"}
 
 1. **`kubelet`** : L'agent de bord du nœud. Reçoit les ordres de l'APIServer, pilote le runtime conteneur et remonte la santé du nœud.
 2. **`CRI (Container Runtime Interface)`** : Le moteur bas niveau (*containerd*, *CRI-O*) qui instancie les namespaces Linux et cgroups.
@@ -106,7 +107,8 @@ Comment un Pod trouve-t-il son Node d'hébergement ?
 - **IPVS (IP Virtual Server)** : Tables de hachage Linux, rapide et taillé pour la volumétrie.
 - **eBPF (ex. Cilium)** : Remplacement moderne de `kube-proxy`, routage directement dans le noyau sans surcoût iptables !
 
-![](images/kubernetes/services-iptables-overview.svg){height="200px"}
+![](images/kubernetes/services-modes-comparison.svg){height="360px"}
+
 
 ### Le Modèle Réseau Fondamental
 

@@ -63,6 +63,22 @@ et empêche les pods démesurés           (ex: Max 32 vCPU et 64GiB au total)
 
 ```yaml
 apiVersion: v1
+kind: LimitRange
+metadata:
+  name: team-limit-range
+spec:
+  limits:
+  - type: Pod
+    max:
+      cpu: "2"
+      memory: "512Mi"
+    min:
+      cpu: "100m"
+      memory: "128Mi"
+```
+
+```yaml
+apiVersion: v1
 kind: ResourceQuota
 metadata:
   name: team-quota
@@ -77,13 +93,15 @@ spec:
 
 ### Mini-Défi : Le Mystère du Pod Pending
 
-**Scénario d'incident** : Vous déployez un pod avec `requests.cpu: "4"`. 
+**Scénario d'incident** : Vous déployez un pod avec `requests.cpu: "4"`.  
+
 En regardant avec `htop` sur le Worker Node, le CPU réel consommé n'est que de 10%. Pourtant, le Pod reste bloqué en statut `Pending`. Pourquoi ?
 
 
 ### Mini-Défi : Le Mystère du Pod Pending
 
-**Scénario d'incident** : Vous déployez un pod avec `requests.cpu: "4"`. 
+**Scénario d'incident** : Vous déployez un pod avec `requests.cpu: "4"`.  
+
 En regardant avec `htop` sur le Worker Node, le CPU réel consommé n'est que de 10%. Pourtant, le Pod reste bloqué en statut `Pending`. Pourquoi ?
 
 **Réponse** : Le scheduler prend ses décisions sur la base de la **somme des Requests réservées**, et non sur la charge réelle du CPU à l'instant T ! Si les autres pods ont réservé tout le CPU théorique du nœud, le scheduler refuse d'en ajouter un nouveau.

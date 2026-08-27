@@ -88,16 +88,113 @@ Dans une démarche GitOps, **interdiction de commiter des Secrets K8s en clair d
  [ AWS Secrets Mgr / Vault ] ──► [ External Secrets Operator ] ──► [ Secret K8s local ]
 ```
 
+### Exemple d'utilisation avec ESO (Vault)
+
+```yaml
+# 1. Déclaration du SecretStore (Connexion à Vault)
+apiVersion: external-secrets.io/v1beta1
+kind: SecretStore
+metadata:
+  name: vault-store
+spec:
+  provider:
+    vault:
+      server: "https://vault.my-company.com"
+      path: "kv"
+      auth:
+        kubernetes:
+          role: "k8s-role"
+
+# 2. Déclaration du ExternalSecret
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: external-db-secret
+spec:
+  secretStoreRef:
+    name: vault-store
+    kind: SecretStore
+  target:
+    name: db-secret-from-vault  # Le nom du Secret K8s qui va être créé
+  data:
+  - secretKey: password
+    remoteRef:
+      key: my-org/prod/database
+      property: DB_PASSWORD
+```
+
+
 ### Mini-Défi : Le Mystère de la Variable Fantôme
 
 **Incident SRE** : Vous modifiez une valeur dans un `ConfigMap` existant via `kubectl edit cm app-config`. 
+
+Exemple de ConfigMap :
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+spec:
+  data:
+    db_url: "postgresql://user:pass@db-service:5432/prod"
+```
+
+Exemple d'utilisation de ce configmap :
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-config-demo
+spec:
+  containers:
+  - name: app
+    image: my-app:1.0
+    env:
+    - name: DATABASE_URL
+      valueFrom:
+        configMapKeyRef:
+          name: app-config
+          key: db_url
+```
 
 Pourtant, l'application continue d'utiliser l'ancienne valeur. Pourquoi ?
 
-
 ### Mini-Défi : Le Mystère de la Variable Fantôme
 
 **Incident SRE** : Vous modifiez une valeur dans un `ConfigMap` existant via `kubectl edit cm app-config`. 
+
+Exemple de ConfigMap :
+
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+spec:
+  data:
+    db_url: "postgresql://user:pass@db-service:5432/prod"
+```
+
+Exemple d'utilisation de ce configmap :
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-config-demo
+spec:
+  containers:
+  - name: app
+    image: my-app:1.0
+    env:
+    - name: DATABASE_URL
+      valueFrom:
+        configMapKeyRef:
+          name: app-config
+          key: db_url
+```
 
 Pourtant, l'application continue d'utiliser l'ancienne valeur. Pourquoi ?
 

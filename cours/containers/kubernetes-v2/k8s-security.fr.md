@@ -17,7 +17,10 @@
 └───────────────────────────────────────────┘
 ```
 
-![](images/kubernetes/Secure-Your-Kubernetes-Cluster-1024x586.png){height="220px"}
+- **Cloud / Datacenter** : Sécurité de l'infrastructure hôte (IAM Fournisseur, VPC, Pare-feu, chiffrement des disques).
+- **Cluster** : Protection du plan de contrôle Kubernetes (API Server, RBAC strict, chiffrement etcd, Network Policies).
+- **Container** : Durcissement du runtime (images minimales *distroless*, `runAsNonRoot`, drop des `capabilities`, profils Seccomp).
+- **Code** : Sécurité applicative et chaîne CI/CD (analyse SAST/DAST, scan des dépendances SCA, gestion externe des secrets).
 
 ### 1. Authentification & RBAC (Qui a le droit de faire quoi ?)
 
@@ -70,9 +73,9 @@ Les vieux `PodSecurityPolicy` (PSP) sont dépréciés. Le standard moderne est *
 
 | Profil PSS | Niveau de Sécurité | Restrictions Imposées |
 | :--- | :--- | :--- |
-| **`Privileged`** | 🔓 Insecure | Accès complet sans restriction (réservé aux CNI / CSI) |
-| **`Baseline`** | 🟡 Standard | Interdit les conteneurs privilégiés et accès hostPath critiques |
-| **`Restricted`** | 🔒 Durci (Prod) | Non-root obligatoire, capabilities supprimées, FS en lecture seule |
+| **`Privileged`** | Insecure | Accès complet sans restriction (réservé aux CNI / CSI) |
+| **`Baseline`** | Standard | Interdit les conteneurs privilégiés et accès hostPath critiques |
+| **`Restricted`** | Durci (Prod) | Non-root obligatoire, capabilities supprimées, FS en lecture seule |
 
 ```bash
 # Activer le mode Restricted sur un namespace en 1 commande :

@@ -59,6 +59,7 @@ Fini les certificats SSL expirés un dimanche soir à 23h !
 
 ```{.center}
 [ Ingress avec annotation ] ──► [ cert-manager ] ──► [ Let's Encrypt API ]
+                                     |
                                      │ (Challenge HTTP-01 / DNS-01)
                                      ▼
                         [ Secret TLS auto-renouvelé ]
@@ -70,13 +71,17 @@ La **Gateway API** est le successeur officiel de l'Ingress standard, conçu pour
 
 ```{.center}
 ┌─────────────────────────────────────────────────────────────┐
+│                                                             │
 │ ÉQUIPE INFRA / CLOUD (Cluster Admin)                        │
 │  ► GatewayClass : Définit le fournisseur (Envoy, Cilium...) │
 │  ► Gateway : Déclare le point d'entrée, IP et ports 80/443  │
+│                                                             │
 ├─────────────────────────────────────────────────────────────┤
+│                                                             │
 │ ÉQUIPE DÉVELOPPEMENT / APPLICATION                          │
 │  ► HTTPRoute : Règle de routage autonome par namespace      │
 │  ► GRPCRoute / TCPRoute : Support natif au-delà du HTTP !   │
+│                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
 

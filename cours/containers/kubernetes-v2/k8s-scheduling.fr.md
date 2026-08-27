@@ -11,7 +11,7 @@
  des machines équipées de GPU"                  aucun pod standard n'y entre !"
 ```
 
-![](images/kubernetes/affinities.png){height="220px"}
+![](images/kubernetes/affinities.png){height="350px"}
 
 ### 1. Du Simple `nodeSelector` à la `nodeAffinity`
 
@@ -68,7 +68,7 @@ spec:
   2. `PreferNoSchedule` : Évite si possible, mais accepte en dernier recours.
   3. `NoExecute` : **Expulse immédiatement** les pods déjà présents s'ils ne tolèrent pas le taint !
 
-### Résumé Visuel des Règles de Placement
+### Résumé des Règles de Placement
 
 | Mécanisme | Portée | Type de Règle | Cas d'Usage Typique |
 | :--- | :--- | :--- | :--- |

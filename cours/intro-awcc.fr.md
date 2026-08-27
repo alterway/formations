@@ -8,9 +8,9 @@
 
 
 
-Les cours sont maintenus et donnés par : <https://www.alterway.fr/cloud-consulting>
+Les cours sont maintenus et donnés par : <https://www.alterway.fr/formation>
 
-![](images/logo-awcc.jpg){height="100px"}
+![](images/logo-awcc.jpg){height="150px"}
 
 - Copyright © 2014 - 2026 Alter Way Cloud Consulting
 - Licence : [Creative Commons BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.fr)

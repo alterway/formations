@@ -4,14 +4,20 @@
 
 ```{.center}
 ┌─────────────────────────────────────────────────────────────┐
+|                                                             |
 │ 1. HPA (Horizontal Pod Autoscaler) : Varie le NOMBRE de Pods│
-│    [ Pod ] ──► [ Pod ] [ Pod ] [ Pod ] [ Pod ]              │
+│    [ Pod ] ──► [ Pod ] [ Pod ] [ Pod ] [ Pod ]              |
+|                                                             |
 ├─────────────────────────────────────────────────────────────┤
-│ 2. VPA (Vertical Pod Autoscaler) : Varie la TAILLE du Pod   │
-│    [ Petit Pod (1 CPU) ] ──► [ GROS Pod (4 CPU) ]           │
+|                                                             |
+| 2. VPA (Vertical Pod Autoscaler) : Varie la TAILLE du Pod   |
+│    [ Petit Pod (1 CPU) ] ──► [ GROS Pod (4 CPU) ]           |
+|                                                             |
 ├─────────────────────────────────────────────────────────────┤
-│ 3. Cluster Autoscaler / Karpenter : Varie le NOMBRE de NŒUDS│
-│    [ Node 1 ] ──► [ Node 1 ] [ Node 2 ] [ Node 3 ]          │
+|                                                             |
+| 3. Cluster Autoscaler / Karpenter : Varie le NOMBRE de NŒUDS|
+│    [ Node 1 ] ──► [ Node 1 ] [ Node 2 ] [ Node 3 ]          |
+|                                                             |
 └─────────────────────────────────────────────────────────────┘
 ```
 

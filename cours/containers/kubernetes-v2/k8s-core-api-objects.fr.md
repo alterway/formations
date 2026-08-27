@@ -23,7 +23,7 @@
 
 ### 1. Le Pod : L'Atome Indivisible
 
-![](images/kubernetes/kubernetes-pod.png){height="180px"}
+![](images/kubernetes/kubernetes-pod.png){height="280px"}
 
 - **Définition** : La plus petite unité déployable dans Kubernetes.
 - **Ce que partagent les conteneurs d'un même Pod** :
@@ -65,7 +65,9 @@ Utilisés par Kubernetes pour sélectionner              Utilisés par des outil
 - tier: backend                                        - ingress.class: nginx
 ```
 
-> **Règle d'or** : Si Kubernetes doit filtrer ou router dessus $\rightarrow$ **Label**. Si c'est informatif $\rightarrow$ **Annotation**.
+> **Règle d'or** : 
+ - Si Kubernetes doit filtrer ou router dessus $\rightarrow$ **Label**. 
+ - Si c'est informatif $\rightarrow$ **Annotation**.
 
 ### 3. Le Deployment & ReplicaSet : Piloter les Versions
 
@@ -105,7 +107,7 @@ kubectl rollout undo deployment/web-app
 
 ### 4. StatefulSet : Pour les Données & l'Ordre Strict
 
-Quand vos applications ne sont pas jetables (bases de données, Kafka, ElasticSearch) :
+Quand vos applications ne sont pas jetables (bases de données, Kafka, ElasticSearch, postgress, mongo, redis, etc) :
 
 ```{.center}
 [ StatefulSet: redis ]
@@ -149,7 +151,7 @@ spec:
 
 ### 6. Strategies de rolling Update
 
-![](images/kubernetes/rollingupdate.png){height=400px}
+![](images/kubernetes/rollingupdate.png){height=500px}
 
 
 ### Mini-Défi : Le « Piège du Sélecteur »

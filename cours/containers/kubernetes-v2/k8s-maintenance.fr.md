@@ -70,7 +70,6 @@ spec:
 
 ### 4. Sauvegarde & Disaster Recovery avec Velero
 
-![](images/kubernetes/dashboard-ns.png){height="180px"}
 
 - **Velero (CNCF)** : L'outil standard de sauvegarde et de migration de clusters.
 - Sauvegarde la totalité des manifests dans un bucket S3/GCS et déclenche des snapshots des disques persistants (CSI).
@@ -82,6 +81,7 @@ velero backup create prod-backup-$(date +%F) --include-namespaces production
 # Restaurer l'environnement complet en cas de désastre
 velero restore create --from-backup prod-backup-2026-08-25
 ```
+
 
 ### Mini-Défi : Le Drain Bloqué
 

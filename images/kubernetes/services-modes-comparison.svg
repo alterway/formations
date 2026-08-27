@@ -1,0 +1,303 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 560" width="100%" height="100%" style="background-color: #f8fafc; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <!-- Shadow filter -->
+    <filter id="shadow" x="-2%" y="-2%" width="104%" height="106%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.06"/>
+    </filter>
+    <filter id="card-shadow" x="-2%" y="-2%" width="104%" height="106%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.08"/>
+    </filter>
+    
+    <!-- Markers for arrows -->
+    <marker id="arrow-data" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#1e293b"/>
+    </marker>
+    <marker id="arrow-data-ebpf" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#059669"/>
+    </marker>
+    <marker id="arrow-ctrl" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M 0 2 L 6 5 L 0 8 z" fill="#64748b"/>
+    </marker>
+  </defs>
+
+  <!-- Title banner -->
+  <text x="800" y="38" text-anchor="middle" font-size="24" font-weight="800" fill="#0f172a" letter-spacing="0.5">Évolution des Modes Réseau Kubernetes (kube-proxy &amp; eBPF)</text>
+  <text x="800" y="62" text-anchor="middle" font-size="14" font-weight="500" fill="#64748b">Comparatif de l'acheminement du trafic Service (ClusterIP) vers les Pods applicatifs</text>
+
+  <!-- ================================================================================== -->
+  <!-- 1. USERSPACE MODE -->
+  <!-- ================================================================================== -->
+  <g transform="translate(25, 80)">
+    <!-- Panel Background -->
+    <rect width="365" height="455" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5" filter="url(#card-shadow)"/>
+    
+    <!-- Header -->
+    <rect width="365" height="52" rx="12" fill="#f1f5f9"/>
+    <rect y="40" width="365" height="12" fill="#f1f5f9"/>
+    <rect x="12" y="12" width="28" height="28" rx="6" fill="#e2e8f0"/>
+    <text x="26" y="31" text-anchor="middle" font-size="14" font-weight="700" fill="#475569">1</text>
+    <text x="48" y="28" font-size="16" font-weight="700" fill="#0f172a">Userspace</text>
+    <text x="48" y="43" font-size="11" font-weight="600" fill="#dc2626">Legacy (K8s v1.0 - v1.2)</text>
+
+    <!-- Node container -->
+    <rect x="15" y="65" width="335" height="325" rx="8" fill="#fafafa" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4,3"/>
+    <text x="25" y="83" font-size="11" font-weight="700" fill="#94a3b8" letter-spacing="1">WORKER NODE</text>
+
+    <!-- Control plane: apiserver -->
+    <rect x="225" y="85" width="110" height="30" rx="6" fill="#f3e8ff" stroke="#c084fc" stroke-width="1.2"/>
+    <text x="280" y="104" text-anchor="middle" font-size="11" font-weight="600" fill="#7e22ce">apiserver</text>
+
+    <!-- kube-proxy (User space) -->
+    <rect x="190" y="145" width="145" height="36" rx="6" fill="#dcfce7" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="262" y="163" text-anchor="middle" font-size="12" font-weight="700" fill="#15803d">kube-proxy</text>
+    <text x="262" y="175" text-anchor="middle" font-size="9" font-weight="600" fill="#166534">(Processus Userspace)</text>
+
+    <!-- Client -->
+    <rect x="25" y="145" width="85" height="36" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="67" y="167" text-anchor="middle" font-size="12" font-weight="700" fill="#b45309">Client</text>
+
+    <!-- iptables interface (Kernel) -->
+    <rect x="55" y="215" width="255" height="34" rx="6" fill="#fee2e2" stroke="#f87171" stroke-width="1.2"/>
+    <text x="182" y="231" text-anchor="middle" font-size="11" font-weight="700" fill="#b91c1c">iptables (Capture Kernel)</text>
+    <text x="182" y="243" text-anchor="middle" font-size="9" font-weight="500" fill="#dc2626">Redirection vers port local kube-proxy</text>
+
+    <!-- Backend Pods -->
+    <g transform="translate(25, 290)">
+      <rect x="0" y="0" width="95" height="60" rx="6" fill="#e0f2fe" stroke="#38bdf8" stroke-width="1.2"/>
+      <text x="47" y="24" text-anchor="middle" font-size="11" font-weight="700" fill="#0369a1">Pod 1</text>
+      <text x="47" y="42" text-anchor="middle" font-size="9" fill="#0284c7">:8080</text>
+
+      <rect x="110" y="0" width="95" height="60" rx="6" fill="#e0f2fe" stroke="#38bdf8" stroke-width="1.2"/>
+      <text x="157" y="24" text-anchor="middle" font-size="11" font-weight="700" fill="#0369a1">Pod 2</text>
+      <text x="157" y="42" text-anchor="middle" font-size="9" fill="#0284c7">:8080</text>
+
+      <rect x="220" y="0" width="95" height="60" rx="6" fill="#e0f2fe" stroke="#38bdf8" stroke-width="1.2"/>
+      <text x="267" y="24" text-anchor="middle" font-size="11" font-weight="700" fill="#0369a1">Pod 3</text>
+      <text x="267" y="42" text-anchor="middle" font-size="9" fill="#0284c7">:8080</text>
+    </g>
+
+    <!-- Arrows Userspace -->
+    <!-- apiserver -> kube-proxy -->
+    <path d="M 280 115 L 280 142" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3" marker-end="url(#arrow-ctrl)"/>
+    <!-- Client -> iptables -->
+    <path d="M 67 181 L 67 212" fill="none" stroke="#1e293b" stroke-width="2.5" marker-end="url(#arrow-data)"/>
+    <!-- iptables -> kube-proxy (Context Switch 1) -->
+    <path d="M 215 215 L 215 184" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="3,2" marker-end="url(#arrow-data)"/>
+    <text x="218" y="202" font-size="8" font-weight="700" fill="#dc2626">Switch 1</text>
+    <!-- kube-proxy -> Pod (Context Switch 2) -->
+    <path d="M 255 181 C 255 240 160 250 160 286" fill="none" stroke="#dc2626" stroke-width="2" marker-end="url(#arrow-data)"/>
+    <text x="260" y="202" font-size="8" font-weight="700" fill="#dc2626">Switch 2</text>
+
+    <!-- Footer verdict -->
+    <rect x="15" y="400" width="335" height="42" rx="6" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+    <text x="25" y="417" font-size="10.5" font-weight="700" fill="#991b1b">🔴 Double aller-retour Kernel ↔ User</text>
+    <text x="25" y="432" font-size="9.5" font-weight="500" fill="#b91c1c">Goulot d'étranglement CPU et latence élevée.</text>
+  </g>
+
+  <!-- ================================================================================== -->
+  <!-- 2. IPTABLES MODE -->
+  <!-- ================================================================================== -->
+  <g transform="translate(415, 80)">
+    <rect width="365" height="455" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5" filter="url(#card-shadow)"/>
+    
+    <rect width="365" height="52" rx="12" fill="#f1f5f9"/>
+    <rect y="40" width="365" height="12" fill="#f1f5f9"/>
+    <rect x="12" y="12" width="28" height="28" rx="6" fill="#e2e8f0"/>
+    <text x="26" y="31" text-anchor="middle" font-size="14" font-weight="700" fill="#475569">2</text>
+    <text x="48" y="28" font-size="16" font-weight="700" fill="#0f172a">iptables</text>
+    <text x="48" y="43" font-size="11" font-weight="600" fill="#d97706">Standard K8s (v1.2+)</text>
+
+    <rect x="15" y="65" width="335" height="325" rx="8" fill="#fafafa" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4,3"/>
+    <text x="25" y="83" font-size="11" font-weight="700" fill="#94a3b8" letter-spacing="1">WORKER NODE</text>
+
+    <!-- Control plane: apiserver -->
+    <rect x="225" y="85" width="110" height="30" rx="6" fill="#f3e8ff" stroke="#c084fc" stroke-width="1.2"/>
+    <text x="280" y="104" text-anchor="middle" font-size="11" font-weight="600" fill="#7e22ce">apiserver</text>
+
+    <!-- kube-proxy (Contrôleur seulement) -->
+    <rect x="190" y="135" width="145" height="34" rx="6" fill="#dcfce7" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="262" y="151" text-anchor="middle" font-size="12" font-weight="700" fill="#15803d">kube-proxy</text>
+    <text x="262" y="163" text-anchor="middle" font-size="8.5" font-weight="600" fill="#166534">(Contrôleur hors chemin de données)</text>
+
+    <!-- Client -->
+    <rect x="25" y="135" width="85" height="34" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="67" y="157" text-anchor="middle" font-size="12" font-weight="700" fill="#b45309">Client</text>
+
+    <!-- iptables Engine in Kernel -->
+    <rect x="25" y="195" width="310" height="55" rx="8" fill="#fef08a" stroke="#eab308" stroke-width="1.5"/>
+    <text x="180" y="217" text-anchor="middle" font-size="12" font-weight="700" fill="#854d0e">iptables / Netfilter (Kernel)</text>
+    <text x="180" y="234" text-anchor="middle" font-size="10" font-weight="600" fill="#a16207">Règles séquentielles PREROUTING / NAT</text>
+
+    <!-- Backend Pods -->
+    <g transform="translate(25, 290)">
+      <rect x="0" y="0" width="95" height="60" rx="6" fill="#e0f2fe" stroke="#38bdf8" stroke-width="1.2"/>
+      <text x="47" y="24" text-anchor="middle" font-size="11" font-weight="700" fill="#0369a1">Pod 1</text>
+      <text x="47" y="42" text-anchor="middle" font-size="9" fill="#0284c7">:8080</text>
+
+      <rect x="110" y="0" width="95" height="60" rx="6" fill="#e0f2fe" stroke="#38bdf8" stroke-width="1.2"/>
+      <text x="157" y="24" text-anchor="middle" font-size="11" font-weight="700" fill="#0369a1">Pod 2</text>
+      <text x="157" y="42" text-anchor="middle" font-size="9" fill="#0284c7">:8080</text>
+
+      <rect x="220" y="0" width="95" height="60" rx="6" fill="#e0f2fe" stroke="#38bdf8" stroke-width="1.2"/>
+      <text x="267" y="24" text-anchor="middle" font-size="11" font-weight="700" fill="#0369a1">Pod 3</text>
+      <text x="267" y="42" text-anchor="middle" font-size="9" fill="#0284c7">:8080</text>
+    </g>
+
+    <!-- Arrows iptables -->
+    <!-- apiserver -> kube-proxy -->
+    <path d="M 280 115 L 280 132" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3" marker-end="url(#arrow-ctrl)"/>
+    <!-- kube-proxy -> iptables config -->
+    <path d="M 262 169 L 262 191" fill="none" stroke="#16a34a" stroke-width="1.8" stroke-dasharray="3,2" marker-end="url(#arrow-ctrl)"/>
+    <text x="268" y="183" font-size="8" font-weight="600" fill="#15803d">sync règles</text>
+    <!-- Client -> iptables -->
+    <path d="M 67 169 L 67 192" fill="none" stroke="#1e293b" stroke-width="2.5" marker-end="url(#arrow-data)"/>
+    <!-- iptables -> Pods -->
+    <path d="M 100 250 L 50 286" fill="none" stroke="#1e293b" stroke-width="2" marker-end="url(#arrow-data)"/>
+    <path d="M 180 250 L 160 286" fill="none" stroke="#1e293b" stroke-width="2.5" marker-end="url(#arrow-data)"/>
+    <path d="M 260 250 L 270 286" fill="none" stroke="#1e293b" stroke-width="2" marker-end="url(#arrow-data)"/>
+
+    <!-- Footer verdict -->
+    <rect x="15" y="400" width="335" height="42" rx="6" fill="#fffbeb" stroke="#fde68a" stroke-width="1"/>
+    <text x="25" y="417" font-size="10.5" font-weight="700" fill="#92400e">🟡 Traitement 100% Kernel mais O(N)</text>
+    <text x="25" y="432" font-size="9.5" font-weight="500" fill="#b45309">Sature et ralentit au-delà de 5 000 - 10 000 services.</text>
+  </g>
+
+  <!-- ================================================================================== -->
+  <!-- 3. IPVS MODE -->
+  <!-- ================================================================================== -->
+  <g transform="translate(805, 80)">
+    <rect width="365" height="455" rx="12" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5" filter="url(#card-shadow)"/>
+    
+    <rect width="365" height="52" rx="12" fill="#f1f5f9"/>
+    <rect y="40" width="365" height="12" fill="#f1f5f9"/>
+    <rect x="12" y="12" width="28" height="28" rx="6" fill="#e2e8f0"/>
+    <text x="26" y="31" text-anchor="middle" font-size="14" font-weight="700" fill="#475569">3</text>
+    <text x="48" y="28" font-size="16" font-weight="700" fill="#0f172a">IPVS (IP Virtual Server)</text>
+    <text x="48" y="43" font-size="11" font-weight="600" fill="#2563eb">Haute Volumétrie (K8s v1.11+)</text>
+
+    <rect x="15" y="65" width="335" height="325" rx="8" fill="#fafafa" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="4,3"/>
+    <text x="25" y="83" font-size="11" font-weight="700" fill="#94a3b8" letter-spacing="1">WORKER NODE</text>
+
+    <!-- Control plane: apiserver -->
+    <rect x="225" y="85" width="110" height="30" rx="6" fill="#f3e8ff" stroke="#c084fc" stroke-width="1.2"/>
+    <text x="280" y="104" text-anchor="middle" font-size="11" font-weight="600" fill="#7e22ce">apiserver</text>
+
+    <!-- kube-proxy (IPVS controller) -->
+    <rect x="190" y="135" width="145" height="34" rx="6" fill="#dcfce7" stroke="#4ade80" stroke-width="1.5"/>
+    <text x="262" y="151" text-anchor="middle" font-size="12" font-weight="700" fill="#15803d">kube-proxy (IPVS)</text>
+    <text x="262" y="163" text-anchor="middle" font-size="8.5" font-weight="600" fill="#166534">(Gère ipset &amp; ipvsadm)</text>
+
+    <!-- Client -->
+    <rect x="25" y="135" width="85" height="34" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="67" y="157" text-anchor="middle" font-size="12" font-weight="700" fill="#b45309">Client</text>
+
+    <!-- IPVS Engine in Kernel -->
+    <rect x="25" y="195" width="310" height="55" rx="8" fill="#e0e7ff" stroke="#818cf8" stroke-width="1.5"/>
+    <text x="180" y="217" text-anchor="middle" font-size="12" font-weight="700" fill="#3730a3">IPVS Hash Tables L4 (Kernel)</text>
+    <text x="180" y="234" text-anchor="middle" font-size="10" font-weight="600" fill="#4338ca">Résolution O(1) + ipset (rr, lc, dh, sed)</text>
+
+    <!-- Backend Pods (Real Servers) -->
+    <g transform="translate(25, 290)">
+      <rect x="0" y="0" width="95" height="60" rx="6" fill="#e0f2fe" stroke="#38bdf8" stroke-width="1.2"/>
+      <text x="47" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="#0369a1">Real Server 1</text>
+      <text x="47" y="34" text-anchor="middle" font-size="9" fill="#0284c7">Pod 1</text>
+      <text x="47" y="48" text-anchor="middle" font-size="8.5" fill="#0369a1">Weight: 1</text>
+
+      <rect x="110" y="0" width="95" height="60" rx="6" fill="#e0f2fe" stroke="#38bdf8" stroke-width="1.2"/>
+      <text x="157" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="#0369a1">Real Server 2</text>
+      <text x="157" y="34" text-anchor="middle" font-size="9" fill="#0284c7">Pod 2</text>
+      <text x="157" y="48" text-anchor="middle" font-size="8.5" fill="#0369a1">Weight: 1</text>
+
+      <rect x="220" y="0" width="95" height="60" rx="6" fill="#e0f2fe" stroke="#38bdf8" stroke-width="1.2"/>
+      <text x="267" y="20" text-anchor="middle" font-size="11" font-weight="700" fill="#0369a1">Real Server 3</text>
+      <text x="267" y="34" text-anchor="middle" font-size="9" fill="#0284c7">Pod 3</text>
+      <text x="267" y="48" text-anchor="middle" font-size="8.5" fill="#0369a1">Weight: 1</text>
+    </g>
+
+    <!-- Arrows IPVS -->
+    <!-- apiserver -> kube-proxy -->
+    <path d="M 280 115 L 280 132" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3" marker-end="url(#arrow-ctrl)"/>
+    <!-- kube-proxy -> IPVS config -->
+    <path d="M 262 169 L 262 191" fill="none" stroke="#16a34a" stroke-width="1.8" stroke-dasharray="3,2" marker-end="url(#arrow-ctrl)"/>
+    <text x="268" y="183" font-size="8" font-weight="600" fill="#15803d">màj ipset</text>
+    <!-- Client -> IPVS -->
+    <path d="M 67 169 L 67 192" fill="none" stroke="#1e293b" stroke-width="2.5" marker-end="url(#arrow-data)"/>
+    <!-- IPVS -> Pods -->
+    <path d="M 100 250 L 50 286" fill="none" stroke="#1e293b" stroke-width="2" marker-end="url(#arrow-data)"/>
+    <path d="M 180 250 L 160 286" fill="none" stroke="#1e293b" stroke-width="2.5" marker-end="url(#arrow-data)"/>
+    <path d="M 260 250 L 270 286" fill="none" stroke="#1e293b" stroke-width="2" marker-end="url(#arrow-data)"/>
+
+    <!-- Footer verdict -->
+    <rect x="15" y="400" width="335" height="42" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/>
+    <text x="25" y="417" font-size="10.5" font-weight="700" fill="#1e40af">🟢 Performance O(1) &amp; Algorithmes avancés</text>
+    <text x="25" y="432" font-size="9.5" font-weight="500" fill="#1d4ed8">Supporte > 100 000 services sans dégradation.</text>
+  </g>
+
+  <!-- ================================================================================== -->
+  <!-- 4. eBPF / CILIUM MODE -->
+  <!-- ================================================================================== -->
+  <g transform="translate(1195, 80)">
+    <rect width="365" height="455" rx="12" fill="#ffffff" stroke="#059669" stroke-width="2" filter="url(#card-shadow)"/>
+    
+    <rect width="365" height="52" rx="12" fill="#ecfdf5"/>
+    <rect y="40" width="365" height="12" fill="#ecfdf5"/>
+    <rect x="12" y="12" width="28" height="28" rx="6" fill="#10b981"/>
+    <text x="26" y="31" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">4</text>
+    <text x="48" y="28" font-size="16" font-weight="700" fill="#065f46">eBPF (Cilium)</text>
+    <text x="48" y="43" font-size="11" font-weight="600" fill="#059669">Révolution Cloud Native (v1.28+)</text>
+
+    <rect x="15" y="65" width="335" height="325" rx="8" fill="#f0fdf4" stroke="#86efac" stroke-width="1" stroke-dasharray="4,3"/>
+    <text x="25" y="83" font-size="11" font-weight="700" fill="#16a34a" letter-spacing="1">WORKER NODE (eBPF REPLACEMENT)</text>
+
+    <!-- Control plane: apiserver -->
+    <rect x="225" y="85" width="110" height="30" rx="6" fill="#f3e8ff" stroke="#c084fc" stroke-width="1.2"/>
+    <text x="280" y="104" text-anchor="middle" font-size="11" font-weight="600" fill="#7e22ce">apiserver</text>
+
+    <!-- Cilium / eBPF Agent (Sans kube-proxy !) -->
+    <rect x="175" y="135" width="160" height="34" rx="6" fill="#a7f3d0" stroke="#10b981" stroke-width="1.5"/>
+    <text x="255" y="151" text-anchor="middle" font-size="12" font-weight="700" fill="#065f46">cilium-agent (eBPF)</text>
+    <text x="255" y="163" text-anchor="middle" font-size="8.5" font-weight="600" fill="#047857">(kube-proxy-replacement)</text>
+
+    <!-- Client -->
+    <rect x="25" y="135" width="85" height="34" rx="6" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="67" y="157" text-anchor="middle" font-size="12" font-weight="700" fill="#b45309">Client</text>
+
+    <!-- eBPF Kernel Programs & Maps -->
+    <rect x="25" y="195" width="310" height="55" rx="8" fill="#d1fae5" stroke="#10b981" stroke-width="1.5"/>
+    <text x="180" y="217" text-anchor="middle" font-size="12" font-weight="700" fill="#065f46">eBPF Maps &amp; Programs (Socket/XDP)</text>
+    <text x="180" y="234" text-anchor="middle" font-size="10" font-weight="600" fill="#047857">Bypass Netfilter / iptables • Zéro-copie</text>
+
+    <!-- Backend Pods -->
+    <g transform="translate(25, 290)">
+      <rect x="0" y="0" width="95" height="60" rx="6" fill="#e0f2fe" stroke="#38bdf8" stroke-width="1.2"/>
+      <text x="47" y="24" text-anchor="middle" font-size="11" font-weight="700" fill="#0369a1">Pod 1</text>
+      <text x="47" y="42" text-anchor="middle" font-size="9" fill="#0284c7">Direct veth</text>
+
+      <rect x="110" y="0" width="95" height="60" rx="6" fill="#e0f2fe" stroke="#38bdf8" stroke-width="1.2"/>
+      <text x="157" y="24" text-anchor="middle" font-size="11" font-weight="700" fill="#0369a1">Pod 2</text>
+      <text x="157" y="42" text-anchor="middle" font-size="9" fill="#0284c7">Direct veth</text>
+
+      <rect x="220" y="0" width="95" height="60" rx="6" fill="#e0f2fe" stroke="#38bdf8" stroke-width="1.2"/>
+      <text x="267" y="24" text-anchor="middle" font-size="11" font-weight="700" fill="#0369a1">Pod 3</text>
+      <text x="267" y="42" text-anchor="middle" font-size="9" fill="#0284c7">Direct veth</text>
+    </g>
+
+    <!-- Arrows eBPF -->
+    <!-- apiserver -> cilium-agent -->
+    <path d="M 280 115 L 280 132" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3" marker-end="url(#arrow-ctrl)"/>
+    <!-- cilium-agent -> BPF Maps -->
+    <path d="M 255 169 L 255 191" fill="none" stroke="#059669" stroke-width="1.8" stroke-dasharray="3,2" marker-end="url(#arrow-ctrl)"/>
+    <text x="262" y="183" font-size="8" font-weight="600" fill="#047857">BPF Maps</text>
+    <!-- Client -> eBPF Hook -->
+    <path d="M 67 169 L 67 192" fill="none" stroke="#059669" stroke-width="2.5" marker-end="url(#arrow-data-ebpf)"/>
+    <!-- eBPF -> Pods direct socket / XDP -->
+    <path d="M 100 250 L 50 286" fill="none" stroke="#059669" stroke-width="2.2" marker-end="url(#arrow-data-ebpf)"/>
+    <path d="M 180 250 L 160 286" fill="none" stroke="#059669" stroke-width="2.8" marker-end="url(#arrow-data-ebpf)"/>
+    <path d="M 260 250 L 270 286" fill="none" stroke="#059669" stroke-width="2.2" marker-end="url(#arrow-data-ebpf)"/>
+
+    <!-- Footer verdict -->
+    <rect x="15" y="400" width="335" height="42" rx="6" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+    <text x="25" y="417" font-size="10.5" font-weight="700" fill="#166534">🚀 Zéro-copie, Routage direct &amp; Observabilité L7</text>
+    <text x="25" y="432" font-size="9.5" font-weight="500" fill="#15803d">Supprime kube-proxy et le surcoût de la pile TCP/IP.</text>
+  </g>
+</svg>
