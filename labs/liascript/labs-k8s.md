@@ -2058,7 +2058,7 @@ Machine : **master**
 
 
 
-### Postgres's Password in a secret (As environment variable)
+### Mot de passe Postgres dans un secret (variable d'env)
 
 
 ```bash +.
@@ -3648,9 +3648,11 @@ Sans surprise le noeud master. :)
 
 <hr>
 
-### Topology Spread Constraints (Répartition Haute Disponibilité)
+### Topology Spread Constraints
 
 **Topology Spread Constraints**
+
+Répartition Haute Disponibilité
 
 Dans les architectures haute disponibilité en production (notamment en environnement multi-nœuds ou multi-zones de disponibilité dans le Cloud), il est crucial d'éviter que tous les réplicas d'une application ne soient concentrés sur un seul et même nœud ou une seule zone de panne (*failure domain*).
 
@@ -6912,7 +6914,7 @@ vérifiez la répartition des requetes
 
 <hr>
 
-### Gateway API (Le standard moderne de routage K8s v1.29+)
+### Gateway API
 
 **Pourquoi la Gateway API ?**
 

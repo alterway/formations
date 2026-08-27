@@ -66,6 +66,7 @@ Utilisés par Kubernetes pour sélectionner              Utilisés par des outil
 ```
 
 > **Règle d'or** : 
+
  - Si Kubernetes doit filtrer ou router dessus $\rightarrow$ **Label**. 
  - Si c'est informatif $\rightarrow$ **Annotation**.
 
