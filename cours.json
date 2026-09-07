@@ -1,102 +1,24 @@
 {
-  "cloud": {
-    "course_name": "cloud",
-    "course_description": "Formation Cloud",
+  "docker-v2": {
+    "course_name": "DOCKER",
+    "course_description": "Formation Docker V2 - Des Fondations Linux à la Production Cloud Native",
     "modules": [
       "intro-awcc",
-      "intro",
-      "cloud/cloud-introduction",
-      "cloud/cloud"
-    ]
-  },
-  "openstack": {
-    "course_name": "openstack",
-    "course_description": "Formation OpenStack administrateur",
-    "modules": [
-      "intro-awcc",
-      "intro",
-      "cloud/cloud-introduction",
-      "openstack/openstack-user-introduction",
-      "openstack/openstack-introduction",
-      "cloud/cloud",
-      "openstack/openstack-presentation",
-      "openstack/openstack-presentation-inside",
-      "openstack/openstack-utilisation",
-      "openstack/openstack-deploiement",
-      "openstack/openstack-deploiement-prod",
-      "cloud/archi-cloud-dev",
-      "cloud/archi-cloud-infra",
-      "openstack/openstack-conclusion"
-    ]
-  },
-  "openstack-ops": {
-    "course_name": "openstack-ops",
-    "course_description": "Formation OpenStack administrateur",
-    "modules": [
-      "intro-awcc",
-      "intro",
-      "openstack/openstack-introduction",
-      "openstack/openstack-presentation",
-      "openstack/openstack-presentation-inside",
-      "openstack/openstack-deploiement",
-      "openstack/openstack-deploiement-avance",
-      "openstack/openstack-deploiement-prod",
-      "openstack/openstack-conclusion"
-    ]
-  },
-  "openstack-user": {
-    "course_name": "openstack-user",
-    "course_description": "Formation OpenStack utilisateur",
-    "modules": [
-      "intro-awcc",
-      "intro",
-      "cloud/cloud-introduction",
-      "openstack/openstack-introduction",
-      "cloud/cloud",
-      "cloud/cloud-avance",
-      "openstack/openstack-presentation",
-      "openstack/openstack-utilisation",
-      "cloud/archi-cloud-dev",
-      "cloud/archi-cloud-infra",
-      "openstack/openstack-user-conclusion"
-    ]
-  },
-  "openstack-admin-user": {
-    "course_name": "openstack-admin-user",
-    "course_description": "Formation OpenStack Ops Users",
-    "modules": [
-      "intro-awcc",
-      "intro",
-      "openstack/openstack-user-introduction",
-      "openstack/openstack-introduction",
-      "openstack/openstack-presentation",
-      "openstack/openstack-presentation-inside",
-      "openstack/openstack-utilisation",
-      "openstack/openstack-deploiement",
-      "openstack/openstack-deploiement-avance",
-      "openstack/openstack-deploiement-prod",
-      "cloud/archi-cloud-dev",
-      "cloud/archi-cloud-infra",
-      "openstack/openstack-conclusion"
-    ]
-  },
-  "docker": {
-    "course_name": "docker",
-    "course_description": "Formation Docker",
-    "modules": [
-      "intro-awcc",
-      "containers/containers-introduction",
-      "containers/containers-runtimes",
-      "containers/docker-concepts",
-      "containers/docker-bsr",
-      "containers/docker-ecosystem",
-      "containers/docker-hosts",
-      "containers/docker-orchestration",
-      "containers/docker-monitoring",
-      "containers/kubernetes/k8s-concepts",
-      "containers/kubernetes/k8s-architecture",
-      "containers/k8s-openshift-introduction",
-      "containers/kubernetes/conclusion"
+      "containers/docker-v2/docker-labs",
+      "containers/docker-v2/docker-introduction",
+      "containers/docker-v2/docker-architecture",
+      "containers/docker-v2/docker-containers-lifecycle",
+      "containers/docker-v2/docker-images-fundamentals",
+      "containers/docker-v2/docker-dockerfile-mastery",
+      "containers/docker-v2/docker-buildx-buildkit",
+      "containers/docker-v2/docker-multistage-optimizations",
+      "containers/docker-v2/docker-storage-volumes",
+      "containers/docker-v2/docker-networking",
+      "containers/docker-v2/docker-compose",
+      "containers/docker-v2/docker-security",
+      "containers/docker-v2/docker-operations-troubleshooting",
+      "containers/docker-v2/docker-orchestration-swarm-k8s",
+      "containers/docker-v2/conclusion"
     ]
   },
   "kubernetes-full": {
@@ -163,82 +85,6 @@
       "containers/kubernetes-v2/k8s-argocd-intro",
       "containers/kubernetes-v2/k8s-certification",
       "containers/kubernetes-v2/conclusion"
-    ]
-  },
-  "kubernetes-beginer": {
-    "course_name": "kubernetes-beginer",
-    "course_description": "Kubernetes Beginer 2 jours",
-    "modules": [
-      "intro-awcc",
-      "containers/kubernetes/k8s-labs",
-      "containers/kubernetes/k8s-governance-short",
-      "containers/kubernetes/k8s-architecture",
-      "containers/kubernetes/k8s-installation",
-      "containers/kubernetes/k8s-usage",
-      "containers/kubernetes/k8s-core-api-objects",
-      "containers/kubernetes/k8s-imperative-declarative-commands",
-      "containers/kubernetes/k8s-networking",
-      "containers/kubernetes/k8s-volumes",
-      "containers/kubernetes/k8s-workloads-configuration",
-      "containers/kubernetes/k8s-resources-handling",
-      "containers/kubernetes/k8s-observability-monitoring",
-      "containers/kubernetes/k8s-scheduling",
-      "containers/kubernetes/k8s-logging-monitoring",
-      "containers/kubernetes/k8s-applications",
-      "containers/kubernetes/k8s-autoscaling",
-      "containers/kubernetes/k8s-operations",
-      "containers/kubernetes/k8s-security",
-      "containers/kubernetes/k8s-helm-intro",
-      "containers/kubernetes/k8s-kustomize-intro",
-      "containers/kubernetes/k8s-argocd-intro",
-      "containers/kubernetes/k8s-ingress",
-      "containers/kubernetes/k8s-maintenance",
-      "containers/kubernetes/k8s-troubleshouting",
-      "containers/kubernetes/k8s-certification",
-      "containers/kubernetes/conclusion"
-    ]
-  },
-  "kubernetes-user": {
-    "course_name": "kubernetes-user",
-    "course_description": "Formation Kubernetes Utilisateur",
-    "modules": [
-      "intro-awcc",
-      "containers/kubernetes/k8s-governance",
-      "containers/kubernetes/k8s-architecture",
-      "containers/kubernetes/k8s-core-api-objects",
-      "containers/kubernetes/k8s-networking",
-      "containers/kubernetes/k8s-volumes",
-      "containers/kubernetes/k8s-workloads-configuration",
-      "containers/kubernetes/k8s-resources-handling",
-      "containers/kubernetes/k8s-observability-monitoring",
-      "containers/kubernetes/k8s-usage",
-      "containers/kubernetes/k8s-operations",
-      "containers/kubernetes/conclusion"
-    ]
-  },
-  "kubernetes-ops": {
-    "course_name": "kubernetes-ops",
-    "course_description": "Formation Kubernetes Opérateur",
-    "modules": [
-      "intro-awcc",
-      "containers/kubernetes/k8s-governance",
-      "containers/kubernetes/k8s-architecture",
-      "containers/kubernetes/k8s-installation",
-      "containers/kubernetes/k8s-operations",
-      "containers/kubernetes/k8s-scheduling",
-      "containers/kubernetes/k8s-security",
-      "containers/kubernetes/k8s-maintenance",
-      "containers/kubernetes/conclusion"
-    ]
-  },
-  "aws": {
-    "course_name": "Amazon Web Services",
-    "course_description": "Formation Cloud Amazon Web Services",
-    "modules": [
-      "intro-awcc",
-      "aws/iam",
-      "aws/networking",
-      "aws/conclusion"
     ]
   },
   "terraform": {
