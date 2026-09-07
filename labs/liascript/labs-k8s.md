@@ -63,7 +63,7 @@ echo 'complete -o default -F __start_kubectl k' >>~/.bashrc
 source ~/.bashrc
 
 # test 
-k version
+k version --client
 
 ```
 
