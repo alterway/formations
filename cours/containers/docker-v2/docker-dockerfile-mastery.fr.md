@@ -129,11 +129,30 @@ HEALTHCHECK --interval=10s --timeout=3s --retries=3 \
   - `(healthy)` : Sonde validée (code retour 0).
   - `(unhealthy)` : Échecs répétés $\rightarrow$ alertes et redémarrage possible via orchestrateur.
 
-### Quizz : Dockerfile
+### Mini-Défi : Forme Exec vs Forme Shell
 
-**Pourquoi faut-il toujours privilégier la syntaxe sous forme de tableau JSON `["executable", "param"]` pour ENTRYPOINT et CMD ?**
+**Question** : Pourquoi devez-vous toujours privilégier la syntaxe tableau JSON `["executable", "param"]` pour vos instructions ENTRYPOINT et CMD ?
 
-[(X)] Pour exécuter directement le processus applicatif en PID 1 et lui permettre de recevoir correctement le signal d'arrêt propre SIGTERM
-[( )] Parce que JSON est plus joli
-[( )] Pour empêcher le conteneur d'accéder au réseau
-[( )] Parce que Docker refuse de compiler la forme shell
+- **A.** Parce que Docker refuse d'exécuter la syntaxe texte brut (shell form).
+- **B.** Pour que le binaire applicatif tourne directement en PID 1 et intercepte instantanément les signaux d'arrêt propres (`SIGTERM`).
+- **C.** Pour compresser automatiquement l'image lors du build.
+- **D.** Pour interdire toute modification des variables d'environnement.
+
+### Mini-Défi : Forme Exec vs Forme Shell
+
+**Question** : Pourquoi devez-vous toujours privilégier la syntaxe tableau JSON `["executable", "param"]` pour vos instructions ENTRYPOINT et CMD ?
+
+- **A.** Parce que Docker refuse d'exécuter la syntaxe texte brut (shell form).
+- **B.** Pour que le binaire applicatif tourne directement en PID 1 et intercepte instantanément les signaux d'arrêt propres (`SIGTERM`).
+- **C.** Pour compresser automatiquement l'image lors du build.
+- **D.** Pour interdire toute modification des variables d'environnement.
+
+```{.center}
+┌─────────────────────────────────────────────────────────────┐
+│                        RÉPONSE : B                          │
+│  La forme shell `CMD node server.js` lance en réalité       │
+│  `/bin/sh -c` en PID 1, qui ne transmet pas le signal       │
+│  SIGTERM à votre code Node, forçant un kill brutal (10s).   │
+└─────────────────────────────────────────────────────────────┘
+```
+

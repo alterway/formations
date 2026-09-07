@@ -115,11 +115,30 @@ docker run -d --user "$(id -u):$(id -g)" \
   my-app:dev
 ```
 
-### Quizz : Volumes & Stockage
+### Mini-Défi : Persistance des Volumes
 
-**Si vous supprimez un conteneur avec `docker rm -f my-db`, qu'advient-il de son volume nommé monté ?**
+**Question** : Si vous supprimez brutalement un conteneur avec `docker rm -f my-postgres`, qu'advient-il de son volume nommé monté (`pg_data`) ?
 
-[(X)] Le volume nommé reste intact sur le disque et peut être réattaché immédiatement à un nouveau conteneur
-[( )] Le volume est automatiquement et définitivement détruit
-[( )] Le volume est vidé de toutes ses données mais conservé vide
-[( )] Le système d'exploitation plante
+- **A.** Le volume est automatiquement et définitivement détruit.
+- **B.** Le volume nommé reste totalement intact sur le disque et peut être immédiatement réattaché à un nouveau conteneur.
+- **C.** Les données sont vidées mais le dossier reste vide.
+- **D.** Le démon Docker refuse de redémarrer tant que le volume n'est pas purgé.
+
+### Mini-Défi : Persistance des Volumes
+
+**Question** : Si vous supprimez brutalement un conteneur avec `docker rm -f my-postgres`, qu'advient-il de son volume nommé monté (`pg_data`) ?
+
+- **A.** Le volume est automatiquement et définitivement détruit.
+- **B.** Le volume nommé reste totalement intact sur le disque et peut être immédiatement réattaché à un nouveau conteneur.
+- **C.** Les données sont vidées mais le dossier reste vide.
+- **D.** Le démon Docker refuse de redémarrer tant que le volume n'est pas purgé.
+
+```{.center}
+┌─────────────────────────────────────────────────────────────┐
+│                        RÉPONSE : B                          │
+│  Les volumes sont des entités décorrélées du cycle de vie   │
+│  du conteneur. Pour supprimer explicitement un volume,      │
+│  il faut exécuter `docker volume rm <nom>` ou `docker rm -v`│
+└─────────────────────────────────────────────────────────────┘
+```
+

@@ -143,11 +143,31 @@ services:
 docker compose watch
 ```
 
-### Quizz : Docker Compose
+### Mini-Défi : Arrêt & Nettoyage Compose
 
-**Quelle est la différence fondamentale entre `docker compose stop` et `docker compose down` ?**
+**Question** : Quelle est la différence fondamentale entre la commande `docker compose stop` et `docker compose down` ?
 
-[(X)] `stop` arrête simplement les conteneurs sans les détruire ; `down` supprime les conteneurs, les réseaux virtuels et les liens créés
-[( )] `stop` supprime les volumes du disque dur
-[( )] `down` réinstalle le système d'exploitation
-[( )] Aucune, ce sont deux alias strictement identiques
+- **A.** `stop` détruit les volumes de base de données ; `down` sauvegarde les fichiers.
+- **B.** `stop` arrête simplement les processus sans détruire les conteneurs ; `down` supprime les conteneurs, les réseaux créés et les liens virtuels.
+- **C.** `down` désinstalle Docker Engine du serveur.
+- **D.** Ce sont deux commandes strictement synonymes.
+
+### Mini-Défi : Arrêt & Nettoyage Compose
+
+**Question** : Quelle est la différence fondamentale entre la commande `docker compose stop` et `docker compose down` ?
+
+- **A.** `stop` détruit les volumes de base de données ; `down` sauvegarde les fichiers.
+- **B.** `stop` arrête simplement les processus sans détruire les conteneurs ; `down` supprime les conteneurs, les réseaux créés et les liens virtuels.
+- **C.** `down` désinstalle Docker Engine du serveur.
+- **D.** Ce sont deux commandes strictement synonymes.
+
+```{.center}
+┌─────────────────────────────────────────────────────────────┐
+│                        RÉPONSE : B                          │
+│  `docker compose stop` laisse les conteneurs intacts prêts  │
+│  à redémarrer via `start`. `docker compose down` fait place │
+│  nette en détruisant les conteneurs et réseaux de la pile.  │
+│  (Les volumes sont préservés sauf si l'option `-v` est mise)│
+└─────────────────────────────────────────────────────────────┘
+```
+

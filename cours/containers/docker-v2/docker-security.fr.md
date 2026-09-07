@@ -116,11 +116,30 @@ docker run --rm --net host --pid host --userns host --cap-add audit_control \
   docker/docker-bench-security
 ```
 
-### Quizz : Sécurité des Conteneurs
+### Mini-Défi : Durcissement Ultime en Production
 
-**Quelle combinaison de drapeaux offre le plus haut niveau de durcissement pour un conteneur web ?**
+**Question** : Quelle combinaison de drapeaux `docker run` applique le principe du moindre privilège pour un conteneur web ?
 
-[(X)] `--read-only --cap-drop=ALL --cap-add=NET_BIND_SERVICE --user 1000:1000 --security-opt no-new-privileges:true`
-[( )] `--privileged --net=host --user 0:0`
-[( )] `-v /:/host -it ubuntu bash`
-[( )] `--cap-add=SYS_ADMIN --restart always`
+- **A.** `--privileged --net=host --user 0:0`
+- **B.** `--cap-add=ALL --restart always`
+- **C.** `--read-only --cap-drop=ALL --cap-add=NET_BIND_SERVICE --user 1000:1000 --security-opt no-new-privileges:true`
+- **D.** `-v /:/host -it ubuntu bash`
+
+### Mini-Défi : Durcissement Ultime en Production
+
+**Question** : Quelle combinaison de drapeaux `docker run` applique le principe du moindre privilège pour un conteneur web ?
+
+- **A.** `--privileged --net=host --user 0:0`
+- **B.** `--cap-add=ALL --restart always`
+- **C.** `--read-only --cap-drop=ALL --cap-add=NET_BIND_SERVICE --user 1000:1000 --security-opt no-new-privileges:true`
+- **D.** `-v /:/host -it ubuntu bash`
+
+```{.center}
+┌─────────────────────────────────────────────────────────────┐
+│                        RÉPONSE : C                          │
+│  Cette combinaison verrouille le système en lecture seule,  │
+│  supprime toutes les capacités Linux sauf le bind du port,  │
+│  tourne sans droits root et bloque l'escalade de privilèges.│
+└─────────────────────────────────────────────────────────────┘
+```
+

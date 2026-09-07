@@ -113,15 +113,31 @@ Docker n'est pas un bloc monolithique, mais une suite de composants spécialisé
 - **`containerd-shim`** : Permet de redémarrer ou mettre à jour le démon Docker **sans tuer les conteneurs en cours d'exécution** (*Live Restore*).
 - **`runc`** : L'implémentation de référence OCI qui configure les appels noyau (`clone`, `unshare`, `pivot_root`).
 
-### Mini-Défi Architecture
+### Mini-Défi : Crash de Démon & Live Restore
 
-**Que se passe-t-il si le démon `dockerd` crashe ou est redémarré avec l'option `live-restore: true` ?**
+**Question** : Que se passe-t-il si le démon `dockerd` crashe ou est redémarré avec l'option `live-restore: true` ?
+
+- **A.** Tous les conteneurs sont immédiatement tués et perdent leurs données.
+- **B.** Le système hôte redémarre automatiquement.
+- **C.** Grâce à `containerd-shim`, les processus applicatifs continuent de tourner normalement sans aucune coupure.
+- **D.** Les adresses IP de tous les conteneurs sont réinitialisées.
+
+### Mini-Défi : Crash de Démon & Live Restore
+
+**Question** : Que se passe-t-il si le démon `dockerd` crashe ou est redémarré avec l'option `live-restore: true` ?
+
+- **A.** Tous les conteneurs sont immédiatement tués et perdent leurs données.
+- **B.** Le système hôte redémarre automatiquement.
+- **C.** Grâce à `containerd-shim`, les processus applicatifs continuent de tourner normalement sans aucune coupure.
+- **D.** Les adresses IP de tous les conteneurs sont réinitialisées.
 
 ```{.center}
 ┌─────────────────────────────────────────────────────────────┐
-│                        RÉPONSE                              │
+│                        RÉPONSE : C                          │
 │  Grâce à `containerd-shim`, les processus applicatifs       │
 │  continuent de s'exécuter normalement sans aucune coupure ! │
-│  Le démon se reconnecte simplement aux shims à son retour.  │
+│  Le démon `dockerd` se reconnecte simplement aux shims dès  │
+│  son redémarrage.                                           │
 └─────────────────────────────────────────────────────────────┘
 ```
+

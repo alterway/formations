@@ -118,11 +118,31 @@ RUN --mount=type=ssh \
 docker buildx build --ssh default -t go-app .
 ```
 
-### Quizz : BuildKit & Buildx
+### Mini-Défi : Secrets de Build avec BuildKit
 
-**Quel est le bénéfice majeur de `RUN --mount=type=secret` par rapport à `ARG TOKEN=xyz` ?**
+**Question** : Quel est le bénéfice majeur de `RUN --mount=type=secret` par rapport à l'ancienne méthode `ARG TOKEN=xyz` ?
 
-[(X)] Le secret n'est jamais stocké dans les métadonnées de l'image ni dans les couches intermédiaires (disparaît totalement de l'historique)
-[( )] Il crypte le code source avec une clé RSA 4096
-[( )] Il empêche le conteneur de démarrer sans mot de passe
-[( )] Il remplace l'utilisation de variables d'environnement
+- **A.** Il crypte le code source avec une clé RSA 4096.
+- **B.** Le secret n'est jamais stocké dans les métadonnées de l'image ni dans les couches intermédiaires (0 fuite dans l'historique).
+- **C.** Il force l'utilisateur à taper son mot de passe au lancement du conteneur.
+- **D.** Il remplace le besoin de variables d'environnement au runtime.
+
+### Mini-Défi : Secrets de Build avec BuildKit
+
+**Question** : Quel est le bénéfice majeur de `RUN --mount=type=secret` par rapport à l'ancienne méthode `ARG TOKEN=xyz` ?
+
+- **A.** Il crypte le code source avec une clé RSA 4096.
+- **B.** Le secret n'est jamais stocké dans les métadonnées de l'image ni dans les couches intermédiaires (0 fuite dans l'historique).
+- **C.** Il force l'utilisateur à taper son mot de passe au lancement du conteneur.
+- **D.** Il remplace le besoin de variables d'environnement au runtime.
+
+```{.center}
+┌─────────────────────────────────────────────────────────────┐
+│                        RÉPONSE : B                          │
+│  Avec `ARG`, le secret reste visible dans `docker history`  │
+│  et dans les métadonnées JSON de l'image. Avec le montage   │
+│  `--mount=type=secret`, le secret existe uniquement en RAM  │
+│  pendant la commande et n'est JAMAIS persisté.              │
+└─────────────────────────────────────────────────────────────┘
+```
+

@@ -107,11 +107,30 @@ scp images-bundle.tar user@serveur-prod:/tmp/
 docker image load -i /tmp/images-bundle.tar
 ```
 
-### Quizz : Images & Tags
+### Mini-Défi : Suppression & Partage de Couches
 
-**Que se passe-t-il lorsque l'on supprime une image avec `docker image rm my-app:1.0` qui partage des couches avec `my-app:2.0` ?**
+**Question** : Que se passe-t-il lorsque l'on supprime une image avec `docker image rm my-app:1.0` sachant qu'elle partage des couches avec `my-app:2.0` ?
 
-[(X)] Seul le tag `1.0` et ses couches spécifiques non partagées sont supprimés ; les couches communes restent préservées
-[( )] Toutes les images du système sont supprimées
-[( )] La commande échoue avec une interdiction stricte
-[( )] Le disque dur est formaté
+- **A.** Toutes les couches sont détruites et `my-app:2.0` devient corrompue.
+- **B.** La commande est refusée tant que `my-app:2.0` existe sur l'hôte.
+- **C.** Seul le tag `1.0` et ses couches spécifiques non partagées sont supprimés ; les couches communes restent préservées.
+- **D.** Toutes les images locales du registre sont réinitialisées.
+
+### Mini-Défi : Suppression & Partage de Couches
+
+**Question** : Que se passe-t-il lorsque l'on supprime une image avec `docker image rm my-app:1.0` sachant qu'elle partage des couches avec `my-app:2.0` ?
+
+- **A.** Toutes les couches sont détruites et `my-app:2.0` devient corrompue.
+- **B.** La commande est refusée tant que `my-app:2.0` existe sur l'hôte.
+- **C.** Seul le tag `1.0` et ses couches spécifiques non partagées sont supprimés ; les couches communes restent préservées.
+- **D.** Toutes les images locales du registre sont réinitialisées.
+
+```{.center}
+┌─────────────────────────────────────────────────────────────┐
+│                        RÉPONSE : C                          │
+│  Grâce au modèle en couches adressé par le contenu          │
+│  (Content Addressable Storage / SHA256), Docker ne supprime │
+│  que le pointeur de tag et les blobs orphelins.             │
+└─────────────────────────────────────────────────────────────┘
+```
+

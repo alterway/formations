@@ -152,11 +152,31 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
  && rm -rf /var/lib/apt/lists/*
 ```
 
-### Quizz : Optimisation d'Images
+### Mini-Défi : Ordonnancement du Cache Docker
 
-**Pourquoi copie-t-on le fichier `package.json` ou `requirements.txt` AVANT le reste du code source ?**
+**Question** : Pourquoi devez-vous toujours copier `package.json` ou `requirements.txt` AVANT le code source applicatif ?
 
-[(X)] Pour profiter du cache Docker lors de l'installation des dépendances et éviter de tout retélécharger à chaque modification de code
-[( )] Parce que le Dockerfile refuse de compiler dans un autre ordre
-[( )] Pour crypter le mot de passe de la base de données
-[( )] Pour réduire la consommation mémoire du conteneur
+- **A.** Parce que la syntaxe Dockerfile interdit d'exécuter `RUN` après `COPY . .`.
+- **B.** Pour crypter les dépendances avant de compiler l'application.
+- **C.** Pour réutiliser le cache de la couche d'installation (`npm ci` / `pip install`) tant que les dépendances ne changent pas.
+- **D.** Pour réduire automatiquement l'empreinte RAM du conteneur en production.
+
+### Mini-Défi : Ordonnancement du Cache Docker
+
+**Question** : Pourquoi devez-vous toujours copier `package.json` ou `requirements.txt` AVANT le code source applicatif ?
+
+- **A.** Parce que la syntaxe Dockerfile interdit d'exécuter `RUN` après `COPY . .`.
+- **B.** Pour crypter les dépendances avant de compiler l'application.
+- **C.** Pour réutiliser le cache de la couche d'installation (`npm ci` / `pip install`) tant que les dépendances ne changent pas.
+- **D.** Pour réduire automatiquement l'empreinte RAM du conteneur en production.
+
+```{.center}
+┌─────────────────────────────────────────────────────────────┐
+│                        RÉPONSE : C                          │
+│  Toute modification d'un fichier invalide le cache de       │
+│  cette étape et de TOUTES les suivantes. En isolant les     │
+│  dépendances, le `npm install` ne rejoue que si la liste    │
+│  des paquets change, divisant le temps de build par 10 !    │
+└─────────────────────────────────────────────────────────────┘
+```
+

@@ -111,17 +111,57 @@ En 1956, Malcolm McLean invente le conteneur maritime standardisé (ISO) :
   - `runtime-spec` : Spécification universelle d'exécution de conteneur (`runc`).
 - **Aujourd'hui** : Docker utilise **BuildKit**, **containerd**, et s'intègre nativement à **Kubernetes**.
 
-### Quizz : Fondamentaux des Conteneurs
+### Mini-Défi : VM vs Conteneur
 
-**1. Quelle est la différence majeure entre une VM et un conteneur ?**
+**Question** : Quelle est la différence architecturale majeure entre une Machine Virtuelle et un Conteneur ?
 
-[( )] Les conteneurs ont leur propre noyau d'exploitation indépendant
-[(X)] Les conteneurs partagent le noyau Linux de la machine hôte
-[( )] Les VMs démarrent plus vite que les conteneurs
-[( )] Un conteneur virtualise la carte mère et le BIOS
+- **A.** Les conteneurs embarquent chacun leur propre noyau Linux complet.
+- **B.** Les conteneurs partagent le noyau Linux de l'hôte et isolent les processus applicatifs.
+- **C.** Les VMs consomment moins de mémoire vive que les conteneurs.
+- **D.** Un conteneur émule le BIOS et la carte mère du serveur hôte.
 
-**2. Que garantit le standard OCI (Open Container Initiative) ?**
+### Mini-Défi : VM vs Conteneur
 
-[(X)] Qu'une image construite avec Docker puisse tourner avec containerd, Podman ou CRI-O
-[( )] Que Docker soit obligatoirement payant en entreprise
-[( )] Que les conteneurs fonctionnent sans noyau Linux
+**Question** : Quelle est la différence architecturale majeure entre une Machine Virtuelle et un Conteneur ?
+
+- **A.** Les conteneurs embarquent chacun leur propre noyau Linux complet.
+- **B.** Les conteneurs partagent le noyau Linux de l'hôte et isolent les processus applicatifs.
+- **C.** Les VMs consomment moins de mémoire vive que les conteneurs.
+- **D.** Un conteneur émule le BIOS et la carte mère du serveur hôte.
+
+```{.center}
+┌─────────────────────────────────────────────────────────────┐
+│                        RÉPONSE : B                          │
+│  Contrairement à une VM qui démarre un Guest OS complet sur │
+│  un hyperviseur, un conteneur est un simple processus hôte  │
+│  isolé par les Namespaces et Cgroups du noyau Linux.        │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Mini-Défi : Le Standard OCI
+
+**Question** : Que garantit le standard OCI (Open Container Initiative) dans l'écosystème moderne ?
+
+- **A.** Que Docker soit obligatoirement la seule plateforme autorisée.
+- **B.** Que les conteneurs puissent fonctionner sans aucun système d'exploitation.
+- **C.** Qu'une image construite avec Docker soit exécutable à l'identique avec containerd, Podman ou CRI-O.
+- **D.** Que le code source soit automatiquement chiffré en AES-256.
+
+### Mini-Défi : Le Standard OCI
+
+**Question** : Que garantit le standard OCI (Open Container Initiative) dans l'écosystème moderne ?
+
+- **A.** Que Docker soit obligatoirement la seule plateforme autorisée.
+- **B.** Que les conteneurs puissent fonctionner sans aucun système d'exploitation.
+- **C.** Qu'une image construite avec Docker soit exécutable à l'identique avec containerd, Podman ou CRI-O.
+- **D.** Que le code source soit automatiquement chiffré en AES-256.
+
+```{.center}
+┌─────────────────────────────────────────────────────────────┐
+│                        RÉPONSE : C                          │
+│  Grâce aux spécifications OCI (`image-spec` et              │
+│  `runtime-spec`), les formats d'images et les runtimes bas  │
+│  niveau (`runc`) sont universels et interopérables.         │
+└─────────────────────────────────────────────────────────────┘
+```
+

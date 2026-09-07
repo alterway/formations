@@ -103,11 +103,30 @@ Activez le point d'accès natif aux métriques dans `/etc/docker/daemon.json` :
 
 Prometheus peut désormais moissonner (`scrape`) les compteurs de conteneurs, les allocations mémoires et les temps de réponse du moteur Docker !
 
-### Quizz : Dépannage Docker
+### Mini-Défi : Diagnostic d'un Crash Éclair
 
-**Quel est le premier réflexe à avoir si `docker run` se ferme instantanément avec le code 137 ?**
+**Question** : Votre conteneur démarre et s'arrête instantanément avec un code `Exit 137`. Quel est le réflexe de diagnostic immédiat ?
 
-[(X)] Vérifier `docker inspect` pour voir si `OOMKilled: true` (manque de mémoire vive) ou si le processus a reçu un SIGKILL externe
-[( )] Réinstaller Docker depuis le début
-[( )] Changer de nom de conteneur
-[( )] Supprimer tous les volumes
+- **A.** Réinstaller le moteur Docker depuis zéro.
+- **B.** Vérifier `docker inspect <nom>` pour vérifier si la propriété `OOMKilled` est à `true` (dépassement du quota de mémoire RAM).
+- **C.** Changer le nom du conteneur avec `--name`.
+- **D.** Purger la totalité des volumes de l'hôte.
+
+### Mini-Défi : Diagnostic d'un Crash Éclair
+
+**Question** : Votre conteneur démarre et s'arrête instantanément avec un code `Exit 137`. Quel est le réflexe de diagnostic immédiat ?
+
+- **A.** Réinstaller le moteur Docker depuis zéro.
+- **B.** Vérifier `docker inspect <nom>` pour vérifier si la propriété `OOMKilled` est à `true` (dépassement du quota de mémoire RAM).
+- **C.** Changer le nom du conteneur avec `--name`.
+- **D.** Purger la totalité des volumes de l'hôte.
+
+```{.center}
+┌─────────────────────────────────────────────────────────────┐
+│                        RÉPONSE : B                          │
+│  La commande `docker inspect --format '{{.State.OOMKilled}}'│
+│  <nom>` permet de confirmer instantanément si le noyau Linux│
+│  a tué le processus suite à une saturation de la RAM.       │
+└─────────────────────────────────────────────────────────────┘
+```
+

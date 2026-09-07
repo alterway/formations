@@ -113,11 +113,30 @@ Deux conteneurs placés sur des réseaux bridges distincts **ne peuvent absolume
 
 Pour permettre la communication : attacher uniquement le composant intermédiaire (ex: l'API backend) aux deux réseaux simultanément.
 
-### Quizz : Réseau Docker
+### Mini-Défi : Résolution DNS Inter-Conteneurs
 
-**Pourquoi deux conteneurs sur le bridge par défaut (`docker0`) ne peuvent-ils pas se joindre via `ping mon-conteneur` ?**
+**Question** : Pourquoi deux conteneurs lancés sur le bridge par défaut (`docker0`) ne peuvent-ils pas se joindre via leur nom (`curl http://mon-api`) ?
 
-[(X)] Parce que le serveur DNS intégré de Docker n'est activé que sur les réseaux bridges personnalisés (*user-defined*)
-[( )] Parce que les conteneurs n'ont pas de carte réseau
-[( )] Parce que le protocole ICMP est interdit par la licence Docker
-[( )] Parce que les conteneurs ont obligatoirement la même adresse IP
+- **A.** Parce que les conteneurs partagent obligatoirement la même adresse MAC.
+- **B.** Parce que le protocole HTTP est bloqué par défaut sur `docker0`.
+- **C.** Parce que le serveur DNS interne de Docker (127.0.0.11) est activé UNIQUEMENT sur les réseaux personnalisés (*User-Defined Bridges*).
+- **D.** Parce qu'il faut obligatoirement installer Bind9 sur l'hôte.
+
+### Mini-Défi : Résolution DNS Inter-Conteneurs
+
+**Question** : Pourquoi deux conteneurs lancés sur le bridge par défaut (`docker0`) ne peuvent-ils pas se joindre via leur nom (`curl http://mon-api`) ?
+
+- **A.** Parce que les conteneurs partagent obligatoirement la même adresse MAC.
+- **B.** Parce que le protocole HTTP est bloqué par défaut sur `docker0`.
+- **C.** Parce que le serveur DNS interne de Docker (127.0.0.11) est activé UNIQUEMENT sur les réseaux personnalisés (*User-Defined Bridges*).
+- **D.** Parce qu'il faut obligatoirement installer Bind9 sur l'hôte.
+
+```{.center}
+┌─────────────────────────────────────────────────────────────┐
+│                        RÉPONSE : C                          │
+│  Sur `docker0`, la découverte DNS automatique par nom est   │
+│  désactivée pour des raisons d'isolation historique.        │
+│  Créez toujours un réseau dédié (`docker network create`) ! │
+└─────────────────────────────────────────────────────────────┘
+```
+

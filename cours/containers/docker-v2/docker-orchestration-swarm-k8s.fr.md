@@ -110,11 +110,30 @@ echo "super-password-123" | docker secret create db_root_pwd -
 | **GitOps & Ingress Moderne** | Limité | ArgoCD, Flux, Traefik, Cilium eBPF, Gateway API |
 | **Gestion Fine des Droits** | Basique | RBAC granulaire, OIDC, Pod Security Standards |
 
-### Quizz : Swarm & Orchestration
+### Mini-Défi : Résilience d'un Cluster Swarm
 
-**Que se passe-t-il si un nœud Worker hébergeant 2 répliques de conteneurs s'éteint brutalement dans un cluster Swarm ?**
+**Question** : Que se passe-t-il si un nœud Worker hébergeant 2 répliques de conteneurs s'éteint brutalement dans un cluster Swarm ?
 
-[(X)] Les managers détectent la perte du nœud (Heartbeat) et replanifient immédiatement les 2 conteneurs sur les autres nœuds sains du cluster
-[( )] Tout le cluster s'arrête
-[( )] Les conteneurs sont perdus à jamais et ne redémarrent pas
-[( )] Une notification par email est envoyée sans action corrective
+- **A.** Tout le cluster Swarm s'arrête instantanément.
+- **B.** Les conteneurs sont définitivement perdus et ne redémarrent jamais.
+- **C.** Les managers détectent la perte du nœud (Heartbeat) et replanifient immédiatement les 2 conteneurs sur les autres nœuds sains du cluster.
+- **D.** Une simple notification par email est envoyée sans action corrective.
+
+### Mini-Défi : Résilience d'un Cluster Swarm
+
+**Question** : Que se passe-t-il si un nœud Worker hébergeant 2 répliques de conteneurs s'éteint brutalement dans un cluster Swarm ?
+
+- **A.** Tout le cluster Swarm s'arrête instantanément.
+- **B.** Les conteneurs sont définitivement perdus et ne redémarrent jamais.
+- **C.** Les managers détectent la perte du nœud (Heartbeat) et replanifient immédiatement les 2 conteneurs sur les autres nœuds sains du cluster.
+- **D.** Une simple notification par email est envoyée sans action corrective.
+
+```{.center}
+┌─────────────────────────────────────────────────────────────┐
+│                        RÉPONSE : C                          │
+│  Le groupe de consensus Raft (Managers) détecte la rupture  │
+│  du Heartbeat et ordonne au scheduler d'instancier 2        │
+│  nouvelles tâches pour restaurer l'état désiré (Replicas).  │
+└─────────────────────────────────────────────────────────────┘
+```
+

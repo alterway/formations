@@ -126,18 +126,56 @@ Dans un conteneur, le processus principal prend le **PID 1** :
 docker container run -d --init --name node-app my-node-image:latest
 ```
 
-### Quizz : Codes de Sortie & Signaux
+### Mini-Défi : Diagnostic d'Arrêt (Exit 137)
 
-**1. Que signifie un code d'arrêt `Exit 137` sur un conteneur ?**
+**Incident SRE** : Votre conteneur Java ou Node.js s'arrête brutalement avec le statut `Exited (137)`. Quelle en est la cause principale ?
 
-[(X)] Le conteneur a été tué par le signal SIGKILL (128 + 9), souvent déclenché par l'OOM Killer (dépassement de mémoire RAM)
-[( )] L'application s'est terminée avec un succès total
-[( )] Le fichier binaire est introuvable (Command Not Found)
-[( )] Le port réseau était déjà utilisé
+- **A.** L'application a terminé son traitement avec succès (code 0).
+- **B.** Le fichier binaire ou la commande spécifiée dans CMD est introuvable.
+- **C.** Le conteneur a reçu un signal SIGKILL (128 + 9), déclenché par l'OOM Killer (dépassement du quota RAM).
+- **D.** Le port réseau demandé est déjà réservé sur la machine hôte.
 
-**2. Quelle commande permet d'accéder en direct aux métriques CPU/RAM de tous les conteneurs ?**
+### Mini-Défi : Diagnostic d'Arrêt (Exit 137)
 
-[( )] `docker inspect`
-[(X)] `docker stats`
-[( )] `docker monitor`
-[( )] `docker ps -m`
+**Incident SRE** : Votre conteneur Java ou Node.js s'arrête brutalement avec le statut `Exited (137)`. Quelle en est la cause principale ?
+
+- **A.** L'application a terminé son traitement avec succès (code 0).
+- **B.** Le fichier binaire ou la commande spécifiée dans CMD est introuvable.
+- **C.** Le conteneur a reçu un signal SIGKILL (128 + 9), déclenché par l'OOM Killer (dépassement du quota RAM).
+- **D.** Le port réseau demandé est déjà réservé sur la machine hôte.
+
+```{.center}
+┌─────────────────────────────────────────────────────────────┐
+│                        RÉPONSE : C                          │
+│  Le code 137 correspond au signal SIGKILL (128 + 9).        │
+│  Dans 95% des cas en production, il est émis par l'OOM      │
+│  Killer du noyau Linux suite au dépassement de `--memory`.  │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Mini-Défi : Surveillance en Temps Réel
+
+**Question** : Quelle commande native permet de suivre en direct la consommation CPU/RAM et les flux I/O de tous vos conteneurs ?
+
+- **A.** `docker inspect --all`
+- **B.** `docker top`
+- **C.** `docker stats`
+- **D.** `docker system monitor`
+
+### Mini-Défi : Surveillance en Temps Réel
+
+**Question** : Quelle commande native permet de suivre en direct la consommation CPU/RAM et les flux I/O de tous vos conteneurs ?
+
+- **A.** `docker inspect --all`
+- **B.** `docker top`
+- **C.** `docker stats`
+- **D.** `docker system monitor`
+
+```{.center}
+┌─────────────────────────────────────────────────────────────┐
+│                        RÉPONSE : C                          │
+│  `docker stats` affiche un tableau de bord dynamique en     │
+│  temps réel (CPU %, RAM consommée / limite, I/O réseau).    │
+└─────────────────────────────────────────────────────────────┘
+```
+
