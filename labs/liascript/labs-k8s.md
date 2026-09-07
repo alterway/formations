@@ -8434,9 +8434,9 @@ Machine : **master**, **worker-0**, **worker-1**
 Préparation de la mise à jour
 
 ```bash +.
-curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.34/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring-1.34.gpg
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.34/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring-1.36.gpg
 
-echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring-1.34.gpg] https://pkgs.k8s.io/core:/stable:/v1.34/deb/ /' | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring-1.36.gpg] https://pkgs.k8s.io/core:/stable:/v1.34/deb/ /' | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
 
 sudo apt-get update
 ```
@@ -8663,9 +8663,9 @@ A faire sur les noeud **worker-0 et worker-1**
 Préparation de la mise à jour
 
 ```bash +.
-curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.34/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring-1.34.gpg
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.34/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring-1.36.gpg
 
-echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring-1.34.gpg] https://pkgs.k8s.io/core:/stable:/v1.34/deb/ /' | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring-1.36.gpg] https://pkgs.k8s.io/core:/stable:/v1.34/deb/ /' | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
 
 sudo apt-get update
 ```
