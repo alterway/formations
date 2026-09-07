@@ -18,7 +18,7 @@ Cette formation pratique a été conçue pour vous amener des fondations du noya
 
 ---
 
-## 0. Préparation & Installation de l'Environnement (Docker 29.7.2)
+## 0. Préparation & Installation de l'Environnement
 
 ### Objectifs du module
 - Installer ou vérifier l'installation de Docker Engine 29.7.2.
@@ -173,7 +173,7 @@ docker container rm -f lab-ns lab-cgroup
 
 ---
 
-## 2. Cycle de Vie des Conteneurs (`docker container`)
+## 2. Cycle de Vie des Conteneurs
 
 ### Objectifs
 - Maîtriser le cycle de vie complet : création, démarrage, pause, arrêt propre (`SIGTERM`) et forcé (`SIGKILL`).
@@ -198,7 +198,7 @@ curl -I http://localhost:8080
 
 ---
 
-### Étape 2.2 : Exécution de Commandes dans un Conteneur Actif (`exec`)
+### Étape 2.2 : Exécution de Commandes dans un Conteneur Actif
 
 ```bash
 # Exécuter une commande ponctuelle sans ouvrir de shell
@@ -223,7 +223,7 @@ docker container logs --tail 20 -f -t my-nginx
 
 ---
 
-### Étape 2.4 : Gestion Propre des Signaux et PID 1 (`--init`)
+### Étape 2.4 : Gestion Propre des Signaux et PID 1
 
 Créez un script qui simule une application gérant mal les signaux :
 
@@ -311,7 +311,7 @@ docker container ps
 
 ---
 
-### Étape 3.4 : Sauvegarde et Restauration d'Images Hors-Ligne (`save` / `load`)
+### Étape 3.4 : Sauvegarde et Restauration d'Images Hors-Ligne
 
 ```bash
 # Exporter l'image dans une archive tar
@@ -819,7 +819,7 @@ EOF
 
 ---
 
-### Étape 9.2 : Définition de `compose.yaml` avec `develop.watch`
+### Étape 9.2 : Définition de compose.yaml avec develop.watch
 
 ```bash
 cat << 'EOF' > compose.yaml
@@ -906,7 +906,7 @@ docker compose down -v
 ## 10. Sécurité, Hardening & Analyse de Vulnérabilités
 
 ### Objectifs
-- Restreindre drastiquement les privilèges d'un conteneur (`--read-only`, `--cap-drop=ALL`).
+- Restreindre drastiquement les privilèges d'un conteneur
 - Scanner les vulnérabilités d'une image avec **Docker Scout** et **Trivy**.
 - Exécuter le benchmark d'audit de sécurité **Docker CIS Benchmark**.
 
@@ -993,7 +993,7 @@ docker container rm -f oom-victim
 
 ---
 
-### Étape 11.2 : Configuration de la Rotation des Logs dans `daemon.json`
+### Étape 11.2 : Configuration de la Rotation des Logs
 
 ```bash
 sudo mkdir -p /etc/docker
