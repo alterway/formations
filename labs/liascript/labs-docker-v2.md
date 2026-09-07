@@ -14,16 +14,16 @@ logo:     https://assets.alterway.fr/2021/01/strong-mind.png
 
 Bienvenue dans le manuel officiel des travaux pratiques **Docker V2**.
 
-Cette formation pratique a été conçue pour vous amener des fondations du noyau Linux jusqu\x27au pilotage avancé en production avec **Docker Engine 29.7.2**, **BuildKit**, **Docker Buildx**, **Docker Compose v2** et les outils de sécurité Cloud Native.
+Cette formation pratique a été conçue pour vous amener des fondations du noyau Linux jusqu'au pilotage avancé en production avec **Docker Engine 29.7.2**, **BuildKit**, **Docker Buildx**, **Docker Compose v2** et les outils de sécurité Cloud Native.
 
 ---
 
-## 0. Préparation & Installation de l\x27Environnement (Docker 29.7.2)
+## 0. Préparation & Installation de l'Environnement (Docker 29.7.2)
 
 ### Objectifs du module
-- Installer ou vérifier l\x27installation de Docker Engine 29.7.2.
-- Configurer l\x27utilisateur non-root pour exécuter les commandes sans `sudo`.
-- Installer l\x27autocomplétion avancée du shell (Bash / Zsh).
+- Installer ou vérifier l'installation de Docker Engine 29.7.2.
+- Configurer l'utilisateur non-root pour exécuter les commandes sans `sudo`.
+- Installer l'autocomplétion avancée du shell (Bash / Zsh).
 - Valider le fonctionnement du démon et des runtimes OCI.
 
 ---
@@ -35,7 +35,7 @@ Cette formation pratique a été conçue pour vous amener des fondations du noya
 docker version
 ```
 
-Si Docker n\x27est pas encore installé sur votre machine Linux (Debian / Ubuntu) :
+Si Docker n'est pas encore installé sur votre machine Linux (Debian / Ubuntu) :
 
 ```bash
 # 1. Mise à jour des dépôts et installation des prérequis
@@ -62,7 +62,7 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plug
 
 ### Étape 0.2 : Configuration des Permissions Utilisateur (Post-Installation)
 
-Par défaut, le socket Unix `/var/run/docker.sock` appartient à l\x27utilisateur `root` et au groupe `docker`.
+Par défaut, le socket Unix `/var/run/docker.sock` appartient à l'utilisateur `root` et au groupe `docker`.
 
 ```bash
 # Ajouter votre utilisateur courant au groupe docker
@@ -77,19 +77,19 @@ docker info
 
 ---
 
-### Étape 0.3 : Activation de l\x27Autocomplétion du Shell
+### Étape 0.3 : Activation de l'Autocomplétion du Shell
 
 ```bash
 # Pour Bash :
-echo \x27source <(docker completion bash)\x27 >> ~/.bashrc
+echo 'source <(docker completion bash)' >> ~/.bashrc
 source ~/.bashrc
 
 # Pour Zsh :
-# echo \x27source <(docker completion zsh)\x27 >> ~/.zshrc
+# echo 'source <(docker completion zsh)' >> ~/.zshrc
 # source ~/.zshrc
 ```
 
-Testez l\x27autocomplétion en tapant `docker con` puis en appuyant deux fois sur la touche **[TAB]** : le shell doit compléter automatiquement par `docker container`.
+Testez l'autocomplétion en tapant `docker con` puis en appuyant deux fois sur la touche **[TAB]** : le shell doit compléter automatiquement par `docker container`.
 
 ---
 
@@ -122,7 +122,7 @@ docker container run -d --name lab-ns alpine sleep 3600
 Récupérez le PID hôte du conteneur :
 
 ```bash
-PID=$(docker container inspect --format \x27{{.State.Pid}}\x27 lab-ns)
+PID=$(docker container inspect --format '{{.State.Pid}}' lab-ns)
 echo "Le PID hôte du processus conteneurisé est : $PID"
 ```
 
@@ -136,7 +136,7 @@ ls -la /proc/$$/ns/
 ls -la /proc/$PID/ns/
 ```
 
-> **Observation** : Vous constaterez que les identifiants d\x27inodes pour `ipc`, `mnt`, `net`, `pid`, `uts`, `cgroup` sont différents entre l\x27hôte et le conteneur.
+> **Observation** : Vous constaterez que les identifiants d'inodes pour `ipc`, `mnt`, `net`, `pid`, `uts`, `cgroup` sont différents entre l'hôte et le conteneur.
 
 ---
 
@@ -148,8 +148,8 @@ Vérifiez comment le noyau Linux alloue et restreint la mémoire du conteneur :
 # Lancer un conteneur avec un plafond mémoire de 256 Mo
 docker container run -d --name lab-cgroup --memory 256m alpine sleep 3600
 
-# Inspecter le fichier de contrôle cgroup v2 sur l\x27hôte Linux
-CGROUP_PATH=$(docker container inspect --format \x27{{.Id}}\x27 lab-cgroup)
+# Inspecter le fichier de contrôle cgroup v2 sur l'hôte Linux
+CGROUP_PATH=$(docker container inspect --format '{{.Id}}' lab-cgroup)
 
 cat /sys/fs/cgroup/docker/$CGROUP_PATH/memory.max 2>/dev/null || \
 cat /sys/fs/cgroup/system.slice/docker-$CGROUP_PATH.scope/memory.max 2>/dev/null || \
@@ -163,7 +163,7 @@ echo "268435456 octets (256 Mo)"
 Inspectez les répertoires réels utilisés par Overlay2 sur le disque hôte :
 
 ```bash
-docker container inspect lab-ns --format \x27{{json .GraphDriver.Data}}\x27 | python3 -m json.tool
+docker container inspect lab-ns --format '{{json .GraphDriver.Data}}' | python3 -m json.tool
 ```
 
 ```bash
@@ -179,7 +179,7 @@ docker container rm -f lab-ns lab-cgroup
 - Maîtriser le cycle de vie complet : création, démarrage, pause, arrêt propre (`SIGTERM`) et forcé (`SIGKILL`).
 - Gérer le flux des logs et le mode interactif.
 - Déboguer un conteneur en direct avec `exec`.
-- Corriger le problème du PID 1 avec l\x27option `--init`.
+- Corriger le problème du PID 1 avec l'option `--init`.
 
 ---
 
@@ -192,7 +192,7 @@ docker container run --rm -it alpine sh
 # 2. Mode détaché en arrière-plan avec nom personnalisé
 docker container run -d --name my-nginx -p 8080:80 nginx:alpine
 
-# 3. Tester l\x27accès HTTP
+# 3. Tester l'accès HTTP
 curl -I http://localhost:8080
 ```
 
@@ -230,9 +230,9 @@ Créez un script qui simule une application gérant mal les signaux :
 ```bash
 mkdir -p ~/docker-labs/lifecycle && cd ~/docker-labs/lifecycle
 
-cat << \x27EOF\x27 > dummy_app.sh
+cat << 'EOF' > dummy_app.sh
 #!/bin/sh
-trap \x27\x27 TERM  # Ignore délibérément le signal SIGTERM !
+trap '' TERM  # Ignore délibérément le signal SIGTERM !
 echo "Application démarrée en PID 1..."
 while true; do sleep 1; done
 EOF
@@ -244,7 +244,7 @@ chmod +x dummy_app.sh
 docker container run -d --name app-no-init -v $(pwd)/dummy_app.sh:/app.sh alpine /app.sh
 time docker container stop app-no-init
 
-# 2. Lancement AVEC l\x27option --init (injecte le mini-init Tini en PID 1)
+# 2. Lancement AVEC l'option --init (injecte le mini-init Tini en PID 1)
 docker container run -d --init --name app-with-init -v $(pwd)/dummy_app.sh:/app.sh alpine /app.sh
 time docker container stop app-with-init
 ```
@@ -266,19 +266,19 @@ docker container rm -f my-nginx app-no-init app-with-init
 
 ---
 
-### Étape 3.1 : Inspection des Couches d\x27une Image
+### Étape 3.1 : Inspection des Couches d'une Image
 
 ```bash
-# Télécharger l\x27image officielle Redis
+# Télécharger l'image officielle Redis
 docker image pull redis:7-alpine
 
-# Examiner l\x27historique et la taille de chaque couche
+# Examiner l'historique et la taille de chaque couche
 docker image history redis:7-alpine
 ```
 
 ---
 
-### Étape 3.2 : Déploiement d\x27un Registre Privé Local & Publication
+### Étape 3.2 : Déploiement d'un Registre Privé Local & Publication
 
 ```bash
 # 1. Démarrer un registre OCI local sur le port 5000
@@ -287,10 +287,10 @@ docker container run -d --name local-registry -p 5000:5000 --restart always regi
 # 2. Tagger une image locale pour cibler le registre local
 docker image tag redis:7-alpine localhost:5000/my-redis:1.0
 
-# 3. Publier l\x27image (Push)
+# 3. Publier l'image (Push)
 docker image push localhost:5000/my-redis:1.0
 
-# 4. Interroger l\x27API du registre local
+# 4. Interroger l'API du registre local
 curl http://localhost:5000/v2/_catalog
 curl http://localhost:5000/v2/my-redis/tags/list
 ```
@@ -301,7 +301,7 @@ curl http://localhost:5000/v2/my-redis/tags/list
 
 ```bash
 # Récupérer le digest cryptographique SHA256 exact
-DIGEST=$(docker image inspect --format \x27{{index .RepoDigests 0}}\x27 localhost:5000/my-redis:1.0)
+DIGEST=$(docker image inspect --format '{{index .RepoDigests 0}}' localhost:5000/my-redis:1.0)
 echo "Digest infalsifiable : $DIGEST"
 
 # Instancier le conteneur directement à partir du Digest
@@ -311,16 +311,16 @@ docker container ps
 
 ---
 
-### Étape 3.4 : Sauvegarde et Restauration d\x27Images Hors-Ligne (`save` / `load`)
+### Étape 3.4 : Sauvegarde et Restauration d'Images Hors-Ligne (`save` / `load`)
 
 ```bash
-# Exporter l\x27image dans une archive tar
+# Exporter l'image dans une archive tar
 docker image save -o /tmp/my-redis-bundle.tar localhost:5000/my-redis:1.0
 
-# Supprimer l\x27image locale pour simuler un nouvel hôte
+# Supprimer l'image locale pour simuler un nouvel hôte
 docker image rm localhost:5000/my-redis:1.0
 
-# Importer l\x27archive tar
+# Importer l'archive tar
 docker image load -i /tmp/my-redis-bundle.tar
 ```
 
@@ -337,19 +337,19 @@ rm -f /tmp/my-redis-bundle.tar
 ### Objectifs
 - Écrire un `Dockerfile` moderne et sécurisé respectant les standards industriels.
 - Maîtriser le duel `ENTRYPOINT` vs `CMD` sous la forme tableau JSON Exec.
-- Utiliser `ARG` (temps de build) et `ENV` (temps d\x27exécution).
+- Utiliser `ARG` (temps de build) et `ENV` (temps d'exécution).
 - Déclarer un utilisateur non-root `USER`.
 - Implémenter une sonde de santé native `HEALTHCHECK`.
 
 ---
 
-### Étape 4.1 : Création d\x27une Application API Node.js
+### Étape 4.1 : Création d'une Application API Node.js
 
 ```bash
 mkdir -p ~/docker-labs/dockerfile-mastery && cd ~/docker-labs/dockerfile-mastery
 
 # 1. Fichier package.json
-cat << \x27EOF\x27 > package.json
+cat << 'EOF' > package.json
 {
   "name": "docker-v2-api",
   "version": "1.0.0",
@@ -361,18 +361,18 @@ cat << \x27EOF\x27 > package.json
 EOF
 
 # 2. Code serveur server.js avec endpoint de santé /healthz
-cat << \x27EOF\x27 > server.js
-const express = require(\x27express\x27);
+cat << 'EOF' > server.js
+const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 let isHealthy = true;
 
-app.get(\x27/\x27, (req, res) => {
+app.get('/', (req, res) => {
   res.json({ message: "Bienvenue sur Docker V2 API !", version: process.env.APP_VERSION || "dev" });
 });
 
-app.get(\x27/healthz\x27, (req, res) => {
+app.get('/healthz', (req, res) => {
   if (isHealthy) {
     res.status(200).send("OK");
   } else {
@@ -381,12 +381,12 @@ app.get(\x27/healthz\x27, (req, res) => {
 });
 
 // Endpoint pour simuler une panne
-app.post(\x27/break\x27, (req, res) => {
+app.post('/break', (req, res) => {
   isHealthy = false;
   res.send("État passé à UNHEALTHY");
 });
 
-app.listen(PORT, \x270.0.0.0\x27, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Serveur actif sur le port ${PORT}`);
 });
 EOF
@@ -397,7 +397,7 @@ EOF
 ### Étape 4.2 : Écriture du Dockerfile Optimisé
 
 ```bash
-cat << \x27EOF\x27 > Dockerfile
+cat << 'EOF' > Dockerfile
 # syntax=docker/dockerfile:1.7
 FROM node:20-alpine
 
@@ -440,16 +440,16 @@ docker image build --build-arg VERSION=2.0.0 -t my-api:2.0 .
 # Démarrage du conteneur
 docker container run -d --name test-api -p 3000:3000 my-api:2.0
 
-# Observer l\x27état de la sonde de santé
+# Observer l'état de la sonde de santé
 sleep 8
-docker container ps --filter name=test-api --format \x27table {{.Names}}\t{{.Status}}\x27
+docker container ps --filter name=test-api --format 'table {{.Names}}\t{{.Status}}'
 
 # Déclencher une panne applicative
 curl -X POST http://localhost:3000/break
 
 # Observer le passage à unhealthy
 sleep 15
-docker container ps --filter name=test-api --format \x27table {{.Names}}\t{{.Status}}\x27
+docker container ps --filter name=test-api --format 'table {{.Names}}\t{{.Status}}'
 ```
 
 ```bash
@@ -469,7 +469,7 @@ docker container rm -f test-api
 
 ---
 
-### Étape 5.1 : Création d\x27un Builder Buildx Avancé
+### Étape 5.1 : Création d'un Builder Buildx Avancé
 
 ```bash
 # Créer et basculer sur un builder basé sur le driver docker-container
@@ -486,7 +486,7 @@ docker buildx inspect custom-builder
 ```bash
 mkdir -p ~/docker-labs/buildx-lab && cd ~/docker-labs/buildx-lab
 
-cat << \x27EOF\x27 > Dockerfile.cache
+cat << 'EOF' > Dockerfile.cache
 # syntax=docker/dockerfile:1.7
 FROM golang:1.22-alpine
 
@@ -512,7 +512,7 @@ docker buildx build -f Dockerfile.cache -t cache-test:2 .
 # Créer un fichier de secret local temporaire
 echo "ghp_SuperSecretApiToken123456" > my_secret_token.txt
 
-cat << \x27EOF\x27 > Dockerfile.secret
+cat << 'EOF' > Dockerfile.secret
 # syntax=docker/dockerfile:1.7
 FROM alpine:3.19
 
@@ -524,7 +524,7 @@ EOF
 # Compilation avec transmission sécurisée du secret
 docker buildx build --secret id=api_token,src=./my_secret_token.txt -f Dockerfile.secret -t secret-test:1 .
 
-# Vérifier dans l\x27historique de l\x27image qu\x27aucune trace du secret n\x27existe
+# Vérifier dans l'historique de l'image qu'aucune trace du secret n'existe
 docker image history secret-test:1
 ```
 
@@ -538,20 +538,20 @@ rm -f my_secret_token.txt
 ## 6. Optimisation Avancée : Multi-Stage Builds & Images Minimales
 
 ### Objectifs
-- Réduire la taille d\x27une image de production de 90% via le pattern Multi-Stage.
+- Réduire la taille d'une image de production de 90% via le pattern Multi-Stage.
 - Utiliser des images de base minimales (*Alpine, Distroless, Scratch*).
 - Isoler les contextes de build via `.dockerignore`.
 - Compiler vers des cibles intermédiaires avec `--target` (tests unitaires en CI).
 
 ---
 
-### Étape 6.1 : Exemple d\x27un Binaire Go compilé pour `scratch`
+### Étape 6.1 : Exemple d'un Binaire Go compilé pour `scratch`
 
 ```bash
 mkdir -p ~/docker-labs/multistage && cd ~/docker-labs/multistage
 
 # 1. Code source main.go
-cat << \x27EOF\x27 > main.go
+cat << 'EOF' > main.go
 package main
 
 import (
@@ -574,7 +574,7 @@ func main() {
 EOF
 
 # 2. Test unitaire main_test.go
-cat << \x27EOF\x27 > main_test.go
+cat << 'EOF' > main_test.go
 package main
 
 import "testing"
@@ -587,7 +587,7 @@ func TestDummy(t *testing.T) {
 EOF
 
 # 3. Fichier .dockerignore
-cat << \x27EOF\x27 > .dockerignore
+cat << 'EOF' > .dockerignore
 .git
 *.md
 .coverage
@@ -599,7 +599,7 @@ EOF
 ### Étape 6.2 : Dockerfile Multi-Stage avec Cibles de Test
 
 ```bash
-cat << \x27EOF\x27 > Dockerfile
+cat << 'EOF' > Dockerfile
 # syntax=docker/dockerfile:1.7
 
 # --- Stage 1 : Base & Dépendances ---
@@ -632,13 +632,13 @@ EOF
 # 1. Exécuter uniquement les tests unitaires (idéal pour pipeline CI/CD)
 docker buildx build --target tester .
 
-# 2. Compiler l\x27image finale de production
+# 2. Compiler l'image finale de production
 docker buildx build --target final -t go-microservice:prod --load .
 
-# 3. Comparer la taille : l\x27image finale fait moins de 10 Mo !
+# 3. Comparer la taille : l'image finale fait moins de 10 Mo !
 docker image ls go-microservice:prod
 
-# 4. Tester l\x27exécution
+# 4. Tester l'exécution
 docker container run -d --name go-app -p 8080:8080 go-microservice:prod
 curl http://localhost:8080
 ```
@@ -659,10 +659,10 @@ docker container rm -f go-app
 
 ---
 
-### Étape 7.1 : Déploiement d\x27une Base PostgreSQL avec Volume Nommé
+### Étape 7.1 : Déploiement d'une Base PostgreSQL avec Volume Nommé
 
 ```bash
-# 1. Création d\x27un volume nommé géré par Docker
+# 1. Création d'un volume nommé géré par Docker
 docker volume create pg_prod_data
 
 # 2. Lancement du conteneur PostgreSQL avec la syntaxe moderne --mount
@@ -674,9 +674,9 @@ docker container run -d --name pg-server \
 
 # 3. Insérer une table et des données de test
 sleep 5
-docker container exec -i pg-server psql -U postgres -d formation_db << \x27EOF\x27
+docker container exec -i pg-server psql -U postgres -d formation_db << 'EOF'
 CREATE TABLE stagiaires (id SERIAL PRIMARY KEY, nom VARCHAR(50), cours VARCHAR(50));
-INSERT INTO stagiaires (nom, cours) VALUES (\x27Alice\x27, \x27Docker V2\x27), (\x27Bob\x27, \x27Kubernetes Expert\x27);
+INSERT INTO stagiaires (nom, cours) VALUES ('Alice', 'Docker V2'), ('Bob', 'Kubernetes Expert');
 SELECT * FROM stagiaires;
 EOF
 ```
@@ -688,7 +688,7 @@ EOF
 ```bash
 mkdir -p ~/docker-labs/backups
 
-# Exécuter une sauvegarde complète en archive tar sans installer d\x27outil sur l\x27hôte
+# Exécuter une sauvegarde complète en archive tar sans installer d'outil sur l'hôte
 docker container run --rm \
   --mount type=volume,source=pg_prod_data,target=/volume-data,readonly \
   --mount type=bind,source=$HOME/docker-labs/backups,target=/backup \
@@ -706,23 +706,23 @@ ls -lh ~/docker-labs/backups/pg_data_backup.tar.gz
 docker container rm -f pg-server
 docker volume rm pg_prod_data
 
-# 2. Création d\x27un nouveau volume pour la restauration
+# 2. Création d'un nouveau volume pour la restauration
 docker volume create pg_restored_data
 
-# 3. Restauration des données depuis l\x27archive tar
+# 3. Restauration des données depuis l'archive tar
 docker container run --rm \
   --mount type=volume,source=pg_restored_data,target=/volume-data \
   --mount type=bind,source=$HOME/docker-labs/backups,target=/backup,readonly \
   alpine tar xzvf /backup/pg_data_backup.tar.gz -C /volume-data
 
-# 4. Relance d\x27un nouveau conteneur branché sur le volume restauré
+# 4. Relance d'un nouveau conteneur branché sur le volume restauré
 docker container run -d --name pg-restored \
   --mount type=volume,source=pg_restored_data,target=/var/lib/postgresql/data \
   -e POSTGRES_PASSWORD=SecretPassword123! \
   -e POSTGRES_DB=formation_db \
   postgres:16-alpine
 
-# 5. Vérification de l\x27intégrité des données
+# 5. Vérification de l'intégrité des données
 sleep 5
 docker container exec -i pg-restored psql -U postgres -d formation_db -c "SELECT * FROM stagiaires;"
 ```
@@ -754,7 +754,7 @@ docker network create --subnet 172.29.0.0/16 back-net
 
 ---
 
-### Étape 8.2 : Déploiement des Composants & Validation de l\x27Isolation
+### Étape 8.2 : Déploiement des Composants & Validation de l'Isolation
 
 ```bash
 # 1. Déploiement de la base de données uniquement sur back-net
@@ -763,11 +763,11 @@ docker container run -d --name db-tier --network back-net -e POSTGRES_PASSWORD=r
 # 2. Déploiement du serveur web uniquement sur front-net
 docker container run -d --name web-tier --network front-net nginx:alpine
 
-# 3. Déploiement de l\x27API rattachée aux 2 réseaux
+# 3. Déploiement de l'API rattachée aux 2 réseaux
 docker container run -d --name api-tier --network front-net alpine sleep 3600
 docker network connect back-net api-tier
 
-# 4. TEST 1 : L\x27API peut joindre la DB par son nom DNS
+# 4. TEST 1 : L'API peut joindre la DB par son nom DNS
 docker container exec api-tier ping -c 2 db-tier
 
 # 5. TEST 2 : Le Web Frontend NE PEUT PAS joindre la DB (Isolation étanche !)
@@ -798,7 +798,7 @@ docker network rm front-net back-net
 mkdir -p ~/docker-labs/compose-watch/app && cd ~/docker-labs/compose-watch
 
 # 1. Application Web statique (HTML + JS)
-cat << \x27EOF\x27 > app/index.html
+cat << 'EOF' > app/index.html
 <!DOCTYPE html>
 <html>
 <head><title>Docker Compose Watch Demo</title></head>
@@ -810,7 +810,7 @@ cat << \x27EOF\x27 > app/index.html
 EOF
 
 # 2. Dockerfile du frontend
-cat << \x27EOF\x27 > app/Dockerfile
+cat << 'EOF' > app/Dockerfile
 FROM nginx:alpine
 COPY index.html /usr/share/nginx/html/index.html
 EXPOSE 80
@@ -822,7 +822,7 @@ EOF
 ### Étape 9.2 : Définition de `compose.yaml` avec `develop.watch`
 
 ```bash
-cat << \x27EOF\x27 > compose.yaml
+cat << 'EOF' > compose.yaml
 services:
   database:
     image: postgres:16-alpine
@@ -877,7 +877,7 @@ sleep 5
 curl -s http://localhost:8080 | grep "Version 1.0"
 
 # Modifier le fichier HTML localement :
-sed -i \x27s/Version 1.0/Version 2.0 (MODIFIÉE EN DIRECT)/g\x27 app/index.html
+sed -i 's/Version 1.0/Version 2.0 (MODIFIÉE EN DIRECT)/g' app/index.html
 
 # Constater que la modification est instantanément disponible dans le conteneur !
 sleep 1
@@ -886,13 +886,13 @@ curl -s http://localhost:8080 | grep "Version 2.0"
 
 ---
 
-### Étape 9.4 : Mise à l\x27Échelle Horizontale (Scaling)
+### Étape 9.4 : Mise à l'Échelle Horizontale (Scaling)
 
 ```bash
 # Scaler le service frontend à 3 instances
 docker compose up -d --scale frontend=3
 
-# Inspecter l\x27état des conteneurs
+# Inspecter l'état des conteneurs
 docker compose ps
 ```
 
@@ -906,16 +906,16 @@ docker compose down -v
 ## 10. Sécurité, Hardening & Analyse de Vulnérabilités
 
 ### Objectifs
-- Restreindre drastiquement les privilèges d\x27un conteneur (`--read-only`, `--cap-drop=ALL`).
-- Scanner les vulnérabilités d\x27une image avec **Docker Scout** et **Trivy**.
-- Exécuter le benchmark d\x27audit de sécurité **Docker CIS Benchmark**.
+- Restreindre drastiquement les privilèges d'un conteneur (`--read-only`, `--cap-drop=ALL`).
+- Scanner les vulnérabilités d'une image avec **Docker Scout** et **Trivy**.
+- Exécuter le benchmark d'audit de sécurité **Docker CIS Benchmark**.
 
 ---
 
-### Étape 10.1 : Durcissement Ultime d\x27un Conteneur Nginx
+### Étape 10.1 : Durcissement Ultime d'un Conteneur Nginx
 
 ```bash
-# Lancement d\x27un conteneur Nginx en mode lecture seule avec suppression de toutes les capabilities
+# Lancement d'un conteneur Nginx en mode lecture seule avec suppression de toutes les capabilities
 docker container run -d --name hardened-nginx -p 8080:8080 \
   --read-only \
   --cap-drop=ALL \
@@ -929,7 +929,7 @@ docker container run -d --name hardened-nginx -p 8080:8080 \
 # Vérifier que le serveur répond
 curl -I http://localhost:8080
 
-# Tenter d\x27écrire un fichier malveillant dans le conteneur :
+# Tenter d'écrire un fichier malveillant dans le conteneur :
 docker container exec hardened-nginx touch /malicious.sh || echo "Écriture bloquée (Read-Only File System) !"
 ```
 
@@ -954,7 +954,7 @@ docker container run --rm \
 ### Étape 10.3 : Audit de Conformité Docker CIS Benchmark
 
 ```bash
-# Lancer l\x27audit de sécurité automatisé de l\x27hôte
+# Lancer l'audit de sécurité automatisé de l'hôte
 docker container run --rm --net host --pid host --userns host --cap-add audit_control \
   -v /var/lib:/var/lib:ro \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -973,17 +973,17 @@ docker container run --rm --net host --pid host --userns host --cap-add audit_co
 
 ---
 
-### Étape 11.1 : Simulation & Diagnostic d\x27un OOMKilled (Exit 137)
+### Étape 11.1 : Simulation & Diagnostic d'un OOMKilled (Exit 137)
 
 ```bash
-# Lancer un conteneur avec un plafond mémoire de 64 Mo qui tente d\x27allouer 256 Mo
-docker container run --name oom-victim --memory 64m alpine sh -c "python3 -c \x27a = [1] * 50000000\x27 2>/dev/null || dd if=/dev/zero of=/dev/null bs=128M"
+# Lancer un conteneur avec un plafond mémoire de 64 Mo qui tente d'allouer 256 Mo
+docker container run --name oom-victim --memory 64m alpine sh -c "python3 -c 'a = [1] * 50000000' 2>/dev/null || dd if=/dev/zero of=/dev/null bs=128M"
 
 # Vérifier le statut de sortie
-docker container ps -a --filter name=oom-victim --format \x27table {{.Names}}\t{{.Status}}\x27
+docker container ps -a --filter name=oom-victim --format 'table {{.Names}}\t{{.Status}}'
 
 # Extraction précise avec Go Template du statut OOMKilled
-docker container inspect oom-victim --format \x27OOMKilled: {{.State.OOMKilled}} | ExitCode: {{.State.ExitCode}}\x27
+docker container inspect oom-victim --format 'OOMKilled: {{.State.OOMKilled}} | ExitCode: {{.State.ExitCode}}'
 ```
 
 ```bash
@@ -999,7 +999,7 @@ docker container rm -f oom-victim
 sudo mkdir -p /etc/docker
 
 # Configuration des plafonds de logs pour éviter la saturation du disque
-sudo tee /etc/docker/daemon.json << \x27EOF\x27
+sudo tee /etc/docker/daemon.json << 'EOF'
 {
   "log-driver": "json-file",
   "log-opts": {
@@ -1020,7 +1020,7 @@ sudo systemctl reload docker || sudo systemctl restart docker
 ### Étape 11.3 : Moissonnage des Métriques Prometheus
 
 ```bash
-# Interroger le point d\x27accès métriques natif de Docker
+# Interroger le point d'accès métriques natif de Docker
 curl -s http://127.0.0.1:9323/metrics | grep "engine_daemon" | head -n 15
 ```
 
@@ -1036,7 +1036,7 @@ curl -s http://127.0.0.1:9323/metrics | grep "engine_daemon" | head -n 15
 
 ---
 
-### Étape 12.1 : Initialisation du Cluster & Déploiement d\x27un Service
+### Étape 12.1 : Initialisation du Cluster & Déploiement d'un Service
 
 ```bash
 # 1. Initialiser le cluster Swarm sur le nœud local
@@ -1054,7 +1054,7 @@ docker service ps web-service
 ### Étape 12.2 : Rolling Update sans Interruption de Service
 
 ```bash
-# Mettre à jour l\x27image du service avec temporisation de 5s entre chaque conteneur
+# Mettre à jour l'image du service avec temporisation de 5s entre chaque conteneur
 docker service update \
   --image nginx:mainline-alpine \
   --update-parallelism 1 \
@@ -1070,15 +1070,15 @@ docker service ps web-service
 ### Étape 12.3 : Gestion des Secrets Chiffrés Swarm
 
 ```bash
-# 1. Création d\x27un secret Swarm sécurisé
+# 1. Création d'un secret Swarm sécurisé
 echo "MySQL_Super_Secret_Password_2026!" | docker secret create db_password -
 
-# 2. Lancement d\x27un service consommant le secret
+# 2. Lancement d'un service consommant le secret
 docker service create --name secure-app \
   --secret db_password \
   alpine sleep 3600
 
-# 3. Récupérer l\x27ID du conteneur créé par la tâche Swarm
+# 3. Récupérer l'ID du conteneur créé par la tâche Swarm
 TASK_CONTAINER=$(docker ps --filter name=secure-app -q | head -n 1)
 
 # 4. Vérifier que le secret est monté uniquement en mémoire vive (tmpfs) dans /run/secrets/
@@ -1096,7 +1096,7 @@ docker swarm leave --force
 
 ## Conclusion & Félicitations !
 
-Vous avez validé avec brio l\x27intégralité des 12 modules pratiques de la formation **Docker V2** !
+Vous avez validé avec brio l'intégralité des 12 modules pratiques de la formation **Docker V2** !
 
 Vous disposez désormais de toutes les compétences requises pour :
 1. Développer et packager des applications modernes avec **Docker Buildx** et **Multi-stage builds**.
