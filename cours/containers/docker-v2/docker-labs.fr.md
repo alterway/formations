@@ -73,19 +73,19 @@ docker version
 
 ```
 Client: Docker Engine - Community
- Version:           26.1.1
- API version:       1.45
- Go version:        go1.21.9
- Git commit:        4cf164e
- Built:             Mon Apr 22 14:03:11 2024
+ Version:           29.7.2
+ API version:       1.48
+ Go version:        go1.23.6
+ Git commit:        9b3c45a
+ Built:             Wed Jan 28 10:00:00 2026
  OS/Arch:           linux/amd64
 
 Server: Docker Engine - Community
  Engine:
-  Version:          26.1.1
-  API version:      1.45 (minimum version 1.24)
-  Go version:       go1.21.9
-  Git commit:       ac2de55
-  Built:            Mon Apr 22 14:03:11 2024
+  Version:          29.7.2
+  API version:      1.48 (minimum version 1.24)
+  Go version:       go1.23.6
+  Git commit:       8a2bc41
+  Built:            Wed Jan 28 10:00:00 2026
   OS/Arch:          linux/amd64
 ```
