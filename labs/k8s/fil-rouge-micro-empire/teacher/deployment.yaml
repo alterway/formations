@@ -11,7 +11,7 @@ data:
 
     app = FastAPI()
 
-    STUDENTS = os.getenv("STUDENTS", "hleclerc,johndoe").split(",")
+    STUDENTS = os.getenv("STUDENTS", "hleclerc,aabdelbaki,abahajji,abahajji,arehim,fcruau,jwanderscheid,lfache,lfache,moudelha,mpoujolbachelard,oelkastali,okarem,smalhouni,smhamdi,tpeltier").split(",")
     DOMAIN = os.getenv("DOMAIN", "apps.caas.fr")
 
     try:
@@ -202,7 +202,7 @@ spec:
           mountPath: /app
         env:
         - name: STUDENTS
-          value: "hleclerc,johndoe"
+          value: "hleclerc,aabdelbaki,abahajji,abahajji,arehim,fcruau,jwanderscheid,lfache,lfache,moudelha,mpoujolbachelard,oelkastali,okarem,smalhouni,smhamdi,tpeltier"
         - name: DOMAIN
           value: "apps.caas.fr"
         ports:
