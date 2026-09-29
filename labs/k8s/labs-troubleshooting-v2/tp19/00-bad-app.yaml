@@ -1,0 +1,35 @@
+# --- MANIFESTE BOGUÉ (bad-app.yaml) ---
+# Problème : Le PDB impose "minAvailable: 1" pour un déploiement qui ne compte qu'une seule réplique (replicas: 1).
+# Résultat : L'API Server interdit formellement toute éviction ou suppression temporaire du Pod.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-service
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-service
+  template:
+    metadata:
+      labels:
+        app: auth-service
+    spec:
+      containers:
+      - name: auth
+        image: nginx:1.25-alpine
+        ports:
+        - containerPort: 80
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: auth-service-pdb
+  namespace: default
+spec:
+  # ERREUR : Exiger 1 Pod disponible au minimum sur un total de 1 réplique empêche 100 % des évictions
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: auth-service

@@ -1,0 +1,24 @@
+# --- MANIFESTE BOGUÉ (bad-app.yaml) ---
+# Problème : Le déploiement fait référence à une ConfigMap "app-config-missing" qui n'a pas été déployée.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-api
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-api
+  template:
+    metadata:
+      labels:
+        app: backend-api
+    spec:
+      containers:
+      - name: api
+        image: redis:7-alpine
+        envFrom:
+        # ERREUR : La ConfigMap référencée n'existe pas dans le namespace
+        - configMapRef:
+            name: app-config-missing

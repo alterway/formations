@@ -1,0 +1,28 @@
+# --- MANIFESTE BOGUÉ (bad-app.yaml) ---
+# Problème : La requête CPU demande 100 cœurs au lieu de 100 millicœurs (100m), ce qu'aucun nœud ne peut satisfaire.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker-app
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: worker-app
+  template:
+    metadata:
+      labels:
+        app: worker-app
+    spec:
+      containers:
+      - name: worker
+        image: redis:7-alpine
+        resources:
+          requests:
+            # ERREUR : "100" signifie 100 cœurs CPU entiers (coquille pour 100m)
+            cpu: "100"
+            memory: "128Mi"
+          limits:
+            cpu: "100"
+            memory: "256Mi"

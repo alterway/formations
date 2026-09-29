@@ -1,0 +1,26 @@
+# --- MANIFESTE BOGUÉ (bad-app.yaml) ---
+# Problème : La politique "dnsPolicy: None" a été définie pour forcer un serveur DNS externe, mais sans inclure les domaines de recherche K8s ni le résolveur CoreDNS du cluster.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: monitor-tool
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: monitor-tool
+  template:
+    metadata:
+      labels:
+        app: monitor-tool
+    spec:
+      # ERREUR : dnsPolicy sur "None" sans ajouter le résolveur DNS interne coupe la résolution des Services K8s
+      dnsPolicy: None
+      dnsConfig:
+        nameservers:
+          - 8.8.8.8
+      containers:
+      - name: probe
+        image: alpine/k8s:1.37.0
+        command: ["sh", "-c", "until nslookup kubernetes.default.svc.cluster.local; do echo 'DNS resolution failed'; sleep 5; done"]

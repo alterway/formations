@@ -1,0 +1,14 @@
+# --- MANIFESTE CORRIGÉ (fixed-app.yaml) ---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: api-tls-secret
+  namespace: default
+type: kubernetes.io/tls
+data:
+  # CORRECTION : Le certificat et la clé privée proviennent de la MÊME paire RSA générée.
+  # (Pour générer une paire de test valide : openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout tls.key -out tls.crt -subj "/CN=app.local")
+  tls.crt: <BASE64_CERTIFICAT_VALIDE>
+  tls.key: <BASE64_CLE_PRIVEE_CORRESPONDANTE>
+---
+# [Le reste du Deployment et de la ConfigMap demeurent identiques]

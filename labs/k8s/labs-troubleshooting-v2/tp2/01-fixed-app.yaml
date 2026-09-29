@@ -1,0 +1,33 @@
+# --- MANIFESTE CORRIGÉ (fixed-app.yaml) ---
+# Correction : Ajout du manifeste de la ConfigMap et alignement du nom dans le Deployment.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: default
+data:
+  MAX_CONNECTIONS: "100"
+  LOG_LEVEL: "info"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-api
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-api
+  template:
+    metadata:
+      labels:
+        app: backend-api
+    spec:
+      containers:
+      - name: api
+        image: redis:7-alpine
+        envFrom:
+        # CORRECTION : Pointe vers la ConfigMap "app-config" réellement existante
+        - configMapRef:
+            name: app-config

@@ -1,0 +1,45 @@
+# --- MANIFESTE CORRIGÉ (fixed-app.yaml) ---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: app-storage-pvc
+  namespace: default
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: standard
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: secure-app
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: secure-app
+  template:
+    metadata:
+      labels:
+        app: secure-app
+    spec:
+      securityContext:
+        runAsUser: 10001
+        runAsGroup: 10001
+        # CORRECTION : Définition du fsGroup. Kubernetes modifiera le groupe propriétaire du volume monté vers GID 10001
+        fsGroup: 10001
+      containers:
+      - name: app
+        image: alpine:3.19
+        command: ["sh", "-c", "echo 'initialization' > /var/app/data/status.log && sleep 3600"]
+        volumeMounts:
+        - name: data-vol
+          mountPath: /var/app/data
+      volumes:
+      - name: data-vol
+        persistentVolumeClaim:
+          claimName: app-storage-pvc

@@ -1,0 +1,38 @@
+# --- MANIFESTE CORRIGÉ (fixed-app.yaml) ---
+# Option A (Correction du routage) : Passage à "externalTrafficPolicy: Cluster" pour autoriser kube-proxy à router le trafic vers n'importe quel nœud du cluster hébergeant le Pod.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: edge-api
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: edge-api
+  template:
+    metadata:
+      labels:
+        app: edge-api
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.25-alpine
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: edge-api-nodeport
+  namespace: default
+spec:
+  type: NodePort
+  # CORRECTION : Le trafic arrivant sur n'importe quel nœud sera redirigé via le réseau overlay (SNAT) vers le nœud hébergeant le Pod
+  externalTrafficPolicy: Cluster
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 30080
+  selector:
+    app: edge-api

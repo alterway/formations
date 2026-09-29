@@ -1,0 +1,42 @@
+# --- MANIFESTE BOGUÉ (bad-app.yaml) ---
+# Problème : Un Deployment à 2 répliques référence le MÊME PVC en mode ReadWriteOnce (RWO).
+# Le deuxième Pod ne peut pas attacher le volume car le stockage RWO est réservé à un seul nœud/Pod.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: shared-data-pvc
+  namespace: default
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: standard
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: file-uploader
+  namespace: default
+spec:
+  # ERREUR : 2 répliques pour un Deployment partageant une seule PVC en mode ReadWriteOnce
+  replicas: 2
+  selector:
+    matchLabels:
+      app: file-uploader
+  template:
+    metadata:
+      labels:
+        app: file-uploader
+    spec:
+      containers:
+      - name: storage-app
+        image: nginx:1.25-alpine
+        volumeMounts:
+        - name: data-vol
+          mountPath: /usr/share/nginx/html
+      volumes:
+      - name: data-vol
+        persistentVolumeClaim:
+          claimName: shared-data-pvc

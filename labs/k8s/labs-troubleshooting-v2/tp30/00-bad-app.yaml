@@ -1,0 +1,39 @@
+# --- MANIFESTE BOGUÉ (bad-app.yaml) ---
+# Problème : "externalTrafficPolicy: Local" indique à kube-proxy de ne PAS retransmettre le trafic vers un autre nœud si aucun Pod cible n'est présent localement.
+# Le Deployment ne compte qu'un seul réplique (1 Pod sur 1 seul nœud). Toutes les requêtes arrivant sur les autres nœuds du cluster tombent dans le vide (timeout).
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: edge-api
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: edge-api
+  template:
+    metadata:
+      labels:
+        app: edge-api
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.25-alpine
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: edge-api-nodeport
+  namespace: default
+spec:
+  type: NodePort
+  # ERREUR : "Local" rejette ou abandonne le trafic arrivant sur un nœud qui n'héberge aucun Pod "edge-api"
+  externalTrafficPolicy: Local
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 30080
+  selector:
+    app: edge-api

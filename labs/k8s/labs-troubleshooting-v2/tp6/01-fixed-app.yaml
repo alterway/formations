@@ -1,0 +1,27 @@
+# --- MANIFESTE CORRIGÉ (fixed-app.yaml) ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker-app
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: worker-app
+  template:
+    metadata:
+      labels:
+        app: worker-app
+    spec:
+      containers:
+      - name: worker
+        image: redis:7-alpine
+        resources:
+          requests:
+            # CORRECTION : Utilisation de la notation millicœurs (100m = 0.1 CPU)
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "200m"
+            memory: "256Mi"

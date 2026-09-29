@@ -1,0 +1,28 @@
+# --- MANIFESTE CORRIGÉ (fixed-app.yaml) ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: memory-app
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: memory-app
+  template:
+    metadata:
+      labels:
+        app: memory-app
+    spec:
+      containers:
+      - name: mem-allocator
+        image: python:3.11-alpine
+        command: ["python", "-c", "import time; x = 'A' * 50 * 1024 * 1024; time.sleep(3600)"]
+        resources:
+          requests:
+            cpu: "50m"
+            memory: "64Mi"
+          limits:
+            cpu: "100m"
+            # CORRECTION : Limite rehaussée à 128Mi pour autoriser l'allocation de 50Mi + l'overhead Python
+            memory: "128Mi"

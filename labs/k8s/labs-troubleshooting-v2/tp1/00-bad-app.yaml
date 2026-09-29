@@ -1,0 +1,23 @@
+# --- MANIFESTE BOGUÉ (bad-app.yaml) ---
+# Problème : Le tag spécifié pour l'image NGINX n'existe pas sur le registre.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-frontend
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-frontend
+  template:
+    metadata:
+      labels:
+        app: web-frontend
+    spec:
+      containers:
+      - name: nginx
+        # ERREUR : Ce tag d'image est fictif et provoque l'échec de pull
+        image: nginx:1.25.999-alpine
+        ports:
+        - containerPort: 80

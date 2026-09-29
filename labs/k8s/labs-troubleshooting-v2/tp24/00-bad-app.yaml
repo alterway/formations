@@ -1,0 +1,18 @@
+# --- MANIFESTE À INJECTER (bad-namespace.yaml) ---
+# Problème : La ConfigMap "app-state" contient un finaliseur personnalisé ("custom.domain.com/hold-cleanup").
+# Le contrôleur censé traiter ce finaliseur n'existe plus. Kubernetes refuse de supprimer l'objet et bloque la destruction du Namespace parent.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: staging-app
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-state
+  namespace: staging-app
+  # ERREUR : Ce finaliseur bloque la suppression de l'objet et du Namespace
+  finalizers:
+    - custom.domain.com/hold-cleanup
+data:
+  status: "archived"

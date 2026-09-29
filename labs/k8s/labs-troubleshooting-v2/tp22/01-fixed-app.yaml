@@ -1,0 +1,35 @@
+# --- MANIFESTE CORRIGÉ (fixed-app.yaml) ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: db-headless-svc
+  namespace: default
+spec:
+  clusterIP: None
+  selector:
+    app: db-cluster
+  ports:
+  - port: 27017
+    targetPort: 27017
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: db-cluster
+  namespace: default
+spec:
+  # CORRECTION : Le serviceName est strictement aligné sur le metadata.name du Service Headless
+  serviceName: "db-headless-svc"
+  replicas: 2
+  selector:
+    matchLabels:
+      app: db-cluster
+  template:
+    metadata:
+      labels:
+        app: db-cluster
+    spec:
+      containers:
+      - name: tester
+        image: alpine/k8s:1.37.0
+        command: ["sh", "-c", "until nslookup db-cluster-0.db-headless-svc.default.svc.cluster.local; do echo 'Waiting for Headless DNS record...'; sleep 3; done"]

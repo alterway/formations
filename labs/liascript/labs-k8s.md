@@ -9773,10 +9773,49 @@ Depuis Kubernetes 1.25+, la commande **`kubectl debug`** résout ce problème en
 
 #### Déboguer un Pod "Distroless" sans shell
 
+0. Example Dockerfile typique d'une application avec une image distroless 
+
+```dockerfile
+FROM golang:1.22-alpine AS builder
+WORKDIR /app
+
+# Génération propre du fichier main.go
+RUN cat <<'EOF' > main.go
+package main
+
+import (
+	"fmt"
+	"net/http"
+)
+
+func main() {
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, "App active!\n")
+	})
+	fmt.Println("Serveur pret sur le port 8080...")
+	http.ListenAndServe(":8080", nil)
+}
+EOF
+
+RUN CGO_ENABLED=0 GOOS=linux go build -o server main.go
+
+# Étape 2 : Image finale Distroless
+FROM gcr.io/distroless/static-debian12:nonroot
+COPY --from=builder /app/server /server
+EXPOSE 8080
+USER nonroot:nonroot
+ENTRYPOINT ["/server"]
+```
+
+Exemple de build (ne pas faire)
+```bash
+docker buildx build --builder=kube --platform=linux/amd64 -t alterway/distroless-example:1.0.0  --push -f Dockerfile .
+```
+
 1. Déployons un Pod exécutant une image sécurisée "distroless" (sans aucun shell ni outil système) :
 
 ```bash +.
-kubectl run distroless-app --image=gcr.io/distroless/static-debian12:nonroot --restart=Never --command -- /bin/pause
+kubectl run distroless-app --image=alterway/distroless-example:1.0.0 --restart=Never
 ```
 
 2. Vérifions que le Pod est en cours d'exécution :
@@ -9812,6 +9851,10 @@ ps aux
 # Inspecter l'environnement réseau et les interfaces du Pod
 netstat -tulpn
 ip addr
+
+
+# Faire un wget sur le petit serveur déployé par l'application
+wget localhost:8080 -O- -q
 
 # Quitter la session de debug
 exit

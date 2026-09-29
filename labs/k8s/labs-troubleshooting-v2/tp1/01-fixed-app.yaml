@@ -1,0 +1,22 @@
+# --- MANIFESTE CORRIGÉ (fixed-app.yaml) ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-frontend
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-frontend
+  template:
+    metadata:
+      labels:
+        app: web-frontend
+    spec:
+      containers:
+      - name: nginx
+        # CORRECTION : Utilisation d'une version d'image valide et existante
+        image: nginx:1.25-alpine
+        ports:
+        - containerPort: 80

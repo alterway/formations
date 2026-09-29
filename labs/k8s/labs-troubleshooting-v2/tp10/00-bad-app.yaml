@@ -1,0 +1,22 @@
+# --- MANIFESTE BOGUÉ (bad-app.yaml) ---
+# Problème : Le Pod utilise le ServiceAccount "default" qui ne possède aucun droit d'accès sur l'API Kubernetes.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-exporter
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: k8s-exporter
+  template:
+    metadata:
+      labels:
+        app: k8s-exporter
+    spec:
+      # ERREUR : Aucun serviceAccountName n'est spécifié, le pod prend "default" sans droits RBAC
+      containers:
+      - name: exporter
+        image: alpine/k8s:1.37.0
+        command: ["sh", "-c", "while true; do kubectl get pods; sleep 10; done"]

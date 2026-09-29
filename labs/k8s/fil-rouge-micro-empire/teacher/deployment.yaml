@@ -1,0 +1,252 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dashboard-app-code
+data:
+  app.py: |
+    import os, asyncio, httpx
+    from fastapi import FastAPI
+    from fastapi.responses import HTMLResponse
+    from kubernetes import client, config
+
+    app = FastAPI()
+
+    STUDENTS = os.getenv("STUDENTS", "hleclerc,johndoe").split(",")
+    DOMAIN = os.getenv("DOMAIN", "apps.caas.fr")
+
+    try:
+        config.load_incluster_config()
+        k8s_core_api = client.CoreV1Api()
+        k8s_auto_v2 = client.AutoscalingV2Api()
+    except Exception as e:
+        print(f"Erreur config K8s : {e}")
+        k8s_core_api = None
+
+    statuses = {}
+
+    def get_student_k8s_data(student: str):
+        running_count = 0
+        pending_count = 0
+        hpa_info = "Non configuré"
+        
+        if not k8s_core_api:
+            return "0", hpa_info
+
+        # 1. Comptage fin des Pods (Running vs Pending)
+        try:
+            pods = k8s_core_api.list_pod_for_all_namespaces()
+            for pod in pods.items:
+                ns = pod.metadata.namespace.lower()
+                pod_name = pod.metadata.name.lower()
+                if student.lower() in ns or student.lower() in pod_name:
+                    if "podinfo" in pod_name and pod.metadata.deletion_timestamp is None:
+                        if pod.status.phase == "Running":
+                            running_count += 1
+                        elif pod.status.phase in ["Pending", "ContainerCreating"]:
+                            pending_count += 1
+        except Exception as e:
+            print(f"Erreur Pods {student} : {e}")
+
+        total_pods = running_count + pending_count
+
+        # Format d'affichage des pods
+        if pending_count > 0:
+            pods_display = f"{running_count} (+{pending_count} en création)"
+        else:
+            pods_display = f"{running_count}"
+
+        # 2. Statut HPA
+        if total_pods > 2:
+            hpa_info = f"🔥 Scaled ({total_pods} pods)"
+        elif total_pods == 2:
+            hpa_info = "🟢 Actif (2/10 pods)"
+        elif total_pods == 1:
+            hpa_info = "⚠️ HPA Inactif (1 pod)"
+
+        return pods_display, hpa_info
+
+    async def check_student(student: str):
+        url = f"https://quartier-{student}.{DOMAIN}/healthz"
+        pods_display, hpa_info = await asyncio.to_thread(get_student_k8s_data, student)
+        
+        timeout = httpx.Timeout(2.0, connect=2.0)
+        try:
+            async with httpx.AsyncClient(verify=False, timeout=timeout) as client_http:
+                r = await client_http.get(url)
+                if r.status_code == 200:
+                    try:
+                        data = r.json()
+                        if isinstance(data, dict) and ("version" in data or "hostname" in data or "status" in data):
+                            statuses[student] = {
+                                "status": "OK", 
+                                "pods": pods_display, 
+                                "hpa": hpa_info,
+                                "latency": f"{r.elapsed.microseconds // 1000}ms"
+                            }
+                        else:
+                            statuses[student] = {"status": "ERROR", "pods": "0", "hpa": "N/A", "latency": "N/A"}
+                    except Exception:
+                        statuses[student] = {"status": "ERROR", "pods": "0", "hpa": "N/A", "latency": "N/A"}
+                else:
+                    statuses[student] = {"status": "ERROR", "pods": "0", "hpa": "N/A", "latency": "N/A"}
+        except Exception:
+            statuses[student] = {"status": "DOWN", "pods": "0", "hpa": "N/A", "latency": "N/A"}
+
+    async def poll_all():
+        while True:
+            tasks = [check_student(s) for s in STUDENTS]
+            await asyncio.gather(*tasks, return_exceptions=True)
+            await asyncio.sleep(3)
+
+    @app.on_event("startup")
+    async def startup_event():
+        asyncio.create_task(poll_all())
+
+    @app.get("/", response_class=HTMLResponse)
+    async def get_grid():
+        cards = ""
+        for student in STUDENTS:
+            info = statuses.get(student, {"status": "WAITING", "pods": "0", "hpa": "N/A", "latency": "N/A"})
+            color = "#2ef072" if info["status"] == "OK" else ("#ff9900" if info["status"] == "ERROR" else "#ff4d4d")
+            cards += f"""
+            <div style="background:{color}; padding:20px; margin:10px; border-radius:8px; width:220px; text-align:center; font-family:sans-serif; color:black;">
+                <h3>{student}</h3>
+                <p><strong>Statut :</strong> {info['status']}</p>
+                <p><strong>Pods :</strong> {info['pods']}</p>
+                <p><strong>HPA :</strong> {info['hpa']}</p>
+                <p><strong>Latence :</strong> {info['latency']}</p>
+            </div>
+            """
+        return f"""
+        <html>
+            <head><title>K8s War Room</title><meta http-equiv="refresh" content="3"></head>
+            <body style="background:#121212; color:white; font-family:sans-serif; padding:20px;">
+                <h1>Carte du Réseau K8s</h1>
+                <div style="display:flex; flex-wrap:wrap;">{cards}</div>
+            </body>
+        </html>
+        """
+---
+# 2. Droits RBAC mis à jour avec les permissions Autoscaling
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: dashboard-center-sa
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: dashboard-center-role
+rules:
+- apiGroups: [""]
+  resources: ["pods", "namespaces"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["autoscaling"]
+  resources: ["horizontalpodautoscalers"]
+  verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: dashboard-center-binding
+subjects:
+- kind: ServiceAccount
+  name: dashboard-center-sa
+  namespace: default
+roleRef:
+  kind: ClusterRole
+  name: dashboard-center-role
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: dashboard-center-binding
+subjects:
+- kind: ServiceAccount
+  name: dashboard-center-sa
+  namespace: dashboard-quartier
+roleRef:
+  kind: ClusterRole
+  name: dashboard-center-role
+  apiGroup: rbac.authorization.k8s.io
+
+---
+# 3. Déploiement avec le volume du ConfigMap monté
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-dashboard-center
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dashboard-center
+  template:
+    metadata:
+      labels:
+        app: dashboard-center
+    spec:
+      serviceAccountName: dashboard-center-sa
+      containers:
+      - name: dashboard
+        image: python:3.11-slim
+        command: ["/bin/sh", "-c"]
+        args:
+        - |
+          pip install --no-cache-dir fastapi uvicorn httpx kubernetes
+          uvicorn app:app --host 0.0.0.0 --port 8080
+        workingDir: /app
+        volumeMounts:
+        - name: app-code
+          mountPath: /app
+        env:
+        - name: STUDENTS
+          value: "hleclerc,johndoe"
+        - name: DOMAIN
+          value: "apps.caas.fr"
+        ports:
+        - containerPort: 8080
+      volumes:
+      - name: app-code
+        configMap:
+          name: dashboard-app-code
+
+---
+# 4. Service & Ingress
+apiVersion: v1
+kind: Service
+metadata:
+  name: dashboard-center-svc
+spec:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: dashboard-center
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dashboard-center-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: le
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: dashboard-quartier.apps.caas.fr
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: dashboard-center-svc
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - dashboard-quartier.apps.caas.fr
+    secretName: dashboard-quartier.apps.caas.fr-tls

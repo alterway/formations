@@ -1,0 +1,34 @@
+# --- MANIFESTE BOGUÉ (bad-app.yaml) ---
+# Problème : Le cluster ne compte que 2 nœuds (ou le vcluster ne voit que 2 nœuds), mais le Deployment exige 3 répliques avec une anti-affinité HARDE (required...).
+# Résultat : Le 3ᵉ Pod ne trouve aucun nœud éligible et reste en Pending.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ha-redis
+  namespace: default
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ha-redis
+  template:
+    metadata:
+      labels:
+        app: ha-redis
+    spec:
+      affinity:
+        podAntiAffinity:
+          # ERREUR : La contrainte stricte (required) empêche l'ordonnancement dès que replicas > nombre de nœuds
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - ha-redis
+            topologyKey: "kubernetes.io/hostname"
+      containers:
+      - name: redis
+        image: redis:7-alpine
+        ports:
+        - containerPort: 6379

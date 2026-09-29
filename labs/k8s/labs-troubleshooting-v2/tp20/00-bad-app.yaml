@@ -1,0 +1,44 @@
+# --- MANIFESTE BOGUÉ (bad-app.yaml) ---
+# Problème : Le Webhook interceptant les créations de Pods pointe vers le service "validator-svc" qui n'a pas de Pods actifs (ou n'existe pas).
+# Avec "failurePolicy: Fail", l'API Server rejette systématiquement la création de TOUT nouveau Pod.
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: strict-pod-validation
+webhooks:
+  - name: validate.pod.security.local
+    rules:
+      - apiGroups: [""]
+        apiVersions: ["v1"]
+        operations: ["CREATE"]
+        resources: ["pods"]
+        scope: "Namespaced"
+    clientConfig:
+      service:
+        name: validator-svc
+        namespace: default
+        path: "/validate"
+        port: 443
+    # ERREUR : Si le service validator-svc ne répond pas, l'API Server refuse la création du Pod au lieu d'ignorer
+    failurePolicy: Fail
+    sideEffects: None
+    admissionReviewVersions: ["v1"]
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: business-app
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: business-app
+  template:
+    metadata:
+      labels:
+        app: business-app
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.25-alpine

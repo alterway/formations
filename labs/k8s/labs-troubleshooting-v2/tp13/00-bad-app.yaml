@@ -1,0 +1,45 @@
+# --- MANIFESTE BOGUÉ (bad-app.yaml) ---
+# Problème : Le conteneur s'exécute avec l'UID 10001, mais le volume monté appartient par défaut à root (0:0). Sans fsGroup, l'écriture est refusée.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: app-storage-pvc
+  namespace: default
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: standard
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: secure-app
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: secure-app
+  template:
+    metadata:
+      labels:
+        app: secure-app
+    spec:
+      securityContext:
+        runAsUser: 10001
+        runAsGroup: 10001
+        # ERREUR : Absence de directive "fsGroup". Le répertoire monté appartiendra à root:root (0:0)
+      containers:
+      - name: app
+        image: alpine:3.19
+        command: ["sh", "-c", "echo 'initialization' > /var/app/data/status.log && sleep 3600"]
+        volumeMounts:
+        - name: data-vol
+          mountPath: /var/app/data
+      volumes:
+      - name: data-vol
+        persistentVolumeClaim:
+          claimName: app-storage-pvc

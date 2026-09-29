@@ -1,0 +1,34 @@
+# --- MANIFESTE CORRIGÉ (fixed-app.yaml) ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ha-redis
+  namespace: default
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ha-redis
+  template:
+    metadata:
+      labels:
+        app: ha-redis
+    spec:
+      affinity:
+        podAntiAffinity:
+          # CORRECTION : Passage en anti-affinité souple (preferred) pour favoriser la répartition sans bloquer le scheduling si le nombre de nœuds est inférieur
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - ha-redis
+              topologyKey: "kubernetes.io/hostname"
+      containers:
+      - name: redis
+        image: redis:7-alpine
+        ports:
+        - containerPort: 6379

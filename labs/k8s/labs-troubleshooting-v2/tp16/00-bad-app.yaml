@@ -1,0 +1,47 @@
+# --- MANIFESTE BOGUÉ (bad-app.yaml) ---
+# Problème : Le volume est monté sur le chemin "/etc/nginx/nginx.conf". Sans l'option "subPath", Kubernetes crée un RÉPERTOIRE nommé "nginx.conf" au lieu d'un fichier.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-custom-config
+  namespace: default
+data:
+  nginx.conf: |
+    events { worker_connections 1024; }
+    http {
+      server {
+        listen 80;
+        location / {
+          return 200 'Config custom chargee avec succes!\n';
+        }
+      }
+    }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-custom
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-custom
+  template:
+    metadata:
+      labels:
+        app: nginx-custom
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.25-alpine
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: config-volume
+          # ERREUR : Sans "subPath", Kubernetes va monter le volume entier en tant que dossier "/etc/nginx/nginx.conf"
+          mountPath: /etc/nginx/nginx.conf
+      volumes:
+      - name: config-volume
+        configMap:
+          name: nginx-custom-config

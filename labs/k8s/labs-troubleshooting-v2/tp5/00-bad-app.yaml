@@ -1,0 +1,44 @@
+# --- MANIFESTE BOGUÉ (bad-app.yaml) ---
+# Problème : Le PVC demande une StorageClass "fast-ssd" non définie dans le cluster.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: db-data-pvc
+  namespace: default
+spec:
+  accessModes:
+    - ReadWriteOnce
+  # ERREUR : La StorageClass "fast-ssd" n'existe pas
+  storageClassName: fast-ssd
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-server
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db-server
+  template:
+    metadata:
+      labels:
+        app: db-server
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:15-alpine
+        env:
+        - name: POSTGRES_PASSWORD
+          value: secretpassword
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: db-storage
+      volumes:
+      - name: db-storage
+        persistentVolumeClaim:
+          claimName: db-data-pvc

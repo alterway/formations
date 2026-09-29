@@ -1,0 +1,26 @@
+# --- MANIFESTE BOGUÉ (bad-app.yaml) ---
+# Problème : "readOnlyRootFilesystem: true" rend l'intégralité du système de fichiers du conteneur immuable.
+# NGINX plante immédiatement car il tente d'écrire /var/run/nginx.pid et d'initialiser /var/cache/nginx.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hardened-web
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hardened-web
+  template:
+    metadata:
+      labels:
+        app: hardened-web
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.25-alpine
+        securityContext:
+          # ERREUR : Le système de fichiers est verrouillé en lecture seule sans fournir de volumes temporaires pour les répertoires d'écriture obligatoires
+          readOnlyRootFilesystem: true
+        ports:
+        - containerPort: 80

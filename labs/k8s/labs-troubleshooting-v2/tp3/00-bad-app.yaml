@@ -1,0 +1,29 @@
+# --- MANIFESTE BOGUÉ (bad-app.yaml) ---
+# Problème : La sonde Liveness pointe sur un port et un chemin invalides.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-app
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-app
+  template:
+    metadata:
+      labels:
+        app: web-app
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.25-alpine
+        ports:
+        - containerPort: 80
+        livenessProbe:
+          httpGet:
+            # ERREUR : NGINX écoute sur le port 80 et ne répond pas sur /healthz par défaut
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5

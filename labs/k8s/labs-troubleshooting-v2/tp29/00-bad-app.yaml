@@ -1,0 +1,31 @@
+# --- MANIFESTE BOGUÉ (bad-app.yaml) ---
+# Problème : "net.ipv4.tcp_tw_reuse" est classé comme "unsafe sysctl" dans Kubernetes.
+# Sans autorisation explicite au niveau du Kubelet hôte (--allowed-unsafe-sysctls), l'API Server/Kubelet rejette le Pod avec une erreur SysctlForbidden.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: high-traffic-proxy
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: high-traffic-proxy
+  template:
+    metadata:
+      labels:
+        app: high-traffic-proxy
+    spec:
+      securityContext:
+        sysctls:
+        # Safe sysctl (autorisé par défaut depuis Kubernetes 1.22+)
+        - name: net.core.somaxconn
+          value: "4096"
+        # ERREUR : Unsafe sysctl non autorisé par défaut par le Kubelet du nœud
+        - name: net.ipv4.tcp_tw_reuse
+          value: "1"
+      containers:
+      - name: nginx
+        image: nginx:1.25-alpine
+        ports:
+        - containerPort: 80

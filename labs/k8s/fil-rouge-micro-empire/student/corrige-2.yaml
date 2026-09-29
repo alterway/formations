@@ -1,0 +1,235 @@
+---
+# ==========================================
+# MODULE 1 : EXPOSITION (SERVICE & INGRESS)
+# ==========================================
+apiVersion: v1
+kind: Service
+metadata:
+  name: podinfo-svc
+spec:
+  type: ClusterIP
+  ports:
+  - port: 9898
+    targetPort: 9898
+  selector:
+    app: podinfo
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: podinfo-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: "le"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - quartier-hleclerc.apps.caas.fr
+    secretName: quartier-hleclerc.apps.caas.fr-secret
+  rules:
+  - host: quartier-hleclerc.apps.caas.fr
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: podinfo-svc
+            port:
+              number: 9898
+
+---
+# ==========================================
+# MODULE 2 : PERSISTANCE (REDIS STATEFULSET)
+# ==========================================
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-svc
+spec:
+  clusterIP: None # Service Headless
+  ports:
+  - port: 6379
+    targetPort: 6379
+  selector:
+    app: redis
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis
+spec:
+  serviceName: "redis-svc"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redis
+        image: redis:alpine
+        ports:
+        - containerPort: 6379
+        volumeMounts:
+        - name: redis-data
+          mountPath: /data
+  volumeClaimTemplates:
+  - metadata:
+      name: redis-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
+
+---
+# ==========================================
+# MODULE 3 & 4 : APP, RÉSILIENCE ET AUTOSCALING
+# ==========================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: podinfo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: podinfo
+  template:
+    metadata:
+      labels:
+        app: podinfo
+    spec:
+      containers:
+      - name: podinfo
+        image: stefanprodan/podinfo:latest
+        ports:
+        - containerPort: 9898
+        env:
+        # FQDN complet pour éviter les bugs DNS inter-namespace dans vCluster
+        - name: PODINFO_CACHE_SERVER
+          value: "tcp://redis-svc.default.svc.cluster.local:6379"
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 9898
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /readyz
+            port: 9898
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        resources:
+          requests:
+            # Très bas pour forcer le HPA à se déclencher vite !
+            cpu: "10m"
+            memory: "32Mi"
+          limits:
+            cpu: "250m"
+            memory: "128Mi"
+
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: podinfo-pdb
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: podinfo
+
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: podinfo-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: podinfo
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 20 # Seuil abaissé à 20% pour le lab
+
+---
+# ==========================================
+# MODULE 5 : SÉCURITÉ (NETWORK POLICIES)
+# ==========================================
+
+# 1. On bloque tout le trafic ENTRANT par défaut
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-ingress
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+
+---
+# 2. On laisse tout le trafic SORTANT libre (Indispensable pour le DNS vCluster)
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-all-egress
+spec:
+  podSelector: {}
+  policyTypes:
+  - Egress
+  egress:
+  - {}
+
+---
+# 3. On autorise le trafic web entrant vers Podinfo
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-web-to-podinfo
+spec:
+  podSelector:
+    matchLabels:
+      app: podinfo
+  policyTypes:
+  - Ingress
+  ingress:
+  - ports:
+    - protocol: TCP
+      port: 9898
+
+---
+# 4. On autorise Podinfo à attaquer Redis
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-podinfo-to-redis
+spec:
+  podSelector:
+    matchLabels:
+      app: redis
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: podinfo
+    ports:
+    - protocol: TCP
+      port: 6379

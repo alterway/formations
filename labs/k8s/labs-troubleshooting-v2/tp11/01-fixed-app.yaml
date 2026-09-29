@@ -1,0 +1,22 @@
+# --- MANIFESTE CORRIGÉ (fixed-app.yaml) ---
+# [...] Les déploiements et le service restent identiques
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: restrict-backend-access
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      app: backend-api
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          # CORRECTION : Le label correspond désormais à celui défini sur le Deployment frontend-app
+          app: frontend-app
+    ports:
+    - protocol: TCP
+      port: 80

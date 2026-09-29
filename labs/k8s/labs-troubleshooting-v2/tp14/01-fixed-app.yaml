@@ -1,0 +1,33 @@
+# --- MANIFESTE CORRIGÉ (fixed-app.yaml) ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-service
+  namespace: default
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: api-service
+  template:
+    metadata:
+      labels:
+        app: api-service
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.25-alpine
+        ports:
+        - containerPort: 80
+        readinessProbe:
+          httpGet:
+            # CORRECTION : Ciblage de la route "/" accessible qui renvoie un HTTP 200
+            path: /
+            port: 80
+          initialDelaySeconds: 2
+          periodSeconds: 5

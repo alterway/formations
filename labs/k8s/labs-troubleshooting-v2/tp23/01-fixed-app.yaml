@@ -1,0 +1,28 @@
+# --- MANIFESTE CORRIGÉ (fixed-app.yaml) ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: batch-processor
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: batch-processor
+  template:
+    metadata:
+      labels:
+        app: batch-processor
+    spec:
+      nodeSelector:
+        node-role.kubernetes.io/batch: "true"
+      tolerations:
+      - key: "dedicated"
+        operator: "Equal"
+        value: "batch"
+        # CORRECTION : Alignement de l'effet sur "NoExecute" pour tolérer l'éviction active du nœud
+        effect: "NoExecute"
+      containers:
+      - name: worker
+        image: alpine:3.19
+        command: ["sh", "-c", "echo 'Processing batch job...'; sleep 3600"]

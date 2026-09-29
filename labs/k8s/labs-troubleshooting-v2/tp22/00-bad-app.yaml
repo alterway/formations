@@ -1,0 +1,38 @@
+# --- MANIFESTE BOGUÉ (bad-app.yaml) ---
+# Problème : Le champ "serviceName" du StatefulSet pointe vers "db-wrong-svc", alors que le Service Headless créé s'appelle "db-headless-svc".
+# Résultat : CoreDNS ne génère pas les enregistrements DNS individuels de type "db-cluster-0.db-headless-svc".
+apiVersion: v1
+kind: Service
+metadata:
+  name: db-headless-svc
+  namespace: default
+spec:
+  clusterIP: None
+  selector:
+    app: db-cluster
+  ports:
+  - port: 27017
+    targetPort: 27017
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: db-cluster
+  namespace: default
+spec:
+  # ERREUR : Le serviceName ne correspond pas au nom du Service Headless ("db-headless-svc")
+  serviceName: "db-wrong-svc"
+  replicas: 2
+  selector:
+    matchLabels:
+      app: db-cluster
+  template:
+    metadata:
+      labels:
+        app: db-cluster
+    spec:
+      containers:
+      - name: tester
+        image: alpine/k8s:1.37.0
+        # Tente d'interroger son propre FQDN stable
+        command: ["sh", "-c", "until nslookup db-cluster-0.db-headless-svc.default.svc.cluster.local; do echo 'Waiting for Headless DNS record...'; sleep 3; done"]

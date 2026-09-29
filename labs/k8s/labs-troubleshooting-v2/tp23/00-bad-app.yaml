@@ -1,0 +1,31 @@
+# --- MANIFESTE BOGUÉ (bad-app.yaml) ---
+# Problème : La tolérance est configurée avec l'effet "NoSchedule".
+# Résultat : Le scheduler autorise le placement du Pod sur le nœud, mais le Kubelet du nœud l'évince immédiatement car la Taint porte l'effet "NoExecute".
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: batch-processor
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: batch-processor
+  template:
+    metadata:
+      labels:
+        app: batch-processor
+    spec:
+      # Le Pod cible spécifiquement les nœuds du pool batch
+      nodeSelector:
+        node-role.kubernetes.io/batch: "true"
+      tolerations:
+      - key: "dedicated"
+        operator: "Equal"
+        value: "batch"
+        # ERREUR : "NoSchedule" empêche seulement le nouveau scheduling, mais ne protège pas contre la Taint "NoExecute" présente sur le nœud
+        effect: "NoSchedule"
+      containers:
+      - name: worker
+        image: alpine:3.19
+        command: ["sh", "-c", "echo 'Processing batch job...'; sleep 3600"]

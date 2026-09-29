@@ -1,0 +1,27 @@
+# --- MANIFESTE CORRIGÉ (fixed-app.yaml) ---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: coredns
+  namespace: kube-system
+data:
+  Corefile: |
+    .:53 {
+        errors
+        health {
+           lameduck 5s
+        }
+        ready
+        kubernetes cluster.local in-addr.arpa ip6.arpa {
+           pods insecure
+           fallthrough in-addr.arpa ip6.arpa
+           ttl 30
+        }
+        prometheus :9153
+        # CORRECTION : Utilisation de /etc/resolv.conf (qui hérite des DNS du nœud/hôte) ou d'un résolveur externe valide (ex. 1.1.1.1)
+        forward . /etc/resolv.conf
+        cache 30
+        loop
+        reload
+        loadbalance
+    }

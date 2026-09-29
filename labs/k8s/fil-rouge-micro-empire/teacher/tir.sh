@@ -1,0 +1,1 @@
+hey -z 3m -c 150 https://quartier-hleclerc.apps.caas.fr/api/info

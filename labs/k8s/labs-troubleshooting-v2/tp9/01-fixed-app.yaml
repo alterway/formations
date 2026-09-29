@@ -1,0 +1,33 @@
+# --- MANIFESTE CORRIGÉ (fixed-app.yaml) ---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: mem-quota
+  namespace: default
+spec:
+  hard:
+    requests.memory: "500Mi"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: memory-heavy-app
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: memory-heavy-app
+  template:
+    metadata:
+      labels:
+        app: memory-heavy-app
+    spec:
+      containers:
+      - name: app
+        image: nginx:1.25-alpine
+        resources:
+          requests:
+            # CORRECTION : Ajustement de la mémoire sous la limite fixée par le ResourceQuota
+            memory: "256Mi"
+            cpu: "100m"

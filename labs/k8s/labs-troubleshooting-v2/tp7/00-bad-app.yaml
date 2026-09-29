@@ -1,0 +1,29 @@
+# --- MANIFESTE BOGUÉ (bad-app.yaml) ---
+# Problème : La limite mémoire (10Mi) est insuffisante pour le processus Python qui requiert ~50Mi pour démarrer.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: memory-app
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: memory-app
+  template:
+    metadata:
+      labels:
+        app: memory-app
+    spec:
+      containers:
+      - name: mem-allocator
+        image: python:3.11-alpine
+        command: ["python", "-c", "import time; x = 'A' * 50 * 1024 * 1024; time.sleep(3600)"]
+        resources:
+          requests:
+            cpu: "50m"
+            memory: "10Mi"
+          limits:
+            cpu: "100m"
+            # ERREUR : Limite mémoire bien trop basse (10Mi) pour l'allocation de 50Mi de l'application
+            memory: "10Mi"

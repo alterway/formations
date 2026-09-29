@@ -1,0 +1,68 @@
+# --- MANIFESTE BOGUÉ (bad-app.yaml) ---
+# Problème : Le PersistentVolume est physiquement lié à la zone "zone-a", mais le Deployment force l'exécution du Pod sur les nœuds de la zone "zone-b".
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: local-pv-data
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local:
+    path: /mnt/disks/data
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: topology.kubernetes.io/zone
+          operator: In
+          values:
+          - zone-a
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: local-pvc-data
+  namespace: default
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-storage
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stateful-db
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stateful-db
+  template:
+    metadata:
+      labels:
+        app: stateful-db
+    spec:
+      # ERREUR : Le nodeSelector force le Pod sur zone-b, ce qui entre en conflit direct avec la nodeAffinity du PV (zone-a)
+      nodeSelector:
+        topology.kubernetes.io/zone: zone-b
+      containers:
+      - name: db
+        image: postgres:15-alpine
+        env:
+        - name: POSTGRES_PASSWORD
+          value: secret
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: db-storage
+      volumes:
+      - name: db-storage
+        persistentVolumeClaim:
+          claimName: local-pvc-data

@@ -1,0 +1,53 @@
+# --- MANIFESTE CORRIGÉ (fixed-app.yaml) ---
+# Correction : Création d'un ServiceAccount, d'un Role RBAC et d'un RoleBinding associés au Pod.
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: exporter-sa
+  namespace: default
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: pod-reader-role
+  namespace: default
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+RoleBinding
+metadata:
+  name: read-pods-binding
+  namespace: default
+subjects:
+- kind: ServiceAccount
+  name: exporter-sa
+  namespace: default
+roleRef:
+  kind: Role
+  name: pod-reader-role
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-exporter
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: k8s-exporter
+  template:
+    metadata:
+      labels:
+        app: k8s-exporter
+    spec:
+      # CORRECTION : Association du ServiceAccount disposant des droits de lecture
+      serviceAccountName: exporter-sa
+      containers:
+      - name: exporter
+        image: alpine/k8s:1.37.0
+        command: ["sh", "-c", "while true; do kubectl get pods; sleep 10; done"]

@@ -1,0 +1,10 @@
+# --- MANIFESTE/COMMANDE DE CORRECTION (fixed-resolution.yaml) ---
+# Correction : Il faut retirer manuellement le finaliseur de la ressource ou la Patcher via la CLI pour que le Garbage Collector de Kubernetes puisse finaliser la suppression du Namespace.
+
+# Commande à exécuter par l'apprenant pour supprimer le finaliseur sur la ressource :
+# kubectl patch configmap app-state -n staging-app -p '{"metadata":{"finalizers":null}}' --type=merge
+
+# Variante si la ressource est déjà masquée et que seul le patch JSON direct sur la ressource fonctionne :
+# kubectl get configmap app-state -n staging-app -o json | jq '.metadata.finalizers = []' | kubectl replace -f -
+
+

@@ -1,0 +1,27 @@
+# --- MANIFESTE CORRIGÉ (fixed-app.yaml) ---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: high-traffic-proxy
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: high-traffic-proxy
+  template:
+    metadata:
+      labels:
+        app: high-traffic-proxy
+    spec:
+      securityContext:
+        sysctls:
+        # CORRECTION : Conservation uniquement du paramètre "safe" (net.core.somaxconn).
+        # Les paramètres unsafe doivent être retirés du manifeste Pod et appliqués via un DaemonSet privilégié ou directement au niveau de l'OS du nœud hôte.
+        - name: net.core.somaxconn
+          value: "4096"
+      containers:
+      - name: nginx
+        image: nginx:1.25-alpine
+        ports:
+        - containerPort: 80

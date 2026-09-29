@@ -1,0 +1,36 @@
+# --- MANIFESTE CORRIGÉ (fixed-app.yaml) ---
+# Option de correction A : Augmenter le nombre de répliques pour autoriser la haute disponibilité réelle (Recommandé).
+# Option de correction B : Utiliser "maxUnavailable: 1" si une seule réplique doit être maintenue.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-service
+  namespace: default
+spec:
+  # CORRECTION : Passage à 2 répliques minimum pour garantir la continuité de service lors d'un drain
+  replicas: 2
+  selector:
+    matchLabels:
+      app: auth-service
+  template:
+    metadata:
+      labels:
+        app: auth-service
+    spec:
+      containers:
+      - name: auth
+        image: nginx:1.25-alpine
+        ports:
+        - containerPort: 80
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: auth-service-pdb
+  namespace: default
+spec:
+  # CORRECTION : Avec 2 répliques, minAvailable: 1 autorise l'éviction de l'un des deux Pods pendant la maintenance
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: auth-service
